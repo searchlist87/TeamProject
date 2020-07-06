@@ -13,8 +13,28 @@ public class SgnController {
 		
 	}
 	
-	@RequestMapping(value="/show-grid", method=RequestMethod.GET)
+	@RequestMapping(value="/shop-grid", method=RequestMethod.GET)
 	public void testShop() throws Exception {
+		
+	}
+	
+	@RequestMapping(value="/checkout", method=RequestMethod.GET)
+	public void testCheckout() throws Exception {
+		
+	}
+	
+	@RequestMapping(value="/contact", method=RequestMethod.GET)
+	public void testContact() throws Exception {
+		
+	}
+	
+	@RequestMapping(value="/cart", method=RequestMethod.GET)
+	public void testCart() throws Exception {
+		
+	}
+	
+	@RequestMapping(value="/blog-single-sidebar", method=RequestMethod.GET)
+	public void testBlog_single_sidebar() throws Exception {
 		
 	}
 }
