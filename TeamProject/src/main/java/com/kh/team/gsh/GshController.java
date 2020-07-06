@@ -1,15 +1,16 @@
-package com.kh.team.sgh;
+package com.kh.team.gsh;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/sgh/board") // board 댓글
-public class SgnController {
-
-	@RequestMapping(value="/register", method=RequestMethod.GET)
+@RequestMapping("/gsh")
+public class GshController {
+	
+	@RequestMapping(value = "/register" , method = RequestMethod.GET)
 	public void register() throws Exception {
 		
 	}
+
 }
