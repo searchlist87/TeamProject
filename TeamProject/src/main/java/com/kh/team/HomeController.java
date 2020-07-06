@@ -12,7 +12,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		return "/templet/shop-grid";
+		return "/templet/blog-single-sidebar";
 	}
 	
 }
