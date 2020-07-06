@@ -44,11 +44,8 @@
 	<link rel="stylesheet" href="/resources/css/reset.css">
 	<link rel="stylesheet" href="/resources/style.css">
     <link rel="stylesheet" href="/resources/css/responsive.css">
-
-	
 	
 </head>
-<%@include file="../include/bootstrap.jsp"%>
 <body class="js">
 	
 	<!-- Preloader -->
