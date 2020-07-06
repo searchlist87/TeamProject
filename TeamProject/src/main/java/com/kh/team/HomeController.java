@@ -12,15 +12,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-<<<<<<< HEAD
-		return "/templet/contact";
-=======
-<<<<<<< HEAD
-		return "/templet/cart";
-=======
-		return "/templet/blog-single-sidebar";
->>>>>>> branch 'master' of https://github.com/searchlist87/TeamProject
->>>>>>> branch 'master' of https://github.com/searchlist87/TeamProject.git
+		return "/main/main";
 	}
 	
 }
