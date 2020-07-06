@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/sgh")
+@RequestMapping("/sgh/board") // board 댓글
 public class SgnController {
 
 	@RequestMapping(value="/register", method=RequestMethod.GET)
