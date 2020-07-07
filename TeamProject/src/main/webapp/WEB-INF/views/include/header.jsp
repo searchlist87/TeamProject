@@ -3,10 +3,8 @@
 
 <style>
 	.titlePadding {
-		margin-left: 30px;
-		margin-right: 30px;
 		width : 100px;
-		text-align : center;
+ 		text-align : center; 
 	}
 </style>
 <!-- Header -->
@@ -146,10 +144,35 @@
 								<div class="navbar-collapse">
 									<div class="nav-inner">
 										<ul class="nav main-menu menu navbar-nav">
-											<li><a href="#" class="titlePadding">상영작</a></li>
-											<li><a href="#" class="titlePadding">예매</a></li>
-											<li><a href="#" class="titlePadding">극장</a></li>
-											<li><a href="#" class="titlePadding">이벤트<i class="ti-angle-down"></i></a>
+											<li><a href="#" class="titlePadding">영화</a>
+												<ul class="dropdown">
+													<li><a href="blog-single-sidebar.html">베스트</a></li>
+													<li><a href="blog-single-sidebar.html">신작</a></li>
+													<li><a href="blog-single-sidebar.html">상영작</a></li>
+												</ul>
+											</li>
+											<li><a href="#" class="titlePadding">예매</a>
+												<ul class="dropdown">
+													<li><a href="blog-single-sidebar.html">예매하기</a></li>
+													<li><a href="blog-single-sidebar.html">상영 시간표</a></li>
+												</ul>
+											</li>
+											<li><a href="#" class="titlePadding">영화관</a>
+												<ul class="dropdown">
+													<li><a href="blog-single-sidebar.html">서울</a></li>
+													<li><a href="blog-single-sidebar.html">울산</a></li>
+												</ul>
+											</li>
+											<li><a href="#" class="titlePadding">이벤트</a>
+												<ul class="dropdown">
+													<li><a href="blog-single-sidebar.html">진행 이벤트</a></li>
+													<li><a href="blog-single-sidebar.html">종료 이벤트</a></li>
+												</ul></li>
+											<li><a href="#" class="titlePadding">스토어</a>
+												<ul class="dropdown">
+													<li><a href="blog-single-sidebar.html">스낵</a></li>
+													<li><a href="blog-single-sidebar.html">음료</a></li>
+												</ul></li>
 <!-- 											<span class="new">New</span> -->
 										
 <!-- 												<ul class="dropdown"> -->
@@ -164,6 +187,7 @@
 <!-- 															Sidebar</a></li> -->
 <!-- 												</ul></li> -->
 <!-- 											<li><a href="contact.html">Contact Us</a></li> -->
+<!-- 										</ul> -->
 										</ul>
 									</div>
 								</div>
