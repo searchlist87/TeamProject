@@ -52,7 +52,7 @@ $(function() {
 						<div class="shop-sidebar">
 							<!-- Single Widget -->
 							<div class="single-widget category">
-								<h3 class="title">상영 지역</h3>
+								<h3 class="title">상영 지역d</h3>
 								<ul class="categor-list">
 									<c:forEach items="${list}" var="SghTheaterVo">
 										<li><a id="choiceArea" href="#" class="areaClass" data-theater_code="${SghTheaterVo.theater_code}">${SghTheaterVo.theater_area}</a></li>
