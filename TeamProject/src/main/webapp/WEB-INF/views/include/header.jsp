@@ -170,7 +170,7 @@
 													<li><a href="blog-single-sidebar.html">진행 이벤트</a></li>
 													<li><a href="blog-single-sidebar.html">종료 이벤트</a></li>
 												</ul></li>
-											<li><a href="/team/food" class="titlePadding">스토어</a>
+											<li><a href="/team/foodView" class="titlePadding">스토어</a>
 												<ul class="dropdown">
 													<li><a href="blog-single-sidebar.html">스낵</a></li>
 													<li><a href="blog-single-sidebar.html">음료</a></li>
