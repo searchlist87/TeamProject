@@ -13,8 +13,23 @@
  .divEvent { 
  	float : left; 
  } 
- .eventEmage {
- 	padding-right: 10px;
+ .content_padding {
+ 	padding-right: 20px;
+ }
+ .timeCss {
+ 	float:left;
+ 	margin:20px;
+ }
+ .marginCss {
+ 	margin-left:100px;
+ }
+ 
+ .timeCss > ul > li {
+ 	text-align:center;
+ }
+ .product {
+ 	margin-left:20px;
+ 	margin-top : 20px;
  }
 </style>
 <body class="js">
@@ -42,21 +57,20 @@
 									<img src="https://via.placeholder.com/950x460" alt="#">
 								</div>
 								<div class="blog-detail">
-									<h2 class="blog-title">울산 삼산점</h2>
+									<h1 class="blog-title fa-4x">울산 삼산점</h1>
 									<div class="blog-meta">
-										<span><i class="fa fa-user">총 영화관 수 :</i></span> 
+										<span><i class="fa fa-film"> 총 영화관 수 :</i></span> 
 										<span id="theater_count">15관</span> 
-										<span><i class="fa fa-user">총 좌석수 :</i></span> 
+										<span><i class="fa fa-user"> 총 좌석수 :</i></span> 
 										<span id="seat_count">155석</span>
 									</div>
 									<!--  각종 안내 -->
-									<div class="content">
-										<p>울산광역시 남구 삼산동</p>
-										<span class=""><img src="/resources/images/jmh/bus.png" />대중교통안내</span> 
-										<span><img src="/resources/images/jmh/parking.png" />주차 안내</span> 
-										<span><img src="/resources/images/jmh/map.png" />지도 안내</span>
+									<div class="blog-meta">
+										<p>울산광역시 남구 삼산동(영화관주소)</p><br/>
+										<span class="content_padding"><a href=""><img src="/resources/images/jmh/bus.png" /> 대중교통안내</a></span> 
+										<span class="content_padding"><a href=""><img src="/resources/images/jmh/parking.png" /> 주차 안내</a></span> 
+										<span class="content_padding"><a href=""><img src="/resources/images/jmh/map.png" /> 지도 안내</a></span>
 									</div>
-									<hr />
 									<div class="content">
 										<h2 class="blog-title">이벤트</h2>
 									</div>
@@ -91,29 +105,253 @@
 		<div>
 		<!--  이벤트창 -->
 		<div class="row">
-			<div class="image divEvent">
-				<ul>
-					<li><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="eventEmage"/></li>
-					<li><a href="#">이벤트1</a> </li>
-				</ul>
-			</div>
-			<div class="image divEvent">
-				<ul>
-					<li><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="eventEmage"/></li>
-					<li><a href="#">이벤트</a> </li>
-				</ul>
-			</div>
-			<div class="image divEvent">
-				<ul>
-					<li><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="eventEmage"/></li>
-					<li><a href="#">이벤트1</a> </li>
-				</ul>
+			<div class="blog-meta">
+				<div class="image divEvent">
+					<ul>
+						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
+						<li class="fa-stack-1x">이벤트주제</li>
+					</ul>
+					<br/>
+				</div>
+				<div class="image divEvent">
+					<ul>
+						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
+						<li class="fa-stack-1x">이벤트주제 </li>
+					</ul>
+				</div>
+				<div class="image divEvent">
+					<ul>
+						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
+						<li class="fa-stack-1x">이벤트주제 </li>
+					</ul>
+				</div>
 			</div>
 		</div> <!--  end 이벤트 -->
 		<!--  상영시간표 안내 -->
-		<div>
-		
+		<div class="row">
+			<h2 class="blog-title">상영시간표</h2>
+		</div>	
+		<div class="row">
+			<div>
+				<div class="marginCss">
+					<label>7월</label>
+				</div>
+			</div>
+		</div>	
+		<div class="row blog-meta">
+			<div class="marginCss">
+				<div class="timeCss">
+					<a href="#"><img src="/resources/images/jmh/point_left.png" style="rotate:180;"/></a>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>8</strong></a></li>
+						<li><label>오늘</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>9</strong></a></li>
+						<li><label>목</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>10</strong></a></li>
+						<li><label>금</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul style="color:#6799FF;">
+						<li><a href=""><strong>11</strong></a></li>
+						<li><label>토</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul style="color:#F15F5F;">
+						<li><a href=""><strong>12</strong></a></li>
+						<li><label>일</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>13</strong></a></li>
+						<li><label>월</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>14</strong></a></li>
+						<li><label>화</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>15</strong></a></li>
+						<li><label>수</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>16</strong></a></li>
+						<li><label>목</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>17</strong></a></li>
+						<li><label>금</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>15</strong></a></li>
+						<li><label>수</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>16</strong></a></li>
+						<li><label>목</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>17</strong></a></li>
+						<li><label>금</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>17</strong></a></li>
+						<li><label>금</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<a href="#"><img src="/resources/images/jmh/point_right.PNG" style="rotate:180;"/></a>
+				</div>
+			</div>
+		</div>	
+		<!--  관람등급 안내 -->
+		<div class="row" style="background-color:#f8f8f8;">
+			<img src="/resources/images/jmh/movie_grade.png"/>
+			<a href="#"><img src="/resources/images/jmh/movie_grade_info.png"/></a>
 		</div>
+		<!--  end 관람등급 안내 -->
+		
+		<!-- 상영회차 및 시간안내 -->
+		<!--  영화 하나 시작 -->
+		<div class="row" style="margin-top:30px;">
+			<img src="/resources/images/jmh/movie_grade_12.PNG"/>
+			<span class="fa-2x" style="padding-top:15px;">#살아있다</span>
+		</div>
+		<div class="row">
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<!--  영화 하나 끝 -->
+		<!--  영화 하나 시작 -->
+		<div class="row" style="margin-top:30px;">
+			<img src="/resources/images/jmh/movie_grade_12.PNG"/>
+			<span class="fa-2x" style="padding-top:15px;">#살아있다</span>
+		</div>
+		<div class="row">
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<!--  영화 하나 끝 -->
 	</div>
 </div><!--  end container -->
 </section>
