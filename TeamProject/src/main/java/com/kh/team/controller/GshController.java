@@ -12,5 +12,10 @@ public class GshController {
 	public void register() throws Exception {
 		
 	}
+	@RequestMapping(value = "/shop-grid", method = RequestMethod.GET)
+	public String shopGrid() throws Exception {
+		System.out.println("shopGrid");
+		return "user/gsh/board/shop-grid";
+	}
 
 }

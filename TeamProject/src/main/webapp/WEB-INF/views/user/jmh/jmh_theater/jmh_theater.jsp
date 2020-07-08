@@ -1,182 +1,361 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="zxx">
-<head>
 <!--  tag_and_styleSheet include -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
-
-</head>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
 <style>
-	#theater_count {
-		padding-right : 20px;
-	}
+#theater_count {
+	padding-right: 20px;
+}
+ .divEvent { 
+ 	float : left; 
+ } 
+ .content_padding {
+ 	padding-right: 20px;
+ }
+ .timeCss {
+ 	float:left;
+ 	margin:20px;
+ }
+ .marginCss {
+ 	margin-left:100px;
+ }
+ 
+ .timeCss > ul > li {
+ 	text-align:center;
+ }
+ .product {
+ 	margin-left:20px;
+ 	margin-top : 20px;
+ }
 </style>
 <body class="js">
-		<section class="hero-slider">
+	<section class="hero-slider">
 		<!-- Single Slider -->
-		<div style="background-color:black;">
+		<div style="background-color: black;">
 			<div>
-			<!--  메인이미지랑 같게 -->
-			<img src="/resources/images/main2.jpg" style="height:100%; width:100%;"/>  
+				<!--  메인이미지랑 같게 -->
+				<img src="/resources/images/main2.jpg"
+					style="height: 100%; width: 100%;" />
 			</div>
 		</div>
 		<!--/ End Single Slider -->
-		</section>	
-		<!-- Start Blog Single -->
-		<section class="blog-single section">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-8 col-12">
-						<div class="blog-single-main">
-							<div class="row">
-								<div class="col-12">
-									<div class="image">
-										<img src="https://via.placeholder.com/950x460" alt="#">
-									</div>
-									<div class="blog-detail">
-										<h2 class="blog-title">울산 삼산점</h2>
-										<div class="blog-meta">
-											<span><i class="fa fa-user">총 영화관 수 :</i></span>
-											<span id="theater_count">15관</span>
-											<span><i class="fa fa-user">총 좌석수 :</i></span>
-											<span id="seat_count">155석</span>
-										</div>
-										<div class="content">
-											<p>울산광역시 남구 삼산동</p>
-											<blockquote> <i class="fa fa-quote-left"></i> Do what you love to do and give it your very best. Whether it's business or baseball, or the theater, or any field. If you don't love what you're doing and you can't give it your best, get out of it. Life is too short. You'll be an old man before you know it. risus. Ut tincidunt, erat eget feugiat eleifend, eros magna dapibus diam.</blockquote>
-											<p>What a crazy time. I have five children in colleghigh school graduates.jpge or pursing post graduate studies  Each of my children attends college far from home, the closest of which is more than 800 miles away. While I miss being with my older children, I know that a college experience can be the source of great growth and experience can be the source of source of great growth and can provide them with even greater in future.</p>
-											<p>What a crazy time. I have five children in colleghigh school graduates.jpge or pursing post graduate studies  Each of my children attends college far from home, the closest of which is more than 800 miles away. While I miss being with my older children, I know that a college experience can be the source of great growth and experience can be the source of source of great growth and can provide them with even greater in future.</p>
-										</div>
-									</div>
-									<div class="share-social">
-										<div class="row">
-											<div class="col-12">
-												<div class="content-tags">
-													<h4>Tags:</h4>
-													<ul class="tag-inner">
-														<li><a href="#">Glass</a></li>
-														<li><a href="#">Pant</a></li>
-														<li><a href="#">t-shirt</a></li>
-														<li><a href="#">swater</a></li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
+	</section>
+	<!-- Start Blog Single -->
+	<section class="blog-single section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-12">
+					<div class="blog-single-main">
+						<div class="row">
+							<div class="col-12">
+								<!--  메인이미지 가져오기 -->
+								<div class="image">
+									<img src="https://via.placeholder.com/950x460" alt="#">
 								</div>
-								<div class="col-12">
-								</div>											
-								<div class="col-12">			
-								</div>			
+								<div class="blog-detail">
+									<h1 class="blog-title fa-4x">울산 삼산점</h1>
+									<div class="blog-meta">
+										<span><i class="fa fa-film"> 총 영화관 수 :</i></span> 
+										<span id="theater_count">15관</span> 
+										<span><i class="fa fa-user"> 총 좌석수 :</i></span> 
+										<span id="seat_count">155석</span>
+									</div>
+									<!--  각종 안내 -->
+									<div class="blog-meta">
+										<p>울산광역시 남구 삼산동(영화관주소)</p><br/>
+										<span class="content_padding"><a href=""><img src="/resources/images/jmh/bus.png" /> 대중교통안내</a></span> 
+										<span class="content_padding"><a href=""><img src="/resources/images/jmh/parking.png" /> 주차 안내</a></span> 
+										<span class="content_padding"><a href=""><img src="/resources/images/jmh/map.png" /> 지도 안내</a></span>
+									</div>
+									<div class="content">
+										<h2 class="blog-title">이벤트</h2>
+									</div>
+								</div> 
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 col-12">
-						<div class="main-sidebar">
-							<!-- Single Widget -->
-							<div class="single-widget search">
-								<div class="form">
-									<input type="email" placeholder="Search Here...">
-									<a class="button" href="#"><i class="fa fa-search"></i></a>
-								</div>
+				</div>
+				<div class="col-lg-4 col-12">
+					<div class="main-sidebar">
+					<!--  검색창 -->
+						<!-- Single Widget -->
+						<div class="single-widget search">
+							<div class="form">
+								<input type="text" placeholder="검색할 영화관 입력"> <a
+									class="button" href="#"><i class="fa fa-search"></i></a>
 							</div>
-							<!--/ End Single Widget -->
-							<!-- Single Widget -->
-							<div class="single-widget category">
-								<h3 class="title">영화관 안내</h3>
-								<ul class="categor-list">
-									<li><a href="#">Men's Apparel</a></li>
-									<li><a href="#">Women's Apparel</a></li>
-									<li><a href="#">Bags Collection</a></li>
-									<li><a href="#">Accessories</a></li>
-									<li><a href="#">Sun Glasses</a></li>
-								</ul>
-							</div>
-							<!--/ End Single Widget -->
-							<!-- Single Widget -->
-							<div class="single-widget recent-post">
-								<h3 class="title">Recent post</h3>
-								<!-- Single Post -->
-								<div class="single-post">
-									<div class="image">
-										<img src="https://via.placeholder.com/100x100" alt="#">
-									</div>
-									<div class="content">
-										<h5><a href="#">Top 10 Beautyful Women Dress in the world</a></h5>
-										<ul class="comment">
-											<li><i class="fa fa-calendar" aria-hidden="true"></i>Jan 11, 2020</li>
-											<li><i class="fa fa-commenting-o" aria-hidden="true"></i>35</li>
-										</ul>
-									</div>
-								</div>
-								<!-- End Single Post -->
-								<!-- Single Post -->
-								<div class="single-post">
-									<div class="image">
-										<img src="https://via.placeholder.com/100x100" alt="#">
-									</div>
-									<div class="content">
-										<h5><a href="#">Top 10 Beautyful Women Dress in the world</a></h5>
-										<ul class="comment">
-											<li><i class="fa fa-calendar" aria-hidden="true"></i>Mar 05, 2019</li>
-											<li><i class="fa fa-commenting-o" aria-hidden="true"></i>59</li>
-										</ul>
-									</div>
-								</div>
-								<!-- End Single Post -->
-								<!-- Single Post -->
-								<div class="single-post">
-									<div class="image">
-										<img src="https://via.placeholder.com/100x100" alt="#">
-									</div>
-									<div class="content">
-										<h5><a href="#">Top 10 Beautyful Women Dress in the world</a></h5>
-										<ul class="comment">
-											<li><i class="fa fa-calendar" aria-hidden="true"></i>June 09, 2019</li>
-											<li><i class="fa fa-commenting-o" aria-hidden="true"></i>44</li>
-										</ul>
-									</div>
-								</div>
-								<!-- End Single Post -->
-							</div>
-							<!--/ End Single Widget -->
-							<!-- Single Widget -->
-							<!--/ End Single Widget -->
-							<!-- Single Widget -->
-							<div class="single-widget side-tags">
-								<h3 class="title">Tags</h3>
-								<ul class="tag">
-									<li><a href="#">business</a></li>
-									<li><a href="#">wordpress</a></li>
-									<li><a href="#">html</a></li>
-									<li><a href="#">multipurpose</a></li>
-									<li><a href="#">education</a></li>
-									<li><a href="#">template</a></li>
-									<li><a href="#">Ecommerce</a></li>
-								</ul>
-							</div>
-							<!--/ End Single Widget -->
-							<!-- Single Widget -->
-							<div class="single-widget newsletter">
-								<h3 class="title">Newslatter</h3>
-								<div class="letter-inner">
-									<h4>Subscribe & get news <br> latest updates.</h4>
-									<div class="form-inner">
-										<input type="email" placeholder="Enter your email">
-										<a href="#">Submit</a>
-									</div>
-								</div>
-							</div>
-							<!--/ End Single Widget -->
+						</div>
+						<!--/ End Single Widget -->
+						<!-- 오른쪽 side bar 안내 -->
+						<div class="single-widget category">
+							<h3 class="title">영화관 안내</h3>
+							<ul class="categor-list">
+								<li><a href="#">울산 삼산점</a></li>
+								<li><a href="#">울산 성남동점</a></li>
+								<li><a href="#">서울 강남점</a></li>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
-		<!--/ End Blog Single -->
+		<div>
+		<!--  이벤트창 -->
+		<div class="row">
+			<div class="blog-meta">
+				<div class="image divEvent">
+					<ul>
+						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
+						<li class="fa-stack-1x">이벤트주제</li>
+					</ul>
+					<br/>
+				</div>
+				<div class="image divEvent">
+					<ul>
+						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
+						<li class="fa-stack-1x">이벤트주제 </li>
+					</ul>
+				</div>
+				<div class="image divEvent">
+					<ul>
+						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
+						<li class="fa-stack-1x">이벤트주제 </li>
+					</ul>
+				</div>
+			</div>
+		</div> <!--  end 이벤트 -->
+		<!--  상영시간표 안내 -->
+		<div class="row">
+			<h2 class="blog-title">상영시간표</h2>
+		</div>	
+		<div class="row">
+			<div>
+				<div class="marginCss">
+					<label>7월</label>
+				</div>
+			</div>
+		</div>	
+		<div class="row blog-meta">
+			<div class="marginCss">
+				<div class="timeCss">
+					<a href="#"><img src="/resources/images/jmh/point_left.png" style="rotate:180;"/></a>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>8</strong></a></li>
+						<li><label>오늘</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>9</strong></a></li>
+						<li><label>목</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>10</strong></a></li>
+						<li><label>금</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul style="color:#6799FF;">
+						<li><a href=""><strong>11</strong></a></li>
+						<li><label>토</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul style="color:#F15F5F;">
+						<li><a href=""><strong>12</strong></a></li>
+						<li><label>일</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>13</strong></a></li>
+						<li><label>월</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>14</strong></a></li>
+						<li><label>화</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>15</strong></a></li>
+						<li><label>수</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>16</strong></a></li>
+						<li><label>목</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>17</strong></a></li>
+						<li><label>금</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>15</strong></a></li>
+						<li><label>수</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>16</strong></a></li>
+						<li><label>목</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>17</strong></a></li>
+						<li><label>금</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<ul>
+						<li><a href=""><strong>17</strong></a></li>
+						<li><label>금</label></li>
+					</ul>
+				</div>
+				<div class="timeCss">
+					<a href="#"><img src="/resources/images/jmh/point_right.PNG" style="rotate:180;"/></a>
+				</div>
+			</div>
+		</div>	
+		<!--  관람등급 안내 -->
+		<div class="row" style="background-color:#f8f8f8;">
+			<img src="/resources/images/jmh/movie_grade.png"/>
+			<a href="#"><img src="/resources/images/jmh/movie_grade_info.png"/></a>
+		</div>
+		<!--  end 관람등급 안내 -->
+		
+		<!-- 상영회차 및 시간안내 -->
+		<!--  영화 하나 시작 -->
+		<div class="row" style="margin-top:30px;">
+			<img src="/resources/images/jmh/movie_grade_12.PNG"/>
+			<span class="fa-2x" style="padding-top:15px;">#살아있다</span>
+		</div>
+		<div class="row">
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<!--  영화 하나 끝 -->
+		<!--  영화 하나 시작 -->
+		<div class="row" style="margin-top:30px;">
+			<img src="/resources/images/jmh/movie_grade_12.PNG"/>
+			<span class="fa-2x" style="padding-top:15px;">#살아있다</span>
+		</div>
+		<div class="row">
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<!--  영화 하나 끝 -->
+	</div>
+</div><!--  end container -->
+</section>
+	<!--/ End Blog Single -->
+	<%@ include file="../../../include/footer.jsp"%>
 </body>
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </html>
