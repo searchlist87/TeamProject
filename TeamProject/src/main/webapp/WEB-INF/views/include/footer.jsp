@@ -130,8 +130,6 @@
 	<script src="/resources/js/popper.min.js"></script>
 	<!-- Bootstrap JS -->
 	<script src="/resources/js/bootstrap.min.js"></script>
-	<!-- Color JS -->
-	<script src="/resources/js/colors.js"></script>
 	<!-- Slicknav JS -->
 	<script src="/resources/js/slicknav.min.js"></script>
 	<!-- Owl Carousel JS -->
