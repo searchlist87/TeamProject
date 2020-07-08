@@ -6,8 +6,14 @@
 <head>
 <!--  tag_and_styleSheet include -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
+
 </head>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+<style>
+	#theater_count {
+		padding-right : 20px;
+	}
+</style>
 <body class="js">
 		<section class="hero-slider">
 		<!-- Single Slider -->
@@ -33,13 +39,13 @@
 									<div class="blog-detail">
 										<h2 class="blog-title">울산 삼산점</h2>
 										<div class="blog-meta">
-											<span><i class="fa fa-search">총 영화관 수 :</i></span>
-											<span>15관</span>
-											<span><i class="fa fa-search">총 좌석수 :</i></span>
-											<span>155석</span>
+											<span><i class="fa fa-user">총 영화관 수 :</i></span>
+											<span id="theater_count">15관</span>
+											<span><i class="fa fa-user">총 좌석수 :</i></span>
+											<span id="seat_count">155석</span>
 										</div>
 										<div class="content">
-											<p>What a crazy time. I have five children in colleghigh school graduates.jpge or pursing post graduate studies  Each of my children attends college far from home, the closest of which is more than 800 miles away. While I miss being with my older children, I know that a college experience can be the source of great growth and experience can be the source of source of great growth and can provide them with even greater in future.</p>
+											<p>울산광역시 남구 삼산동</p>
 											<blockquote> <i class="fa fa-quote-left"></i> Do what you love to do and give it your very best. Whether it's business or baseball, or the theater, or any field. If you don't love what you're doing and you can't give it your best, get out of it. Life is too short. You'll be an old man before you know it. risus. Ut tincidunt, erat eget feugiat eleifend, eros magna dapibus diam.</blockquote>
 											<p>What a crazy time. I have five children in colleghigh school graduates.jpge or pursing post graduate studies  Each of my children attends college far from home, the closest of which is more than 800 miles away. While I miss being with my older children, I know that a college experience can be the source of great growth and experience can be the source of source of great growth and can provide them with even greater in future.</p>
 											<p>What a crazy time. I have five children in colleghigh school graduates.jpge or pursing post graduate studies  Each of my children attends college far from home, the closest of which is more than 800 miles away. While I miss being with my older children, I know that a college experience can be the source of great growth and experience can be the source of source of great growth and can provide them with even greater in future.</p>
@@ -171,8 +177,6 @@
 			</div>
 		</section>
 		<!--/ End Blog Single -->
-
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
-
 </body>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </html>
