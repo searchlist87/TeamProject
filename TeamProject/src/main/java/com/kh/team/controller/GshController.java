@@ -13,8 +13,9 @@ public class GshController {
 		
 	}
 	@RequestMapping(value = "/shop-grid", method = RequestMethod.GET)
-	public void shopGrid() throws Exception {
+	public String shopGrid() throws Exception {
 		System.out.println("shopGrid");
+		return "user/gsh/board/shop-grid";
 	}
 
 }
