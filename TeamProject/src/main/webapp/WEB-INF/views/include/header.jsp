@@ -159,10 +159,10 @@
 													<li><a href="blog-single-sidebar.html">상영 시간표</a></li>
 												</ul>
 											</li>
-											<li><a href="/team/blog-single-sidebar" class="titlePadding">영화관</a>
+											<li><a href="/team/theaterView" class="titlePadding">영화관</a>
 												<ul class="dropdown">
-													<li><a href="blog-single-sidebar.html">서울</a></li>
-													<li><a href="blog-single-sidebar.html">울산</a></li>
+													<li><a href="/team/theaterView">서울</a></li>
+													<li><a href="/team/theaterView">울산</a></li>
 												</ul>
 											</li>
 											<li><a href="/team/contact" class="titlePadding">이벤트</a>
