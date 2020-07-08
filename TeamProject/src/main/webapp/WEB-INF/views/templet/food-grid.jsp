@@ -13,16 +13,21 @@
 <!-- 해더 부분 -->
 <%@include file="../include/header.jsp" %>
 		
+<!-- 		<!-- 메인 사진 -->
+<!-- 		<div style="background-color:black;"> -->
+<!-- 			<div> -->
+<!-- 			<img src="/resources/images/팝콘3.jpg" style="height:100%; width:100%;"/>   -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<!--/ 메인 사진 -->
+
 		<!-- Breadcrumbs -->
-		<div class="breadcrumbs">
-			<div class="container">
+		<div class="breadcrumbs" style="background-color:black">
+			<div style="background-color:black" class="container">
 				<div class="row">
 					<div class="col-12">
-						<div class="bread-inner">
-							<ul class="bread-list">
-								<li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-								<li class="active"><a href="blog-single.html">Shop Grid</a></li>
-							</ul>
+						<div>
+							<img src="/resources/images/팝콘.png" style="height:400px; width:100%;"/>
 						</div>
 					</div>
 				</div>
