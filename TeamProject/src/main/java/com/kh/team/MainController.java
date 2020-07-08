@@ -20,4 +20,10 @@ public class MainController {
 		public String theaterView() throws Exception {
 			return "redirect:/jmh/theater/theaterView";
 		}
+		
+		// KdhController
+		@RequestMapping(value="/foodView", method = RequestMethod.GET)
+		public String foodView() throws Exception {
+			return "redirect:/kdh/food/foodView";
+		}
 }
