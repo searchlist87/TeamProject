@@ -29,9 +29,9 @@ public class MainController {
 			return "templet/contact";
 		}
 		
-		@RequestMapping(value="/cart", method=RequestMethod.GET)
+		@RequestMapping(value="/food", method=RequestMethod.GET)
 		public String testCart() throws Exception {
-			return "templet/cart";
+			return "templet/food-grid";
 		}
 		
 		@RequestMapping(value="/blog-single-sidebar", method=RequestMethod.GET)
