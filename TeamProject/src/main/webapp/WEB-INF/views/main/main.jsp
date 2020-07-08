@@ -77,7 +77,7 @@
                     <div class="owl-carousel popular-slider">
 						<!-- Start Single Product -->
 						<div class="single-product">
-							<div class="product-img">
+							<div class="product-img">  
 								<a href="product-details.html">
 									<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
 									<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
