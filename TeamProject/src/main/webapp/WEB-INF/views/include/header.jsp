@@ -36,13 +36,13 @@
 				<div class="col-lg-2 col-md-2 col-12">
 					<!-- Logo -->
 					<div class="logo">
-						<a href="index.html"><img src="/resources/images/logo.jpg"
+						<a href="/ "><img src="/resources/images/logo.jpg"
 							alt="logo"></a> 
 					</div>  
 					<!--/ End Logo --> 
 					<!-- Search Form -->
 					<div class="search-top">
-			s			<div class="top-search">
+						<div class="top-search">
 							<a href="#0"><i class="ti-search"></i></a>
 						</div>
 						<!-- Search Form -->
@@ -144,31 +144,32 @@
 								<div class="navbar-collapse">
 									<div class="nav-inner">
 										<ul class="nav main-menu menu navbar-nav">
-											<li><a href="#" class="titlePadding">영화</a>
+										<!-- 화면 위쪽에 나오는 Bar -->
+											<li><a href="/templet/shop-grid" class="titlePadding">영화</a>
 												<ul class="dropdown">
 													<li><a href="blog-single-sidebar.html">베스트</a></li>
 													<li><a href="blog-single-sidebar.html">신작</a></li>
 													<li><a href="blog-single-sidebar.html">상영작</a></li>
 												</ul>
 											</li>
-											<li><a href="#" class="titlePadding">예매</a>
+											<li><a href="/book/bookingView" class="titlePadding">예매</a>
 												<ul class="dropdown">
 													<li><a href="blog-single-sidebar.html">예매하기</a></li>
 													<li><a href="blog-single-sidebar.html">상영 시간표</a></li>
 												</ul>
 											</li>
-											<li><a href="#" class="titlePadding">영화관</a>
+											<li><a href="/templet/blog-single-sidebar" class="titlePadding">영화관</a>
 												<ul class="dropdown">
 													<li><a href="blog-single-sidebar.html">서울</a></li>
 													<li><a href="blog-single-sidebar.html">울산</a></li>
 												</ul>
 											</li>
-											<li><a href="#" class="titlePadding">이벤트</a>
+											<li><a href="/templet/contact" class="titlePadding">이벤트</a>
 												<ul class="dropdown">
 													<li><a href="blog-single-sidebar.html">진행 이벤트</a></li>
 													<li><a href="blog-single-sidebar.html">종료 이벤트</a></li>
 												</ul></li>
-											<li><a href="#" class="titlePadding">스토어</a>
+											<li><a href="/templet/cart" class="titlePadding">스토어</a>
 												<ul class="dropdown">
 													<li><a href="blog-single-sidebar.html">스낵</a></li>
 													<li><a href="blog-single-sidebar.html">음료</a></li>
