@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/jmh/board")
+@RequestMapping("/jmh/theater")
 public class JmhController {
 
-	@RequestMapping(value="/register", method = RequestMethod.GET)
-	public void register() throws Exception {
-		
+	@RequestMapping(value="/theaterView", method = RequestMethod.GET)
+	public String register() throws Exception {
+		return "user/jmh/jmh_theater/jmh_theater";
 	}
 	
 }

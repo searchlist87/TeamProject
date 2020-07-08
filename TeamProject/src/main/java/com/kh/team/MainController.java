@@ -14,4 +14,10 @@ public class MainController {
 		public String testBookingView() throws Exception {
 			return "redirect:/sgh/book/bookingView";
 		}
+		
+		// JmhController
+		@RequestMapping(value="/theaterView", method = RequestMethod.GET)
+		public String theaterView() throws Exception {
+			return "redirect:/jmh/theater/theaterView";
+		}
 }
