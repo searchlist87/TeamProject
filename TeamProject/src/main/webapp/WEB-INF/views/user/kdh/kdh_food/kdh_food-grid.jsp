@@ -18,13 +18,13 @@
 
 </style>
 <!-- tag_and_styleSheet 인크루드 -->
-<%@include file = "../include/tag_and_styleSheet.jsp" %>
+<%@include file = "../../../include/tag_and_styleSheet.jsp" %>
 
 </head>
 <body class="js">
 	
 <!-- 해더 부분 -->
-<%@include file="../include/header.jsp" %>
+<%@include file="../../../include/header.jsp" %>
 
 	<!-- 음식 메인 사진 -->
 	<div class="foodMain" style="background-color:black">
@@ -566,6 +566,6 @@
 			</div>
 			<!-- Modal end -->
 		
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../../../include/footer.jsp" %>
 </body>
 </html>
