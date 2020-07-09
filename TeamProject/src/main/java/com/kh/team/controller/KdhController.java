@@ -9,9 +9,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class KdhController {
 
 	@RequestMapping(value = "/foodView", method = RequestMethod.GET)
-	public String register() throws Exception {
+	public String foodView() throws Exception {
 		return "user/kdh/kdh_food/kdh_food-grid";
 	} 
 	
-
+	@RequestMapping(value = "/honeyPopCon", method = RequestMethod.GET)
+	public String honeyPopCon() throws Exception {
+		return "user/kdh/kdh_food/kdh_honeyPopCon";
+	}
+	
+	@RequestMapping(value = "/garicPopCon", method = RequestMethod.GET)
+	public String garicPopCon() throws Exception {
+		return "user/kdh/kdh_food/kdh_garicPopCon";
+	}
 }
