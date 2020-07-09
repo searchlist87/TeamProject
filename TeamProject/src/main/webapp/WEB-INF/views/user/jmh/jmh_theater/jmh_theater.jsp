@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -7,6 +8,12 @@
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <%@ include file="/WEB-INF/views/user/jmh/jmh_modal/modal.jsp"%>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.*" %>
+<!-- Jquery -->
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
+	<script src="/resources/js/jquery-ui.min.js"></script>
 <style>
 #theater_count {
 	padding-right: 20px;
@@ -37,6 +44,48 @@
  	padding-left:5px;
  }
 </style>
+<script>
+$(function() {
+	
+	var date = new Date();
+	var month = date.getMonth() + 1; // 월
+	var day = date.getDate(); // 일
+	var dayint = date.getDay(); // 요일 0~6
+	
+	var dayArray = new Array("일","월","화","수","목","금","토");
+	// 월 설정
+	$("#monthText").text(month);
+	$(".cloneUl").find("label").eq(1).text(dayArray[dayint]);
+	var dayintIndex = dayint;
+	for(var i = 0; i < 21; i++) {
+		var cloneTimeDiv = $(".cloneUl:first").clone();
+		
+		
+		// -- 날짜 --
+		cloneTimeDiv.find("label").eq(0).text(day + i);
+		if(dayintIndex > 6) {
+			dayintIndex = 0;
+		}
+		// --요일--
+		// 토요일 글꼴색상 수정
+		if(dayintIndex == 6) {
+			cloneTimeDiv.find("label").eq(1).css("color","blue");
+		}
+		// 일요일 글꼴색상 수정
+		if(dayintIndex == 0) {
+			cloneTimeDiv.find("label").eq(1).css("color","red");
+		}
+		cloneTimeDiv.find("label").eq(1).text(dayArray[dayintIndex]);
+		dayintIndex ++;
+		//$("#cloneTimeDiv").append(cloneTimeDiv);		
+	}
+	//$(".cloneUl").eq(0).css("visibility", "hidden");
+	
+	console.log(cloneTimeDiv);
+});
+</script>
+
+
 <body class="js">
 	<section class="hero-slider">
 		<!-- Single Slider -->
@@ -151,103 +200,46 @@
 		<div class="row">
 			<div>
 				<div class="marginCss">
-					<label>7월</label>
+					<label id="monthText">7</label>월
 				</div>
 			</div>
 		</div>	
 		<div class="row blog-meta">
-			<div class="marginCss">
-				<div class="timeCss">
-					<a href="#"><img src="/resources/images/jmh/point_left.png" style="rotate:180;"/></a>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>8</strong></a></li>
-						<li><label>오늘</label></li>
+			<div class="marginCss"> 
+				
+				
+				<div class="timeCss" style="float:left;transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 800px;" id="cloneTimeDiv" > 
+					<ul style="float:left;margin-right:30px;" class="cloneUl">
+						<li><a href="#" style="cursor:pointer;"><label class="fa-2x">1</label></a></li>
+						<li><label>1</label></li>
 					</ul>
 				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>9</strong></a></li>
-						<li><label>목</label></li>
+				<div class="timeCss" style="float:left;transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 800px;" id="cloneTimeDiv" > 
+					<ul style="float:left;margin-right:30px;" class="cloneUl">
+						<li><a href="#" style="cursor:pointer;"><label class="fa-2x">1</label></a></li>
+						<li><label>1</label></li>
 					</ul>
 				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>10</strong></a></li>
-						<li><label>금</label></li>
+				<div class="timeCss" style="float:left;transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 800px;" id="cloneTimeDiv" > 
+					<ul style="float:left;margin-right:30px;" class="cloneUl">
+						<li><a href="#" style="cursor:pointer;"><label class="fa-2x">1</label></a></li>
+						<li style="float:left;"><label>1</label></li>
 					</ul>
 				</div>
-				<div class="timeCss">
-					<ul style="color:#6799FF;">
-						<li><a href=""><strong>11</strong></a></li>
-						<li><label>토</label></li>
+				<div class="timeCss" style="float:left;transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 800px;" id="cloneTimeDiv" > 
+					<ul style="float:left;margin-right:30px;" class="cloneUl">
+						<li><a href="#" style="cursor:pointer;"><label class="fa-2x">1</label></a></li>
+						<li style="float:left;"><label>1</label></li>
 					</ul>
 				</div>
-				<div class="timeCss">
-					<ul style="color:#F15F5F;">
-						<li><a href=""><strong>12</strong></a></li>
-						<li><label>일</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>13</strong></a></li>
-						<li><label>월</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>14</strong></a></li>
-						<li><label>화</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>15</strong></a></li>
-						<li><label>수</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>16</strong></a></li>
-						<li><label>목</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>17</strong></a></li>
-						<li><label>금</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>15</strong></a></li>
-						<li><label>수</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>16</strong></a></li>
-						<li><label>목</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>17</strong></a></li>
-						<li><label>금</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<ul>
-						<li><a href=""><strong>17</strong></a></li>
-						<li><label>금</label></li>
-					</ul>
-				</div>
-				<div class="timeCss">
-					<a href="#"><img src="/resources/images/jmh/point_right.PNG" style="rotate:180;"/></a>
-				</div>
+				
 			</div>
+			<div style="float:left;padding:10px; padding-right:10px;">
+					<button type="button"><img src="/resources/images/jmh/point_left.png"/></button>
+				</div>
+				<div style="float:left;padding:10px;">
+					<button type="button"><img src="/resources/images/jmh/point_right.PNG"/></button>
+				</div>
 		</div>	
 		<!--  관람등급 안내 -->
 		<div class="row" style="background-color:#f8f8f8;">
@@ -372,7 +364,60 @@
 	</div>
 </div><!--  end container -->
 </section>
-	<!--/ End Blog Single -->
-	<%@ include file="../../../include/footer.jsp"%>
+<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<div class="carousel slide" id="carousel-529126">
+				<ol class="carousel-indicators">
+					<li data-slide-to="0" data-target="#carousel-529126">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-529126">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-529126" class="active">
+					</li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="carousel-item">
+						<img class="d-block w-100" alt="Carousel Bootstrap First" src="https://www.layoutit.com/img/sports-q-c-1600-500-1.jpg" />
+						<div class="carousel-caption">
+							<h4>
+								First Thumbnail label
+							</h4>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item">
+						<img class="d-block w-100" alt="Carousel Bootstrap Second" src="https://www.layoutit.com/img/sports-q-c-1600-500-2.jpg" />
+						<div class="carousel-caption">
+							<h4>
+								Second Thumbnail label
+							</h4>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+					<div class="carousel-item active">
+						<img class="d-block w-100" alt="Carousel Bootstrap Third" src="https://www.layoutit.com/img/sports-q-c-1600-500-3.jpg" />
+						<div class="carousel-caption">
+							<h4>
+								Third Thumbnail label
+							</h4>
+							<p>
+								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+							</p>
+						</div>
+					</div>
+				</div> <a class="carousel-control-prev" href="#carousel-529126" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-529126" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
+			</div>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
 </body>
+<!--/ End Blog Single -->
+	<%@ include file="../../../include/footer.jsp"%>
 </html>
