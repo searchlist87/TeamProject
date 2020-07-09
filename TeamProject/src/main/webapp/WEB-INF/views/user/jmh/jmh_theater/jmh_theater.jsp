@@ -6,6 +6,7 @@
 <!--  tag_and_styleSheet include -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<%@ include file="/WEB-INF/views/user/jmh/jmh_modal/modal.jsp"%>
 <style>
 #theater_count {
 	padding-right: 20px;
@@ -30,6 +31,10 @@
  .product {
  	margin-left:20px;
  	margin-top : 20px;
+ }
+ .information_css {
+ 	color:white;
+ 	padding-left:5px;
  }
 </style>
 <body class="js">
@@ -67,9 +72,21 @@
 									<!--  각종 안내 -->
 									<div class="blog-meta">
 										<p>울산광역시 남구 삼산동(영화관주소)</p><br/>
-										<span class="content_padding"><a href=""><img src="/resources/images/jmh/bus.png" /> 대중교통안내</a></span> 
-										<span class="content_padding"><a href=""><img src="/resources/images/jmh/parking.png" /> 주차 안내</a></span> 
-										<span class="content_padding"><a href=""><img src="/resources/images/jmh/map.png" /> 지도 안내</a></span>
+										<span class="content_padding">
+											<a id="modal-458336" href="#modal-container-458336" role="button" class="btn" data-toggle="modal">
+												<img src="/resources/images/jmh/bus.png" /><label class="information_css">대중교통안내</label>
+											</a>
+										</span> 
+										<span class="content_padding">
+											<a id="modal-458337" href="#modal-container-458337" role="button" class="btn" data-toggle="modal">
+												<img src="/resources/images/jmh/parking.png" /><label class="information_css">주차 안내</label> 
+											</a>
+										</span> 
+										<span class="content_padding">
+											<a id="modal-458338" href="#modal-container-458338" role="button" class="btn" data-toggle="modal">
+												<img src="/resources/images/jmh/map.png" /><label class="information_css">지도 안내</label> 
+											</a>
+										</span>
 									</div>
 									<div class="content">
 										<h2 class="blog-title">이벤트</h2>
@@ -235,7 +252,7 @@
 		<!--  관람등급 안내 -->
 		<div class="row" style="background-color:#f8f8f8;">
 			<img src="/resources/images/jmh/movie_grade.png"/>
-			<a href="#"><img src="/resources/images/jmh/movie_grade_info.png"/></a>
+			<a id="modal-458339" href="#modal-container-458339" role="button"  data-toggle="modal"><img src="/resources/images/jmh/movie_grade_info.png"/></a>
 		</div>
 		<!--  end 관람등급 안내 -->
 		

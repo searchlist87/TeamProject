@@ -5,17 +5,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/gsh/board")
+@RequestMapping("/gsh/movie")
 public class GshController {
 	
-	@RequestMapping(value = "/register" , method = RequestMethod.GET)
-	public void register() throws Exception {
-		
-	}
-	@RequestMapping(value = "/shop-grid", method = RequestMethod.GET)
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public String shopGrid() throws Exception {
-		System.out.println("shopGrid");
-		return "user/gsh/board/shop-grid";
+//		System.out.println("movie");
+		return "user/gsh/movie/review";
 	}
 
 }
