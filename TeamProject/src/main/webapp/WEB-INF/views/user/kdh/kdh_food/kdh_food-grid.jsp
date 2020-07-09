@@ -32,7 +32,7 @@
 			<div class="row">
 				<div class="col-12" style="text-align: center;">
 					<div>
-						<img src="/resources/images/팝콘.png" style="height:400px; width:70%;"/>
+						<img src="/resources/images/kdh/팝콘.png" style="height:400px; width:70%;"/>
 					</div>
 				</div>
 			</div>
@@ -56,7 +56,7 @@
 				<div class="col-lg-2 col-12">
 					<div class="single-banner">
 						<div>
-							<img src="/resources/images/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
+							<img src="/resources/images/kdh/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
 							<div>
 								<h2 style="text-align: center">카라멜 팝콘L</h2>
 								<h3 style="text-align: center">6,000원</h3>
@@ -68,7 +68,7 @@
 				<!-- Single Banner  -->
 				<div class="col-lg-2 col-12">
 					<div class="single-banner">
-						<img src="/resources/images/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
+						<img src="/resources/images/kdh/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
 						<div>
 							<h2 style="text-align: center">카라멜 팝콘L</h2>
 							<h3 style="text-align: center">6,000원</h3>
@@ -79,7 +79,7 @@
 				<!-- Single Banner  -->
 				<div class="col-lg-2 col-12">
 					<div class="single-banner tab-height">
-						<img src="/resources/images/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
+						<img src="/resources/images/kdh/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
 						<div>
 							<h2 style="text-align: center">카라멜 팝콘L</h2>
 							<h3 style="text-align: center">6,000원</h3>
