@@ -1,63 +1,62 @@
 package com.kh.team.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.kh.team.constants.sample;
+import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.service.KdhFoodService;
 
 @Controller
 @RequestMapping("/kdh/food")
 public class KdhController {
 
+	@Inject
+	KdhFoodService foodService;
+	
+	// 스토어 메인
 	@RequestMapping(value = "/foodView", method = RequestMethod.GET)
-	public String foodView() throws Exception {
+	public String foodView(Model model) throws Exception {
+		List<KdhFoodVo> list = foodService.listFood();
+		model.addAttribute("list", list);
+//		System.out.println("list:" + list);
 		return "user/kdh/kdh_food/kdh_food-grid";
 	} 
 	
-	// 캬라멜 팝콘
-	@RequestMapping(value = "/honeyPopCon", method = RequestMethod.GET)
-	public String honeyPopCon() throws Exception {
-		return "user/kdh/kdh_food/kdh_honeyPopCon";
+	// 상품 등록(GET)
+	@RequestMapping(value = "/insertFood", method = RequestMethod.GET)
+	public String insertFoodGet() throws Exception {
+		return "user/kdh/kdh_food/kdh_insertFood";
 	}
 	
-	// 갈릭 팝콘
-	@RequestMapping(value = "/garicPopCon", method = RequestMethod.GET)
-	public String garicPopCon() throws Exception {
-		return "user/kdh/kdh_food/kdh_garicPopCon";
+	// 상품 등록(POST)
+	@RequestMapping(value = "/insertFood", method = RequestMethod.POST)
+	public String insertFoodPost() throws Exception {
+		return "redirect:/kdh/food/foodView";
 	}
-	
-	// 베이직 팝콘
-	@RequestMapping(value = "/basicPopCon", method = RequestMethod.GET)
-	public String basicPopCon() throws Exception {
-		return "user/kdh/kdh_food/kdh_basicPopCon";
+
+	// 상품 이너 페이지(GET)
+	@RequestMapping(value = "/innerfood", method = RequestMethod.GET)
+	public String InnerfoodGet(int food_num, Model model) throws Exception {
+		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
+		model.addAttribute("foodVo", foodVo);
+		System.out.println("foodVo:" + foodVo);
+		return "user/kdh/kdh_food/kdh_Innerfood";
 	}
-	
-	// 사이다
-	@RequestMapping(value = "/saida", method = RequestMethod.GET)
-	public String saida() throws Exception {
-		return "user/kdh/kdh_food/kdh_saida";
+
+	// 상품 이너 페이지
+	@RequestMapping(value = "/Innerfood", method = RequestMethod.POST)
+	public String InnerfoodPost() throws Exception {
+		return "user/kdh/kdh_food/kdh_Innerfood";
 	}
-	
-	// 복숭아 아이스티
-	@RequestMapping(value = "/peachIcedtea", method = RequestMethod.GET)
-	public String peachIcedtea() throws Exception {
-		return "user/kdh/kdh_food/kdh_peachIcedtea";
-	}
-	
-	// 레몬 아이스티
-	@RequestMapping(value = "/lemonIcedtea", method = RequestMethod.GET)
-	public String lemonIcedtea() throws Exception {
-		return "user/kdh/kdh_food/kdh_lemonIcedtea";
-	}
-	
-	// 핫도그
-	@RequestMapping(value = "/hotDog", method = RequestMethod.GET)
-	public String hotDog() throws Exception {
-		return "user/kdh/kdh_food/kdh_hotDog";
-	}
-	
-	// 나초
-	@RequestMapping(value = "/nacho", method = RequestMethod.GET)
-	public String nacho() throws Exception {
-		return "user/kdh/kdh_food/kdh_nacho";
-	}
+
 }

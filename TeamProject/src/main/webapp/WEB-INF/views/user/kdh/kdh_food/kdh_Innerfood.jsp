@@ -43,12 +43,12 @@ function btnUseGuide() {
 			<div class="row">
 				<!-- 바디 왼쪽 이미지-->
 				<div class="col-md-6" style="text-align: center">
-					<img alt="캬라멜 팝콘 이미지" src="/resources/images/kdh/카라멜.jpg" />
+					<img alt="${foodVo.food_name} 이미지" src="/resources/images/kdh/${foodVo.food_image}" style="width: 500px; height:auto;"/>
 				</div>
 				
 				<!-- 바디 오른쪽 이미지-->
 				<div class="col-md-6">
-					<h2>캬라멜 팝콘(L)</h2>
+					<h2>${foodVo.food_name}</h2>
 					<hr/>
 					<p>유효기간　　　구매일로부터 92일 이내 사용 가능</p>
 					<p>판매수량　　　1회 8개 구매가능</p>
@@ -57,7 +57,7 @@ function btnUseGuide() {
 					<div>수량/금액　　　<button class="button1" id="btnMius" type="button">-</button> 
 					<button class="button1" id="btnCount" type="button">갯수</button> 
 					<button class="button1" id="btnPlus" type="button">+</button>
-					　　　<a>6,000원</a>　　　<button id="btnBuy" type="button" class="btn">구매하기</button>
+					　　　<a>${foodVo.food_price}</a>　　　<button id="btnBuy" type="button" class="btn">구매하기</button>
 					</div>
 					<hr/>
 				</div>

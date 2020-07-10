@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -20,9 +21,22 @@
 <!-- tag_and_styleSheet 인크루드 -->
 <%@include file = "../../../include/tag_and_styleSheet.jsp" %>
 
+  <!-- Jquery -->
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
+	<script src="/resources/js/jquery-ui.min.js"></script>
+<script>
+// $(function() {
+// 	$(".default-img").click(function() {
+// 		var food_num = $(this).attr("data-food-num");
+// 		var url = "/kdh/food/Innerfood/" + food_num;
+		
+// 	});
+// });
+</script>
 </head>
 <body class="js">
-	
+
 <!-- 해더 부분 -->
 <%@include file="../../../include/header.jsp" %>
 
@@ -39,7 +53,6 @@
 		</div>
 	</div>
 	<!--/ 음식 메인 사진 -->
-	
 		<div></div>
 		<!-- Product Style -->
 		<section class="product-area shop-sidebar shop section">
@@ -125,6 +138,7 @@
 						<div class="row">
 							<div class="col-12">
 								<!-- Shop Top -->
+								<a href="/kdh/food/insertFood" class="btn">상품 등록</a>
 								<div class="shop-top">
 									<div class="shop-shorter">
 										<div class="single-shorter">
@@ -154,199 +168,202 @@
 							</div>
 						</div>
 						<div class="row">
+						
+						<c:forEach items="${list}" var="foodVo">
 							<div class="col-lg-4 col-md-6 col-12">
 								<div class="single-product">
 									<div class="product-img">
-										<a href="/kdh/food/honeyPopCon">
-											<img class="default-img" src="/resources/images/kdh/카라멜.jpg" style="height:300px" alt="캬라멜 팝콘">
-											<span class="out-of-stock">Hot</span>
+										<a href="/kdh/food/innerfood?food_num=${foodVo.food_num}">
+											<img id="foodImg" class="default-img" data-food-num="${foodVo.food_num}" src="/resources/images/kdh/${foodVo.food_image}" style="height:300px" alt="${foodVo.food_image}">
+<!-- 											<span class="out-of-stock">Hot</span> -->
 										</a>
 									</div>
 									<div class="product-content">
-										<h3><a href="/kdh/food/honeyPopCon">캬라멜 팝콘</a></h3>
+										<h3><a href="/kdh/food/Innerfood">${foodVo.food_name}</a></h3>
 										<div class="product-price">
-											<span>6,000원</span>
+											<span>${foodVo.food_price}</span>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/garicPopCon">
-											<img class="default-img" src="/resources/images/kdh/갈릭.jpg" style="height:300px" alt="갈릭 팝콘">
-											<span class="new">New</span>
-										</a>
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/garicPopCon">갈릭 팝콘</a></h3>
-										<div class="product-price">
-											<span>6,000원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/basicPopCon">
-											<img class="default-img" src="/resources/images/kdh/기본.jpg" style="height:300px" alt="기본 팝콘">
-										</a>
-									</div>
-									<div class="product-content">
-										<h3><a href="product-details.html">베이직 팝콘</a></h3>
-										<div class="product-price">
-											<span>5,000원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/cola">
-											<img class="default-img" src="/resources/images/kdh/콜라컵.jpg" style="height:300px" alt="콜라 이미지">
-											<span class="out-of-stock">Hot</span>
-										</a>
-									</div>
-									<div class="product-content">
-										<h3><a href="product-details.html">콜라</a></h3>
-										<div class="product-price">
-											<span>3,000원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/saida">
-											<img class="default-img" src="/resources/images/kdh/콜라컵.jpg" style="height:300px" alt="사이다 이미지">
-										</a>
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/saida">사이다</a></h3>
-										<div class="product-price">
-											<span>3,000원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/peachIcedtea">
-											<img class="default-img" src="/resources/images/kdh/복숭아.jpg" style="height:300px" alt="복숭아 아이스티 이미지">
-											<span class="new">New</span>
-										</a>
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/peachIcedtea">복숭아 아이스티</a></h3>
-										<div class="product-price">
-											<span>4,000원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/lemonIcedtea">
-											<img class="default-img" src="/resources/images/kdh/레몬.png" style="height:300px" alt="레몬 아이스티 이미지">
-											<span class="new">New</span>
-										</a>
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/lemonIcedtea">레몬 아이스티</a></h3>
-										<div class="product-price">
-											<span>4,000원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/hotDog">
-											<img class="default-img" src="/resources/images/kdh/핫도그.jpg" style="height:300px" alt="핫도그 이미지">
-										</a>
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/hotDog">핫도그</a></h3>
-										<div class="product-price">
-											<span>3,500원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/nacho">
-											<img class="default-img" src="/resources/images/kdh/나초6.png" style="height:300px" alt="#">
-											<span class="new">New</span>
-										</a>
+						</c:forEach>
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/garicPopCon"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/갈릭.jpg" style="height:300px" alt="갈릭 팝콘"> -->
+<!-- 											<span class="new">New</span> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/garicPopCon">갈릭 팝콘</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>6,000원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/basicPopCon"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/베이직.jpg" style="height:300px" alt="기본 팝콘"> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="product-details.html">베이직 팝콘</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>5,000원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/cola"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/콜라컵.jpg" style="height:300px" alt="콜라 이미지"> -->
+<!-- 											<span class="out-of-stock">Hot</span> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/cola">콜라(L)</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>3,000원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/saida"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/콜라컵.jpg" style="height:300px" alt="사이다 이미지"> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/saida">사이다</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>3,000원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/peachIcedtea"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/복숭아.jpg" style="height:300px" alt="복숭아 아이스티 이미지"> -->
+<!-- 											<span class="new">New</span> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/peachIcedtea">복숭아 아이스티</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>4,000원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/lemonIcedtea"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/레몬.png" style="height:300px" alt="레몬 아이스티 이미지"> -->
+<!-- 											<span class="new">New</span> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/lemonIcedtea">레몬 아이스티</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>4,000원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/hotDog"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/핫도그.jpg" style="height:300px" alt="핫도그 이미지"> -->
+<!-- 										</a> -->
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/hotDog">핫도그</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>3,500원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/nacho"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/나초.png" style="height:300px" alt="#"> -->
+<!-- 											<span class="new">New</span> -->
+<!-- 										</a> -->
 										
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/nacho">나초</a></h3>
-										<div class="product-price">
-											<span>3,500원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/nacho2">
-											<img class="default-img" src="/resources/images/kdh/나초6.png" style="height:300px" alt="#">
-											<span class="new">New</span>
-										</a>
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/nacho">나초</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>3,500원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/nacho2"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/나초.png" style="height:300px" alt="#"> -->
+<!-- 											<span class="new">New</span> -->
+<!-- 										</a> -->
 										
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/nacho2">나초2</a></h3>
-										<div class="product-price">
-											<span>3,500원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/nacho3">
-											<img class="default-img" src="/resources/images/kdh/나초6.png" style="height:300px" alt="#">
-											<span class="new">New</span>
-										</a>
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/nacho2">나초2</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>3,500원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/nacho3"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/나초.png" style="height:300px" alt="#"> -->
+<!-- 											<span class="new">New</span> -->
+<!-- 										</a> -->
 										
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/nacho3">나초3</a></h3>
-										<div class="product-price">
-											<span>3,500원</span>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 col-12">
-								<div class="single-product">
-									<div class="product-img">
-										<a href="/kdh/food/nacho4">
-											<img class="default-img" src="/resources/images/kdh/나초6.png" style="height:300px" alt="#">
-											<span class="new">New</span>
-										</a>
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/nacho3">나초3</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>3,500원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
+<!-- 								<div class="single-product"> -->
+<!-- 									<div class="product-img"> -->
+<!-- 										<a href="/kdh/food/nacho4"> -->
+<!-- 											<img class="default-img" src="/resources/images/kdh/나초.png" style="height:300px" alt="#"> -->
+<!-- 											<span class="new">New</span> -->
+<!-- 										</a> -->
 										
-									</div>
-									<div class="product-content">
-										<h3><a href="/kdh/food/nacho4">나초4</a></h3>
-										<div class="product-price">
-											<span>3,500원</span>
-										</div>
-									</div>
-								</div>
-							</div>
+<!-- 									</div> -->
+<!-- 									<div class="product-content"> -->
+<!-- 										<h3><a href="/kdh/food/nacho4">나초4</a></h3> -->
+<!-- 										<div class="product-price"> -->
+<!-- 											<span>3,500원</span> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							
 						</div>
 					</div>
