@@ -150,7 +150,7 @@
 													<li><a href="blog-single-sidebar.html">베스트</a></li>
 													<li><a href="blog-single-sidebar.html">신작</a></li>
 													<li><a href="blog-single-sidebar.html">상영작</a></li>
-													<li><a href="/team/shop-grid">리뷰</a></li>
+													<li><a href="/gsh/movie/reviewList">리뷰</a></li>
 												</ul>
 											</li>
 											<li><a href="/team/bookingView" class="titlePadding">예매</a>
@@ -170,11 +170,7 @@
 													<li><a href="blog-single-sidebar.html">진행 이벤트</a></li>
 													<li><a href="blog-single-sidebar.html">종료 이벤트</a></li>
 												</ul></li>
-											<li><a href="/team/food" class="titlePadding">스토어</a>
-												<ul class="dropdown">
-													<li><a href="blog-single-sidebar.html">스낵</a></li>
-													<li><a href="blog-single-sidebar.html">음료</a></li>
-												</ul></li>
+											<li><a href="/team/foodView" class="titlePadding">스토어</a>
 <!-- 											<span class="new">New</span> -->
 										
 <!-- 												<ul class="dropdown"> -->

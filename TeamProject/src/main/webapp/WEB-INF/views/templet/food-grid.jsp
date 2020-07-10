@@ -3,8 +3,11 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
+
 <style>
-	.tablink {
+
+/* 탭 링크 */
+.tablink {
   background-color: #555;
   color: white;
   float: left;
@@ -14,6 +17,14 @@
   padding: 14px 16px;
   font-size: 17px;
   width: 25%;
+}
+
+/* 탭 내용 */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 50px;
+  text-align: center;
 }
 
 </style>
@@ -39,7 +50,7 @@
 		</div>
 	</div>
 	<!--/ 음식 메인 사진 -->
-	
+
 	<!-- 베스트 3  -->
 	<section class="small-banner section">
 	<div class="row">
@@ -56,7 +67,7 @@
 				<div class="col-lg-2 col-12">
 					<div class="single-banner">
 						<div>
-							<img src="/resources/images/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
+							<a href="kdh/food/honeyPopCon"><img src="/resources/images/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘"></a>
 							<div>
 								<h2 style="text-align: center">카라멜 팝콘L</h2>
 								<h3 style="text-align: center">6,000원</h3>
@@ -79,7 +90,7 @@
 				<!-- Single Banner  -->
 				<div class="col-lg-2 col-12">
 					<div class="single-banner tab-height">
-						<img src="/resources/images/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
+						<img src="/resources/images/kdh/카라멜.jpg" style="height:400px; width:350px" alt="카라멜팝콘">
 						<div>
 							<h2 style="text-align: center">카라멜 팝콘L</h2>
 							<h3 style="text-align: center">6,000원</h3>
@@ -208,9 +219,9 @@
 							<div class="col-lg-4 col-md-6 col-12">
 								<div class="single-product">
 									<div class="product-img">
-										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+										<a href="kdh/food/honeyPopCon">
+											<img class="default-img" src="resources/images/kdh/카라멜.jpg" alt="캬라멜팝콘이미지">
+											<img class="hover-img" src="resources/images/kdh/카라멜.jpg" alt="캬라멜팝콘이미지">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -224,9 +235,9 @@
 										</div>
 									</div>
 									<div class="product-content">
-										<h3><a href="product-details.html">Women Hot Collection</a></h3>
+										<h3><a href="kdh/food/honeyPopCon">캬라멜 팝콘</a></h3>
 										<div class="product-price">
-											<span>$29.00</span>
+											<span>6,000원</span>
 										</div>
 									</div>
 								</div>
@@ -245,14 +256,14 @@
 												<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 											</div>
 											<div class="product-action-2">
-												<a title="Add to cart" href="#">Add to cart</a>
+												<a title="Add to cart" href="#">카트 담기</a>
 											</div>
 										</div>
 									</div>
 									<div class="product-content">
-										<h3><a href="product-details.html">Awesome Pink Show</a></h3>
+										<h3><a href="product-details.html">갈릭 팝콘</a></h3>
 										<div class="product-price">
-											<span>$29.00</span>
+											<span>6,000원</span>
 										</div>
 									</div>
 								</div>
@@ -271,14 +282,14 @@
 												<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 											</div>
 											<div class="product-action-2">
-												<a title="Add to cart" href="#">Add to cart</a>
+												<a title="Add to cart" href="#">카트 담기</a>
 											</div>
 										</div>
 									</div>
 									<div class="product-content">
-										<h3><a href="product-details.html">Awesome Bags Collection</a></h3>
+										<h3><a href="product-details.html">베이직 팝콘</a></h3>
 										<div class="product-price">
-											<span>$29.00</span>
+											<span>5,500원</span>
 										</div>
 									</div>
 								</div>
