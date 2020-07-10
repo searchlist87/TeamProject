@@ -3,18 +3,22 @@ package com.kh.team.domain;
 public class SghTheaterVo {
 	private String theater_code;
 	private String theater_name;
-	private String theater_area;
+	private String area_code;
+	private int theater_num;
+	private String area_name;
 	
 	public SghTheaterVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public SghTheaterVo(String theater_code, String theater_name, String theater_area) {
+	public SghTheaterVo(String theater_code, String theater_name, String area_code, int theater_num, String area_name) {
 		super();
 		this.theater_code = theater_code;
 		this.theater_name = theater_name;
-		this.theater_area = theater_area;
+		this.area_code = area_code;
+		this.theater_num = theater_num;
+		this.area_name = area_name;
 	}
 
 	public String getTheater_code() {
@@ -29,22 +33,41 @@ public class SghTheaterVo {
 		return theater_name;
 	}
 
+
 	public void setTheater_name(String theater_name) {
 		this.theater_name = theater_name;
 	}
 
-	public String getTheater_area() {
-		return theater_area;
+
+	public String getArea_code() {
+		return area_code;
 	}
 
-	public void setTheater_area(String theater_area) {
-		this.theater_area = theater_area;
+
+	public void setArea_code(String area_code) {
+		this.area_code = area_code;
+	}
+
+
+	public String getArea_name() {
+		return area_name;
+	}
+
+	public void setArea_name(String area_name) {
+		this.area_name = area_name;
+	}
+
+	public int getTheater_num() {
+		return theater_num;
+	}
+
+	public void setTheater_num(int theater_num) {
+		this.theater_num = theater_num;
 	}
 
 	@Override
 	public String toString() {
-		return "SghTheaterVo [theater_code=" + theater_code + ", theater_name=" + theater_name + ", theater_area="
-				+ theater_area + "]";
+		return "SghTheaterVo [theater_code=" + theater_code + ", theater_name=" + theater_name + ", area_code="
+				+ area_code + ", theater_num=" + theater_num + ", area_name=" + area_name + "]";
 	}
-	
 }

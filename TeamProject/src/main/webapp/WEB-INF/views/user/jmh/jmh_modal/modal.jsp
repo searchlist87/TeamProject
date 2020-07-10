@@ -6,13 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script></script>
 <body>
 <!--  대중교통 모달창 -->
 <div class="modal fade" id="modal-container-458336" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="align:left;">
-<!-- 				<h5 id="myModalLabel">대중교통 안내</h5>  -->
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">×</span>
 				</button>
@@ -40,7 +40,6 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="align:left;">
-<!-- 				<h5 id="myModalLabel">대중교통 안내</h5>  -->
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">×</span>
 				</button>
@@ -76,21 +75,19 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="align:left;">
-<!-- 				<h5 id="myModalLabel">대중교통 안내</h5>  -->
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<h5 id="myModalLabel" style="padding:20px;">지도 안내</h5> 
+				<h5 id="myModalLabel" style="margin:20px;">지도 안내</h5> 
 				<div class="blog-meta" style="padding:20px;border:3px solid #A6A6A6;border-radius:1em;">
 					<img src="/resources/images/jmh/mycar.png" style="float:left;"/>
 					<h6 style="padding-top:5px;">울산광역시 남구 삼산동</h6> 
 					
 				</div>
-				<div class="blog-meta" style="padding:20px;">
-					 <h6 style="padding-top:5px;">울산광역시 남구 삼산동</h6>
-				</div>
+				<div id="map" style="width:1000px;height:400px;posirion:relative"></div>
+				<div id="marker" style="position:absolute;"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

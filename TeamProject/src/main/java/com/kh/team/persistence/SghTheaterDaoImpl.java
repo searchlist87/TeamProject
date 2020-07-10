@@ -14,11 +14,11 @@ public class SghTheaterDaoImpl implements SghTheaterDao {
 
 	private final String NAMESPACE = "mappers.sgh-theater-mapper.";
 	@Inject
-	SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	@Override
-	public List<SghTheaterVo> getAreaList() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getAreaList");
+	public List<SghTheaterVo> getTheaterList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getTheaterList");
 	}
 
 }

@@ -10,14 +10,14 @@ import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.persistence.SghTheaterDao;
 
 @Service
-public class SqhTheaterServiceImpl implements SghTheaterService {
+public class SghTheaterServiceImpl implements SghTheaterService {
 
 	@Inject
 	private SghTheaterDao sghTheaterDao;
 	
 	@Override
-	public List<SghTheaterVo> getAreaList() throws Exception {
-		return sghTheaterDao.getAreaList();
+	public List<SghTheaterVo> getTheaterList() throws Exception {
+		return sghTheaterDao.getTheaterList();
 	}
 
 }
