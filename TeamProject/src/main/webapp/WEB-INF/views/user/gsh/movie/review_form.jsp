@@ -6,8 +6,6 @@
 
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -49,7 +47,7 @@
 				</div>
 				
 				<a href="작성 완료하고 이동할 페이지" class="btn btn">리뷰 작성</a>
-				<a href="작성 취소하고 이동할 페이지" class="btn btn">작성 취소</a>
+				<a href="/gsh/movie/reviewList" class="btn btn">작성 취소</a>
 				<h1>　　　</h1>
 			</form>
 			

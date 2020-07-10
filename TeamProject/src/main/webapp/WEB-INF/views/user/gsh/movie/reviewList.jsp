@@ -9,7 +9,11 @@
 	
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-${list }
+
+<!-- Controller에서 작성한 목록이 나오는지 시험 -->
+<%-- ${list } --%>
+
+<a href="/gsh/movie/test" class="btn btn-sm btn-success">테스트</a>	
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -19,8 +23,7 @@ ${list }
 	</div>
 	
 		<div class="row">
-		<div class="col-md-2">
-		</div>
+		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<h3>리뷰 게시판 입니다.</h3>
 			　
@@ -55,8 +58,9 @@ ${list }
 				<tbody>
 					<c:forEach items="${list}" var="gshReviewVo">
 						<tr>
+							<!-- 임시 값 나중에 수정해야함 -->
 							<th>${gshReviewVo.review_num}</th>
-							<th>${gshReviewVo.movie_code}</th>
+							<th><a href="/gsh/movie/reviewContent">${gshReviewVo.movie_code}</a></th>
 							<th>${gshReviewVo.user_id}</th>
 							<th>${gshReviewVo.review_score}</th>
 							<th>${gshReviewVo.review_date}</th>

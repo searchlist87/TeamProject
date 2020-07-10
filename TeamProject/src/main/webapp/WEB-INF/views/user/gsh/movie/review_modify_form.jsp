@@ -9,6 +9,6 @@
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-<!-- 정보를 그대로 불러와서 수정 -->
+<!-- 정보를 그대로 불러와서 PK는 readonly설정하고 나머지 값만 수정 -->
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
