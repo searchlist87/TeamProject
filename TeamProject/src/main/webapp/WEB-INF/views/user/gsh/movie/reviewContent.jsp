@@ -14,6 +14,10 @@
 		<div class="col-md-2"></div>
 	</div>
 
+
+		<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
 			<form name="review_content">
 			
 				<div class="form-group">
@@ -40,7 +44,8 @@
 				<a href="" class="btn btn">수정</a>
 				<a href="" class="btn btn">삭제</a>
 			</form>
-			
+			</div>
+</div>	
 	<div class="row">
 		<div class="col-md-2">
 			<h1>　　　</h1></div>
