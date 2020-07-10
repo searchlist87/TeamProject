@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
 <!-- tag_and_styleSheet 인크루드 -->
@@ -8,7 +9,7 @@
 	
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-		
+${list }
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -52,13 +53,15 @@
 				</thead>
 				
 				<tbody>
-					<tr>
-						<th>리뷰 번호</th>
-						<th>영화 제목</th>
-						<th>작성자</th>
-						<th>평점</th>
-						<th>작성일</th>
-					</tr>
+					<c:forEach items="${list}" var="gshReviewVo">
+						<tr>
+							<th>${gshReviewVo.review_num}</th>
+							<th>${gshReviewVo.movie_code}</th>
+							<th>${gshReviewVo.user_id}</th>
+							<th>${gshReviewVo.review_score}</th>
+							<th>${gshReviewVo.review_date}</th>
+						</tr>
+					</c:forEach>
 				</tbody>
 				
 			</table>
