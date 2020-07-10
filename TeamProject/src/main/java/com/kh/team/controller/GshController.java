@@ -28,18 +28,18 @@ public class GshController {
 		
 		List<GshReviewVo> list = new ArrayList<GshReviewVo>();
 		
-		for (int i = 1; i < 10; i++) {
+		for (int i = 1; i < 11; i++) {
 			
 			GshReviewVo gshReviewVo = new GshReviewVo();
-					gshReviewVo.setUser_id("작성자");
+					gshReviewVo.setUser_id("작성자" + i);
 					gshReviewVo.setReview_num(i);
 					gshReviewVo.setReview_date(new Timestamp(100000L));
-					gshReviewVo.setReview_content("재미있다" + i);
 					gshReviewVo.setReview_score(i);
-					gshReviewVo.setMovie_code("2020" + i);
+					gshReviewVo.setMovie_code("일본침몰" + i);
 					list.add(gshReviewVo);
 		}
 		
+		model.addAttribute("list", list);
 		return "user/gsh/movie/reviewList";
 	}
 	
