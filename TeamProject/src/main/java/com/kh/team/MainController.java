@@ -15,6 +15,12 @@ public class MainController {
 			return "redirect:/sgh/book/bookingView";
 		}
 		
+		// SghController
+		@RequestMapping(value="/member", method=RequestMethod.GET)
+		public String testMember() throws Exception {
+			return "redirect:/sgh/member/loginForm";
+		}
+		
 		// JmhController
 		@RequestMapping(value="/theaterView", method = RequestMethod.GET)
 		public String theaterView() throws Exception {
