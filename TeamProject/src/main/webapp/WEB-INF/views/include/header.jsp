@@ -149,7 +149,7 @@
 												<ul class="dropdown">
 													<li><a href="blog-single-sidebar.html">베스트</a></li>
 													<li><a href="blog-single-sidebar.html">신작</a></li>
-													<li><a href="blog-single-sidebar.html">상영작</a></li>
+													<li><a href="/gsh/movie/onairList">상영작</a></li>
 													<li><a href="/gsh/movie/reviewList">리뷰</a></li>
 												</ul>
 											</li>
