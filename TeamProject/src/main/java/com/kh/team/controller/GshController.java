@@ -46,7 +46,7 @@ public class GshController {
 		return "user/gsh/movie/reviewList";
 	}
 	
-	@RequestMapping(value = "/review_form", method = RequestMethod.GET)
+	@RequestMapping(value = "/review_write_form", method = RequestMethod.GET)
 	public String review_form() throws Exception {
 		return "user/gsh/movie/review_write_form";
 	}

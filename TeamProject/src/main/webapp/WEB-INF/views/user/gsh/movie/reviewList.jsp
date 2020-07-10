@@ -40,7 +40,7 @@
 				<input type="text" name="search_keyword" placeholder="게시판 검색">
 					 <button type="submit" class="btn btn" >검색</button>
 					  <!-- 글 작성 버튼 클릭 기능 실행 확인했음 -->
-					 <a href="/gsh/movie/review_form" class="btn btn">리뷰 작성</a>
+					 <a href="/gsh/movie/review_write_form" class="btn btn">리뷰 작성</a>
 				</div>
 			</form>
 			
