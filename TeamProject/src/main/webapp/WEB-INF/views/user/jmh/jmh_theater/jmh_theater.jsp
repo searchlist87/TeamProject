@@ -14,6 +14,7 @@
     <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
+	<script src="/resources/js/jmh_js/jmh_js.js"></script>
 <style>
 #theater_count {
 	padding-right: 20px;
@@ -43,48 +44,124 @@
  	color:white;
  	padding-left:5px;
  }
+ .cloneDiv:hover {
+ 	background-color:#FACC2E;
+ }
 </style>
 <script>
 $(function() {
-	
+	// 현재 시간 및 날짜
 	var date = new Date();
+	var year = date.getFullYear();
 	var month = date.getMonth() + 1; // 월
 	var day = date.getDate(); // 일
 	var dayint = date.getDay(); // 요일 0~6
+//  현재 달의 일 수 구하기
+	var dateCount = new Date(year, month, 0).getDate();
 	
 	var dayArray = new Array("일","월","화","수","목","금","토");
-	// 월 설정
-	$("#monthText").text(month);
-	$(".cloneUl").find("label").eq(1).text(dayArray[dayint]);
-	var dayintIndex = dayint;
-	for(var i = 0; i < 21; i++) {
-		var cloneTimeDiv = $(".cloneUl:first").clone();
-		
-		
+	// Ul 첫번째꺼 설정
+	$(".cloneDiv").find("li").eq(1).text(day); // 일
+	$(".cloneDiv").find("li").eq(2).text("오늘"); // 요일
+	$(".cloneDiv").find("li").eq(0).text(month);
+	$(".cloneDiv").find("li").eq(0).attr("data-index", 0);
+	
+	var data_total_date = check(year,month,day);
+	$(".cloneDiv").find("li").eq(0).attr("data-total_date",data_total_date);
+	var dayintIndex = dayint + 1;// 요일인덱스
+	var dateIndex = 1; // 일 수 인덱스
+	for(var i = 1; i < 28; i++) {
+		var cloneTimeDiv = $(".cloneDiv:first").clone();
 		// -- 날짜 --
-		cloneTimeDiv.find("label").eq(0).text(day + i);
+		if(day + dateIndex > dateCount) {
+			month++;
+			dateIndex = 0;
+			day = 1;
+		}
+		cloneTimeDiv.find("li").eq(1).text(day + dateIndex);
+		dateIndex++;
+		
+		// --요일--
 		if(dayintIndex > 6) {
 			dayintIndex = 0;
 		}
-		// --요일--
 		// 토요일 글꼴색상 수정
 		if(dayintIndex == 6) {
-			cloneTimeDiv.find("label").eq(1).css("color","blue");
+			cloneTimeDiv.find("li").eq(1).css("color","blue");
+			cloneTimeDiv.find("li").eq(2).css("color","blue");
 		}
 		// 일요일 글꼴색상 수정
 		if(dayintIndex == 0) {
-			cloneTimeDiv.find("label").eq(1).css("color","red");
+			cloneTimeDiv.find("li").eq(1).css("color","red");
+			cloneTimeDiv.find("li").eq(2).css("color","red");
 		}
-		cloneTimeDiv.find("label").eq(1).text(dayArray[dayintIndex]);
+		// 월 넣어두기
+		cloneTimeDiv.find("li").eq(0).text(month);
+		// 요일 넣기
+		cloneTimeDiv.find("li").eq(2).text(dayArray[dayintIndex]);
 		dayintIndex ++;
-		//$("#cloneTimeDiv").append(cloneTimeDiv);		
+		// index 넣어두기
+		cloneTimeDiv.find("li").eq(0).attr("data-index", i);
+		//서버전송 데이터 넣기
+		var data_total_date = check(year,month,day);
+		cloneTimeDiv.find("li").eq(0).attr("data-total_date",data_total_date);
+		
+		// 붙이기
+		$("#appendDiv").append(cloneTimeDiv);	
+		
 	}
-	//$(".cloneUl").eq(0).css("visibility", "hidden");
+	// 월 나타내기 - 6번째껄로
+	var monthText = $("#appendDiv").find(".cloneDiv").eq(6).find("li:first").text();
+	$("#monthSpan").text("[ " + monthText + "월 ]");
 	
-	console.log(cloneTimeDiv);
+	var checkState = 1;
+	// 상영시간표 왼쪽으로 이동
+	$("#btnLeftShow").click(function() {
+		console.log(checkState);
+		switch(checkState) {
+		case 0 :
+			$("#appendDiv").css("transform", "translate(0px)");
+			$("#btnRightShow").css("pointer-events", "auto");
+			$(this).css("pointer-events", "none");
+			checkState = 1;
+			break;
+		case 1 :
+			$("#appendDiv").css("transform", "translate(-770px)");
+			$("#btnRightShow").css("pointer-events", "auto");
+			$(this).css("pointer-events", "none");
+			checkState = 0;
+			break;
+		}
+	});
+	
+	// 상영시간표 오른쪽으로 이동
+	$("#btnRightShow").click(function() {
+		console.log(checkState);
+		switch(checkState) {
+		case 0 :
+			$("#appendDiv").css("transform", "translate(0px)");
+			$("#btnLeftShow").css("pointer-events", "auto");
+			$(this).css("pointer-events", "none");
+			checkState = 1;
+			break;
+		case 1 :
+			$("#appendDiv").css("transform", "translate(-770px)");
+			$("#btnLeftShow").css("pointer-events", "auto");
+			$(this).css("pointer-events", "none");
+			checkState = 0;
+			break;
+		}
+	});
+	// ---------------- 상영시간표 끝
+	
+	
+	
+	
+	
+	
+	
 });
 </script>
-
 
 <body class="js">
 	<section class="hero-slider">
@@ -110,6 +187,7 @@ $(function() {
 								<div class="image">
 									<img src="https://via.placeholder.com/950x460" alt="#">
 								</div>
+								<!--  영화관 정보 -->
 								<div class="blog-detail">
 									<h1 class="blog-title fa-4x">울산 삼산점</h1>
 									<div class="blog-meta">
@@ -118,7 +196,7 @@ $(function() {
 										<span><i class="fa fa-user"> 총 좌석수 :</i></span> 
 										<span id="seat_count">155석</span>
 									</div>
-									<!--  각종 안내 -->
+									<!--  각종 안내(모달창) -->
 									<div class="blog-meta">
 										<p>울산광역시 남구 삼산동(영화관주소)</p><br/>
 										<span class="content_padding">
@@ -131,6 +209,7 @@ $(function() {
 												<img src="/resources/images/jmh/parking.png" /><label class="information_css">주차 안내</label> 
 											</a>
 										</span> 
+										<!--  지도 해야함 -->
 										<span class="content_padding">
 											<a id="modal-458338" href="#modal-container-458338" role="button" class="btn" data-toggle="modal">
 												<img src="/resources/images/jmh/map.png" /><label class="information_css">지도 안내</label> 
@@ -148,14 +227,12 @@ $(function() {
 				<div class="col-lg-4 col-12">
 					<div class="main-sidebar">
 					<!--  검색창 -->
-						<!-- Single Widget -->
 						<div class="single-widget search">
 							<div class="form">
 								<input type="text" placeholder="검색할 영화관 입력"> <a
 									class="button" href="#"><i class="fa fa-search"></i></a>
 							</div>
 						</div>
-						<!--/ End Single Widget -->
 						<!-- 오른쪽 side bar 안내 -->
 						<div class="single-widget category">
 							<h3 class="title">영화관 안내</h3>
@@ -198,48 +275,34 @@ $(function() {
 			<h2 class="blog-title">상영시간표</h2>
 		</div>	
 		<div class="row">
-			<div>
-				<div class="marginCss">
-					<label id="monthText">7</label>월
+			<span class="fa-2x" style="padding-top:10px;padding-left:20px;" id="monthSpan"></span>
+		</div>
+		<div style="position:relative;">
+			<!--  페이징 버튼 -->
+				<!--  left_paging_btn -->
+			<div style="position:absolute;">
+					<button type="button" id="btnLeftShow"><img src="/resources/images/jmh/point_left.png"/></button>
+			</div>
+			<!--  right_paging_btn -->
+			<div style="position:absolute;left:72%;">
+				<button type="button" id="btnRightShow"><img src="/resources/images/jmh/point_right.PNG"/></button>
+			</div>
+			<div style="width:789px;margin-top:22px;margin-left:40px;margin-right:20px;margin-bottom:10px;overflow:hidden;">
+				<div id="appendDiv" style="margin:10px;transform:translate(0px); width:1700px;overflow:hidden;">
+					<div class="cloneDiv" style="float:left;margin-right:5px;">
+						<ul style="text-align:center;">
+							<div style="width:50px;"> 
+								<li class="fa-1x" style="display:none;"></li>
+								<a href=""><li class="fa-2x"></li></a>
+								<li></li>
+							</div>
+						</ul>
+					</div>
 				</div>
 			</div>
-		</div>	
-		<div class="row blog-meta">
-			<div class="marginCss"> 
-				
-				
-				<div class="timeCss" style="float:left;transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 800px;" id="cloneTimeDiv" > 
-					<ul style="float:left;margin-right:30px;" class="cloneUl">
-						<li><a href="#" style="cursor:pointer;"><label class="fa-2x">1</label></a></li>
-						<li><label>1</label></li>
-					</ul>
-				</div>
-				<div class="timeCss" style="float:left;transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 800px;" id="cloneTimeDiv" > 
-					<ul style="float:left;margin-right:30px;" class="cloneUl">
-						<li><a href="#" style="cursor:pointer;"><label class="fa-2x">1</label></a></li>
-						<li><label>1</label></li>
-					</ul>
-				</div>
-				<div class="timeCss" style="float:left;transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 800px;" id="cloneTimeDiv" > 
-					<ul style="float:left;margin-right:30px;" class="cloneUl">
-						<li><a href="#" style="cursor:pointer;"><label class="fa-2x">1</label></a></li>
-						<li style="float:left;"><label>1</label></li>
-					</ul>
-				</div>
-				<div class="timeCss" style="float:left;transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 800px;" id="cloneTimeDiv" > 
-					<ul style="float:left;margin-right:30px;" class="cloneUl">
-						<li><a href="#" style="cursor:pointer;"><label class="fa-2x">1</label></a></li>
-						<li style="float:left;"><label>1</label></li>
-					</ul>
-				</div>
-				
-			</div>
-			<div style="float:left;padding:10px; padding-right:10px;">
-					<button type="button"><img src="/resources/images/jmh/point_left.png"/></button>
-				</div>
-				<div style="float:left;padding:10px;">
-					<button type="button"><img src="/resources/images/jmh/point_right.PNG"/></button>
-				</div>
+		</div>
+			
+		
 		</div>	
 		<!--  관람등급 안내 -->
 		<div class="row" style="background-color:#f8f8f8;">
@@ -362,7 +425,6 @@ $(function() {
 		</div>
 		<!--  영화 하나 끝 -->
 	</div>
-</div><!--  end container -->
 </section>
 <div class="row">
 		<div class="col-md-4">
