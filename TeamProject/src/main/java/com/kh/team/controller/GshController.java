@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/gsh/movie")
 public class GshController {
 	
-	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
 	public String review() throws Exception {
 //		System.out.println("movie");
-		return "user/gsh/movie/review";
+		return "user/gsh/movie/reviewList";
 	}
 	
 	@RequestMapping(value = "/review_form", method = RequestMethod.GET)
