@@ -13,37 +13,67 @@
 <script>
 $(function() {
 	
+	
 	// 상영 지역 이벤트 설정
-	$("#screeningArea").on("click", ".areaClass", function(e) {
-		e.preventDefault();
-		var code = $(this).attr("data-theater_code");
-		$(".areaChoiceClone").remove();
-		// 상영 지역 복사해서 새로 붙이는 작업
-		var areaChoiceClone = $("#screeningArea").clone().addClass("areaChoiceClone");
-		areaChoiceClone.find("ul").find("li").find("a").eq(0).remove();
-		areaChoiceClone.find("h3").text("상영관 선택");
-		if(code == '01') {
-			areaChoiceClone.find("ul").find("li").find("a").text("서울허니복스");
-		} else if (code == '02') {
-			areaChoiceClone.find("ul").find("li").find("a").text("울산허니복스");
-		}
-		$("#screeningArea").after(areaChoiceClone);
+	// 상영 지역에 있는 영화관 정보를 받아서 해당 지역으로 클릭하면 그 지역에 관한 영화관 뿌리기
+	var theaterArr = new Array();
+	$(".theater_code").each(function() {
+		var that = $(this);
+		theaterArr.push(that);
 	});
 	
-	$("#section").on("click", ".areaChoiceClone", function(e) {
+	$("#screeningArea").on("click", ".areaChoice", function(e) {
 		e.preventDefault();
-		var url = "/sgh/book/areaMovie";
-		var h1 = "gdgd";
+		var a_areaName = $(this).attr("data-a-areaName");
+		$(".screeningAreaClone").remove();
+		var screeningAreaClone = $("#screeningArea").clone().addClass("screeningAreaClone");
+		screeningAreaClone.find("li").remove();
+		
+		$.each(theaterArr, function() {
+			var t_areaName = $(this).attr("data-t-areaName");
+			console.log("t_areaName :" + t_areaName);
+			if(a_areaName == t_areaName) {
+				var theaterA_tag = $(this);
+				screeningAreaClone.find("ul").append(theaterA_tag);
+			}
+		});
+		screeningAreaClone.find("a").wrap("<li></li>");
+		
+		$("#screeningArea").after(screeningAreaClone);
+	});
+
+	$("#section").on("click", ".theater_code", function(e) {
+		e.preventDefault();
+		var url = "/sgh/book/getMovieName";
+		var theater_code = $(this).attr("data-t-theater-code");
+		console.log("theater_code :" + theater_code);
 		var sendData = {
-				"hi" : h1
+				"theater_code" : theater_code
 		};
+		$(".movieChoice").remove();
+		var screeningAreaClone = $("#screeningArea").clone().addClass("movieChoice");
+		screeningAreaClone.find("li").remove();
 		
 		$.getJSON(url, sendData, function(rData) {
-			console.log(rData);
+			console.log("찍힘");
+			console.log("rData : " + rData);
+			$.each(rData, function() {
+				var movieName = this.movie_name;
+				var a = "<li><a href='#'>" + movieName + "</a></li>";
+				screeningAreaClone.find("ul").append(a);
+			});
 		});
+		$(".screeningAreaClone").after(screeningAreaClone);
 	});
 });
 </script>
+<c:forEach items="${theaterList}" var="SghTheaterVo">
+	<li style="visibility: hidden;">
+		<a class="theater_code" href="#" data-t-areaName="${SghTheaterVo.area_name}" data-t-theater-code="${SghTheaterVo.theater_code}">${SghTheaterVo.theater_name}</a>
+		<a id="aCloneTag" href="#"></a>	
+	</li>
+</c:forEach>
+
 		<!-- Product Style -->
 		<section id="section" class="product-area shop-sidebar shop section">
 			<div class="container">
@@ -52,10 +82,10 @@ $(function() {
 						<div class="shop-sidebar">
 							<!-- Single Widget -->
 							<div class="single-widget category">
-								<h3 class="title">상영 지역d</h3>
+								<h3 class="title">상영 지역</h3>
 								<ul class="categor-list">
-									<c:forEach items="${list}" var="SghTheaterVo">
-										<li><a id="choiceArea" href="#" class="areaClass" data-theater_code="${SghTheaterVo.theater_code}">${SghTheaterVo.theater_area}</a></li>
+									<c:forEach items="${areaList}" var="SghAreaVo">
+										<li><a href="#" class="areaChoice" data-a-areaName="${SghAreaVo.area_name}">${SghAreaVo.area_name }</a></li>
 									</c:forEach>
 								</ul>
 							</div>

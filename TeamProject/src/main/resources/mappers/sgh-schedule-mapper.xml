@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.sgh-schedule-mapper">
+	<select id="getMovieName" resultType="SghMovieNameVo">
+		select movie.movie_name from tbl_movie_schedule schedule, tbl_movie movie 
+		where schedule.theater_code = #{theater_code} and schedule.movie_code = movie.movie_code
+	</select>
+</mapper>
