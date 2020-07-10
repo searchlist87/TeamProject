@@ -175,10 +175,10 @@
 									<div class="product-img">
 										<a href="/kdh/food/innerfood?food_num=${foodVo.food_num}">
 											<img id="foodImg" class="default-img" data-food-num="${foodVo.food_num}" src="/resources/images/kdh/${foodVo.food_image}" style="height:300px" alt="${foodVo.food_image}">
-<!-- 											<span class="out-of-stock">Hot</span> -->
+										<!-- <span class="out-of-stock">Hot</span> -->
 										</a>
 									</div>
-									<div class="product-content">
+									<div class="product-content" style="text-align: center;">
 										<h3><a href="/kdh/food/Innerfood">${foodVo.food_name}</a></h3>
 										<div class="product-price">
 											<span>${foodVo.food_price}</span>
