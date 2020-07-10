@@ -8,13 +8,18 @@
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
 <%@ include file="/WEB-INF/views/user/jmh/jmh_modal/modal.jsp"%>
+
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
+<!--  지도관련 파일 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 <!-- Jquery -->
     <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
 	<script src="/resources/js/jmh_js/jmh_js.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x6srghvj2m"></script>
 <style>
 #theater_count {
 	padding-right: 20px;
@@ -65,9 +70,10 @@ $(function() {
 	$(".cloneDiv").find("li").eq(2).text("오늘"); // 요일
 	$(".cloneDiv").find("li").eq(0).text(month);
 	$(".cloneDiv").find("li").eq(0).attr("data-index", 0);
+	$(".cloneDiv").find("a").eq(0).addClass("link_btn");
 	
 	var data_total_date = check(year,month,day);
-	$(".cloneDiv").find("li").eq(0).attr("data-total_date",data_total_date);
+	$(".cloneDiv").find("li").eq(1).attr("data-total-date",data_total_date);
 	var dayintIndex = dayint + 1;// 요일인덱스
 	var dateIndex = 1; // 일 수 인덱스
 	for(var i = 1; i < 28; i++) {
@@ -104,7 +110,10 @@ $(function() {
 		cloneTimeDiv.find("li").eq(0).attr("data-index", i);
 		//서버전송 데이터 넣기
 		var data_total_date = check(year,month,day);
-		cloneTimeDiv.find("li").eq(0).attr("data-total_date",data_total_date);
+		cloneTimeDiv.find("li").eq(0).attr("data-total-date",data_total_date);
+		
+		// a 클래스 부여하기
+		cloneTimeDiv.find("a").eq(1).addClass("link_btn");
 		
 		// 붙이기
 		$("#appendDiv").append(cloneTimeDiv);	
@@ -154,13 +163,34 @@ $(function() {
 	});
 	// ---------------- 상영시간표 끝
 	
-	
-	
+	// 상영일 ajax요청
+	$(".link_btn").click(function(e) {
+		e.preventDefault();
+		var data_total_date = $(this).find("li").attr("data-total-date");
+		console.log(data_total_date);
+	});
 	
 	
 	
 	
 });
+// 지도 관련
+var position1 = new naver.maps.LatLng(35.5346057, 129.3102609,17);
+var mapOptions = {
+	    center: position1,
+	    zoom: 17
+};
+
+var map = new naver.maps.Map('map', mapOptions);
+
+var markerOptions = {
+		position : position1,
+		map: map,
+};
+var marker = new naver.maps.Marker(markerOptions);
+
+
+
 </script>
 
 <body class="js">
@@ -426,59 +456,7 @@ $(function() {
 		<!--  영화 하나 끝 -->
 	</div>
 </section>
-<div class="row">
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-4">
-			<div class="carousel slide" id="carousel-529126">
-				<ol class="carousel-indicators">
-					<li data-slide-to="0" data-target="#carousel-529126">
-					</li>
-					<li data-slide-to="1" data-target="#carousel-529126">
-					</li>
-					<li data-slide-to="2" data-target="#carousel-529126" class="active">
-					</li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="carousel-item">
-						<img class="d-block w-100" alt="Carousel Bootstrap First" src="https://www.layoutit.com/img/sports-q-c-1600-500-1.jpg" />
-						<div class="carousel-caption">
-							<h4>
-								First Thumbnail label
-							</h4>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-						</div>
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" alt="Carousel Bootstrap Second" src="https://www.layoutit.com/img/sports-q-c-1600-500-2.jpg" />
-						<div class="carousel-caption">
-							<h4>
-								Second Thumbnail label
-							</h4>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-						</div>
-					</div>
-					<div class="carousel-item active">
-						<img class="d-block w-100" alt="Carousel Bootstrap Third" src="https://www.layoutit.com/img/sports-q-c-1600-500-3.jpg" />
-						<div class="carousel-caption">
-							<h4>
-								Third Thumbnail label
-							</h4>
-							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-						</div>
-					</div>
-				</div> <a class="carousel-control-prev" href="#carousel-529126" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-529126" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
-			</div>
-		</div>
-		<div class="col-md-4">
-		</div>
-	</div>
+
 </body>
 <!--/ End Blog Single -->
 	<%@ include file="../../../include/footer.jsp"%>
