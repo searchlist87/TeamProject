@@ -30,7 +30,7 @@ public class GshController {
 		
 		List<GshReviewVo> list = new ArrayList<GshReviewVo>();
 		
-		for (int i = 1; i < 11; i++) {
+		for (int i = 1; i < 10; i++) {
 			
 			GshReviewVo gshReviewVo = new GshReviewVo();
 					// ()값은 임시로 넣어둠
