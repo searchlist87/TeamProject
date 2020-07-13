@@ -13,30 +13,13 @@
 <!-- 해더 부분 -->
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 		
-		<!-- Breadcrumbs -->
-		<div class="breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="bread-inner">
-							<ul class="bread-list">
-								<li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-								<li class="active"><a href="blog-single.html">Shop Grid</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Breadcrumbs -->
-		
 		<!-- Product Style -->
 		<section class="product-area shop-sidebar shop section">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-4 col-12">
 						<div class="shop-sidebar">
-								<!-- Shop By Price -->
+<!-- 								Shop By Price -->
 									<div class="single-widget range">
 										<h3 class="title">Shop by Price</h3>
 										<div class="price-filter">
@@ -61,66 +44,66 @@
 											</li>
 										</ul>
 									</div>
-									<!--/ End Shop By Price -->
-								<!-- Single Widget -->
-								<div class="single-widget recent-post">
-									<h3 class="title">Recent post</h3>
-									<!-- Single Post -->
-									<div class="single-post first">
-										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
-										</div>
-										<div class="content">
-											<h5><a href="#">Girls Dress</a></h5>
-											<p class="price">$99.50</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-											</ul>
-										</div>
-									</div>
-									<!-- End Single Post -->
-									<!-- Single Post -->
-									<div class="single-post first">
-										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
-										</div>
-										<div class="content">
-											<h5><a href="#">Women Clothings</a></h5>
-											<p class="price">$99.50</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-											</ul>
-										</div>
-									</div>
-									<!-- End Single Post -->
-									<!-- Single Post -->
-									<div class="single-post first">
-										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
-										</div>
-										<div class="content">
-											<h5><a href="#">Man Tshirt</a></h5>
-											<p class="price">$99.50</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-											</ul>
-										</div>
-									</div>
-									<!-- End Single Post -->
-								</div>
-								<!--/ End Single Widget -->
+<!-- 									/ End Shop By Price -->
+<!-- 								Single Widget -->
+<!-- 								<div class="single-widget recent-post"> -->
+<!-- 									<h3 class="title">Recent post</h3> -->
+<!-- 									Single Post -->
+<!-- 									<div class="single-post first"> -->
+<!-- 										<div class="image"> -->
+<!-- 											<img src="https://via.placeholder.com/75x75" alt="#"> -->
+<!-- 										</div> -->
+<!-- 										<div class="content"> -->
+<!-- 											<h5><a href="#">Girls Dress</a></h5> -->
+<!-- 											<p class="price">$99.50</p> -->
+<!-- 											<ul class="reviews"> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li><i class="ti-star"></i></li> -->
+<!-- 												<li><i class="ti-star"></i></li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									End Single Post -->
+<!-- 									Single Post -->
+<!-- 									<div class="single-post first"> -->
+<!-- 										<div class="image"> -->
+<!-- 											<img src="https://via.placeholder.com/75x75" alt="#"> -->
+<!-- 										</div> -->
+<!-- 										<div class="content"> -->
+<!-- 											<h5><a href="#">Women Clothings</a></h5> -->
+<!-- 											<p class="price">$99.50</p> -->
+<!-- 											<ul class="reviews"> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li><i class="ti-star"></i></li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									End Single Post -->
+<!-- 									Single Post -->
+<!-- 									<div class="single-post first"> -->
+<!-- 										<div class="image"> -->
+<!-- 											<img src="https://via.placeholder.com/75x75" alt="#"> -->
+<!-- 										</div> -->
+<!-- 										<div class="content"> -->
+<!-- 											<h5><a href="#">Man Tshirt</a></h5> -->
+<!-- 											<p class="price">$99.50</p> -->
+<!-- 											<ul class="reviews"> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									End Single Post -->
+<!-- 								</div> -->
+<!-- 								/ End Single Widget -->
 						</div>
 					</div>
 					<div class="col-lg-9 col-md-8 col-12">
