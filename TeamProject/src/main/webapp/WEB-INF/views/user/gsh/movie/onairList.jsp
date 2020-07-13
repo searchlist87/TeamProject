@@ -139,12 +139,14 @@
 							</div>
 						</div>
 						<div class="row">
+						
 							<div class="col-lg-4 col-md-6 col-12">
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie01.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -165,12 +167,14 @@
 									</div>
 								</div>
 							</div>
+							
 							<div class="col-lg-4 col-md-6 col-12">
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie02.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -195,8 +199,9 @@
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie03.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -221,8 +226,9 @@
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie04.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 											<span class="new">New</span>
 										</a>
 										<div class="button-head">
@@ -248,8 +254,9 @@
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie05.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -274,8 +281,9 @@
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie06.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 											<span class="price-dec">30% Off</span>
 										</a>
 										<div class="button-head">
@@ -301,8 +309,9 @@
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie07.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -327,8 +336,9 @@
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie08.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 											<span class="out-of-stock">Hot</span>
 										</a>
 										<div class="button-head">
@@ -355,8 +365,9 @@
 								<div class="single-product">
 									<div class="product-img">
 										<a href="product-details.html">
-											<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-											<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
+											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+											<img class="default-img" src="/resources/images/gsh/movie09.jpg" alt="#">
+											<img class="hover-img" src="" alt="#">
 											<span class="new">New</span>
 										</a>
 										<div class="button-head">
