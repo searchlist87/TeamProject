@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.jmh-movie-theater-mapper">
+	<!-- 영화관 이름 가져오기 -->
+	<select id="getTheaterInfo" resultType="JmhMovieTheaterVo">
+		select theater.theater_code, theater.theater_name, area.area_code, area.area_name
+		from tbl_theater theater, tbl_area area	
+		where theater.area_code = area.area_code order by theater_code
+	</select>
+	
+</mapper>

@@ -1,0 +1,20 @@
+/* Admin CSS*/
+@charset "UTF-8";
+.categor-list dt {
+	font-size:15px;
+}
+.categor-list dt:hover {
+	color:red;
+}
+.categor-list dd {
+	margin:0px;
+	padding-left:20px;
+	display:none; 
+}
+.categor-list dd:hover {
+	color:blue;
+}
+
+.lastdd {
+	padding-bottom:10px;
+}
