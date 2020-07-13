@@ -28,24 +28,29 @@
 					
 					<!-- 영화 영역 -->
 					
-<%-- 				<c:forEach items="${best}" var="bestList"> --%>
+				<c:forEach items="${best}" var="vo">
+				
 					<div class="col-lg-4 col-md-6 col-12">
 						<div class="single-product">
 							<div class="product-img">
 								<!-- 클릭 시 이동하는 페이지 -->
-								<a href="/resources/images/gsh/movie01.jpg"> <!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
+								<a href="/resources/images/gsh/movie01.jpg">
+								<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 									<img class="default-img"
 									src="/resources/images/gsh/movie01.jpg" alt="#"></a>
 							</div>
 							<div class="product-content">
-								<h3><a href="product-details.html">Women Hot Collection</a></h3>
+								<!-- 영화 이름 -->
+								<h3><a href="product-details.html">${vo.movie_name}</a></h3>
 								<div class="product-price">
-									<span>$29.00</span>
+								<!-- 영화 등급 -->
+									<span>${vo.movie_name}</span>
 								</div>
 							</div>
 						</div>
 					</div>
-<%-- 				</c:forEach> --%>
+					
+				</c:forEach>
 					<!-- 영화 영역 -->
 
 				</div>

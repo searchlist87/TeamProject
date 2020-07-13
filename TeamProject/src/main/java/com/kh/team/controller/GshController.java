@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kh.team.domain.GshBestListVo;
 import com.kh.team.domain.GshReviewVo;
 import com.kh.team.service.GshReviewService;
 
@@ -61,7 +62,8 @@ public class GshController {
 	// 베스트 리스트
 	@RequestMapping(value = "/bestList", method = RequestMethod.GET)
 	public String bestList(Model model) throws Exception {
-		
+		List<GshBestListVo> best = new ArrayList<GshBestListVo>();
+		model.addAttribute("best", best);
 		return "user/gsh/movie/bestList";
 	}
 	

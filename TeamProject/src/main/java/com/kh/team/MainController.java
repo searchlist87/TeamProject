@@ -37,4 +37,5 @@ public class MainController {
 		public String review() throws Exception {
 			return "redirect:/gsh/movie/review";
 		}
+		
 }
