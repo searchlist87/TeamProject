@@ -20,10 +20,17 @@ public class AdminController {
 		return "/admin/admin_movie_list";
 	}
 	
-	// 영화 등록
+	// 영화 등록 폼
 	@RequestMapping(value="/admin_movie_register", method = RequestMethod.GET)
 	public String movie_register() throws Exception {
 		return "/admin/admin_movie_register";
+	}
+	
+	// 영화 등록 처리
+	@RequestMapping(value="/admin_movie_register", method = RequestMethod.POST)
+	public String movie_registerPost() throws Exception {
+		System.out.println("register");
+		return null;
 	}
 	
 	// 영화 수정
