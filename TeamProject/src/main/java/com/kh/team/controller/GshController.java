@@ -58,6 +58,18 @@ public class GshController {
 		return "user/gsh/movie/reviewContent";
 	}
 	
+	// 베스트 페이지
+	@RequestMapping(value = "/bestList", method = RequestMethod.GET)
+	public String bestList() throws Exception {
+		return "user/gsh/movie/bestList";
+	}
+	
+	// 신작 페이지
+	@RequestMapping(value = "/newList", method = RequestMethod.GET)
+	public String newList() throws Exception {
+		return "user/gsh/movie/newList";
+	}
+	
 	// 상영작 페이지
 	@RequestMapping(value = "/onairList", method = RequestMethod.GET)
 	public String onairList() throws Exception {

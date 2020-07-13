@@ -20,7 +20,7 @@
 					<div class="right-content">
 						<ul class="list-main">
 								<c:if test="${user_class == 'admin'}">
-									<li><i class="ti-user"></i> <a href="/sgh/user/logout">로그아웃</a></li>
+									<li><i class="ti-user"></i> <a href="/admin/admin">관리자 페이지</a></li>
 								</c:if>
 							<c:choose>
 								<c:when test="${not empty user_id}">
@@ -159,8 +159,8 @@
 										<!-- 화면 위쪽에 나오는 Bar -->
 											<li><a href="/team/shop-grid" class="titlePadding">영화</a>
 												<ul class="dropdown">
-													<li><a href="blog-single-sidebar.html">베스트</a></li>
-													<li><a href="blog-single-sidebar.html">신작</a></li>
+													<li><a href="/gsh/movie/bestList">베스트</a></li>
+													<li><a href="/gsh/movie/newList">신작</a></li>
 													<li><a href="/gsh/movie/onairList">상영작</a></li>
 													<li><a href="/gsh/movie/reviewList">리뷰</a></li>
 												</ul>
