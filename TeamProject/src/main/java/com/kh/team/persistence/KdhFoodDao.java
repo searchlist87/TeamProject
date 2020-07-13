@@ -1,8 +1,10 @@
 package com.kh.team.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhPagingDto;
 
 public interface KdhFoodDao {
 
@@ -29,4 +31,10 @@ public interface KdhFoodDao {
 	// food number 300(패키지)만 선택
 	public List<KdhFoodVo> listFoodCode300() throws Exception;
 	
+	// 최근 상품 3개 구하기
+	public List<KdhFoodVo> listLatestFood() throws Exception;
+	
+	// 상품 페이징
+	public List<KdhFoodVo> listPage(KdhPagingDto pagingDto) throws Exception;
+
 }
