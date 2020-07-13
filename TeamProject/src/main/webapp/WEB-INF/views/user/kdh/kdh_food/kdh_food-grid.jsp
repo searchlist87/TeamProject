@@ -25,20 +25,29 @@
     <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
+
 <script>
-// $(function() {
-// 	$(".default-img").click(function() {
-// 		var food_num = $(this).attr("data-food-num");
-// 		var url = "/kdh/food/Innerfood/" + food_num;
+$(function() {
+	$("select[name=perPage]").change(function() {
+// 		var perPage = $(this).val();
+// 		var sendData = {
+// 				"perPage" : perPage
+// 		};
+// 		var url = "/kdh/food/foodView";
+// 		$.get(url, sendData, function(rData) {
+// 			console.log(rData);
+// 		});
 		
-// 	});
-// });
+// 		location.href = "/kdh/food/foodView?page=${page.page}&perPage=${page.perPage}";
+		
+	});
+});
 </script>
 </head>
 <body class="js">
 
 <!-- 해더 부분 -->
-<%@include file="../../../include/header.jsp" %>
+<%@include file="/WEB-INF/views/include/header.jsp" %>
 
 	<!-- 음식 메인 사진 -->
 	<div class="foodMain" style="background-color:black">
@@ -75,59 +84,54 @@
 								<div class="single-widget recent-post">
 									<h3 class="title">최신 상품</h3>
 									<!-- Single Post -->
+									<c:forEach items="${listLatestFood}" var="LatestFood">
 									<div class="single-post first">
 										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
+											<img src="/resources/images/kdh/${LatestFood.food_image}" alt="${LatestFood.food_image}">
 										</div>
 										<div class="content">
-											<h5><a href="#">갈릭 팝콘(L)</a></h5>
-											<p class="price">6,000원</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-											</ul>
+											<h5><a href="#">${LatestFood.food_name}</a></h5>
+											<p class="price">${LatestFood.food_price}</p>
 										</div>
 									</div>
+									</c:forEach>
 									<!-- End Single Post -->
-									<!-- Single Post -->
-									<div class="single-post first">
-										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
-										</div>
-										<div class="content">
-											<h5><a href="#">복숭아 아이스티</a></h5>
-											<p class="price">3,000원</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-											</ul>
-										</div>
-									</div>
-									<!-- End Single Post -->
-									<!-- Single Post -->
-									<div class="single-post first">
-										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
-										</div>
-										<div class="content">
-											<h5><a href="#">레몬 아이스티</a></h5>
-											<p class="price">3,500원</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-											</ul>
-										</div>
-									</div>
-									<!-- End Single Post -->
+<!-- 									Single Post -->
+<!-- 									<div class="single-post first"> -->
+<!-- 										<div class="image"> -->
+<!-- 											<img src="https://via.placeholder.com/75x75" alt="#"> -->
+<!-- 										</div> -->
+<!-- 										<div class="content"> -->
+<!-- 											<h5><a href="#">복숭아 아이스티</a></h5> -->
+<!-- 											<p class="price">3,000원</p> -->
+<!-- 											<ul class="reviews"> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li><i class="ti-star"></i></li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									End Single Post -->
+<!-- 									Single Post -->
+<!-- 									<div class="single-post first"> -->
+<!-- 										<div class="image"> -->
+<!-- 											<img src="https://via.placeholder.com/75x75" alt="#"> -->
+<!-- 										</div> -->
+<!-- 										<div class="content"> -->
+<!-- 											<h5><a href="#">레몬 아이스티</a></h5> -->
+<!-- 											<p class="price">3,500원</p> -->
+<!-- 											<ul class="reviews"> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
+<!-- 											</ul> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									End Single Post -->
 								</div>
 								<!--/ End Single Widget -->
 								
@@ -137,16 +141,14 @@
 						<div class="row">
 							<div class="col-12">
 								<!-- Shop Top -->
-								<a href="/kdh/food/insertFood" class="btn">상품 등록</a>
 								<div class="shop-top">
 									<div class="shop-shorter">
 										<div class="single-shorter">
-											<label>Show :</label>
-											<select>
-												<option>09</option>
-												<option selected="selected">15</option>
-												<option>25</option>
-												<option>30</option>
+											<label>보기 :</label>
+											<select name="perPage">
+											<c:forEach begin="3" end="6" step="1" var="i">
+												<option value="${i}">${i}줄씩 보기</option>
+											</c:forEach>
 											</select>
 										</div>
 										<div class="single-shorter">
@@ -486,6 +488,32 @@
 			</div>
 			<!-- Modal end -->
 		
-<%@ include file="../../../include/footer.jsp" %>
+<!-- 페이징 -->
+<div class="row">
+	<div class="col-md-2"></div>
+		<div class="col-md-8 text-center">
+			<nav>
+				<ul class="pagination text-center">
+				    <li class="page-item" style="width:60px; float:left;">
+				    	<a class="page-link" href="">이전</a>
+				    </li>
+				    <li class="page-item" style="width:30px; float:left;" >
+				    	<a class="page-link" href="">1</a>
+				    </li>
+				    <li class="page-item" style="width:30px; float:left;">
+				    	<a class="page-link" href="">2</a>
+				    </li>
+				     <li class="page-item" style="width:30px; float:left;">
+				    	<a class="page-link" href="">3</a>
+				    </li>
+				    <li class="page-item" style="width:60px; float:left;">
+				    	<a class="page-link" href="">다음</a>
+				    </li>
+				</ul>
+			</nav>
+		</div>
+	<div class="col-md-2" style="margin-bottom: 30px;"></div>
+</div>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

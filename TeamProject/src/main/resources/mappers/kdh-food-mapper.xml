@@ -51,4 +51,21 @@ where food_code = '200'
 select * from tbl_food
 where food_code = '300'
 </select>
+
+<!-- 최근 상품 3개 구하기 -->
+<select id="listLatestFood" resultType="KdhFoodVo">
+select *
+from(select * from tbl_food
+order by food_num desc)
+where rownum between 1 and 3
+</select>
+
+<!-- 상품 페이징 -->
+<select id="listPage" resultType="KdhFoodVo">
+select *
+from (select rownum rnum, a.*
+        from (select * from tbl_food
+            order by food_num desc) a)
+where rnum between 1 and 10
+</select>
 </mapper>

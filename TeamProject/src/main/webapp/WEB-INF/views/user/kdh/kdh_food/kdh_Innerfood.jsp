@@ -4,8 +4,14 @@
 <!-- tag_and_styleSheet 인크루드 -->
 <%@include file = "../../../include/tag_and_styleSheet.jsp" %>
 
+ <!-- Jquery -->
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
+	<script src="/resources/js/jquery-ui.min.js"></script>
+	
 <style>
 .button1 {
+  width: 20px;
   background-color: white;
   color: black;
   border: 2px solid #000000;
@@ -14,13 +20,54 @@
 
 <body class="js">
 <script>
-function btnCancle() {
-	$("#cancleContent").toggle();
-}
-
-function btnUseGuide() {
-	$("#useContent").toggle();
-}
+$(function() {
+	
+	// 구매 후 취소 버튼
+	function btnCancle() {
+		$("#cancleContent").toggle();
+	}
+	
+	// 상품이용안내 버튼 
+	function btnUseGuide() {
+		$("#useContent").toggle();
+	}
+	
+	// 수량/금액 증가 버튼
+	$("#btnPlus").click(function() {
+		var count = "${foodVo.food_count}";
+		// 수량 증가
+		var index = $("#btnCount").text();
+		var Iindex = parseInt(index);
+		if (Iindex < count) {
+			var indexPlus = Iindex + 1;
+			$("#btnCount").text(indexPlus);
+			
+			// 수량에 따른 가격 증가
+			var price = "${foodVo.food_price}";
+			var pricePlus = price * indexPlus;
+			$("#price").text(pricePlus);	
+		}
+	});
+	
+	// 수량/금액 감소 버튼
+	$("#btnMius").click(function() {
+		// 수량 감소
+		var index = $("#btnCount").text();
+		var Iindex = parseInt(index);
+		if (Iindex > 1) {
+		indexMius = Iindex - 1;
+		} else if (Iindex = 1) {
+				indexMius = 1;
+		}
+		$("#btnCount").text(indexMius);
+		
+		// 수량에 따른 가격 증가
+		var price = "${foodVo.food_price}";
+		var priceMius = price * indexMius;
+		$("#price").text(priceMius);	
+	});
+	
+});
 </script>
 <!-- 해더 부분 -->
 <%@include file="../../../include/header.jsp" %>
@@ -55,9 +102,9 @@ function btnUseGuide() {
 					<p>구매 후 취소　　　구매일로부터 10일 이내 취소 가능하며, 부분취소는 불가능합니다.
 					<hr/>
 					<div>수량/금액　　　<button class="button1" id="btnMius" type="button">-</button> 
-					<button class="button1" id="btnCount" type="button">갯수</button> 
+					<span id="btnCount">1</span>
 					<button class="button1" id="btnPlus" type="button">+</button>
-					　　　<a>${foodVo.food_price}</a>　　　<button id="btnBuy" type="button" class="btn">구매하기</button>
+					　　　<a id="price">${foodVo.food_price}</a>　　　<button id="btnBuy" type="button" class="btn">구매하기</button>
 					</div>
 					<hr/>
 				</div>
