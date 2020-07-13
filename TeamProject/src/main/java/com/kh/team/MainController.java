@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 @RequestMapping("/team")
 public class MainController {
 
-		
 		// SghController
 		@RequestMapping(value="/bookingView", method=RequestMethod.GET)
 		public String testBookingView() throws Exception {
@@ -16,9 +15,9 @@ public class MainController {
 		}
 		
 		// SghController
-		@RequestMapping(value="/member", method=RequestMethod.GET)
+		@RequestMapping(value="/user", method=RequestMethod.GET)
 		public String testMember() throws Exception {
-			return "redirect:/sgh/member/loginForm";
+			return "redirect:/sgh/user/loginForm";
 		}
 		
 		// JmhController

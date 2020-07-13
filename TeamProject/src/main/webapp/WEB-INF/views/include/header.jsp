@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <style>
 	.titlePadding {
@@ -18,8 +19,16 @@
 					<!-- Top Right -->
 					<div class="right-content">
 						<ul class="list-main">
-							<li><i class="ti-user"></i> <a href="/sgh/member/joinForm">회원가입</a></li>
-							<li><i class="ti-power-off"></i><a href="/team/member">로그인</a></li>
+							<c:choose>
+								<c:when test="${not empty user_id}">
+									<li><i class="ti-user"><label style="color: black; margin-left: 5px;">${user_id}님</label></i></li>
+									<li><i class="ti-user"></i> <a href="/sgh/user/logout">로그아웃</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><i class="ti-user"></i> <a href="/sgh/user/joinForm">회원가입</a></li>
+									<li><i class="ti-power-off"></i><a href="/team/user">로그인</a></li>
+								</c:otherwise>
+							</c:choose>
 							<li><i class="ti-user"></i> <a href="#">내 정보</a></li>
 							<li><i class="ti-user"></i> <a href="#">고객센터</a></li>
 						</ul>

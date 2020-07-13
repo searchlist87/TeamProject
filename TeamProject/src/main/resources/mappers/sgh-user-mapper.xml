@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.sgh-user-mapper">
+	<!-- 일반 사용자 회원가입 -->
+	<insert id="userInsert">
+		insert into tbl_user(user_id, user_pw, user_name, user_gender, user_email, user_birth, user_phone, user_address, user_sms_check, user_num)
+		values(#{user_id}, #{user_pw}, #{user_name}, #{user_gender}, #{user_email}, #{user_birth}, #{user_phone}, #{user_address}, #{user_sms_check}, seq_user_num.nextval)
+	</insert>
+	<!-- 로그인 -->
+	<select id="userLoginSelect" resultType="Integer">
+		select count(*) from tbl_user
+		where user_id = #{user_id} and user_pw = #{user_pw}
+	</select>
+</mapper>

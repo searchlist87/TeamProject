@@ -8,7 +8,7 @@ public class SghUserVo {
 	private String user_name;
 	private String user_gender;
 	private String user_email;
-	private String user_bitrh;
+	private String user_birth;
 	private String user_phone;
 	private String user_address;
 	private int user_total_money;
@@ -22,8 +22,9 @@ public class SghUserVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public SghUserVo(String user_id, String user_pw, String user_name, String user_gender, String user_email,
-			String user_bitrh, String user_phone, String user_address, int user_total_money, int user_point,
+			String user_birth, String user_phone, String user_address, int user_total_money, int user_point,
 			String user_sms_check, String user_class, int user_num, Timestamp user_join_date,
 			Timestamp user_out_check) {
 		super();
@@ -32,7 +33,7 @@ public class SghUserVo {
 		this.user_name = user_name;
 		this.user_gender = user_gender;
 		this.user_email = user_email;
-		this.user_bitrh = user_bitrh;
+		this.user_birth = user_birth;
 		this.user_phone = user_phone;
 		this.user_address = user_address;
 		this.user_total_money = user_total_money;
@@ -43,6 +44,7 @@ public class SghUserVo {
 		this.user_join_date = user_join_date;
 		this.user_out_check = user_out_check;
 	}
+
 	public String getUser_id() {
 		return user_id;
 	}
@@ -73,11 +75,11 @@ public class SghUserVo {
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
 	}
-	public String getUser_bitrh() {
-		return user_bitrh;
+	public String getUser_birth() {
+		return user_birth;
 	}
-	public void setUser_bitrh(String user_bitrh) {
-		this.user_bitrh = user_bitrh;
+	public void setUser_birth(String user_birth) {
+		this.user_birth = user_birth;
 	}
 	public String getUser_phone() {
 		return user_phone;
@@ -133,10 +135,11 @@ public class SghUserVo {
 	public void setUser_out_check(Timestamp user_out_check) {
 		this.user_out_check = user_out_check;
 	}
+
 	@Override
 	public String toString() {
 		return "SghUserVo [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_gender="
-				+ user_gender + ", user_email=" + user_email + ", user_bitrh=" + user_bitrh + ", user_phone="
+				+ user_gender + ", user_email=" + user_email + ", user_birth=" + user_birth + ", user_phone="
 				+ user_phone + ", user_address=" + user_address + ", user_total_money=" + user_total_money
 				+ ", user_point=" + user_point + ", user_sms_check=" + user_sms_check + ", user_class=" + user_class
 				+ ", user_num=" + user_num + ", user_join_date=" + user_join_date + ", user_out_check=" + user_out_check
