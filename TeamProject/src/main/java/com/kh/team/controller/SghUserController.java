@@ -27,14 +27,15 @@ public class SghUserController {
 	// 로그인
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
 	public String loginRun(SghLoginDto sghLoginDto, HttpSession session) throws Exception {
-		SghUserVo result = sghUserService.userLogin(sghLoginDto);
-		// 로그인 아이디 정보 세션에 담기
-		session.setAttribute("user_id", sghLoginDto.getUser_id());
-//		session.setAttribute("user_class", sghLoginDto.getUser_class());
-		System.out.println("user_class : " + sghLoginDto.getUser_class());
-		// 맵퍼의 반환값이 1이면 성공
-		if(result == null) {
+		try {
+			sghLoginDto = sghUserService.userLogin(sghLoginDto);
+			// 로그인 아이디 정보 세션에 담기
+			// 맵퍼의 반환값이 1이면 성공
+			session.setAttribute("user_id", sghLoginDto.getUser_id());
+			session.setAttribute("user_class", sghLoginDto.getUser_class());
 			return "redirect:/";
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 		return "redirect:/sgh/user/loginForm";
 	}
