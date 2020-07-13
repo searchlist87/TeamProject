@@ -40,4 +40,22 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 		sqlSession.update(NAMESPACE + "updateFood", foodVo);
 	}
 
+	// food number 100(스낵)만 선택
+	@Override
+	public List<KdhFoodVo> listFoodCode100() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "listFoodCode100");
+	}
+
+	// food number 200(스낵)만 선택
+	@Override
+	public List<KdhFoodVo> listFoodCode200() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "listFoodCode200");
+	}
+
+	// food number 300(스낵)만 선택
+	@Override
+	public List<KdhFoodVo> listFoodCode300() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "listFoodCode300");
+	}
+
 }

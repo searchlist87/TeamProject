@@ -34,4 +34,21 @@
 	where food_num = #{food_num}
 </update>
 
+<!-- food number 100(스낵)만 선택 -->
+<select id="listFoodCode100" resultType="KdhFoodVo">
+select * from tbl_food
+where food_code = '100'
+</select>
+
+<!-- food number 200(음료)만 선택 -->
+<select id="listFoodCode200" resultType="KdhFoodVo">
+select * from tbl_food
+where food_code = '200'
+</select>
+
+<!-- food number 300(패키지)만 선택 -->
+<select id="listFoodCode300" resultType="KdhFoodVo">
+select * from tbl_food
+where food_code = '300'
+</select>
 </mapper>
