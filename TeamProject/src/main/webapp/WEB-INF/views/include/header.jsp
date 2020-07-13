@@ -19,6 +19,9 @@
 					<!-- Top Right -->
 					<div class="right-content">
 						<ul class="list-main">
+								<c:if test="${user_class == 'admin'}">
+									<li><i class="ti-user"></i> <a href="/sgh/user/logout">로그아웃</a></li>
+								</c:if>
 							<c:choose>
 								<c:when test="${not empty user_id}">
 									<li><i class="ti-user"><label style="color: black; margin-left: 5px;">${user_id}님</label></i></li>

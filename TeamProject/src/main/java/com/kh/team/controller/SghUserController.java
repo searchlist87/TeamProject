@@ -27,11 +27,13 @@ public class SghUserController {
 	// 로그인
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
 	public String loginRun(SghLoginDto sghLoginDto, HttpSession session) throws Exception {
-		int result = sghUserService.userLogin(sghLoginDto);
+		SghUserVo result = sghUserService.userLogin(sghLoginDto);
 		// 로그인 아이디 정보 세션에 담기
 		session.setAttribute("user_id", sghLoginDto.getUser_id());
+//		session.setAttribute("user_class", sghLoginDto.getUser_class());
+		System.out.println("user_class : " + sghLoginDto.getUser_class());
 		// 맵퍼의 반환값이 1이면 성공
-		if(result == 1) {
+		if(result == null) {
 			return "redirect:/";
 		}
 		return "redirect:/sgh/user/loginForm";
@@ -67,5 +69,18 @@ public class SghUserController {
 		}
 		System.out.println("회원가입 결과 : " + result);
 		return "redirect:/sgh/user/joinForm";
+	}
+	
+	// 아이디 중복 확인
+	@RequestMapping(value="/userIdDupCheck", method=RequestMethod.GET)
+	public String userIdDupCheck(String user_id) throws Exception {
+		System.out.println("user_id :" + user_id);
+		int result = sghUserService.userIdDupCheck(user_id);
+		// 결과가 1 있으면 사용 불가, 0 없으면 사용가능
+		System.out.println("result :" + result);
+		if(result == 1) {
+			return "false";
+		}
+		return "true";
 	}
 }

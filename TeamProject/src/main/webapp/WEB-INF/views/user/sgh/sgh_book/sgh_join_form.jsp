@@ -11,7 +11,22 @@ $(function() {
 	$("select").css("display", "block");
 	$(".nice-select").remove();
 	
+	// 아이디 중복 에이잭스 요청
+	$("#btnIdDupCheck").click(function() {
+		var user_id = $("#user_id").val();
+		console.log("user_id : " + user_id);
+		var url = "/sgh/user/userIdDupCheck";
+		var sendData = {
+			"user_id" : user_id	
+		};
+		$.get(url, sendData, function(rData) {
+			console.log(rData);
+		});
+	});
+	
 	$("#joinForm").submit(function() {
+		
+		// 생년월일 합쳐서 hidden에 담아 보내기
 		var year = $("#user_year option:selected").val();
 		var month = $("#user_month option:selected").val();
 		var date = $("#user_date option:selected").val();
@@ -35,16 +50,16 @@ $(function() {
 				<div class="form-group">
 					<input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디"/>
 				</div>
-<!-- 				<div class="form-group"> -->
-<!-- 					<button type="button" id="idDupCheck" class="btn-sm">중복 확인</button> -->
-<!-- 					<span id="idDupResult">아이디 중복 확인</span> -->
-<!-- 				</div> -->
+				<div class="form-group">
+					<button type="button" id="btnIdDupCheck" class="btn-sm">중복 확인</button>
+					<span id="idDupResult">아이디 중복 확인</span>
+				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" id="user_pw" name="user_pw" placeholder="비밀번호"/>
 				</div>
-<!-- 				<div class="form-group"> -->
-<!-- 					<input type="password" class="form-control" id="user_pw2" name="user_pw2" placeholder="비밀번호 재확인"/> -->
-<!-- 				</div> -->
+				<div class="form-group">
+					<input type="password" class="form-control" id="user_pw2" name="user_pw2" placeholder="비밀번호 재확인"/>
+				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="user_name" name="user_name" placeholder="이름"/>
 				</div>
