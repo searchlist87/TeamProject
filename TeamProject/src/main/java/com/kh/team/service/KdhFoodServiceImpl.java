@@ -35,4 +35,19 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 		foodDao.updateFood(foodVo);
 	}
 
+	@Override
+	public List<KdhFoodVo> listFoodCode100() throws Exception {
+		return foodDao.listFoodCode100();
+	}
+
+	@Override
+	public List<KdhFoodVo> listFoodCode200() throws Exception {
+		return foodDao.listFoodCode200();
+	}
+
+	@Override
+	public List<KdhFoodVo> listFoodCode300() throws Exception {
+		return foodDao.listFoodCode300();
+	}
+
 }

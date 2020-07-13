@@ -6,13 +6,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.team.constants.sample;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.service.KdhFoodService;
 
@@ -59,4 +55,27 @@ public class KdhController {
 		return "user/kdh/kdh_food/kdh_Innerfood";
 	}
 
+	// 상품 선택하기(100 스낵)
+	@RequestMapping(value = "/snack", method = RequestMethod.GET)
+	public String listFoodCode100(Model model) throws Exception {
+		List<KdhFoodVo> list = foodService.listFoodCode100();
+		model.addAttribute("list", list);
+		return "user/kdh/kdh_food/kdh_snack";
+	}
+	
+	// 상품 선택하기(200 음료)
+	@RequestMapping(value = "/drink", method = RequestMethod.GET)
+	public String listFoodCode200(Model model) throws Exception {
+		List<KdhFoodVo> list = foodService.listFoodCode200();
+		model.addAttribute("list", list);
+		return "user/kdh/kdh_food/kdh_drink";
+	}
+	
+	// 상품 선택하기(300 패키지)
+	@RequestMapping(value = "/package", method = RequestMethod.GET)
+	public String listFoodCode300(Model model) throws Exception {
+		List<KdhFoodVo> list = foodService.listFoodCode300();
+		model.addAttribute("list", list);
+		return "user/kdh/kdh_food/kdh_package";
+	}
 }

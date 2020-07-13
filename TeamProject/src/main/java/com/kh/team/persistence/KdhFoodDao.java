@@ -19,4 +19,14 @@ public interface KdhFoodDao {
 	public void updateFood(KdhFoodVo foodVo) throws Exception;
 	
 	// 상품 삭제
+	
+	// food number 100(스낵)만 선택
+	public List<KdhFoodVo> listFoodCode100() throws Exception;
+	
+	// food number 200(음료)만 선택
+	public List<KdhFoodVo> listFoodCode200() throws Exception;
+	
+	// food number 300(패키지)만 선택
+	public List<KdhFoodVo> listFoodCode300() throws Exception;
+	
 }
