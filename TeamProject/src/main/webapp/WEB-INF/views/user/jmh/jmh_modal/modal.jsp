@@ -86,7 +86,7 @@
 					<h6 style="padding-top:5px;">울산광역시 남구 삼산동</h6> 
 					
 				</div>
-				<div id="map" style="width:1000px;height:400px;posirion:relative"></div>
+				<div id="map" style="width:1000px;height:400px;position:relative;"></div>
 				<div id="marker" style="position:absolute;"></div>
 			</div>
 			<div class="modal-footer">

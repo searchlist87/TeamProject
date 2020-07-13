@@ -52,9 +52,11 @@
  .cloneDiv:hover {
  	background-color:#FACC2E;
  }
+ 
 </style>
 <script>
 $(function() {
+	
 	// 현재 시간 및 날짜
 	var date = new Date();
 	var year = date.getFullYear();
@@ -170,24 +172,17 @@ $(function() {
 		console.log(data_total_date);
 	});
 	
-	
-	
-	
 });
 // 지도 관련
-var position1 = new naver.maps.LatLng(35.5346057, 129.3102609,17);
-var mapOptions = {
-	    center: position1,
-	    zoom: 17
-};
+var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 15
+});
 
-var map = new naver.maps.Map('map', mapOptions);
-
-var markerOptions = {
-		position : position1,
-		map: map,
-};
-var marker = new naver.maps.Marker(markerOptions);
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(37.3595704, 127.105399),
+    map: map
+});
 
 
 
@@ -215,7 +210,7 @@ var marker = new naver.maps.Marker(markerOptions);
 							<div class="col-12">
 								<!--  메인이미지 가져오기 -->
 								<div class="image">
-									<img src="https://via.placeholder.com/950x460" alt="#">
+									<img src="/resources/images/jmh/theater.png" alt="상영관이미지">
 								</div>
 								<!--  영화관 정보 -->
 								<div class="blog-detail">
@@ -267,9 +262,9 @@ var marker = new naver.maps.Marker(markerOptions);
 						<div class="single-widget category">
 							<h3 class="title">영화관 안내</h3>
 							<ul class="categor-list">
-								<li><a href="#">울산 삼산점</a></li>
-								<li><a href="#">울산 성남동점</a></li>
-								<li><a href="#">서울 강남점</a></li>
+								<c:forEach items="${list}" var="vo">
+									<li><a href="#">${vo.theater_name}</a></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
