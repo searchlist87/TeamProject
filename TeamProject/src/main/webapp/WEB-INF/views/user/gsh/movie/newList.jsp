@@ -22,7 +22,7 @@
 						
 								<!-- 왼쪽 배너 시작 -->
 									<div class="single-widget range">
-										<h3 class="title">영화 종류</h3>
+										<h3 class="title">카테고리</h3>
 										<div class="price-filter">
 											<div class="price-filter-inner">
 												<div id="slider-range"></div>
@@ -30,6 +30,7 @@
 												</div>
 											</div>
 										</div>
+											
 										<ul class="check-box-list">
 											<li>
 												<label class="checkbox-inline" for="1">베스트</label>
@@ -41,6 +42,7 @@
 												<label class="checkbox-inline" for="3">상영작</label>
 											</li>
 										</ul>
+										
 									</div>
 								<!-- 왼쪽 배너 끝 -->
 
@@ -109,6 +111,19 @@
 						<div class="row">
 							<div class="col-12">
 							
+							<!-- 영화 종류 시작 -->
+			<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<h3>
+								신작
+							</h3>
+						</div>
+					</div>
+			</div>
+　							<!-- 영화 종류 끝 -->
+　
+							
 							<!-- 검색 부분 시작 -->
 							
 <div class="container-fluid">
@@ -167,10 +182,10 @@
 							<div class="col-lg-4 col-md-6 col-12">
 								<div class="single-product">
 									<div class="product-img">
-										<a href="product-details.html">
+										<!-- 클릭 시 이동하는 페이지 -->
+										<a href="/resources/images/gsh/movie01.jpg">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie01.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -198,7 +213,6 @@
 										<a href="product-details.html">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie02.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -225,7 +239,6 @@
 										<a href="product-details.html">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie03.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -252,7 +265,6 @@
 										<a href="product-details.html">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie04.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 											<span class="new">New</span>
 										</a>
 										<div class="button-head">
@@ -280,7 +292,6 @@
 										<a href="product-details.html">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie05.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -307,7 +318,6 @@
 										<a href="product-details.html">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie06.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 											<span class="price-dec">30% Off</span>
 										</a>
 										<div class="button-head">
@@ -335,7 +345,6 @@
 										<a href="product-details.html">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie07.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 										</a>
 										<div class="button-head">
 											<div class="product-action">
@@ -362,7 +371,6 @@
 										<a href="product-details.html">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie08.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 											<span class="out-of-stock">Hot</span>
 										</a>
 										<div class="button-head">
@@ -391,7 +399,6 @@
 										<a href="product-details.html">
 											<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
 											<img class="default-img" src="/resources/images/gsh/movie09.jpg" alt="#">
-											<img class="hover-img" src="" alt="#">
 											<span class="new">New</span>
 										</a>
 										<div class="button-head">

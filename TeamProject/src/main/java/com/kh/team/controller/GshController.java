@@ -46,16 +46,19 @@ public class GshController {
 		return "user/gsh/movie/reviewList";
 	}
 	
+	// 리뷰 작성 폼
 	@RequestMapping(value = "/review_write_form", method = RequestMethod.GET)
 	public String review_form() throws Exception {
 		return "user/gsh/movie/review_write_form";
 	}
 	
+	// 리뷰 내용 작성
 	@RequestMapping(value = "/reviewContent", method = RequestMethod.GET)
 	public String reviewContent() throws Exception {
 		return "user/gsh/movie/reviewContent";
 	}
 	
+	// 상영작 페이지
 	@RequestMapping(value = "/onairList", method = RequestMethod.GET)
 	public String onairList() throws Exception {
 		return "user/gsh/movie/onairList";
