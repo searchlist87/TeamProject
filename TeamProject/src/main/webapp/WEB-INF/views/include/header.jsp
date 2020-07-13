@@ -159,8 +159,8 @@
 										<!-- 화면 위쪽에 나오는 Bar -->
 											<li><a href="/team/shop-grid" class="titlePadding">영화</a>
 												<ul class="dropdown">
-													<li><a href="blog-single-sidebar.html">베스트</a></li>
-													<li><a href="blog-single-sidebar.html">신작</a></li>
+													<li><a href="/gsh/movie/bestList">베스트</a></li>
+													<li><a href="/gsh/movie/newList">신작</a></li>
 													<li><a href="/gsh/movie/onairList">상영작</a></li>
 													<li><a href="/gsh/movie/reviewList">리뷰</a></li>
 												</ul>
