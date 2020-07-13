@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.SghLoginDto;
@@ -73,6 +74,7 @@ public class SghUserController {
 	}
 	
 	// 아이디 중복 확인
+	@ResponseBody
 	@RequestMapping(value="/userIdDupCheck", method=RequestMethod.GET)
 	public String userIdDupCheck(String user_id) throws Exception {
 		System.out.println("user_id :" + user_id);
@@ -83,5 +85,15 @@ public class SghUserController {
 			return "false";
 		}
 		return "true";
+	}
+
+	@RequestMapping(value="/doro", method=RequestMethod.GET)
+	public String testDoro() throws Exception {
+		return "user/sgh/sgh_book/doro";
+	}
+	
+	@RequestMapping(value="/pop", method=RequestMethod.GET)
+	public String testPop() throws Exception {
+		return "../popup/jusoPopup";
 	}
 }

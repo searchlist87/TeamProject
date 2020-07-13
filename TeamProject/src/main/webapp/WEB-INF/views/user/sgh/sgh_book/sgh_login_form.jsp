@@ -11,7 +11,23 @@
 	input {
 		width: 30%;
 	}
+	/* 바탕 배경 이미지 */
+.pop-address-search .pop-address-search-inner { background-image: url(http://www.0000.com/img/backImg.png);}
+/* 회사 로고 이미지 */
+.pop-address-search .pop-address-search-inner .logo { background: url(http://www.0000.com/img/logo.png) no-repeat; background-position:center; }
+
+/* 바탕 배경색상 */
+.pop-address-search .pop-address-search-inner { background-color:#ECECEC; }
+/* 검색창 색상 */
+.pop-address-search .pop-address-search-inner .wrap input { background-color:#FFFFFF; }
+/* 검색버튼 색상 */
+.pop-address-search .pop-address-search-inner .wrap { background-color:#FFFFFF; }
+/* 본문 배경색(홀수) */
+.pop-address-search .pop-address-search-inner .result table.data-col tbody tr:nth-child(odd) td {background:#FFFFFF}
+/* 본문 배경색(짝수) */
+.pop-address-search .pop-address-search-inner .result table.data-col tbody tr:nth-child(even) td {background:#FFFFFF}
 </style>
+
 <script>
 	var result = "${result}";
 	if(result == true) {
@@ -36,8 +52,8 @@
 					<button type="submit" class="btn btn-sm">
 						로그인
 					</button>
-					<a href="#">아이디 찾기</a>
-					<a href="#">비밀번호 찾기</a>
+					<a href="#">아이디 찾기</a> <!-- 이메일 보내기 -->
+					<a href="#">비밀번호 찾기</a> <!-- 이메일 보내기 -->
 					<a href="/sgh/user/joinForm">회원가입</a>
 				</div>
 			</form>
