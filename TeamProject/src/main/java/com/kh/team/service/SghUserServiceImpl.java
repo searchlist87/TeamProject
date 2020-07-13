@@ -20,8 +20,13 @@ public class SghUserServiceImpl implements SghUserService {
 	}
 
 	@Override
-	public int userLogin(SghLoginDto sghLoginDto) throws Exception {
+	public SghUserVo userLogin(SghLoginDto sghLoginDto) throws Exception {
 		return sghUserDao.userLoginSelect(sghLoginDto);
+	}
+
+	@Override
+	public int userIdDupCheck(String user_id) throws Exception {
+		return sghUserDao.userIdDupCheckSelect(user_id);
 	}
 
 }

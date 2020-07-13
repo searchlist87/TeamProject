@@ -7,5 +7,7 @@ public interface SghUserService {
 	// 회원가입
 	public void userJoin(SghUserVo sghUserVo) throws Exception;
 	// 로그인
-	public int userLogin(SghLoginDto sghLoginDto) throws Exception;
+	public SghUserVo userLogin(SghLoginDto sghLoginDto) throws Exception;
+	// 아이디 중복 체크
+	public int userIdDupCheck(String user_id) throws Exception;
 }

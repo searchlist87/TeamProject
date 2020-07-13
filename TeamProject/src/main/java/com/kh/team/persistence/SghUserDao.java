@@ -7,5 +7,7 @@ public interface SghUserDao {
 	// 회원가입
 	public void userInsert(SghUserVo sghUserVo) throws Exception;
 	// 로그인
-	public int userLoginSelect(SghLoginDto sghLoginDto) throws Exception;
+	public SghUserVo userLoginSelect(SghLoginDto sghLoginDto) throws Exception;
+	// 아이디 중복 확인
+	public int userIdDupCheckSelect(String user_id) throws Exception;
 }

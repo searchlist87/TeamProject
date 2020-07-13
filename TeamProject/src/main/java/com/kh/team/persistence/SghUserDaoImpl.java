@@ -21,8 +21,13 @@ public class SghUserDaoImpl implements SghUserDao {
 	}
 
 	@Override
-	public int userLoginSelect(SghLoginDto sghLoginDto) throws Exception {
+	public SghUserVo userLoginSelect(SghLoginDto sghLoginDto) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "userLoginSelect", sghLoginDto);
+	}
+
+	@Override
+	public int userIdDupCheckSelect(String user_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "userIdDupCheckSelect", user_id);
 	}
 
 }
