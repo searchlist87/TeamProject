@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,6 +22,7 @@ public class GshController {
 	@Inject
 	private GshReviewService gshReviewService;
 	
+	// 리뷰 목록
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
 	public String review(Model model) throws Exception {
 //		System.out.println("movie");
@@ -28,9 +30,10 @@ public class GshController {
 		
 		List<GshReviewVo> list = new ArrayList<GshReviewVo>();
 		
-		for (int i = 1; i < 11; i++) {
+		for (int i = 1; i < 10; i++) {
 			
 			GshReviewVo gshReviewVo = new GshReviewVo();
+					// ()값은 임시로 넣어둠
 					gshReviewVo.setUser_id("작성자" + i);
 					gshReviewVo.setReview_num(i);
 					gshReviewVo.setReview_date(new Timestamp(100000L));
@@ -43,9 +46,22 @@ public class GshController {
 		return "user/gsh/movie/reviewList";
 	}
 	
-	@RequestMapping(value = "/review_form", method = RequestMethod.GET)
+	// 리뷰 작성 폼
+	@RequestMapping(value = "/review_write_form", method = RequestMethod.GET)
 	public String review_form() throws Exception {
-		return "user/gsh/movie/review_form";
+		return "user/gsh/movie/review_write_form";
 	}
-
+	
+	// 리뷰 내용 작성
+	@RequestMapping(value = "/reviewContent", method = RequestMethod.GET)
+	public String reviewContent() throws Exception {
+		return "user/gsh/movie/reviewContent";
+	}
+	
+	// 상영작 페이지
+	@RequestMapping(value = "/onairList", method = RequestMethod.GET)
+	public String onairList() throws Exception {
+		return "user/gsh/movie/onairList";
+	}
+	
 }
