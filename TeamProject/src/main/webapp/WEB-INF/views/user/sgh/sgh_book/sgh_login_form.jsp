@@ -54,7 +54,7 @@
 					</button>
 					<a href="#">아이디 찾기</a> <!-- 이메일 보내기 -->
 					<a href="#">비밀번호 찾기</a> <!-- 이메일 보내기 -->
-					<a href="/sgh/user/joinForm">회원가입</a>
+					<a href="/sgh/user/joinForm">회원가입d</a>
 				</div>
 			</form>
 		</div>
