@@ -1,6 +1,7 @@
 package com.kh.team.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhPagingDto;
 
 @Repository
 public class KdhFoodDaoImpl implements KdhFoodDao {
@@ -56,6 +58,16 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	@Override
 	public List<KdhFoodVo> listFoodCode300() throws Exception {
 		return sqlSession.selectList(NAMESPACE + "listFoodCode300");
+	}
+
+	@Override
+	public List<KdhFoodVo> listLatestFood() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "listLatestFood");
+	}
+
+	@Override
+	public List<KdhFoodVo> listPage(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "listPage");
 	}
 
 }

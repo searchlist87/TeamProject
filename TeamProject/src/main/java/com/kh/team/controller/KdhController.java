@@ -1,15 +1,20 @@
 package com.kh.team.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.service.KdhFoodService;
 
 @Controller
@@ -21,10 +26,12 @@ public class KdhController {
 	
 	// 스토어 메인
 	@RequestMapping(value = "/foodView", method = RequestMethod.GET)
-	public String foodView(Model model) throws Exception {
+	public String foodView(ModelMap model, KdhPagingDto pagingDto) throws Exception {
 		List<KdhFoodVo> list = foodService.listFood();
+		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
 		model.addAttribute("list", list);
-//		System.out.println("list:" + list);
+		model.addAttribute("listLatestFood", listLatestFood);
+//		model.addAttribute("page", page);
 		return "user/kdh/kdh_food/kdh_food-grid";
 	} 
 	
@@ -45,7 +52,6 @@ public class KdhController {
 	public String InnerfoodGet(int food_num, Model model) throws Exception {
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
 		model.addAttribute("foodVo", foodVo);
-		System.out.println("foodVo:" + foodVo);
 		return "user/kdh/kdh_food/kdh_Innerfood";
 	}
 
@@ -57,9 +63,11 @@ public class KdhController {
 
 	// 상품 선택하기(100 스낵)
 	@RequestMapping(value = "/snack", method = RequestMethod.GET)
-	public String listFoodCode100(Model model) throws Exception {
+	public String listFoodCode100(ModelMap model) throws Exception {
 		List<KdhFoodVo> list = foodService.listFoodCode100();
+		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
 		model.addAttribute("list", list);
+		model.addAttribute("listLatestFood", listLatestFood);
 		return "user/kdh/kdh_food/kdh_snack";
 	}
 	
@@ -67,7 +75,9 @@ public class KdhController {
 	@RequestMapping(value = "/drink", method = RequestMethod.GET)
 	public String listFoodCode200(Model model) throws Exception {
 		List<KdhFoodVo> list = foodService.listFoodCode200();
+		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
 		model.addAttribute("list", list);
+		model.addAttribute("listLatestFood", listLatestFood);
 		return "user/kdh/kdh_food/kdh_drink";
 	}
 	
@@ -75,7 +85,17 @@ public class KdhController {
 	@RequestMapping(value = "/package", method = RequestMethod.GET)
 	public String listFoodCode300(Model model) throws Exception {
 		List<KdhFoodVo> list = foodService.listFoodCode300();
+		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
 		model.addAttribute("list", list);
+		model.addAttribute("listLatestFood", listLatestFood);
 		return "user/kdh/kdh_food/kdh_package";
 	}
+	
+//	// 상품 페이징
+//	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+//	@ResponseBody
+//	public void listPage(KdhPagingDto pagingDto, Model model) throws Exception {
+//		
+//		
+//	}
 }

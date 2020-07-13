@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.persistence.KdhFoodDao;
 
 @Service
@@ -48,6 +49,16 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	@Override
 	public List<KdhFoodVo> listFoodCode300() throws Exception {
 		return foodDao.listFoodCode300();
+	}
+
+	@Override
+	public List<KdhFoodVo> listLatestFood() throws Exception {
+		return foodDao.listLatestFood();
+	}
+
+	@Override
+	public List<KdhFoodVo> listPage(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.listPage(pagingDto);
 	}
 
 }

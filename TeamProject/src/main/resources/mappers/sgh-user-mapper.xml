@@ -10,7 +10,7 @@
 		values(#{user_id}, #{user_pw}, #{user_name}, #{user_gender}, #{user_email}, #{user_birth}, #{user_phone}, #{user_address}, #{user_sms_check}, seq_user_num.nextval)
 	</insert>
 	<!-- 로그인 -->
-	<select id="userLoginSelect" resultType="SghUserVo">
+	<select id="userLoginSelect" resultType="SghLoginDto">
 		select * from tbl_user
 		where user_id = #{user_id} and user_pw = #{user_pw}
 	</select>

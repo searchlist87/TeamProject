@@ -75,59 +75,17 @@
 								<div class="single-widget recent-post">
 									<h3 class="title">최신 상품</h3>
 									<!-- Single Post -->
+									<c:forEach items="${listLatestFood}" var="LatestFood">
 									<div class="single-post first">
 										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
+											<img src="/resources/images/kdh/${LatestFood.food_image}" alt="${LatestFood.food_image}">
 										</div>
 										<div class="content">
-											<h5><a href="#">갈릭 팝콘(L)</a></h5>
-											<p class="price">6,000원</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-											</ul>
+											<h5><a href="#">${LatestFood.food_name}</a></h5>
+											<p class="price">${LatestFood.food_price}</p>
 										</div>
 									</div>
-									<!-- End Single Post -->
-									<!-- Single Post -->
-									<div class="single-post first">
-										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
-										</div>
-										<div class="content">
-											<h5><a href="#">복숭아 아이스티</a></h5>
-											<p class="price">3,000원</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li><i class="ti-star"></i></li>
-											</ul>
-										</div>
-									</div>
-									<!-- End Single Post -->
-									<!-- Single Post -->
-									<div class="single-post first">
-										<div class="image">
-											<img src="https://via.placeholder.com/75x75" alt="#">
-										</div>
-										<div class="content">
-											<h5><a href="#">레몬 아이스티</a></h5>
-											<p class="price">3,500원</p>
-											<ul class="reviews">
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-												<li class="yellow"><i class="ti-star"></i></li>
-											</ul>
-										</div>
-									</div>
-									<!-- End Single Post -->
+									</c:forEach>
 								</div>
 								<!--/ End Single Widget -->
 								
@@ -137,7 +95,6 @@
 						<div class="row">
 							<div class="col-12">
 								<!-- Shop Top -->
-								<a href="/kdh/food/insertFood" class="btn">상품 등록</a>
 								<div class="shop-top">
 									<div class="shop-shorter">
 										<div class="single-shorter">

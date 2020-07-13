@@ -12,11 +12,17 @@
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="/resources/css/admin.css">
+<style>
+	.movie_title:hover {
+		color:red;
+	}
+</style>
 <script>
 $(function () {
 	$("#movie_manage > dd").css("display","block");
 	$("#movie_manage > dt").css("color","red");
 	$("#movie_manage > dd").eq(0).css("color","blue");
+	
 });
 </script>
 
@@ -36,15 +42,14 @@ $(function () {
 									<h4 class="title" >영화관리_영화조회</h4>
 								</div>	
 								<!--  검색 -->
-								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;text-align:right;">
+								<div style="padding:20px;text-align:right;">
 										
 									<div class="single-shorter" style="vertical-align:middle;">
-											<label>Show :</label>
+											<label>검색 :</label>
 											<select>
-												<option selected="selected">09</option>
-												<option>15</option>
-												<option>25</option>
-												<option>30</option>
+												<option selected="selected">영화명</option>
+												<option>영화장르</option>
+												<option>영화등급</option>
 											</select>
 										</div>
 
@@ -53,9 +58,9 @@ $(function () {
 								</div>	
 								<!--  검색 끝 -->
 								<!--  페이지별 내용 -->
-								<table class="table" style="text-align:center;">
+								<table class="table" style="text-align:center;height:auto;" id="movie_table">
 									<thead>
-										<tr style="hegith:200px;">
+										<tr>
 											<th style="width:70px;">순서</th>
 											<th style="width:100px;">영화이미지</th>
 											<th>영화명</th>
@@ -64,40 +69,33 @@ $(function () {
 											<th style="width:130px;">개봉일</th>
 										</tr>
 									</thead>
-									<tbody style="vertical-align:middle;">
-										<tr>
-											<td style="vertical-align:middle;">3</td>
-											<td style="vertical-align:middle;"><img src="/resources/images/gsh/movie01.jpg"/></td>
-											<td style="vertical-align:middle;"><a href=""># 살아있다</a></td>
+									<tbody style="vertical-align:middle;table-layout:fixed;">
+										<tr style="height:50px;">
+											<td style="height:100px;vertical-align:middle;">3</td>
+											<td><img src="/resources/images/gsh/movie01.jpg"/></td>
+											<td style="vertical-align:middle;"><a href="" class="movie_title"># 살아있다</a></td>
 											<td style="vertical-align:middle;">로맨스</td>
 											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_12.PNG"/></td>
 											<td style="vertical-align:middle;">2020-07-07</td>
 										</tr>
-										<tr>
-											<td style="vertical-align:middle;">3</td>
-											<td style="vertical-align:middle;"><img src="/resources/images/gsh/movie01.jpg"/></td>
-											<td style="vertical-align:middle;"># 살아있다</td>
+										<tr style="height:50px;">
+											<td style="height:100px;vertical-align:middle;">3</td>
+											<td><img src="/resources/images/gsh/movie01.jpg"/></td>
+											<td style="vertical-align:middle;"><a href="" class="movie_title"># 살아있다</a></td>
 											<td style="vertical-align:middle;">로맨스</td>
 											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_12.PNG"/></td>
 											<td style="vertical-align:middle;">2020-07-07</td>
 										</tr>
-										<tr>
-											<td style="vertical-align:middle;">3</td>
-											<td style="vertical-align:middle;"><img src="/resources/images/gsh/movie01.jpg"/></td>
-											<td style="vertical-align:middle;"># 살아있다</td>
-											<td style="vertical-align:middle;">로맨스</td>
-											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_12.PNG"/></td>
-											<td style="vertical-align:middle;">2020-07-07</td>
-										</tr>
-										
 									</tbody>
 								</table>
 							</div>
+						</div>
+						<div class="row" style="height:100px;">
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-<%@ include file="../include/footer.jsp" %>
 </body>
+<%@ include file="../include/footer.jsp" %>
 </html>
