@@ -22,7 +22,7 @@
 						
 								<!-- 왼쪽 배너 시작 -->
 									<div class="single-widget range">
-										<h3 class="title">영화 종류</h3>
+										<h3 class="title">카테고리</h3>
 										<div class="price-filter">
 											<div class="price-filter-inner">
 												<div id="slider-range"></div>
