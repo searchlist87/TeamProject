@@ -20,32 +20,6 @@
 					<div class="col-lg-3 col-md-4 col-12">
 						<div class="shop-sidebar">
 						
-								<!-- 왼쪽 배너 시작 -->
-									<div class="single-widget range">
-										<h3 class="title">카테고리</h3>
-										<div class="price-filter">
-											<div class="price-filter-inner">
-												<div id="slider-range"></div>
-													<div class="price_slider_amount">
-												</div>
-											</div>
-										</div>
-											
-										<ul class="check-box-list">
-											<li>
-												<label class="checkbox-inline" for="1">베스트</label>
-											</li>
-											<li>
-												<label class="checkbox-inline" for="2">신작</label>
-											</li>
-											<li>
-												<label class="checkbox-inline" for="3">상영작</label>
-											</li>
-										</ul>
-										
-									</div>
-								<!-- 왼쪽 배너 끝 -->
-
 <!-- 								Single Widget -->
 <!-- 								<div class="single-widget recent-post"> -->
 <!-- 									<h3 class="title">Recent post</h3> -->
