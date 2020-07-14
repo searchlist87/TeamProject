@@ -20,7 +20,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-8" style="text-align: center">
+			<div class="col-md-8" style=": center">
 				<h1>베스트</h1>
 				<div>
 					<input type="text" name="textfield" size="60" />
@@ -29,13 +29,14 @@
 <!-- 영화 영역 시작-->
 	<div class="col-md-8">
 			
-		<div class="row" style="float: center;">
+		<div class="row">
 			<c:forEach items="${list}" var="vo">
 				<div class="col-md-4">
 					<a href="/resources/images/gsh/movie01.jpg">
 						<h3>
 							<span><img src="/resources/images/gsh/movie01.jpg">${vo.movie_name}</span>
 						</h3>
+							<span><img src="/resources/images/jmh/movie_grade_15.png">${vo.movie_grade}</span>
 					</a>
 				</div>
 			</c:forEach>

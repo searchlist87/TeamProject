@@ -5,20 +5,19 @@
   
 <mapper namespace="mappers.gsh-bestlist-mapper">
 
-<!-- 	private String movie_code; -->
-<!-- 	private String movie_name; -->
-<!-- 	private String movie_genre; -->
-<!-- 	private String movie_director; -->
-<!-- 	private String movie_actor; -->
-<!-- 	private Timestamp movie_open_date; -->
-<!-- 	private int movie_total_time; -->
-<!-- 	private String movie_main_image; -->
-<!-- 	private Timestamp movie_regist_date; -->
-<!-- 	private String movie_grade; -->
-<!-- 	private String movie_preview; -->
-<!-- 	private int movie_num; -->
+<!-- 	private String movie_code; 영화코드 -->
+<!-- 	private String movie_name; 영화제목 -->
+<!-- 	private String movie_genre; 영화장르 -->
+<!-- 	private String movie_director; 영화감독 -->
+<!-- 	private String movie_actor; 영화배우 -->
+<!-- 	private Timestamp movie_open_date; 상영날짜 -->
+<!-- 	private int movie_total_time; 상영시간 -->
+<!-- 	private String movie_main_image; 이미지 -->
+<!-- 	private Timestamp movie_regist_date; 등록날짜 -->
+<!-- 	private String movie_grade; 영화등급 -->
+<!-- 	private String movie_preview; 영화 예고편 -->
 
-	<!-- 영화코드로 전체 영화 찾기 -->
+	<!-- 영화코드로 전체(베스트, 신작, 상영작) 영화 찾기 -->
 	<select id="select_movie_list" resultType="GshBestListVo">
 		select * from tbl_movie
 		order by movie_code desc
@@ -34,6 +33,24 @@
 	<select id="select_movie_genre">
 		select * from tbl_movie
 		where movie_genre = #{movie_genre}
+	</select>
+	
+	<!-- 영화감독 이름으로 영화 찾기 -->
+	<select id="select_movie_director">
+		select * from tbl_movie
+		where movie_director = #{movie_director}
+	</select>
+	
+	<!-- 영화배우 이름으로 영화 찾기 -->
+	<select id="select_movie_actor">
+		select * from tbl_movie
+		where movie_actor = #{movie_actor}
+	</select>
+	
+	<!-- 영화등급으로 영화 찾기 -->
+	<select id="select_movie_grade">
+		select * from tbl_movie
+		where movie_grade = #{movie_grade}
 	</select>
 	
 </mapper>
