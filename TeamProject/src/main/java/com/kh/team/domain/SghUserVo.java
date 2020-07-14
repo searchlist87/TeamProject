@@ -22,7 +22,6 @@ public class SghUserVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	public SghUserVo(String user_id, String user_pw, String user_name, String user_gender, String user_email,
 			String user_birth, String user_phone, String user_address, int user_total_money, int user_point,
 			String user_sms_check, String user_class, int user_num, Timestamp user_join_date,
@@ -135,7 +134,6 @@ public class SghUserVo {
 	public void setUser_out_check(Timestamp user_out_check) {
 		this.user_out_check = user_out_check;
 	}
-
 	@Override
 	public String toString() {
 		return "SghUserVo [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_gender="
@@ -145,5 +143,4 @@ public class SghUserVo {
 				+ ", user_num=" + user_num + ", user_join_date=" + user_join_date + ", user_out_check=" + user_out_check
 				+ "]";
 	}
-	
 }

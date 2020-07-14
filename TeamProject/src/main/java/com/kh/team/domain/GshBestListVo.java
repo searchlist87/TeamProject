@@ -2,6 +2,7 @@ package com.kh.team.domain;
 
 import java.sql.Timestamp;
 
+// 영화 - 베스트, 신작, 상영작
 public class GshBestListVo {
 	
 	private String movie_code;
