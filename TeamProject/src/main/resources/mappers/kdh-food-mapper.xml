@@ -66,6 +66,11 @@ select *
 from (select rownum rnum, a.*
         from (select * from tbl_food
             order by food_num desc) a)
-where rnum between 1 and 10
+where rnum between #{startRow} and #{endRow}
+</select>
+
+<!-- 상품 총 개수 구하기 -->
+<select id="foodCount" resultType="int">
+select count(*) from tbl_food
 </select>
 </mapper>

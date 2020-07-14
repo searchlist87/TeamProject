@@ -1,8 +1,6 @@
 package com.kh.team.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
@@ -27,11 +24,13 @@ public class KdhController {
 	// 스토어 메인
 	@RequestMapping(value = "/foodView", method = RequestMethod.GET)
 	public String foodView(ModelMap model, KdhPagingDto pagingDto) throws Exception {
-		List<KdhFoodVo> list = foodService.listFood();
 		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
-		model.addAttribute("list", list);
+		List<KdhFoodVo> listPageFoodlist = foodService.listPage(pagingDto);
+		int foodCount = foodService.foodCount();
+		pagingDto.setPageInfo(foodCount);
+		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("listLatestFood", listLatestFood);
-//		model.addAttribute("page", page);
+		model.addAttribute("listPageFoodlist", listPageFoodlist);
 		return "user/kdh/kdh_food/kdh_food-grid";
 	} 
 	

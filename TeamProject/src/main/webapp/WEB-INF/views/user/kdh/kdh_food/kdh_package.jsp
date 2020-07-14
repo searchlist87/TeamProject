@@ -98,21 +98,7 @@
 								<div class="shop-top">
 									<div class="shop-shorter">
 										<div class="single-shorter">
-											<label>Show :</label>
-											<select>
-												<option>09</option>
-												<option selected="selected">15</option>
-												<option>25</option>
-												<option>30</option>
-											</select>
-										</div>
-										<div class="single-shorter">
-											<label>Sort By :</label>
-											<select>
-												<option selected="selected">Name</option>
-												<option>Price</option>
-												<option>Size</option>
-											</select>
+											<h3>패키지</h3>
 										</div>
 									</div>
 									<ul class="view-mode">

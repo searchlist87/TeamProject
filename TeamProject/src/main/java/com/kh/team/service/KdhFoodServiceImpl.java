@@ -61,4 +61,9 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 		return foodDao.listPage(pagingDto);
 	}
 
+	@Override
+	public int foodCount() throws Exception {
+		return foodDao.foodCount();
+	}
+
 }
