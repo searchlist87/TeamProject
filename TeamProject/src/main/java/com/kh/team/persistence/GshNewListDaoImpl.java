@@ -10,16 +10,14 @@ import org.springframework.stereotype.Repository;
 import com.kh.team.domain.GshMovieListVo;
 
 @Repository
-public class GshBestListDaoImpl implements GshBestListDao {
-
+public class GshNewListDaoImpl implements GshNewListDao {
+	
 	private static final String NAMESPACE = "mappers.gsh-movielist-mapper.";
 	
 	@Inject
 	private SqlSession sqlSession;
-	
-	
+
 	@Override
-	// 이름 같아야함
 	public List<GshMovieListVo> select_movie_list() throws Exception {
 		return sqlSession.selectList(NAMESPACE + "select_movie_list");
 	}

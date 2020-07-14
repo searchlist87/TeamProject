@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.kh.team.domain.GshMovieListVo;
 
-// 베스트 영화
-public interface GshBestListDao {
+// 최신 영화
+public interface GshNewListDao {
 	
 	public List<GshMovieListVo> select_movie_list() throws Exception;
 
