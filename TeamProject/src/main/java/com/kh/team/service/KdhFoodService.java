@@ -33,4 +33,7 @@ public interface KdhFoodService {
 	
 	// 상품 페이징
 	public List<KdhFoodVo> listPage(KdhPagingDto pagingDto) throws Exception;
+	
+	// 상품 총 개수 구하기
+	public int foodCount() throws Exception;
 }
