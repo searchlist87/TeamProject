@@ -89,5 +89,13 @@ public class GshBestListVo {
 	public void setMovie_num(int movie_num) {
 		this.movie_num = movie_num;
 	}
+	@Override
+	public String toString() {
+		return "GshBestListVo [movie_code=" + movie_code + ", movie_name=" + movie_name + ", movie_genre=" + movie_genre
+				+ ", movie_director=" + movie_director + ", movie_actor=" + movie_actor + ", movie_open_date="
+				+ movie_open_date + ", movie_total_time=" + movie_total_time + ", movie_main_image=" + movie_main_image
+				+ ", movie_regist_date=" + movie_regist_date + ", movie_grade=" + movie_grade + ", movie_preview="
+				+ movie_preview + ", movie_num=" + movie_num + "]";
+	}
 	
 }

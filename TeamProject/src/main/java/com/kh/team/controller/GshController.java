@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.domain.GshBestListVo;
 import com.kh.team.domain.GshReviewVo;
+import com.kh.team.service.GshBestListService;
 import com.kh.team.service.GshReviewService;
 
 @Controller
@@ -22,6 +23,9 @@ public class GshController {
 	
 	@Inject
 	private GshReviewService gshReviewService;
+	
+	@Inject
+	private GshBestListService gshBestListService;
 	
 	// 리뷰 목록
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
@@ -62,8 +66,9 @@ public class GshController {
 	// 베스트 리스트
 	@RequestMapping(value = "/bestList", method = RequestMethod.GET)
 	public String bestList(Model model) throws Exception {
-		List<GshBestListVo> best = new ArrayList<GshBestListVo>();
-		model.addAttribute("best", best);
+		List<GshBestListVo> list = gshBestListService.select_movie_list();
+		System.out.println(list);
+		model.addAttribute("list", list);
 		return "user/gsh/movie/bestList";
 	}
 	

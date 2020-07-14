@@ -20,38 +20,28 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-8 text-center">
-				<h1>영화 카테고리</h1>
-				<div style="text-align: center;">
+			<div class="col-md-8" style="text-align: center">
+				<h1>베스트</h1>
+				<div>
 					<input type="text" name="textfield" size="60" />
 					<button class="btn" type="submit">검색</button>
 					
-					<!-- 영화 영역 -->
-					
-				<c:forEach items="${best}" var="vo">
-				
-					<div class="col-lg-4 col-md-6 col-12">
-						<div class="single-product">
-							<div class="product-img">
-								<!-- 클릭 시 이동하는 페이지 -->
-								<a href="/resources/images/gsh/movie01.jpg">
-								<!-- 이미지 교체시 아래 경로만 바꾸면 됨 -->
-									<img class="default-img"
-									src="/resources/images/gsh/movie01.jpg" alt="#"></a>
-							</div>
-							<div class="product-content">
-								<!-- 영화 이름 -->
-								<h3><a href="product-details.html">${vo.movie_name}</a></h3>
-								<div class="product-price">
-								<!-- 영화 등급 -->
-									<span>${vo.movie_name}</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</c:forEach>
-					<!-- 영화 영역 -->
+<!-- 영화 영역 시작-->
+	<div class="col-md-8">
+			
+		<div class="row" style="float: center;">
+			<c:forEach items="${list}" var="vo">
+				<div class="col-md-4">
+					<a href="/resources/images/gsh/movie01.jpg">
+						<h3>
+							<span><img src="/resources/images/gsh/movie01.jpg">${vo.movie_name}</span>
+						</h3>
+					</a>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
+<!-- 영화 영역 끝-->
 
 				</div>
 			</div>
@@ -69,15 +59,11 @@
 			<div class="row">
 				<div class="col-12"></div>
 			</div>
-			<div class="row">
-
-
-
-			</div>
+			<div class="row"></div>
 		</div>
 	</section>
 	<!--/ End Product Style 1  -->
-
+	
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
 		<div class="modal-dialog" role="document">
