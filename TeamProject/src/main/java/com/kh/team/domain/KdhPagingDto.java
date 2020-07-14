@@ -1,14 +1,75 @@
 package com.kh.team.domain;
 
 public class KdhPagingDto {
-	private int page = 1;
-	private int perPage = 9;
-	private int startRow = 1;
-	private int endRow = 10;
+	private int page = 1; // 현재 페이지 수
+	private int perPage = 9; // 몇개씩 나올건지
+	private int startRow = 1; // 시작ㄱ ㅔ시글 수
+	private int endRow = 9; // 끝 게시글 수
+	private int totalCount; // 총 게시글 수
+	private int startPage = 1; // 시작 페이지 수
+	private int endPage; // 끝 페이지 수
+	private int totalPage; // 총 페이지 수 
+	private int DisplayPageNum = 10; // 보여질 페이지 수
+	
+	public int getTotalPage() {
+		return totalPage;
+	}
 
-	public void setPageInfo() {
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
+		
+	}
+
+	public int getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+		this.totalPage = (int) Math.ceil((double) totalCount/perPage);
+		
+		if(endPage > totalPage) {
+			endPage = totalPage;
+		}
+	}
+
+	public int getStartPage() {
+		return startPage;
+	}
+
+	public void setStartPage(int startPage) {
+		this.startPage = startPage;
+	}
+
+	public int getEndPage() {
+		return endPage;
+	}
+
+	public void setEndPage(int endPage) {
+		this.endPage = endPage;
+	}
+
+	public int getDisplayPageNum() {
+		return DisplayPageNum;
+	}
+
+	public void setDisplayPageNum(int displayPageNum) {
+		DisplayPageNum = displayPageNum;
+	}
+
+	public void setPageInfo(int totalCount) {
 		this.endRow = page * perPage;
 		this.startRow = this.endRow - this.perPage + 1;
+//		1 5  2 9
+		this.endPage = (int)(Math.ceil((double) page/perPage) * perPage);
+		this.startPage = (this.endPage - perPage) + 1;
+		
+		this.totalCount = totalCount;
+		this.totalPage = (int) Math.ceil((double) totalCount/perPage);
+		
+		if(endPage > totalPage) {
+			endPage = totalPage;
+		}
 	}
 
 	public int getPage() {
@@ -51,8 +112,8 @@ public class KdhPagingDto {
 	@Override
 	public String toString() {
 		return "KdhPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow=" + endRow
-				+ "]";
+				+ ", totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage="
+				+ totalPage + ", DisplayPageNum=" + DisplayPageNum + "]";
 	}
 
-	
 }

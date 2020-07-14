@@ -41,6 +41,14 @@ $(function() {
 // 		location.href = "/kdh/food/foodView?page=${page.page}&perPage=${page.perPage}";
 		
 	});
+	
+	$("a.page-link").click(function(e) {
+		e.preventDefault();
+		var page = $(this).attr("href");
+		console.log("page:" + page);
+		
+		location.href = "/kdh/food/foodView?page=" + page;
+	});
 });
 </script>
 </head>
@@ -95,43 +103,6 @@ $(function() {
 										</div>
 									</div>
 									</c:forEach>
-									<!-- End Single Post -->
-<!-- 									Single Post -->
-<!-- 									<div class="single-post first"> -->
-<!-- 										<div class="image"> -->
-<!-- 											<img src="https://via.placeholder.com/75x75" alt="#"> -->
-<!-- 										</div> -->
-<!-- 										<div class="content"> -->
-<!-- 											<h5><a href="#">복숭아 아이스티</a></h5> -->
-<!-- 											<p class="price">3,000원</p> -->
-<!-- 											<ul class="reviews"> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 												<li><i class="ti-star"></i></li> -->
-<!-- 											</ul> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									End Single Post -->
-<!-- 									Single Post -->
-<!-- 									<div class="single-post first"> -->
-<!-- 										<div class="image"> -->
-<!-- 											<img src="https://via.placeholder.com/75x75" alt="#"> -->
-<!-- 										</div> -->
-<!-- 										<div class="content"> -->
-<!-- 											<h5><a href="#">레몬 아이스티</a></h5> -->
-<!-- 											<p class="price">3,500원</p> -->
-<!-- 											<ul class="reviews"> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 												<li class="yellow"><i class="ti-star"></i></li> -->
-<!-- 											</ul> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									End Single Post -->
 								</div>
 								<!--/ End Single Widget -->
 								
@@ -144,20 +115,7 @@ $(function() {
 								<div class="shop-top">
 									<div class="shop-shorter">
 										<div class="single-shorter">
-											<label>보기 :</label>
-											<select name="perPage">
-											<c:forEach begin="3" end="6" step="1" var="i">
-												<option value="${i}">${i}줄씩 보기</option>
-											</c:forEach>
-											</select>
-										</div>
-										<div class="single-shorter">
-											<label>Sort By :</label>
-											<select>
-												<option selected="selected">Name</option>
-												<option>Price</option>
-												<option>Size</option>
-											</select>
+											<h3>전체</h3>
 										</div>
 									</div>
 									<ul class="view-mode">
@@ -169,8 +127,7 @@ $(function() {
 							</div>
 						</div>
 						<div class="row">
-						
-						<c:forEach items="${list}" var="foodVo">
+						<c:forEach items="${listPageFoodlist}" var="foodVo">
 							<div class="col-lg-4 col-md-6 col-12">
 								<div class="single-product">
 									<div class="product-img">
@@ -188,183 +145,6 @@ $(function() {
 								</div>
 							</div>
 						</c:forEach>
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/garicPopCon"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/갈릭.jpg" style="height:300px" alt="갈릭 팝콘"> -->
-<!-- 											<span class="new">New</span> -->
-<!-- 										</a> -->
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/garicPopCon">갈릭 팝콘</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>6,000원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/basicPopCon"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/베이직.jpg" style="height:300px" alt="기본 팝콘"> -->
-<!-- 										</a> -->
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="product-details.html">베이직 팝콘</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>5,000원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/cola"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/콜라컵.jpg" style="height:300px" alt="콜라 이미지"> -->
-<!-- 											<span class="out-of-stock">Hot</span> -->
-<!-- 										</a> -->
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/cola">콜라(L)</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>3,000원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/saida"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/콜라컵.jpg" style="height:300px" alt="사이다 이미지"> -->
-<!-- 										</a> -->
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/saida">사이다</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>3,000원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/peachIcedtea"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/복숭아.jpg" style="height:300px" alt="복숭아 아이스티 이미지"> -->
-<!-- 											<span class="new">New</span> -->
-<!-- 										</a> -->
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/peachIcedtea">복숭아 아이스티</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>4,000원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/lemonIcedtea"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/레몬.png" style="height:300px" alt="레몬 아이스티 이미지"> -->
-<!-- 											<span class="new">New</span> -->
-<!-- 										</a> -->
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/lemonIcedtea">레몬 아이스티</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>4,000원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/hotDog"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/핫도그.jpg" style="height:300px" alt="핫도그 이미지"> -->
-<!-- 										</a> -->
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/hotDog">핫도그</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>3,500원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/nacho"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/나초.png" style="height:300px" alt="#"> -->
-<!-- 											<span class="new">New</span> -->
-<!-- 										</a> -->
-										
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/nacho">나초</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>3,500원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/nacho2"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/나초.png" style="height:300px" alt="#"> -->
-<!-- 											<span class="new">New</span> -->
-<!-- 										</a> -->
-										
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/nacho2">나초2</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>3,500원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/nacho3"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/나초.png" style="height:300px" alt="#"> -->
-<!-- 											<span class="new">New</span> -->
-<!-- 										</a> -->
-										
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/nacho3">나초3</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>3,500원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-4 col-md-6 col-12"> -->
-<!-- 								<div class="single-product"> -->
-<!-- 									<div class="product-img"> -->
-<!-- 										<a href="/kdh/food/nacho4"> -->
-<!-- 											<img class="default-img" src="/resources/images/kdh/나초.png" style="height:300px" alt="#"> -->
-<!-- 											<span class="new">New</span> -->
-<!-- 										</a> -->
-										
-<!-- 									</div> -->
-<!-- 									<div class="product-content"> -->
-<!-- 										<h3><a href="/kdh/food/nacho4">나초4</a></h3> -->
-<!-- 										<div class="product-price"> -->
-<!-- 											<span>3,500원</span> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
 							
 						</div>
 					</div>
@@ -489,31 +269,39 @@ $(function() {
 			<!-- Modal end -->
 		
 <!-- 페이징 -->
-<div class="row">
-	<div class="col-md-2"></div>
-		<div class="col-md-8 text-center">
-			<nav>
-				<ul class="pagination text-center">
+<div class="row"  style="text-align:center;">
+	<div class="col-md-4"></div>
+		<div class="col-md-8 text-center" style="text-align:center;">
+			<nav style="text-align:center;">
+				<ul class="pagination text-center" style="text-align:center;">
+				
+				<!-- 이전 버튼 -->
+				<c:if test ="${pagingDto.startPage != 1}">
+					<li class="page-item" style="width:60px;"  style="float:left;">
+				    	<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
+					</li>
+				</c:if>
+
+			 	<!-- 페이징 넘버링 -->
+			 	<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+				    <li id="pageNumber" class="page-item"  style="width:30px; float:left;">
+				    	<a class="page-link" href="${v}">${v}</a>
+				    </li>
+				</c:forEach>    	
+				
+				<!-- 다음 버튼 -->
+				  <c:if test="${pagingDto.endPage < pagingDto.totalPage}">
 				    <li class="page-item" style="width:60px; float:left;">
-				    	<a class="page-link" href="">이전</a>
+				    	<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
 				    </li>
-				    <li class="page-item" style="width:30px; float:left;" >
-				    	<a class="page-link" href="">1</a>
-				    </li>
-				    <li class="page-item" style="width:30px; float:left;">
-				    	<a class="page-link" href="">2</a>
-				    </li>
-				     <li class="page-item" style="width:30px; float:left;">
-				    	<a class="page-link" href="">3</a>
-				    </li>
-				    <li class="page-item" style="width:60px; float:left;">
-				    	<a class="page-link" href="">다음</a>
-				    </li>
+				   </c:if>
 				</ul>
 			</nav>
 		</div>
-	<div class="col-md-2" style="margin-bottom: 30px;"></div>
+	<div class="col-md-4"></div>
+	<div class="col-md-12" style="margin-bottom: 100px;"></div>	
 </div>
+<!-- /페이징 -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

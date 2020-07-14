@@ -27,28 +27,18 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	}
 
 	@Override
-	public void insertFood(KdhFoodVo foodVo) throws Exception {
-		foodDao.insertFood(foodVo);
+	public List<KdhFoodVo> listFoodCode100(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.listFoodCode100(pagingDto);
 	}
 
 	@Override
-	public void updateFood(KdhFoodVo foodVo) throws Exception {
-		foodDao.updateFood(foodVo);
+	public List<KdhFoodVo> listFoodCode200(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.listFoodCode200(pagingDto);
 	}
 
 	@Override
-	public List<KdhFoodVo> listFoodCode100() throws Exception {
-		return foodDao.listFoodCode100();
-	}
-
-	@Override
-	public List<KdhFoodVo> listFoodCode200() throws Exception {
-		return foodDao.listFoodCode200();
-	}
-
-	@Override
-	public List<KdhFoodVo> listFoodCode300() throws Exception {
-		return foodDao.listFoodCode300();
+	public List<KdhFoodVo> listFoodCode300(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.listFoodCode300(pagingDto);
 	}
 
 	@Override
@@ -59,6 +49,26 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	@Override
 	public List<KdhFoodVo> listPage(KdhPagingDto pagingDto) throws Exception {
 		return foodDao.listPage(pagingDto);
+	}
+
+	@Override
+	public int foodCount() throws Exception {
+		return foodDao.foodCount();
+	}
+
+	@Override
+	public int CountFoodCode100() throws Exception {
+		return foodDao.CountFoodCode100();
+	}
+
+	@Override
+	public int CountFoodCode200() throws Exception {
+		return foodDao.CountFoodCode200();
+	}
+
+	@Override
+	public int CountFoodCode300() throws Exception {
+		return foodDao.CountFoodCode300();
 	}
 
 }
