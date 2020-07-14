@@ -28,6 +28,8 @@
 				</div>
 			<div class="col-md-2"></div>
 		</div>
+	</div>
+</div>
 <!-- 영화 영역 시작-->
 	<div class="row">
 		<div class="col-md-2"></div>

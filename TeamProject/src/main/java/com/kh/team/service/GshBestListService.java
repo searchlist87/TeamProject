@@ -2,10 +2,10 @@ package com.kh.team.service;
 
 import java.util.List;
 
-import com.kh.team.domain.GshBestListVo;
+import com.kh.team.domain.GshMovieListVo;
 
 public interface GshBestListService {
 	
-	public List<GshBestListVo> select_movie_list() throws Exception;
+	public List<GshMovieListVo> select_movie_list() throws Exception;
 
 }
