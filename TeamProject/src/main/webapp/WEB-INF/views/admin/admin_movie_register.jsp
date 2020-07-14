@@ -3,7 +3,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
+<meta charset="utf-8">
 <!-- tag_and_styleSheet 인크루드 -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
 </head>
@@ -22,26 +24,82 @@
 	.movie_grade_span {
 		margin-left:10px;
 	}
+	
+	#fileLabel {
+		width:80px;
+		height:30px;
+		border:1px solid #767676;
+		border-top-right-radius:3px;
+		border-top-left-radius:3px;
+		border-bottom-left-radius:3px;
+		border-bottom-right-radius:3px;
+		text-align:center;
+		background-color:#efefef;
+		padding-top:2px;
+	}
+	
+	
+	
+
+
 </style>
 <script>
 $(function () {
 	$("#movie_manage > dd").css("display","block");
 	$("#movie_manage > dt").css("color","red");
 	$("#movie_manage > dd").eq(1).css("color","blue");
-	
-	
-	
 });
 
 // 파일 데이터 미리보기 - 1개
 function loadImage(value) {
-	if(value.files && value.files[0]) {
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			$("#main_image_div").attr("src", e.target.result);
+	$("#movie_main_image").prop("disabled","true");
+ 	// 파일 추가하기
+	var file = value.files[0];
+	
+	var formData = new FormData(); // <form> 작성
+	formData.append("file", file); // <input type="file"> : 파일 선택
+	var url = "/upload/uploadAjax";
+	$.ajax({
+		"processData" : false,  // text 파일
+		"contentType" : false,	// text 파일
+		"type" : "post",
+		"url" : url,
+		"data" : formData,
+		"success" : function(rData) {
+			console.log(rData);
+			var slashIndex = rData.lastIndexOf("/");
+			var front = rData.substring(0, slashIndex + 1);
+			var rear = rData.substring(slashIndex + 1);
+			var thumbnailName = front + "sm_" + rear;
+			var html = "<div data-fileName='" + rData + "'>";
+			html += "<img src='/upload/displayFile?fileName=" + thumbnailName + "'/><br/>";
+			html += "<a href='"+rData+"' class='attach-del'><span class='pull-right'>x</span></a>";
+			html += "</div>";
+			
+			console.log(html);
+			
+			$("#main_image_div").append(html);
 		}
-		reader.readAsDataURL(value.files[0]);
-	}
+	});
+	
+	// 이미지 지우기
+	$("#registForm").on("click", ".attach-del", function(e) {
+		e.preventDefault();
+		var removeDiv = $(this).parent();
+		var fileName = $(this).attr("href");
+		var url = "/upload/deleteFile";
+		var sendData = {"fileName" : fileName};
+		$.ajax({
+			"type" : "get",
+			"url" : url,
+			"data" : sendData,
+			"success" : function(rData) {
+				$("#movie_main_image").val("");
+				removeDiv.remove();
+				$("#movie_main_image").removeAttr("disabled");
+			}
+		});
+	});
 }
 
 //파일 데이터 미리보기 - 여러개
@@ -49,23 +107,65 @@ function loadSubImage(value) {
 	$("#movie_sub_image_div > img").remove();
 	var files = value.files;
 	var filesArr = Array.prototype.slice.call(files);
+	var fileIndex = 0;
+	var length = filesArr.length;
 	
 	filesArr.forEach(function(f) { 
 		
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			var img_html = "<img src=\"" + e.target.result + "\" />";
-			$("#movie_sub_image_div").append(img_html);
-		}
-		reader.readAsDataURL(f);
-		
+		// 파일 추가하기
+		var file = value.files[fileIndex];
+		fileIndex ++;
+		var formData = new FormData(); // <form> 작성
+		formData.append("file", file); // <input type="file"> : 파일 선택
+		var url = "/upload/uploadAjax";
+		$.ajax({
+			"processData" : false,  // text 파일
+			"contentType" : false,	// text 파일
+			"type" : "post",
+			"url" : url,
+			"data" : formData,
+			"success" : function(rData) {
+				var slashIndex = rData.lastIndexOf("/");
+				var front = rData.substring(0, slashIndex + 1);
+				var rear = rData.substring(slashIndex + 1);
+				var originalFilename = rData.substring(rData.lastIndexOf("-")+1);
+				var thumbnailName = front + "sm_" + rear;
+				var html = "<div data-fileName='" + rData + "'>";
+				html += "<img src='/upload/displayFile?fileName=" + thumbnailName + "'/><br/>";
+				html += "<span>"+originalFilename+"</span>";
+				html += "<a href='"+rData+"' class='attach-del'><span class='pull-right'>x</span></a>";
+				html += "</div>";
+				$("#movie_sub_image_div").append(html);
+			}
+		});	
+		$("#movie_sub_image_text").text("파일있음");
+		var tempLength = 0;
+		// 이미지 지우기
+		$("#registForm").on("click", ".attach-del", function(e) {
+			tempLength ++;
+			e.preventDefault();
+			var removeDiv = $(this).parent();
+			var fileName = $(this).attr("href");
+			var url = "/upload/deleteFile";
+			var sendData = {"fileName" : fileName};
+			$.ajax({
+				"type" : "get",
+				"url" : url,
+				"data" : sendData,
+				"success" : function(rData) {
+					var check = length-tempLength;
+					if(check == 0) {
+						tempLength = 0;
+						length = 0;
+					}
+					
+					removeDiv.remove();
+				}
+			});
+		});
 	});
-		
 	
 }
-
-
-
 
 </script>
 <body class="js">
@@ -84,7 +184,7 @@ function loadSubImage(value) {
 									<h4 class="title" >영화관리_영화등록</h4>
 								</div>	
 								<!--  페이지별 내용 -->
-								<form role="form" action="/admin/admin_movie_register" method="post">
+								<form role="form" action="/admin/admin_movie_register" method="post" id="registForm">
 									<div class="form-group">
 										<label for="movie_name">영화이름</label>
 										<input type=text class="form-control" id="movie_name" name="movie_name"  />
@@ -119,21 +219,21 @@ function loadSubImage(value) {
 									<div class="form-group">
 										<label for="movie_main_image" style="margin-right:10px;">영화 메인이미지 : </label>
 										<input type="file" class="movie_main_image" id="movie_main_image" onchange="loadImage(this);"/>
-										<div>
-											<img src="" id="main_image_div"/>
-										</div>
+										<div id="main_image_div"></div>
 									</div>
 									<div class="form-group">
 										<label for="movie_sub_image" style="margin-right:10px;">영화 상세사진 : </label>
-										<input type="file" class="movie_sub_image" id="movie_sub_image" multiple onchange="loadSubImage(this);"/>
-										<div id="movie_sub_image_div">
-										</div>
+										<input type="file" class="movie_sub_image" id="movie_sub_image" multiple onchange="loadSubImage(this);" style="display:none;" accept-charset="UTF-8"/>
+										<label for="movie_sub_image" id="fileLabel" >파일 선택</label>
+										<span id="movie_sub_image_text">선택된 파일 없음</span>
+										<div id="movie_sub_image_div"></div>
 									</div>
+									<br/>
 									<div class="form-group">
 										<label for="movie_preview" style="margin-right:10px;">영화 예고편 : </label>
 										<input type="file" class="movie_preview" id="movie_preview" />
 									</div>
-									<button type="submit" class="btn btn-primary">등록</button>
+									<button type="submit" class="btn btn-primary" id="btnSubmit">등록</button>
 								</form>
 							</div>
 						</div>

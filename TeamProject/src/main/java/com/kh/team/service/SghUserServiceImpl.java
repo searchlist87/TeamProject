@@ -1,9 +1,12 @@
 package com.kh.team.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.team.domain.SghFindDto;
 import com.kh.team.domain.SghLoginDto;
 import com.kh.team.domain.SghUserVo;
 import com.kh.team.persistence.SghUserDao;
@@ -27,6 +30,21 @@ public class SghUserServiceImpl implements SghUserService {
 	@Override
 	public int userIdDupCheck(String user_id) throws Exception {
 		return sghUserDao.userIdDupCheckSelect(user_id);
+	}
+
+	@Override
+	public List<SghFindDto> userFindId(SghFindDto sghFindDto) throws Exception {
+		return sghUserDao.userFindIdSelect(sghFindDto);
+	}
+
+	@Override
+	public void userChengePw(String user_id, String user_pw) throws Exception {
+		sghUserDao.userChengePwUpdate(user_id, user_pw);
+	}
+
+	@Override
+	public SghFindDto userPwSelect(String user_id) throws Exception {
+		return sghUserDao.userPwSelect(user_id);
 	}
 
 }
