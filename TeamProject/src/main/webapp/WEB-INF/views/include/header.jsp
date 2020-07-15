@@ -157,31 +157,31 @@
 									<div class="nav-inner">
 										<ul class="nav main-menu menu navbar-nav">
 										<!-- 화면 위쪽에 나오는 Bar -->
-											<li><a href="/team/shop-grid" class="titlePadding">영화</a>
-												<ul class="dropdown">
-													<li><a href="/gsh/movie/bestList">베스트</a></li>
-													<li><a href="/gsh/movie/newList">신작</a></li>
-													<li><a href="/gsh/movie/onairList">상영작</a></li>
-													<li><a href="/gsh/movie/reviewList">리뷰</a></li>
-												</ul>
+											<li><a href="/team/movieView" class="titlePadding">영화</a>
+<!-- 												<ul class="dropdown"> -->
+<!-- 													<li><a href="/gsh/movie/bestList">베스트</a></li> -->
+<!-- 													<li><a href="/gsh/movie/newList">신작</a></li> -->
+<!-- 													<li><a href="/gsh/movie/onairList">상영작</a></li> -->
+<!-- 												</ul> -->
 											</li>
 											<li><a href="/team/bookingView" class="titlePadding">예매</a>
-												<ul class="dropdown">
-													<li><a href="blog-single-sidebar.html">예매하기</a></li>
-													<li><a href="blog-single-sidebar.html">상영 시간표</a></li>
-												</ul>
+<!-- 												<ul class="dropdown"> -->
+<!-- 													<li><a href="blog-single-sidebar.html">예매하기</a></li> -->
+<!-- 													<li><a href="blog-single-sidebar.html">상영 시간표</a></li> -->
+<!-- 												</ul> -->
 											</li>
 											<li><a href="/team/theaterView" class="titlePadding">영화관</a>
-												<ul class="dropdown">
-													<li><a href="/team/theaterView">서울</a></li>
-													<li><a href="/team/theaterView">울산</a></li>
-												</ul>
+<!-- 												<ul class="dropdown"> -->
+<!-- 													<li><a href="/team/theaterView">서울</a></li> -->
+<!-- 													<li><a href="/team/theaterView">울산</a></li> -->
+<!-- 												</ul> -->
 											</li>
 											<li><a href="/team/contact" class="titlePadding">이벤트</a>
-												<ul class="dropdown">
-													<li><a href="blog-single-sidebar.html">진행 이벤트</a></li>
-													<li><a href="blog-single-sidebar.html">종료 이벤트</a></li>
-												</ul></li>
+<!-- 												<ul class="dropdown"> -->
+<!-- 													<li><a href="blog-single-sidebar.html">진행 이벤트</a></li> -->
+<!-- 													<li><a href="blog-single-sidebar.html">종료 이벤트</a></li> -->
+<!-- 												</ul> -->
+											</li>
 											<li><a href="/team/foodView" class="titlePadding">스토어</a>
 <!-- 											<span class="new">New</span> -->
 										

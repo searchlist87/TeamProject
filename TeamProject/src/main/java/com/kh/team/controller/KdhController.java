@@ -7,8 +7,12 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
@@ -52,13 +56,9 @@ public class KdhController {
 	@RequestMapping(value = "/snack", method = RequestMethod.GET)
 	public String listFoodCode100(ModelMap model, KdhPagingDto pagingDto) throws Exception {
 		List<KdhFoodVo> list = foodService.listFoodCode100(pagingDto);
-		System.out.println("list:" + list);
 		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
-		System.out.println("listLatestFood:" + listLatestFood);
 		int foodCount = foodService.CountFoodCode100();
-		System.out.println("foodCount:" + foodCount);
 		pagingDto.setPageInfo(foodCount);
-		System.out.println("pagingDto:" + pagingDto);
 		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("list", list);
 		model.addAttribute("listLatestFood", listLatestFood);
@@ -91,4 +91,8 @@ public class KdhController {
 		return "user/kdh/kdh_food/kdh_package";
 	}
 	
+	@RequestMapping(value = "/cart", method = RequestMethod.GET)
+	public String cart(int food_num, int food_price, int food_buy_count) throws Exception {
+		return "user/kdh/kdh_food/kdh_cart";
+	}
 }
