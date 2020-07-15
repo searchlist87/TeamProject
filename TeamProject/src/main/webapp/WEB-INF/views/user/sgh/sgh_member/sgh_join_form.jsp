@@ -11,9 +11,7 @@
 <!-- 주소 창에서 주소 받을때 지정하기 -->
 function jusoCallBack(roadFullAddr){
 	$("#user_address").val(roadFullAddr);
-	console.log("roadFullAddr : " + roadFullAddr);
 	var address = $("#user_address").val();
-	console.log("address :" + address);
 }
 
 $(function() {
