@@ -12,7 +12,7 @@ import org.springframework.util.FileCopyUtils;
 
 public class JmhFileUploadUtil {
 
-	
+	// 파일 업로드
 	public static String uploadFile(String JmhUploadPath, String originalName, byte[] fileData) throws Exception {
 		UUID uuid = UUID.randomUUID();
 		String datePath = calcPath(JmhUploadPath);
@@ -69,5 +69,16 @@ public class JmhFileUploadUtil {
 			return true;
 		}
 		return false;
+	}
+	
+	// 동영상 올리기
+	public static String uploadPreviewFile(String JmhUploadPath, String originalName, byte[] fileData) throws Exception {
+		UUID uuid = UUID.randomUUID();
+		String datePath = calcPath(JmhUploadPath);
+		String dirPath = datePath + File.separator + uuid + "-" + originalName;
+		String filePath = JmhUploadPath + File.separator + dirPath;
+		File target = new File(filePath);
+		FileCopyUtils.copy(fileData, target);
+		return dirPath;
 	}
 }

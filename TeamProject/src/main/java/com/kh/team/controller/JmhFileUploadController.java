@@ -27,7 +27,6 @@ public class JmhFileUploadController {
 	public String fileUpload(MultipartFile file) throws Exception {
 		String JmhUploadPath = uploadPath + "/jeon_upload";
 		String oFileName = file.getOriginalFilename();
-		System.out.println("oFileName " + oFileName);
 		String dirPath = JmhFileUploadUtil.uploadFile(JmhUploadPath, oFileName, file.getBytes());
 		return dirPath.replace("\\","/");
 	}
@@ -65,4 +64,15 @@ public class JmhFileUploadController {
 		}
 		return "success";
 	}
+	
+	// 동영상 올리기
+	@RequestMapping(value = "/previewUploadAjax", method = RequestMethod.POST, produces = {"text/plain;charset=UTF-8"})
+	public String previewUpload(MultipartFile file) throws Exception {
+		String JmhUploadPath = uploadPath + "/jeon_upload";
+		String oFileName = file.getOriginalFilename();
+		String dirPath = JmhFileUploadUtil.uploadPreviewFile(JmhUploadPath, oFileName, file.getBytes());
+		return dirPath.replace("\\","/");
+	}
+	
+	
 }

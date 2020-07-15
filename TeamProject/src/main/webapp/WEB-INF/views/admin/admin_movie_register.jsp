@@ -25,7 +25,7 @@
 		margin-left:10px;
 	}
 	
-	#fileLabel {
+	.fileLabel {
 		width:80px;
 		height:30px;
 		border:1px solid #767676;
@@ -37,10 +37,6 @@
 		background-color:#efefef;
 		padding-top:2px;
 	}
-	
-	
-	
-
 
 </style>
 <script>
@@ -48,6 +44,39 @@ $(function () {
 	$("#movie_manage > dd").css("display","block");
 	$("#movie_manage > dt").css("color","red");
 	$("#movie_manage > dd").eq(1).css("color","blue");
+	
+	
+	$("#registForm").submit(function () {
+		// 개봉일 형식 확인(2020-07-07)
+		var movie_open_date = $("#movie_open_date").val();
+		var date_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; 
+		if(!date_pattern.test(movie_open_date)) {
+			$("#movie_open_date").parent().find("span").remove();
+			html = "<span style='color:red;'>개봉일 형식을 확인해주세요.</span>";
+			$("#movie_open_date").parent().append(html);
+			return false;
+		}
+		$("#movie_open_date").parent().find("span").remove();
+		
+		// 총시간(0~999)
+		var movie_total_time = $("#movie_total_time").val();
+		console.log(movie_total_time);
+		if (movie_total_time < 0 || movie_total_time > 999) {
+			$("#movie_total_time").parent().find("span").remove();
+			html = "<span style='color:red;'>총시간을 확인해주세요.</span>";
+			$("#movie_total_time").parent().append(html);
+			return false;
+		} 
+		$("#movie_total_time").parent().find("span").remove();
+		return false;
+	});
+	
+	
+	
+	
+	
+	
+	
 });
 
 // 파일 데이터 미리보기 - 1개
@@ -55,7 +84,6 @@ function loadImage(value) {
 	$("#movie_main_image").prop("disabled","true");
  	// 파일 추가하기
 	var file = value.files[0];
-	
 	var formData = new FormData(); // <form> 작성
 	formData.append("file", file); // <input type="file"> : 파일 선택
 	var url = "/upload/uploadAjax";
@@ -72,11 +100,9 @@ function loadImage(value) {
 			var rear = rData.substring(slashIndex + 1);
 			var thumbnailName = front + "sm_" + rear;
 			var html = "<div data-fileName='" + rData + "'>";
-			html += "<img src='/upload/displayFile?fileName=" + thumbnailName + "'/><br/>";
-			html += "<a href='"+rData+"' class='attach-del'><span class='pull-right'>x</span></a>";
+			html += "<img src='/upload/displayFile?fileName=" + thumbnailName + "'/>";
+			html += "<a href='"+rData+"' class='attach-del'><span class='pull-right' style='color:red;'>[삭제]</span></a>";
 			html += "</div>";
-			
-			console.log(html);
 			
 			$("#main_image_div").append(html);
 		}
@@ -102,13 +128,17 @@ function loadImage(value) {
 	});
 }
 
+var tempLength = 0;
+var rearLength = 0;
 //파일 데이터 미리보기 - 여러개
 function loadSubImage(value) {
+	
 	$("#movie_sub_image_div > img").remove();
 	var files = value.files;
 	var filesArr = Array.prototype.slice.call(files);
 	var fileIndex = 0;
 	var length = filesArr.length;
+	rearLength += length;
 	
 	filesArr.forEach(function(f) { 
 		
@@ -133,40 +163,97 @@ function loadSubImage(value) {
 				var html = "<div data-fileName='" + rData + "'>";
 				html += "<img src='/upload/displayFile?fileName=" + thumbnailName + "'/><br/>";
 				html += "<span>"+originalFilename+"</span>";
-				html += "<a href='"+rData+"' class='attach-del'><span class='pull-right'>x</span></a>";
+				html += "<a href='"+rData+"' class='attach-del'><span class='pull-right' style='color:red;'>[삭제]</span></a>";
 				html += "</div>";
 				$("#movie_sub_image_div").append(html);
 			}
 		});	
-		$("#movie_sub_image_text").text("파일있음");
-		var tempLength = 0;
-		// 이미지 지우기
-		$("#registForm").on("click", ".attach-del", function(e) {
-			tempLength ++;
-			e.preventDefault();
-			var removeDiv = $(this).parent();
-			var fileName = $(this).attr("href");
-			var url = "/upload/deleteFile";
-			var sendData = {"fileName" : fileName};
-			$.ajax({
-				"type" : "get",
-				"url" : url,
-				"data" : sendData,
-				"success" : function(rData) {
-					var check = length-tempLength;
-					if(check == 0) {
-						tempLength = 0;
-						length = 0;
-					}
-					
-					removeDiv.remove();
-				}
-			});
+		
+		$("#movie_sub_image_text").text("파일 " + (rearLength+tempLength) + "개");
+		
+	});
+	// 이미지 지우기
+	$("#registForm").on("click", ".attach-del", function(e) {
+		tempLength = -1;
+		e.preventDefault();
+		var removeDiv = $(this).parent();
+		var fileName = $(this).attr("href");
+		var url = "/upload/deleteFile";
+		var sendData = {"fileName" : fileName};
+		$.ajax({
+			"type" : "get",
+			"url" : url,
+			"data" : sendData,
+			"success" : function(rData) {
+				var check = rearLength+tempLength;
+				rearLength = check;
+				tempLength = 0;
+				$("#movie_sub_image_text").text("파일 " + check + "개");
+				removeDiv.remove();
+			}
+		});
+	});
+}
+
+// 예고편 동영상 올리기
+function previewUpload(value) {
+	$("#movie_preview").prop("disabled","true");
+	$("#tempDiv").remove();
+	var file = value.files[0];
+	var fileSize = Math.floor(file.size/(1024*1024));
+	console.log("fileSize:" + fileSize + "MB");
+	
+	if(fileSize > 10) {
+		console.log("사이즈오류");
+		
+		var html = "<div id='tempDiv'>";
+		html += "<span style='color:red;'>파일사이즈가 맞지않습니다.</span>";
+		html += "</div>";
+		$("#movie_preview_text").append(html);
+		$("#movie_preview").removeAttr("disabled");
+		return false;
+	}
+	var formData = new FormData(); // <form> 작성
+	formData.append("file", file); // <input type="file"> : 파일 선택
+	var url = "/upload/previewUploadAjax";
+	$.ajax({
+		"processData" : false,  // text 파일
+		"contentType" : false,	// text 파일
+		"type" : "post",
+		"url" : url,
+		"data" : formData,
+		"success" : function(rData) {
+			var originalFilename = rData.substring(rData.lastIndexOf("-")+1);
+			var text = "파일명: "+ originalFilename + " Size:" + fileSize;
+			var html = "<div data-fileName='" + rData + "'>";
+			html += "<span style='margin-left:100px;width:100px;'>파일사이즈: "+fileSize+"MB</span>";
+			html += "<a href='"+rData+"' class='attach-del'><span class='pull-right' style='color:red;'>[삭제]</span></a>";
+			html += "</div>";
+			
+			$("#movie_preview_text").append(html);
+		}
+	});
+	
+	// 이미지 지우기
+	$("#registForm").on("click", ".attach-del", function(e) {
+		e.preventDefault();
+		var removeDiv = $(this).parent();
+		var fileName = $(this).attr("href");
+		var url = "/upload/deleteFile";
+		var sendData = {"fileName" : fileName};
+		$.ajax({
+			"type" : "get",
+			"url" : url,
+			"data" : sendData,
+			"success" : function(rData) {
+				removeDiv.remove();
+				$("#movie_preview").val("");
+				$("#movie_preview").removeAttr("disabled");
+			}
 		});
 	});
 	
 }
-
 </script>
 <body class="js">
 <!-- 해더 부분 -->
@@ -186,52 +273,56 @@ function loadSubImage(value) {
 								<!--  페이지별 내용 -->
 								<form role="form" action="/admin/admin_movie_register" method="post" id="registForm">
 									<div class="form-group">
-										<label for="movie_name">영화이름</label>
-										<input type=text class="form-control" id="movie_name" name="movie_name"  />
+										<label for="movie_name"><strong>영화이름</strong></label>
+										<input type=text class="form-control" id="movie_name" name="movie_name" required/>
 									</div>
 									<div class="form-group">
-										<label for="movie_genre">영화장르</label>
-										<input type="text" class="form-control" id="movie_genre" name="movie_genre"  placeholder="로맨스 / 호러 / 스릴러 / 등"/>
+										<label for="movie_genre"><strong>영화장르</strong></label>
+										<input type="text" class="form-control" id="movie_genre" name="movie_genre"  placeholder="로맨스 / 호러 / 스릴러 / 등" required/>
 									</div>
 									<div class="form-group">
-										<label for="movie_director">영화감독</label>
-										<input type="text" class="form-control" id="movie_director" name="movie_director" />
+										<label for="movie_director"><strong>영화감독</strong></label> 
+										<input type="text" class="form-control" id="movie_director" name="movie_director" required/>
 									</div>
 									<div class="form-group">
-										<label for="movie_actor">등장인물</label>
-										<input type="text" class="form-control" id="movie_actor" name="movie_actor" />
+										<label for="movie_actor"><strong>등장인물</strong></label>
+										<input type="text" class="form-control" id="movie_actor" name="movie_actor" required/>
 									</div>
 									<div class="form-group">
-										<label for="movie_grade">영화등급 :</label>
+										<label for="movie_grade"><strong>영화등급 :</strong></label>
 										<input type="radio" name="movie_grade" value="all" class="movie_grade" checked/><span class="movie_grade_span">전체관람가</span>
 										<input type="radio" name="movie_grade" value="12" class="movie_grade"/><span class="movie_grade_span">12세</span>
 										<input type="radio" name="movie_grade" value="15" class="movie_grade"/><span class="movie_grade_span">15세</span>
 										<input type="radio" name="movie_grade" value="19" class="movie_grade"/><span class="movie_grade_span">19세</span>
 									</div>
 									<div class="form-group">
-										<label for="movie_open_date">개봉일</label>
-										<input type="text" class="form-control" id="movie_open_date" name="movie_open_date" placeholder="ex)2020-07-07"/>
+										<label for="movie_open_date"><strong>개봉일</strong></label>
+										<input type="text" class="form-control" id="movie_open_date" name="movie_open_date" placeholder="ex)2020-07-07" required/>
 									</div>
 									<div class="form-group">
-										<label for="movie_total_time">총시간</label>
-										<input type="number" class="form-control" id="movie_total_time" name="movie_total_time" placeholder="ex)180분->180"/>
+										<label for="movie_total_time"><strong>총시간</strong></label>
+										<input type="number" class="form-control" id="movie_total_time" name="movie_total_time" placeholder="ex)180분->180" required/>
+									</div>
+									<div> 
+										<span style="color:blue;">* 이미지& 동영상 파일 크기는 15MB 미만만 가능합니다.</span>
 									</div>
 									<div class="form-group">
-										<label for="movie_main_image" style="margin-right:10px;">영화 메인이미지 : </label>
-										<input type="file" class="movie_main_image" id="movie_main_image" onchange="loadImage(this);"/>
-										<div id="main_image_div"></div>
+										<label for="movie_main_image" style="margin-right:10px;"><strong>영화 메인이미지 : </strong></label>
+										<input type="file" class="movie_main_image" id="movie_main_image" onchange="loadImage(this);" accept="image/*" required/>
+										<div id="main_image_div" style="width:300px;height:auto;"></div>
 									</div>
-									<div class="form-group">
-										<label for="movie_sub_image" style="margin-right:10px;">영화 상세사진 : </label>
-										<input type="file" class="movie_sub_image" id="movie_sub_image" multiple onchange="loadSubImage(this);" style="display:none;" accept-charset="UTF-8"/>
-										<label for="movie_sub_image" id="fileLabel" >파일 선택</label>
+									<div class="form-group"> 
+										<label for="movie_sub_image" style="margin-right:10px;"><strong>영화 상세사진 : </strong></label>
+										<input type="file" class="movie_sub_image" id="movie_sub_image" multiple onchange="loadSubImage(this);" style="display:none;" accept="image/*" required/>
+										<label for="movie_sub_image" class="fileLabel" >파일 선택</label>
 										<span id="movie_sub_image_text">선택된 파일 없음</span>
-										<div id="movie_sub_image_div"></div>
+										<div id="movie_sub_image_div" style="width:300px;height:auto;"></div>
 									</div>
 									<br/>
 									<div class="form-group">
-										<label for="movie_preview" style="margin-right:10px;">영화 예고편 : </label>
-										<input type="file" class="movie_preview" id="movie_preview" />
+										<label for="movie_preview" style="margin-right:10px;"><strong>영화 예고편 : </strong></label>
+										<input type="file" class="movie_preview" id="movie_preview" accept="video/*" onchange="previewUpload(this);" required />
+										<div id="movie_preview_text" style="width:250px;height:auto;"></div>
 									</div>
 									<button type="submit" class="btn btn-primary" id="btnSubmit">등록</button>
 								</form>
