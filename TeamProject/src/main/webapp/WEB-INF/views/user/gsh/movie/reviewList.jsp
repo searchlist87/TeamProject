@@ -6,14 +6,11 @@
 <!-- tag_and_styleSheet 인크루드 -->
 <%@include file = "/WEB-INF/views/include/tag_and_styleSheet.jsp" %>
 
-	
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
 <!-- Controller에서 작성한 목록이 나오는지 시험 -->
 <%-- ${list } --%>
-
-<a href="/gsh/movie/test" class="btn btn-sm btn-success">테스트</a>	
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2">
@@ -48,7 +45,7 @@
 				<thead>
 					<tr>
 						<th>리뷰 번호</th>
-						<th>영화 제목</th>
+						<th>영화 이름</th>
 						<th>작성자</th>
 						<th>평점</th>
 						<th>작성일</th>
@@ -56,14 +53,13 @@
 				</thead>
 				
 				<tbody>
-					<c:forEach items="${list}" var="gshReviewVo">
+					<c:forEach items="${list}" var="vo">
 						<tr>
-							<!-- 임시 값 나중에 수정해야함 -->
-							<th>${gshReviewVo.review_num}</th>
-							<th><a href="/gsh/movie/reviewContent">${gshReviewVo.movie_code}</a></th>
-							<th>${gshReviewVo.user_id}</th>
-							<th>${gshReviewVo.review_score}</th>
-							<th>${gshReviewVo.review_date}</th>
+							<th>${vo.review_num}</th>
+							<th><a href="/gsh/movie/reviewContent">${vo.movie_name}</a></th>
+							<th>${vo.user_id}</th>
+							<th>${vo.review_score}</th>
+							<th>${vo.review_date}</th>
 						</tr>
 					</c:forEach>
 				</tbody>

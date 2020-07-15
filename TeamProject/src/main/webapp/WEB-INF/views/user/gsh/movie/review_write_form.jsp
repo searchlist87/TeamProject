@@ -37,6 +37,11 @@
 				</div>
 				
 				<div class="form-group">
+					<label for="exampleInputPassword1">아이디</label>
+					<input type="text" class="form-control" maxlength="20" placeholder="아이디를 입력 해주세요." required>
+				</div>
+				
+				<div class="form-group">
 					<label for="exampleInputPassword1">내용</label>
 					<textarea class="form-control" maxlength="200" placeholder="최대 200자까지 작성 가능합니다." required></textarea>
 				</div>
