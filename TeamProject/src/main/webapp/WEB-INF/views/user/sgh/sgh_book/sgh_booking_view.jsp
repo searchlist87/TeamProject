@@ -13,7 +13,8 @@
 <script>
 $(function() {
 	
-	
+	var code;
+	var movie_code;
 	// 상영 지역 이벤트 설정
 	// 상영 지역에 있는 영화관 정보를 받아서 해당 지역으로 클릭하면 그 지역에 관한 영화관 뿌리기
 	var theaterArr = new Array();
@@ -22,16 +23,17 @@ $(function() {
 		theaterArr.push(that);
 	});
 	
+	// 상영 지역
 	$("#screeningArea").on("click", ".areaChoice", function(e) {
 		e.preventDefault();
 		var a_areaName = $(this).attr("data-a-areaName");
 		$(".screeningAreaClone").remove();
+		$(".movieChoice").remove();
 		var screeningAreaClone = $("#screeningArea").clone().addClass("screeningAreaClone");
 		screeningAreaClone.find("li").remove();
 		
 		$.each(theaterArr, function() {
 			var t_areaName = $(this).attr("data-t-areaName");
-			console.log("t_areaName :" + t_areaName);
 			if(a_areaName == t_areaName) {
 				var theaterA_tag = $(this);
 				screeningAreaClone.find("ul").append(theaterA_tag);
@@ -41,12 +43,13 @@ $(function() {
 		
 		$("#screeningArea").after(screeningAreaClone);
 	});
-
+	
+	// 상영 영화관
 	$("#section").on("click", ".theater_code", function(e) {
 		e.preventDefault();
 		var url = "/sgh/book/getMovieName";
 		var theater_code = $(this).attr("data-t-theater-code");
-		console.log("theater_code :" + theater_code);
+		code = theater_code;
 		var sendData = {
 				"theater_code" : theater_code
 		};
@@ -55,15 +58,32 @@ $(function() {
 		screeningAreaClone.find("li").remove();
 		
 		$.getJSON(url, sendData, function(rData) {
-			console.log("찍힘");
-			console.log("rData : " + rData);
+			console.log("rData" + rData);
 			$.each(rData, function() {
 				var movieName = this.movie_name;
-				var a = "<li><a href='#'>" + movieName + "</a></li>";
+				movie_code = this.movie_code;
+				var a = "<li><a href='#' class='movie_name' data-movie='" + movieName + "'>" + movieName + "</a></li>";
 				screeningAreaClone.find("ul").append(a);
 			});
 		});
 		$(".screeningAreaClone").after(screeningAreaClone);
+	});
+	
+	// 각각의 영화
+	$("#section").on("click", ".movie_name", function(e) {
+		e.preventDefault();
+		var theater_code = code;
+		var that = $(this).attr("data-movie");
+		var url = "/sgh/book/movieSchedule";
+		var sendData = {
+				"theater_code" : theater_code,
+				"movie_code" : movie_code
+		};
+		
+		$.getJSON(url, sendData, function(rData) {
+			// 컨트롤러에 요청해서 반환하는 작업 해야함. mapper + dao 등등 해야함
+			console.log("rData :" + rData);
+		});
 	});
 });
 </script>

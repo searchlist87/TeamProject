@@ -33,8 +33,6 @@ public class SghBookController {
 	public String testBookingView(Model model) throws Exception {
 		List<SghTheaterVo> theaterList = sghTheaterService.getTheaterList();
 		List<SghAreaVo> areaList = sghAreaService.getAreaList();
-		System.out.println("theaterList :" + theaterList);
-		System.out.println("areaList :" + areaList);
 		model.addAttribute("theaterList", theaterList);
 		model.addAttribute("areaList", areaList);
 		return "user/sgh/sgh_book/sgh_booking_view";
@@ -43,13 +41,19 @@ public class SghBookController {
 	@ResponseBody
 	@RequestMapping(value="/getMovieName", method=RequestMethod.GET)
 	public List<SghMovieNameVo> testMovieName(String theater_code) throws Exception {
-		System.out.println("theater_code :" + theater_code);
 		return sghMovieScheduleService.getMovieName(theater_code);
 	}
 	
 	@RequestMapping(value="/testAdmin", method=RequestMethod.GET)
 	public String test() throws Exception {
-		System.out.println("hi :");
 		return "user/sgh/sgh_book/sgh_test_admin";
+	}
+	
+	// 영화 일정
+	@ResponseBody
+	@RequestMapping(value="/movieSchedule", method=RequestMethod.GET)
+	public String getDayMovieList(String theater_code, String movie_code) throws Exception {
+		
+		return null;
 	}
 }

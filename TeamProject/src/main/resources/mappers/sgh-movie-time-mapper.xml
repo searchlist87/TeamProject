@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.sgh-movie-time-mapper">
+	<select id="getMovieSchedule" resultType="SghAreaVo">
+		select time.movie_time_code, movie.movie_name, m_screen.screen_name, time.movie_screen_count, to_char(schedule.movie_start_date, 'YYYY/MM/DD'), to_char(schedule.movie_end_date, 'YYYY/MM/DD'), time.movie_start_time, m_screen.screen_total_seat
+		from tbl_movie_time time, tbl_movie movie, tbl_movie_screen m_screen, tbl_movie_schedule schedule
+		where time.movie_code = movie.movie_code and time.screen_code = m_screen.screen_code and time.movie_schedule_num = schedule.movie_schedule_num
+		and time.movie_code = 'MC1' and m_screen.theater_code = 'TC3';
+	</select>
+</mapper>

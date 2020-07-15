@@ -67,6 +67,17 @@ $(function() {
 		$("#price").text(priceMius);	
 	});
 	
+	// 구매하기 버튼
+	$("#btnBuy").click(function() {
+		var num = "${foodVo.food_num}";
+		var food_num = parseInt(num);
+		var price = $("#price").text();
+		var food_price = parseInt(price);
+		var buy_count = $("#btnCount").text();
+		var food_buy_count = parseInt(buy_count);
+		location.href = "/kdh/food/cart?food_num="+food_num+"&food_price="+food_price+"&food_buy_count="+food_buy_count;
+// 		location.href = "/kdh/food/cart?foodInfoDto="+foodInfoDto;
+	});
 });
 </script>
 <!-- 해더 부분 -->

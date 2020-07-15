@@ -5,7 +5,8 @@
   
 <mapper namespace="mappers.sgh-schedule-mapper">
 	<select id="getMovieName" resultType="SghMovieNameVo">
-		select movie.movie_name from tbl_movie_schedule schedule, tbl_movie movie 
+		select distinct movie.movie_name, movie.movie_code
+		from tbl_movie_schedule schedule, tbl_movie movie 
 		where schedule.theater_code = #{theater_code} and schedule.movie_code = movie.movie_code
 	</select>
 </mapper>

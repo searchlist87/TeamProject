@@ -21,4 +21,9 @@ public class SghTheaterDaoImpl implements SghTheaterDao {
 		return sqlSession.selectList(NAMESPACE + "getTheaterList");
 	}
 
+	@Override
+	public void insertMovieTheater(SghTheaterVo sghTheaterVo) throws Exception {
+		sqlSession.insert(NAMESPACE + "insertMovieTheater", sghTheaterVo);
+	}
+
 }

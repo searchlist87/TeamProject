@@ -33,9 +33,9 @@ $(function () {
 				</dl>
 				<dl class="categor-list" >
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃영화관 관리</a></dt>
-					<dd><a href="#">영화관 조회</a></dd>
-					<dd><a href="#">영화관 등록</a></dd>
-					<dd><a href="#">영화관 수정</a></dd>
+					<dd><a href="/sgh/admin/movieTheaterList">영화관 조회</a></dd>
+					<dd><a href="/sgh/admin/movieTheaterAdd">영화관 등록</a></dd>
+					<dd><a href="/sgh/admin/movieTheaterModify">영화관 수정</a></dd>
 				</dl>	
 				<dl class="categor-list" >
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃상영일정 관리</a></dt>

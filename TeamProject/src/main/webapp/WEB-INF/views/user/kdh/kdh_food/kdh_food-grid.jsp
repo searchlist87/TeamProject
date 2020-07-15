@@ -28,20 +28,6 @@
 
 <script>
 $(function() {
-	$("select[name=perPage]").change(function() {
-// 		var perPage = $(this).val();
-// 		var sendData = {
-// 				"perPage" : perPage
-// 		};
-// 		var url = "/kdh/food/foodView";
-// 		$.get(url, sendData, function(rData) {
-// 			console.log(rData);
-// 		});
-		
-// 		location.href = "/kdh/food/foodView?page=${page.page}&perPage=${page.perPage}";
-		
-	});
-	
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href");
@@ -302,6 +288,8 @@ $(function() {
 	<div class="col-md-12" style="margin-bottom: 100px;"></div>	
 </div>
 <!-- /페이징 -->
+
+<!-- 푸더 부분 -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

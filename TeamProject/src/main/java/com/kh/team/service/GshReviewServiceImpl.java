@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.team.domain.GshMovieDto;
 import com.kh.team.domain.GshReviewVo;
 import com.kh.team.persistence.GshReviewDao;
 
@@ -18,6 +19,11 @@ public class GshReviewServiceImpl implements GshReviewService {
 	@Override
 	public List<GshReviewVo> reviewList() throws Exception {
 		return gshReviewDao.reviewList();
+	}
+
+	@Override
+	public List<GshMovieDto> select_review_code() throws Exception {
+		return gshReviewDao.select_review_code();
 	}
 
 }

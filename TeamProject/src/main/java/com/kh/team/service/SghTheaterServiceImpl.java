@@ -20,4 +20,9 @@ public class SghTheaterServiceImpl implements SghTheaterService {
 		return sghTheaterDao.getTheaterList();
 	}
 
+	@Override
+	public void movieTheaterAdd(SghTheaterVo sghTheaterVo) throws Exception {
+		sghTheaterDao.insertMovieTheater(sghTheaterVo);
+	}
+
 }

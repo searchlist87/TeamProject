@@ -7,6 +7,21 @@
 
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
+<script>
+$(function () {
+	var msg = "${msg}"
+	if (msg == "success") {
+		alert("리뷰 삭제 성공")
+	}
+	
+	// 리뷰 삭제 버튼
+	$("#btnDelete").click(function() {
+		
+	});
+	
+});
+</script>
+
 	<div class="row">
 		<div class="col-md-2">
 			<h1>　　　</h1></div>
@@ -21,12 +36,7 @@
 			<form name="review_content">
 			
 				<div class="form-group">
-					<label for="exampleInputEmail1">리뷰 번호</label>
-					<input type="text" class="form-control" readonly/>
-				</div>
-				
-				<div class="form-group">
-					<label for="exampleInputEmail1">제목</label>
+					<label for="exampleInputEmail1">영화이름</label>
 					<input type="text" class="form-control" readonly/>
 				</div>
 				
@@ -40,9 +50,9 @@
 					<textarea class="form-control" readonly></textarea>
 				</div>
 			
-				<a href="" class="btn btn">리뷰 목록</a>
-				<a href="" class="btn btn">수정</a>
-				<a href="" class="btn btn">삭제</a>
+				<a href="/gsh/movie/reviewList" class="btn btn">리뷰 목록</a>
+				<a href="/gsh/movie/review_modify_form" class="btn btn">수정</a>
+				<a href="/gsh/movie/reviewList" class="btn btn" id="btnDeleteReview">삭제</a>
 			</form>
 			</div>
 </div>	
