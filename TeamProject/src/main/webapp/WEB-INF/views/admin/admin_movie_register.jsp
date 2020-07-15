@@ -68,12 +68,33 @@ $(function () {
 			return false;
 		} 
 		$("#movie_total_time").parent().find("span").remove();
-		return false;
+		
+		
+		// 메인 파일 담기
+		var upDiv1 = $("#main_image_div > div");
+		upDiv1.each(function(index) {
+			var filename = $(this).attr("data-filename");
+			var hiddenInput = "<input type='hidden' name='movie_main_image' value='"+filename+"'/>";
+			$("#registForm").prepend(hiddenInput);
+		});
+		
+		// 서브 파일 담기
+		var upDiv2 = $("#movie_sub_image_div > div");
+		upDiv2.each(function(index) {
+			var filename = $(this).attr("data-filename");
+			var hiddenInput = "<input type='hidden' name='movie_sub_image["+index+"]' value='"+filename+"'/>";
+			$("#registForm").prepend(hiddenInput);
+		});
+		
+		// 동영상 파일 담기
+		var upDiv3 = $("#movie_preview_text > div");
+		upDiv3.each(function(index) {
+			var filename = $(this).attr("data-filename");
+			var hiddenInput = "<input type='hidden' name='movie_preview' value='"+filename+"'/>";
+			$("#registForm").prepend(hiddenInput);
+		});
+		
 	});
-	
-	
-	
-	
 	
 	
 	

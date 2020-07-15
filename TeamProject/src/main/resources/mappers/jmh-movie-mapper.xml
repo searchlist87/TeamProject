@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.jmh-movie-mapper">
+
+	<!-- 영화 조회 -->
+	<select id="getMovieList" resultType="JmhMovieVo">
+		
+	</select>
+	
+	<!--  영화 등록 -->
+	<insert id="movieRegister">
+	insert into tbl_movie(movie_code, movie_name, movie_genre, movie_director, movie_actor, movie_open_date, movie_total_time,
+				movie_main_image, movie_regist_date, movie_grade, movie_preview, movie_num)
+	values('MC' || seq_movie_num.nextval, #{movie_name}, #{movie_genre}, #{movie_director}, #{movie_actor}, to_date(#{movie_open_date},'YYYY-MM-DD'),
+			#{movie_total_time}, #{movie_main_image}, to_date(sysdate,'YYYY-MM-DD'), #{movie_grade}, #{movie_preview}, seq_movie_num.nextval)
+	</insert>	
+
+	<!--  영화상세이미지 등록 -->
+	<insert id="movieSubImageRegister">
+		insert into tbl_
+	</insert>
+
+
+</mapper>
