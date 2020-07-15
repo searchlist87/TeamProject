@@ -29,7 +29,6 @@ public class AdminController {
 	// 영화 등록 처리
 	@RequestMapping(value="/admin_movie_register", method = RequestMethod.POST)
 	public String movie_registerPost() throws Exception {
-		System.out.println("register");
 		return null;
 	}
 	

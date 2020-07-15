@@ -34,18 +34,6 @@ public class KdhController {
 		return "user/kdh/kdh_food/kdh_food-grid";
 	} 
 	
-	// 상품 등록(GET)
-	@RequestMapping(value = "/insertFood", method = RequestMethod.GET)
-	public String insertFoodGet() throws Exception {
-		return "user/kdh/kdh_food/kdh_insertFood";
-	}
-	
-	// 상품 등록(POST)
-	@RequestMapping(value = "/insertFood", method = RequestMethod.POST)
-	public String insertFoodPost() throws Exception {
-		return "redirect:/kdh/food/foodView";
-	}
-
 	// 상품 이너 페이지(GET)
 	@RequestMapping(value = "/innerfood", method = RequestMethod.GET)
 	public String InnerfoodGet(int food_num, Model model) throws Exception {
@@ -62,9 +50,16 @@ public class KdhController {
 
 	// 상품 선택하기(100 스낵)
 	@RequestMapping(value = "/snack", method = RequestMethod.GET)
-	public String listFoodCode100(ModelMap model) throws Exception {
-		List<KdhFoodVo> list = foodService.listFoodCode100();
+	public String listFoodCode100(ModelMap model, KdhPagingDto pagingDto) throws Exception {
+		List<KdhFoodVo> list = foodService.listFoodCode100(pagingDto);
+		System.out.println("list:" + list);
 		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
+		System.out.println("listLatestFood:" + listLatestFood);
+		int foodCount = foodService.CountFoodCode100();
+		System.out.println("foodCount:" + foodCount);
+		pagingDto.setPageInfo(foodCount);
+		System.out.println("pagingDto:" + pagingDto);
+		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("list", list);
 		model.addAttribute("listLatestFood", listLatestFood);
 		return "user/kdh/kdh_food/kdh_snack";
@@ -72,9 +67,12 @@ public class KdhController {
 	
 	// 상품 선택하기(200 음료)
 	@RequestMapping(value = "/drink", method = RequestMethod.GET)
-	public String listFoodCode200(Model model) throws Exception {
-		List<KdhFoodVo> list = foodService.listFoodCode200();
+	public String listFoodCode200(ModelMap model, KdhPagingDto pagingDto) throws Exception {
+		List<KdhFoodVo> list = foodService.listFoodCode200(pagingDto);
 		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
+		int foodCount = foodService.CountFoodCode200();
+		pagingDto.setPageInfo(foodCount);
+		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("list", list);
 		model.addAttribute("listLatestFood", listLatestFood);
 		return "user/kdh/kdh_food/kdh_drink";
@@ -82,19 +80,15 @@ public class KdhController {
 	
 	// 상품 선택하기(300 패키지)
 	@RequestMapping(value = "/package", method = RequestMethod.GET)
-	public String listFoodCode300(Model model) throws Exception {
-		List<KdhFoodVo> list = foodService.listFoodCode300();
+	public String listFoodCode300(ModelMap model, KdhPagingDto pagingDto) throws Exception {
+		List<KdhFoodVo> list = foodService.listFoodCode300(pagingDto);
 		List<KdhFoodVo> listLatestFood = foodService.listLatestFood();
+		int foodCount = foodService.CountFoodCode300();
+		pagingDto.setPageInfo(foodCount);
+		model.addAttribute("pagingDto", pagingDto);
 		model.addAttribute("list", list);
 		model.addAttribute("listLatestFood", listLatestFood);
 		return "user/kdh/kdh_food/kdh_package";
 	}
 	
-//	// 상품 페이징
-//	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-//	@ResponseBody
-//	public void listPage(KdhPagingDto pagingDto, Model model) throws Exception {
-//		
-//		
-//	}
 }

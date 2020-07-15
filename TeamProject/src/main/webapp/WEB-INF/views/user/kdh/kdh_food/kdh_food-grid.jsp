@@ -270,21 +270,21 @@ $(function() {
 		
 <!-- 페이징 -->
 <div class="row"  style="text-align:center;">
-	<div class="col-md-2"></div>
+	<div class="col-md-4"></div>
 		<div class="col-md-8 text-center" style="text-align:center;">
 			<nav style="text-align:center;">
 				<ul class="pagination text-center" style="text-align:center;">
 				
 				<!-- 이전 버튼 -->
-				<c:if test ="${pagingDto.startPage > 1}">
-					<li class="page-item" style="width:60px; float:left;"  style="text-align:center;">
+				<c:if test ="${pagingDto.startPage != 1}">
+					<li class="page-item" style="width:60px;"  style="float:left;">
 				    	<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
 					</li>
 				</c:if>
 
 			 	<!-- 페이징 넘버링 -->
 			 	<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
-				    <li id="pageNumber" class="page-item" style="width:30px; float:left;">
+				    <li id="pageNumber" class="page-item"  style="width:30px; float:left;">
 				    	<a class="page-link" href="${v}">${v}</a>
 				    </li>
 				</c:forEach>    	
@@ -298,10 +298,10 @@ $(function() {
 				</ul>
 			</nav>
 		</div>
-	<div class="col-md-2"></div>
-	<div class="col-md-12" style="margin-bottom: 100px;"></div>
-	
+	<div class="col-md-4"></div>
+	<div class="col-md-12" style="margin-bottom: 100px;"></div>	
 </div>
+<!-- /페이징 -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

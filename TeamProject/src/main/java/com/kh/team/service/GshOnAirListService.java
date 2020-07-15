@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kh.team.domain.GshMovieListVo;
 
-public interface GshBestListService {
+public interface GshOnAirListService {
 	
 	public List<GshMovieListVo> select_movie_list() throws Exception;
 
