@@ -98,7 +98,7 @@ $(function() {
 							
 				<c:forEach items="${list}" var="vo">
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
-						<a href="/resources/images/gsh/movie01.jpg">
+						<a href="http://www.cgv.co.kr/movies/detail-view/?midx=83160">
 							<h3>
 								<span><img src="/resources/images/gsh/movie01.jpg"style="width:100px;height:auto;"></span>
 							</h3>

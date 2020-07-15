@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.domain.GshMovieDto;
 import com.kh.team.domain.GshMovieListVo;
+import com.kh.team.persistence.GshMovieViewDao;
 import com.kh.team.service.GshBestListService;
+import com.kh.team.service.GshMovieViewService;
 import com.kh.team.service.GshNewListService;
 import com.kh.team.service.GshOnAirListService;
 import com.kh.team.service.GshReviewService;
@@ -31,6 +33,11 @@ public class GshController {
 	
 	@Inject
 	private GshOnAirListService gshOnAirListService;
+	
+	@Inject
+	private GshMovieViewService gshMovieViewService;
+	
+	
 	
 	// 리뷰 목록
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
@@ -65,7 +72,22 @@ public class GshController {
 		return "user/gsh/movie/reviewList";
 	}
 	
-	// 베스트 리스트
+	// 영화 리뷰 목차
+	@RequestMapping(value = "/movieView", method = RequestMethod.GET)
+	public String movieView(Model model) throws Exception {
+		List<GshMovieDto> list = gshMovieViewService.select_movie_list();
+//		System.out.println(list);
+		model.addAttribute("list", list);
+		return "user/gsh/movie/movieView";
+	}
+	
+	// 영화 상세 정보 보기
+//	@RequestMapping(value = "/movieInfo", method = RequestMethod.GET)
+//	public String movieInfo(Model model) throws Exception {
+//		List<GshMovieDto> list = 
+//	}
+	
+	// 베스트 영화 리스트
 	@RequestMapping(value = "/bestList", method = RequestMethod.GET)
 	public String bestList(Model model) throws Exception {
 		List<GshMovieListVo> list = gshBestListService.select_movie_list();
