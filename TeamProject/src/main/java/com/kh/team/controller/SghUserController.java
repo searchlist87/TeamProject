@@ -171,5 +171,4 @@ public class SghUserController {
 		model.addAttribute("sghFindDto", sghFindDto);
 		return "user/sgh/sgh_member/sgh_find_pw_mail_form";
 	}
-	
 }
