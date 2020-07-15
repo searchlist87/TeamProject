@@ -7,17 +7,17 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.GshMovieListVo;
-import com.kh.team.persistence.GshBestListDao;
+import com.kh.team.persistence.GshOnAirListDao;
 
 @Service
-public class GshBestListServiceImpl implements GshBestListService {
-
-	@Inject
-	private GshBestListDao gshBestListDao;
+public class GshOnAirListServiceImpl implements GshOnAirListService {
 	
+	@Inject
+	private GshOnAirListDao gshOnAirListDao;
+
 	@Override
 	public List<GshMovieListVo> select_movie_list() throws Exception {
-		return gshBestListDao.select_movie_list();
+		return gshOnAirListDao.select_movie_list();
 	}
 
 }
