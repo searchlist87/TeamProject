@@ -1,18 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="zxx">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <head>
 
 <!-- tag_and_styleSheet 인크루드 -->
 <%@include file = "../../../include/tag_and_styleSheet.jsp" %>
+ <!-- Jquery -->
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
+	<script src="/resources/js/jquery-ui.min.js"></script>
+
+
+<script>
+$(function() {
+	$("#btnSetCount").click(function() {
+		var food_count = $("#food_count").val();
+		var price = $("#food_price").text();
+		console.log("price:" + price);
+		var food_price = parseInt(price);
+		console.log("food_price:" + food_price);
+		var sumPrice = (food_count * food_price) * 1000;
+		console.log("sumPrice:" + sumPrice);
+		
+		$("#sumPrice").text((sumPrice)+"원");
+	});
+});
+
+</script>
+
+<body class="js">
+
+<!-- 해더 부분 -->
+<%@include file="/WEB-INF/views/include/header.jsp" %>
 
 </head>
 
-<body class="js">
-<!-- 해더 부분 -->
-<%@include file="/WEB-INF/views/include/header.jsp" %>
 	<!-- Breadcrumbs -->
 	<div class="breadcrumbs">
 		<div class="container">
@@ -20,8 +44,8 @@
 				<div class="col-12">
 					<div class="bread-inner">
 						<ul class="bread-list">
-							<li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-							<li class="active"><a href="blog-single.html">Cart</a></li>
+							<li><a href="index1.html">홈<i class="ti-arrow-right"></i></a></li>
+							<li class="active"><a href="blog-single.html">장바구니</a></li>
 						</ul>
 					</div>
 				</div>
@@ -47,32 +71,32 @@
 							</tr>
 						</thead>
 						<tbody>
-<%-- 						<c:forEach items="${sessionScope.foodInfo}" var="foodVo"> --%>
+							<c:forEach items="${sessionScope.foodList}" var="foodVo">
 							<tr>
 								<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
 								<td class="product-des" data-title="Description">
-									<p class="product-name"><a href="#">${sessionScope.foodInfo.food_name}</a></p>
+									<p class="product-name"><a href="#">${foodVo.food_name}</a></p>
 								</td>
-								<td class="price" data-title="Price"><span>${sessionScope.foodInfo.food_price}</span></td>
-								<td class="qty" data-title="Qty"><!-- Input Order -->
-									<div class="input-group">
+								<td class="price" id="food_price" data-title="Price"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber> </span></td>
+								<td class="qty" data-title="Qty">
+									<div id="btnSetCount" class="input-group">
 										<div class="button minus">
 											<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
 												<i class="ti-minus"></i>
 											</button>
 										</div>
-										<input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="${sessionScope.foodInfo.food_buy_count}">
+										<input type="text" id="food_count" name="quant[1]" class="input-number"  data-min="1" data-max="${foodVo.food_count}" value="${foodVo.food_buy_count}">
 										<div class="button plus">
 											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
 												<i class="ti-plus"></i>
 											</button>
 										</div>
 									</div>
-									<!--/ End Input Order -->
 								</td>
-								<td class="total-amount" data-title="Total"><span>${sessionScope.foodInfo.food_buy_price}</span></td>
+								<td id="sumPrice" class="total-amount" data-title="Total"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_buy_price}"></fmt:formatNumber>원</span></td>
 								<td class="action" data-title="Remove"><a href="#"><i class="ti-trash remove-icon"></i></a></td>
 							</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<!--/ End Shopping Summery -->
@@ -122,8 +146,8 @@
 					<!-- Start Single Service -->
 					<div class="single-service">
 						<i class="ti-rocket"></i>
-						<h4>무료 배송</h4>
-						<p>무료 배송 지원</p>
+						<h4>싱싱한 맛</h4>
+						<p>주문시 즉시 조리</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
