@@ -28,6 +28,7 @@
 
 <script>
 $(function() {
+	// 페이지 버튼 클릭시 해당 페이지 넘어가게
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href");
@@ -35,6 +36,16 @@ $(function() {
 		
 		location.href = "/kdh/food/foodView?page=" + page;
 	});
+	
+	// 현재 페이지 액티브 설정
+	$("a.page-link").each(function() {
+		var page = $(this).attr("href");
+		if (page == "${pagingDto.page}") {
+			$(this).parent().addClass("active");
+			return;
+		}
+	});
+	
 });
 </script>
 </head>

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
 
@@ -83,6 +84,11 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	@Override
 	public int CountFoodCode300() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "CountFoodCode300");
+	}
+
+	@Override
+	public KdhBuyFoodInfo selectBuyFoodbyNum(int food_num) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectBuyFoodbyNum", food_num);
 	}
 
 }

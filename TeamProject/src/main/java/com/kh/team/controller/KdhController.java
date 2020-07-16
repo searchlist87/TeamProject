@@ -1,9 +1,13 @@
 package com.kh.team.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.service.KdhFoodService;
@@ -92,7 +97,21 @@ public class KdhController {
 	}
 	
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public String cart(int food_num, int food_price, int food_buy_count) throws Exception {
+	public String cart(HttpSession session, int food_num, int food_buy_price, int food_buy_count) throws Exception {
+		
+//		Map<String, Object> buyFoodList = new HashMap<String, Object>();
+		KdhBuyFoodInfo foodInfo = foodService.selectBuyFoodbyNum(food_num);
+		foodInfo.setFood_buy_count(food_buy_count);
+		foodInfo.setFood_buy_price(food_buy_price);
+		
+//		buyFoodList.put("foodInfo", foodInfo);
+		
+		session.setAttribute("foodInfo", foodInfo);
+		System.out.println("foodInfo:" + foodInfo);
+		
+		
+//		String user_id = String.valueOf(session.getAttribute("user_id"));
+//		System.out.println("user_id : " + user_id);
 		return "user/kdh/kdh_food/kdh_cart";
 	}
 }
