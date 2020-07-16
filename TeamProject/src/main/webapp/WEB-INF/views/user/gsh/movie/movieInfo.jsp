@@ -5,19 +5,10 @@
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
 <body>
-
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-12">
-			<div class="row">
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-8">
-				
-				<hr>
-				
-					<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-2"></div>
+		<div class="col-md-8" style="margin-top:50px;margin-bottom:50px;">
 			<div class="carousel slide" id="carousel-346228">
 				<ol class="carousel-indicators">
 					<li data-slide-to="0" data-target="#carousel-346228">
@@ -46,17 +37,19 @@
 				</div> <a class="carousel-control-prev" href="#carousel-346228" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-346228" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
 			</div>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 	
-	<hr>
-	
-						<!-- 영화 정보 시작 -->
-							<div class="detail_top_wrap">
-						<div class="poster_info">
-							<img src="/resources/images/gsh/peninsula.jpg" style="width:150px;height:auto;" alt="영화이름">
-						</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div style="padding:15px;float:left;">
+			<img src="/resources/images/gsh/peninsula.jpg" style="height:auto;" alt="영화이름">
+		</div>
+		<div style="padding:15px;">
+		
+				
 						<div class="tit_info">
-							<span class="ic_grade gr_15">15세이상관람가</span>
+							<span class="ic_grade gr_15">관람등급</span>
 								<strong>영화이름</strong>
 						</div>
 							<ul class="detail_info1">
@@ -77,38 +70,21 @@
 									<a href="#">영화배우3</a>, <a href="#">영화배우4</a>, <a href="#">영화배우5</a></strong>
 								</li>
 							</ul>
-						<div class="movie_detail_aside_menu">
-							<ul>
+							
+ 						<div class="movie_detail_aside_menu">
+ 							<ul>
 								<li class="area_reserve"><a href="#" class="btn_col1 ty7 rnd">
-								예매하기->해당영화 구매페이지 이동</a>
-								</li>
-							</ul>
-						</div>
+ 								예매하기->해당영화 구매페이지 이동</a> 
+ 								</li> 
+ 							</ul> 
+						</div> 
+						
+						<textarea id="txtComment" maxlength="300" style="margin-top:10px;margin-bottom:50px;" placeholder="평점 및 영화 관람평을 작성해주세요."></textarea>
+						
 					</div>
-				<!-- 영화 정보 끝 -->
-				
-				
-				
-<%-- #{나이등급} --%>
-<%-- #{영화이름} --%>
-<%-- #{영화점수} --%>
-<%-- #{장르} --%>
-<%-- #{개봉일} --%>
-<%-- #{상영시간} --%>
-<%-- #{영화감독} --%>
-<%-- #{출연배우} --%>
-				
-				</div>
-				<div class="col-md-2">
-				</div>
+				<div class="col-md-2"></div>
 			</div>
 		</div>
-	</div>
-</div>
 	
-	
-	
-	
-	
-	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>

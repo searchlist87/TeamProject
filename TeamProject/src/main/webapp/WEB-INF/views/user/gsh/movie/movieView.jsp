@@ -32,7 +32,7 @@
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-	<!-- 영화 메인 사진 -->
+	<!-- 영화 메인 사진 시작 -->
 	<div class="foodMain" style="background-color:black">
 		<div style="background-color:black" class="container">
 			<div class="row">
@@ -44,7 +44,8 @@
 			</div>
 		</div>
 	</div>
-	<!--/ 영화 메인 사진 -->
+	<!-- 영화 메인 사진 끝 -->
+	
 		<div></div>
 		<!-- Product Style -->
 		<section class="product-area shop-sidebar shop section">
@@ -74,25 +75,11 @@
 											<h3>전체</h3>
 										</div>
 									</div>
-<!-- 									<ul class="view-mode"> -->
-<!-- 										<li class="active"><a href="shop-grid.html"><i class="fa fa-th-large"></i></a></li> -->
-<!-- 										<li><a href="shop-list.html"><i class="fa fa-th-list"></i></a></li> -->
-<!-- 									</ul> -->
 								</div>
-								<!--/ End Shop Top -->
+								<!-- End Shop Top -->
 							</div>
 						</div>
 						<div class="row" style="padding-left:20px;">
-						
-						<!-- 영화 이미지 -->
-<!-- 						2020/7/16/fc4a73ad-2b07-483c-b208-9ab6d063bd00-main.jpg -->
-<!-- 						2020/7/16/fdc652a5-9227-41c3-bc13-6230749a815a-main.jpg -->
-<!-- 						2020/7/16/e1a47c4e-9384-4553-ab96-bfc16342a596-main.jpg -->
-<!-- 						2020/7/16/b8d617e8-c834-4fc0-a509-3f3677766155-main.jpg -->
-<!-- 						2020/7/16/6d8435fc-9613-4b92-bf7f-ca15676d7252-main.jpg -->
-<!-- 						2020/7/16/1821590e-6ff2-4ecf-abd6-8c8de07d4d40-main.jpg -->
-<!-- 						2020/7/16/aada08a4-8c72-46eb-a1e0-64a809d4ca57-main.jpg -->
-<!-- 						2020/7/16/cfeb140c-892c-4dff-9bb1-3074f70a3cca-main.jpg -->
 							
 				<c:forEach items="${list}" var="vo">
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
