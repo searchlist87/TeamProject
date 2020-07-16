@@ -16,6 +16,11 @@ $(function() {
 	$("select").css("display", "block");
 	$(".nice-select").remove();
 	
+	var result = "${result}";
+	if(result == "false") {
+		alert("등록에 실패하셨습니다 다시 확인해주세요.");
+	}
+	
 	$("#addressSearch").click(function() {
 		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
 	});

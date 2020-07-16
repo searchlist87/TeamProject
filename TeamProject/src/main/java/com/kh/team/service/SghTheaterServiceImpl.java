@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.persistence.SghTheaterDao;
 
@@ -23,6 +24,26 @@ public class SghTheaterServiceImpl implements SghTheaterService {
 	@Override
 	public void movieTheaterAdd(SghTheaterVo sghTheaterVo) throws Exception {
 		sghTheaterDao.insertMovieTheater(sghTheaterVo);
+	}
+
+	@Override
+	public int getTheaterListCount(SghPagingDto sghPagingDto) throws Exception {
+		return sghTheaterDao.getTheaterListCount(sghPagingDto);
+	}
+
+	@Override
+	public List<SghTheaterVo> getTheaterPagingList(SghPagingDto sghPagingDto) throws Exception {
+		return sghTheaterDao.getTheaterPagingList(sghPagingDto);
+	}
+
+	@Override
+	public void modifyTheater(SghTheaterVo sghTheaterVo) throws Exception {
+		sghTheaterDao.modifyTheater(sghTheaterVo);
+	}
+
+	@Override
+	public SghTheaterVo selectOneTheater(String theater_code) throws Exception {
+		return sghTheaterDao.selectOneTheater(theater_code);
 	}
 
 }
