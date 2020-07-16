@@ -322,7 +322,7 @@ function previewUpload(value) {
 										<input type="text" class="form-control" id="movie_open_date" name="movie_open_date" placeholder="ex)2020-07-07" required/>
 									</div>
 									<div class="form-group">
-										<label for="movie_total_time"><strong>총시간</strong></label>
+										<label for="movie_total_time"><strong>총시간(분)</strong></label>
 										<input type="number" class="form-control" id="movie_total_time" name="movie_total_time" placeholder="ex)180분->180" required/>
 									</div>
 									<div class="form-group">
