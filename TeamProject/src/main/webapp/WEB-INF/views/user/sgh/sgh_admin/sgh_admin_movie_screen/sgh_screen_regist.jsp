@@ -38,10 +38,12 @@ $(function() {
 							<h4 class="title">${sghScreenRegistDto.theater_name}의 상영관 등록</h4>
 						</div>
 						<!--  페이지별 내용 -->
-						<form role="form" action="/sgh/admin/movieTheaterAddRun" method="get">
+						<form role="form" action="/sgh/admin/movieScreen/screenRegistRun" method="get">
+							<input type="hidden" name="theater_code" value="${sghScreenRegistDto.theater_code}">
+							<input type="hidden" name="theater_name" value="${sghScreenRegistDto.theater_name}">
 							<div class="form-group">
 								<label for="movie_genre"><strong>상영관 이름</strong></label>
-								<input type="text" class="form-control" id="theater_name" name="theater_name" placeholder="영화관 이름" required />
+								<input type="text" class="form-control" id="screen_name" name="screen_name" placeholder="상영관 이름" required />
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>총 좌석 수</strong></label>
