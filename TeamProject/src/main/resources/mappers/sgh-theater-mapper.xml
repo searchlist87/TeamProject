@@ -6,9 +6,10 @@
 <mapper namespace="mappers.sgh-theater-mapper">
 	<!-- 영화관 목록 가져오기 -->
 	<select id="getTheaterList" resultType="SghTheaterVo">
-		select theater.theater_code, theater.theater_name, area.area_code, area.area_name
+		select *
 		from tbl_theater theater, tbl_area area	
-		where theater.area_code = area.area_code order by theater_code
+		where theater.area_code = area.area_code
+		order by regexp_replace(area.area_code, '[0-9]'), to_number(regexp_replace(area.area_code, '[^0-9]'))
 	</select>
 	
 	<!-- 영화관 등록 -->
@@ -16,4 +17,46 @@
 	insert into tbl_theater(theater_code, theater_name, area_code, theater_num, theater_address)
 	values('TC' || seq_theater_num.nextval, #{theater_name}, #{area_code}, seq_theater_num.nextval, #{theater_address})
 	</insert>
+	
+	<!-- 영화관 총 수 가져오기 -->
+	<select id="getTheaterListCount" resultType="integer">
+		select count(*)
+		from(select rownum rnum, a.*  from
+		(select theater.theater_code, theater.theater_name, theater.area_code, theater.theater_address, area.area_name from tbl_theater theater, tbl_area area
+		where theater.area_code = area.area_code
+		order by area_code desc) a)
+		<if test="area_code != 'all'">
+		where
+		area_code = #{area_code}
+		</if>
+	</select>
+	
+	<!--  영화관 조회 페이징 -->
+	<select id="theaterListPaging" resultType="SghTheaterVo">
+		select *
+		from(select rownum rnum, a.*  from
+		(select theater.theater_code, theater.theater_name, theater.area_code, theater.theater_address, area.area_name from tbl_theater theater, tbl_area area
+		where theater.area_code = area.area_code
+		<if test="area_code != 'all'">
+		and area.area_code = #{area_code}
+		</if>
+		order by area_code desc) a)
+		where rnum between #{start_row} and #{end_row}
+	</select>
+	
+	<!-- 영화관 수정할 때 선택한 영화관 가져오기 -->
+	<select id="selectOneTheater" resultType="SghTheaterVo">
+		select theater.theater_code, theater.theater_name, theater.area_code, theater.theater_address, area.area_name
+		from tbl_theater theater, tbl_area area
+		where theater.area_code = area.area_code and theater.theater_code = #{theater_code}
+	</select>
+	
+	<!-- 영화관 수정 처리 -->
+	<update id="modifyTheater">
+		update tbl_theater set
+			theater_name = #{theater_name},
+			area_code = #{area_code},
+			theater_address = #{theater_address}
+		where theater_code = #{theater_code}
+	</update>
 </mapper>
