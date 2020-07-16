@@ -17,6 +17,7 @@ public class JmhMovieVo {
 	private String movie_preview;
 	private int movie_num;
 	private String[] movie_sub_image;
+	private String movie_content;
 	public JmhMovieVo() {
 		super();
 	}
@@ -101,6 +102,15 @@ public class JmhMovieVo {
 
 	public void setMovie_sub_image(String[] movie_sub_image) {
 		this.movie_sub_image = movie_sub_image;
+	}
+
+	
+	public String getMovie_content() {
+		return movie_content;
+	}
+
+	public void setMovie_content(String movie_content) {
+		this.movie_content = movie_content;
 	}
 
 	@Override
