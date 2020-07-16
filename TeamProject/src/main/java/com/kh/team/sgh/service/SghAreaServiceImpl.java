@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.sgh.service;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.SghAreaVo;
-import com.kh.team.persistence.SghAreaDao;
+import com.kh.team.sgh.persistence.SghAreaDao;
 
 @Service
 public class SghAreaServiceImpl implements SghAreaService {

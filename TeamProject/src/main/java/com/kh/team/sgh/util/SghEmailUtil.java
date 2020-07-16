@@ -1,4 +1,4 @@
-package com.kh.team.util;
+package com.kh.team.sgh.util;
 
 import java.util.UUID;
 

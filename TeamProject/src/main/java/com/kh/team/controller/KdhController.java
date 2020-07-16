@@ -1,5 +1,6 @@
 package com.kh.team.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,22 +97,22 @@ public class KdhController {
 		return "user/kdh/kdh_food/kdh_package";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/cart", method = RequestMethod.GET)
 	public String cart(HttpSession session, int food_num, int food_buy_price, int food_buy_count) throws Exception {
 		
-//		Map<String, Object> buyFoodList = new HashMap<String, Object>();
+		List<KdhBuyFoodInfo> foodList = null;
+		foodList =  (List<KdhBuyFoodInfo>)session.getAttribute("foodList");
+		if (foodList == null) {
+			foodList = new ArrayList<>();
+		}
 		KdhBuyFoodInfo foodInfo = foodService.selectBuyFoodbyNum(food_num);
 		foodInfo.setFood_buy_count(food_buy_count);
 		foodInfo.setFood_buy_price(food_buy_price);
+		foodList.add(foodInfo);
 		
-//		buyFoodList.put("foodInfo", foodInfo);
-		
-		session.setAttribute("foodInfo", foodInfo);
-		System.out.println("foodInfo:" + foodInfo);
-		
-		
-//		String user_id = String.valueOf(session.getAttribute("user_id"));
-//		System.out.println("user_id : " + user_id);
+		session.setAttribute("foodList", foodList);
+		System.out.println("foodList:" + foodList);
 		return "user/kdh/kdh_food/kdh_cart";
 	}
 }

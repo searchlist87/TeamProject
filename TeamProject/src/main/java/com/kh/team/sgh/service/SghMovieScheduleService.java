@@ -1,11 +1,10 @@
-package com.kh.team.persistence;
+package com.kh.team.sgh.service;
 
 import java.util.List;
 
 import com.kh.team.domain.SghMovieNameVo;
 
-public interface SghMovieScheduleDao {
+public interface SghMovieScheduleService {
 
-	// 영화 이름, 코드 가져오기
 	public List<SghMovieNameVo> getMovieName(String theater_code) throws Exception;
 }

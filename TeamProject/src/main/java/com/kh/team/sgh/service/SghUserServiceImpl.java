@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.sgh.service;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.team.domain.SghFindDto;
 import com.kh.team.domain.SghLoginDto;
 import com.kh.team.domain.SghUserVo;
-import com.kh.team.persistence.SghUserDao;
+import com.kh.team.sgh.persistence.SghUserDao;
 
 @Service
 public class SghUserServiceImpl implements SghUserService {

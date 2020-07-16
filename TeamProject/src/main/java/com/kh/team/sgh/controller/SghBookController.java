@@ -1,4 +1,4 @@
-package com.kh.team.controller;
+package com.kh.team.sgh.controller;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.team.domain.SghAreaVo;
 import com.kh.team.domain.SghMovieNameVo;
 import com.kh.team.domain.SghTheaterVo;
-import com.kh.team.service.SghAreaService;
-import com.kh.team.service.SghMovieScheduleService;
-import com.kh.team.service.SghTheaterService;
+import com.kh.team.sgh.service.SghAreaService;
+import com.kh.team.sgh.service.SghMovieScheduleService;
+import com.kh.team.sgh.service.SghTheaterService;
 
 @Controller
 @RequestMapping("/sgh/book")

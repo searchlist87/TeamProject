@@ -1,14 +1,11 @@
-package com.kh.team.controller;
+package com.kh.team.sgh.controller;
 
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +17,8 @@ import com.kh.team.domain.SghEmailDto;
 import com.kh.team.domain.SghFindDto;
 import com.kh.team.domain.SghLoginDto;
 import com.kh.team.domain.SghUserVo;
-import com.kh.team.service.SghUserService;
-import com.kh.team.util.SghEmailUtil;
+import com.kh.team.sgh.service.SghUserService;
+import com.kh.team.sgh.util.SghEmailUtil;
 
 @Controller
 @RequestMapping("/sgh/user")

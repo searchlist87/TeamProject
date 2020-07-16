@@ -4,6 +4,15 @@
 <%@ include file="../../../include/tag_and_styleSheet.jsp" %>
 <%@ include file="../../../include/admin_header.jsp" %>
 
+<script>
+$(function() {
+	var result = "${result}";
+	if(result == "true") {
+		alert("성공적으로 등록되었습니다.");
+	}
+});
+</script>
+
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">

@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.sgh.service;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.SghMovieNameVo;
-import com.kh.team.persistence.SghMovieScheduleDao;
+import com.kh.team.sgh.persistence.SghMovieScheduleDao;
 
 @Service
 public class SghMovieScheduleServiceImpl implements SghMovieScheduleService {
