@@ -2,8 +2,8 @@ package com.kh.team.sgh.service;
 
 import java.util.List;
 
-import com.kh.team.sgh.domain.SghPagingDto;
-import com.kh.team.sgh.domain.SghTheaterVo;
+import com.kh.team.domain.SghPagingDto;
+import com.kh.team.domain.SghTheaterVo;
 
 public interface SghTheaterService {
 

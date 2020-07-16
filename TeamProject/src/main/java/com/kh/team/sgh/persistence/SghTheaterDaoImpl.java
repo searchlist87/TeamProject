@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kh.team.sgh.domain.SghPagingDto;
-import com.kh.team.sgh.domain.SghTheaterVo;
+import com.kh.team.domain.SghPagingDto;
+import com.kh.team.domain.SghTheaterVo;
 
 @Repository
 public class SghTheaterDaoImpl implements SghTheaterDao {

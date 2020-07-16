@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kh.team.sgh.domain.SghMovieScreenVo;
+import com.kh.team.domain.SghMovieScreenVo;
 
 @Repository
 public class SghMovieScreenDaoImpl implements SghMovieScreenDao {
@@ -24,6 +24,11 @@ public class SghMovieScreenDaoImpl implements SghMovieScreenDao {
 	@Override
 	public void insertScreen(SghMovieScreenVo sghMovieScreenVo) throws Exception {
 		sqlSession.insert(NAMESPACE + "insertScreen", sghMovieScreenVo);
+	}
+
+	@Override
+	public SghMovieScreenVo getScreenOne(String screen_code) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getScreenOne", screen_code);
 	}
 
 }

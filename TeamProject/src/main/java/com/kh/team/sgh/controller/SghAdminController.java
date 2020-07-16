@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.team.sgh.domain.SghAreaVo;
-import com.kh.team.sgh.domain.SghPagingDto;
-import com.kh.team.sgh.domain.SghTheaterVo;
+import com.kh.team.domain.SghAreaVo;
+import com.kh.team.domain.SghPagingDto;
+import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.sgh.service.SghAreaService;
 import com.kh.team.sgh.service.SghTheaterService;
 

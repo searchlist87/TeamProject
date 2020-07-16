@@ -2,7 +2,7 @@ package com.kh.team.sgh.service;
 
 import java.util.List;
 
-import com.kh.team.sgh.domain.SghAreaVo;
+import com.kh.team.domain.SghAreaVo;
 
 public interface SghAreaService {
 	// 지역 리스트 가져오기

@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.kh.team.sgh.domain.SghMovieNameVo;
+import com.kh.team.domain.SghMovieNameVo;
 import com.kh.team.sgh.persistence.SghMovieScheduleDao;
 
 @Service

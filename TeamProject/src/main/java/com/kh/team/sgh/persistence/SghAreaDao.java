@@ -2,7 +2,7 @@ package com.kh.team.sgh.persistence;
 
 import java.util.List;
 
-import com.kh.team.sgh.domain.SghAreaVo;
+import com.kh.team.domain.SghAreaVo;
 
 public interface SghAreaDao {
 

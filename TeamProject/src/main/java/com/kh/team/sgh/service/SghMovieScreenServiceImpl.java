@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.kh.team.sgh.domain.SghMovieScreenVo;
+import com.kh.team.domain.SghMovieScreenVo;
 import com.kh.team.sgh.persistence.SghMovieScreenDao;
 
 @Service
@@ -22,6 +22,11 @@ public class SghMovieScreenServiceImpl implements SghMovieScreenService {
 	@Override
 	public void insertScreen(SghMovieScreenVo sghMovieScreenVo) throws Exception {
 		sghMovieScreenDao.insertScreen(sghMovieScreenVo);
+	}
+
+	@Override
+	public SghMovieScreenVo getScreenOne(String screen_code) throws Exception {
+		return sghMovieScreenDao.getScreenOne(screen_code);
 	}
 
 }

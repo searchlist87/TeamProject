@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.team.sgh.domain.SghEmailDto;
-import com.kh.team.sgh.domain.SghFindDto;
-import com.kh.team.sgh.domain.SghLoginDto;
-import com.kh.team.sgh.domain.SghUserVo;
+import com.kh.team.domain.SghEmailDto;
+import com.kh.team.domain.SghFindDto;
+import com.kh.team.domain.SghLoginDto;
+import com.kh.team.domain.SghUserVo;
 import com.kh.team.sgh.service.SghUserService;
 import com.kh.team.sgh.util.SghEmailUtil;
 

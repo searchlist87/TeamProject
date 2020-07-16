@@ -2,9 +2,9 @@ package com.kh.team.sgh.service;
 
 import java.util.List;
 
-import com.kh.team.sgh.domain.SghFindDto;
-import com.kh.team.sgh.domain.SghLoginDto;
-import com.kh.team.sgh.domain.SghUserVo;
+import com.kh.team.domain.SghFindDto;
+import com.kh.team.domain.SghLoginDto;
+import com.kh.team.domain.SghUserVo;
 
 public interface SghUserService {
 	// 회원가입

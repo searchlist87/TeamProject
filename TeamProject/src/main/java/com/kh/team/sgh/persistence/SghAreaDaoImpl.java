@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kh.team.sgh.domain.SghAreaVo;
+import com.kh.team.domain.SghAreaVo;
 
 @Repository
 public class SghAreaDaoImpl implements SghAreaDao {

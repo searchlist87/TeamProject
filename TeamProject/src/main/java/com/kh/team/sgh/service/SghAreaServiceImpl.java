@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.kh.team.sgh.domain.SghAreaVo;
+import com.kh.team.domain.SghAreaVo;
 import com.kh.team.sgh.persistence.SghAreaDao;
 
 @Service

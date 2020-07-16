@@ -6,9 +6,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.kh.team.sgh.domain.SghFindDto;
-import com.kh.team.sgh.domain.SghLoginDto;
-import com.kh.team.sgh.domain.SghUserVo;
+import com.kh.team.domain.SghFindDto;
+import com.kh.team.domain.SghLoginDto;
+import com.kh.team.domain.SghUserVo;
 import com.kh.team.sgh.persistence.SghUserDao;
 
 @Service

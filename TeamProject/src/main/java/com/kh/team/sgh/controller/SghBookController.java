@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kh.team.sgh.domain.SghAreaVo;
-import com.kh.team.sgh.domain.SghMovieNameVo;
-import com.kh.team.sgh.domain.SghTheaterVo;
+import com.kh.team.domain.SghAreaVo;
+import com.kh.team.domain.SghMovieNameVo;
+import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.sgh.service.SghAreaService;
 import com.kh.team.sgh.service.SghMovieScheduleService;
 import com.kh.team.sgh.service.SghTheaterService;

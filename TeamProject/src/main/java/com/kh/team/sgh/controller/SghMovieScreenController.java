@@ -9,9 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kh.team.sgh.domain.SghMovieScreenVo;
-import com.kh.team.sgh.domain.SghScreenRegistDto;
-import com.kh.team.sgh.domain.SghTheaterVo;
+import com.kh.team.domain.SghMovieScreenVo;
+import com.kh.team.domain.SghScreenRegistDto;
+import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.sgh.service.SghMovieScreenService;
 import com.kh.team.sgh.service.SghTheaterService;
 
@@ -37,8 +37,9 @@ public class SghMovieScreenController {
 	// 상영관 수정 폼으로
 	@RequestMapping(value="/screenModify", method=RequestMethod.GET)
 	public String screenModify(String screen_code, Model model) throws Exception {
-		System.out.println("screen_code :" + screen_code);
-		return null;
+		SghMovieScreenVo sghMovieScreenVo = sghMovieScreenService.getScreenOne(screen_code);
+		model.addAttribute("sghMovieScreenVo", sghMovieScreenVo);
+		return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_screen_modify";
 	}
 	
 	// 상영관 등록 폼으로

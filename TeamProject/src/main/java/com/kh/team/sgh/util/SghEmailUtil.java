@@ -8,7 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 
-import com.kh.team.sgh.domain.SghEmailDto;
+import com.kh.team.domain.SghEmailDto;
 
 public class SghEmailUtil {
 	// 임시 비밀번호 생성

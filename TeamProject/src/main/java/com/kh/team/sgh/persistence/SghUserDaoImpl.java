@@ -9,9 +9,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kh.team.sgh.domain.SghFindDto;
-import com.kh.team.sgh.domain.SghLoginDto;
-import com.kh.team.sgh.domain.SghUserVo;
+import com.kh.team.domain.SghFindDto;
+import com.kh.team.domain.SghLoginDto;
+import com.kh.team.domain.SghUserVo;
 
 @Repository
 public class SghUserDaoImpl implements SghUserDao {

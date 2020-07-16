@@ -1,4 +1,4 @@
-package com.kh.team.sgh.domain;
+package com.kh.team.domain;
 
 public class SghMovieNameVo {
 
