@@ -35,7 +35,7 @@ public class MainController {
 		// GshController
 		@RequestMapping(value="/movieView", method = RequestMethod.GET)
 		public String review() throws Exception {
-			return "redirect:/gsh/movie/bestList";
+			return "redirect:/gsh/movie/movieView";
 		}
 		
 }

@@ -27,6 +27,7 @@ $(function () {
 </script>
 
 <body class="js">
+
 <!-- 해더 부분 -->
 <%@include file="../include/admin_header.jsp" %>
 		<!-- admin_category -->
@@ -70,22 +71,18 @@ $(function () {
 										</tr>
 									</thead>
 									<tbody style="vertical-align:middle;table-layout:fixed;">
+									<!--  영화정보 조회 -->
+									<c:forEach items="${jmhMovieVo}" var="jmhMovieVo">
 										<tr style="height:50px;">
-											<td style="height:100px;vertical-align:middle;">3</td>
-											<td><img src="/resources/images/gsh/movie01.jpg"/></td>
-											<td style="vertical-align:middle;"><a href="" class="movie_title"># 살아있다</a></td>
-											<td style="vertical-align:middle;">로맨스</td>
+											<td style="height:100px;vertical-align:middle;">${jmhMovieVo.movie_num}</td>
+											<td><img src="/upload/displayFile?fileName=${jmhMovieVo.movie_main_image}"/></td>
+											<td style="vertical-align:middle;"><a href="/admin/admin_movie_selectByMovie?movie_code=${jmhMovieVo.movie_code}" class="movie_title">${jmhMovieVo.movie_name}</a></td>
+											<td style="vertical-align:middle;">${jmhMovieVo.movie_genre}</td>
+											<!--  등급 image 처리 -->
 											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_12.PNG"/></td>
-											<td style="vertical-align:middle;">2020-07-07</td>
+											<td style="vertical-align:middle;">${jmhMovieVo.movie_open_date}</td>
 										</tr>
-										<tr style="height:50px;">
-											<td style="height:100px;vertical-align:middle;">3</td>
-											<td><img src="/resources/images/gsh/movie01.jpg"/></td>
-											<td style="vertical-align:middle;"><a href="" class="movie_title"># 살아있다</a></td>
-											<td style="vertical-align:middle;">로맨스</td>
-											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_12.PNG"/></td>
-											<td style="vertical-align:middle;">2020-07-07</td>
-										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 							</div>

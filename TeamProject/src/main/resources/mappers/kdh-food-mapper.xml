@@ -86,4 +86,10 @@ where food_code = '200'
 select count(*) from tbl_food
 where food_code = '300'
 </select>
+
+<!-- 해당 구매 상품 조회 -->
+<select id="selectBuyFoodbyNum" resultType="KdhBuyFoodInfo">
+	select * from tbl_food
+	where food_num = #{food_num}
+</select>
 </mapper>

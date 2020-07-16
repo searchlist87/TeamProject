@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.domain.GshMovieDto;
 import com.kh.team.domain.GshMovieListVo;
-import com.kh.team.service.GshBestListService;
-import com.kh.team.service.GshNewListService;
-import com.kh.team.service.GshOnAirListService;
+import com.kh.team.service.GshMovieService;
 import com.kh.team.service.GshReviewService;
 
 @Controller
@@ -24,13 +22,7 @@ public class GshController {
 	private GshReviewService gshReviewService;
 	
 	@Inject
-	private GshBestListService gshBestListService;
-	
-	@Inject
-	private GshNewListService gshNewListService;
-	
-	@Inject
-	private GshOnAirListService gshOnAirListService;
+	private GshMovieService gshMovieService;
 	
 	// 리뷰 목록
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
@@ -65,27 +57,28 @@ public class GshController {
 		return "user/gsh/movie/reviewList";
 	}
 	
-	// 베스트 리스트
-	@RequestMapping(value = "/bestList", method = RequestMethod.GET)
-	public String bestList(Model model) throws Exception {
-		List<GshMovieListVo> list = gshBestListService.select_movie_list();
-		System.out.println(list);
+	// 영화 리뷰 목차
+	@RequestMapping(value = "/movieView", method = RequestMethod.GET)
+	public String movieView(Model model) throws Exception {
+		List<GshMovieDto> list = gshMovieService.select_movie_list();
+//		System.out.println(list);
 		model.addAttribute("list", list);
-		return "user/gsh/movie/bestList";
+		return "user/gsh/movie/movieView";
 	}
 	
-	// 신작 리스트
-	@RequestMapping(value = "/newList", method = RequestMethod.GET)
-	public String newList(Model model) throws Exception {
-		List<GshMovieListVo> list = gshNewListService.select_movie_list();
+//	 영화 상세 정보 보기
+	@RequestMapping(value = "/movieInfo", method = RequestMethod.GET)
+	public String movieInfo(Model model) throws Exception {
+		List<GshMovieDto> list = gshMovieService.select_movie_list();
 		model.addAttribute("list", list);
-		return "user/gsh/movie/newList";
+		return "user/gsh/movie/movieInfo";
 	}
+	
 	
 	// 상영작 리스트
 	@RequestMapping(value = "/onairList", method = RequestMethod.GET)
 	public String onairList(Model model) throws Exception {
-		List<GshMovieListVo> list = gshOnAirListService.select_movie_list();
+		List<GshMovieDto> list = gshMovieService.select_movie_list();
 		model.addAttribute("list", list);
 		return "user/gsh/movie/onairList";
 	}

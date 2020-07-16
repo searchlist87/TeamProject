@@ -2,6 +2,7 @@ package com.kh.team.service;
 
 import java.util.List;
 
+import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
 
@@ -39,4 +40,7 @@ public interface KdhFoodService {
 	
 	// food number 300(패키지) 상품 개수 구하기
 	public int CountFoodCode300() throws Exception;
+	
+	// 해당 구매 상품 조회
+	public KdhBuyFoodInfo selectBuyFoodbyNum(int food_num) throws Exception;
 }

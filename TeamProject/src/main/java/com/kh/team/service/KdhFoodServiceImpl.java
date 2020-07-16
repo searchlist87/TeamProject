@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.persistence.KdhFoodDao;
@@ -69,6 +70,11 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	@Override
 	public int CountFoodCode300() throws Exception {
 		return foodDao.CountFoodCode300();
+	}
+
+	@Override
+	public KdhBuyFoodInfo selectBuyFoodbyNum(int food_num) throws Exception {
+		return foodDao.selectBuyFoodbyNum(food_num);
 	}
 
 }

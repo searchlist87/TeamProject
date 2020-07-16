@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-12" style="text-align: center;">
 					<div>
-						<img src="/resources/images/gsh/movie00.jpg" style="height:300px; width:100%;"/>
+						<img src="/resources/images/gsh/peninsula.jpg" style="height:300px; width:100%;"/>
 					</div>
 				</div>
 			</div>
@@ -98,7 +98,7 @@
 							
 				<c:forEach items="${list}" var="vo">
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
-						<a href="/resources/images/gsh/movie01.jpg">
+						<a href="/gsh/movie/movieInfo">
 							<h3>
 								<span><img src="/resources/images/gsh/movie01.jpg"style="width:100px;height:auto;"></span>
 							</h3>
