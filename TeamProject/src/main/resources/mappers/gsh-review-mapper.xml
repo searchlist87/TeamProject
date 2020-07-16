@@ -26,6 +26,12 @@
 		order by review_num desc
 	</select>
 	
+		<!-- 영화 리뷰 작성하기 -->
+<!-- 	<insert id="insert_movie_review"> -->
+<!--  		insert into tbl_review(review_num, movie_name, user_id, review_score, regist_date) -->
+<!--  		values() -->
+<!--  	</insert> -->
+	
 	<!-- 리뷰 삭제하기 -->
 	<delete id="delete_review">
 		delete from tbl_review
@@ -39,11 +45,7 @@
 		where review_num = #{review_num}
 	</update>
 	
-		<!-- 영화 리뷰 작성하기 -->
-<!-- 	<insert id="insert_movie_review"> -->
-<!-- 		insert into tbl_review(review_num, movie_name, user_id, review_score, regist_date) -->
-<!-- 		values() -->
-<!-- 	</insert> -->
+
 
 	
 </mapper>

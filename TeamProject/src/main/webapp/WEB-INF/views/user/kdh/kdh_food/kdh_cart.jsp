@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -8,11 +9,10 @@
 <%@include file = "../../../include/tag_and_styleSheet.jsp" %>
 
 </head>
-<body class="js">
 
+<body class="js">
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-	
 	<!-- Breadcrumbs -->
 	<div class="breadcrumbs">
 		<div class="container">
@@ -29,7 +29,6 @@
 		</div>
 	</div>
 	<!-- End Breadcrumbs -->
-			
 	<!-- Shopping Cart -->
 	<div class="shopping-cart section">
 		<div class="container">
@@ -48,13 +47,13 @@
 							</tr>
 						</thead>
 						<tbody>
+<%-- 						<c:forEach items="${sessionScope.foodInfo}" var="foodVo"> --%>
 							<tr>
 								<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
 								<td class="product-des" data-title="Description">
-									<p class="product-name"><a href="#">상품1</a></p>
-<!-- 									<p class="product-des">상품내용</p> -->
+									<p class="product-name"><a href="#">${sessionScope.foodInfo.food_name}</a></p>
 								</td>
-								<td class="price" data-title="Price"><span>가격</span></td>
+								<td class="price" data-title="Price"><span>${sessionScope.foodInfo.food_price}</span></td>
 								<td class="qty" data-title="Qty"><!-- Input Order -->
 									<div class="input-group">
 										<div class="button minus">
@@ -62,7 +61,7 @@
 												<i class="ti-minus"></i>
 											</button>
 										</div>
-										<input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="1">
+										<input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="${sessionScope.foodInfo.food_buy_count}">
 										<div class="button plus">
 											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
 												<i class="ti-plus"></i>
@@ -71,7 +70,7 @@
 									</div>
 									<!--/ End Input Order -->
 								</td>
-								<td class="total-amount" data-title="Total"><span>가격</span></td>
+								<td class="total-amount" data-title="Total"><span>${sessionScope.foodInfo.food_buy_price}</span></td>
 								<td class="action" data-title="Remove"><a href="#"><i class="ti-trash remove-icon"></i></a></td>
 							</tr>
 						</tbody>

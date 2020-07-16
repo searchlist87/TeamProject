@@ -27,16 +27,16 @@
 	<script src="/resources/js/jquery-ui.min.js"></script>
 
 <script>
-$(function() {
+// $(function() {
 	
-	$("a.page-link").click(function(e) {
-		e.preventDefault();
-		var page = $(this).attr("href");
-		console.log("page:" + page);
+// 	$("a.page-link").click(function(e) {
+// 		e.preventDefault();
+// 		var page = $(this).attr("href");
+// 		console.log("page:" + page);
 		
-		location.href = "/kdh/food/foodView?page=" + page;
-	});
-});
+// 		location.href = "/kdh/food/foodView?page=" + page;
+// 	});
+// });
 </script>
 </head>
 <body class="js">
