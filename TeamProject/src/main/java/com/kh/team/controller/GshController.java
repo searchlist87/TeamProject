@@ -61,7 +61,7 @@ public class GshController {
 	@RequestMapping(value = "/movieView", method = RequestMethod.GET)
 	public String movieView(Model model) throws Exception {
 		List<GshMovieDto> list = gshMovieService.select_movie_list();
-//		System.out.println(list);
+		System.out.println(list);
 		model.addAttribute("list", list);
 		return "user/gsh/movie/movieView";
 	}

@@ -26,18 +26,6 @@
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
 
-<script>
-// $(function() {
-	
-// 	$("a.page-link").click(function(e) {
-// 		e.preventDefault();
-// 		var page = $(this).attr("href");
-// 		console.log("page:" + page);
-		
-// 		location.href = "/kdh/food/foodView?page=" + page;
-// 	});
-// });
-</script>
 </head>
 <body class="js">
 
@@ -95,14 +83,25 @@
 							</div>
 						</div>
 						<div class="row" style="padding-left:20px;">
+						
+						<!-- 영화 이미지 -->
+<!-- 						2020/7/16/fc4a73ad-2b07-483c-b208-9ab6d063bd00-main.jpg -->
+<!-- 						2020/7/16/fdc652a5-9227-41c3-bc13-6230749a815a-main.jpg -->
+<!-- 						2020/7/16/e1a47c4e-9384-4553-ab96-bfc16342a596-main.jpg -->
+<!-- 						2020/7/16/b8d617e8-c834-4fc0-a509-3f3677766155-main.jpg -->
+<!-- 						2020/7/16/6d8435fc-9613-4b92-bf7f-ca15676d7252-main.jpg -->
+<!-- 						2020/7/16/1821590e-6ff2-4ecf-abd6-8c8de07d4d40-main.jpg -->
+<!-- 						2020/7/16/aada08a4-8c72-46eb-a1e0-64a809d4ca57-main.jpg -->
+<!-- 						2020/7/16/cfeb140c-892c-4dff-9bb1-3074f70a3cca-main.jpg -->
 							
 				<c:forEach items="${list}" var="vo">
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
 						<a href="/gsh/movie/movieInfo">
 							<h3>
-								<span><img src="/resources/images/gsh/movie01.jpg"style="width:100px;height:auto;"></span>
+								<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:100px;height:auto;"></span>
 							</h3>
-							<span><img src="/resources/images/jmh/movie_grade_15.png">${vo.movie_name}</span>
+							<span><img src="/resources/images/jmh/movie_grade_${vo.movie_grade}.png" width="30">${vo.movie_name}</span>
+						
 						</a>
 					</div>
 				</c:forEach>
@@ -111,7 +110,6 @@
 				</div>
 			</div>
 		</section>
-		<!--/ End Product Style 1  -->	
 		
 		
 		
