@@ -69,7 +69,6 @@ $(function () {
 		} 
 		$("#movie_total_time").parent().find("span").remove();
 		
-		
 		// 메인 파일 담기
 		var upDiv1 = $("#main_image_div > div");
 		upDiv1.each(function(index) {
@@ -114,6 +113,7 @@ function loadImage(value) {
 		"url" : url,
 		"data" : formData,
 		"success" : function(rData) {
+			console.log(rData);
 			var slashIndex = rData.lastIndexOf("/");
 			var front = rData.substring(0, slashIndex + 1);
 			var rear = rData.substring(slashIndex + 1);
@@ -341,7 +341,7 @@ function previewUpload(value) {
 									</div>
 									<div class="form-group"> 
 										<label for="movie_sub_image" style="margin-right:10px;"><strong>영화 상세사진 : </strong></label>
-										<input type="file" class="movie_sub_image" id="movie_sub_image" multiple onchange="loadSubImage(this);" style="display:none;" accept="image/*" required/>
+										<input type="file" class="movie_sub_image" id="movie_sub_image" multiple onchange="loadSubImage(this);" required style="display:none;" accept="image/*" required/>
 										<label for="movie_sub_image" class="fileLabel" >파일 선택</label>
 										<span id="movie_sub_image_text">선택된 파일 없음</span>
 										<div id="movie_sub_image_div" style="width:300px;height:auto;"></div>

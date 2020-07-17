@@ -36,10 +36,18 @@ public class JmhMovieServiceImpl implements JmhMovieService {
 		
 	}
 
+	// 영화 수정
+	@Transactional
 	@Override
 	public void movieModify(JmhMovieVo jmhMovieVo) throws Exception {
-		// TODO Auto-generated method stub
-
+		jmhMovieDao.movieModify(jmhMovieVo);
+		String movie_code = jmhMovieVo.getMovie_code();
+		String[] files = jmhMovieVo.getMovie_sub_image();
+		System.out.println("movie_code : " + movie_code);
+		System.out.println("files : " + files);
+//		for (String movie_sub_image : files) {
+//			jmhMovieDao.movieImageModify(movie_code, movie_sub_image);
+//		}
 	}
 
 	// 영화 코드 조회
