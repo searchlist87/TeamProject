@@ -64,8 +64,23 @@ public class JmhAdminController {
 	
 	// 영화 수정
 	@RequestMapping(value="/admin_movie_modify", method = RequestMethod.GET)
-	public String movie_modify() throws Exception {
+	public String movie_modify(String movie_code, Model model) throws Exception {
+		JmhMovieVo jmhMovieVo = jmhMovieService.selectByMovie(movie_code);
+		List<JmhMovieImageVo> jmhMovieImageVo = jmhMovieService.selectByMovieSubImage(movie_code);
+		model.addAttribute("jmhMovieImageVo", jmhMovieImageVo);
+		model.addAttribute("jmhMovieVo", jmhMovieVo);
 		return "/admin/admin_movie_modify";
+	}
+	
+	// 영화 수정 처리
+	@RequestMapping(value="/admin_movie_modify", method = RequestMethod.POST)
+	public String movie_modifyPost(JmhMovieVo jmhMovieVo) throws Exception {
+		String movie_code = jmhMovieVo.getMovie_code();
+		System.out.println("movie_code :" + movie_code);
+		System.out.println("jmhMovieVo :" + jmhMovieVo);
+		jmhMovieService.movieModify(jmhMovieVo);
+		
+		return "redirect:/admin/admin_movie_selectByMovie?movie_code=" + movie_code;
 	}
 	
 }

@@ -13,10 +13,10 @@
 	
 	<!--  영화 등록 -->
 	<insert id="movieRegister">
-	insert into tbl_movie(movie_code, movie_name, movie_genre, movie_director, movie_actor, movie_open_date, movie_total_time,
-				movie_main_image, movie_regist_date, movie_grade, movie_preview, movie_num, movie_content)
-	values('MC' || seq_movie_num.nextval, #{movie_name}, #{movie_genre}, #{movie_director}, #{movie_actor}, #{movie_open_date},
-			#{movie_total_time}, #{movie_main_image}, sysdate, #{movie_grade}, #{movie_preview}, seq_movie_num.nextval, #{movie_content})
+		insert into tbl_movie(movie_code, movie_name, movie_genre, movie_director, movie_actor, movie_open_date, movie_total_time,
+							movie_main_image, movie_regist_date, movie_grade, movie_preview, movie_num, movie_content)
+		values('MC' || seq_movie_num.nextval, #{movie_name}, #{movie_genre}, #{movie_director}, #{movie_actor}, #{movie_open_date},
+				#{movie_total_time}, #{movie_main_image}, sysdate, #{movie_grade}, #{movie_preview}, seq_movie_num.nextval, #{movie_content})
 	</insert>	
 
 	<!--  영화상세이미지 등록 -->
@@ -39,11 +39,33 @@
 	
 	<!-- 영화코드 조회 -->
 	<select id="selectMovieCode" resultType="string">
-	select * from
-		(select movie_code, rownum as rnum 
+		select * from
+			(select movie_code, rownum as rnum 
 		                from tbl_movie
 		                order by movie_code desc)
 		where rnum = 1
 	</select>
+	
+	<!--  영화 수정 -->
+	<update id="updateMovie">
+		update tbl_movie set 
+		    movie_name = #{movie_name},
+		    movie_genre = #{movie_genre},
+		    movie_director = #{movie_director},
+		    movie_actor = #{movie_actor},
+		    movie_open_date = #{movie_open_date},
+		    movie_total_time = #{movie_total_time},
+		    movie_main_image = #{movie_main_image},
+		    movie_grade = #{movie_grade},
+		    movie_preview = #{movie_preview},
+		    movie_content = #{movie_content}
+		where movie_code = #{movie_code}
+	</update>
+	
+	<!--  서브 이미지 삭제 -->
+	<delete id="deleteMovieImage">
+		delete from tbl_movie_image
+		where movie_code = #{movie_code}
+	</delete>
 
 </mapper>

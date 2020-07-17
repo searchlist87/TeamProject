@@ -28,5 +28,8 @@ public interface JmhMovieDao {
 	// 영화 서브 이미지 추가
 	public void movieSubImageRegister(String movie_code, String movie_sub_image) throws Exception;
 	
+	// 영화 sub_image 삭제
+	public void deleteMovieImage(String movie_code) throws Exception;
+	
 	
 }

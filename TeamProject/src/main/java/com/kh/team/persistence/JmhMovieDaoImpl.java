@@ -48,10 +48,9 @@ public class JmhMovieDaoImpl implements JmhMovieDao {
 	// 영화 수정
 	@Override
 	public void movieModify(JmhMovieVo jmhMovieVo) throws Exception {
-		// TODO Auto-generated method stub
-
+		sqlSession.update(NAMESPACE + "updateMovie", jmhMovieVo);
 	}
-
+	
 	// 영화코드 조회
 	@Override
 	public String selectMovieCode() throws Exception {
@@ -64,13 +63,13 @@ public class JmhMovieDaoImpl implements JmhMovieDao {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("movie_code", movie_code);
 		map.put("movie_sub_image", movie_sub_image);
-		System.out.println("movie_code:" + movie_code);
-		System.out.println("movie_sub_image:" + movie_sub_image);
 		sqlSession.insert(NAMESPACE + "movieSubImageRegister", map)	;
 	}
 
-	
-
-	
+	// 영화 서브이미지 삭제
+	@Override
+	public void deleteMovieImage(String movie_code) throws Exception {
+		sqlSession.delete(NAMESPACE + "deleteMovieImage", movie_code);
+	}
 
 }
