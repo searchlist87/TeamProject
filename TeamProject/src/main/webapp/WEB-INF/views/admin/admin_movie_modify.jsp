@@ -389,16 +389,17 @@ function previewUpload(value) {
 									</div>
 									<div> 
 										<span style="color:blue;">* 이미지& 동영상 파일 크기는 10MB 미만만 가능합니다.</span>
+										<span style="color:red;">( 파일명에 '#', [], {}, 등 특수문자는 제외시켜주세요.)</span>
 									</div>
 									<div class="form-group">
 										<label for="movie_main_image" style="margin-right:10px;"><strong>영화 메인이미지 : </strong></label>
-										<input type="file" class="movie_main_image" id="movie_main_image" onchange="loadImage(this);" accept="image/*" style="display:none;"/>
+										<input type="file" class="movie_main_image" id="movie_main_image" onchange="loadImage(this);" accept="image/*" style="display:none;" disabled/>
 										<label for="movie_main_image" class="fileLabel" >파일 선택</label>
 										<span id="movie_main_image_text"></span>
-										<div id="main_image_div" style="width:200px;height:auto;">
+										<div id="main_image_div" style="width:300px;height:auto;">
 											<div data-fileName="${jmhMovieVo.movie_main_image}">
 <%-- 												<input type="hidden" name="movie_main_image" value="${jmhMovieVo.movie_main_image}"/> --%>
-												<img src="/upload/displayFile?fileName=${jmhMovieVo.movie_main_image}" />
+												<img src="/upload/displayFile?fileName=${jmhMovieVo.movie_main_image}" width="150px;"/>
 												<a href="${jmhMovieVo.movie_main_image}" class="attach-main-del"><span class="pull-right" style="color:red;">[삭제]</span></a>
 											</div>
 											
@@ -414,7 +415,7 @@ function previewUpload(value) {
 				
 											<div data-fileName="${imageVo.movie_sub_image}">
 <%-- 											<input type="hidden" value="${imageVo.movie_sub_image}" name="movie_sub_image" /> --%>
-												<img src="/upload/displayFile?fileName=${imageVo.movie_sub_image}"/>
+												<img src="/upload/displayFile?fileName=${imageVo.movie_sub_image}" width="225px;"/>
 												<a href="${imageVo.movie_sub_image}" class="attach-sub-del"><span class="pull-right" style="color:red;">[삭제]</span></a>
 											</div>
 										</c:forEach>	
@@ -423,7 +424,7 @@ function previewUpload(value) {
 									<br/>
 									<div class="form-group">
 										<label for="movie_preview" style="margin-right:10px;"><strong>영화 예고편 : </strong></label>
-										<input type="file" class="movie_preview" id="movie_preview" accept="video/*" onchange="previewUpload(this);" style="display:none;"/>
+										<input type="file" class="movie_preview" id="movie_preview" accept="video/*" onchange="previewUpload(this);" style="display:none;" disabled/>
 										<label for="movie_preview" class="fileLabel" >파일 선택</label>
 										<span id="movie_preview_span"></span>
 										<div id="movie_preview_text" style="width:250px;height:auto;">
