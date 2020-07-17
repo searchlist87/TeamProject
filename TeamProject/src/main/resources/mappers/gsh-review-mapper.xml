@@ -19,8 +19,6 @@
 		order by review_num desc
 	</select>
 	
-
-	
 	<!-- 리뷰 삭제하기 -->
 	<delete id="delete_review">
 		delete from tbl_review

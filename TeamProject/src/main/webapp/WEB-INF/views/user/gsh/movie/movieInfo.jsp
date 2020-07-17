@@ -5,54 +5,28 @@
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
 <body>
-${movieDto.movie_main_image}
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8" style="margin-top:50px;margin-bottom:50px;">
-			<div class="carousel slide" id="carousel-346228">
-				<ol class="carousel-indicators">
-					<li data-slide-to="0" data-target="#carousel-346228">
-					</li>
-					<li data-slide-to="1" data-target="#carousel-346228">
-					</li>
-					<li data-slide-to="2" data-target="#carousel-346228" class="active">
-					</li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="carousel-item">
-						<img class="d-block w-100" alt="Carousel Bootstrap First" src="/resources/images/gsh/peninsula3.jpg" style="height:300px; width:100%;"/>
-						<div class="carousel-caption">
-						</div>
-					</div>
-					<div class="carousel-item">
-						<img class="d-block w-100" alt="Carousel Bootstrap Second" src="/resources/images/gsh/peninsula2.jpg" style="height:300px; width:100%;"/>
-						<div class="carousel-caption">
-						</div>
-					</div>
-					<div class="carousel-item active">
-						<img class="d-block w-100" alt="Carousel Bootstrap Third" src="/resources/images/gsh/peninsula1.jpg" style="height:300px; width:100%;"/>
-						<div class="carousel-caption">
-						</div>
-					</div>
-				</div> <a class="carousel-control-prev" href="#carousel-346228" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> <a class="carousel-control-next" href="#carousel-346228" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+	
+	<!-- 영화 배너 이미지 끝 -->
 	
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="row">
 				<div class="colo-md-4">
-					<div style="padding:15px;float:left;">
+					<div style="padding:15px;float:left; margin-bottom:50px;">
 						<img src="/upload/displayFile?fileName=${movieDto.movie_main_image}" style="height:auto;" alt="영화이름">
 					</div>
 				</div>
 				<div class="colo-md-8">
 					<table class="table">
-				
 						<tbody>
 							<tr>
 								<th>관람등급</th>
@@ -86,16 +60,12 @@ ${movieDto.movie_main_image}
 							<tr>
 								<th colspan="2"><button type="button" class="btn btn-primary">예매하기</button></th>
 							</tr>
-							
 						</tbody>
 					</table>
-				
 				</div>
 			</div>
-		
 			</div>
 		</div>
-	</div>
 		
 		
 		
@@ -145,11 +115,81 @@ ${movieDto.movie_main_image}
 <!-- 				<div class="col-md-2"></div> -->
 <!-- 			</div> -->
 <!-- 		</div> -->
+
+		<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+
+			<!-- 영화 예고편 시작 -->
+			
+			<div class="slide_wrap slide_movie_detail_trailer">
+				<div class="owl-carousel owl-loaded owl-drag">
+					<div class="owl-stage-outer">
+						<div class="owl-stage" style="margin-bottom:50px;">
+<%-- 						<c:forEach items="${list}" var="vo"> --%>
+							<div class="owl-item active"
+								style="width: 313.333px; margin-right: 20px;">
+								<div class="item" id="movie_trailer_0">
+									<a href="#"><em><img src="https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202007/16010_109_1.jpg" alt="반도"></em>
+									<strong>스틸컷</strong>
+									</a>
+								</div>
+							</div>
+<%-- 						</c:forEach> --%>
+<!-- 							<div class="owl-item active" -->
+<!-- 								style="width: 313.333px; margin-right: 20px;"> -->
+<!-- 								<div class="item" id="movie_trailer_1"> -->
+<!-- 									<a href="#"><em><img src="https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202007/16010_109_2.jpg" alt="반도"></em> -->
+<!-- 									<strong>스틸컷</strong> -->
+<!-- 									</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="owl-item active" -->
+<!-- 								style="width: 313.333px; margin-right: 20px;"> -->
+<!-- 								<div class="item" id="movie_trailer_2"> -->
+<!-- 									<a href="#"><em><img src="https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202007/16010_109_3.jpg" alt="반도"></em> -->
+<!-- 									<strong>스틸컷</strong> -->
+<!-- 									</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="owl-item active" -->
+<!-- 								style="width: 313.333px; margin-right: 20px;"> -->
+<!-- 								<div class="item" id="movie_trailer_3"> -->
+<!-- 									<a href="#"><em> -->
+<!-- 									<img src="https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202007/16010_109_4.jpg" alt="반도"></em> -->
+<!-- 										<strong>스틸컷</strong>  -->
+<!-- 									</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 영화 예고편 끝 -->
+
+			<!-- 영화 내용 시작 -->
+				<div class="movieContent " style="margin-bottom:20px;">
+					<h2>영화내용</h2>
+				</div>
+				<div>
+					<p>영화내용</p>
+				</div>
+				
+			<div style="margin-top:50px;margin-bottom:50px;">
+				<h2>예고편</h2>
+				<video src="/upload/displayFile?fileName=${movieDto.movie_preview}" controls style="width:1400px; height:auto;"></video>
+			</div>
+			
+			<!-- 영화 내용 끝 -->
+		</div>	
+		<div class="col-md-2"></div>
+	</div>
 		
 		<!-- 영화 줄거리 시작 -->
 <!-- 			<div class="movie-summary" id="movieInfo"> -->
 <!--             	<div class="summary" style="margin-top:10px; margin-bottom:10px;text-align:center;"><strong>영화 내용</strong></div> -->
-<!--             	<div class="text" style=text-align:center;>영화 내용</div> -->
+<!--             	<div class="text" style=text-align:center;>영화내용</div> -->
 <!--     		</div> -->
     	<!-- 영화 줄거리 끝 -->
 		
