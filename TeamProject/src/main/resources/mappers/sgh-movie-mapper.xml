@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.sgh-movie-mapper">
+	<!-- 영화 상영 일정 등록에 사용할 movie 목록 가져오기 -->
+	<select id="getScheduleMovieList" resultType="SghScheduleListDto">
+		select movie_code, movie_name, movie_open_date from tbl_movie
+	</select>
+	
+</mapper>

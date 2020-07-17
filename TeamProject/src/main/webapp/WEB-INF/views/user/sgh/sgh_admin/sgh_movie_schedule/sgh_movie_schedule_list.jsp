@@ -6,31 +6,14 @@
 <%@ include file="../../../../include/admin_header.jsp" %>
 
 <style>
-	strong {
-		font-size: 20px;
+	td {
+		text-align: center;
 	}
 	th {
 		text-align: center;
 	}
-	td {
-		text-align: center;
-	}
 </style>
 
-<script>
-$(function() {
-	$("#screen_regist").click(function(e) {
-		e.preventDefault();
-		
-		$("#frm_theater").submit();
-	});
-});
-</script>
-
-<form id="frm_theater" action="/sgh/admin/movieScreen/screenRegist" method="get">
-	<input type="hidden" name="theater_name" value="${sghTheaterVo.theater_name}">
-	<input type="hidden" name="theater_code" value="${sghTheaterVo.theater_code}">
-</form>
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">
@@ -45,39 +28,31 @@ $(function() {
 								<div class="col-md-12">
 									<div class="container-fluid">
 										<div class="row" style="margin-top: 20px;">
-											<div class="col-md-12">
-												<h2>${sghTheaterVo.theater_name}</h2>
-												<div><strong>지역 : ${sghTheaterVo.area_name}</strong></div>
-												<div><strong>주소 : ${sghTheaterVo.theater_address}</strong></div>
-												
-												<a id="screen_regist" class="btn" href="/#" style="color:white; margin-bottom: 30px;">상영관 등록</a>
-												<a class="btn" href="/sgh/admin/movieTheaterList" style="color:white; margin-bottom: 30px;">목록으로</a>
-												
+											<div class="col-md-12"></div>
 												<table class="table">
 													<thead>
 														<tr>
-															<th>상영관</th>
-															<th>총 좌석 수</th>
-															<th>좌석 행</th>
-															<th>좌석 열</th>
+															<th>상영작</th>
+															<th>영화관</th>
+															<th>시작일</th>
+															<th>종료일</th>
 															<th>수정</th>
 															<th>삭제</th>
 														</tr>
 													</thead>
 													<tbody>
-													<c:forEach items="${screen_list}" var="SghScreenVo">
+													<c:forEach items="${schedule_list}" var="SghScheduleVo">
 														<tr>
-															<td>${SghScreenVo.screen_name}</td>
-															<td>${SghScreenVo.screen_total_seat}</td>
-															<td>${SghScreenVo.screen_seat_row}</td>
-															<td>${SghScreenVo.screen_seat_col}</td>
-															<td><a href="/sgh/admin/movieScreen/screenModify?screen_code=${SghScreenVo.screen_code}" class="btn-primary" style="color: white;">수정</a></td>
+															<td>${SghScheduleVo.movie_name}</td>
+															<td>${SghScheduleVo.theater_name}</td>
+															<td>${SghScheduleVo.movie_start_date}</td>
+															<td>${SghScheduleVo.movie_end_date}</td>
+															<td><a href="/sgh/admin/schedule/scheduleModify?movie_schedule_code=${SghScheduleVo.movie_schedule_code}" class="btn-primary" style="color: white;">수정</a></td>
 															<td><a href="/#" class="btn-danger" style="color: white;">삭제</a></td>
 														</tr>
 													</c:forEach>
 													</tbody>
 												</table>
-											</div>
 										</div>
 									</div>
 								</div>

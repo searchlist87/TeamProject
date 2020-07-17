@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.SghMovieScreenVo;
 import com.kh.team.domain.SghScreenRegistDto;
@@ -42,6 +43,22 @@ public class SghMovieScreenController {
 		return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_screen_modify";
 	}
 	
+	// 상영관 수정 처리
+	@RequestMapping(value="/screenModifyRun", method=RequestMethod.GET)
+	public String screenModifyRun(SghMovieScreenVo sghMovieScreenVo, RedirectAttributes rttr) {
+		String theater_code = sghMovieScreenVo.getTheater_code();
+		try {
+			sghMovieScreenService.screenModify(sghMovieScreenVo);
+			return "redirect:/sgh/admin/movieScreen/screenList?theater_code=" + theater_code;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		boolean result = false;
+		String screen_code = sghMovieScreenVo.getScreen_code();
+		rttr.addFlashAttribute("result", result);
+		return "redirect:/sgh/admin/movieScreen/screenModify?screen_code=" + screen_code;
+	}
+	
 	// 상영관 등록 폼으로
 	@RequestMapping(value="/screenRegist", method=RequestMethod.GET)
 	public String screenRegist(SghScreenRegistDto sghScreenRegistDto, Model model) throws Exception {
@@ -51,9 +68,8 @@ public class SghMovieScreenController {
 	
 	// 상영관 등록 처리
 	@RequestMapping(value="/screenRegistRun", method=RequestMethod.GET)
-	public String screenRegistRun(SghMovieScreenVo sghMovieScreenVo, String theater_name, Model model) {
+	public String screenRegistRun(SghMovieScreenVo sghMovieScreenVo, String theater_name, RedirectAttributes rttr) {
 		String theater_code = sghMovieScreenVo.getTheater_code();
-		SghScreenRegistDto sghScreenRegistDto = new SghScreenRegistDto(theater_name, theater_code);
 		
 		try {
 			sghMovieScreenService.insertScreen(sghMovieScreenVo);
@@ -62,8 +78,7 @@ public class SghMovieScreenController {
 			e.printStackTrace();
 		}
 		boolean result = false;
-		model.addAttribute("result", result);
-		model.addAttribute("sghScreenRegistDto", sghScreenRegistDto);
-		return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_screen_regist";
+		rttr.addFlashAttribute("result", result);
+		return "redirect:/sgh/admin/movieScreen/screenRegist?theater_code=" + theater_code + "&theater_name=" + theater_name;
 	}
 }

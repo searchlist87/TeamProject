@@ -26,7 +26,7 @@ public class SghAdminController {
 	private SghTheaterService sghTheaterService;
 	
 	
-//	 영화관 조회 폼 이동
+//	 영화관 임시 메인 폼 이동
 	@RequestMapping(value="/adminMainForm", method=RequestMethod.GET)
 	public String adminMainForm() throws Exception {
 		return "user/sgh/sgh_admin/sgh_admin_main_form";
@@ -36,7 +36,6 @@ public class SghAdminController {
 	@RequestMapping(value="/movieTheaterList", method=RequestMethod.GET)
 	public String movieTheaterListForm(SghPagingDto sghPagingDto, Model model) throws Exception {
 		int list_count = sghTheaterService.getTheaterListCount(sghPagingDto);
-		System.out.println("count:" + list_count);
 		
 		sghPagingDto.setTotal_count(list_count);
 		sghPagingDto.setPageInfo();
@@ -56,6 +55,21 @@ public class SghAdminController {
 		List<SghAreaVo> areaList = sghAreaService.getAreaList();
 		model.addAttribute("areaList", areaList);
 		return "user/sgh/sgh_admin/sgh_movie_theater_add";
+	}
+	
+	// 영화관 등록 처리
+	@RequestMapping(value="movieTheaterAddRun", method=RequestMethod.GET)
+	public String movieTheaterAdd(SghTheaterVo sghTheaterVo, RedirectAttributes rttr){
+		String result;
+		try {
+			sghTheaterService.movieTheaterAdd(sghTheaterVo);
+			return "redirect:/sgh/admin/movieTheaterList";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		result = "false";
+		rttr.addFlashAttribute("message", result);
+		return "redirect:/sgh/admin/adminMainForm";
 	}
 	
 	// 영화관 수정 폼 이동
@@ -85,24 +99,6 @@ public class SghAdminController {
 			e.printStackTrace();
 		}
 		rttr.addFlashAttribute("result", result);
-		return "user/sgh/sgh_admin/sgh_movie_theater_modify?theater_code=" + sghTheaterVo.getTheater_code();
-	}
-	
-	// 영화관 등록 처리
-	@RequestMapping(value="movieTheaterAddRun", method=RequestMethod.GET)
-	public String movieTheaterAdd(SghTheaterVo sghTheaterVo, RedirectAttributes rttr){
-		System.out.println("SghTheaterVo :" + sghTheaterVo);
-		String result;
-		try {
-			sghTheaterService.movieTheaterAdd(sghTheaterVo);
-			result = "true";
-			rttr.addFlashAttribute("message", result);
-			return "redirect:/sgh/admin/adminMainForm";
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		result = "false";
-		rttr.addFlashAttribute("message", result);
-		return "redirect:/sgh/admin/adminMainForm";
+		return "redirect:/sgh/admin/movieTheaterModify?theater_code=" + sghTheaterVo.getTheater_code();
 	}
 }

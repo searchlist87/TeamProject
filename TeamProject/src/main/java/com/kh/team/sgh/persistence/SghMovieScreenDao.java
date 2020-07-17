@@ -12,4 +12,6 @@ public interface SghMovieScreenDao {
 	public void insertScreen(SghMovieScreenVo sghMovieScreenVo) throws Exception;
 	// 상영관 하나 가져오기
 	public SghMovieScreenVo getScreenOne(String screen_code) throws Exception;
+	// 상영관 수정하기
+	public void screenModify(SghMovieScreenVo sghMovieScreenVo) throws Exception;
 }

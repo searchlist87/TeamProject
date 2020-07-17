@@ -60,7 +60,7 @@ $(function() {
 											<c:forEach items="${theater_list}" var="SghTheaterVo">
 											<tr>
 												<td>${SghTheaterVo.area_name}</td>
-												<td><a href="/sgh/admin/movieScreen/screenList?theater_code=${SghTheaterVo.theater_code}">${SghTheaterVo.theater_name}</a></td>
+												<td><a href="/sgh/admin/movieScreen/screenList?theater_code=${SghTheaterVo.theater_code}" style="color:blue;">${SghTheaterVo.theater_name}</a></td>
 												<td>${SghTheaterVo.theater_address}</td>
 												<td><a href="/sgh/admin/movieTheaterModify?theater_code=${SghTheaterVo.theater_code}" class="btn-primary" style="color: white;">수정</a></td>
 												<td><a href="/#" class="btn-danger" style="color: white;">삭제</a></td>

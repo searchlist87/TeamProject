@@ -29,4 +29,9 @@ public class SghMovieScreenServiceImpl implements SghMovieScreenService {
 		return sghMovieScreenDao.getScreenOne(screen_code);
 	}
 
+	@Override
+	public void screenModify(SghMovieScreenVo sghMovieScreenVo) throws Exception {
+		sghMovieScreenDao.screenModify(sghMovieScreenVo);
+	}
+
 }

@@ -19,4 +19,13 @@
 	<select id="getScreenOne" resultType="SghMovieScreenVo">
 		select * from tbl_movie_screen where screen_code = #{screen_code}
 	</select>
+	<!-- 상영관 수정하기 -->
+	<select id="screenModify">
+		update tbl_movie_screen set
+			screen_name = #{screen_name},
+			screen_total_seat = #{screen_total_seat},
+			screen_seat_col = #{screen_seat_col},
+			screen_seat_row = #{screen_seat_row}
+		where screen_code = #{screen_code}
+	</select>
 </mapper>

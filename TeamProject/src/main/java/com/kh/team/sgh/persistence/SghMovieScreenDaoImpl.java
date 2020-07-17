@@ -31,4 +31,9 @@ public class SghMovieScreenDaoImpl implements SghMovieScreenDao {
 		return sqlSession.selectOne(NAMESPACE + "getScreenOne", screen_code);
 	}
 
+	@Override
+	public void screenModify(SghMovieScreenVo sghMovieScreenVo) throws Exception {
+		sqlSession.update(NAMESPACE + "screenModify", sghMovieScreenVo);
+	}
+
 }

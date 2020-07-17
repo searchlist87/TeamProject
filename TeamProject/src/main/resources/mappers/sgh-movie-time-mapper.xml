@@ -10,4 +10,5 @@
 		where time.movie_code = movie.movie_code and time.screen_code = m_screen.screen_code and time.movie_schedule_num = schedule.movie_schedule_num
 		and time.movie_code = 'MC1' and m_screen.theater_code = 'TC3';
 	</select>
+	
 </mapper>

@@ -16,19 +16,51 @@ $(function() {
 	$("select").css("display", "block");
 	$(".nice-select").remove();
 	
+	// 실패했을 경우
 	var result = "${result}";
 	if(result == "false") {
 		alert("등록에 실패하셨습니다 다시 확인해주세요.");
 	}
 	
+	// 주소 검색 클릭 했을때
 	$("#addressSearch").click(function() {
 		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
+	});
+	
+	// 영화관 이름
+	$("#theater_name").blur(function() {
+		$(".name_clone").remove();
+		var theater_name = $(this).val();
+		var name_rgx = /^[가-힣a-zA-Z0-9]{1,50}$/;
+		if(!name_rgx.test(theater_name)) {
+			var span_clone = $("#message_span").clone();
+			span_clone.attr("class", "name_clone");
+			span_clone.text("필수 정보 입니다. 1~50자 한글과 영어, 숫자만 허용됩니다.");
+			$(this).after(span_clone);
+			return false;
+		}
+		$("#theater_name_result").val("true");
+	});
+	
+	// 전송 할 때
+	$("#frm_theater").submit(function() {
+		var name_result = $("#theater_name_result").val();
+		var address = $("#theater_address").val(); 
+		if(name_result != "true" || address == null || address == "") {
+			alert("비어있는 정보가 있습니다. 다시 확인해주세요.");
+			return false;
+		}
 	});
 });
 </script>
 
 <!-- 해더 부분 -->
 <!-- admin_category -->
+<div style="visibility: hidden;">
+	<span id="message_span" style="color: red;"></span>
+</div>
+<!-- 등록을 할 때 결과를 체크할 hidden type들 -->
+<input type="hidden" id="theater_name_result">
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">
@@ -41,7 +73,7 @@ $(function() {
 							<h4 class="title">영화관 등록</h4>
 						</div>
 						<!--  페이지별 내용 -->
-						<form role="form" action="/sgh/admin/movieTheaterAddRun" method="get">
+						<form id="frm_theater" role="form" action="/sgh/admin/movieTheaterAddRun" method="get">
 							<div class="form-group">
 								<label for="movie_name"><strong>영화관 지역</strong></label>
 								<select class="form-control" name="area_code">
@@ -52,7 +84,7 @@ $(function() {
 							</div>
 							<div class="form-group">
 								<label for="movie_genre"><strong>영화관 이름</strong></label>
-								<input type="text" class="form-control" id="theater_name" name="theater_name" placeholder="영화관 이름" required />
+								<input type="text" class="form-control" id="theater_name" name="theater_name" placeholder="영화관 이름"/>
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>영화관 주소</strong></label>
@@ -60,7 +92,7 @@ $(function() {
 								<button type="button" class="btn" id="addressSearch">주소 검색</button>
 							</div>
 							<button type="submit" class="btn" id="btnSubmit">등록</button>
-							<a href="/sgh/admin/adminMainForm" class="btn" style="color: white;">취소</a>
+							<a href="/sgh/admin/movieTheaterList" class="btn" style="color: white;">취소</a>
 						</form>
 					</div>
 				</div>
