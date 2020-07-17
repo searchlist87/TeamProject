@@ -37,8 +37,10 @@ $(function () {
 				</dl>	
 				<dl class="categor-list" >
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃상영일정 관리</a></dt>
-					<dd><a href="#">상영 일정조회</a></dd>
-					<dd><a href="#">상영 일정등록</a></dd>
+					<dd><a href="/sgh/admin/schedule/scheduleList">상영 일정조회</a></dd>
+					<dd><a href="/sgh/admin/schedule/scheduleRegist">상영 일정등록</a></dd>
+					<dd><a href="/sgh/admin/movieTime/movieTimeList">상영 회차조회</a></dd>
+					<dd><a href="/sgh/admin/movieTime/movieTimeRegist">상영 회차등록</a></dd>
 				</dl>
 				<dl class="categor-list" >
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃영화 상품관리</a></dt>

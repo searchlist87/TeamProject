@@ -176,7 +176,7 @@
 <!-- 													<li><a href="/team/theaterView">울산</a></li> -->
 <!-- 												</ul> -->
 											</li>
-											<li><a href="/team/contact" class="titlePadding">이벤트</a>
+											<li><a href="/event/eventList" class="titlePadding">이벤트</a>
 <!-- 												<ul class="dropdown"> -->
 <!-- 													<li><a href="blog-single-sidebar.html">진행 이벤트</a></li> -->
 <!-- 													<li><a href="blog-single-sidebar.html">종료 이벤트</a></li> -->

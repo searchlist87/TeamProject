@@ -13,18 +13,85 @@ $(function() {
 		alert("등록에 실패하셨습니다 다시 확인해주세요.");
 	}
 	
+	// 상영관 이름
+	$("#screen_name").blur(function() {
+		console.log("클릭");
+		$(".name_clone").remove();
+		var span_clone = $("#message_span").clone();
+		var screen_name = $(this).val();
+		var name_rgx = /^[가-힣a-zA-Z0-9]{1,5}$/;
+		if(!name_rgx.test(screen_name)) {
+			span_clone.attr("class", "name_clone");
+			span_clone.text("필수 정보 입니다. 1~5자 한글, 영문자, 숫자만 사용 가능합니다.");
+			$(this).after(span_clone);
+			$("#screen_name_result").val("false");
+			return false;
+		}
+		$("#screen_name_result").val("true");
+	});
+	
+	// 행
+	$("#screen_seat_row").blur(function() {
+		$(".row_clone").remove();
+		var span_clone = $("#message_span").clone();
+		var screen_seat_row = $(this).val();
+		var row_rgx = /^[0-9]{1,2}$/;
+		if(!row_rgx.test(screen_seat_row)) {
+			span_clone.attr("class", "row_clone");
+			span_clone.text("필수 정보 입니다. 1~2자 숫자만 사용 가능합니다.");
+			$(this).after(span_clone);
+			$("#screen_seat_row_result").val("false");
+			return false;
+		}
+		
+		$("#screen_seat_row_result").val("true");
+		var screen_seat_col = $("#screen_seat_col").val();
+		var total_seat = screen_seat_row * screen_seat_col;
+		$("#screen_total_seat").val(total_seat);
+	});
+	
+	// 열
 	$("#screen_seat_col").blur(function() {
-		var row = $("#screen_seat_row").val();
-		var col = $(this).val();
+		$(".col_clone").remove();
+		var span_clone = $("#message_span").clone();
+		var screen_seat_col = $(this).val();
+		var col_rgx = /^[0-9]{1,2}$/;
+		if(!col_rgx.test(screen_seat_col)) {
+			span_clone.attr("class", "col_clone");
+			span_clone.text("필수 정보 입니다. 1~2자 숫자만 사용 가능합니다.");
+			$(this).after(span_clone);
+			$("#screen_seat_col_result").val("false");
+			return false;
+		}
 		
-		var sum = row * col;
+		$("#screen_seat_col_result").val("true");
+		var screen_seat_row = $("#screen_seat_row").val();
+		var total_seat = screen_seat_row * screen_seat_col;
+		$("#screen_total_seat").val(total_seat);
+	});
+	
+	// 전송할 때 이벤트 막기
+	$("#frm_screen").submit(function() {
+		var name_result = $("#screen_name_result").val();
+		var row_result = $("#screen_seat_row_result").val();
+		var col_result = $("#screen_seat_col_result").val();
 		
-		$("#screen_total_seat").val(sum);
+		if(name_result != "true" || row_result != "true" || col_result != "true") {
+			alert("비어있는 곳이 있습니다. 다시 확인해주세요.");
+			return false;
+		}
 	});
 });
 </script>
 <!-- 해더 부분 -->
 <!-- admin_category -->
+<div style="visibility: hidden;">
+	<span id="message_span" style="color: red;"></span>
+</div>
+<!-- 등록을 할 때 결과를 체크할 hidden type들 -->
+<input type="hidden" id="screen_name_result" value="true">
+<input type="hidden" id="screen_seat_row_result" value="true">
+<input type="hidden" id="screen_seat_col_result" value="true">
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">
@@ -37,12 +104,12 @@ $(function() {
 							<h4 class="title">${sghMovieScreenVo.screen_name}의 상영관 수정</h4>
 						</div>
 						<!--  페이지별 내용 -->
-						<form role="form" action="/sgh/admin/movieScreen/screenModifyRun" method="get">
-							<input type="hidden" name="theater_code" value="${sghScreenRegistDto.theater_code}">
-							<input type="hidden" name="theater_name" value="${sghScreenRegistDto.theater_name}">
+						<form id="frm_screen" role="form" action="/sgh/admin/movieScreen/screenModifyRun" method="get">
+							<input type="hidden" name="screen_code" value="${sghMovieScreenVo.screen_code}">
+							<input type="hidden" name="theater_code" value="${sghMovieScreenVo.theater_code}">
 							<div class="form-group">
 								<label for="movie_genre"><strong>상영관 이름</strong></label>
-								<input type="text" class="form-control" id="screen_name" name="screen_name" placeholder="상영관 이름" value="${sghMovieScreenVo.screen_name}"required />
+								<input type="text" class="form-control" id="screen_name" name="screen_name" placeholder="상영관 이름" value="${sghMovieScreenVo.screen_name}"/>
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>총 좌석 수</strong></label>
@@ -57,7 +124,7 @@ $(function() {
 								<input type="text" class="form-control" id="screen_seat_col" name="screen_seat_col" value="${sghMovieScreenVo.screen_seat_col}"/>
 							</div>
 							<button type="submit" class="btn" id="btnSubmit">등록</button>
-							<a href="/sgh/admin/adminMainForm" class="btn" style="color: white;">취소</a>
+							<a href="/sgh/admin/movieScreen/screenList?theater_code=${sghMovieScreenVo.theater_code}" class="btn" style="color: white;">취소</a>
 						</form>
 					</div>
 				</div>
