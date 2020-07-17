@@ -5,17 +5,29 @@ import java.sql.Timestamp;
 // 영화 - 베스트, 신작, 상영작
 public class GshMovieListVo {
 	
+	// 영화 코드
 	private String movie_code;
+	// 영화 이름
 	private String movie_name;
+	// 영화 장르
 	private String movie_genre;
+	// 영화 감독
 	private String movie_director;
+	// 영화 배우
 	private String movie_actor;
+	// 영화 개봉날짜
 	private Timestamp movie_open_date;
+	// 영화 상영 시간
 	private int movie_total_time;
+	// 영화 메인 이미지
 	private String movie_main_image;
+	// 영화 등록일
 	private Timestamp movie_regist_date;
+	// 영화 등급
 	private String movie_grade;
+	// 영화 예고편
 	private String movie_preview;
+	// 영화 순서
 	private int movie_num;
 	
 	public String getMovie_code() {

@@ -4,11 +4,17 @@ import java.sql.Timestamp;
 
 public class GshReviewVo {
 	
+	// 리뷰 번호
 	private int review_num;
+	// 영화 코드
 	private String movie_code;
+	// 아이디
 	private String user_id;
+	// 평점
 	private int review_score;
+	// 리뷰 내용
 	private String review_content;
+	// 리뷰 작성일
 	private Timestamp review_date;
 	
 	public int getReview_num() {
