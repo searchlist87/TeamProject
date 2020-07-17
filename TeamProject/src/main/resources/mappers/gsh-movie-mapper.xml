@@ -18,7 +18,7 @@
 <!-- 	private String movie_preview; 영화 예고편 -->
 
 	<!-- 영화코드로 전체 영화 찾기 -->
-	<select id="select_movie_list" resultType="GshMovieListVo">
+	<select id="select_movie_list" resultType="GshMovieDto">
 		select * from tbl_movie
 		order by movie_code desc
 	</select>
@@ -52,5 +52,13 @@
 		select * from tbl_movie
 		where movie_grade = #{movie_grade}
 	</select>
+
+	
+	<!--  영화 코드로 영화정보 찾기 -->
+	<select id="select_movie_code" resultType="GshMovieDto">
+		select * from tbl_movie
+		where movie_code = #{movie_code}
+	</select>
+	
 	
 </mapper>

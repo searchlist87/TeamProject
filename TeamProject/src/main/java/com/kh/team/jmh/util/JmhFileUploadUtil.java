@@ -1,10 +1,11 @@
-package com.kh.team.util;
+package com.kh.team.jmh.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Calendar;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
@@ -12,6 +13,9 @@ import org.springframework.util.FileCopyUtils;
 
 public class JmhFileUploadUtil {
 
+	@Resource
+	private static String uploadPath;// servlet-context.xml (id="uploadPath");
+	
 	// 파일 업로드
 	public static String uploadFile(String JmhUploadPath, String originalName, byte[] fileData) throws Exception {
 		UUID uuid = UUID.randomUUID();
@@ -80,5 +84,25 @@ public class JmhFileUploadUtil {
 		File target = new File(filePath);
 		FileCopyUtils.copy(fileData, target);
 		return dirPath;
+	}
+	
+	// 파일 지우기
+	public static String deleteFile(String fileName) throws Exception {
+		String JmhUploadPath = uploadPath + "/jeon_upload";
+		String filePath = JmhUploadPath + File.separator + fileName;
+		
+		String file2Front = fileName.substring(0, fileName.lastIndexOf("/") + 1);
+		String file2Rear = fileName.substring(fileName.lastIndexOf("/") + 1);
+		String smFilePath = JmhUploadPath + File.separator + file2Front + "sm_" + file2Rear;
+		
+		File file = new File(filePath);
+		file.delete();
+		
+		boolean result = JmhFileUploadUtil.isImage(fileName);
+		if (result == true) {
+			File file2 = new File(smFilePath);
+			file2.delete();
+		}
+		return "success";
 	}
 }

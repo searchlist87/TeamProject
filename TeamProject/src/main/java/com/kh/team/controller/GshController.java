@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.domain.GshMovieDto;
-import com.kh.team.domain.GshMovieListVo;
 import com.kh.team.service.GshMovieService;
 import com.kh.team.service.GshReviewService;
 
@@ -28,10 +27,12 @@ public class GshController {
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
 	public String review(Model model) throws Exception {
 		List<GshMovieDto> list = gshReviewService.select_review_code();
-		System.out.println("list:" + list);
+//		System.out.println("list:" + list);
 		model.addAttribute("list", list);
 		return "user/gsh/movie/reviewList";
 	}
+	
+	//
 	
 	// 리뷰 작성 폼
 	@RequestMapping(value = "/review_write_form", method = RequestMethod.GET)
@@ -68,9 +69,12 @@ public class GshController {
 	
 //	 영화 상세 정보 보기
 	@RequestMapping(value = "/movieInfo", method = RequestMethod.GET)
-	public String movieInfo(Model model) throws Exception {
-		List<GshMovieDto> list = gshMovieService.select_movie_list();
-		model.addAttribute("list", list);
+	public String movieInfo(String movie_code, Model model) throws Exception {
+		System.out.println("movie_code:" + movie_code);
+//		List<GshMovieDto> list = gshMovieService.select_movie_list();
+		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
+		System.out.println("movieDto :" + movieDto);
+		model.addAttribute("movieDto", movieDto);
 		return "user/gsh/movie/movieInfo";
 	}
 	
@@ -82,5 +86,7 @@ public class GshController {
 		model.addAttribute("list", list);
 		return "user/gsh/movie/onairList";
 	}
+	
+	
 	
 }

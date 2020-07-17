@@ -1,4 +1,4 @@
-package com.kh.team.controller;
+package com.kh.team.jmh.controller;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.domain.JmhMovieTheaterVo;
-import com.kh.team.service.JmhMovieTheaterService;
+import com.kh.team.jmh.service.JmhMovieTheaterService;
 
 @Controller
 @RequestMapping("/jmh/theater")
@@ -31,6 +31,13 @@ public class JmhController {
 	public String admin() throws Exception {
 		return "admin/admin";
 	}
+	
+	// 이벤트 페이지
+	@RequestMapping(value="/event", method = RequestMethod.GET)
+	public String event() throws Exception {
+		return "event/event";
+	}
+	
 	
 	
 	

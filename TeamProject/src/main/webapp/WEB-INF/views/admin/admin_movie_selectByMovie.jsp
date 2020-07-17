@@ -43,14 +43,12 @@
 $(function () {
 	$("#movie_manage > dd").css("display","block");
 	$("#movie_manage > dt").css("color","red");
-	$("#movie_manage > dd").eq(1).css("color","blue");
+	$("#movie_manage > dd").eq(0).css("color","blue");
 	
 });
 
 </script>
 <body class="js">
-${jmhMovieVo}
-${jmhMovieImageVo}
 <!-- 해더 부분 -->
 <%@include file="../include/admin_header.jsp" %>
 		<!-- admin_category -->
@@ -139,10 +137,10 @@ ${jmhMovieImageVo}
 									<div class="form-group">
 										<label for="movie_preview" style="margin-right:10px;"><strong>영화 예고편 : </strong></label>
 										<div id="movie_preview_text" style="width:auto;height:auto;">
-											<video src="/upload/displayFile?fileName=${jmhMovieVo.movie_preview}" controls></video>
+											<video src="/upload/displayFile?fileName=${jmhMovieVo.movie_preview}" width="300px;" controls></video>
 										</div>
 									</div>
-									<a href="/admin/admin_movie_modify" role="button" class="btn">수정</a>
+									<a href="/admin/admin_movie_modify?movie_code=${jmhMovieVo.movie_code}" role="button" class="btn">수정</a>
 									<a href="/admin/admin_movie_list" role="button" class="btn">목록</a>
 								</form>
 							</div>

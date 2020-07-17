@@ -5,20 +5,13 @@
   
 <mapper namespace="mappers.gsh-review-mapper">
 	
-<!-- 	리뷰번호	review_num -->
-<!-- 	영화코드	movie_code -->
-<!-- 	아이디	user_id -->
-<!-- 	평점	review_score -->
-<!-- 	내용	review_content -->
-<!-- 리뷰 번호(PK)를 기준으로 리뷰 수정 - readonly -->
-	
-	<!-- 영화 리스트 가져오기 -->
+<!-- 	영화 리스트 가져오기 -->
 	<select id="select_review_num">
 		select * from tbl_review
 		order by review_num desc
 	</select>
 	
-		<!-- 영화 정보 찾기  -->
+		<!-- 영화 리뷰 정보 찾기  -->
 	<select id="select_review_code" resultType="GshMovieDto">
 		select *
 		from tbl_movie m, tbl_review r
@@ -26,11 +19,7 @@
 		order by review_num desc
 	</select>
 	
-		<!-- 영화 리뷰 작성하기 -->
-<!-- 	<insert id="insert_movie_review"> -->
-<!--  		insert into tbl_review(review_num, movie_name, user_id, review_score, regist_date) -->
-<!--  		values() -->
-<!--  	</insert> -->
+
 	
 	<!-- 리뷰 삭제하기 -->
 	<delete id="delete_review">
@@ -45,7 +34,6 @@
 		where review_num = #{review_num}
 	</update>
 	
-
 
 	
 </mapper>

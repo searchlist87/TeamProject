@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.jmh.service;
 
 import java.util.List;
 
@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
-import com.kh.team.persistence.JmhMovieDao;
+import com.kh.team.jmh.persistence.JmhMovieDao;
+import com.kh.team.jmh.util.JmhFileUploadUtil;
 
 @Service
 public class JmhMovieServiceImpl implements JmhMovieService {
@@ -36,10 +37,27 @@ public class JmhMovieServiceImpl implements JmhMovieService {
 		
 	}
 
+	// 영화 수정
+	@Transactional
 	@Override
 	public void movieModify(JmhMovieVo jmhMovieVo) throws Exception {
-		// TODO Auto-generated method stub
-
+		jmhMovieDao.movieModify(jmhMovieVo);
+		String movie_code = jmhMovieVo.getMovie_code();
+		List<JmhMovieImageVo> list = jmhMovieDao.selectByMovieSubImage(movie_code);
+		int size = list.size();
+		
+		for (int i = 0; i < size; i ++) {
+			JmhMovieImageVo vo = list.get(i);
+			String movie_sub_image = vo.getMovie_sub_image();
+			JmhFileUploadUtil.deleteFile(movie_sub_image);
+		}
+		
+		jmhMovieDao.deleteMovieImage(movie_code);
+		
+		String[] files = jmhMovieVo.getMovie_sub_image();
+		for (String movie_sub_image : files) {
+			jmhMovieDao.movieSubImageRegister(movie_code, movie_sub_image);
+		}
 	}
 
 	// 영화 코드 조회

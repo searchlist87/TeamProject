@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.jmh.service;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.JmhMovieTheaterVo;
-import com.kh.team.persistence.JmhMovieTheaterDao;
+import com.kh.team.jmh.persistence.JmhMovieTheaterDao;
 
 @Service
 public class JmhMovieTheaterServiceImpl implements JmhMovieTheaterService {

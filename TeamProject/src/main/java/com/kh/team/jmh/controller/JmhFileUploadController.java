@@ -1,4 +1,4 @@
-package com.kh.team.controller;
+package com.kh.team.jmh.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.team.util.JmhFileUploadUtil;
+import com.kh.team.jmh.util.JmhFileUploadUtil;
 
 @RestController
 @RequestMapping("/upload")
