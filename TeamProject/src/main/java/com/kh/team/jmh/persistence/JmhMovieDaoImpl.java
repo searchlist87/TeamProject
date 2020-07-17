@@ -1,4 +1,4 @@
-package com.kh.team.persistence;
+package com.kh.team.jmh.persistence;
 
 import java.util.HashMap;
 import java.util.List;

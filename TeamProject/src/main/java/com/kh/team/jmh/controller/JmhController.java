@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.domain.JmhMovieTheaterVo;
-import com.kh.team.service.JmhMovieTheaterService;
+import com.kh.team.jmh.service.JmhMovieTheaterService;
 
 @Controller
 @RequestMapping("/jmh/theater")

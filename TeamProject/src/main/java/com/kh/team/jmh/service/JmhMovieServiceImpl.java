@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.jmh.service;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
-import com.kh.team.persistence.JmhMovieDao;
-import com.kh.team.util.JmhFileUploadUtil;
+import com.kh.team.jmh.persistence.JmhMovieDao;
+import com.kh.team.jmh.util.JmhFileUploadUtil;
 
 @Service
 public class JmhMovieServiceImpl implements JmhMovieService {

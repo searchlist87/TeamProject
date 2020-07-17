@@ -1,4 +1,4 @@
-package com.kh.team.util;
+package com.kh.team.jmh.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
-import com.kh.team.service.JmhMovieService;
+import com.kh.team.jmh.service.JmhMovieService;
 
 @Controller
 @RequestMapping("/admin")
