@@ -26,25 +26,13 @@
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
 
-<script>
-// $(function() {
-	
-// 	$("a.page-link").click(function(e) {
-// 		e.preventDefault();
-// 		var page = $(this).attr("href");
-// 		console.log("page:" + page);
-		
-// 		location.href = "/kdh/food/foodView?page=" + page;
-// 	});
-// });
-</script>
 </head>
 <body class="js">
 
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
-	<!-- 영화 메인 사진 -->
+	<!-- 영화 메인 사진 시작 -->
 	<div class="foodMain" style="background-color:black">
 		<div style="background-color:black" class="container">
 			<div class="row">
@@ -56,7 +44,8 @@
 			</div>
 		</div>
 	</div>
-	<!--/ 영화 메인 사진 -->
+	<!-- 영화 메인 사진 끝 -->
+	
 		<div></div>
 		<!-- Product Style -->
 		<section class="product-area shop-sidebar shop section">
@@ -86,12 +75,8 @@
 											<h3>전체</h3>
 										</div>
 									</div>
-<!-- 									<ul class="view-mode"> -->
-<!-- 										<li class="active"><a href="shop-grid.html"><i class="fa fa-th-large"></i></a></li> -->
-<!-- 										<li><a href="shop-list.html"><i class="fa fa-th-list"></i></a></li> -->
-<!-- 									</ul> -->
 								</div>
-								<!--/ End Shop Top -->
+								<!-- End Shop Top -->
 							</div>
 						</div>
 						<div class="row" style="padding-left:20px;">
@@ -100,9 +85,10 @@
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
 						<a href="/gsh/movie/movieInfo">
 							<h3>
-								<span><img src="/resources/images/gsh/movie01.jpg"style="width:100px;height:auto;"></span>
+								<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:100px;height:auto;"></span>
 							</h3>
-							<span><img src="/resources/images/jmh/movie_grade_15.png">${vo.movie_name}</span>
+							<span><img src="/resources/images/jmh/movie_grade_${vo.movie_grade}.png" width="30">${vo.movie_name}</span>
+						
 						</a>
 					</div>
 				</c:forEach>
@@ -111,7 +97,6 @@
 				</div>
 			</div>
 		</section>
-		<!--/ End Product Style 1  -->	
 		
 		
 		

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -84,7 +85,7 @@ $(function() {
 										</div>
 										<div class="content">
 											<h5><a href="#">${LatestFood.food_name}</a></h5>
-											<p class="price">${LatestFood.food_price}</p>
+											<p class="price"><fmt:formatNumber pattern="#,###,###" value="${LatestFood.food_price}"></fmt:formatNumber>원</p>
 										</div>
 									</div>
 									</c:forEach>
@@ -125,7 +126,7 @@ $(function() {
 									<div class="product-content" style="text-align: center;">
 										<h3><a href="/kdh/food/innerfood?food_num=${foodVo.food_num}">${foodVo.food_name}</a></h3>
 										<div class="product-price">
-											<span>${foodVo.food_price}</span>
+											<span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber>원</span>
 										</div>
 									</div>
 								</div>

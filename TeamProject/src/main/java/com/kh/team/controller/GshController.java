@@ -28,7 +28,7 @@ public class GshController {
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
 	public String review(Model model) throws Exception {
 		List<GshMovieDto> list = gshReviewService.select_review_code();
-		System.out.println("list:" + list);
+//		System.out.println("list:" + list);
 		model.addAttribute("list", list);
 		return "user/gsh/movie/reviewList";
 	}

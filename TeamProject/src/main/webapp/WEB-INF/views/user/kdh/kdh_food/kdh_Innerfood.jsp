@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     
 <!-- tag_and_styleSheet 인크루드 -->
 <%@include file = "../../../include/tag_and_styleSheet.jsp" %>
-
  <!-- Jquery -->
     <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
@@ -43,10 +43,42 @@ $(function() {
 			$("#btnCount").text(indexPlus);
 			
 			// 수량에 따른 가격 증가
-			var price = "${foodVo.food_price}";
-			var pricePlus = price * indexPlus;
-			$("#price").text(pricePlus);	
-		}
+			var price = $("#price").attr("data-price");
+			var pricePlus = (price * indexPlus);
+			var StringpricePlus = String(pricePlus);
+			var PriceLastIndex3 = StringpricePlus.substring(StringpricePlus.length-3);
+			var priceFirstIndex = StringpricePlus.substring(0,StringpricePlus.length);
+			priceIndex = StringpricePlus.substring(priceFirstIndex,PriceLastIndex3);
+			
+			var firstPriceIndex3;
+			var centerPriceIndex3;
+			var lastPriceIndex3;
+			
+			if(StringpricePlus.length == 4) {
+				firstPriceIndex3 = StringpricePlus.substr(0,1);
+				lastPriceIndex3 = StringpricePlus.substr(1,4);
+			} else if(StringpricePlus.length == 5) {
+				firstPriceIndex3 = StringpricePlus.substr(0,2);
+				lastPriceIndex3 = StringpricePlus.substr(2,5);
+			} else if(StringpricePlus.length == 6) {
+				firstPriceIndex3 = StringpricePlus.substr(0,3);
+				lastPriceIndex3 = StringpricePlus.substr(3,6);
+			} else if(StringpricePlus.length == 7) {
+				firstPriceIndex3 = StringpricePlus.substr(0,1);
+				centerPriceIndex3 = StringpricePlus.substr(1,4);
+				lastPriceIndex3 = StringpricePlus.substr(4,7);
+			} else if(StringpricePlus.length == 8) {
+				firstPriceIndex3 = StringpricePlus.substr(0,2);
+				centerPriceIndex3 = StringpricePlus.substr(2,5);
+				lastPriceIndex3 = StringpricePlus.substr(5,8);
+			}
+
+			if (centerPriceIndex3 != null) {
+				$("#price").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+			} else {
+				$("#price").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			}
+		};
 	});
 	
 	// 수량/금액 감소 버튼
@@ -61,23 +93,60 @@ $(function() {
 		}
 		$("#btnCount").text(indexMius);
 		
-		// 수량에 따른 가격 증가
-		var price = "${foodVo.food_price}";
-		var priceMius = price * indexMius;
-		$("#price").text(priceMius);	
+		// 수량에 따른 가격 감소
+		var price = $("#price").attr("data-price");
+		var priceMius = (price * indexMius);
+		
+		var StringpriceMius = String(priceMius);
+		var PriceLastIndex3 = StringpriceMius.substring(StringpriceMius.length-3);
+		var priceFirstIndex = StringpriceMius.substring(0,StringpriceMius.length);
+		priceIndex = StringpriceMius.substring(priceFirstIndex,PriceLastIndex3);
+		
+		var firstPriceIndex3;
+		var centerPriceIndex3;
+		var lastPriceIndex3;
+		
+		if(StringpriceMius.length == 4) {
+			firstPriceIndex3 = StringpriceMius.substr(0,1);
+			lastPriceIndex3 = StringpriceMius.substr(1,4);
+		} else if(StringpriceMius.length == 5) {
+			firstPriceIndex3 = StringpriceMius.substr(0,2);
+			lastPriceIndex3 = StringpriceMius.substr(2,5);
+		} else if(StringpriceMius.length == 6) {
+			firstPriceIndex3 = StringpriceMius.substr(0,3);
+			lastPriceIndex3 = StringpriceMius.substr(3,6);
+		} else if(StringpriceMius.length == 7) {
+			firstPriceIndex3 = StringpriceMius.substr(0,1);
+			centerPriceIndex3 = StringpriceMius.substr(1,4);
+			lastPriceIndex3 = StringpriceMius.substr(4,7);
+		} else if(StringpriceMius.length == 8) {
+			firstPriceIndex3 = StringpriceMius.substr(0,2);
+			centerPriceIndex3 = StringpriceMius.substr(2,5);
+			lastPriceIndex3 = StringpriceMius.substr(5,8);
+		}
+		
+		if (centerPriceIndex3 != null) {
+			$("#price").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+		} else {
+			$("#price").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+		}
 	});
 	
-	// 구매하기 버튼
+ 	// 구매하기 버튼
 	$("#btnBuy").click(function() {
 		var num = "${foodVo.food_num}";
-		var price = $("#price").text();
+		var price = $("#price").attr("data-price");
 		var buy_count = $("#btnCount").text();
 		
 		var food_num = parseInt(num);
-		var food_buy_price = parseInt(price);
+		console.log("food_num:"+ food_num);
+		var iprice = parseInt(price);
+		console.log("iprice:"+ iprice);
 		var food_buy_count = parseInt(buy_count);
-		
-		location.href = "/kdh/food/cart?food_num="+food_num+"&food_buy_price="+food_buy_price+"&food_buy_count="+food_buy_count;
+		console.log("food_buy_count:"+ food_buy_count);
+		var food_buy_price = iprice;
+		console.log("food_buy_price:"+ food_buy_price);
+// 		location.href = "/kdh/food/cart?food_num="+food_num+"&food_buy_price="+food_buy_price+"&food_buy_count="+food_buy_count;
 // 		location.href = "/kdh/food/cart?foodInfoDto="+foodInfoDto;
 	});
 });
@@ -107,7 +176,7 @@ $(function() {
 				</div>
 				
 				<!-- 바디 오른쪽 이미지-->
-				<div class="col-md-6">
+				<div id="priceDiv" class="col-md-6">
 					<h2>${foodVo.food_name}</h2>
 					<hr/>
 					<p>유효기간　　　구매일로부터 92일 이내 사용 가능</p>
@@ -117,7 +186,7 @@ $(function() {
 					<div>수량/금액　　　<button class="button1" id="btnMius" type="button">-</button> 
 					<span id="btnCount">1</span>
 					<button class="button1" id="btnPlus" type="button">+</button>
-					　　　<a id="price">${foodVo.food_price}</a>　　　<button id="btnBuy" type="button" class="btn">구매하기</button>
+					　　　<a id="price" data-price="${foodVo.food_price}"><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber>원</a>　　　<button id="btnBuy" type="button" class="btn">구매하기</button>
 					</div>
 					<hr/>
 				</div>
