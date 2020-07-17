@@ -52,5 +52,13 @@
 		select * from tbl_movie
 		where movie_grade = #{movie_grade}
 	</select>
+
+	
+	<!--  무비 코드로 영화정보 찾기 -->
+	<select id="select_movie_code">
+	select * from tbl_movie
+	where movie_code = #{movie_code}
+	</select>
+	
 	
 </mapper>

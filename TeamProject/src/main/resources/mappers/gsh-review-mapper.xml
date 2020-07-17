@@ -31,6 +31,14 @@
 <!--  		insert into tbl_review(review_num, movie_name, user_id, review_score, regist_date) -->
 <!--  		values() -->
 <!--  	</insert> -->
+
+	<!-- 무비 코드로 리뷰 찾기 -->
+	<select id="select_review_code" resultType="GshMovieDto">
+		select m.movie_code, m.movie_name, m.movie_genre, m.movie_director, m.movie_actor, m.movie_grade, m.movie_main_image, m.movie_content , r.review_score
+		from tbl_movie m , tbl_review r
+		where m.movie_code = #{movie_code}
+		and m.movie_code = r.movie_code
+	</select>
 	
 	<!-- 리뷰 삭제하기 -->
 	<delete id="delete_review">

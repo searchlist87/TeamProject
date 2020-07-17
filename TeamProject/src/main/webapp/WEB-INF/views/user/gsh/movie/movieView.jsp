@@ -83,7 +83,7 @@
 							
 				<c:forEach items="${list}" var="vo">
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
-						<a href="/gsh/movie/movieInfo">
+						<a href="/gsh/movie/movieInfo?movie_code=${vo.movie_code}">
 							<h3>
 								<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:100px;height:auto;"></span>
 							</h3>
@@ -97,9 +97,6 @@
 				</div>
 			</div>
 		</section>
-		
-		
-		
 		
 <!-- 페이징 -->
 <!-- <div class="row"  style="text-align:center;"> -->
