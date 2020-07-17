@@ -398,7 +398,6 @@ function previewUpload(value) {
 										<span id="movie_main_image_text"></span>
 										<div id="main_image_div" style="width:300px;height:auto;">
 											<div data-fileName="${jmhMovieVo.movie_main_image}">
-<%-- 												<input type="hidden" name="movie_main_image" value="${jmhMovieVo.movie_main_image}"/> --%>
 												<img src="/upload/displayFile?fileName=${jmhMovieVo.movie_main_image}" width="150px;"/>
 												<a href="${jmhMovieVo.movie_main_image}" class="attach-main-del"><span class="pull-right" style="color:red;">[삭제]</span></a>
 											</div>
@@ -412,9 +411,7 @@ function previewUpload(value) {
 										<span id="movie_sub_image_text"></span>
 										<div id="movie_sub_image_div" style="width:300px;height:auto;">
 										<c:forEach items="${jmhMovieImageVo}" var="imageVo">
-				
 											<div data-fileName="${imageVo.movie_sub_image}">
-<%-- 											<input type="hidden" value="${imageVo.movie_sub_image}" name="movie_sub_image" /> --%>
 												<img src="/upload/displayFile?fileName=${imageVo.movie_sub_image}" width="225px;"/>
 												<a href="${imageVo.movie_sub_image}" class="attach-sub-del"><span class="pull-right" style="color:red;">[삭제]</span></a>
 											</div>
@@ -429,7 +426,6 @@ function previewUpload(value) {
 										<span id="movie_preview_span"></span>
 										<div id="movie_preview_text" style="width:250px;height:auto;">
 											<div data-fileName="${jmhMovieVo.movie_preview}">
-<%-- 											<input type="hidden" value="${jmhMovieVo.movie_preview}" name="movie_preview" /> --%>
 											<video src="/upload/displayFile?fileName=${jmhMovieVo.movie_preview}" width="300px;" controls></video>
 											<a href="${jmhMovieVo.movie_preview}" class="attach-preview-del"><span class="pull-right" style="color:red;">[삭제]</span></a>
 											</div>
