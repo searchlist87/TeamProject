@@ -1,4 +1,4 @@
-package com.kh.team.controller;
+package com.kh.team.jmh.controller;
 
 import java.io.File;
 import java.io.FileInputStream;

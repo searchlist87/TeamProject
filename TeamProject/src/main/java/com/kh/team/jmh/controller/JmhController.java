@@ -1,4 +1,4 @@
-package com.kh.team.controller;
+package com.kh.team.jmh.controller;
 
 import java.util.List;
 
@@ -31,6 +31,13 @@ public class JmhController {
 	public String admin() throws Exception {
 		return "admin/admin";
 	}
+	
+	// 이벤트 페이지
+	@RequestMapping(value="/event", method = RequestMethod.GET)
+	public String event() throws Exception {
+		return "event/event";
+	}
+	
 	
 	
 	
