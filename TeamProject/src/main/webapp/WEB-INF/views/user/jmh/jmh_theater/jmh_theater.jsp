@@ -134,12 +134,17 @@ $(function() {
 			$("#appendDiv").css("transform", "translate(0px)");
 			$("#btnRightShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(6).find("li:first").text();
+			$("#monthSpan").text("[ " + monthText + "월 ]");
 			checkState = 1;
 			break;
 		case 1 :
 			$("#appendDiv").css("transform", "translate(-770px)");
 			$("#btnRightShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(20).find("li:first").text();
+			$("#monthSpan").text("[ " + monthText + "월 ]");
+			console.log(monthText);
 			checkState = 0;
 			break;
 		}
@@ -153,12 +158,16 @@ $(function() {
 			$("#appendDiv").css("transform", "translate(0px)");
 			$("#btnLeftShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(6).find("li:first").text();
+			$("#monthSpan").text("[ " + monthText + "월 ]");
 			checkState = 1;
 			break;
 		case 1 :
 			$("#appendDiv").css("transform", "translate(-770px)");
 			$("#btnLeftShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(20).find("li:first").text();
+			$("#monthSpan").text("[ " + monthText + "월 ]");
 			checkState = 0;
 			break;
 		}

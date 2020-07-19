@@ -142,7 +142,6 @@ function loadImage(value) {
 			"url" : url,
 			"data" : sendData,
 			"success" : function(rData) {
-				$("#movie_main_image").val("");
 				removeDiv.remove();
 				$("#movie_main_image").removeAttr("disabled");
 			}
