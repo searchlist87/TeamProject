@@ -49,7 +49,7 @@ public class GshController {
 	// 리뷰 내용 수정
 //	@RequestMapping(value = "/reviewContent", method = RequestMethod.GET)
 //	public String reviewModify() throws Exception {
-//		return null;
+//		return "user/gsh/movie/reviewContent";
 //	}
 	
 	// 리뷰 삭제
@@ -70,13 +70,14 @@ public class GshController {
 //	 영화 상세 정보 보기
 	@RequestMapping(value = "/movieInfo", method = RequestMethod.GET)
 	public String movieInfo(String movie_code, Model model) throws Exception {
-		System.out.println("movie_code:" + movie_code);
+//		System.out.println("movie_code:" + movie_code);
 //		List<GshMovieDto> list = gshMovieService.select_movie_list();
 		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
 		List<String> subImageList = gshMovieService.selectMovieSubImage(movie_code);
-		System.out.println("subImageList:" + subImageList);
-		System.out.println("movieDto :" + movieDto);
+//		System.out.println("subImageList:" + subImageList);
+//		System.out.println("movieDto :" + movieDto);
 		model.addAttribute("movieDto", movieDto);
+		model.addAttribute("subImageList", subImageList);
 		return "user/gsh/movie/movieInfo";
 	}
 	

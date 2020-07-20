@@ -12,5 +12,13 @@ public interface GshReviewService {
 	
 	// 영화 리뷰 정보 가져오기
 	public List<GshMovieDto> select_review_code() throws Exception;
-
+	
+	// 리뷰 작성하기
+//	public void write_review() throws Exception;
+	
+	// 리뷰 수정하기
+//	public void reviewModify() throws Exception;
+	
+	// 리뷰 삭제하기
+//	public void reviewDelete() throws Exception;
 }
