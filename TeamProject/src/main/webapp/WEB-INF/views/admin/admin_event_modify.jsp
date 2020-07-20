@@ -17,15 +17,7 @@
 	<script src="/resources/js/admin.js"></script>
 <link rel="stylesheet" href="/resources/css/admin.css">
 <style>
-	.movie_grade {
-		margin-left:20px;
-	}
-	
-	.movie_grade_span {
-		margin-left:10px;
-	}
-	
-	.fileLabel {
+.fileLabel {
 		width:80px;
 		height:30px;
 		border:1px solid #767676;
@@ -37,15 +29,55 @@
 		background-color:#efefef;
 		padding-top:2px;
 	}
-
 </style>
 <script>
 $(function () {
 	$("#event_manage > dd").css("display","block");
 	$("#event_manage > dt").css("color","red");
-	$("#event_manage > dd").eq(1).css("color","blue");
+	$("#event_manage > dd").eq(0).css("color","blue");
 	
-	$("#btnSubmit").click(function () {
+	
+	// 기존 메인이미지 지우기
+	$(".attach-del").click(function (e) {
+		e.preventDefault();
+		var removeDiv = $(this).parent();
+		var fileName = $(this).attr("href");
+		var url = "/upload/deleteFile";
+		var sendData = {"fileName" : fileName};
+		$.ajax({
+			"type" : "get",
+			"url" : url,
+			"data" : sendData,
+			"success" : function(rData) {
+				removeDiv.remove();
+			}
+		});
+	});
+	
+// 	// 기존 sub_이미지 지우기
+// 	$(".attach-sub-del").click(function (e) {
+// 		e.preventDefault();
+// 		var removeDiv = $(this).parent();
+// 		var fileName = $(this).attr("href");
+// 		var url = "/upload/deleteFile";
+// 		var sendData = {"fileName" : fileName};
+// 		$.ajax({
+// 			"type" : "get",
+// 			"url" : url,
+// 			"data" : sendData,
+// 			"success" : function(rData) {
+// 				removeDiv.remove();
+// 			}
+// 		});
+// 	});
+	
+	
+	
+	
+	
+	
+	
+	$("#btnModify").click(function () {
 		
 		// 이벤트 주제 확인
 		var event_title = $("#event_title").val();
@@ -99,7 +131,6 @@ $(function () {
 			return false;
 		}
 		
-		
 		// 상세이미지 없을 경우 처리
 		var event_content_image = $("#event_content_image_text").text();
 		if (event_content_image == "" || event_content_image == null) {
@@ -113,7 +144,7 @@ $(function () {
 		upDiv1.each(function(index) {
 			var filename = $(this).attr("data-filename");
 			var hiddenInput = "<input type='hidden' name='event_thumb_image' value='"+filename+"'/>";
-			$("#registForm").prepend(hiddenInput);
+			$("#modifyForm").prepend(hiddenInput);
 		});
 		
 		// 서브 이미지 담기
@@ -121,9 +152,9 @@ $(function () {
 		upDiv2.each(function(index) {
 			var filename = $(this).attr("data-filename");
 			var hiddenInput = "<input type='hidden' name='event_content_image' value='"+filename+"'/>";
-			$("#registForm").prepend(hiddenInput);
+			$("#modifyForm").prepend(hiddenInput);
 		});
-		$("#registForm").submit();
+		$("#modifyForm").submit();
 	});	
 	
 });
@@ -161,7 +192,7 @@ function loadImage(value) {
 	});
 	
 	// 이미지 지우기
-	$("#registForm").on("click", ".attach-del", function(e) {
+	$("#modifyForm").on("click", ".attach-del", function(e) {
 		e.preventDefault();
 		$("#event_thumb_image_text").text("선택된 파일 없음");
 		var removeDiv = $(this).parent();
@@ -212,7 +243,7 @@ function loadSubImage(value) {
 	});
 	
 	// 이미지 지우기
-	$("#registForm").on("click", ".attach-del1", function(e) {
+	$("#modifyForm").on("click", ".attach-del1", function(e) {
 		e.preventDefault();
 		$("#event_content_image_text").text("선택된 파일 없음");
 		var removeDiv = $(this).parent();
@@ -230,8 +261,6 @@ function loadSubImage(value) {
 		});
 	});
 }
-
-	
 </script>
 <body class="js">
 <!-- 해더 부분 -->
@@ -246,25 +275,26 @@ function loadSubImage(value) {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;margin-bottom:20px;">
-									<h4 class="title" >이벤트관리_이벤트등록</h4>
+									<h4 class="title" >이벤트조회_이벤트수정</h4>
 								</div>	
 								<!--  페이지별 내용 -->
-								<form role="form" action="/admin/admin_event_register" method="post" id="registForm">
+								<form role="form" action="/admin/admin_event_modify" method="post" id="modifyForm">
+									<input type="hidden" value="${eventVo.event_code}" name="event_code"/>
 									<div class="form-group">
 										<label for="event_title"><strong>이벤트 주제</strong></label>
-										<input type=text class="form-control" id="event_title" name="event_title"/>
+										<input type=text class="form-control" id="event_title" name="event_title" value="${eventVo.event_title}"/>
 									</div>
 									<div class="form-group">
 										<label for="event_content"><strong>이벤트 내용</strong></label>
-										<textarea rows="5" id="event_content" name="event_content"></textarea>
+										<textarea rows="5" id="event_content" name="event_content">${eventVo.event_content}</textarea>
 									</div>
 									<div class="form-group">
 										<label for="event_start_date"><strong>이벤트 시작일</strong></label>
-										<input type="text" class="form-control" id="event_start_date" name="event_start_date" placeholder="ex)2020-07-07"/>
+										<input type="text" class="form-control" id="event_start_date" name="event_start_date" value="${eventVo.event_start_date}" placeholder="ex)2020-07-07"/>
 									</div>
 									<div class="form-group">
 										<label for="event_end_date"><strong>이벤트 종료일</strong></label>
-										<input type="text" class="form-control" id="event_end_date" name="event_end_date" placeholder="ex)2020-07-07"/>
+										<input type="text" class="form-control" id="event_end_date" name="event_end_date" value="${eventVo.event_end_date}" placeholder="ex)2020-07-07"/>
 									</div>
 									
 									<div> 
@@ -273,20 +303,30 @@ function loadSubImage(value) {
 									</div>
 									<div class="form-group">
 										<label for="event_thumb_image" style="margin-right:10px;"><strong>이벤트 메인이미지 : </strong></label>
-										<input type="file" class="event_thumb_image" id="event_thumb_image" onchange="loadImage(this);" accept="image/*"  style="display:none;"/>
+										<input type="file" class="event_thumb_image" id="event_thumb_image" onchange="loadImage(this);" accept="image/*" style="display:none;"/>
 										<label for="event_thumb_image" class="fileLabel" >파일 선택</label>
-										<span id="event_thumb_image_text"></span>
-										<div id="event_thumb_image_div" style="width:200px;height:auto;"></div>
+										<span id="event_thumb_image_text">파일 있음</span>
+										<div id="event_thumb_image_div" style="width:300px;height:auto;">
+											<div data-fileName="${eventVo.event_thumb_image}">
+												<img src="/upload/displayFile?fileName=${eventVo.event_thumb_image}" width="150px;"/>
+												<a href="${eventVo.event_thumb_image}" class="attach-del"><span class="pull-right" style="color:red;">[삭제]</span></a>
+											</div>
+										</div>
 									</div>
-									<div class="form-group" style="width:500px;"> 
+									<div class="form-group"> 
 										<label for="event_content_image" style="margin-right:10px;"><strong>이벤트 상세이미지 : </strong></label>
-										<input type="file" class="event_content_image" id="event_content_image" multiple onchange="loadSubImage(this);"  style="display:none;" accept="image/*"/>
+										<input type="file" class="event_content_image" id="event_content_image" multiple onchange="loadSubImage(this);" style="display:none;" accept="image/*" required/>
 										<label for="event_content_image" class="fileLabel" >파일 선택</label>
-										<span id="event_content_image_text"></span>
-										<div id="event_content_image_div" style="width:300px;height:auto;"></div>
+										<span id="event_content_image_text">파일 있음</span>
+										<div id="event_content_image_div" style="width:300px;height:auto;">
+											<div data-fileName="${eventVo.event_content_image}">
+												<img src="/upload/displayFile?fileName=${eventVo.event_content_image}" width="150px;"/>
+												<a href="${eventVo.event_content_image}" class="attach-del"><span class="pull-right" style="color:red;">[삭제]</span></a>
+											</div>
+										</div>
 									</div>
 									<br/>
-									<button type="button" class="btn btn-primary" id="btnSubmit">등록</button>
+									<button type="submit" class="btn btn-primary" id="btnModify">수정</button>
 								</form>
 							</div>
 						</div>

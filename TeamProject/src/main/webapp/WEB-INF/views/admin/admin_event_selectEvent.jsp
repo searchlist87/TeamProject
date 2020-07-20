@@ -52,25 +52,25 @@ $(function () {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;margin-bottom:20px;">
-									<h4 class="title" >이벤트조회_이벤트상세페이지</h4>
+									<h4 class="title" >이벤트조회_이벤트상세</h4>
 								</div>	
 								<!--  페이지별 내용 -->
 								<form role="form" action="/admin/admin_movie_register" method="post" id="registForm">
 									<div class="form-group">
 										<label for="event_title"><strong>이벤트 주제</strong></label>
-										<input type=text class="form-control" id="event_title" name="event_title" readonly/>
+										<input type=text class="form-control" id="event_title" name="event_title" value="${eventVo.event_title}" readonly/>
 									</div>
 									<div class="form-group">
 										<label for="event_content"><strong>이벤트 내용</strong></label>
-										<textarea rows="5" id="event_content" name="event_content" readonly></textarea>
+										<textarea rows="5" id="event_content" name="event_content" readonly>${eventVo.event_content}</textarea>
 									</div>
 									<div class="form-group">
 										<label for="event_start_date"><strong>이벤트 시작일</strong></label>
-										<input type="text" class="form-control" id="event_start_date" name="event_start_date" placeholder="ex)2020-07-07" readonly/>
+										<input type="text" class="form-control" id="event_start_date" name="event_start_date" value="${eventVo.event_start_date}" placeholder="ex)2020-07-07" readonly/>
 									</div>
 									<div class="form-group">
-										<label for="event_end_time"><strong>이벤트 종료일</strong></label>
-										<input type="text" class="form-control" id="event_end_time" name="event_end_times" placeholder="ex)2020-07-07" readonly/>
+										<label for="event_end_date"><strong>이벤트 종료일</strong></label>
+										<input type="text" class="form-control" id="event_end_date" name="event_end_date" value="${eventVo.event_end_date}" placeholder="ex)2020-07-07" readonly/>
 									</div>
 									
 									<div> 
@@ -79,20 +79,25 @@ $(function () {
 									</div>
 									<div class="form-group">
 										<label for="event_thumb_image" style="margin-right:10px;"><strong>이벤트 메인이미지 : </strong></label>
-										<input type="file" class="event_thumb_image" id="event_thumb_image" onchange="loadImage(this);" accept="image/*"  readonly style="display:none;"/>
+										<input type="file" class="event_thumb_image" id="event_thumb_image" onchange="loadImage(this);" accept="image/*"  disabled style="display:none;"/>
 										<label for="event_thumb_image" class="fileLabel" >파일 선택</label>
-										<span id="event_thumb_image_text">선택된 파일 없음</span>
-										<div id="event_thumb_image" style="width:300px;height:auto;"></div>
+										<span id="event_thumb_image_text"></span>
+										<div id="event_thumb_image" style="width:300px;height:auto;">
+											<img src="/upload/displayFile?fileName=${eventVo.event_thumb_image}"/>
+										</div>
 									</div>
 									<div class="form-group"> 
 										<label for="event_content_image" style="margin-right:10px;"><strong>이벤트 상세이미지 : </strong></label>
-										<input type="file" class="event_content_image" id="event_content_image" multiple onchange="loadSubImage(this);" readonly style="display:none;" accept="image/*" required/>
+										<input type="file" class="event_content_image" id="event_content_image" multiple onchange="loadSubImage(this);" disabled style="display:none;" accept="image/*" required/>
 										<label for="event_content_image" class="fileLabel" >파일 선택</label>
-										<span id="event_content_image_text">선택된 파일 없음</span>
-										<div id="event_content_image_div" style="width:300px;height:auto;"></div>
+										<span id="event_content_image_text"></span>
+										<div id="event_content_image_div" style="width:300px;height:auto;">
+											<img src="/upload/displayFile?fileName=${eventVo.event_content_image}"/>
+										</div>
 									</div>
 									<br/>
-									<button type="submit" class="btn btn-primary" >수정</button>
+									<a href="/admin/admin_event_modify?event_code=${eventVo.event_code}" role="button" class="btn" style="color:#fff;">수정</a>
+									<a href="/admin/admin_event_list" role="button" class="btn" style="color:#fff;">목록</a>
 								</form>
 							</div>
 						</div>

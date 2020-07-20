@@ -19,20 +19,9 @@
 </style>
 <script>
 $(function () {
-	$("#event_manage > dd").css("display","block");
-	$("#event_manage > dt").css("color","red");
-	$("#event_manage > dd").eq(0).css("color","blue");
-	
-	$("#searchBtn").click(function () {
-		var searchType = $("#selectSearch option:selected").val();
-		var keyword = $("#keyword").val();
-		if (keyword == null || keyword == "") {
-			alert("검색 키워드를 확인해주세요.");
-			return false;
-			
-		}
-		location.href="/admin/admin_event_list?searchType=" + searchType + "&keyword=" + keyword;
-	});
+	$("#booking_manage > dd").css("display","block");
+	$("#booking_manage > dt").css("color","red");
+	$("#booking_manage > dd").eq(0).css("color","blue");
 	
 });
 </script>
@@ -53,17 +42,17 @@ $(function () {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
-									<h4 class="title" >이벤트관리_이벤트조회</h4>
+									<h4 class="title" >예매내역 관리_예매내역 조회</h4>
 								</div>	
 								<!--  검색 -->
 								<div style="padding:20px;text-align:right;">
 										
 									<div class="single-shorter" style="vertical-align:middle;">
-										<label>검색 :</label>
-										<select id="selectSearch">
-											<option selected="selected" value="ename">이벤트명</option>
-										</select>
-									</div>
+											<label>검색 :</label>
+											<select id="selectSearch">
+												<option selected="selected" value="ename">이벤트명</option>
+											</select>
+										</div>
 
 									<input type="text" name="keyword" id="keyword"/>
 									<button class="btn" id="searchBtn">검색</button>

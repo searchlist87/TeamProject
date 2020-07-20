@@ -30,9 +30,6 @@
 <script>
 $(function() {
 	
-	$(".nice-select").remove();
-	$("#selectSearch").removeAttr("style");
-	
 	// 현재 시간 및 날짜
 	var date = new Date();
 	var year = date.getFullYear();
@@ -41,24 +38,6 @@ $(function() {
 	
 	
 	
-	// pastEventBtn 지난이벤트
-	$("#pastEventBtn").click(function (e) {
-		e.preventDefault();
-		var date = year + "-" + month + "-" + day;
-		location.href="/event/pastEventList?event_end_date="+date;
-	});
-	
-	$("#searchBtn").click(function (e) {
-		e.preventDefault();
-		var searchType = $("#selectSearch option:selected").val();
-		var keyword = $("#keyword").val();
-		if (keyword == null || keyword == "") {
-			alert("검색 키워드를 확인해주세요.");
-			return false;
-			
-		}
-		location.href="/event/eventList?searchType=" + searchType + "&keyword=" + keyword;
-	});
 	
 });
 
@@ -83,17 +62,9 @@ $(function() {
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8 blog-meta" style="margin-bottom:20px;">
-				<h2>진행 이벤트</h2>
+				<h2>지난 이벤트</h2>
 				<div style="float:right;">
-					<div style="padding:10px;float:left;height:50px;">
-						<select id="selectSearch"> 
-							<option selected="selected" value="ename">이벤트명</option>
-						</select>
-					</div>
-					<input type="text" name="keyword" id="keyword" value="${searchMap.keyword}"/>
-					<a href="/event/eventList" role="button" class="btn" style="color:#fff;background-color:#2328bb;" id="searchBtn">검색</a>
-					
-					<a href="/event/pastEventList" role="button" class="btn" style="color:#fff;" id="pastEventBtn">지난이벤트 보기</a>
+					<a href="/event/eventList" role="button" class="btn" style="color:#fff;" id="pastEventBtn">진행이벤트 보기</a>
 				</div>
 			</div>
 			<div class="col-md-2"></div>
