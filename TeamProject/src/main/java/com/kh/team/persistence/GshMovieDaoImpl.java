@@ -36,5 +36,14 @@ public class GshMovieDaoImpl implements GshMovieDao {
 	public GshMovieListVo select_movie_code(String movie_code) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "select_movie_code");
 	}
+	
+	// 영화 서브 이미지(스틸컷) 가져오기
+	@Override
+	public List<String> selectMovieSubImage(String movie_code) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "select_movie_sub_iamage", movie_code);
+	}
+	
+	
+	
 
 }
