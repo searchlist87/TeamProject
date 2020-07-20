@@ -73,6 +73,8 @@ public class GshController {
 		System.out.println("movie_code:" + movie_code);
 //		List<GshMovieDto> list = gshMovieService.select_movie_list();
 		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
+		List<String> subImageList = gshMovieService.selectMovieSubImage(movie_code);
+		System.out.println("subImageList:" + subImageList);
 		System.out.println("movieDto :" + movieDto);
 		model.addAttribute("movieDto", movieDto);
 		return "user/gsh/movie/movieInfo";

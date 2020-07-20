@@ -11,5 +11,8 @@ public interface GshMovieService {
 	
 	// 영화 상세 정보 보기
 	public GshMovieDto selectMovieCode(String movie_code) throws Exception;
+	
+	// 영화 서브 이미지(스틸컷) 가져오기
+	public List<String> selectMovieSubImage(String movie_code) throws Exception;
 
 }
