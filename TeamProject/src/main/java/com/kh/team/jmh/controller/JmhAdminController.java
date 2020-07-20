@@ -83,4 +83,26 @@ public class JmhAdminController {
 		return "redirect:/admin/admin_movie_selectByMovie?movie_code=" + movie_code;
 	}
 	
+	// 이벤트
+	
+	
+	// 이벤트 조회
+	@RequestMapping(value="/admin_event_list", method = RequestMethod.GET)
+	public String admin_eventList() throws Exception {
+		return "/admin/admin_event_list";
+	}
+	
+	// 이벤트 등록
+	@RequestMapping(value="/admin_event_register", method = RequestMethod.GET)
+	public String admin_eventRegister() throws Exception {
+		
+		return "/admin/admin_event_register";	
+	}
+	
+	// 이벤트 상세페이지
+	@RequestMapping(value="/admin_event_selectEvent", method = RequestMethod.GET)
+	public String admin_selectEvent() throws Exception {
+		return "/admin/admin_event_selectEvent";
+	}
+	
 }

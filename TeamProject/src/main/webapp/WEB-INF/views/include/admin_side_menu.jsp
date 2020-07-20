@@ -30,53 +30,53 @@ $(function () {
 					<dd><a href="/admin/admin_movie_list" class="sub_menu">영화 조회</a></dd>
 					<dd><a href="/admin/admin_movie_register" class="sub_menu">영화 등록</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="theater_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃영화관 관리</a></dt>
-					<dd><a href="/sgh/admin/movieTheaterList">영화관 조회</a></dd>
-					<dd><a href="/sgh/admin/movieTheaterAdd">영화관 등록</a></dd>
+					<dd><a href="/sgh/admin/movieTheaterList" class="sub_menu">영화관 조회</a></dd>
+					<dd><a href="/sgh/admin/movieTheaterAdd" class="sub_menu">영화관 등록</a></dd>
 				</dl>	
-				<dl class="categor-list" >
+				<dl class="categor-list" id="movie_time_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃상영일정 관리</a></dt>
-					<dd><a href="/sgh/admin/schedule/scheduleList">상영 일정조회</a></dd>
-					<dd><a href="/sgh/admin/schedule/scheduleRegist">상영 일정등록</a></dd>
-					<dd><a href="/sgh/admin/movieTime/movieTimeList">상영 회차조회</a></dd>
-					<dd><a href="/sgh/admin/movieTime/movieTimeRegist">상영 회차등록</a></dd>
+					<dd><a href="/sgh/admin/schedule/scheduleList" class="sub_menu">상영 일정조회</a></dd>
+					<dd><a href="/sgh/admin/schedule/scheduleRegist" class="sub_menu">상영 일정등록</a></dd>
+					<dd><a href="/sgh/admin/movieTime/movieTimeList" class="sub_menu">상영 회차조회</a></dd>
+					<dd><a href="/sgh/admin/movieTime/movieTimeRegist" class="sub_menu">상영 회차등록</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="movie_product_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃영화 상품관리</a></dt>
-					<dd><a href="#">영화 상품조회</a></dd>
-					<dd><a href="#">영화 상품등록</a></dd>
+					<dd><a href="#" class="sub_menu">영화 상품조회</a></dd>
+					<dd><a href="#" class="sub_menu">영화 상품등록</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="food_product_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃푸드 상품관리</a></dt>
-					<dd><a href="#">푸드 상품조회</a></dd>
-					<dd><a href="#">푸드 상품등록</a></dd>
+					<dd><a href="#" class="sub_menu">푸드 상품조회</a></dd>
+					<dd><a href="#" class="sub_menu">푸드 상품등록</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="seat_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃좌석 관리</a></dt>
-					<dd><a href="#">좌석 조회</a></dd>
+					<dd><a href="#" class="sub_menu">좌석 조회</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="booking_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃예매 관리</a></dt>
-					<dd><a href="#">예매내역 조회</a></dd>
+					<dd><a href="#" class="sub_menu">예매내역 조회</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="event_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃이벤트 관리</a></dt>
-					<dd><a href="#">이벤트 조회</a></dd>
-					<dd><a href="#">이벤트 등록</a></dd>
+					<dd><a href="/admin/admin_event_list" class="sub_menu">이벤트 조회</a></dd>
+					<dd><a href="/admin/admin_event_register" class="sub_menu">이벤트 등록</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="board_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃게시판 관리</a></dt>
-					<dd><a href="#">게시판 조회</a></dd>
-					<dd><a href="#">게사판 등록</a></dd>
+					<dd><a href="#" class="sub_menu">게시판 조회</a></dd>
+					<dd><a href="#" class="sub_menu">게사판 등록</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="review_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃리뷰 관리</a></dt>
-					<dd><a href="#">리뷰 조회</a></dd>
+					<dd><a href="#" class="sub_menu">리뷰 조회</a></dd>
 				</dl>
-				<dl class="categor-list" >
+				<dl class="categor-list" id="costomer_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃고객 관리</a></dt>
-					<dd><a href="#">회원정보 조회</a></dd>
+					<dd><a href="#" class="sub_menu">회원정보 조회</a></dd>
 				</dl>
 			</div>
 			<!--/ End Single Widget -->
