@@ -46,4 +46,6 @@ public interface KdhFoodDao {
 	
 	// 해당 구매 상품 조회
 	public KdhBuyFoodInfo selectBuyFoodbyNum(int food_num) throws Exception;
+	
+	
 }

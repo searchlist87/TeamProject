@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.JmhEventVo;
+import com.kh.team.domain.JmhPagingDto;
 
 @Repository
 public class JmhEventDaoImpl implements JmhEventDao {
@@ -45,9 +46,6 @@ public class JmhEventDaoImpl implements JmhEventDao {
 		paramMap.put("searchType", searchType);
 		return sqlSession.selectList(NAMESPACE + "adminEventList", paramMap);
 	}
-	
-	
-	
 
 	// 이벤트 수정
 	@Override
@@ -67,5 +65,24 @@ public class JmhEventDaoImpl implements JmhEventDao {
 		return sqlSession.selectList(NAMESPACE + "pastEventList", event_end_date);
 	}
 
+	// 이벤트 총 갯수 가져오기
+	@Override
+	public int getCountEvent(Date event_date) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getCountEvent", event_date);
+	}
+
+	// 이벤트 페이징
+	@Override
+	public List<JmhEventVo> eventPagingList(JmhPagingDto jmhPagingDto) throws Exception {
+		System.out.println("jmhPagingDto :" + jmhPagingDto);
+		
+		return sqlSession.selectList(NAMESPACE + "eventListPaging", jmhPagingDto);
+	}
+
+	// theater페이지 event 3개 가져오기
+	@Override
+	public List<JmhEventVo> selectEventThree(Date event_date) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectEventThree", event_date);
+	}
 	
 }

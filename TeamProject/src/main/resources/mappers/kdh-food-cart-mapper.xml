@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.kdh-food-cart-mapper">
+
+<!-- 장바구니 전체 조회 -->
+<select id="AllCart" resultType="KdhFoodCartDto">
+	select c.food_cart_num, c.food_cart_count,f.food_num, c.user_id,  f.food_name,
+	f.food_price, f.food_image, f.food_name,f.food_price, c.buy_food_price, f.food_count
+	from tbl_food f, tbl_food_cart c
+	where f.food_num = c.food_num and user_id = #{user_id}
+	order by c.food_cart_num desc
+</select>
+	
+<!-- 장바구니 조회 -->
+<select id="selectCart" resultType="KdhFoodCartDto">
+	select * from tbl_food_cart
+	where user_id = #{user_id}
+	and food_num = #{food_num}
+</select>
+	
+<!-- 장바구니 삭제 -->
+<delete id="deleteCart">
+	delete from tbl_food_cart
+	where food_cart_num = #{food_cart_num}
+</delete>
+
+<!-- 장바구니 수정 -->
+<update id="updateCart">
+	update tbl_food_cart set
+		food_num = #{food_num},
+		food_cart_count = #{food_cart_count}
+	where food_cart_num = #{food_cart_num}
+</update>
+
+<!-- 장바구니 등록 -->
+<insert id="insertCart">
+	insert into tbl_food_cart(food_cart_num, food_num, user_id, food_cart_count, buy_food_price)
+	values(seq_cart_num.nextval, #{food_num}, #{user_id}, #{food_cart_count}, #{buy_food_price})
+</insert>
+
+<!-- 장바구니 중복체크 -->
+<select id="overlapCart" resultType="String">
+	select decode(count(*),0,'false','true')from tbl_food_cart
+	where user_id = #{user_id}
+	and food_num = #{food_num}
+</select>
+
+<!-- food_cart_num으로 KdhFoodCartDao 구하기  --> 
+<select id="selectFoodnumByCartnum" resultType="int">
+	select food_num from tbl_food_cart
+	where food_cart_num = #{food_cart_num}
+</select>
+</mapper>

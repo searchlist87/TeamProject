@@ -11,4 +11,9 @@
 		where theater.area_code = area.area_code order by theater_code
 	</select>
 	
+	<!--  지역 가져오기 -->
+	<select id="getArea" resultType="JmhAreaVo">
+		select * from tbl_area
+	</select>
+	
 </mapper>
