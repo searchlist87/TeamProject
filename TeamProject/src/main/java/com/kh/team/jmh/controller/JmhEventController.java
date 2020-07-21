@@ -1,7 +1,6 @@
 package com.kh.team.jmh.controller;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.domain.JmhEventVo;
+import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.jmh.service.JmhEventService;
 
 @Controller
@@ -26,7 +26,7 @@ public class JmhEventController {
 	
 	// 이벤트 정보 리스트
 	@RequestMapping(value="/eventList", method = RequestMethod.GET)
-	public String eventList(Model model, String searchType, String keyword) throws Exception {
+	public String eventList(Model model, JmhPagingDto jmhPagingDto) throws Exception {
 		
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -34,13 +34,19 @@ public class JmhEventController {
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String date = year + "-" + month + "-" + day;
 		Date event_date =  java.sql.Date.valueOf(date);
+		
+		int count = jmhEventService.getCountEvent(event_date);
+		jmhPagingDto.setTotalCount(count);
+		jmhPagingDto.setPageInfo();
+		jmhPagingDto.setEvent_date(event_date);
+		List<JmhEventVo> list = jmhEventService.eventPagingList(jmhPagingDto);
 
-		List<JmhEventVo> list = jmhEventService.eventList(keyword, searchType, event_date);
-		Map<String, String> searchMap = new HashMap<String, String>();
-		searchMap.put("keyword", keyword);
-		searchMap.put("searchType", searchType);
+//		List<JmhEventVo> list = jmhEventService.eventList(keyword, searchType, event_date);
+//		Map<String, String> searchMap = new HashMap<String, String>();
+//		searchMap.put("keyword", keyword);
+//		searchMap.put("searchType", searchType);
 		model.addAttribute("list", list);
-		model.addAttribute("searchMap", searchMap);
+		model.addAttribute("jmhPagingDto", jmhPagingDto);
 
 		return "/user/jmh/jmh_event/jmh_event";
 	}
