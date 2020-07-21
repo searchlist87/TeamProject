@@ -27,7 +27,7 @@ public class GshMovieDaoImpl implements GshMovieDao {
 	// 영화 코드로 영화 리뷰 보기
 	@Override
 	public GshMovieDto selectMovieCode(String movie_code) throws Exception {
-		System.out.println("movie_code : " + movie_code);
+		System.out.println("dao, movie_code : " + movie_code);
 		return sqlSession.selectOne(NAMESPACE + "select_movie_code", movie_code);
 	}
 	

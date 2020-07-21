@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.kh.team.domain.GshMovieDto;
 import com.kh.team.domain.GshReviewVo;
 
 @Repository
@@ -20,8 +19,8 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	
 	// 리뷰 작성하기
 	@Override
-	public void write_review() throws Exception {
-		
+	public void write_review(GshReviewVo ghGshReviewVo) throws Exception {
+		sqlSession.insert(NAMESPACE + "write_review", ghGshReviewVo);
 	}
 	
 	// 리뷰 목록보기
@@ -32,8 +31,8 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	
 	// 리뷰 코드로 선택해서 보기
 	@Override
-	public List<GshMovieDto> select_review_code() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "select_review_code");
+	public List<GshReviewVo> select_reviewAll() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "select_reviewAll");
 	}
 	
 	// 리뷰 수정

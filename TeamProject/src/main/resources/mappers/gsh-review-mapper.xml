@@ -20,9 +20,9 @@
 	</select>
 	
 	<!-- 리뷰 작성하기 -->
-	<insert id="insert_review">
-		insert into tbl_review(review_num, movie_code, user_id, review_score, review_content)
-		values(#{seq_review_num.nextval}, #{movie_code}, #{user_id}, #{review_score}, #{review_content})
+	<insert id="write_review">
+		insert into tbl_review(review_num, movie_code, user_id, review_content, review_score)
+		values(seq_review_num.nextval, #{movie_code}, #{user_id}, #{review_content}, #{review_score})
 	</insert>
 	
 	<!-- 리뷰 삭제하기 -->
@@ -37,6 +37,8 @@
 		set review_content = #{user_id}, #{review_content}
 		where review_num = #{review_num}
 	</update>
+	
+	
 	
 	
 	
