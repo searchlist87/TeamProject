@@ -29,7 +29,6 @@ $(function() {
 		if (Iindex < count) {
 			var indexPlus = Iindex + 1;
 			$("#btnCount").text(indexPlus);
-			
 			// 수량에 따른 가격 증가
 			var price = $("#food_price").attr("data-price");
 			var pricePlus = (price * indexPlus);
@@ -63,8 +62,12 @@ $(function() {
 
 			if (centerPriceIndex3 != null) {
 				$("#sumPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+				$("#totalPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+				$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
 			} else {
 				$("#sumPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+				$("#totalPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
 		};
 	});
@@ -115,11 +118,151 @@ $(function() {
 		
 		if (centerPriceIndex3 != null) {
 			$("#sumPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+			$("#totalPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+			$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
 		} else {
 			$("#sumPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			$("#totalPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 		}
+		
+		
 	});
 	
+	// 쿠폰 사용 버튼
+	$("#btnUse").click(function() {
+		var couponPrice = $("#UsecouponPrice").val();
+		var StringcouponPrice = String(couponPrice);
+		
+		var index = $("#btnCount").text();
+		var Iindex = parseInt(index);
+		var price = $("#food_price").attr("data-price");
+		var sumPrice = (price * Iindex);
+		
+		if (sumPrice > couponPrice) {
+			var lastPrice = sumPrice-couponPrice;	
+			
+			var lastPriceToString = String(lastPrice);
+			var PriceLastIndex3 = lastPriceToString.substring(lastPriceToString.length-3);
+			var priceFirstIndex = lastPriceToString.substring(0,lastPriceToString.length);
+			priceIndex = lastPriceToString.substring(priceFirstIndex,PriceLastIndex3);
+			
+			var firstPriceIndex3;
+			var centerPriceIndex3;
+			var lastPriceIndex3;
+		
+			if(lastPriceToString.length == 4) {
+				firstPriceIndex3 = lastPriceToString.substr(0,1);
+				lastPriceIndex3 = lastPriceToString.substr(1,4);
+			} else if(lastPriceToString.length == 5) {
+				firstPriceIndex3 = lastPriceToString.substr(0,2);
+				lastPriceIndex3 = lastPriceToString.substr(2,5);
+			} else if(lastPriceToString.length == 6) {
+				firstPriceIndex3 = lastPriceToString.substr(0,3);
+				lastPriceIndex3 = lastPriceToString.substr(3,6);
+			} else if(lastPriceToString.length == 7) {
+				firstPriceIndex3 = lastPriceToString.substr(0,1);
+				centerPriceIndex3 = lastPriceToString.substr(1,4);
+				lastPriceIndex3 = lastPriceToString.substr(4,7);
+			} else if(lastPriceToString.length == 8) {
+				firstPriceIndex3 = lastPriceToString.substr(0,2);
+				centerPriceIndex3 = lastPriceToString.substr(2,5);
+				lastPriceIndex3 = lastPriceToString.substr(5,8);
+			}
+			
+			if (centerPriceIndex3 != null) {
+				$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+	
+			} else {
+				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			}
+			
+			// 쿠폰 금액 만들기
+			var PriceLastIndex3 = StringcouponPrice.substring(StringcouponPrice.length-3);
+			var priceFirstIndex = StringcouponPrice.substring(0,StringcouponPrice.length);
+			priceIndex = StringcouponPrice.substring(priceFirstIndex,PriceLastIndex3);
+			
+			var firstPriceIndex3;
+			var centerPriceIndex3;
+			var lastPriceIndex3;
+			
+			if(StringcouponPrice.length == 4) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,1);
+				lastPriceIndex3 = StringcouponPrice.substr(1,4);
+			} else if(StringcouponPrice.length == 5) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,2);
+				lastPriceIndex3 = StringcouponPrice.substr(2,5);
+			} else if(StringcouponPrice.length == 6) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,3);
+				lastPriceIndex3 = StringcouponPrice.substr(3,6);
+			} else if(StringcouponPrice.length == 7) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,1);
+				centerPriceIndex3 = StringcouponPrice.substr(1,4);
+				lastPriceIndex3 = StringcouponPrice.substr(4,7);
+			} else if(StringcouponPrice.length == 8) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,2);
+				centerPriceIndex3 = StringcouponPrice.substr(2,5);
+				lastPriceIndex3 = StringcouponPrice.substr(5,8);
+			}
+			
+			if (centerPriceIndex3 != null) {
+				$("#couponPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+		
+			} else {
+				$("#couponPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			}
+		
+		} else {
+			alert("쿠폰을 사용할 수 없습니다.")
+			var zero = 0;
+			var couponPriceVal = $("#couponPrice").val();
+			console.log("couponPriceVal:" + couponPriceVal);
+			$("#couponPrice").text(zero + "원");
+			var couponPriceText = $("#couponPrice").text();
+			console.log("couponPriceText:" + couponPriceText);
+			
+			var lastPrice = sumPrice;	
+			var lastPriceToString = String(lastPrice);
+			console.log("lastPriceToString:" + lastPriceToString);
+			var PriceLastIndex3 = lastPriceToString.substring(lastPriceToString.length-3);
+			var priceFirstIndex = lastPriceToString.substring(0,lastPriceToString.length);
+			priceIndex = lastPriceToString.substring(priceFirstIndex,PriceLastIndex3);
+			
+			var firstPriceIndex3;
+			var centerPriceIndex3;
+			var lastPriceIndex3;
+			
+			if(lastPriceToString.length == 4) {
+				firstPriceIndex3 = lastPriceToString.substr(0,1);
+				lastPriceIndex3 = lastPriceToString.substr(1,4);
+			} else if(lastPriceToString.length == 5) {
+				firstPriceIndex3 = lastPriceToString.substr(0,2);
+				lastPriceIndex3 = lastPriceToString.substr(2,5);
+			} else if(lastPriceToString.length == 6) {
+				firstPriceIndex3 = lastPriceToString.substr(0,3);
+				lastPriceIndex3 = lastPriceToString.substr(3,6);
+			} else if(lastPriceToString.length == 7) {
+				firstPriceIndex3 = lastPriceToString.substr(0,1);
+				centerPriceIndex3 = lastPriceToString.substr(1,4);
+				lastPriceIndex3 = lastPriceToString.substr(4,7);
+			} else if(lastPriceToString.length == 8) {
+				firstPriceIndex3 = lastPriceToString.substr(0,2);
+				centerPriceIndex3 = lastPriceToString.substr(2,5);
+				lastPriceIndex3 = lastPriceToString.substr(5,8);
+			}
+		
+			if (centerPriceIndex3 != null) {
+				$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+			} else {
+				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			}
+			
+		}
+	
+	
+	
+	
+	}); // 쿠폰 사용 버튼
 });
 
 </script>
@@ -139,7 +282,7 @@ $(function() {
 					<div class="bread-inner">
 						<ul class="bread-list">
 							<li><a href="index1.html">홈<i class="ti-arrow-right"></i></a></li>
-							<li class="active"><a href="blog-single.html">장바구니</a></li>
+							<li class="active"><a href="blog-single.html">주문/결제</a></li>
 						</ul>
 					</div>
 				</div>
@@ -167,24 +310,22 @@ $(function() {
 							</tr>
 						</thead>
 						<tbody id="Ttbody">
-						<c:forEach items="${list}" var="foodVo">
 							<tr id="food_tr">
-								<td class="image"><img src="/resources/images/kdh/${foodVo.food_image}" alt="${foodVo.food_image}"></td>
+								<td class="image"><img src="/resources/images/kdh/${food_image}" alt="${food_image}이미지"></td>
 								<td class="product-des" data-title="Description">
-									<p class="product-name"><a href="#">${foodVo.food_name}</a></p>
+									<p class="product-name"><a href="#">${food_name}</a></p>
 								</td>
-								<td class="price" id="food_price" data-price="${foodVo.food_price}"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber></span>원</td>
+								<td class="price" id="food_price" data-price="${food_price}"><span><fmt:formatNumber pattern="#,###,###" value="${food_price}"></fmt:formatNumber></span>원</td>
 								<td class="qty" data-title="Qty">
-									<div id="btnSetCount" data-food-count="${foodVo.food_count}" class="input-group" style="text-align: center;">
+									<div id="btnSetCount" data-food-count="${food_count}" class="input-group" style="text-align: center;">
 										<button class="button1" id="btnMius" type="button">-</button> 
-										<span id="btnCount">${foodVo.food_cart_count}</span>
+										<span id="btnCount">${buy_food_buy_count}</span>
 										<button class="button1" id="btnPlus" type="button">+</button>
 									</div>
 								</td>
-								<td class="total-amount" data-total-price="${foodVo.buy_food_price}"><span id="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${foodVo.buy_food_price}"></fmt:formatNumber>원</span></td>
-								<td class="action" data-title="Remove"><a href="/cart/delete?food_cart_num=${foodVo.food_cart_num}"><i class="ti-trash remove-icon"></i></a></td>
+								<td class="total-amount" data-total-price="${buy_food_buy_price}"><span id="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></td>
+								<td class="action" data-title="Remove"><a href="/buy/delete?food_cart_num=${food_cart_num}"><i class="ti-trash remove-icon"></i></a></td>
 							</tr>
-						</c:forEach>
 						</tbody>
 					</table>
 					<!--/ End Shopping Summery -->
@@ -198,19 +339,17 @@ $(function() {
 							<div class="col-lg-8 col-md-5 col-12">
 								<div class="left">
 									<div class="coupon">
-										<form action="#" target="_blank">
-											<input name="Coupon" placeholder="쿠폰 사용">
-											<button class="btn">사용하기</button>
-										</form>
+											<input id="UsecouponPrice" name="Coupon" placeholder="쿠폰 사용">
+											<a id="btnUse" class="btn" style="color: white;">사용하기</a>
 									</div>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li>총 상품금액<span id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>총 상품금액<span id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
 										<li>쿠폰 사용<span id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
-										<li>총 결제금액<span id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>총 결제금액<span id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">
 										<a href="#" class="btn">결제하기</a>

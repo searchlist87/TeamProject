@@ -132,30 +132,150 @@ $(function() {
 		}
 	});
 	
+ 	// 장바구니 버튼
+//  	$("#btnCart").click(function() {
+ 		
+//  		// '예'버튼 -> 장바구니 jsp로
+// 		if ("${findCartResult}" == "true") {
+// 			alert("중복된 상품이 담겨있습니다.");
+// 		} else if ("${findCartResult}" == "false") {
+// 			$("#modal-420329").trigger("click");
+// 			$("#btnOk").click(function() {
+// 				var food_num = "${foodVo.food_num}";
+// 				var price = $("#price").attr("data-price");
+// 				var iprice = parseInt(price);
+				
+// 				var buy_count = $("#btnCount").text();
+// 				var food_buy_count2 = parseInt(buy_count);
+// 				var food_buy_price2 = iprice * food_buy_count2;
+				
+// 				var num = $("#food_num").val();
+// 				$("#food_buy_count").val(food_buy_count2);
+// 				$("#food_buy_price").val(food_buy_price2);
+// 				var food_buy_count = $("#food_buy_count").val();
+// 				var food_buy_price = $("#food_buy_price").val();
+// 				var user_id = "${user_id}";
+// 				$("#foodDataForm").submit();
+// 				location.href = "/cart/displayCart";
+// 			}); //$("#btnOk")
+			
+		
+// 			$("#btnNo").click(function() {
+// 			var food_num = "${foodVo.food_num}";
+// 			var price = $("#price").attr("data-price");
+// 			var iprice = parseInt(price);
+			
+// 			var buy_count = $("#btnCount").text();
+// 			var food_buy_count2 = parseInt(buy_count);
+// 			var food_buy_price2 = iprice * food_buy_count2;
+			
+// 			var num = $("#food_num").val();
+// 			$("#food_buy_count").val(food_buy_count2);
+// 			$("#food_buy_price").val(food_buy_price2);
+// 			var food_buy_count = $("#food_buy_count").val();
+// 			var food_buy_price = $("#food_buy_price").val();
+// 			var user_id = "${user_id}";
+// 			$("#foodDataForm").submit();
+			
+// 			}); // btnNo
+// 		}
+//  	});// 장바구니 버튼
+ 
+ 
  	// 구매하기 버튼
 	$("#btnBuy").click(function() {
-		var num = "${foodVo.food_num}";
+		var food_num = "${foodVo.food_num}";
 		var price = $("#price").attr("data-price");
-		var buy_count = $("#btnCount").text();
-		
-		var food_num = parseInt(num);
-		console.log("food_num:"+ food_num);
 		var iprice = parseInt(price);
-		console.log("iprice:"+ iprice);
-		var food_buy_count = parseInt(buy_count);
-		console.log("food_buy_count:"+ food_buy_count);
-		var food_buy_price = iprice;
-		console.log("food_buy_price:"+ food_buy_price);
-// 		location.href = "/kdh/food/cart?food_num="+food_num+"&food_buy_price="+food_buy_price+"&food_buy_count="+food_buy_count;
-// 		location.href = "/kdh/food/cart?foodInfoDto="+foodInfoDto;
+		var buy_count = $("#btnCount").text();
+		var buy_food_buy_count = parseInt(buy_count);
+		var buy_food_buy_price = iprice * buy_food_buy_count;
+	
+		var num = $("#food_num").val();
+		$("#buy_food_buy_count").val(buy_food_buy_count);
+		$("#buy_food_buy_price").val(buy_food_buy_price);
+		buy_food_buy_count = $("#buy_food_buy_count").val();
+		buy_food_buy_price = $("#buy_food_buy_price").val();
+		var buy_user_id = "${user_id}";
+		$("#BuyFoodForm").submit();
+		location.href = "/kdh/food/buy";
 	});
-});
+ }); 
+ 	
+ 	
+ 	
 </script>
 <!-- 해더 부분 -->
-<%@include file="../../../include/header.jsp" %>
-
+<%@include file="/WEB-INF/views/include/header.jsp" %>
 <!-- 바디 부분 -->
 <div class="container-fluid">
+<!-- 장바구니용 폼 -->
+<form id="foodDataForm" action="/cart/displayCart" method="get">
+	<input type="hidden" id="food_num" value="${foodVo.food_num}" name="food_num"/>
+	<input type="hidden" id="food_buy_price" value="" name="food_buy_price"/>
+	<input type="hidden" id="food_buy_count" value="" name="food_buy_count"/>
+	<input type="hidden" id="user_id" value="${user_id}" name="user_id"/>
+</form>
+
+<!-- 구매용 폼 -->
+<form id="BuyFoodForm" action="/kdh/food/buy" method="get">
+	<input type="hidden" id="buy_food_num" value="${foodVo.food_num}" name="buy_food_num"/>
+	<input type="hidden" id="buy_food_buy_price" value="" name="buy_food_buy_price"/>
+	<input type="hidden" id="buy_food_buy_count" value="" name="buy_food_buy_count"/>
+	<input type="hidden" id="buy_user_id" value="${user_id}" name="buy_user_id"/>
+</form>
+
+<!-- 장바구니 모달창 -->
+	<div class="row">
+		<div class="col-md-12">
+			 <a id="modal-420329" href="#modal-container-420329" role="button" class="btn" data-toggle="modal" style="display : none">Launch demo modal</a>
+			<div class="modal fade" id="modal-container-420329" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								카트에 넣기
+							</h5> 
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">X</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							
+							<div class="row">
+								<div class="col-md-2">
+									<h1>　　　</h1></div>
+								<div class="col-md-8"></div>
+								<div class="col-md-2"></div>
+								
+							</div>
+							
+							<h3 id="str1" style="text-align: center">상품이 카트에 담겼습니다.</h3>
+							<h5 id="str2" style="text-align: center">바로 확인하시겠습니까?</h5>
+							
+							<div class="row">
+								<div class="col-md-2">
+									<h1>　　　</h1></div>
+								<div class="col-md-8"></div>
+								<div class="col-md-2"></div>
+							</div>
+							
+							<button id="btnOk" type="button" class="btn btn" data-dismiss="modal" style="text-align: center; height:50px;">
+								예
+							</button>
+							<button id="btnNo" type="button" class="btn btn" data-dismiss="modal" style="text-align: center; height:50px;">
+								아니요
+							</button>
+						
+						</div>
+						<div class="modal-footer" style="display : none"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- /장바구니 모달창 -->
+
 	<div class="row">
 		<div class="col-md-2">
 			<h1>　　　</h1></div>
@@ -183,10 +303,10 @@ $(function() {
 					<p>판매수량　　　1회 8개 구매가능</p>
 					<p>구매 후 취소　　　구매일로부터 10일 이내 취소 가능하며, 부분취소는 불가능합니다.
 					<hr/>
-					<div>수량/금액　　　<button class="button1" id="btnMius" type="button">-</button> 
+					<div>수량/금액　　<button class="button1" id="btnMius" type="button">-</button> 
 					<span id="btnCount">1</span>
 					<button class="button1" id="btnPlus" type="button">+</button>
-					　　　<a id="price" data-price="${foodVo.food_price}"><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber>원</a>　　　<button id="btnBuy" type="button" class="btn">구매하기</button>
+					　　<a id="price" data-price="${foodVo.food_price}"><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber>원</a>　　<button id="btnBuy" type="button" class="btn">구매하기</button> <button id="btnCart" type="button" class="btn">장바구니</button>
 					</div>
 					<hr/>
 				</div>
@@ -230,10 +350,5 @@ $(function() {
 </div>
 
 
-
-
-
-
-
-<%@ include file="../../../include/footer.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
