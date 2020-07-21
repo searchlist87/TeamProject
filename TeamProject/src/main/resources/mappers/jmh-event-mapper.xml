@@ -66,4 +66,46 @@
 	select * from tbl_event
 	where event_end_date <![CDATA[ < ]]>= #{event_end_date}
 </select>
+
+<!--  [admin]이벤트 총 갯수 가져오기 -->
+<select id="adminGetCountEvent" resultType="int">
+	select count(*) from tbl_event
+</select>
+
+<!--  이벤트 총 갯수 가져오기 -->
+<select id="getCountEvent" resultType="int">
+	select count(*) from tbl_event
+	where #{event_date} between event_start_date and event_end_date
+</select>
+
+<!--  이벤트 페이징 -->
+<select id="eventListPaging" resultType="JmhEventVo">
+	select * from (
+		select rownum rnum, a.* from (
+			select * from tbl_event 
+			<if test="searchType != null">
+				<choose>
+					<when test="searchType == 'ename'">
+					where event_title like '%' || #{keyword} || '%'
+					and #{event_date} between event_start_date and event_end_date
+					</when>
+				</choose>
+			</if>
+			<if test="searchType == null">
+				where #{event_date} between event_start_date and event_end_date
+			</if>
+			order by event_code desc)
+		 a)
+	where rnum between #{startRow} and #{endRow}
+	
+</select>
+
+<!--  [theaterView] 진행이벤트 3개 가져오기 -->
+<select id="selectEventThree" resultType="JmhEventVo">
+	select * from (select rownum rnum, a.* from (
+		select * from tbl_event 
+    	where #{event_date} between event_start_date and event_end_date
+    	order by event_code desc) a)
+	where rnum between 1 and 3
+</select>
 </mapper>
