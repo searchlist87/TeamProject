@@ -15,12 +15,14 @@ public class GshReviewServiceImpl implements GshReviewService {
 	
 	@Inject
 	private GshReviewDao gshReviewDao;
-
+	
+	// 리뷰 목록
 	@Override
 	public List<GshReviewVo> reviewList() throws Exception {
 		return gshReviewDao.reviewList();
 	}
-
+	
+	// 리뷰 목록 선택
 	@Override
 	public List<GshMovieDto> select_review_code() throws Exception {
 		return gshReviewDao.select_review_code();

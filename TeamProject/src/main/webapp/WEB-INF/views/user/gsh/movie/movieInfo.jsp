@@ -4,7 +4,17 @@
 <%@include file = "/WEB-INF/views/include/tag_and_styleSheet.jsp" %>
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
+<script>
+	// 리뷰 작성 확인 버튼
+$(function() {
+	$("#btnInput").click(function () {
+		console.log("click");
+	});
+});
+</script>
+
 <body>
+<%-- ${subImageList} --%>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-2"></div>
@@ -79,11 +89,10 @@
 						<div class="owl-stage" style="margin-bottom:50px;">
 							<div class="owl-item active"
 								style="width: 320px; margin-right: 20px;">
-								<div class="item" id="movie_image">
-								<!-- tbl_movie_image  -->
-								<!-- movie_sub_image -->
-									<em><img src="/upload/displayFile?fileName=${movieDto.movie_sub_image}" alt="반도"></em>
-									<strong>스틸컷</strong>
+									<c:forEach items="${subImageList}" var="str" varStatus="status">
+										<strong>스틸컷 - ${status.count}</strong>
+										<img src="/upload/displayFile?fileName=${str}" alt="영화스틸컷">
+									</c:forEach>
 								</div>
 							</div>
 						</div>
@@ -93,7 +102,10 @@
 			
 			<!-- 영화 스틸컷 끝 -->
 			
+
+			
 			<!-- 영화 내용 시작 -->
+				
 				<div class="movieContent " style="margin-bottom:20px;">
 					<h2>시놉시스</h2><br>
 					
@@ -107,10 +119,16 @@
 
 		<!-- 영화 예고편 시작 -->
 				
+		<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+				
 			<div style="margin-top:50px;margin-bottom:50px;">
-				<h2>예고편</h2>
+				<h2>예고편</h2><br>
 				<video src="/upload/displayFile?fileName=${movieDto.movie_preview}" controls style="width:1260px; height:auto;"></video>
 			</div>
+		</div>
+		</div>
 			
 		<!-- 영화 예고편 끝 -->	
 		
@@ -133,12 +151,13 @@
 							</tr>
 						</thead>
 						
-						
+						<!-- 내용 값 변경 -->
+						<c:forEach items="${list}" var="vo">
 						<tbody>
 							<tr>
-								<td>1</td>
-								<td>Default</td>
-								<td>
+								<td>${vo.seq_review_num.nextval}</td>
+								<td>${vo.user_id}</td>
+								<td>${vo.review_score}
 									<select>
 										<option value="1"></option>
 										<option value="2"></option>
@@ -149,10 +168,12 @@
 								</td>
 								<td>
 									<input type="text" class="form-control" maxlength="200" placeholder="감상평을 적어주세요." required/>
+									<button type="button" id="btnInput" class="btn btn-primary">입력</button>
 								</td>
 								<td>Default</td>
 							</tr>
 						</tbody>
+						</c:forEach>
 						
 					</table>
 					</div>
@@ -161,21 +182,10 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
 				
 			<!-- 한줄 감상평 끝 -->
 			
 		<div class="col-md-2"></div>
-		
-		<!-- 영화 줄거리 시작 -->
-<!-- 			<div class="movie-summary" id="movieInfo"> -->
-<!--             	<div class="summary" style="margin-top:10px; margin-bottom:10px;text-align:center;"><strong>영화 내용</strong></div> -->
-<!--             	<div class="text" style=text-align:center;>영화내용</div> -->
-<!--     		</div> -->
-    	<!-- 영화 줄거리 끝 -->
-		
-
 	
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
