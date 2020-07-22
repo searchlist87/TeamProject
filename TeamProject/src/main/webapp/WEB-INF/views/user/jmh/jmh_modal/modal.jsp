@@ -6,7 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script></script>
+<!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=6m20s4qrzp&submodules=geocoder"></script> -->
+<style>
+#map > img{
+	width:500px;
+	height:500px;
+}
+</style>
+
 <body>
 <!--  대중교통 모달창 -->
 <div class="modal fade" id="modal-container-458336" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -83,11 +90,19 @@
 				<h5 id="myModalLabel" style="margin:20px;">지도 안내</h5> 
 				<div class="blog-meta" style="padding:20px;border:3px solid #A6A6A6;border-radius:1em;">
 					<img src="/resources/images/jmh/mycar.png" style="float:left;"/>
-					<h6 style="padding-top:5px;">울산광역시 남구 삼산동</h6> 
+					<h6 style="padding-top:5px;">${mTheaterVo.theater_address}</h6> 
 					
 				</div>
-				<div id="map" style="width:1000px;height:400px;position:relative;"></div>
-				<div id="marker" style="position:absolute;"></div>
+				<div id="map" style="width:500px;height:400px;margin-left:100px;">
+				
+				
+				
+				
+				
+				
+				
+				</div>
+<!-- 				<div id="marker" style="position:absolute;"></div> -->
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

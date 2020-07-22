@@ -3,9 +3,9 @@ package com.kh.team.domain;
 public class JmhMovieTheaterVo {
 	private String theater_code;
 	private String theater_name;
-	private String theater_adress;
-	private String area_name;
+	private String theater_address;
 	private String area_code;
+	private int theater_num;
 
 	
 	public String getTheater_name() {
@@ -16,20 +16,12 @@ public class JmhMovieTheaterVo {
 		this.theater_name = theater_name;
 	}
 
-	public String getTheater_adress() {
-		return theater_adress;
+	public String getTheater_address() {
+		return theater_address;
 	}
 
-	public void setTheater_adress(String theater_adress) {
-		this.theater_adress = theater_adress;
-	}
-
-	public String getArea_name() {
-		return area_name;
-	}
-
-	public void setArea_name(String area_name) {
-		this.area_name = area_name;
+	public void setTheater_address(String theater_adress) {
+		this.theater_address = theater_adress;
 	}
 
 	public JmhMovieTheaterVo() {
@@ -52,9 +44,19 @@ public class JmhMovieTheaterVo {
 		this.area_code = area_code;
 	}
 
+	public int getTheater_num() {
+		return theater_num;
+	}
+
+	public void setTheater_num(int theater_num) {
+		this.theater_num = theater_num;
+	}
+
 	@Override
 	public String toString() {
-		return "JmhMovietheaterName [theater_code=" + theater_code + ", theater_name=" + theater_name
-				+ ", theater_adress=" + theater_adress + ", area_name=" + area_name + "]";
+		return "JmhMovieTheaterVo [theater_code=" + theater_code + ", theater_name=" + theater_name
+				+ ", theater_address=" + theater_address + ", area_code=" + area_code + ", theater_num=" + theater_num
+				+ "]";
 	}
+
 }

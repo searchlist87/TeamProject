@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -83,7 +84,7 @@ public class GshController {
 	// 영화 리뷰 목차
 	@RequestMapping(value = "/movieView", method = RequestMethod.GET)
 	public String movieView(Model model) throws Exception {
-		List<GshMovieDto> list = gshMovieService.select_movie_list();
+		List<GshMovieDto> list = gshMovieService.select_movieAll();
 		System.out.println(list);
 		model.addAttribute("list", list);
 		return "user/gsh/movie/movieView";
@@ -91,17 +92,19 @@ public class GshController {
 	
 //	 영화 상세 정보 보기
 	@RequestMapping(value = "/movieInfo", method = RequestMethod.GET)
-	public String movieInfo(String movie_code, Model model) throws Exception {
+	public String movieInfo(String movie_code, ModelMap model) throws Exception {
 //		System.out.println("movie_code:" + movie_code);
-		List<GshMovieDto> list = gshMovieService.select_movie_list();
+		List<GshMovieDto> list = gshMovieService.select_movieAll();
 		System.out.println("list:" + list);
 		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
 		List<String> subImageList = gshMovieService.selectMovieSubImage(movie_code);
+		List<GshReviewVo> reviewList = gshReviewService.selectReviewByCode(movie_code);
 //		System.out.println("subImageList:" + subImageList);
 //		System.out.println("movieDto :" + movieDto);
 		model.addAttribute("list", list);
 		model.addAttribute("movieDto", movieDto);
 		model.addAttribute("subImageList", subImageList);
+		model.addAttribute("reviewList", reviewList);
 		return "user/gsh/movie/movieInfo";
 	}
 	
@@ -110,15 +113,16 @@ public class GshController {
 	@ResponseBody
 	public GshReviewVo movieAjax(HttpSession session, Model model, GshReviewVo gshReviewVo) throws Exception {
 //		System.out.println("movie_code:" + movie_code);
-		System.out.println("============== GshController, movieAjax ================");
+//		System.out.println("============== GshController, movieAjax ================");
 		String user_id = (String) session.getAttribute("user_id");
 		gshReviewVo.setUser_id(user_id); // null -> user01
-		System.out.println("user_id: "+ user_id);
-		System.out.println("review_content"+gshReviewVo.getReview_content());
-		System.out.println("review_score"+gshReviewVo.getReview_score());
-		gshReviewService.write_review(gshReviewVo);
+//		System.out.println("user_id: "+ user_id);
+//		System.out.println("review_content"+gshReviewVo.getReview_content());
+//		System.out.println("review_score"+gshReviewVo.getReview_score());
 		String movie_code = gshReviewVo.getMovie_code();
-		System.out.println("movie_code:" + movie_code);
+		gshReviewService.write_review(gshReviewVo);
+//		System.out.println("gshReviewVo :" + gshReviewVo);
+//		System.out.println("movie_code:" + movie_code);
 		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
 		List<String> subImageList = gshMovieService.selectMovieSubImage(movie_code);
 //		System.out.println("subImageList:" + subImageList);
@@ -132,7 +136,7 @@ public class GshController {
 	// 상영작 리스트
 	@RequestMapping(value = "/onairList", method = RequestMethod.GET)
 	public String onairList(Model model) throws Exception {
-		List<GshMovieDto> list = gshMovieService.select_movie_list();
+		List<GshMovieDto> list = gshMovieService.select_movieAll();
 		model.addAttribute("list", list);
 		return "user/gsh/movie/onairList";
 	}

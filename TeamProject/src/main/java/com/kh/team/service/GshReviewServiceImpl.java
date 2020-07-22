@@ -33,5 +33,10 @@ public class GshReviewServiceImpl implements GshReviewService {
 		gshReviewDao.write_review(gshReviewVo);
 	}
 
+	@Override
+	public List<GshReviewVo> selectReviewByCode(String movie_code) throws Exception {
+		return gshReviewDao.selectReviewByCode(movie_code);
+	}
+
 	
 }
