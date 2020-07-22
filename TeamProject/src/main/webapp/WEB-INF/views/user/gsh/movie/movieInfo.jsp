@@ -10,13 +10,14 @@
 	<script src="/resources/js/jquery-ui.min.js"></script>
 
 <script>
-	// 리뷰 작성 확인 버튼
+// 페이지 시작 시 리뷰 목록 나타내기
 $(function() {
 		// 클릭 되는거 확인함
-// 		console.log("클릭됨");
+// 		console.log("가장 위 클릭됨");
 		
 		// 댓글작성 버튼
 		$("#btnCommentWrite").click(function() {
+			console.log("댓글버튼");
 			var movie_code = "${movieDto.movie_code}";
 			var review_content = $("#review_content").val();
 			var review_score = $("#review_score").val();
@@ -35,36 +36,23 @@ $(function() {
 			var url = "/gsh/movie/movieAjax";
 			$.get(url, sendData, function(rData) {
 				console.log(rData);
+				// 값이 제대로 들어있다면  success 표시
+				// success값이 나온다면 다음 단계 진행
 				if (rData == "success") {
 					$("#commentTable tr.cl_tr").remove();
 					$.each(rData, function() {
-						var tr = $("#commentTable tr:first").clone();
-						tr.addClass("cl_tr");
-						var td = tr.find("td");
-//	 					td.eq(0).text(this.user_id);
+						console.log("rData:" + rData);
+						var tbody = $(".tbody").clone();
+						var tr = tbody.find("tr");
+	 					tr.eq(0).text(this.user_id);
 						td.eq(1).text(this.review_content);
 						td.eq(2).text(this.review_score);
-//	 					td.eq(3).text(sysdate);
-						td.eq(4).text("").append("<button class='btn btn-sm btn-warning btnReviewModify' data-cno='"+this.cno+"'>수정</button>");
-						td.eq(5).text("").append("<button class='btn btn-sm btn-danger btnReviewDelete'  data-cno='"+this.cno+"'>삭제</button>");
+	 					td.eq(3).text(sysdate);
+						td.eq(4).text("").append("<button class='btn btn-sm btn-warning btnReviewModify' data-movie_code='"+this.movie_code+"'>수정</button>");
+						td.eq(5).text("").append("<button class='btn btn-sm btn-danger btnReviewDelete'  data-movie_code='"+this.movie_code+"'>삭제</button>");
 						$("#commentTable").append(tr);
 					});
 				}
-				/*
-				$("#commentTable tr.cl_tr").remove();
-				$.each(rData, function() {
-					var tr = $("#commentTable tr:first").clone();
-					tr.addClass("cl_tr");
-					var td = tr.find("td");
-// 					td.eq(0).text(this.user_id);
-					td.eq(1).text(this.review_content);
-					td.eq(2).text(this.review_score);
-// 					td.eq(3).text(sysdate);
-					td.eq(4).text("").append("<button class='btn btn-sm btn-warning btnReviewModify' data-cno='"+this.cno+"'>수정</button>");
-					td.eq(5).text("").append("<button class='btn btn-sm btn-danger btnReviewDelete'  data-cno='"+this.cno+"'>삭제</button>");
-					$("#commentTable").append(tr);
-				});
-				*/
 			});
 			/*
 			$.ajax({
@@ -82,9 +70,16 @@ $(function() {
 				}
 			});
 			*/
-			
+
 		
 	});
+		
+		// 목록 버튼
+		$("#btnCommentUpdate").click(function() {
+			console.log("클릭됨");
+			var movie_code = "${movieDto.movie_code}";
+			location.href="/gsh/movie/movieInfo?movie_code=" + movie_code;
+		});
 		
 		// 리뷰 수정 기능
 // 		$("#commentTable").on("click", ".btnReviewModify", function() {
@@ -124,7 +119,7 @@ $(function() {
 					<table class="table">
 						<tbody>
 							<tr>
-								<th>${list}관람등급</th>
+								<th>관람등급</th>
 								<td><img src="/resources/images/jmh/movie_grade_${movieDto.movie_grade}.png"/></td>
 							</tr>
 							<tr>
@@ -226,8 +221,8 @@ $(function() {
 		<div class="col-md-10">
 
 	<div class="row" style="margin: 10px 0">
-		<div class="col-md-10">
-			<input type="text" class="form-control" placeholder="댓글내용" id="review_content">
+		<div class="col-md-9">
+			<input type="text" class="form-control" placeholder="감상평을 남겨주세요." maxlength="100" id="review_content" required/>
 		</div>
 		<div class="col-md-1">
 			<select id="review_score">
@@ -239,31 +234,36 @@ $(function() {
 			</select>
 		</div>
 		<div class="col-md-1">
-			<button type="button" class="btn btn-sm btn-danger" id="btnCommentWrite">완료</button>
+			<button type="button" class="btn btn-sm btn-danger" id="btnCommentWrite">작성</button>
+		</div>
+		<div>
+			<button type="button" class="btn btn-sm btn-danger" id="btnCommentUpdate">갱신</button>
 		</div>
 	</div>
 	
 	<div class="row">
-		<div style="display : none" class="col-md-12">
+		<div class="col-md-12">
 			<table id="commentTable" class="table">
 				<tr style="background-color: #ccc;">
-					<th>작성자 아이디</th>
-					<th>리뷰 내용</th>
-					<th>평점</th>
-					<th>작성일</th>
-					<th>수정</th>
-					<th>삭제</th>
+					<td>작성자 아이디</td>
+					<td>리뷰 내용</td>
+					<td>평점</td>
+					<td>작성일</td>
+					<td>수정</td>
+					<td>삭제</td>
 				</tr>
 				
-			<tbody>	
-<%-- 				<c:forEach items="${list}" var="vo"> --%>
+			<tbody class="tbody">	
+				<c:forEach items="${reviewList}" var="vo">
 				<tr>
-					<td>${vo.user_id}</td>
-					<td>${vo.review_content}</td>
-					<td>${vo.review_score}</td>
-					<td>${vo.sysdate}</td>
+					<th>${vo.user_id}</th>
+					<th>${vo.review_content}</th>
+					<th>${vo.review_score}</th>
+					<th>${vo.review_date}</th>
+					<th><button id="btnUpdate" type="button">수정</button></th>
+					<th><button id="btnDelete" type="button">삭제</button></th>
 				</tr>
-<%-- 				</c:forEach> --%>
+				</c:forEach>
 			</tbody>
 			</table>
 		</div>
@@ -277,55 +277,6 @@ $(function() {
 
 <!-- 한줄 감상평 1 끝 -->
 			
-<!-- 한줄 감상평 시작 -->
-
-<!-- 		<div class="container-fluid"> -->
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-md-1"></div> -->
-<!-- 				<div class="col-md-10"> -->
-<!-- 					<h3>한줄 감상평</h3><br> -->
-					
-<!-- 					<table class="table"> -->
-<!-- 						<thead> -->
-<!-- 							<tr> -->
-<!-- 								<th>리뷰 번호</th>  -->
-<!-- 								<th>영화 코드</th>  -->
-<!-- 							<th>아이디</th> -->
-<!-- 								<th>평점</th> -->
-<!-- 								<th>리뷰 내용</th> -->
-<!-- 							<th>리뷰 작성일</th> -->
-<!-- 							</tr> -->
-<!-- 						</thead> -->
-						
-<!-- <!-- 						내용 값 변경 -->
-<%-- 						<c:forEach items="${list}" var="vo"> --%>
-<!-- 							<tr> -->
-<%--  								<td>${vo.seq_review_num.nextval}</td> --%>
-<%--  								<td>${vo.movie_code}</td> --%>
-<%--  								<td>${vo.user_id}</td> --%>
-<%-- 								<td>${vo.review_score} --%>
-<!-- 									<select> -->
-<!-- 										<option value="1"></option> -->
-<!-- 										<option value="2"></option> -->
-<!-- 										<option value="3"></option> -->
-<!-- 										<option value="4"></option> -->
-<!-- 										<option value="5"></option> -->
-<!-- 									</select> -->
-<!-- 								</td> -->
-<!-- 								<td> -->
-<!-- 									<input type="text" class="form-control" maxlength="200" placeholder="감상평을 적어주세요." required/> -->
-<!-- 									<button type="button" id="btnInput" class="btn btn-primary">입력</button> -->
-<!-- 								</td> -->
-<!--  								<td>Default</td> -->
-<!-- 							</tr> -->
-<%-- 						</c:forEach> --%>
-						
-<!-- 					</table> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-md-1"></div> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			<!-- 한줄 감상평 끝 -->
 			
 		</div>
 		<div class="col-md-2"></div>

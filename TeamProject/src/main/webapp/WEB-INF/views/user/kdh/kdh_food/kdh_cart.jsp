@@ -126,7 +126,6 @@ $(function() {
 	// 수정 버튼
 	$(".btnUpdate").click(function() {
 		var food_cart_count = $(this).parent().find($(".btnCount")).text();
-// 		var totalPlus = $(this).parent().parent().parent().find($(".small_total")).attr("data-total-price");
 		var price = $("#food_price").attr("data-price");
 		
 		var buy_food_price = price * food_cart_count;
@@ -199,6 +198,192 @@ $(function() {
 		} else {
 			
 		}
+	});
+	
+	// 쿠폰 사용 버튼
+	$("#btnUse").click(function() {
+		var couponPrice = $("#UsecouponPrice").val();
+		console.log("couponPrice:" + couponPrice);
+		var StringcouponPrice = String(couponPrice);
+
+		var sumPrice = 0;
+		$.each($(".small_total"), function() {
+			sumPrice += Number($(this).attr("data-total-price"));
+		});
+		
+		if (sumPrice > couponPrice) {
+			var lastPrice = sumPrice-couponPrice;	
+			
+			var lastPriceToString = String(lastPrice);
+			var PriceLastIndex3 = lastPriceToString.substring(lastPriceToString.length-3);
+			var priceFirstIndex = lastPriceToString.substring(0,lastPriceToString.length);
+			priceIndex = lastPriceToString.substring(priceFirstIndex,PriceLastIndex3);
+			
+			var firstPriceIndex3;
+			var centerPriceIndex3;
+			var lastPriceIndex3;
+		
+			if(lastPriceToString.length == 4) {
+				firstPriceIndex3 = lastPriceToString.substr(0,1);
+				lastPriceIndex3 = lastPriceToString.substr(1,4);
+			} else if(lastPriceToString.length == 5) {
+				firstPriceIndex3 = lastPriceToString.substr(0,2);
+				lastPriceIndex3 = lastPriceToString.substr(2,5);
+			} else if(lastPriceToString.length == 6) {
+				firstPriceIndex3 = lastPriceToString.substr(0,3);
+				lastPriceIndex3 = lastPriceToString.substr(3,6);
+			} else if(lastPriceToString.length == 7) {
+				firstPriceIndex3 = lastPriceToString.substr(0,1);
+				centerPriceIndex3 = lastPriceToString.substr(1,4);
+				lastPriceIndex3 = lastPriceToString.substr(4,7);
+			} else if(lastPriceToString.length == 8) {
+				firstPriceIndex3 = lastPriceToString.substr(0,2);
+				centerPriceIndex3 = lastPriceToString.substr(2,5);
+				lastPriceIndex3 = lastPriceToString.substr(5,8);
+			}
+			
+			if (centerPriceIndex3 != null) {
+				$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+	
+			} else {
+				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			}
+			
+			// 쿠폰 금액 만들기
+			var PriceLastIndex3 = StringcouponPrice.substring(StringcouponPrice.length-3);
+			var priceFirstIndex = StringcouponPrice.substring(0,StringcouponPrice.length);
+			priceIndex = StringcouponPrice.substring(priceFirstIndex,PriceLastIndex3);
+			
+			var firstPriceIndex3;
+			var centerPriceIndex3;
+			var lastPriceIndex3;
+			
+			if(StringcouponPrice.length == 4) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,1);
+				lastPriceIndex3 = StringcouponPrice.substr(1,4);
+			} else if(StringcouponPrice.length == 5) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,2);
+				lastPriceIndex3 = StringcouponPrice.substr(2,5);
+			} else if(StringcouponPrice.length == 6) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,3);
+				lastPriceIndex3 = StringcouponPrice.substr(3,6);
+			} else if(StringcouponPrice.length == 7) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,1);
+				centerPriceIndex3 = StringcouponPrice.substr(1,4);
+				lastPriceIndex3 = StringcouponPrice.substr(4,7);
+			} else if(StringcouponPrice.length == 8) {
+				firstPriceIndex3 = StringcouponPrice.substr(0,2);
+				centerPriceIndex3 = StringcouponPrice.substr(2,5);
+				lastPriceIndex3 = StringcouponPrice.substr(5,8);
+			}
+			
+			if (centerPriceIndex3 != null) {
+				$("#couponPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+		
+			} else {
+				$("#couponPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			}
+		
+		} else {
+			alert("쿠폰을 사용할 수 없습니다.")
+			var zero = 0;
+			var couponPriceVal = $("#couponPrice").val();
+			$("#couponPrice").text(zero + "원");
+			var couponPriceText = $("#couponPrice").text();
+			
+			var lastPrice = sumPrice;	
+			var lastPriceToString = String(lastPrice);
+			var PriceLastIndex3 = lastPriceToString.substring(lastPriceToString.length-3);
+			var priceFirstIndex = lastPriceToString.substring(0,lastPriceToString.length);
+			priceIndex = lastPriceToString.substring(priceFirstIndex,PriceLastIndex3);
+			
+			var firstPriceIndex3;
+			var centerPriceIndex3;
+			var lastPriceIndex3;
+			
+			if(lastPriceToString.length == 4) {
+				firstPriceIndex3 = lastPriceToString.substr(0,1);
+				lastPriceIndex3 = lastPriceToString.substr(1,4);
+			} else if(lastPriceToString.length == 5) {
+				firstPriceIndex3 = lastPriceToString.substr(0,2);
+				lastPriceIndex3 = lastPriceToString.substr(2,5);
+			} else if(lastPriceToString.length == 6) {
+				firstPriceIndex3 = lastPriceToString.substr(0,3);
+				lastPriceIndex3 = lastPriceToString.substr(3,6);
+			} else if(lastPriceToString.length == 7) {
+				firstPriceIndex3 = lastPriceToString.substr(0,1);
+				centerPriceIndex3 = lastPriceToString.substr(1,4);
+				lastPriceIndex3 = lastPriceToString.substr(4,7);
+			} else if(lastPriceToString.length == 8) {
+				firstPriceIndex3 = lastPriceToString.substr(0,2);
+				centerPriceIndex3 = lastPriceToString.substr(2,5);
+				lastPriceIndex3 = lastPriceToString.substr(5,8);
+			}
+		
+			if (centerPriceIndex3 != null) {
+				$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+			} else {
+				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			}
+		}
+	}); // 쿠폰 사용 버튼
+	
+	// 쿠폰 삭제하기 버튼
+	$("#btnUseNo").click(function() {
+		
+		var couponPrice = $("#UsecouponPrice").val();
+		var StringcouponPrice = String(couponPrice);
+
+		var sumPrice = 0;
+		$.each($(".small_total"), function() {
+			sumPrice += Number($(this).attr("data-total-price"));
+		});
+		
+// 		var index = $("#btnCount").text();
+// 		var Iindex = parseInt(index);
+// 		var price = $("#food_price").attr("data-price");
+// 		var sumPrice = (price * Iindex);
+		
+		var zero = 0;
+		var couponPriceVal = $("#couponPrice").val();
+		$("#couponPrice").text(zero + "원");
+		var couponPriceText = $("#couponPrice").text();
+		
+		var lastPrice = sumPrice;	
+		var lastPriceToString = String(lastPrice);
+		var PriceLastIndex3 = lastPriceToString.substring(lastPriceToString.length-3);
+		var priceFirstIndex = lastPriceToString.substring(0,lastPriceToString.length);
+		priceIndex = lastPriceToString.substring(priceFirstIndex,PriceLastIndex3);
+		
+		var firstPriceIndex3;
+		var centerPriceIndex3;
+		var lastPriceIndex3;
+		
+		if(lastPriceToString.length == 4) {
+			firstPriceIndex3 = lastPriceToString.substr(0,1);
+			lastPriceIndex3 = lastPriceToString.substr(1,4);
+		} else if(lastPriceToString.length == 5) {
+			firstPriceIndex3 = lastPriceToString.substr(0,2);
+			lastPriceIndex3 = lastPriceToString.substr(2,5);
+		} else if(lastPriceToString.length == 6) {
+			firstPriceIndex3 = lastPriceToString.substr(0,3);
+			lastPriceIndex3 = lastPriceToString.substr(3,6);
+		} else if(lastPriceToString.length == 7) {
+			firstPriceIndex3 = lastPriceToString.substr(0,1);
+			centerPriceIndex3 = lastPriceToString.substr(1,4);
+			lastPriceIndex3 = lastPriceToString.substr(4,7);
+		} else if(lastPriceToString.length == 8) {
+			firstPriceIndex3 = lastPriceToString.substr(0,2);
+			centerPriceIndex3 = lastPriceToString.substr(2,5);
+			lastPriceIndex3 = lastPriceToString.substr(5,8);
+		}
+	
+		if (centerPriceIndex3 != null) {
+			$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+		} else {
+			$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+		}
+	
 	});
 });
 
@@ -279,10 +464,9 @@ $(function() {
 							<div class="col-lg-8 col-md-5 col-12">
 								<div class="left">
 									<div class="coupon">
-										<form action="#" target="_blank">
-											<input name="Coupon" placeholder="쿠폰 사용">
-											<button class="btn">사용하기</button>
-										</form>
+										<input id="UsecouponPrice" name="Coupon" placeholder="쿠폰 사용">
+										<button id="btnUse" class="btn btn-sm">사용하기</button>
+										<button id="btnUseNo" class="btn btn-sm">삭제하기</button>
 									</div>
 								</div>
 							</div>
