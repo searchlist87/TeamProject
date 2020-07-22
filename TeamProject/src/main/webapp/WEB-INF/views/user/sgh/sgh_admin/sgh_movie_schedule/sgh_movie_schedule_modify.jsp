@@ -70,9 +70,6 @@ $(function() {
 <div style="visibility: hidden;">
 	<span id="message_span" style="color: red;"></span>
 </div>
-<!-- 등록을 할 때 결과를 체크할 hidden type들 -->
-<input type="hidden" id="start_date_result" value="true">
-<input type="hidden" id="end_date_result" value="true">
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">

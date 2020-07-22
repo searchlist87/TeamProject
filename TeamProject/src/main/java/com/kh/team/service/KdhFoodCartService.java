@@ -17,7 +17,7 @@ public interface KdhFoodCartService {
 	public void deleteCart(int food_cart_num) throws Exception; 
 	
 	// 장바구니 수정
-	public void updateCart(int food_cart_num, int food_cart_count, int food_num) throws Exception;
+	public void updateCart(int food_cart_num, int food_cart_count, int buy_food_price) throws Exception;
 	
 	// 장바구니 등록
 	public void insertCart(KdhFoodCartDto cartDto) throws Exception;
@@ -27,4 +27,7 @@ public interface KdhFoodCartService {
 	
 	// food_cart_num으로 KdhFoodCartDao 구하기
 	public int selectFoodnumByCartnum(int food_cart_num) throws Exception;
+	
+	// 장바구니 합계액 구하기
+	public int FoodTotalMoney() throws Exception;
 }

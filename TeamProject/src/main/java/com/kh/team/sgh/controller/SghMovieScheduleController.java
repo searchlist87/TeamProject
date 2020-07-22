@@ -32,7 +32,6 @@ public class SghMovieScheduleController {
 	@RequestMapping(value="/scheduleList", method=RequestMethod.GET)
 	public String scheduleList(Model model) throws Exception {
 		List<SghScheduleVo> schedule_list = sghScheduleService.getScheduleList();
-		System.out.println("schedule_list :" + schedule_list);
 		model.addAttribute("schedule_list", schedule_list);
 		return "user/sgh/sgh_admin/sgh_movie_schedule/sgh_movie_schedule_list";
 	}
@@ -52,7 +51,6 @@ public class SghMovieScheduleController {
 	@RequestMapping(value="/scheduleRegistRun", method=RequestMethod.GET)
 	public String scheduleRegistRun(SghScheduleVo sghScheduleVo, RedirectAttributes rttr) {
 		try {
-			System.out.println("sghScheduleVo :" + sghScheduleVo);
 			sghScheduleService.insertMovieSchedule(sghScheduleVo);
 			return "redirect:/sgh/admin/schedule/scheduleList";
 		} catch (Exception e) {

@@ -30,8 +30,8 @@
 <!-- 장바구니 수정 -->
 <update id="updateCart">
 	update tbl_food_cart set
-		food_num = #{food_num},
-		food_cart_count = #{food_cart_count}
+		food_cart_count = #{food_cart_count},
+		buy_food_price = #{buy_food_price}
 	where food_cart_num = #{food_cart_num}
 </update>
 
@@ -52,5 +52,10 @@
 <select id="selectFoodnumByCartnum" resultType="int">
 	select food_num from tbl_food_cart
 	where food_cart_num = #{food_cart_num}
+</select>
+
+<!-- 장바구니 합계액 구하기 -->
+<select id="FoodTotalMoney" resultType="int">
+	select sum(buy_food_price) as buy_food_price from tbl_food_cart
 </select>
 </mapper>

@@ -31,8 +31,8 @@ public class KdhFoodCartServiceImpl implements KdhFoodCartService {
 	}
 
 	@Override
-	public void updateCart(int food_cart_num, int food_cart_count, int food_num) throws Exception {
-		cartDao.updateCart(food_cart_num, food_cart_count, food_num);
+	public void updateCart(int food_cart_num, int food_cart_count, int buy_food_price) throws Exception {
+		cartDao.updateCart(food_cart_num, food_cart_count, buy_food_price);
 	}
 
 	@Override
@@ -48,6 +48,11 @@ public class KdhFoodCartServiceImpl implements KdhFoodCartService {
 	@Override
 	public int selectFoodnumByCartnum(int food_cart_num) throws Exception {
 		return cartDao.selectFoodnumByCartnum(food_cart_num);
+	}
+
+	@Override
+	public int FoodTotalMoney() throws Exception {
+		return cartDao.FoodTotalMoney();
 	}
 
 }

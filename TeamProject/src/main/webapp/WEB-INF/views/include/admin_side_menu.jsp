@@ -52,14 +52,6 @@ $(function () {
 					<dd><a href="#" class="sub_menu">푸드 상품조회</a></dd>
 					<dd><a href="#" class="sub_menu">푸드 상품등록</a></dd>
 				</dl>
-				<dl class="categor-list" id="seat_manage">
-					<dt><a href="#" data-link="sub_open" class="title_menu">＃좌석 관리</a></dt>
-					<dd><a href="#" class="sub_menu">좌석 조회</a></dd>
-				</dl>
-				<dl class="categor-list" id="booking_manage">
-					<dt><a href="#" data-link="sub_open" class="title_menu">＃예매 관리</a></dt>
-					<dd><a href="#" class="sub_menu">예매내역 조회</a></dd>
-				</dl>
 				<dl class="categor-list" id="event_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃이벤트 관리</a></dt>
 					<dd><a href="/admin/admin_event_list" class="sub_menu">이벤트 조회</a></dd>

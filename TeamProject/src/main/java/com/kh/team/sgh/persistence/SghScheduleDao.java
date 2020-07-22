@@ -6,7 +6,7 @@ import com.kh.team.domain.SghScheduleVo;
 
 public interface SghScheduleDao {
 
-	// 상영작 목록 가져오기
+	// 개봉작 목록 가져오기
 	public List<SghScheduleVo> getScheduleList() throws Exception;
 	// 상영작 등록하기
 	public void insertMovieSchedule(SghScheduleVo sghScheduleVo) throws Exception;

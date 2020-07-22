@@ -6,10 +6,21 @@
 <head>
 <!--  tag_and_styleSheet include -->
 <%@ include file="../include/tag_and_styleSheet.jsp"%>
+<%@ include file="../include/bootstrap.jsp" %>
 </head>
 <!--  header include -->
 <%@include file="../include/header.jsp"%>
+<script>
+$(function() {
+	var result = "${result}";
+	console.log("result : " + result);
+	if(result == "false") {
+		console.log("찍힘");
+		alert("잘못된 등급의 접근 입니다.");
+	}
+});
 
+</script>
 <body class="js">
 	<!-- Slider Area -->
 	<section class="hero-slider">

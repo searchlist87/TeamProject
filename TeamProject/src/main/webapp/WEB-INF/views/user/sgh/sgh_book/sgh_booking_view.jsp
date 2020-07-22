@@ -8,13 +8,14 @@
 	.font {
 		font-size: 30px;
 	}
+	#movie_lsit_span {
+		cursor: pointer;
+	}
 </style>
-
+<script src="/resources/js/sgh_js/booking_date.js"></script>
 <script>
 $(function() {
 	
-	var code;
-	var movie_code;
 	// 상영 지역 이벤트 설정
 	// 상영 지역에 있는 영화관 정보를 받아서 해당 지역으로 클릭하면 그 지역에 관한 영화관 뿌리기
 	var theaterArr = new Array();
@@ -23,25 +24,31 @@ $(function() {
 		theaterArr.push(that);
 	});
 	
+	$("#movie_lsit_span").click(function(e) {
+		e.preventDefault();
+		$(this).css("border", "2px solid");
+	});
+	
 	// 상영 지역
 	$("#screeningArea").on("click", ".areaChoice", function(e) {
 		e.preventDefault();
 		var a_areaName = $(this).attr("data-a-areaName");
 		$(".screeningAreaClone").remove();
 		$(".movieChoice").remove();
-		var screeningAreaClone = $("#screeningArea").clone().addClass("screeningAreaClone");
-		screeningAreaClone.find("li").remove();
+		var screenClone = $("#screeningArea").clone().addClass("screeningAreaClone");
+		screenClone.find(".title").text("상영 영화관");
+		screenClone.find("li").remove();
 		
 		$.each(theaterArr, function() {
 			var t_areaName = $(this).attr("data-t-areaName");
 			if(a_areaName == t_areaName) {
 				var theaterA_tag = $(this);
-				screeningAreaClone.find("ul").append(theaterA_tag);
+				screenClone.find("ul").append(theaterA_tag);
 			}
 		});
-		screeningAreaClone.find("a").wrap("<li></li>");
+		screenClone.find("a").wrap("<li></li>");
 		
-		$("#screeningArea").after(screeningAreaClone);
+		$("#screeningArea").after(screenClone);
 	});
 	
 	// 상영 영화관
@@ -49,51 +56,87 @@ $(function() {
 		e.preventDefault();
 		var url = "/sgh/book/getMovieName";
 		var theater_code = $(this).attr("data-t-theater-code");
-		code = theater_code;
 		var sendData = {
 				"theater_code" : theater_code
 		};
 		$(".movieChoice").remove();
-		var screeningAreaClone = $("#screeningArea").clone().addClass("movieChoice");
-		screeningAreaClone.find("li").remove();
+		var screenClone = $("#screeningArea").clone().addClass("movieChoice");
+		screenClone.find(".title").text("상영작");
+		screenClone.find("li").remove();
 		
-		$.getJSON(url, sendData, function(rData) {
+		$.get(url, sendData, function(rData) {
 			console.log("rData" + rData);
 			$.each(rData, function() {
 				var movieName = this.movie_name;
-				movie_code = this.movie_code;
-				var a = "<li><a href='#' class='movie_name' data-movie='" + movieName + "'>" + movieName + "</a></li>";
-				screeningAreaClone.find("ul").append(a);
+				var a = "<li><a href='#' class='movie_name' data-movie-code='" + this.movie_code + "'>" + movieName + "</a></li>";
+				screenClone.find("ul").append(a);
 			});
 		});
-		$(".screeningAreaClone").after(screeningAreaClone);
+		
+		$(".screeningAreaClone").after(screenClone);
 	});
 	
 	// 각각의 영화
 	$("#section").on("click", ".movie_name", function(e) {
 		e.preventDefault();
-		var theater_code = code;
-		var that = $(this).attr("data-movie");
+		
+		var today = new Date();
+		var year = today.getFullYear(); // 년도
+		var month = today.getMonth() + 1; // 월
+		var date = today.getDate(); // 일
+		var day = today.getDay(); // 날짜
+		
+		var strDate = year + "-" + zeroPlus(month) + "-" + zeroPlus(date) + "("+strDay(day)+")";
+		
+		var movie_code = $(this).attr("data-movie-code");
+		var start_date = year + "-" + zeroPlus(month) + "-" + zeroPlus(date);
+		
+		var screenClone = $("#screeningArea").clone();
+		screenClone.attr("class", "col-lg-4 col-md-2 col-2 screeningAreaClone");
+		screenClone.find(".title").text(strDate);
+		screenClone.find("li").remove();
+		
 		var url = "/sgh/book/movieSchedule";
 		var sendData = {
-				"theater_code" : theater_code,
+				"start_date" : start_date,
 				"movie_code" : movie_code
 		};
 		
-		$.getJSON(url, sendData, function(rData) {
-			// 컨트롤러에 요청해서 반환하는 작업 해야함. mapper + dao 등등 해야함
-			console.log("rData :" + rData);
+		$.get(url, sendData, function(rData) {
+			$.each(rData, function() {
+				var movie_grade = (this).movie_grade;
+				var start_time = (this).start_time;
+				var screen_name = (this).screen_name;
+				var	total_seat = (this).screen_total_seat;
+				var rmn_sts = (this).rmn_sts;
+				var movie_time_code = (this).movie_time_code;
+				console.log("movie_grade : " + movie_grade);
+				console.log("start_time : " + start_time);
+				console.log("screen_name : " + screen_name);
+				console.log("total_seat : " + total_seat);
+				console.log("rmn_sts : " + rmn_sts);
+				console.log("movie_time_code : " + movie_time_code);
+			});
 		});
+		
+		screenClone.find("a").wrap("<li></li>");
+		$(".movieChoice").after(screenClone);
 	});
 });
 </script>
 <c:forEach items="${theaterList}" var="SghTheaterVo">
-	<li style="visibility: hidden;">
+	<li style="display: none">
 		<a class="theater_code" href="#" data-t-areaName="${SghTheaterVo.area_name}" data-t-theater-code="${SghTheaterVo.theater_code}">${SghTheaterVo.theater_name}</a>
 		<a id="aCloneTag" href="#"></a>	
 	</li>
 </c:forEach>
 
+<span id="movie_lsit_span"class="row" style="margin-left: 30px; border: 1px solid; border-radius: 1em; width: 75px; height: 40px;"><!-- display: none; -->
+	<a href="#" style="font: 5px;">
+		12:00
+		34/34 b관
+	</a>	
+</span>
 		<!-- Product Style -->
 		<section id="section" class="product-area shop-sidebar shop section">
 			<div class="container">
