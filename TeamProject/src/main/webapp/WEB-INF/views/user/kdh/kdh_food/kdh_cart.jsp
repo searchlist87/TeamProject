@@ -6,7 +6,7 @@
 <head>
 
 <!-- tag_and_styleSheet 인크루드 -->
-<%@include file = "../../../include/tag_and_styleSheet.jsp" %>
+<%@include file = "/WEB-INF/views/include/tag_and_styleSheet.jsp" %>
  <!-- Jquery -->
     <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
@@ -15,16 +15,190 @@
 
 <script>
 $(function() {
-	$("#btnSetCount").click(function() {
-		var food_count = $("#food_count").val();
-		var price = $("#food_price").text();
-		console.log("price:" + price);
-		var food_price = parseInt(price);
-		console.log("food_price:" + food_price);
-		var sumPrice = (food_count * food_price) * 1000;
-		console.log("sumPrice:" + sumPrice);
+//  	var msg = "${findCartResult}";
+// 	if (msg == "true") {
+// 		alert("중복안내 모달창 등장");
+// 	} 
+	
+	// 수량/금액 증가 버튼
+	$(".btnPlus").click(function() {
+		var count = $(".btnSetCount").attr("data-food-count");
+		// 수량 증가
+		var index = $(this).parent().find($(".btnCount")).text();
+		var Iindex = parseInt(index);
+		if (Iindex < count) {
+			var indexPlus = Iindex + 1;
+			$(this).parent().find($(".btnCount")).text(indexPlus);
+			
+			// 수량에 따른 가격 증가
+			var price = $(this).parent().parent().parent().find($(".food_price")).attr("data-price");
+			var pricePlus = (price * indexPlus);
+			var totalPlus = $(this).parent().parent().parent().find($(".small_total")).attr("data-total-price", pricePlus);
+			
+			var StringpricePlus = String(pricePlus);
+			var PriceLastIndex3 = StringpricePlus.substring(StringpricePlus.length-3);
+			var priceFirstIndex = StringpricePlus.substring(0,StringpricePlus.length);
+			priceIndex = StringpricePlus.substring(priceFirstIndex,PriceLastIndex3);
+			
+			var firstPriceIndex3;
+			var centerPriceIndex3;
+			var lastPriceIndex3;
+			
+			if(StringpricePlus.length == 4) {
+				firstPriceIndex3 = StringpricePlus.substr(0,1);
+				lastPriceIndex3 = StringpricePlus.substr(1,4);
+			} else if(StringpricePlus.length == 5) {
+				firstPriceIndex3 = StringpricePlus.substr(0,2);
+				lastPriceIndex3 = StringpricePlus.substr(2,5);
+			} else if(StringpricePlus.length == 6) {
+				firstPriceIndex3 = StringpricePlus.substr(0,3);
+				lastPriceIndex3 = StringpricePlus.substr(3,6);
+			} else if(StringpricePlus.length == 7) {
+				firstPriceIndex3 = StringpricePlus.substr(0,1);
+				centerPriceIndex3 = StringpricePlus.substr(1,4);
+				lastPriceIndex3 = StringpricePlus.substr(4,7);
+			} else if(StringpricePlus.length == 8) {
+				firstPriceIndex3 = StringpricePlus.substr(0,2);
+				centerPriceIndex3 = StringpricePlus.substr(2,5);
+				lastPriceIndex3 = StringpricePlus.substr(5,8);
+			}
+
+			if (centerPriceIndex3 != null) {
+				var total_price = $(this).parent().parent().parent().find($(".sumPrice")).text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+			} else {
+				var total_price = $(this).parent().parent().parent().find($(".sumPrice")).text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			}
+		};
+	});
+
+	// 수량/금액 감소 버튼
+	$(".btnMius").click(function() {
+		// 수량 감소
+		var index = $(this).parent().find($(".btnCount")).text();
+		var Iindex = parseInt(index);
+		if (Iindex > 1) {
+		indexMius = Iindex - 1;
+		} else if (Iindex = 1) {
+				indexMius = 1;
+		}
+		$(this).parent().find($(".btnCount")).text(indexMius);
 		
-		$("#sumPrice").text((sumPrice)+"원");
+		// 수량에 따른 가격 감소
+		var price = $("#food_price").attr("data-price");
+		var priceMius = (price * indexMius);
+		var totalPlus = $(this).parent().parent().parent().find($(".small_total")).attr("data-total-price", priceMius);
+		
+		var StringpriceMius = String(priceMius);
+		var PriceLastIndex3 = StringpriceMius.substring(StringpriceMius.length-3);
+		var priceFirstIndex = StringpriceMius.substring(0,StringpriceMius.length);
+		priceIndex = StringpriceMius.substring(priceFirstIndex,PriceLastIndex3);
+		
+		var firstPriceIndex3;
+		var centerPriceIndex3;
+		var lastPriceIndex3;
+		
+		if(StringpriceMius.length == 4) {
+			firstPriceIndex3 = StringpriceMius.substr(0,1);
+			lastPriceIndex3 = StringpriceMius.substr(1,4);
+		} else if(StringpriceMius.length == 5) {
+			firstPriceIndex3 = StringpriceMius.substr(0,2);
+			lastPriceIndex3 = StringpriceMius.substr(2,5);
+		} else if(StringpriceMius.length == 6) {
+			firstPriceIndex3 = StringpriceMius.substr(0,3);
+			lastPriceIndex3 = StringpriceMius.substr(3,6);
+		} else if(StringpriceMius.length == 7) {
+			firstPriceIndex3 = StringpriceMius.substr(0,1);
+			centerPriceIndex3 = StringpriceMius.substr(1,4);
+			lastPriceIndex3 = StringpriceMius.substr(4,7);
+		} else if(StringpriceMius.length == 8) {
+			firstPriceIndex3 = StringpriceMius.substr(0,2);
+			centerPriceIndex3 = StringpriceMius.substr(2,5);
+			lastPriceIndex3 = StringpriceMius.substr(5,8);
+		}
+		
+		if (centerPriceIndex3 != null) {
+			var total_price = $(this).parent().parent().parent().find($(".sumPrice")).text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+		} else {
+			var total_price = $(this).parent().parent().parent().find($(".sumPrice")).text(firstPriceIndex3+","+lastPriceIndex3+"원");
+		}
+	}); // 수량/금액 감소 버튼
+	
+	// 수정 버튼
+	$(".btnUpdate").click(function() {
+		var food_cart_count = $(this).parent().find($(".btnCount")).text();
+// 		var totalPlus = $(this).parent().parent().parent().find($(".small_total")).attr("data-total-price");
+		var price = $("#food_price").attr("data-price");
+		
+		var buy_food_price = price * food_cart_count;
+		
+		var food_cart_num = $(this).attr("data-food-cart-num");
+		var sendData = {
+				"food_cart_count" : food_cart_count,
+				"buy_food_price" : buy_food_price,
+				"food_cart_num" : food_cart_num
+		};
+		var url = "/cart/update";
+		$.get(url, sendData, function(rData) {
+			console.log(rData);
+			if (rData == "success") {
+				var sum = 0;
+				$.each($(".small_total"), function() {
+					sum += Number($(this).attr("data-total-price"));
+					
+				});
+				
+				var sum = String(sum);
+				var PriceLastIndex3 = sum.substring(sum.length-3);
+				var priceFirstIndex = sum.substring(0,sum.length);
+				var priceIndex = sum.substring(priceFirstIndex,PriceLastIndex3);
+				
+				var firstPriceIndex3;
+				var centerPriceIndex3;
+				var lastPriceIndex3;
+				
+				if(sum.length == 4) {
+					firstPriceIndex3 = sum.substr(0,1);
+					lastPriceIndex3 = sum.substr(1,4);
+				} else if(sum.length == 5) {
+					firstPriceIndex3 = sum.substr(0,2);
+					lastPriceIndex3 = sum.substr(2,5);
+				} else if(sum.length == 6) {
+					firstPriceIndex3 = sum.substr(0,3);
+					lastPriceIndex3 = sum.substr(3,6);
+				} else if(sum.length == 7) {
+					firstPriceIndex3 = sum.substr(0,1);
+					centerPriceIndex3 = sum.substr(1,4);
+					lastPriceIndex3 = sum.substr(4,7);
+				} else if(sum.length == 8) {
+					firstPriceIndex3 = sum.substr(0,2);
+					centerPriceIndex3 = sum.substr(2,5);
+					lastPriceIndex3 = sum.substr(5,8);
+				}
+				if (centerPriceIndex3 != null) {
+					$("#totalPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+					$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+				} else {
+					$("#totalPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+					$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+				}
+			}
+		});
+	}); // 수정 버튼
+	
+	// 결제하기 버튼
+	$("#btnBuy").click(function() {
+		location.href="/kdh/food/buyView";
+	});
+	
+	// 쓰레기통 모양 클릭(스토어 홈으로 보내기)
+	$(".action").click(function() {
+		var r = confirm("선택하신 상품을 삭제하시겠습니까?");
+		if(r == true) {
+			var food_cart_num = $(this).attr("data-food-cart-num");
+			location.href="/cart/delete?food_cart_num="+food_cart_num;
+		} else {
+			
+		}
 	});
 });
 
@@ -67,36 +241,31 @@ $(function() {
 								<th class="text-center">가격</th>
 								<th class="text-center">개수</th>
 								<th class="text-center">합계</th> 
-								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
+								<th class="text-center">
+									<i class="ti-trash remove-icon"></i>
+								</th>
 							</tr>
 						</thead>
-						<tbody>
-							<c:forEach items="${sessionScope.foodList}" var="foodVo">
-							<tr>
-								<td class="image" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#"></td>
+						<tbody class="Ttbody" id="Ttbody">
+						<c:forEach items="${list}" var="foodVo">
+							<tr id="food_tr">
+								<td class="image"><img src="/resources/images/kdh/${foodVo.food_image}" alt="${foodVo.food_image}"></td>
 								<td class="product-des" data-title="Description">
 									<p class="product-name"><a href="#">${foodVo.food_name}</a></p>
 								</td>
-								<td class="price" id="food_price" data-title="Price"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber> </span></td>
+								<td class="food_price" id="food_price" data-price="${foodVo.food_price}"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber></span>원</td>
 								<td class="qty" data-title="Qty">
-									<div id="btnSetCount" class="input-group">
-										<div class="button minus">
-											<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-												<i class="ti-minus"></i>
-											</button>
-										</div>
-										<input type="text" id="food_count" name="quant[1]" class="input-number"  data-min="1" data-max="${foodVo.food_count}" value="${foodVo.food_buy_count}">
-										<div class="button plus">
-											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
-												<i class="ti-plus"></i>
-											</button>
-										</div>
+									<div data-food-count="${foodVo.food_count}" class="input-group btnSetCount" style="text-align: center;">
+										<button class="btnMius" type="button">-</button> 
+										<span class="btnCount">${foodVo.food_cart_count}</span>
+										<button class="btnPlus" type="button">+</button>　
+										<button data-food-cart-num="${foodVo.food_cart_num}" class="btnUpdate btn btn-sm" type="button">수정</button>
 									</div>
 								</td>
-								<td id="sumPrice" class="total-amount" data-title="Total"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_buy_price}"></fmt:formatNumber>원</span></td>
-								<td class="action" data-title="Remove"><a href="#"><i class="ti-trash remove-icon"></i></a></td>
+								<td class="total-amount small_total" data-total-price="${foodVo.buy_food_price}"><span class="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${foodVo.buy_food_price}"></fmt:formatNumber>원</span></td>
+								<td class="action" data-food-cart-num="${foodVo.food_cart_num}"><i class="ti-trash remove-icon"></i></td>
 							</tr>
-							</c:forEach>
+						</c:forEach>
 						</tbody>
 					</table>
 					<!--/ End Shopping Summery -->
@@ -120,12 +289,12 @@ $(function() {
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li>총 상품금액<span>가격</span></li>
-										<li>쿠폰 사용<span>가격</span></li>
-										<li class="last">총 결제금액<span>가격</span></li>
+										<li>총 상품금액<span class="totalPrice" id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
+										<li>쿠폰 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>총 결제금액<span class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">
-										<a href="#" class="btn">결제하기</a>
+										<button id="btnBuy" class="btn btn-sm">결제하기</button>
 									</div>
 								</div>
 							</div>
@@ -147,7 +316,7 @@ $(function() {
 					<div class="single-service">
 						<i class="ti-rocket"></i>
 						<h4>싱싱한 맛</h4>
-						<p>주문시 즉시 조리</p>
+						<p>주문 즉시 조리</p>
 					</div>
 					<!-- End Single Service -->
 				</div>
@@ -184,120 +353,6 @@ $(function() {
 	<!-- End Shop Newsletter -->
 <div class="col-md-12" style="margin-bottom: 100px;"></div>	
 	
-	
-	
-	<!-- Modal -->
-<!--         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"> -->
-<!--             <div class="modal-dialog" role="document"> -->
-<!--                 <div class="modal-content"> -->
-<!--                     <div class="modal-header"> -->
-<!--                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button> -->
-<!--                     </div> -->
-<!--                     <div class="modal-body"> -->
-<!--                         <div class="row no-gutters"> -->
-<!--                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"> -->
-<!--                                 Product Slider -->
-<!-- 									<div class="product-gallery"> -->
-<!-- 										<div class="quickview-slider-active"> -->
-<!-- 											<div class="single-slider"> -->
-<!-- 												<img src="images/modal1.jpg" alt="#"> -->
-<!-- 											</div> -->
-<!-- 											<div class="single-slider"> -->
-<!-- 												<img src="images/modal2.jpg" alt="#"> -->
-<!-- 											</div> -->
-<!-- 											<div class="single-slider"> -->
-<!-- 												<img src="images/modal3.jpg" alt="#"> -->
-<!-- 											</div> -->
-<!-- 											<div class="single-slider"> -->
-<!-- 												<img src="images/modal4.jpg" alt="#"> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 								End Product slider -->
-<!--                             </div> -->
-<!--                             <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12"> -->
-<!--                                 <div class="quickview-content"> -->
-<!--                                     <h2>Flared Shift Dress</h2> -->
-<!--                                     <div class="quickview-ratting-review"> -->
-<!--                                         <div class="quickview-ratting-wrap"> -->
-<!--                                             <div class="quickview-ratting"> -->
-<!--                                                 <i class="yellow fa fa-star"></i> -->
-<!--                                                 <i class="yellow fa fa-star"></i> -->
-<!--                                                 <i class="yellow fa fa-star"></i> -->
-<!--                                                 <i class="yellow fa fa-star"></i> -->
-<!--                                                 <i class="fa fa-star"></i> -->
-<!--                                             </div> -->
-<!--                                             <a href="#"> (1 customer review)</a> -->
-<!--                                         </div> -->
-<!--                                         <div class="quickview-stock"> -->
-<!--                                             <span><i class="fa fa-check-circle-o"></i> in stock</span> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
-<!--                                     <h3>$29.00</h3> -->
-<!--                                     <div class="quickview-peragraph"> -->
-<!--                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste laborum ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos qui nemo ipsum numquam.</p> -->
-<!--                                     </div> -->
-<!-- 									<div class="size"> -->
-<!-- 										<div class="row"> -->
-<!-- 											<div class="col-lg-6 col-12"> -->
-<!-- 												<h5 class="title">Size</h5> -->
-<!-- 												<select> -->
-<!-- 													<option selected="selected">s</option> -->
-<!-- 													<option>m</option> -->
-<!-- 													<option>l</option> -->
-<!-- 													<option>xl</option> -->
-<!-- 												</select> -->
-<!-- 											</div> -->
-<!-- 											<div class="col-lg-6 col-12"> -->
-<!-- 												<h5 class="title">Color</h5> -->
-<!-- 												<select> -->
-<!-- 													<option selected="selected">orange</option> -->
-<!-- 													<option>purple</option> -->
-<!-- 													<option>black</option> -->
-<!-- 													<option>pink</option> -->
-<!-- 												</select> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!--                                     <div class="quantity"> -->
-<!-- 										Input Order -->
-<!-- 										<div class="input-group"> -->
-<!-- 											<div class="button minus"> -->
-<!-- 												<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]"> -->
-<!-- 													<i class="ti-minus"></i> -->
-<!-- 												</button> -->
-<!-- 											</div> -->
-<!-- 											<input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="1000" value="1"> -->
-<!-- 											<div class="button plus"> -->
-<!-- 												<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]"> -->
-<!-- 													<i class="ti-plus"></i> -->
-<!-- 												</button> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 										/ End Input Order -->
-<!-- 									</div> -->
-<!-- 									<div class="add-to-cart"> -->
-<!-- 										<a href="#" class="btn">Add to cart</a> -->
-<!-- 										<a href="#" class="btn min"><i class="ti-heart"></i></a> -->
-<!-- 										<a href="#" class="btn min"><i class="fa fa-compress"></i></a> -->
-<!-- 									</div> -->
-<!--                                     <div class="default-social"> -->
-<!-- 										<h4 class="share-now">Share:</h4> -->
-<!--                                         <ul> -->
-<!--                                             <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li> -->
-<!--                                             <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li> -->
-<!--                                             <li><a class="youtube" href="#"><i class="fa fa-pinterest-p"></i></a></li> -->
-<!--                                             <li><a class="dribbble" href="#"><i class="fa fa-google-plus"></i></a></li> -->
-<!--                                         </ul> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div> -->
-        <!-- Modal end -->
 
 <!-- 푸더 부분 -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>

@@ -90,15 +90,15 @@ $(function() {
 								<div class="single-widget recent-post">
 									<h3 class="title">최신 상품</h3>
 									<!-- Single Post -->
-									<c:forEach items="${listLatestFood}" var="LatestFood">
+									<c:forEach items="${listLatestFood}" var="listLatestFood">
 									<div class="single-post first">
 										<div class="image">
-											<img src="/resources/images/kdh/${LatestFood.food_image}" alt="${LatestFood.food_image}">
+											<img src="/resources/images/kdh/${listLatestFood.food_image}" alt="${listLatestFood.food_image}">
 										</div>
 										<div class="content">
-											<h5><a href="#">${LatestFood.food_name}</a></h5>
+											<h5><a href="/kdh/food/innerfood?food_num=${listLatestFood.food_num}">${listLatestFood.food_name}</a></h5>
 											
-											<p class="price"><fmt:formatNumber pattern="#,###,###" value="${LatestFood.food_price}"></fmt:formatNumber>원</p>
+											<p class="price"><fmt:formatNumber pattern="#,###,###" value="${listLatestFood.food_price}"></fmt:formatNumber>원</p>
 										</div>
 									</div>
 									</c:forEach>

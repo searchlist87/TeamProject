@@ -9,6 +9,7 @@ function check(year,month,day) {
 	if(day < 10) {
 		day = "0" + day; 
 	}
-	var data_total_date = year + "/" + month + "/" + day; 
+	var data_total_date = year + "-" + month + "-" + day; 
 	return data_total_date;
+	
 }

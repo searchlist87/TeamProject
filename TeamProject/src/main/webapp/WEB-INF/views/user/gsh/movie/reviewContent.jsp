@@ -36,11 +36,6 @@ $(function () {
 			<form name="review_content">
 			
 				<div class="form-group">
-					<label for="exampleInputEmail1">영화이름</label>
-					<input type="text" class="form-control" readonly/>
-				</div>
-				
-				<div class="form-group">
 					<label for="exampleInputEmail1">작성자	</label>
 					<input type="text" class="form-control" readonly/>
 				</div>
@@ -48,6 +43,11 @@ $(function () {
 				<div class="form-group">
 					<label for="exampleInputPassword1">내용</label>
 					<textarea class="form-control" readonly></textarea>
+				</div>
+				
+				<div class="form-group">
+					<label for="exampleInputEmail1">평점</label>
+					<input type="text" class="form-control" readonly/>
 				</div>
 			
 				<a href="/gsh/movie/reviewList" class="btn btn">리뷰 목록</a>

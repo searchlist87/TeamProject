@@ -63,7 +63,7 @@ $(function() {
 		<div class="row" style="text-align:center;">
 			<div class="col-md-2"></div>
 			<div class="col-md-8 blog-meta" style="margin-bottom:20px;">
-				<img src="/resources/images/jmh/event.jpg"/>
+				<img src="/upload/displayFile?fileName=${eventVo.event_content_image}"/>
 			</div>
 			<div class="col-md-2"></div>
 		</div>

@@ -28,6 +28,8 @@ public class GshMovieDto {
 	private String movie_preview;
 	// 영화 순서
 	private String movie_num;
+	// 영화 내용
+	private String movie_content;
 	// 리뷰 번호
 	private String review_num;
 	// 작성자 아이디
@@ -38,6 +40,8 @@ public class GshMovieDto {
 	private String review_content;
 	// 리뷰 작성일
 	private Timestamp review_date;
+	// 스틸컷 이미지 불러오기
+	private String movie_sub_image;
 	
 	public String getMovie_code() {
 		return movie_code;
@@ -111,6 +115,12 @@ public class GshMovieDto {
 	public void setMovie_num(String movie_num) {
 		this.movie_num = movie_num;
 	}
+	public String getMovie_content() {
+		return movie_content;
+	}
+	public void setMovie_content(String movie_content) {
+		this.movie_content = movie_content;
+	}
 	public String getReview_num() {
 		return review_num;
 	}
@@ -141,15 +151,21 @@ public class GshMovieDto {
 	public void setReview_date(Timestamp review_date) {
 		this.review_date = review_date;
 	}
+	public String getMovie_sub_image() {
+		return movie_sub_image;
+	}
+	public void setMovie_sub_image(String movie_sub_image) {
+		this.movie_sub_image = movie_sub_image;
+	}
 	@Override
 	public String toString() {
 		return "GshMovieDto [movie_code=" + movie_code + ", movie_name=" + movie_name + ", movie_genre=" + movie_genre
 				+ ", movie_director=" + movie_director + ", movie_actor=" + movie_actor + ", movie_open_date="
 				+ movie_open_date + ", movie_total_time=" + movie_total_time + ", movie_main_image=" + movie_main_image
 				+ ", movie_regist_date=" + movie_regist_date + ", movie_grade=" + movie_grade + ", movie_preview="
-				+ movie_preview + ", movie_num=" + movie_num + ", review_num=" + review_num + ", user_id=" + user_id
-				+ ", review_score=" + review_score + ", review_content=" + review_content + ", review_date="
-				+ review_date + "]";
+				+ movie_preview + ", movie_num=" + movie_num + ", movie_content=" + movie_content + ", review_num="
+				+ review_num + ", user_id=" + user_id + ", review_score=" + review_score + ", review_content="
+				+ review_content + ", review_date=" + review_date + ", movie_sub_image=" + movie_sub_image + "]";
 	}
 
 }

@@ -60,5 +60,18 @@
 		where movie_code = #{movie_code}
 	</select>
 	
+	<!-- 영화 내용 가져오기 -->
+	<select id="select_movie_content" resultType="GshMovieDto">
+		select m.movie_code, m.movie_name, m.movie_genre, m.movie_director, m.movie_actor, m.movie_grade, m.movie_main_image, m.movie_content, r.review_content,  r.review_score
+		from tbl_movie m , tbl_review r
+		where m.movie_code = #{movie_code}
+		and m.movie_code = r.movie_code
+	</select>
+	
+	<!-- 영화 서브 이미지(스틸컷) 가져오기 -->
+	<select id="select_movie_sub_iamage" resultType="string">
+		select movie_sub_image from tbl_movie_image
+		where movie_code = #{movie_code}
+	</select>
 	
 </mapper>

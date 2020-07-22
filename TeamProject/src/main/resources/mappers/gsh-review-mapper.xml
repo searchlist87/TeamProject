@@ -5,7 +5,7 @@
   
 <mapper namespace="mappers.gsh-review-mapper">
 	
-<!-- 	영화 리스트 가져오기 -->
+	<!-- 	전체 영화 리스트 가져오기 -->
 	<select id="select_review_num">
 		select * from tbl_review
 		order by review_num desc
@@ -19,7 +19,11 @@
 		order by review_num desc
 	</select>
 	
-
+	<!-- 리뷰 작성하기 -->
+	<insert id="write_review">
+		insert into tbl_review(review_num, movie_code, user_id, review_content, review_score)
+		values(seq_review_num.nextval, #{movie_code}, #{user_id}, #{review_content}, #{review_score})
+	</insert>
 	
 	<!-- 리뷰 삭제하기 -->
 	<delete id="delete_review">
@@ -30,10 +34,12 @@
 	<!-- 리뷰 수정하기 -->
 	<update id="update_review">
 		update tbl_review
-		set review_content = #{board_title}, #{user_id}, #{review_content}
+		set review_content = #{user_id}, #{review_content}
 		where review_num = #{review_num}
 	</update>
 	
-
+	
+	
+	
 	
 </mapper>

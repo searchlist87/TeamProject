@@ -27,4 +27,9 @@ public class GshMovieServiceImpl implements GshMovieService {
 		return gshMovieDao.selectMovieCode(movie_code);
 	}
 
+	@Override
+	public List<String> selectMovieSubImage(String movie_code) throws Exception {
+		return gshMovieDao.selectMovieSubImage(movie_code);
+	}
+
 }

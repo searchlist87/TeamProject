@@ -74,8 +74,10 @@ $(function() {
 	$(".cloneDiv").find("li").eq(0).attr("data-index", 0);
 	$(".cloneDiv").find("a").eq(0).addClass("link_btn");
 	
-	var data_total_date = check(year,month,day);
-	$(".cloneDiv").find("li").eq(1).attr("data-total-date",data_total_date);
+	var data_event_date = check(year,month,day);
+	
+	$(".cloneDiv").find("a").attr("data-event-date",data_event_date);
+	
 	var dayintIndex = dayint + 1;// 요일인덱스
 	var dateIndex = 1; // 일 수 인덱스
 	for(var i = 1; i < 28; i++) {
@@ -111,8 +113,9 @@ $(function() {
 		// index 넣어두기
 		cloneTimeDiv.find("li").eq(0).attr("data-index", i);
 		//서버전송 데이터 넣기
-		var data_total_date = check(year,month,day);
-		cloneTimeDiv.find("li").eq(0).attr("data-total-date",data_total_date);
+		var data_event_date = check(year,month,day);
+		cloneTimeDiv.find("a").attr("data-event-date",data_event_date);
+		
 		
 		// a 클래스 부여하기
 		cloneTimeDiv.find("a").eq(1).addClass("link_btn");
@@ -134,12 +137,17 @@ $(function() {
 			$("#appendDiv").css("transform", "translate(0px)");
 			$("#btnRightShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(6).find("li:first").text();
+			$("#monthSpan").text("[ " + monthText + "월 ]");
 			checkState = 1;
 			break;
 		case 1 :
 			$("#appendDiv").css("transform", "translate(-770px)");
 			$("#btnRightShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(20).find("li:first").text();
+			$("#monthSpan").text("[ " + monthText + "월 ]");
+			console.log(monthText);
 			checkState = 0;
 			break;
 		}
@@ -153,12 +161,16 @@ $(function() {
 			$("#appendDiv").css("transform", "translate(0px)");
 			$("#btnLeftShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(6).find("li:first").text();
+			$("#monthSpan").text("[ " + monthText + "월 ]");
 			checkState = 1;
 			break;
 		case 1 :
 			$("#appendDiv").css("transform", "translate(-770px)");
 			$("#btnLeftShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(20).find("li:first").text();
+			$("#monthSpan").text("[ " + monthText + "월 ]");
 			checkState = 0;
 			break;
 		}
@@ -216,7 +228,7 @@ var marker = new naver.maps.Marker({
 								<div class="blog-detail">
 									<h1 class="blog-title fa-4x">울산 삼산점</h1>
 									<div class="blog-meta">
-										<span><i class="fa fa-film"> 총 영화관 수 :</i></span> 
+										<span><i class="fa fa-film"> 총 상영관 수 :</i></span> 
 										<span id="theater_count">15관</span> 
 										<span><i class="fa fa-user"> 총 좌석수 :</i></span> 
 										<span id="seat_count">155석</span>
@@ -262,8 +274,8 @@ var marker = new naver.maps.Marker({
 						<div class="single-widget category">
 							<h3 class="title">영화관 안내</h3>
 							<ul class="categor-list">
-								<c:forEach items="${list}" var="vo">
-									<li><a href="#">${vo.theater_name}</a></li>
+								<c:forEach items="${areaVo}" var="areavo">
+									<li><a href="#" data-area-code="${areavo.area_code}">${areavo.area_name}</a></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -274,25 +286,20 @@ var marker = new naver.maps.Marker({
 		<!--  이벤트창 -->
 		<div class="row">
 			<div class="blog-meta">
-				<div class="image divEvent">
-					<ul>
-						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
-						<li class="fa-stack-1x">이벤트주제</li>
-					</ul>
-					<br/>
-				</div>
-				<div class="image divEvent">
-					<ul>
-						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
-						<li class="fa-stack-1x">이벤트주제 </li>
-					</ul>
-				</div>
-				<div class="image divEvent">
-					<ul>
-						<li><a href="#"><img src="/resources/images/jmh/eventSampleImage.jpg" alt="#" class="content_padding"/></a></li>
-						<li class="fa-stack-1x">이벤트주제 </li>
-					</ul>
-				</div>
+				<!--  db 이벤트 읽어오기 -->
+				<c:forEach items="${eventVo}" var="eventList">
+					<div class="image divEvent">
+						<ul>
+							<li>
+								<a href="/event/selectEvent?event_code=${eventList.event_code}">
+								<img src="/upload/displayFile?fileName=${eventList.event_thumb_image}" class="content_padding"/>
+								</a>
+							</li>
+							<li class="fa-stack-1x">${eventList.event_title}</li>
+						</ul>
+						<br/>
+					</div>
+				</c:forEach>
 			</div>
 		</div> <!--  end 이벤트 -->
 		<!--  상영시간표 안내 -->
@@ -339,7 +346,7 @@ var marker = new naver.maps.Marker({
 		<!-- 상영회차 및 시간안내 -->
 		<!--  영화 하나 시작 -->
 		<div class="row" style="margin-top:30px;">
-			<img src="/resources/images/jmh/movie_grade_12.PNG"/>
+			<img src="/resources/images/jmh/movie_grade_12.png"/>
 			<span class="fa-2x" style="padding-top:15px;">#살아있다</span>
 		</div>
 		<div class="row">
@@ -395,10 +402,106 @@ var marker = new naver.maps.Marker({
 		<!--  영화 하나 끝 -->
 		<!--  영화 하나 시작 -->
 		<div class="row" style="margin-top:30px;">
-			<img src="/resources/images/jmh/movie_grade_12.PNG"/>
+			<img src="/resources/images/jmh/movie_grade_12.png"/>
 			<span class="fa-2x" style="padding-top:15px;">#살아있다</span>
 		</div>
 		<div class="row">
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul style="width:200px; text-align:center;">
+				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
+					<dl>
+						<dt style="display:none;">상영시간</dt>
+						<dd>
+							<span class="fa fa-3x" style="padding-top:10px;">10:00</span>
+						</dd>
+						<dt style="display:none;">잔여석</dt>
+						<dd style="float:left;padding-left:15px;">
+							<strong>82</strong>  / 109
+						</dd>
+						<dt style="display:none;">상영관</dt>
+						<dd>6관</dd>
+					</dl>
+				</li>
+			</ul>
 			<ul style="width:200px; text-align:center;">
 				<li class="product" style="border:3px solid #A6A6A6;border-radius: 1em;">
 					<dl>

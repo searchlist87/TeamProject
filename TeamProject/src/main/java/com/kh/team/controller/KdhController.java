@@ -6,22 +6,22 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.KdhBuyFoodInfo;
+import com.kh.team.domain.KdhFoodCartDto;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
+import com.kh.team.service.KdhFoodCartService;
 import com.kh.team.service.KdhFoodService;
 
 @Controller
@@ -30,6 +30,8 @@ public class KdhController {
 
 	@Inject
 	KdhFoodService foodService;
+	@Inject
+	KdhFoodCartService cartService;
 	
 	// 스토어 메인
 	@RequestMapping(value = "/foodView", method = RequestMethod.GET)
@@ -46,16 +48,41 @@ public class KdhController {
 	
 	// 상품 이너 페이지(GET)
 	@RequestMapping(value = "/innerfood", method = RequestMethod.GET)
-	public String InnerfoodGet(int food_num, Model model) throws Exception {
+	public String InnerfoodGet(int food_num, ModelMap model, HttpSession session) throws Exception {
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
+		String user_id = (String) session.getAttribute("user_id");
+		int findCartResult= cartService.overlapCart(user_id, food_num);
+		model.addAttribute("findCartResult", findCartResult);
 		model.addAttribute("foodVo", foodVo);
+		model.addAttribute("user_id", user_id);
 		return "user/kdh/kdh_food/kdh_Innerfood";
 	}
+	
+	// 카트 ajax요청
+	@ResponseBody
+	@RequestMapping(value = "/cartAjax", method = RequestMethod.GET)
+	public String cartAjax(ModelMap model,String user_id,int food_num,int food_buy_price,int food_buy_count) throws Exception {
+		int findCartResult = cartService.overlapCart(user_id, food_num);
+		// 중복 상품이 없으면
+		if (findCartResult==0) {
+			KdhFoodCartDto cartDto = new KdhFoodCartDto();
+			cartDto.setBuy_food_price(food_buy_price);
+			cartDto.setFood_cart_count(food_buy_count);
+			cartDto.setFood_num(food_num);
+			cartDto.setUser_id(user_id);
+			cartService.insertCart(cartDto);
+			return "success";
+		} else if (findCartResult==1) {
+			return "false";
+		}
 
-	// 상품 이너 페이지
-	@RequestMapping(value = "/Innerfood", method = RequestMethod.POST)
-	public String InnerfoodPost() throws Exception {
-		return "user/kdh/kdh_food/kdh_Innerfood";
+//		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
+//		String user_id = (String) session.getAttribute("user_id");
+//		String findCartResult= cartService.overlapCart(user_id, food_num);
+//		model.addAttribute("findCartResult", findCartResult);
+//		model.addAttribute("foodVo", foodVo);
+//		model.addAttribute("user_id", user_id);
+		return "success";
 	}
 
 	// 상품 선택하기(100 스낵)
@@ -97,22 +124,34 @@ public class KdhController {
 		return "user/kdh/kdh_food/kdh_package";
 	}
 	
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/cart", method = RequestMethod.GET)
-	public String cart(HttpSession session, int food_num, int food_buy_price, int food_buy_count) throws Exception {
+	// 구매하기
+	@RequestMapping(value = "/buy", method = RequestMethod.GET)
+	
+	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id) throws Exception {
+
+		KdhFoodVo foodVo = foodService.selectFoodbyNum(buy_food_num);
+		String food_image = foodVo.getFood_image();
+		String food_name = foodVo.getFood_name();
+		int food_price = foodVo.getFood_price();
+		int food_count = foodVo.getFood_count();
 		
-		List<KdhBuyFoodInfo> foodList = null;
-		foodList =  (List<KdhBuyFoodInfo>)session.getAttribute("foodList");
-		if (foodList == null) {
-			foodList = new ArrayList<>();
-		}
-		KdhBuyFoodInfo foodInfo = foodService.selectBuyFoodbyNum(food_num);
-		foodInfo.setFood_buy_count(food_buy_count);
-		foodInfo.setFood_buy_price(food_buy_price);
-		foodList.add(foodInfo);
-		
-		session.setAttribute("foodList", foodList);
-		System.out.println("foodList:" + foodList);
-		return "user/kdh/kdh_food/kdh_cart";
+		model.addAttribute("food_count", food_count);
+		model.addAttribute("food_image", food_image);
+		model.addAttribute("food_name", food_name);
+		model.addAttribute("food_price", food_price);
+		model.addAttribute("buy_food_buy_price", buy_food_buy_price);
+		model.addAttribute("buy_food_buy_count", buy_food_buy_count);
+
+		return "user/kdh/kdh_food/kdh_buy";
+	}
+
+	@RequestMapping(value = "/buyView", method = RequestMethod.GET)
+	public String buyView() throws Exception {
+		return "user/kdh/kdh_food/kdh_buy_view";
+	}
+	
+	@RequestMapping(value = "/buyFoodNone", method = RequestMethod.GET)
+	public String buyFoodNone() throws Exception {
+		return "user/kdh/kdh_food/kdh_buy_none";
 	}
 }
