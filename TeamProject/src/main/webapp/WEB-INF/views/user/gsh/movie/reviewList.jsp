@@ -42,23 +42,25 @@
 			</form>
 			
 			<table class="table">
-				<thead>
-					<tr>
-						<th>리뷰 번호</th>
-						<th>영화 이름</th>
-						<th>작성자</th>
-						<th>평점</th>
-						<th>작성일</th>
-					</tr>
-				</thead>
+						<thead>
+							<tr>
+								<th>리뷰 번호</th>
+								<th>영화 코드</th>
+								<th>아이디</th>
+								<th>평점</th>
+								<th>리뷰 내용</th>
+								<th>리뷰 작성일</th>
+							</tr>
+						</thead>
 				
 				<tbody>
 					<c:forEach items="${list}" var="vo">
 						<tr>
 							<th>${vo.review_num}</th>
-							<th><a href="/gsh/movie/reviewContent">${vo.movie_name}</a></th>
+							<th><a href="/gsh/movie/reviewContent">${vo.movie_code}</a></th>
 							<th>${vo.user_id}</th>
 							<th>${vo.review_score}</th>
+							<th>${vo.review_content}</th>
 							<th>${vo.review_date}</th>
 						</tr>
 					</c:forEach>
