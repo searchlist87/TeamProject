@@ -102,8 +102,9 @@
 								class="fa fa-user-circle-o" aria-hidden="true"></i></a>
 						</div>
 						<div class="sinlge-bar shopping">
-							<a href="#" class="single-icon"><i class="ti-bag"></i> <span
-								class="total-count">2</span></a>
+
+							<a href="/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon"><i class="ti-bag"></i>
+							<span class="total-count">2</span></a>
 							<!-- Shopping Item -->
 							<div class="shopping-item">
 								<div class="dropdown-cart-header">
