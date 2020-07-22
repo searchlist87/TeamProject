@@ -126,6 +126,7 @@ public class KdhController {
 	
 	// 구매하기
 	@RequestMapping(value = "/buy", method = RequestMethod.GET)
+	
 	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id) throws Exception {
 
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(buy_food_num);

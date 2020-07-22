@@ -162,59 +162,6 @@ $(function() {
 
 		});
  	});
-// 		if ("${findCartResult}" == "true") {
-// 			alert("중복된 상품이 담겨있습니다.");
-// 		} else {
-// 			$("#modal-420329").trigger("click");
-// 				$("#btnOk").click(function() {
-// 					location.href = "/cart/displayCart?food_num=" + food_num;
-// 				});
-// 			}
-//  	
- 		
-// 		} else if ("${findCartResult}" == "false") {
-// 			$("#modal-420329").trigger("click");
-// 			$("#btnOk").click(function() {
-// 				var food_num = "${foodVo.food_num}";
-// 				var price = $("#price").attr("data-price");
-// 				var iprice = parseInt(price);
-				
-// 				var buy_count = $("#btnCount").text();
-// 				var food_buy_count2 = parseInt(buy_count);
-// 				var food_buy_price2 = iprice * food_buy_count2;
-				
-// 				var num = $("#food_num").val();
-// 				$("#food_buy_count").val(food_buy_count2);
-// 				$("#food_buy_price").val(food_buy_price2);
-// 				var food_buy_count = $("#food_buy_count").val();
-// 				var food_buy_price = $("#food_buy_price").val();
-// 				var user_id = "${user_id}";
-// 				$("#foodDataForm").submit();
-// 				location.href = "/cart/displayCart";
-// 			}); //$("#btnOk")
-			
-		
-// 			$("#btnNo").click(function() {
-// 			var food_num = "${foodVo.food_num}";
-// 			var price = $("#price").attr("data-price");
-// 			var iprice = parseInt(price);
-			
-// 			var buy_count = $("#btnCount").text();
-// 			var food_buy_count2 = parseInt(buy_count);
-// 			var food_buy_price2 = iprice * food_buy_count2;
-			
-// 			var num = $("#food_num").val();
-// 			$("#food_buy_count").val(food_buy_count2);
-// 			$("#food_buy_price").val(food_buy_price2);
-// 			var food_buy_count = $("#food_buy_count").val();
-// 			var food_buy_price = $("#food_buy_price").val();
-// 			var user_id = "${user_id}";
-// 			$("#foodDataForm").submit();
-			
-// 			}); // btnNo
-// 		}
-//  	});// 장바구니 버튼
- 
  
  	// 바로구매 버튼
 	$("#btnBuy").click(function() {
@@ -224,7 +171,6 @@ $(function() {
 		var buy_count = $("#btnCount").text();
 		var buy_food_buy_count = parseInt(buy_count);
 		var buy_food_buy_price = iprice * buy_food_buy_count;
-	
 		var num = $("#food_num").val();
 		$("#buy_food_buy_count").val(buy_food_buy_count);
 		$("#buy_food_buy_price").val(buy_food_buy_price);
@@ -243,13 +189,14 @@ $(function() {
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 <!-- 바디 부분 -->
 <div class="container-fluid">
-<!-- 장바구니용 폼 -->
-<!-- <form id="foodDataForm" action="/cart/displayCart" method="get"> -->
-<%-- 	<input type="hidden" id="food_num" value="${foodVo.food_num}" name="food_num"/> --%>
-<!-- 	<input type="hidden" id="food_buy_price" value="" name="food_buy_price"/> -->
-<!-- 	<input type="hidden" id="food_buy_count" value="" name="food_buy_count"/> -->
-<%-- 	<input type="hidden" id="user_id" value="${user_id}" name="user_id"/> --%>
-<!-- </form> -->
+
+<!-- 구매용 폼 -->
+<form id="BuyFoodForm" action="/kdh/food/buy" method="get">
+	<input type="hidden" id="food_num" value="${foodVo.food_num}" name="buy_food_num"/>
+	<input type="hidden" id="buy_food_buy_price" value="" name="buy_food_buy_price"/>
+	<input type="hidden" id="buy_food_buy_count" value="" name="buy_food_buy_count"/>
+	<input type="hidden" id="user_id" value="${user_id}" name="buy_user_id"/>
+</form>
 
 
 <!-- 장바구니 모달창 -->

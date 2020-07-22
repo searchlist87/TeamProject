@@ -38,11 +38,11 @@ public class KdhFoodCartDaoImpl implements KdhFoodCartDao {
 	}
 
 	@Override
-	public void updateCart(int food_cart_num, int food_cart_count, int food_num) throws Exception {
+	public void updateCart(int food_cart_num, int food_cart_count, int buy_food_price) throws Exception {
 		Map<String, Object> paraMap = new HashMap<>();
 		paraMap.put("food_cart_num", food_cart_num);
 		paraMap.put("food_cart_count", food_cart_count);
-		paraMap.put("food_num", food_num);
+		paraMap.put("buy_food_price", buy_food_price);
 		sqlSession.update(NAMESPACE + "updateCart", paraMap);
 	}
 
@@ -63,6 +63,11 @@ public class KdhFoodCartDaoImpl implements KdhFoodCartDao {
 	@Override
 	public int selectFoodnumByCartnum(int food_cart_num) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "selectFoodnumByCartnum", food_cart_num);
+	}
+
+	@Override
+	public int FoodTotalMoney() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "FoodTotalMoney");
 	}
 
 }

@@ -33,6 +33,8 @@ $(function() {
 			// 수량에 따른 가격 증가
 			var price = $(this).parent().parent().parent().find($(".food_price")).attr("data-price");
 			var pricePlus = (price * indexPlus);
+			var totalPlus = $(this).parent().parent().parent().find($(".small_total")).attr("data-total-price", pricePlus);
+			
 			var StringpricePlus = String(pricePlus);
 			var PriceLastIndex3 = StringpricePlus.substring(StringpricePlus.length-3);
 			var priceFirstIndex = StringpricePlus.substring(0,StringpricePlus.length);
@@ -84,6 +86,7 @@ $(function() {
 		// 수량에 따른 가격 감소
 		var price = $("#food_price").attr("data-price");
 		var priceMius = (price * indexMius);
+		var totalPlus = $(this).parent().parent().parent().find($(".small_total")).attr("data-total-price", priceMius);
 		
 		var StringpriceMius = String(priceMius);
 		var PriceLastIndex3 = StringpriceMius.substring(StringpriceMius.length-3);
@@ -122,7 +125,80 @@ $(function() {
 	
 	// 수정 버튼
 	$(".btnUpdate").click(function() {
+		var food_cart_count = $(this).parent().find($(".btnCount")).text();
+// 		var totalPlus = $(this).parent().parent().parent().find($(".small_total")).attr("data-total-price");
+		var price = $("#food_price").attr("data-price");
 		
+		var buy_food_price = price * food_cart_count;
+		
+		var food_cart_num = $(this).attr("data-food-cart-num");
+		var sendData = {
+				"food_cart_count" : food_cart_count,
+				"buy_food_price" : buy_food_price,
+				"food_cart_num" : food_cart_num
+		};
+		var url = "/cart/update";
+		$.get(url, sendData, function(rData) {
+			console.log(rData);
+			if (rData == "success") {
+				var sum = 0;
+				$.each($(".small_total"), function() {
+					sum += Number($(this).attr("data-total-price"));
+					
+				});
+				
+				var sum = String(sum);
+				var PriceLastIndex3 = sum.substring(sum.length-3);
+				var priceFirstIndex = sum.substring(0,sum.length);
+				var priceIndex = sum.substring(priceFirstIndex,PriceLastIndex3);
+				
+				var firstPriceIndex3;
+				var centerPriceIndex3;
+				var lastPriceIndex3;
+				
+				if(sum.length == 4) {
+					firstPriceIndex3 = sum.substr(0,1);
+					lastPriceIndex3 = sum.substr(1,4);
+				} else if(sum.length == 5) {
+					firstPriceIndex3 = sum.substr(0,2);
+					lastPriceIndex3 = sum.substr(2,5);
+				} else if(sum.length == 6) {
+					firstPriceIndex3 = sum.substr(0,3);
+					lastPriceIndex3 = sum.substr(3,6);
+				} else if(sum.length == 7) {
+					firstPriceIndex3 = sum.substr(0,1);
+					centerPriceIndex3 = sum.substr(1,4);
+					lastPriceIndex3 = sum.substr(4,7);
+				} else if(sum.length == 8) {
+					firstPriceIndex3 = sum.substr(0,2);
+					centerPriceIndex3 = sum.substr(2,5);
+					lastPriceIndex3 = sum.substr(5,8);
+				}
+				if (centerPriceIndex3 != null) {
+					$("#totalPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+					$("#lastPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+				} else {
+					$("#totalPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+					$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+				}
+			}
+		});
+	}); // 수정 버튼
+	
+	// 결제하기 버튼
+	$("#btnBuy").click(function() {
+		location.href="/kdh/food/buyView";
+	});
+	
+	// 쓰레기통 모양 클릭(스토어 홈으로 보내기)
+	$(".action").click(function() {
+		var r = confirm("선택하신 상품을 삭제하시겠습니까?");
+		if(r == true) {
+			var food_cart_num = $(this).attr("data-food-cart-num");
+			location.href="/cart/delete?food_cart_num="+food_cart_num;
+		} else {
+			
+		}
 	});
 });
 
@@ -183,11 +259,11 @@ $(function() {
 										<button class="btnMius" type="button">-</button> 
 										<span class="btnCount">${foodVo.food_cart_count}</span>
 										<button class="btnPlus" type="button">+</button>　
-										<button class="btnUpdate" type="button" style="width:50px; height:40px;">수정</button>
+										<button data-food-cart-num="${foodVo.food_cart_num}" class="btnUpdate btn btn-sm" type="button">수정</button>
 									</div>
 								</td>
-								<td class="total-amount" data-total-price="${foodVo.buy_food_price}"><span class="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${foodVo.buy_food_price}"></fmt:formatNumber>원</span></td>
-								<td class="action" data-title="Remove"><a href="/cart/delete?food_cart_num=${foodVo.food_cart_num}"><i class="ti-trash remove-icon"></i></a></td>
+								<td class="total-amount small_total" data-total-price="${foodVo.buy_food_price}"><span class="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${foodVo.buy_food_price}"></fmt:formatNumber>원</span></td>
+								<td class="action" data-food-cart-num="${foodVo.food_cart_num}"><i class="ti-trash remove-icon"></i></td>
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -213,12 +289,12 @@ $(function() {
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li>총 상품금액<span class="totalPrice" id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>총 상품금액<span class="totalPrice" id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
 										<li>쿠폰 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
-										<li>총 결제금액<span class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>총 결제금액<span class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">
-										<a href="#" class="btn">결제하기</a>
+										<button id="btnBuy" class="btn btn-sm">결제하기</button>
 									</div>
 								</div>
 							</div>
