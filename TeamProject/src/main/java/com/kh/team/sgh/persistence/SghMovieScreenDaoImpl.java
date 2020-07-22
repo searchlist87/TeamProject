@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.SghMovieScreenVo;
+import com.kh.team.domain.SghMovieSeatVo;
+import com.kh.team.domain.SghScreenSeatVo;
 
 @Repository
 public class SghMovieScreenDaoImpl implements SghMovieScreenDao {
@@ -34,6 +36,22 @@ public class SghMovieScreenDaoImpl implements SghMovieScreenDao {
 	@Override
 	public void screenModify(SghMovieScreenVo sghMovieScreenVo) throws Exception {
 		sqlSession.update(NAMESPACE + "screenModify", sghMovieScreenVo);
+	}
+
+	@Override
+	public SghScreenSeatVo getScreenSeat(String screen_code) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getScreenSeat", screen_code);
+	}
+
+	@Override
+	public void insertSeat(SghMovieSeatVo sghMovieSeatVo) throws Exception {
+		System.out.println("sghMovieSeatVo :" + sghMovieSeatVo);
+		sqlSession.insert(NAMESPACE + "insertSeat", sghMovieSeatVo);
+	}
+
+	@Override
+	public String selectNewDate() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectNewDate");
 	}
 
 }

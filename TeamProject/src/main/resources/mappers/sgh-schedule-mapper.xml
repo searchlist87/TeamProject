@@ -6,7 +6,7 @@
 <mapper namespace="mappers.sgh-schedule-mapper">
 	<!-- 상영작으로 등록된 영화 가져오기 -->
 	<select id="scheduleList" resultType="SghScheduleVo">
-		select s.movie_schedule_code, s.movie_code, m.movie_name, to_char(s.movie_start_date, 'YYYY/MM/DD') movie_start_date, to_char(s.movie_end_date, 'YYYY/MM/DD') movie_end_date, t.theater_name
+		select s.movie_schedule_code, s.movie_code, s.theater_code, m.movie_name, s.movie_start_date, s.movie_end_date, t.theater_name
 		from tbl_movie_schedule s, tbl_movie m, tbl_theater t
 		where s.movie_code = m.movie_code and s.theater_code = t.theater_code
 	</select>
@@ -23,9 +23,10 @@
 	</insert>
 	<!-- 등록된 영화 하나 가져오기 -->
 	<select id="getMovieScheduleOne" resultType="SghScheduleVo">
-		select movie_schedule_code, movie_code, theater_code, to_char(movie_start_date, 'YYYY-MM-DD') movie_start_date, to_char(movie_end_date, 'YYYY-MM-DD') movie_end_date, movie_schedule_num
+		select movie_schedule_code, movie_code, theater_code, movie_start_date, movie_end_date, movie_schedule_num
 		from tbl_movie_schedule where movie_schedule_code = #{movie_schedule_code}
 	</select>
+	<!-- 등록된 영화 수정 -->
 	<update id="updateSchedule">
 		update tbl_movie_schedule set
 		    movie_code = #{movie_code},

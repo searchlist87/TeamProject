@@ -9,6 +9,12 @@ import org.springframework.stereotype.Controller;
 public class MainController {
 		
 		// SghController
+		@RequestMapping(value="/main", method=RequestMethod.GET)
+		public String mainForm() throws Exception {
+			return "main/main";
+		}
+		
+		// SghController
 		@RequestMapping(value="/bookingView", method=RequestMethod.GET)
 		public String testBookingView() throws Exception {
 			return "redirect:/sgh/book/bookingView";

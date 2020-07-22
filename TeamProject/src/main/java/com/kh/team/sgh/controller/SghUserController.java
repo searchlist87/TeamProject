@@ -23,7 +23,7 @@ import com.kh.team.sgh.util.SghEmailUtil;
 @Controller
 @RequestMapping("/sgh/user")
 public class SghUserController {
-	
+
 	@Inject
 	private SghUserService sghUserService;
 	@Inject
@@ -34,7 +34,7 @@ public class SghUserController {
 		return "user/sgh/sgh_member/sgh_login_form";
 	}
 	
-	// 로그인
+	// 로그인 (Session에 user_id, user_class 저장)
 	@RequestMapping(value="/loginRun", method=RequestMethod.POST)
 	public String loginRun(SghLoginDto sghLoginDto, RedirectAttributes rttr,HttpSession session) throws Exception {
 		try {
@@ -167,5 +167,12 @@ public class SghUserController {
 		SghFindDto sghFindDto = sghUserService.userPwSelect(user_id);
 		model.addAttribute("sghFindDto", sghFindDto);
 		return "user/sgh/sgh_member/sgh_find_pw_mail_form";
+	}
+	
+	// 관리자 페이지 회원가입 조회 폼
+	@RequestMapping(value="/userList", method=RequestMethod.GET)
+	public String userList(Model model) throws Exception {
+		
+		return "user/sgh/sgh_admin/sgh_user/sgh_user_list";
 	}
 }

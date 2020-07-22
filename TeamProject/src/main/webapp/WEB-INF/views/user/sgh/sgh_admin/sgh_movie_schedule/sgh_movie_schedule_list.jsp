@@ -14,6 +14,8 @@
 	}
 </style>
 
+<script src="/resources/js/sgh_js/timestmap_change.js"></script>
+
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">

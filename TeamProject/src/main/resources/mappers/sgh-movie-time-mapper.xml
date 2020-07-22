@@ -4,11 +4,70 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mappers.sgh-movie-time-mapper">
-	<select id="getMovieSchedule" resultType="SghAreaVo">
-		select time.movie_time_code, movie.movie_name, m_screen.screen_name, time.movie_screen_count, to_char(schedule.movie_start_date, 'YYYY/MM/DD'), to_char(schedule.movie_end_date, 'YYYY/MM/DD'), time.movie_start_time, m_screen.screen_total_seat
-		from tbl_movie_time time, tbl_movie movie, tbl_movie_screen m_screen, tbl_movie_schedule schedule
-		where time.movie_code = movie.movie_code and time.screen_code = m_screen.screen_code and time.movie_schedule_num = schedule.movie_schedule_num
-		and time.movie_code = 'MC1' and m_screen.theater_code = 'TC3';
+	<!-- movie_time 리스트 가져오기 -->
+	<select id="getMovieTimeList" resultType="SghMovieTimeListVo">
+		select t.movie_time_code, t.movie_start_time, t.movie_end_time, d.movie_code,
+       		   m.movie_name, s.screen_name, tt.theater_name, t.movie_money
+		from tbl_movie_time t, tbl_movie_schedule d, tbl_movie m, tbl_movie_screen s, tbl_theater tt
+		where t.movie_schedule_code = d.movie_schedule_code and d.movie_code = m.movie_code and t.screen_code = s.screen_code
+              and s.theater_code = tt.theater_code
 	</select>
 	
+	<!-- 에이잭스 요청, 상영 일정에 등록된 영화 정보 -->
+	<select id="getAjaxScheduleOne" resultType="SghMovieTimeAjaxDto">
+		select m.movie_name, m.movie_code, tt.theater_name, d.theater_code, d.movie_start_date, d.movie_end_date, d.movie_schedule_code
+		from tbl_movie_schedule d, tbl_theater tt, tbl_movie m
+		where d.theater_code = tt.theater_code and m.movie_code = d.movie_code
+			  and d.movie_schedule_code = #{movie_schedule_code}
+	</select>
+	
+	<!-- 에이잭스 요청, 상영 일정에서 고른 상영관에 대한 스크린 정보 -->
+	<select id="getAjaxScreenList" resultType="SghMovieScreenAjaxDto">
+		select * from tbl_movie_screen
+		where theater_code = #{theater_code}
+	</select>
+	
+	<!-- 상영 회차 등록하기 -->
+	<insert id="insertMovieTime">
+		insert into tbl_movie_time(movie_time_code, screen_code, movie_schedule_code, movie_start_time, movie_end_time, movie_money)
+		values('MTC' || seq_movie_time_num.nextval, #{screen_code}, #{movie_schedule_code}, #{movie_start_time}, #{movie_end_time}, #{movie_money})
+	</insert>
+	
+	<!-- 상영 회차 하나 정보 가져오기 -->
+	<select id="selectMovieTimeOne" resultType="SghMovieTimeModifyVo">
+		select d.movie_schedule_code, m.movie_code, m.movie_name, tt.theater_code, tt.theater_name, d.movie_start_date, d.movie_end_date, t.screen_code, t.movie_time_code, t.movie_start_time, t.movie_end_time, s.screen_total_seat, s.screen_seat_row, s.screen_seat_col, t.movie_money
+		from tbl_movie_schedule d, tbl_theater tt, tbl_movie m, tbl_movie_time t, tbl_movie_screen s
+		where d.theater_code = tt.theater_code and m.movie_code = d.movie_code and d.movie_schedule_code = t.movie_schedule_code and t.screen_code = s.screen_code
+		and t.movie_time_code= #{movie_time_code}
+	</select>
+	
+	<!-- 상영 회차 수정하기 -->
+	<update id="modifyMovieTime">
+		update tbl_movie_time set
+		    screen_code = #{screen_code},
+		    movie_start_time = #{movie_start_time},
+		    movie_end_time = #{movie_end_time},
+		    movie_money = #{movie_money}
+		where movie_time_code = #{movie_time_code}
+	</update>
+	
+	<!-- 좌석 일정 테이블에 넣을 좌석 코드 가져오기 -->
+	<select id="getSeatCode" resultType="string">
+		select movie_seat_num from tbl_movie_seat
+		where screen_code = #{screen_code}
+	</select>
+	
+	<!-- 좌석 일정 테이블에 입력하기 -->
+	<insert id="insertScheduleSeat">
+		insert into tbl_schedule_seat(schedule_seat_code, movie_seat_num, movie_time_code)
+		values(seq_schedule_seat.nextval, #{movie_seat_num}, #{movie_time_code})
+	</insert>
+	
+	<!-- 가장 최신 movie_time 코드 가져오기 -->
+	<select id="getMovieTimeNewDate" resultType="string">
+		select movie_time_code from (select rownum rnum, movie_time_code from (select movie_time_code from tbl_movie_time
+                                                        order by regexp_replace(movie_time_code, '[0-9]') , 
+                                                        to_number(regexp_replace(movie_time_code, '[^0-9]')) desc))
+		where rnum = 1
+	</select>
 </mapper>
