@@ -43,22 +43,14 @@ $(function () {
 					<dd><a href="/sgh/admin/movieTime/movieTimeRegist">상영 회차등록</a></dd>
 				</dl>
 				<dl class="categor-list" >
-					<dt><a href="#" data-link="sub_open" class="title_menu">＃영화 상품관리</a></dt>
-					<dd><a href="#">영화 상품조회</a></dd>
-					<dd><a href="#">영화 상품등록</a></dd>
+					<dt><a href="#" data-link="sub_open" class="title_menu">＃예매 관리</a></dt>
+					<dd><a href="/sgh/admin/scheduleProduct/scheduleProductList">영화 좌석 조회</a></dd>
+					<dd><a href="#">예매내역 조회</a></dd>
 				</dl>
 				<dl class="categor-list" >
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃푸드 상품관리</a></dt>
 					<dd><a href="#">푸드 상품조회</a></dd>
 					<dd><a href="#">푸드 상품등록</a></dd>
-				</dl>
-				<dl class="categor-list" >
-					<dt><a href="#" data-link="sub_open" class="title_menu">＃좌석 관리</a></dt>
-					<dd><a href="#">좌석 조회</a></dd>
-				</dl>
-				<dl class="categor-list" >
-					<dt><a href="#" data-link="sub_open" class="title_menu">＃예매 관리</a></dt>
-					<dd><a href="#">예매내역 조회</a></dd>
 				</dl>
 				<dl class="categor-list" >
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃이벤트 관리</a></dt>

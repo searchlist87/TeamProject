@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.sgh-movie-product-mapper">
+	<!-- 영화 상품 목록 가져오기 -->
+	<select id="getMovieProductList" resultType="SghMovieProductVo">
+		select t.movie_time_code, m.movie_name, m.movie_code, tt.theater_code, tt.theater_name, sc.screen_code, sc.screen_name, t.movie_start_time, t.movie_end_time, sc.screen_total_seat, a.*, sc.screen_seat_row, sc.screen_seat_col
+		from tbl_movie_time t, tbl_movie m, tbl_movie_schedule d, tbl_theater tt, tbl_movie_screen sc, (select count(*) seat_check_cnt from tbl_schedule_seat where seat_check = 'Y') a
+		where m.movie_code = d.movie_code and d.movie_schedule_code = t.movie_schedule_code and tt.theater_code = d.theater_code and t.screen_code = sc.screen_code
+	</select>
+	
+	<!-- 영화 상품 목록 한개 가져오기 -->
+	<select id="getMovieProductInfo" resultType="SghMovieProductVo">
+		select t.movie_time_code, m.movie_name, m.movie_code, tt.theater_code, tt.theater_name, sc.screen_code, sc.screen_name, t.movie_start_time, t.movie_end_time, sc.screen_total_seat, a.*, sc.screen_seat_row, sc.screen_seat_col
+		from tbl_movie_time t, tbl_movie m, tbl_movie_schedule d, tbl_theater tt, tbl_movie_screen sc, (select count(*) seat_check_cnt from tbl_schedule_seat where movie_time_code = #{movie_time_code} and seat_check = 'N') a
+		where m.movie_code = d.movie_code and d.movie_schedule_code = t.movie_schedule_code and tt.theater_code = d.theater_code and t.screen_code = sc.screen_code
+		and t.movie_time_code = #{movie_time_code}
+	</select>
+	
+	<!-- 좌석 예매되지 않은것만 확인해서 가져오기 -->
+	<select id="getSeatCheck" resultType="SghSeatCheckVo">
+		select ss.schedule_seat_code, s.movie_seat_num, s.seat_code, ss.seat_check, t.screen_code, ss.movie_time_code
+		from tbl_schedule_seat ss, tbl_movie_time t, tbl_movie_seat s
+		where ss.movie_time_code = t.movie_time_code and ss.movie_seat_num = s.movie_seat_num
+		and ss.movie_time_code = #{movie_time_code} and ss.seat_check = 'Y'
+	</select>
+</mapper>

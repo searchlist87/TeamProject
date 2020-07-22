@@ -66,10 +66,14 @@ $(function() {
 	});
 });
 </script>
+
 <!-- 해더 부분 -->
 <div style="visibility: hidden;">
 	<span id="message_span" style="color: red;"></span>
 </div>
+<!-- 등록을 할 때 결과를 체크할 hidden type들 -->
+<input type="hidden" id="start_date_result">
+<input type="hidden" id="end_date_result">
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">
@@ -79,22 +83,17 @@ $(function() {
 					<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
-							<h4 class="title">상영일 수정하기</h4>
+							<h4 class="title">상영일 등록하기</h4>
 						</div>
 						<!--  페이지별 내용 -->
-						<form id="frm_schedule" role="form" action="/sgh/admin/schedule/scheduleModifyRun" method="get">
+						<form id="frm_schedule" role="form" action="/sgh/admin/schedule/scheduleRegistRun" method="get">
 							<input type="hidden" id="movie_code" name="movie_code">
 							<input type="hidden" id="theater_code" name="theater_code">
-							<input type="hidden" name="movie_schedule_code" value="${schedule_vo.movie_schedule_code}">
 							<div class="form-group">
 								<label for="movie_genre"><strong>등록된 영화</strong></label>
 								<select id="movie_name">
 									<c:forEach items="${schedule_list}" var="SghScheduleListDto">
-										<option value="${SghScheduleListDto.movie_code}"
-										<c:if test="${schedule_vo.movie_code == SghScheduleListDto.movie_code}">
-											selected
-										</c:if>
-										>${SghScheduleListDto.movie_name}</option>
+										<option value="${SghScheduleListDto.movie_code}">${SghScheduleListDto.movie_name}</option>
 									</c:forEach>
 								</select>
 <!-- 								<input type="text" class="form-control" id="movie_name" name="movie_name"/> -->
@@ -103,21 +102,17 @@ $(function() {
 								<label for="movie_genre"><strong>등록된 영화관</strong></label>
 								<select id="theater_name">
 									<c:forEach items="${theater_list}" var="SghTheaterVo">
-										<option value="${SghTheaterVo.theater_code}"
-										<c:if test="${schedule_vo.theater_code == SghTheaterVo.theater_code}">
-											selected
-										</c:if>
-										>${SghTheaterVo.theater_name}</option>
+										<option value="${SghTheaterVo.theater_code}">${SghTheaterVo.theater_name}</option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>시작일</strong></label>
-								<input type="text" class="form-control" id="movie_start_date" name="movie_start_date" value="${schedule_vo.movie_start_date}"/>
+								<input type="text" class="form-control" id="movie_start_date" name="movie_start_date"/>
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>종료일</strong></label>
-								<input type="text" class="form-control" id="movie_end_date" name="movie_end_date" value="${schedule_vo.movie_end_date}"/>
+								<input type="text" class="form-control" id="movie_end_date" name="movie_end_date" />
 							</div>
 							<button type="submit" class="btn" id="btnSubmit">등록</button>
 							<a href="/sgh/admin/schedule/scheduleList" class="btn" style="color: white;">취소</a>

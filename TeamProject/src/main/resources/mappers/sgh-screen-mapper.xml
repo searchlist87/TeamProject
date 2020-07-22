@@ -20,12 +20,29 @@
 		select * from tbl_movie_screen where screen_code = #{screen_code}
 	</select>
 	<!-- 상영관 수정하기 -->
-	<select id="screenModify">
+	<update id="screenModify">
 		update tbl_movie_screen set
 			screen_name = #{screen_name},
 			screen_total_seat = #{screen_total_seat},
 			screen_seat_col = #{screen_seat_col},
 			screen_seat_row = #{screen_seat_row}
 		where screen_code = #{screen_code}
+	</update>
+	<!-- 상영관 좌석 가져오기 -->
+	<select id="getScreenSeat" resultType="SghScreenSeatVo">
+		select screen_total_seat, screen_seat_row, screen_seat_col
+		from tbl_movie_screen
+		where screen_code = #{screen_code}
+	</select>
+	<!-- 상영관 좌석 추가하기 -->
+	<select id="insertSeat" resultType="SghMovieSeatVo">
+		insert into tbl_movie_seat(movie_seat_num, seat_code, screen_code)
+		values(seq_movie_seat_num.nextval, #{seat_code}, #{screen_code})
+	</select>
+	<!-- 등록한 상영관 최신 데이터 가져오기 -->
+	<select id="selectNewDate" resultType="string">
+		select screen_code from (select rownum rnum, screen_code from (select screen_code from tbl_movie_screen
+        order by regexp_replace(screen_code, '[0-9]'), to_number(regexp_replace(screen_code, '[^0-9]')) desc))
+		where rnum = 1
 	</select>
 </mapper>

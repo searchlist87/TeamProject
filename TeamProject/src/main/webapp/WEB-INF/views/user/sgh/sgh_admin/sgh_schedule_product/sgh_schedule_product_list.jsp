@@ -13,8 +13,8 @@
 		text-align: center;
 	}
 </style>
-
-<script src="/resources/js/sgh_js/timestmap_change.js"></script>
+<script>
+</script>
 
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
@@ -30,31 +30,34 @@
 								<div class="col-md-12">
 									<div class="container-fluid">
 										<div class="row" style="margin-top: 20px;">
-											<div class="col-md-12"></div>
+											<div class="col-md-12">
 												<table class="table">
 													<thead>
 														<tr>
 															<th>상영작</th>
 															<th>영화관</th>
-															<th>시작일</th>
-															<th>종료일</th>
-															<th>수정</th>
-															<th>삭제</th>
+															<th>상영관</th>
+															<th>시간대</th>
+															<th>총좌석</th>
+															<th>예약상황</th>
+															<th>확인</th>
 														</tr>
 													</thead>
 													<tbody>
-													<c:forEach items="${schedule_list}" var="SghScheduleVo">
+													<c:forEach items="${movie_product_vo}" var="movie_product_vo">
 														<tr>
-															<td>${SghScheduleVo.movie_name}</td>
-															<td>${SghScheduleVo.theater_name}</td>
-															<td>${SghScheduleVo.movie_start_date}</td>
-															<td>${SghScheduleVo.movie_end_date}</td>
-															<td><a href="/sgh/admin/schedule/scheduleModify?movie_schedule_code=${SghScheduleVo.movie_schedule_code}" class="btn-primary" style="color: white;">수정</a></td>
-															<td><a href="/#" class="btn-danger" style="color: white;">삭제</a></td>
+															<td>${movie_product_vo.movie_name}</td>
+															<td>${movie_product_vo.theater_name}</td>
+															<td>${movie_product_vo.screen_name}</td>
+															<td>${movie_product_vo.movie_start_time} ~ <br/>${movie_product_vo.movie_end_time}</td>
+															<td>${movie_product_vo.screen_total_seat}</td>
+															<td>${movie_product_vo.seat_check_cnt}</td>
+															<td><a href="/sgh/admin/scheduleProduct/scheduleProductInfo?movie_time_code=${movie_product_vo.movie_time_code}" class="btn-primary" style="color: white;">확인</a></td>
 														</tr>
 													</c:forEach>
 													</tbody>
 												</table>
+											</div>
 										</div>
 									</div>
 								</div>

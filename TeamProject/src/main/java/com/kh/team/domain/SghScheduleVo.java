@@ -1,9 +1,11 @@
 package com.kh.team.domain;
 
+import java.sql.Date;
+
 public class SghScheduleVo {
 	private String movie_code;
-	private String movie_start_date;
-	private String movie_end_date;
+	private Date movie_start_date;
+	private Date movie_end_date;
 	private String theater_code;
 	private String movie_schedule_code;
 	private String movie_schedule_num;
@@ -12,7 +14,7 @@ public class SghScheduleVo {
 	public SghScheduleVo() {
 		super();
 	}
-	public SghScheduleVo(String movie_code, String movie_start_date, String movie_end_date, String theater_code,
+	public SghScheduleVo(String movie_code, Date movie_start_date, Date movie_end_date, String theater_code,
 			String movie_schedule_code, String movie_schedule_num, String movie_name, String theater_name) {
 		super();
 		this.movie_code = movie_code;
@@ -30,16 +32,16 @@ public class SghScheduleVo {
 	public void setMovie_code(String movie_code) {
 		this.movie_code = movie_code;
 	}
-	public String getMovie_start_date() {
+	public Date getMovie_start_date() {
 		return movie_start_date;
 	}
-	public void setMovie_start_date(String movie_start_date) {
+	public void setMovie_start_date(Date movie_start_date) {
 		this.movie_start_date = movie_start_date;
 	}
-	public String getMovie_end_date() {
+	public Date getMovie_end_date() {
 		return movie_end_date;
 	}
-	public void setMovie_end_date(String movie_end_date) {
+	public void setMovie_end_date(Date movie_end_date) {
 		this.movie_end_date = movie_end_date;
 	}
 	public String getTheater_code() {
@@ -48,27 +50,24 @@ public class SghScheduleVo {
 	public void setTheater_code(String theater_code) {
 		this.theater_code = theater_code;
 	}
-	public String getMovie_schedule_num() {
-		return movie_schedule_num;
-	}
-	public void setMovie_schedule_num(String movie_schedule_num) {
-		this.movie_schedule_num = movie_schedule_num;
-	}
-	
-	public String getMovie_name() {
-		return movie_name;
-	}
-	public void setMovie_name(String movie_name) {
-		this.movie_name = movie_name;
-	}
-	
 	public String getMovie_schedule_code() {
 		return movie_schedule_code;
 	}
 	public void setMovie_schedule_code(String movie_schedule_code) {
 		this.movie_schedule_code = movie_schedule_code;
 	}
-	
+	public String getMovie_schedule_num() {
+		return movie_schedule_num;
+	}
+	public void setMovie_schedule_num(String movie_schedule_num) {
+		this.movie_schedule_num = movie_schedule_num;
+	}
+	public String getMovie_name() {
+		return movie_name;
+	}
+	public void setMovie_name(String movie_name) {
+		this.movie_name = movie_name;
+	}
 	public String getTheater_name() {
 		return theater_name;
 	}

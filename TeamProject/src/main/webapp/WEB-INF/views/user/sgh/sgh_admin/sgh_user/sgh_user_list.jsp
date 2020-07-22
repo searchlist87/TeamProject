@@ -13,8 +13,8 @@
 		text-align: center;
 	}
 </style>
-
-<script src="/resources/js/sgh_js/timestmap_change.js"></script>
+<script>
+</script>
 
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
@@ -30,31 +30,28 @@
 								<div class="col-md-12">
 									<div class="container-fluid">
 										<div class="row" style="margin-top: 20px;">
-											<div class="col-md-12"></div>
+											<div class="col-md-12">
 												<table class="table">
 													<thead>
 														<tr>
-															<th>상영작</th>
-															<th>영화관</th>
-															<th>시작일</th>
-															<th>종료일</th>
-															<th>수정</th>
-															<th>삭제</th>
+															<th>아이디</th>
+															<th>이름</th>
+															<th>등급</th>
+															<th>포인트</th>
+															<th>가입여부</th>
 														</tr>
 													</thead>
 													<tbody>
-													<c:forEach items="${schedule_list}" var="SghScheduleVo">
 														<tr>
-															<td>${SghScheduleVo.movie_name}</td>
-															<td>${SghScheduleVo.theater_name}</td>
-															<td>${SghScheduleVo.movie_start_date}</td>
-															<td>${SghScheduleVo.movie_end_date}</td>
-															<td><a href="/sgh/admin/schedule/scheduleModify?movie_schedule_code=${SghScheduleVo.movie_schedule_code}" class="btn-primary" style="color: white;">수정</a></td>
-															<td><a href="/#" class="btn-danger" style="color: white;">삭제</a></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
+															<td></td>
 														</tr>
-													</c:forEach>
 													</tbody>
 												</table>
+											</div>
 										</div>
 									</div>
 								</div>

@@ -22,12 +22,8 @@
     <version>2.5.4</version>
 </dependency>
 
-<!-- 에이잭스 -->
-<dependency>
-    <groupId>org.aspectj</groupId>
-    <artifactId>aspectjweaver</artifactId>
-    <version>1.6.10</version>
-</dependency>
+
+
 
 <!-- 마이바티스 -->
 <dependency>
@@ -77,6 +73,14 @@
     <artifactId>aspectjweaver</artifactId>
     <version>1.6.10</version>
 </dependency>
+
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjrt</artifactId>
+    <version>1.6.10</version>
+</dependency>
+
+
 
 <!-- 파일 업로드 -->
 <dependency>

@@ -1,18 +1,18 @@
 package com.kh.team.domain;
 
-public class SghMovieScreenVo {
+public class SghMovieScreenAjaxDto {
 	private String screen_code;
 	private String theater_code;
 	private String screen_name;
 	private int screen_total_seat;
 	private int screen_seat_row;
 	private int screen_seat_col;
-	private String movie_screen_num;
-	public SghMovieScreenVo() {
+	public SghMovieScreenAjaxDto() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	public SghMovieScreenVo(String screen_code, String theater_code, String screen_name, int screen_total_seat,
-			int screen_seat_row, int screen_seat_col, String movie_screen_num) {
+	public SghMovieScreenAjaxDto(String screen_code, String theater_code, String screen_name, int screen_total_seat,
+			int screen_seat_row, int screen_seat_col) {
 		super();
 		this.screen_code = screen_code;
 		this.theater_code = theater_code;
@@ -20,7 +20,6 @@ public class SghMovieScreenVo {
 		this.screen_total_seat = screen_total_seat;
 		this.screen_seat_row = screen_seat_row;
 		this.screen_seat_col = screen_seat_col;
-		this.movie_screen_num = movie_screen_num;
 	}
 	public String getScreen_code() {
 		return screen_code;
@@ -58,16 +57,11 @@ public class SghMovieScreenVo {
 	public void setScreen_seat_col(int screen_seat_col) {
 		this.screen_seat_col = screen_seat_col;
 	}
-	public String getMovie_screen_num() {
-		return movie_screen_num;
-	}
-	public void setMovie_screen_num(String movie_screen_num) {
-		this.movie_screen_num = movie_screen_num;
-	}
 	@Override
 	public String toString() {
-		return "SghMovieScreenVo [screen_code=" + screen_code + ", theater_code=" + theater_code + ", screen_name="
+		return "SghMovieScreenAjaxDto [screen_code=" + screen_code + ", theater_code=" + theater_code + ", screen_name="
 				+ screen_name + ", screen_total_seat=" + screen_total_seat + ", screen_seat_row=" + screen_seat_row
-				+ ", screen_seat_col=" + screen_seat_col + ", movie_screen_num=" + movie_screen_num + "]";
+				+ ", screen_seat_col=" + screen_seat_col + "]";
 	}
+	
 }

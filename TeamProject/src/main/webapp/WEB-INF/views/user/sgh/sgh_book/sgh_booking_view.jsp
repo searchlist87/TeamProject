@@ -9,7 +9,7 @@
 		font-size: 30px;
 	}
 </style>
-
+<script src="/resources/js/sgh_js/booking_date.js"></script>
 <script>
 $(function() {
 	
@@ -30,6 +30,7 @@ $(function() {
 		$(".screeningAreaClone").remove();
 		$(".movieChoice").remove();
 		var screeningAreaClone = $("#screeningArea").clone().addClass("screeningAreaClone");
+		screeningAreaClone.find(".title").text("상영 영화관");
 		screeningAreaClone.find("li").remove();
 		
 		$.each(theaterArr, function() {
@@ -55,9 +56,10 @@ $(function() {
 		};
 		$(".movieChoice").remove();
 		var screeningAreaClone = $("#screeningArea").clone().addClass("movieChoice");
+		screeningAreaClone.find(".title").text("상영작");
 		screeningAreaClone.find("li").remove();
 		
-		$.getJSON(url, sendData, function(rData) {
+		$.get(url, sendData, function(rData) {
 			console.log("rData" + rData);
 			$.each(rData, function() {
 				var movieName = this.movie_name;
@@ -66,6 +68,7 @@ $(function() {
 				screeningAreaClone.find("ul").append(a);
 			});
 		});
+		
 		$(".screeningAreaClone").after(screeningAreaClone);
 	});
 	
@@ -80,7 +83,16 @@ $(function() {
 				"movie_code" : movie_code
 		};
 		
-		$.getJSON(url, sendData, function(rData) {
+// 		var today = new Date();
+// 		var year = today.getFullYear(); // 년도
+// 		var month = today.getMonth(); // 월
+// 		var date = today.getDate(); // 일
+// 		var day = today.getDay(); // 날짜
+		
+// 		var strDate = year + "-" + zeroPlue(month) + "-" + zeroPlue(date) + "("+strDay(day)+")";
+// 		console.log(strDate);
+		
+		$.get(url, sendData, function(rData) {
 			// 컨트롤러에 요청해서 반환하는 작업 해야함. mapper + dao 등등 해야함
 			console.log("rData :" + rData);
 		});
