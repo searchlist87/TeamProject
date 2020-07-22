@@ -53,7 +53,7 @@ public class KdhFoodCartDaoImpl implements KdhFoodCartDao {
 	}
 
 	@Override
-	public String overlapCart(String user_id, int food_num) throws Exception {
+	public int overlapCart(String user_id, int food_num) throws Exception {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("user_id", user_id);
 		paraMap.put("food_num", food_num);

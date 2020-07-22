@@ -21,17 +21,17 @@ $(function() {
 // 	} 
 	
 	// 수량/금액 증가 버튼
-	$("#btnSetCount").on("click", "#btnPlus", function() {
-		var count = $("#btnSetCount").attr("data-food-count");
+	$(".btnPlus").click(function() {
+		var count = $(".btnSetCount").attr("data-food-count");
 		// 수량 증가
-		var index = $("#btnCount").text();
+		var index = $(this).parent().find($(".btnCount")).text();
 		var Iindex = parseInt(index);
 		if (Iindex < count) {
 			var indexPlus = Iindex + 1;
-			$("#btnCount").text(indexPlus);
+			$(this).parent().find($(".btnCount")).text(indexPlus);
 			
 			// 수량에 따른 가격 증가
-			var price = $("#food_price").attr("data-price");
+			var price = $(this).parent().parent().parent().find($(".food_price")).attr("data-price");
 			var pricePlus = (price * indexPlus);
 			var StringpricePlus = String(pricePlus);
 			var PriceLastIndex3 = StringpricePlus.substring(StringpricePlus.length-3);
@@ -62,24 +62,24 @@ $(function() {
 			}
 
 			if (centerPriceIndex3 != null) {
-				$("#sumPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+				var total_price = $(this).parent().parent().parent().find($(".sumPrice")).text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
 			} else {
-				$("#sumPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+				var total_price = $(this).parent().parent().parent().find($(".sumPrice")).text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
 		};
 	});
-	
+
 	// 수량/금액 감소 버튼
-	$("#btnSetCount").on("click", "#btnMius", function() {
+	$(".btnMius").click(function() {
 		// 수량 감소
-		var index = $("#btnCount").text();
+		var index = $(this).parent().find($(".btnCount")).text();
 		var Iindex = parseInt(index);
 		if (Iindex > 1) {
 		indexMius = Iindex - 1;
 		} else if (Iindex = 1) {
 				indexMius = 1;
 		}
-		$("#btnCount").text(indexMius);
+		$(this).parent().find($(".btnCount")).text(indexMius);
 		
 		// 수량에 따른 가격 감소
 		var price = $("#food_price").attr("data-price");
@@ -114,12 +114,16 @@ $(function() {
 		}
 		
 		if (centerPriceIndex3 != null) {
-			$("#sumPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
+			var total_price = $(this).parent().parent().parent().find($(".sumPrice")).text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
 		} else {
-			$("#sumPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
+			var total_price = $(this).parent().parent().parent().find($(".sumPrice")).text(firstPriceIndex3+","+lastPriceIndex3+"원");
 		}
-	});
+	}); // 수량/금액 감소 버튼
 	
+	// 수정 버튼
+	$(".btnUpdate").click(function() {
+		
+	});
 });
 
 </script>
@@ -166,22 +170,23 @@ $(function() {
 								</th>
 							</tr>
 						</thead>
-						<tbody id="Ttbody">
+						<tbody class="Ttbody" id="Ttbody">
 						<c:forEach items="${list}" var="foodVo">
 							<tr id="food_tr">
 								<td class="image"><img src="/resources/images/kdh/${foodVo.food_image}" alt="${foodVo.food_image}"></td>
 								<td class="product-des" data-title="Description">
 									<p class="product-name"><a href="#">${foodVo.food_name}</a></p>
 								</td>
-								<td class="price" id="food_price" data-price="${foodVo.food_price}"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber></span>원</td>
+								<td class="food_price" id="food_price" data-price="${foodVo.food_price}"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber></span>원</td>
 								<td class="qty" data-title="Qty">
-									<div id="btnSetCount" data-food-count="${foodVo.food_count}" class="input-group" style="text-align: center;">
-										<button class="button1" id="btnMius" type="button">-</button> 
-										<span id="btnCount">${foodVo.food_cart_count}</span>
-										<button class="button1" id="btnPlus" type="button">+</button>
+									<div data-food-count="${foodVo.food_count}" class="input-group btnSetCount" style="text-align: center;">
+										<button class="btnMius" type="button">-</button> 
+										<span class="btnCount">${foodVo.food_cart_count}</span>
+										<button class="btnPlus" type="button">+</button>　
+										<button class="btnUpdate" type="button" style="width:50px; height:40px;">수정</button>
 									</div>
 								</td>
-								<td class="total-amount" data-total-price="${foodVo.buy_food_price}"><span id="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${foodVo.buy_food_price}"></fmt:formatNumber>원</span></td>
+								<td class="total-amount" data-total-price="${foodVo.buy_food_price}"><span class="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${foodVo.buy_food_price}"></fmt:formatNumber>원</span></td>
 								<td class="action" data-title="Remove"><a href="/cart/delete?food_cart_num=${foodVo.food_cart_num}"><i class="ti-trash remove-icon"></i></a></td>
 							</tr>
 						</c:forEach>
@@ -208,9 +213,9 @@ $(function() {
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li>총 상품금액<span id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
-										<li>쿠폰 사용<span id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
-										<li>총 결제금액<span id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>총 상품금액<span class="totalPrice" id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>쿠폰 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>총 결제금액<span class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">
 										<a href="#" class="btn">결제하기</a>

@@ -41,7 +41,7 @@ public class KdhFoodCartServiceImpl implements KdhFoodCartService {
 	}
 
 	@Override
-	public String overlapCart(String user_id, int food_num) throws Exception {
+	public int overlapCart(String user_id, int food_num) throws Exception {
 		return cartDao.overlapCart(user_id, food_num);
 	}
 

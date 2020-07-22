@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,11 +51,38 @@ public class KdhController {
 	public String InnerfoodGet(int food_num, ModelMap model, HttpSession session) throws Exception {
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
 		String user_id = (String) session.getAttribute("user_id");
-//		String findCartResult= cartService.overlapCart(user_id, food_num);
-//		model.addAttribute("findCartResult", findCartResult);
+		int findCartResult= cartService.overlapCart(user_id, food_num);
+		model.addAttribute("findCartResult", findCartResult);
 		model.addAttribute("foodVo", foodVo);
 		model.addAttribute("user_id", user_id);
 		return "user/kdh/kdh_food/kdh_Innerfood";
+	}
+	
+	// 카트 ajax요청
+	@ResponseBody
+	@RequestMapping(value = "/cartAjax", method = RequestMethod.GET)
+	public String cartAjax(ModelMap model,String user_id,int food_num,int food_buy_price,int food_buy_count) throws Exception {
+		int findCartResult = cartService.overlapCart(user_id, food_num);
+		// 중복 상품이 없으면
+		if (findCartResult==0) {
+			KdhFoodCartDto cartDto = new KdhFoodCartDto();
+			cartDto.setBuy_food_price(food_buy_price);
+			cartDto.setFood_cart_count(food_buy_count);
+			cartDto.setFood_num(food_num);
+			cartDto.setUser_id(user_id);
+			cartService.insertCart(cartDto);
+			return "success";
+		} else if (findCartResult==1) {
+			return "false";
+		}
+
+//		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
+//		String user_id = (String) session.getAttribute("user_id");
+//		String findCartResult= cartService.overlapCart(user_id, food_num);
+//		model.addAttribute("findCartResult", findCartResult);
+//		model.addAttribute("foodVo", foodVo);
+//		model.addAttribute("user_id", user_id);
+		return "success";
 	}
 
 	// 상품 선택하기(100 스낵)
@@ -116,4 +144,13 @@ public class KdhController {
 		return "user/kdh/kdh_food/kdh_buy";
 	}
 
+	@RequestMapping(value = "/buyView", method = RequestMethod.GET)
+	public String buyView() throws Exception {
+		return "user/kdh/kdh_food/kdh_buy_view";
+	}
+	
+	@RequestMapping(value = "/buyFoodNone", method = RequestMethod.GET)
+	public String buyFoodNone() throws Exception {
+		return "user/kdh/kdh_food/kdh_buy_none";
+	}
 }

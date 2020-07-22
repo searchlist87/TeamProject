@@ -23,14 +23,14 @@
 $(function() {
 	
 	// 구매 후 취소 버튼
-	function btnCancle() {
+	$("#btnCancle").click(function() {
 		$("#cancleContent").toggle();
-	}
-	
+	});
+
 	// 상품이용안내 버튼 
-	function btnUseGuide() {
+	$("#btnUseGuide").click(function() {
 		$("#useContent").toggle();
-	}
+	});
 	
 	// 수량/금액 증가 버튼
 	$("#btnPlus").click(function() {
@@ -133,11 +133,45 @@ $(function() {
 	});
 	
  	// 장바구니 버튼
-//  	$("#btnCart").click(function() {
- 		
-//  		// '예'버튼 -> 장바구니 jsp로
+ 	$("#btnCart").click(function() {
+ 		// 중복된 상품 체크
+ 		var url = "/kdh/food/cartAjax";
+ 		var user_id = "${user_id}";
+ 		var food_num = "${foodVo.food_num}";
+ 		console.log("food_num" + food_num);
+ 		var index = $("#btnCount").text();
+ 		var food_buy_count = parseInt(index);
+ 		var price = $("#price").attr("data-price");
+		var food_buy_price = (price * food_buy_count);
+		var sendData = {
+ 				"user_id" : user_id,
+ 				"food_num" : food_num,
+ 				"food_buy_price" : food_buy_price,
+ 				"food_buy_count" : food_buy_count				
+ 		};
+ 		$.get(url, sendData, function(rData) {
+ 			console.log("rData:" + rData);
+			if (rData == "success") {
+				$("#modal-420329").trigger("click");
+				$("#btnOk").click(function() {
+					location.href = "/cart/displayCart?user_id=" + user_id;
+				});
+			} else if (rData == "false") {
+				alert("중복된 상품이 있습니다.");
+			}
+
+		});
+ 	});
 // 		if ("${findCartResult}" == "true") {
 // 			alert("중복된 상품이 담겨있습니다.");
+// 		} else {
+// 			$("#modal-420329").trigger("click");
+// 				$("#btnOk").click(function() {
+// 					location.href = "/cart/displayCart?food_num=" + food_num;
+// 				});
+// 			}
+//  	
+ 		
 // 		} else if ("${findCartResult}" == "false") {
 // 			$("#modal-420329").trigger("click");
 // 			$("#btnOk").click(function() {
@@ -182,7 +216,7 @@ $(function() {
 //  	});// 장바구니 버튼
  
  
- 	// 구매하기 버튼
+ 	// 바로구매 버튼
 	$("#btnBuy").click(function() {
 		var food_num = "${foodVo.food_num}";
 		var price = $("#price").attr("data-price");
@@ -210,20 +244,13 @@ $(function() {
 <!-- 바디 부분 -->
 <div class="container-fluid">
 <!-- 장바구니용 폼 -->
-<form id="foodDataForm" action="/cart/displayCart" method="get">
-	<input type="hidden" id="food_num" value="${foodVo.food_num}" name="food_num"/>
-	<input type="hidden" id="food_buy_price" value="" name="food_buy_price"/>
-	<input type="hidden" id="food_buy_count" value="" name="food_buy_count"/>
-	<input type="hidden" id="user_id" value="${user_id}" name="user_id"/>
-</form>
+<!-- <form id="foodDataForm" action="/cart/displayCart" method="get"> -->
+<%-- 	<input type="hidden" id="food_num" value="${foodVo.food_num}" name="food_num"/> --%>
+<!-- 	<input type="hidden" id="food_buy_price" value="" name="food_buy_price"/> -->
+<!-- 	<input type="hidden" id="food_buy_count" value="" name="food_buy_count"/> -->
+<%-- 	<input type="hidden" id="user_id" value="${user_id}" name="user_id"/> --%>
+<!-- </form> -->
 
-<!-- 구매용 폼 -->
-<form id="BuyFoodForm" action="/kdh/food/buy" method="get">
-	<input type="hidden" id="buy_food_num" value="${foodVo.food_num}" name="buy_food_num"/>
-	<input type="hidden" id="buy_food_buy_price" value="" name="buy_food_buy_price"/>
-	<input type="hidden" id="buy_food_buy_count" value="" name="buy_food_buy_count"/>
-	<input type="hidden" id="buy_user_id" value="${user_id}" name="buy_user_id"/>
-</form>
 
 <!-- 장바구니 모달창 -->
 	<div class="row">
@@ -306,7 +333,7 @@ $(function() {
 					<div>수량/금액　　<button class="button1" id="btnMius" type="button">-</button> 
 					<span id="btnCount">1</span>
 					<button class="button1" id="btnPlus" type="button">+</button>
-					　　<a id="price" data-price="${foodVo.food_price}"><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber>원</a>　　<button id="btnBuy" type="button" class="btn">구매하기</button> <button id="btnCart" type="button" class="btn">장바구니</button>
+					　　<a id="price" data-price="${foodVo.food_price}"><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber>원</a>　　<button id="btnBuy" type="button" class="btn">바로구매</button> <button id="btnCart" type="button" class="btn">장바구니</button>
 					</div>
 					<hr/>
 				</div>
@@ -320,7 +347,7 @@ $(function() {
 			</div>
 			<div class="col-md-8">
 				 <hr/>
-				<button id="btnCancle" type="button" class="btn" onclick="btnCancle()">구매 후 취소</button>
+				<a id="btnCancle" style="color: white;" class="btn">구매 후 취소</a>
 				<br/><br/><div id="cancleContent" style="display:none">■ 연장/취소/환불 안내<br/>
 				본 상품은 구매일로부터 10일 이내에 취소 가능합니다.<br/>
 				- 유효기간은 본 상품의 유효기간 내에서 연장 신청이 가능하며, 1회 연장 시 3개월(92일) 단위로 연장됩니다.<br/>
@@ -329,7 +356,7 @@ $(function() {
 				- 구매 취소 및 환불 요청은 미사용 상품에 한해 가능하며, 사용한 상품에 대해서는 불가합니다.<br/>
 				- 본 상품은 현금으로 환불이 불가합니다.<br/>
 				 ※ 2020년 2월 4일 이후 구매 상품에 한하여 유효기간 연장 신청이 가능합니다.</div><br/>
-				<button id="btnUseGuide" type="button" class="btn" onclick="btnUseGuide()">상품이용안내</button>
+				<a id="btnUseGuide" style="color: white;" class="btn">상품이용안내</a>
 				<br/><br/><div id="useContent" style="display:none">■ 이용 안내<br/>
 				본 상품의 사용 기한은 구매일로부터 92일까지입니다.<br/>
 				- 영화관 매점에서 스토어 쿠폰번호 제시 후 상품으로 교환하실 수 있습니다.<br/>

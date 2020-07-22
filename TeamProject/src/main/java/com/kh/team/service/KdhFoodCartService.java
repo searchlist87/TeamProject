@@ -23,7 +23,7 @@ public interface KdhFoodCartService {
 	public void insertCart(KdhFoodCartDto cartDto) throws Exception;
 	
 	// 장바구니 중복체크
-	public String overlapCart(String user_id, int food_num) throws Exception;
+	public int overlapCart(String user_id, int food_num) throws Exception;
 	
 	// food_cart_num으로 KdhFoodCartDao 구하기
 	public int selectFoodnumByCartnum(int food_cart_num) throws Exception;

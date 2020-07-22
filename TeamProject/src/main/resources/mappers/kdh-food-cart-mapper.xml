@@ -42,8 +42,8 @@
 </insert>
 
 <!-- 장바구니 중복체크 -->
-<select id="overlapCart" resultType="String">
-	select decode(count(*),0,'false','true')from tbl_food_cart
+<select id="overlapCart" resultType="int">
+	select decode(count(*),0,'0','1')from tbl_food_cart
 	where user_id = #{user_id}
 	and food_num = #{food_num}
 </select>
