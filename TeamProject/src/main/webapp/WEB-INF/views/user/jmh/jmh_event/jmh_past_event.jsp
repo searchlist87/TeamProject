@@ -36,9 +36,6 @@ $(function() {
 	var month = date.getMonth() + 1; // 월
 	var day = date.getDate(); // 일
 	
-	
-	
-	
 });
 
 

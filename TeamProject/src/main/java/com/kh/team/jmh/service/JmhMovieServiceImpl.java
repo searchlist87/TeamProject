@@ -34,7 +34,6 @@ public class JmhMovieServiceImpl implements JmhMovieService {
 		for (String movie_sub_image : files) {
 			jmhMovieDao.movieSubImageRegister(movie_code, movie_sub_image);
 		}
-		
 	}
 
 	// 영화 수정
