@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.SghAreaVo;
+import com.kh.team.domain.SghBookingVo;
 import com.kh.team.domain.SghMovieNameVo;
 import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.sgh.service.SghAreaService;
+import com.kh.team.sgh.service.SghBookingService;
 import com.kh.team.sgh.service.SghMovieScheduleService;
 import com.kh.team.sgh.service.SghTheaterService;
 
@@ -27,6 +29,8 @@ public class SghBookController {
 	private SghMovieScheduleService sghMovieScheduleService;
 	@Inject
 	private SghAreaService sghAreaService;
+	@Inject
+	private SghBookingService sghBookingService;
 	
 	@RequestMapping(value="/bookingView", method=RequestMethod.GET)
 	public String bookingView(Model model) throws Exception {
@@ -51,8 +55,10 @@ public class SghBookController {
 	// 영화 일정
 	@ResponseBody
 	@RequestMapping(value="/movieSchedule", method=RequestMethod.GET)
-	public String getDayMovieList(String theater_code, String movie_code) throws Exception {
-		System.out.println("dd");
-		return null;
+	public List<SghBookingVo> getDayMovieList(String start_date, String movie_code) throws Exception {
+		
+		List<SghBookingVo> booking_list = sghBookingService.getChoiceMovieList(start_date, movie_code);
+		System.out.println("booking_list :" + booking_list);
+		return booking_list;
 	}
 }

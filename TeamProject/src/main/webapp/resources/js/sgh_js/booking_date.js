@@ -3,7 +3,7 @@
  */
 
 // 10미만 0 붙이기
-function zeroPlue(num) {
+function zeroPlus(num) {
 	return (num < 10) ? "0" + num : num;
 }
 
