@@ -12,7 +12,7 @@
 	</select>
 	
 		<!-- 영화 리뷰 정보 찾기  -->
-	<select id="select_review_code" resultType="GshMovieDto">
+	<select id="selectMovieCode" resultType="GshMovieDto">
 		select *
 		from tbl_movie m, tbl_review r
 		where m.movie_code = r.movie_code
@@ -38,8 +38,18 @@
 		where review_num = #{review_num}
 	</update>
 	
+	<!-- 2020/07/22 추가 -->
+	<!-- 작성자 아이디로 리뷰 찾기 -->
+	<select id="search_review">
+		select * from tbl_review
+		where user_id = #{user_id}
+	</select>
 	
-	
-	
-	
+	<!-- 해당 영화 리뷰 찾기 -->
+	<select id="selectReviewByCode" resultType="GshReviewVo">
+		select * from tbl_review
+		where movie_code = #{movie_code}
+		order by review_num desc
+	</select>
+		
 </mapper>

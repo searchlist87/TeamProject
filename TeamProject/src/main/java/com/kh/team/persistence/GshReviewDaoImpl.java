@@ -23,6 +23,7 @@ public class GshReviewDaoImpl implements GshReviewDao {
 		sqlSession.insert(NAMESPACE + "write_review", ghGshReviewVo);
 	}
 	
+	
 	// 리뷰 목록보기
 	@Override
 	public List<GshReviewVo> reviewList() throws Exception {
@@ -47,5 +48,12 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	public List<GshReviewVo> reviewDelete() throws Exception {
 		return null;
 	}
+
+	// 해당 영화 리뷰 조회
+	@Override
+	public List<GshReviewVo> selectReviewByCode(String movie_code) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectReviewByCode", movie_code);
+	}
+
 
 }

@@ -19,5 +19,8 @@ public interface GshReviewDao {
 	public List<GshReviewVo> reviewModify() throws Exception;
 	
 	// 영화 리뷰 삭제
-	public List<GshReviewVo> reviewDelete() throws Exception;	
+	public List<GshReviewVo> reviewDelete() throws Exception;
+
+	// 해당 영화 리뷰 조회
+	public List<GshReviewVo> selectReviewByCode(String movie_code) throws Exception;	
 }

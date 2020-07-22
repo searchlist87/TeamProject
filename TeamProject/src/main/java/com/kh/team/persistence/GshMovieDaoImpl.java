@@ -20,8 +20,8 @@ public class GshMovieDaoImpl implements GshMovieDao {
 	
 	// 영화 목록 보기
 	@Override
-	public List<GshMovieDto> select_movie_list() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "select_movie_list");
+	public List<GshMovieDto> select_movieAll() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "select_movieAll");
 	}
 	
 	// 영화 코드로 영화 리뷰 보기
