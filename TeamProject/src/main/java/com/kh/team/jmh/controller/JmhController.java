@@ -99,9 +99,18 @@ public class JmhController {
 	}
 	
 	// Ajax 요청 - 선택한 날짜에 맞게 영화데이터 가져가기
+	@ResponseBody
 	@RequestMapping(value="/dateGetMovieData", method = RequestMethod.GET)
-	public void ajaxSelectDategetMovieData(String theater_code, String movie_date) throws Exception {
-		
+	public List<JmhMovieTheaterDto> ajaxSelectDategetMovieData(String theater_code, String movie_date) throws Exception {
+		List<JmhMovieTheaterDto> mTheaterDtoAjax = jmhMovieTheaterService.getTheaterScheduleMovieName(theater_code, movie_date);
+		return mTheaterDtoAjax;
 	}
 	
+	// Ajax 요청 - 선택한 날짜에 맞게 영화 서브데이터 가져가기
+	@ResponseBody
+	@RequestMapping(value="/dateGetMovieSubData", method = RequestMethod.GET)
+	public List<JmhTheaterScheduleVo> ajaxSelectDategetMovieSubData(String theater_code, String movie_date) throws Exception {
+		List<JmhTheaterScheduleVo> tScheduleVoAjax = jmhMovieTheaterService.getTheaterSchedule(theater_code, movie_date);
+		return tScheduleVoAjax;
+	}
 }

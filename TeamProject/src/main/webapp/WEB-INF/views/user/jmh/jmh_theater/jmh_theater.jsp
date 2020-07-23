@@ -281,10 +281,13 @@ $(function () {
 	
 	});
 	
+	// --------------- 일자 클릭했을 경우 -----------------
+	a = 0;
 	// 일자 ajax 요청
 	$(".link_btn").click(function (e) {
 		e.preventDefault();
-		
+		$("#movieInfo").children().remove();
+		$("#temp_div").children().remove();
 		var movie_date = $(this).attr("data-movie-date");
 		var theater_code = $("#theater_code").val();
 		// ajax 요청
@@ -292,21 +295,96 @@ $(function () {
 		var sendData = {"movie_date" : movie_date, "theater_code" : theater_code};
 		
 		
-		// 오늘 할 곳!!!!!!!!
-// 		$.get(url, sendData, function () {
+		$.ajax({
+			"type" : "get",
+			"url" : url,
+			"data" : sendData,
+			"async" : false,
+			"success" : function(rData) {
+				$.each(rData, function() {
+					var movie_code = (this).movie_code;
+					var movie_grade = (this).movie_grade;
+					var movie_name = (this).movie_name;
+					
+					// 복사
+					var cloneNameInfo = $(".movie_name_info").eq(0).clone();
+					
+					cloneNameInfo.addClass("movie_name_info2");
+					cloneNameInfo.attr("data-movie-code", movie_code);
+					cloneNameInfo.find("img").attr("src", "/resources/images/jmh/movie_grade_" + movie_grade + ".png");
+					cloneNameInfo.find("span").text(movie_name);
+					cloneNameInfo.css("display", "block");
+					$("#temp_div").append(cloneNameInfo);
+				}); // each
+			}
+		
+		});
+		
+		
+		// 영화 상세정보 가져오기
+		var url = "/jmh/theater/dateGetMovieSubData";
+		var sendData = {"movie_date" : movie_date, "theater_code" : theater_code};
+			$("#temp_sub_div").children().remove();
+		$.ajax({
+			"type" : "get",
+			"url" : url,
+			"data" : sendData,
+			"async" : false,
+			"success" : function(rData) {	
+				console.log(rData);
+				$.each(rData, function () {
+					var movie_code1 = (this).movie_code;
+					var start_time = (this).start_time;
+					var rmn_sts = (this).rmn_sts;
+					var screen_total_seat = (this).screen_total_seat;
+					var screen_name = (this).screen_name;
+					
+					var cloneMovieSubUl = $(".movie_schedule_info").eq(0).clone();
+					cloneMovieSubUl.css("display", "block");
+					cloneMovieSubUl.addClass("movie_schedule_info2");
+					cloneMovieSubUl.attr("data-movie-code", movie_code1);
+					cloneMovieSubUl.find("strong").text(rmn_sts);
+					cloneMovieSubUl.find("span").eq(0).text(start_time);
+					cloneMovieSubUl.find("span").eq(1).text(screen_total_seat);
+					cloneMovieSubUl.find("dd").last().text(screen_name);
+					$("#temp_sub_div").append(cloneMovieSubUl);
+				}); 
+			}
+		}); // get end
+		
+		
+		$.each($(".movie_name_info2"), function() {
+			var title_movie_code = $(this).attr("data-movie-code");
+			var movie_list_clone = $(this).clone().addClass("clone" + a);
+			movie_list_clone.css("display", "block");
+			$("#movieInfo").append(movie_list_clone);
+			var div_wrap = "<div class='row list_wrap"+a+"'></div>";
+			$(".clone" + a).after(div_wrap);
 			
-// 		});
+			$.each($(".movie_schedule_info2"), function() {
+				var content_movie_code = $(this).attr("data-movie-code");
+				console.log("content_movie_code :" + content_movie_code);
+				if(title_movie_code == content_movie_code) {
+					
+					var movie_time_list_clone = $(this).clone();	
+					movie_time_list_clone.css("display", "block");
+					$(".list_wrap" + a).append(movie_time_list_clone);
+				}
+			});
+			a++;
+		});
+		
 	});
 		
 });
 </script>
 
 <body class="js">
-
+<div id="temp_div"></div>
+<div id="temp_sub_div"></div>
 <!--  복사할 제목&등급 -->
 <c:forEach items="${mTheaterDto}" var="mTDto">
 	<div class="movie_name_info" data-movie-code='${mTDto.movie_code}' style="display:none;">
-		
 		<div class="row" style="margin-top:30px;">
 			<img src="/resources/images/jmh/movie_grade_${mTDto.movie_grade}.png"/>
 			<span class="fa-2x spam_name" style="padding-top:15px;">${mTDto.movie_name}</span>
@@ -314,6 +392,7 @@ $(function () {
 	</div>
 </c:forEach>
 <!-- end  복사할 제목&등급 -->
+
 <!--  복사할 영화정보 -->
 <div class="row" >
 	<c:forEach items="${tScheduleVo}" var="tSvo">
@@ -326,7 +405,7 @@ $(function () {
 					</dd>
 					<dt style="display:none;">잔여석</dt>
 					<dd style="float:left;padding-left:15px;">
-						<strong>${tSvo.rmn_sts}</strong>  / ${tSvo.screen_total_seat}
+						<strong>${tSvo.rmn_sts}</strong>  / <span>${tSvo.screen_total_seat}</span>
 					</dd>
 					<dt style="display:none;">상영관</dt>
 					<dd>${tSvo.screen_name}</dd>
@@ -479,12 +558,13 @@ $(function () {
 			</div>
 		</div>
 		</div>	
-		<!--  영화 정보 붙이는 곳 -->
-		<div id="movieInfo">
-			<div class="row" style="background-color:#f8f8f8;">
+		<div class="row" style="background-color:#f8f8f8;">
 			<img src="/resources/images/jmh/movie_grade.png"/>
 			<a id="modal-458339" href="#modal-container-458339" role="button"  data-toggle="modal"><img src="/resources/images/jmh/movie_grade_info.png"/></a>
-			</div>
+		</div>
+		<!--  영화 정보 붙이는 곳 -->
+		<div id="movieInfo">
+			
 			
 		</div>
 		
