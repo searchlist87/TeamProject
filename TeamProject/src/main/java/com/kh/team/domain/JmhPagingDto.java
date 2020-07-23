@@ -15,6 +15,16 @@ public class JmhPagingDto {
 	private int endPage; // 페이지 블럭에서 끝 페이지
 	private final int PAGE_BLOCK = 10; // 페이지 블럭 수
 	private Date event_date;
+	private Date event_end_date;
+	
+
+	public Date getEvent_end_date() {
+		return event_end_date;
+	}
+
+	public void setEvent_end_date(Date event_end_date) {
+		this.event_end_date = event_end_date;
+	}
 
 	public Date getEvent_date() {
 		return event_date;
@@ -37,10 +47,7 @@ public class JmhPagingDto {
 		this.endPage = (int) (Math.ceil((double)page / PAGE_BLOCK) * PAGE_BLOCK);
 		this.startPage = this.endPage - PAGE_BLOCK + 1;
 		
-		// 페이징 블럭에서 끝 페이지 정리 - 
-		if(endPage > totalPage) {
-			endPage = totalPage;
-		}
+		
 		
 	}
 
@@ -105,6 +112,10 @@ public class JmhPagingDto {
 		// 499 -> 50
 		this.totalPage = (int) Math.ceil((double)totalCount / perPage);
 		
+		// 페이징 블럭에서 끝 페이지 정리 - 
+		if(endPage > totalPage) {
+			endPage = totalPage;
+		}
 		
 	}
 
@@ -134,9 +145,11 @@ public class JmhPagingDto {
 
 	@Override
 	public String toString() {
-		return "PagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow=" + endRow
+		return "JmhPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow=" + endRow
 				+ ", searchType=" + searchType + ", keyword=" + keyword + ", totalCount=" + totalCount + ", totalPage="
-				+ totalPage + ", startPage=" + startPage + ", endPage=" + endPage + "]";
+				+ totalPage + ", startPage=" + startPage + ", endPage=" + endPage + ", PAGE_BLOCK=" + PAGE_BLOCK
+				+ ", event_date=" + event_date + ", event_end_date=" + event_end_date + "]";
 	}
+
 
 }
