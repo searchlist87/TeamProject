@@ -32,7 +32,19 @@ public class GshReviewServiceImpl implements GshReviewService {
 	public void write_review(GshReviewVo gshReviewVo) throws Exception {
 		gshReviewDao.write_review(gshReviewVo);
 	}
+	
 
+	// 영화 리뷰 수정
+//	public List<GshReviewVo> reviewModify(GshReviewVo gshReviewVo) throws Exception {
+//		return gshReviewDao.reviewModify(gshReviewVo);
+//	}
+	
+	// 영화 리뷰 삭제
+//	public void delete_review(String review_content, int review_score) throws Exception {
+//		gshReviewDao.delete_review(review_content, review_score);
+//	}
+	
+	// 리뷰 번호로 리뷰 찾기
 	@Override
 	public List<GshReviewVo> selectReviewByCode(String movie_code) throws Exception {
 		return gshReviewDao.selectReviewByCode(movie_code);

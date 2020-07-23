@@ -112,14 +112,14 @@ public class GshController {
 	@RequestMapping(value = "/movieAjax", method = RequestMethod.GET)
 	@ResponseBody
 	public GshReviewVo movieAjax(HttpSession session, Model model, GshReviewVo gshReviewVo) throws Exception {
-//		System.out.println("movie_code:" + movie_code);
+		String movie_code = gshReviewVo.getMovie_code();
+		System.out.println("movie_code:" + movie_code);
 //		System.out.println("============== GshController, movieAjax ================");
 		String user_id = (String) session.getAttribute("user_id");
 		gshReviewVo.setUser_id(user_id); // null -> user01
-//		System.out.println("user_id: "+ user_id);
+		System.out.println("user_id: "+ user_id);
 //		System.out.println("review_content"+gshReviewVo.getReview_content());
 //		System.out.println("review_score"+gshReviewVo.getReview_score());
-		String movie_code = gshReviewVo.getMovie_code();
 		gshReviewService.write_review(gshReviewVo);
 //		System.out.println("gshReviewVo :" + gshReviewVo);
 //		System.out.println("movie_code:" + movie_code);

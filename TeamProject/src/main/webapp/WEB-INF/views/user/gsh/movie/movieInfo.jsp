@@ -8,6 +8,12 @@
     <script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
+	
+<style>
+	.span_strong {
+		width:312px; margin: 10px auto; text-align:center; font-weight: bold; font-size: 20px;
+	}
+</style>
 
 <script>
 // 페이지 시작 시 리뷰 목록 나타내기
@@ -15,11 +21,24 @@ $(function() {
 		// 클릭 되는거 확인함
 // 		console.log("가장 위 클릭됨");
 		
+		$(".nice-select").remove();
+		$("#review_score").removeAttr("style");
+		
 		// 댓글작성 버튼
 		$("#btnCommentWrite").click(function() {
-			console.log("댓글버튼");
+			
+// 			console.log("댓글버튼");
 			var movie_code = "${movieDto.movie_code}";
 			var review_content = $("#review_content").val();
+			
+			// required는 submit에만 적용되므로 추가했음
+			if (review_content == "" || review_content == null) {
+				alert("내용을 작성해주세요.");
+				$("#review_content").focus();
+				return false;
+			} 
+			
+			
 			var review_score = $("#review_score").val();
 			
 			console.log("movie_code :" + movie_code);
@@ -39,65 +58,150 @@ $(function() {
 				// 값이 제대로 들어있다면  success 표시
 				// success값이 나온다면 다음 단계 진행
 				if (rData == "success") {
+					alert("등록 되었습니다.");
 					$("#commentTable tr.cl_tr").remove();
 					$.each(rData, function() {
 						console.log("rData:" + rData);
 						var tbody = $(".tbody").clone();
 						var tr = tbody.find("tr");
-	 					tr.eq(0).text(this.user_id);
-						td.eq(1).text(this.review_content);
-						td.eq(2).text(this.review_score);
-	 					td.eq(3).text(sysdate);
-						td.eq(4).text("").append("<button class='btn btn-sm btn-warning btnReviewModify' data-movie_code='"+this.movie_code+"'>수정</button>");
-						td.eq(5).text("").append("<button class='btn btn-sm btn-danger btnReviewDelete'  data-movie_code='"+this.movie_code+"'>삭제</button>");
+						tr.eq(0).text(this.review_num);
+	 					tr.eq(1).text(this.user_id);
+						td.eq(2).text(this.review_content);
+						td.eq(3).text(this.review_score);
+	 					td.eq(4).text(sysdate);
+						td.eq(5).text("").append("<button class='btn btn-sm btn-warning btnReviewModify' data-review_code='"+this.review_code+"'>수정</button>");
+						td.eq(6).text("").append("<button class='btn btn-sm btn-danger btnReviewDelete'  data-review_code='"+this.review_code+"'>삭제</button>");
 						$("#commentTable").append(tr);
 					});
 				}
 			});
-			/*
-			$.ajax({
-				"type" : "get",
-				"url" : url,
-				"dataType" : "text",
-				"data" : JSON.stringify(sendData),
-				"headers" : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "get"
-				},
-				"success" : function(rData) {
-					console.log(rData);
-					$("#btnComment").trigger("click");
-				}
-			});
-			*/
-
 		
 	});
 		
-		// 목록 버튼
+		// 갱신 버튼
 		$("#btnCommentUpdate").click(function() {
 			console.log("클릭됨");
 			var movie_code = "${movieDto.movie_code}";
 			location.href="/gsh/movie/movieInfo?movie_code=" + movie_code;
 		});
 		
-		// 리뷰 수정 기능
-// 		$("#commentTable").on("click", ".btnReviewModify", function() {
-// 			var cno = $(this).attr("data-cno");
-// 			$("#btnReviewModify").attr("data-cno", cno);
-// 			var td  = $(this).parent().parent().find("td");
-// 			var content = td.eq(1).text();
-// 			var score = td.eq(2).text();
-// 			$("#modal_content").val(content);
-// 			$("#modal_writer").val(writer);
-// 			$("#modal-505484").trigger("click");
+		// 댓글 수정 버튼
+		$('.btnModify').click(function() {
+			console.log("수정 버튼 클릭");
+			var movie_code = $(this).attr("data-movie_code");
+			$("#btnModifyModal").attr("data-movie_code", movie_code);
+			var td = $(this).parent().parent().find("td");
+			var review_num = td.eq(1).text();
+			var user_id = td.eq(2).text();
+			var review_content = td.eq(3).text();
+			var review_score = te.eq(4).text();
+			$("#review_num").val(review_num);
+			$("#user_id").val(user_id);
+			$("#review_content").val(review_content);
+			$("#review_score").val(review_score);
+			location.href = "#modal-container-997340";
+		});
+		
+		// 댓글 수정하고 저장하기
+// 			$("#btnModifyModal").click(function() {
+// 		var review_content = $("#modal_review").val();
+// 		var revie_score = $("#modal_review_score").val();
+// 		var revuew_num = $(this).attr("data-movie_code");
+// 		var sendData = {
+// 			"review_content"  : review_content,
+// 			"review_score"		: review_score
+// 		};
+// 		console.log("sendData", sendData);
+// 		var url = "/gsh/movie/reviewModify";
+// 		$.ajax({
+// 			"type" : "put",
+// 			"url" : url,
+// 			"dataType" : "text",
+// 			"data" : JSON.stringify(sendData),
+// 			"headers" : {
+// 				"Content-Type" : "application/json",
+// 				"X-HTTP-Method-Override" : "put"
+// 			},
+// 			"success" : function(rData) {
+// 				console.log(rData);
+// 				$("#btnModifyModal").trigger("click");
+// 			}
 // 		});
+	
+// 	});
+		
+		// 댓글 삭제 버튼
+		// 여러개 사용시에는 id가 아닌 class로 불러옴
+		// # -> .
+		$(".btnDelete").click(function() {
+// 			// 삭제 버튼 기능 활성화 확인
+			console.log("삭제 버튼 클릭");
+		});
+		
 });
 </script>
 
 <body>
 <%-- ${subImageList} --%>
 <div class="container-fluid">
+	
+	<!-- 모달 창 부분 시작 -->
+	<div class="row">
+		<div class="col-md-12">
+			 <a id="modal-997340" href="#modal-container-997340" role="button" class="btn" data-toggle="modal" style="visibility: hidden;">Launch demo modal </a>
+			
+			<div class="modal fade" id="modal-container-997340" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">내용 변경</h5>
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+						
+						<!-- 수정 버튼(modal) 클릭 시 나타나는 수정 창 시작 -->
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-12">
+										<form role="form">
+										
+											<div class="form-group">
+												<label>리뷰 내용</label>
+												<input type="text" class="form-control" id="review_content_modify" />
+											</div>
+											
+											<div class="form-group">
+												<label>평점</label>
+												<select id="review_score">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5" selected>5</option>
+												</select>
+											</div>
+											
+											<button type="submit" class="btn btn-primary" id="btnModifyModal">저장</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						<!-- 수정 버튼(modal) 클릭 시 나타나는 수정 창 끝 -->	
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 모달 창 부분 끝 -->
+
+
+
+
+
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8" style="margin-top:50px;margin-bottom:50px;"></div>
@@ -163,21 +267,38 @@ $(function() {
 
 			<!-- 영화 스틸컷 시작 -->
 			
-			<div class="slide_wrap slide_movie_detail_trailer">
-				<div class="owl-carousel owl-loaded owl-drag">
-					<div class="owl-stage-outer">
-						<div class="owl-stage" style="margin-bottom:50px;">
-							<div class="owl-item active"
-								style="width: 320px; margin-right: 20px;">
-									<c:forEach items="${subImageList}" var="str" varStatus="status">
-										<strong>스틸컷 - ${status.count}</strong>
-										<img src="/upload/displayFile?fileName=${str}" alt="영화스틸컷">
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-					</div>
+			<div class="row">
+<%-- 			<c:forEach items="${subImageList}" var="str" varStatus="status"> --%>
+<%-- ${subImageList} --%>
+			<c:forEach begin="0" end="3" var="i">
+				
+				<div class="col-md-3" style="margin: 50px auto;">
+					
+					<div class="span_strong" >스틸컷 - ${i}</div>
+					<img class="img-thumbnail" src="/upload/displayFile?fileName=${subImageList[i]}" alt="영화스틸컷">
 				</div>
+			</c:forEach>
+			</div>
+			
+			
+			
+			<!-- 이전꺼 -->
+<!-- 				<div class="slide_wrap slide_movie_detail_trailer"> -->
+<!-- 				<div class="owl-carousel owl-loaded owl-drag"> -->
+<!-- 					<div class="owl-stage-outer"> -->
+<!-- 						<div class="owl-stage" style="margin-bottom:50px;"> -->
+<!-- 							<div class="owl-item active" -->
+<!-- 								style="width: 320px; margin-right: 20px;"> -->
+<%-- 									<c:forEach items="${subImageList}" var="str" varStatus="status"> --%>
+<%-- 										<strong>스틸컷 - ${status.count}</strong> --%>
+<%-- 										<img src="/upload/displayFile?fileName=${str}" alt="영화스틸컷"> --%>
+<%-- 									</c:forEach> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+			<!-- // 이전꺼 -->
 			</div>
 			<!-- 영화 스틸컷 끝 -->
 			<div class="row">
@@ -222,15 +343,16 @@ $(function() {
 
 	<div class="row" style="margin: 10px 0">
 		<div class="col-md-9">
-			<input type="text" class="form-control" placeholder="감상평을 남겨주세요." maxlength="100" id="review_content" required/>
+			<input type="text" class="form-control" placeholder="감상평을 남겨주세요." maxlength="60" id="review_content" required/>
 		</div>
 		<div class="col-md-1">
+		<span>평점 : </span>
 			<select id="review_score">
 				<option value="1">1</option>
 				<option value="2">2</option>
 				<option value="3">3</option>
 				<option value="4">4</option>
-				<option value="5">5</option>
+				<option value="5" selected>5</option>
 			</select>
 		</div>
 		<div class="col-md-1">
@@ -245,6 +367,7 @@ $(function() {
 		<div class="col-md-12">
 			<table id="commentTable" class="table">
 				<tr style="background-color: #ccc;">
+					<td>리뷰 번호</td>
 					<td>작성자 아이디</td>
 					<td>리뷰 내용</td>
 					<td>평점</td>
@@ -256,12 +379,15 @@ $(function() {
 			<tbody class="tbody">	
 				<c:forEach items="${reviewList}" var="vo">
 				<tr>
-					<th>${vo.user_id}</th>
-					<th>${vo.review_content}</th>
-					<th>${vo.review_score}</th>
-					<th>${vo.review_date}</th>
-					<th><button id="btnUpdate" type="button">수정</button></th>
-					<th><button id="btnDelete" type="button">삭제</button></th>
+					<td>${vo.review_num}</td>
+					<td>${vo.user_id}</td>
+					<td>${vo.review_content}</td>
+					<td>${vo.review_score}</td>
+					<td>${vo.review_date}</td>
+					<td>
+						<a id="modal-997340" href="#modal-container-997340" role="button" class="btn btn-xs btnModify" data-toggle="modal">수정</a>
+					</td>
+					<td><button id="btnDelete" type="button" class="btn btn-xs btnDelete">삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>

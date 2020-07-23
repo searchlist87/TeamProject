@@ -45,7 +45,7 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	
 	// 리뷰 삭제
 	@Override
-	public List<GshReviewVo> reviewDelete() throws Exception {
+	public List<GshReviewVo> delete_review() throws Exception {
 		return null;
 	}
 
@@ -54,6 +54,5 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	public List<GshReviewVo> selectReviewByCode(String movie_code) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "selectReviewByCode", movie_code);
 	}
-
 
 }
