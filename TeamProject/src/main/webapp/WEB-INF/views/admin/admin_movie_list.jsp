@@ -16,6 +16,13 @@
 	.movie_title:hover {
 		color:red;
 	}
+.page-item {
+	float:left;
+}
+.page-link {
+	width:30px;
+	float:left;
+}
 </style>
 <script>
 $(function () {
@@ -23,11 +30,35 @@ $(function () {
 	$("#movie_manage > dt").css("color","red");
 	$("#movie_manage > dd").eq(0).css("color","blue");
 	
+	$("#btnSearch").click(function (e) {
+		e.preventDefault();
+		var searchType = $("select[name=searchType]").val();
+		var keyword = $("#keyword").val();
+		if (keyword == "" || keyword == null) {
+			alert("검색어를 입력해주세요.");
+			$("#keyword").focus();
+			return false;
+		}
+		
+		$("#frmPage > input[name=searchType]").val(searchType);
+		$("#frmPage > input[name=keyword]").val(keyword);
+		$("#frmPage").submit();
+	});
+	
+	
+	// 페이지 번호
+	$("a.page-link").click(function(e) {
+		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
+		var page = $(this).attr("href").trim();
+		$("#frmPage > input[name=page]").val(page);
+		$("#frmPage").submit();
+	});
+	
 });
 </script>
 
 <body class="js">
-
+<%@ include file="../user/jmh/include/formPage.jsp" %>
 <!-- 해더 부분 -->
 <%@include file="../include/admin_header.jsp" %>
 		<!-- admin_category -->
@@ -47,15 +78,21 @@ $(function () {
 										
 									<div class="single-shorter" style="vertical-align:middle;">
 											<label>검색 :</label>
-											<select>
-												<option selected="selected">영화명</option>
-												<option>영화장르</option>
-												<option>영화등급</option>
+											<select id="searchSelect" name=searchType>
+												<option value="mname"
+												<c:if test="${jmhPagingDto.searchType == 'mname'}">selected</c:if>
+												>영화명</option>
+												<option value="mgenre"
+												<c:if test="${jmhPagingDto.searchType == 'mgenre'}">selected</c:if>
+												>영화장르</option>
+												<option value="mgrade"
+												<c:if test="${jmhPagingDto.searchType == 'mgrade'}">selected</c:if>
+												>영화등급</option>
 											</select>
 										</div>
 
-									<input type="text"/>
-									<button type="button" class="btn">검색</button>
+									<input type="text" id="keyword" value="${jmhPagingDto.keyword}"/>
+									<button type="button" class="btn" id="btnSearch">검색</button>
 								</div>	
 								<!--  검색 끝 -->
 								<!--  페이지별 내용 -->
@@ -79,7 +116,7 @@ $(function () {
 											<td style="vertical-align:middle;"><a href="/admin/admin_movie_selectByMovie?movie_code=${jmhMovieVo.movie_code}" class="movie_title">${jmhMovieVo.movie_name}</a></td>
 											<td style="vertical-align:middle;">${jmhMovieVo.movie_genre}</td>
 											<!--  등급 image 처리 -->
-											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_12.PNG"/></td>
+											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_${jmhMovieVo.movie_grade}.png"/></td>
 											<td style="vertical-align:middle;">${jmhMovieVo.movie_open_date}</td>
 										</tr>
 									</c:forEach>
@@ -89,6 +126,38 @@ $(function () {
 						</div>
 						<div class="row" style="height:100px;">
 						</div>
+						
+						<!--페이징-->
+			<div class="row">
+				<div class="col-md-5">
+				</div>
+				<div class="col-md-7">
+					<nav>
+ 						<ul class="pagination">
+						<!-- 이전 -->
+ 							<c:if test="${jmhPagingDto.startPage != 1}">
+ 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
+ 							</c:if>
+						<!-- 페이지 넘버링 -->
+ 							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
+								<li class="page-item
+ 									<c:if test="${jmhPagingDto.page == v }">
+ 										active
+ 									</c:if>
+ 									"
+ 								>
+ 									<a class="page-link" href="${v}">${v}</a>
+ 								</li>
+ 							</c:forEach>
+						<!-- 다음 -->
+ 							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
+ 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
+ 							</c:if>
+ 						</ul>
+ 					</nav>
+				</div>
+			</div>
+		<!--  페이징 끝 -->
 					</div>
 				</div>
 			</div>

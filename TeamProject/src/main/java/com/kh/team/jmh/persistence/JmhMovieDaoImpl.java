@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
+import com.kh.team.domain.JmhPagingDto;
 
 @Repository
 public class JmhMovieDaoImpl implements JmhMovieDao {
@@ -70,6 +71,18 @@ public class JmhMovieDaoImpl implements JmhMovieDao {
 	@Override
 	public void deleteMovieImage(String movie_code) throws Exception {
 		sqlSession.delete(NAMESPACE + "deleteMovieImage", movie_code);
+	}
+
+	// 영화 총 갯수 가져오기
+	@Override
+	public int getCountMovie(JmhPagingDto jmhPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getCountMovie",jmhPagingDto);
+	}
+
+	// 영화 페이징
+	@Override
+	public List<JmhMovieVo> moviePagingList(JmhPagingDto jmhPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "movieListPaging", jmhPagingDto);
 	}
 
 }

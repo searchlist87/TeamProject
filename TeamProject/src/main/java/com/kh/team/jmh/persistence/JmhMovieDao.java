@@ -1,9 +1,12 @@
 package com.kh.team.jmh.persistence;
 
+import java.sql.Date;
 import java.util.List;
 
+import com.kh.team.domain.JmhEventVo;
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
+import com.kh.team.domain.JmhPagingDto;
 
 public interface JmhMovieDao {
 	
@@ -30,6 +33,12 @@ public interface JmhMovieDao {
 	
 	// 영화 sub_image 삭제
 	public void deleteMovieImage(String movie_code) throws Exception;
+	
+	// 영화 총 갯수 가져오기
+	public int getCountMovie(JmhPagingDto jmhPagingDto) throws Exception;
+	
+	// 영화 페이징
+	public List<JmhMovieVo> moviePagingList(JmhPagingDto jmhPagingDto) throws Exception;
 	
 	
 }

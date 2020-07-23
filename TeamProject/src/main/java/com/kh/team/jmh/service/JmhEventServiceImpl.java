@@ -55,8 +55,8 @@ public class JmhEventServiceImpl implements JmhEventService {
 
 	// 이벤트 총 갯수 가져오기
 	@Override
-	public int getCountEvent(Date event_date) throws Exception {
-		return jmhEventDao.getCountEvent(event_date);
+	public int getCountEvent(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhEventDao.getCountEvent(jmhPagingDto);
 	}
 
 	// 이벤트 페이징
@@ -70,6 +70,18 @@ public class JmhEventServiceImpl implements JmhEventService {
 	@Override
 	public List<JmhEventVo> selectEventThree(Date event_date) throws Exception {
 		return jmhEventDao.selectEventThree(event_date);
+	}
+
+	// 지난이벤트 갯수 가져오기
+	@Override
+	public int pastEventCount(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhEventDao.pastEventCount(jmhPagingDto);
+	}
+
+	// 지난 이벤트 페이징
+	@Override
+	public List<JmhEventVo> pastEventPagingList(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhEventDao.pastEventPagingList(jmhPagingDto);
 	}
 
 	

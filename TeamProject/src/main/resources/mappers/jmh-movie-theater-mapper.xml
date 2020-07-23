@@ -6,14 +6,70 @@
 <mapper namespace="mappers.jmh-movie-theater-mapper">
 	<!-- 영화관 이름 가져오기 -->
 	<select id="getTheaterInfo" resultType="JmhMovieTheaterVo">
-		select theater.theater_code, theater.theater_name, area.area_code, area.area_name
+		select theater.theater_code, theater.theater_name
 		from tbl_theater theater, tbl_area area	
-		where theater.area_code = area.area_code order by theater_code
+		where theater.area_code = area.area_code 
+		and area.area_code = #{area_code}
+		order by theater_code
 	</select>
 	
-	<!--  지역 가져오기 -->
+	<!-- 지역 가져오기 -->
 	<select id="getArea" resultType="JmhAreaVo">
 		select * from tbl_area
 	</select>
+	
+	<!-- 영화관 정보 가져오기 -->
+	<select id="selectTheaterInfo" resultType="JmhMovieTheaterVo">
+		select * from tbl_theater
+		where theater_code = #{theater_code} 
+	</select>
+	
+	<!--  영화관 총 좌석수 가져오기 -->
+	<select id="getTotalSeat" resultType="int">
+		select sum(screen_total_seat) from tbl_movie_screen
+		where theater_code = #{theater_code}
+	</select>
+	
+	<!-- 상영관 수 가져오기 -->
+	<select id="getScreenCount" resultType="int">
+		select count(*) cnt from tbl_theater t, tbl_movie_screen s
+		where t.theater_code = s.theater_code
+		and t.theater_code= #{theater_code}
+	</select>
+	
+	<!--  영화관 코드 하나 가져오기 -->
+	<select id="getTheaterCode" resultType="string">
+		select theater_code from (select rownum rnum, t.* from (select * from tbl_theater
+		order by theater_num desc) t)
+		where rnum = 1	
+	</select>
+	
+	<!-- 영화 상영일정 가져오기 -->
+	<select id="getTheaterSchedule" resultType="JmhTheaterScheduleVo">
+		select mt.*, m.movie_code, m.movie_name, m.movie_grade, s.screen_name, s.screen_total_seat, c.rmn_sts
+		from tbl_movie_schedule sd, tbl_movie m, tbl_movie_screen s, tbl_theater tt, 
+		(select movie_time_code, count(*) rmn_sts from tbl_schedule_seat s where seat_check = 'N' group by movie_time_code) c,
+		(select movie_time_code, movie_schedule_code, screen_code, to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, movie_end_time from tbl_movie_time) mt
+		where mt.start_date = #{movie_date} and tt.theater_code = #{theater_code}
+		and mt.movie_schedule_code = sd.movie_schedule_code
+		and sd.movie_code = m.movie_code
+		and mt.screen_code = s.screen_code
+		and mt.movie_time_code = c.movie_time_code
+		and tt.theater_code = sd.theater_code
+	</select>
+	
+	<!-- 상영 영화 가져오기 -->
+	<select id="getTheaterMovieName" resultType="JmhMovieTheaterDto">
+		select distinct m.movie_name, m.movie_code, m.movie_grade
+		from tbl_movie_schedule sd, tbl_movie m, tbl_movie_screen s, tbl_theater tt,
+		(select movie_time_code, movie_schedule_code, screen_code , to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, movie_end_time from tbl_movie_time) mt
+		where mt.start_date = #{movie_date} and tt.theater_code = #{theater_code}
+		and mt.movie_schedule_code = sd.movie_schedule_code
+		and tt.theater_code = sd.theater_code
+		and sd.movie_code = m.movie_code
+		and mt.screen_code = s.screen_code
+	</select>
+	
+	
 	
 </mapper>
