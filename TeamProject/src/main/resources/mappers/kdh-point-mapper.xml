@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.kdh-point-mapper">
+
+<!-- 아이디로 쿠폰 전체 조회 -->
+<select id="selectPointById" resultType="KdhPointVo">
+	select p.point_num, p.point, p.user_id, p.point_date, p.point_code, pc.point_percent,pc.point_name
+	from tbl_point p, tbl_point_code pc
+	where p.point_code = pc.point_code and user_id = #{user_id}
+	
+</select>
+
+<!-- 물건을 살때 포인트 테이블에 데이터 넣기 -->
+<insert id="insertPointInData">
+	insert into tbl_point(point_num,point_code,user_id,point_date, point)
+	values(seq_point_num.nextval, 'PC2', #{user_id}, sysdate, #{food_buy_price}/#{point_percent})
+</insert>	
+
+<!-- 물건 살때 금액만큼 10% 적립 업데이트 -->
+<update id="insertPointInDataUpdate">
+	UPDATE tbl_point
+	SET point = #{food_buy_price}/#{point_percent}
+	where point_num = #{point_num} and user_id = #{user_id}
+</update>
+
+<!-- 총 포인트 합계 구하기 -->
+<select id="selectTotalPoint" resultType="int">
+	select sum(point) from tbl_point
+	where user_id = #{user_id}
+</select>
+
+<!-- 유저 데이트 포인트 업데이트 -->
+<select id="updateTotalUserPoint">
+	update tbl_user_point
+	set user_point = #{user_point}
+	where user_id = #{user_id}
+</select>
+
+<!-- 포인트 쓴만큼 차감 -->
+<update id="updateUserPoint">
+	UPDATE tbl_user_point
+	SET user_point = user_point-#{user_point}
+	where point_num = #{point_num} and user_id = #{user_id}
+</update>
+
+</mapper>
