@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.domain.JmhEventVo;
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
+import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.jmh.service.JmhEventService;
 import com.kh.team.jmh.service.JmhMovieService;
 
@@ -34,9 +35,13 @@ public class JmhAdminController {
 	
 	// 영화 조회
 	@RequestMapping(value="/admin_movie_list", method = RequestMethod.GET)
-	public String movie_list(Model model) throws Exception {
-		List<JmhMovieVo> jmhMovieVo = jmhMovieService.getMovieList();
+	public String movie_list(Model model, JmhPagingDto jmhPagingDto) throws Exception {
+		jmhPagingDto.setPageInfo();
+		int count = jmhMovieService.getCountMovie(jmhPagingDto);
+		jmhPagingDto.setTotalCount(count);
+		List<JmhMovieVo> jmhMovieVo = jmhMovieService.moviePagingList(jmhPagingDto);
 		model.addAttribute("jmhMovieVo", jmhMovieVo);
+		model.addAttribute("jmhPagingDto", jmhPagingDto);
 		return "/admin/admin_movie_list";
 	}
 	

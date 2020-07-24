@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
+import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.jmh.persistence.JmhMovieDao;
 import com.kh.team.jmh.util.JmhFileUploadUtil;
 
@@ -75,6 +76,18 @@ public class JmhMovieServiceImpl implements JmhMovieService {
 	@Override
 	public List<JmhMovieImageVo> selectByMovieSubImage(String movie_code) throws Exception {
 		return jmhMovieDao.selectByMovieSubImage(movie_code);
+	}
+
+	// 영화 총 갯수 가져오기
+	@Override
+	public int getCountMovie(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhMovieDao.getCountMovie(jmhPagingDto);
+	}
+
+	// 영화 페이징
+	@Override
+	public List<JmhMovieVo> moviePagingList(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhMovieDao.moviePagingList(jmhPagingDto);
 	}
 
 }

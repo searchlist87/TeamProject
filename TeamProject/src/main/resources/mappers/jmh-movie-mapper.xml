@@ -11,6 +11,23 @@
 		order by movie_num desc
 	</select>
 	
+	<!-- 영화 수 조회 -->
+	<select id="getCountMovie" resultType="int">
+		select count(*) from tbl_movie
+		<include refid="search"></include>
+	</select>
+	
+	<!--  영화 페이징 -->
+	<select id="movieListPaging" resultType="JmhMovieVo">
+		select * from (
+			select rownum rnum, a.* from (
+				select * from tbl_movie 
+				<include refid="search"></include>
+				order by movie_num desc)
+			 a)
+		where rnum between #{startRow} and #{endRow}
+	</select>
+	
 	<!--  영화 등록 -->
 	<insert id="movieRegister">
 		insert into tbl_movie(movie_code, movie_name, movie_genre, movie_director, movie_actor, movie_open_date, movie_total_time,
@@ -67,5 +84,20 @@
 		delete from tbl_movie_image
 		where movie_code = #{movie_code}
 	</delete>
-
+	
+<sql id="search">
+	<if test="searchType != null">
+		<choose>
+			<when test="searchType == 'mname'">
+			where movie_name like '%' || #{keyword} || '%'
+			</when>
+			<when test="searchType == 'mgenre'">
+			where movie_genre like '%' || #{keyword} || '%'
+			</when>
+			<when test="searchType == 'mgrade'">
+			where movie_grade like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+	</if>
+</sql>
 </mapper>

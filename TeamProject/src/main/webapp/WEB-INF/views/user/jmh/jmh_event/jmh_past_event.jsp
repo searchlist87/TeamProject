@@ -25,6 +25,13 @@
   	margin-bottom:50px;
   }  
 
+.page-item {
+	float:left;
+}
+.page-link {
+	width:30px;
+	float:left;
+}
  
 </style>
 <script>
@@ -36,11 +43,34 @@ $(function() {
 	var month = date.getMonth() + 1; // 월
 	var day = date.getDate(); // 일
 	
+	$("#searchBtn").click(function (e) {
+		e.preventDefault();
+		var searchType = $("#selectSearch option:selected").val();
+		var keyword = $("#keyword").val();
+		if (keyword == null || keyword == "") {
+			alert("검색 키워드를 확인해주세요.");
+			return false;
+			
+		}
+		$("#frmPage > input[name=searchType]").val(searchType);
+		$("#frmPage > input[name=keyword]").val(keyword);
+		$("#frmPage").attr("action", "/event/pastEventList");
+		$("#frmPage").submit();
+	});
+	
+	// 페이지 번호
+	$("a.page-link").click(function(e) {
+		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
+		var page = $(this).attr("href").trim();
+		$("#frmPage > input[name=page]").val(page);
+		$("#frmPage").attr("action", "/event/pastEventList");
+		$("#frmPage").submit();
+	});
 });
 
 
 </script>
-
+<%@ include file="../include/formPage.jsp" %>
 <body class="js">
 	<section class="hero-slider">
 		<!-- Single Slider -->
@@ -61,6 +91,13 @@ $(function() {
 			<div class="col-md-8 blog-meta" style="margin-bottom:20px;">
 				<h2>지난 이벤트</h2>
 				<div style="float:right;">
+					<div style="padding:10px;float:left;height:50px;">
+						<select id="selectSearch" name="searchType"> 
+							<option selected="selected" value="ename">이벤트명</option>
+						</select>
+					</div>
+					<input type="text" name="keyword" id="keyword" value="${jmhPagingDto.keyword}"/>
+					<a href="/event/eventList" role="button" class="btn" style="color:#fff;background-color:#2328bb;" id="searchBtn">검색</a>
 					<a href="/event/eventList" role="button" class="btn" style="color:#fff;" id="pastEventBtn">진행이벤트 보기</a>
 				</div>
 			</div>
@@ -89,7 +126,37 @@ $(function() {
 			<div class="col-md-2"></div>
 			
 		</div> <!--  end 이벤트 -->
-	
+		<!--페이징-->
+			<div class="row">
+				<div class="col-md-5">
+				</div>
+				<div class="col-md-7">
+					<nav>
+ 						<ul class="pagination">
+						<!-- 이전 -->
+ 							<c:if test="${jmhPagingDto.startPage != 1}">
+ 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
+ 							</c:if>
+						<!-- 페이지 넘버링 -->
+ 							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
+								<li class="page-item
+ 									<c:if test="${jmhPagingDto.page == v }">
+ 										active
+ 									</c:if>
+ 									"
+ 								>
+ 									<a class="page-link" href="${v}">${v}</a>
+ 								</li>
+ 							</c:forEach>
+						<!-- 다음 -->
+ 							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
+ 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
+ 							</c:if>
+ 						</ul>
+ 					</nav>
+				</div>
+			</div>
+		<!--  페이징 끝 -->
 </section>
 
 </body>
