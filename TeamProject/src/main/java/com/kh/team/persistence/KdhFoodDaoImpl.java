@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
+import com.kh.team.domain.kdhFoodBuyDto;
+import com.kh.team.domain.kdhFoodBuyListDto;
 
 @Repository
 public class KdhFoodDaoImpl implements KdhFoodDao {
@@ -89,6 +91,18 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	@Override
 	public KdhBuyFoodInfo selectBuyFoodbyNum(int food_num) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "selectBuyFoodbyNum", food_num);
+	}
+	
+	// 구매 내역 테이블 데이터 입력
+	@Override
+	public void insertFoodBuy(kdhFoodBuyDto foodBuyDto) throws Exception {
+		sqlSession.insert(NAMESPACE + "insertFoodBuy", foodBuyDto);
+	}
+	
+	// 구매 내역 리스트 테이블 테이터 입력
+	@Override
+	public void insertFoodBuyList(kdhFoodBuyListDto foodBuyListDto) throws Exception {
+		sqlSession.insert(NAMESPACE + "insertFoodBuyList", foodBuyListDto);
 	}
 
 }

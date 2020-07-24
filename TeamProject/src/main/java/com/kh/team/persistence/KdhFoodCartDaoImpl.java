@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhFoodCartDto;
 
 @Repository
@@ -66,8 +67,13 @@ public class KdhFoodCartDaoImpl implements KdhFoodCartDao {
 	}
 
 	@Override
-	public int FoodTotalMoney() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "FoodTotalMoney");
+	public int FoodTotalMoney(String user_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "FoodTotalMoney", user_id);
+	}
+
+	@Override
+	public List<KdhBasicCartDto> selectCartListByUserId(String user_id) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectCartListByUserId", user_id);
 	}
 
 }

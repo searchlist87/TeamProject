@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhFoodCartDto;
 import com.kh.team.persistence.KdhFoodCartDao;
 
@@ -51,8 +52,13 @@ public class KdhFoodCartServiceImpl implements KdhFoodCartService {
 	}
 
 	@Override
-	public int FoodTotalMoney() throws Exception {
-		return cartDao.FoodTotalMoney();
+	public int FoodTotalMoney(String user_id) throws Exception {
+		return cartDao.FoodTotalMoney(user_id);
+	}
+
+	@Override
+	public List<KdhBasicCartDto> selectCartListByUserId(String user_id) throws Exception {
+		return cartDao.selectCartListByUserId(user_id);
 	}
 
 }

@@ -186,7 +186,10 @@ $(function() {
 	
 	// 결제하기 버튼
 	$("#btnBuy").click(function() {
-		location.href="/kdh/food/buyView";
+		location.href="/cart/buyCart";
+// 		var test = $(this).parent().parent().parent().parent().parent().parent().parent().parent().find($(".data-food-num")).attr("data-food-num");
+// 		console.log("test:" + test);
+		
 	});
 	
 	// 쓰레기통 모양 클릭(스토어 홈으로 보내기)
@@ -200,7 +203,7 @@ $(function() {
 		}
 	});
 	
-	// 쿠폰 사용 버튼
+	// 포인트 사용 버튼
 	$("#btnUse").click(function() {
 		var couponPrice = $("#UsecouponPrice").val();
 		console.log("couponPrice:" + couponPrice);
@@ -249,7 +252,7 @@ $(function() {
 				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
 			
-			// 쿠폰 금액 만들기
+			// 포인트 금액 만들기
 			var PriceLastIndex3 = StringcouponPrice.substring(StringcouponPrice.length-3);
 			var priceFirstIndex = StringcouponPrice.substring(0,StringcouponPrice.length);
 			priceIndex = StringcouponPrice.substring(priceFirstIndex,PriceLastIndex3);
@@ -285,7 +288,7 @@ $(function() {
 			}
 		
 		} else {
-			alert("쿠폰을 사용할 수 없습니다.")
+			alert("포인트를 사용할 수 없습니다.")
 			var zero = 0;
 			var couponPriceVal = $("#couponPrice").val();
 			$("#couponPrice").text(zero + "원");
@@ -326,9 +329,9 @@ $(function() {
 				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
 		}
-	}); // 쿠폰 사용 버튼
+	}); // 포인트 사용 버튼
 	
-	// 쿠폰 삭제하기 버튼
+	// 포인트 삭제하기 버튼
 	$("#btnUseNo").click(function() {
 		
 		var couponPrice = $("#UsecouponPrice").val();
@@ -435,7 +438,7 @@ $(function() {
 						<c:forEach items="${list}" var="foodVo">
 							<tr id="food_tr">
 								<td class="image"><img src="/resources/images/kdh/${foodVo.food_image}" alt="${foodVo.food_image}"></td>
-								<td class="product-des" data-title="Description">
+								<td class="product-des" data-food-num="${foodVo.food_num}">
 									<p class="product-name"><a href="#">${foodVo.food_name}</a></p>
 								</td>
 								<td class="food_price" id="food_price" data-price="${foodVo.food_price}"><span><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber></span>원</td>
@@ -449,6 +452,7 @@ $(function() {
 								</td>
 								<td class="total-amount small_total" data-total-price="${foodVo.buy_food_price}"><span class="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${foodVo.buy_food_price}"></fmt:formatNumber>원</span></td>
 								<td class="action" data-food-cart-num="${foodVo.food_cart_num}"><i class="ti-trash remove-icon"></i></td>
+								<td class="data-food-num" style="display : none;" data-food-num="${foodVo.food_num}"></td>
 							</tr>
 						</c:forEach>
 						</tbody>
@@ -464,7 +468,7 @@ $(function() {
 							<div class="col-lg-8 col-md-5 col-12">
 								<div class="left">
 									<div class="coupon">
-										<input id="UsecouponPrice" name="Coupon" placeholder="쿠폰 사용">
+										<input id="UsecouponPrice" name="Coupon" placeholder="포인트 사용">
 										<button id="btnUse" class="btn btn-sm">사용하기</button>
 										<button id="btnUseNo" class="btn btn-sm">삭제하기</button>
 									</div>
@@ -474,7 +478,7 @@ $(function() {
 								<div class="right">
 									<ul>
 										<li>총 상품금액<span class="totalPrice" id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
-										<li>쿠폰 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
 										<li>총 결제금액<span class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">
