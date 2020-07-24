@@ -20,7 +20,6 @@ public class SghUserVo {
 	private Timestamp user_out_check;
 	public SghUserVo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public SghUserVo(String user_id, String user_pw, String user_name, String user_gender, String user_email,
 			String user_birth, String user_phone, String user_address, int user_total_money, int user_point,

@@ -2,9 +2,12 @@ package com.kh.team.service;
 
 import java.util.List;
 
+import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
+import com.kh.team.domain.kdhFoodBuyDto;
+import com.kh.team.domain.kdhFoodBuyListDto;
 
 public interface KdhFoodService {
 	
@@ -43,4 +46,11 @@ public interface KdhFoodService {
 	
 	// 해당 구매 상품 조회
 	public KdhBuyFoodInfo selectBuyFoodbyNum(int food_num) throws Exception;
+	
+	// 구매 내역 테이블 데이터 입력 
+	public void insertFoodBuy(kdhFoodBuyDto foodBuyDto) throws Exception;
+	
+	// 구매 내역 리스트 테이블 테이터 입력
+	public void insertFoodBuyList(kdhFoodBuyListDto foodBuyListDto) throws Exception;
+
 }

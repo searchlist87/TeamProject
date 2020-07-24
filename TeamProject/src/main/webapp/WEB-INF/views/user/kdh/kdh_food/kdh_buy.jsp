@@ -15,12 +15,7 @@
 
 <script>
 $(function() {
-//  	var msg = "${findCartResult}";
-// 	if (msg == "true") {
-// 		alert("중복안내 모달창 등장");
-// 	} 
-	
-	// 쿠폰 사용 버튼
+	// 적립포인트 사용 버튼
 	$("#btnUse").click(function() {
 		var couponPrice = $("#UsecouponPrice").val();
 		var StringcouponPrice = String(couponPrice);
@@ -68,7 +63,7 @@ $(function() {
 				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
 			
-			// 쿠폰 금액 만들기
+			// 적립포인트 금액 만들기
 			var PriceLastIndex3 = StringcouponPrice.substring(StringcouponPrice.length-3);
 			var priceFirstIndex = StringcouponPrice.substring(0,StringcouponPrice.length);
 			priceIndex = StringcouponPrice.substring(priceFirstIndex,PriceLastIndex3);
@@ -104,7 +99,7 @@ $(function() {
 			}
 		
 		} else {
-			alert("쿠폰을 사용할 수 없습니다.")
+			alert("적립포인트를 사용할 수 없습니다.")
 			var zero = 0;
 			var couponPriceVal = $("#couponPrice").val();
 			$("#couponPrice").text(zero + "원");
@@ -145,9 +140,9 @@ $(function() {
 				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
 		}
-	}); // 쿠폰 사용 버튼
+	}); // 적립포인트 사용 버튼
 	
-	// 쿠폰 삭제하기 버튼
+	// 적립포인트 삭제하기 버튼
 	$("#btnUseNo").click(function() {
 		var couponPrice = $("#UsecouponPrice").val();
 		var StringcouponPrice = String(couponPrice);
@@ -292,7 +287,7 @@ $(function() {
 							<div class="col-lg-8 col-md-5 col-12">
 								<div class="left">
 									<div class="coupon">
-											<input id="UsecouponPrice" name="Coupon" placeholder="쿠폰 사용">
+											<input id="UsecouponPrice" name="Coupon" placeholder="적립포인트 사용">
 											<a id="btnUse" class="btn" style="color: white;">사용하기</a>
 											<a id="btnUseNo" class="btn" style="color: white;">삭제하기</a>
 									</div>
@@ -302,7 +297,7 @@ $(function() {
 								<div class="right">
 									<ul>
 										<li>총 상품금액<span id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
-										<li>쿠폰 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>적립포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
 										<li>총 결제금액<span id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">

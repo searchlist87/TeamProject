@@ -92,4 +92,22 @@ where food_code = '300'
 	select * from tbl_food
 	where food_num = #{food_num}
 </select>
+
+<!-- 구매 내역 테이블 데이터 입력 -->
+<insert id="insertFoodBuy">
+	insert into tbl_food_buy(food_buy_num, food_num, user_id, food_buy_total_price, food_buy_date, food_buy_count)
+	values(seq_food_buy_num.nextval, #{food_num}, #{user_id}, #{food_buy_total_price}, sysdate, #{food_buy_count})
+</insert>
+
+<!-- 구매 내역 리스트 테이블 테이터 입력 -->
+<insert id="insertFoodBuyList">
+	insert into tbl_food_buy_list(food_buy_list_num, food_buy_code, food_num, user_id, food_buy_total_price, food_buy_date,food_buy_count,food_buy_check)
+	values(seq_food_buy_list_num.nextval, 'FC' || seq_food_buy_list_num.nextval, #{food_num}, #{user_id}, #{food_buy_total_price}, sysdate, #{food_buy_count}, default)
+</insert>
+
+<!-- 유저정보 가져오기 -->
+<select id="selectUserInfo">
+	select * from tbl_user
+	where user_id = #{user_id}
+</select>
 </mapper>

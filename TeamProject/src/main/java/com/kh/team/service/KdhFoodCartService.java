@@ -2,6 +2,7 @@ package com.kh.team.service;
 
 import java.util.List;
 
+import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhFoodCartDto;
 import com.kh.team.persistence.KdhFoodCartDao;
 
@@ -29,5 +30,8 @@ public interface KdhFoodCartService {
 	public int selectFoodnumByCartnum(int food_cart_num) throws Exception;
 	
 	// 장바구니 합계액 구하기
-	public int FoodTotalMoney() throws Exception;
+	public int FoodTotalMoney(String user_id) throws Exception;
+	
+	// 아이디로 장바구니내역 가져오기
+	public List<KdhBasicCartDto> selectCartListByUserId(String user_id) throws Exception;
 }
