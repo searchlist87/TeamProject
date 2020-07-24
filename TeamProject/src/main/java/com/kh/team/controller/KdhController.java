@@ -23,6 +23,7 @@ import com.kh.team.domain.KdhFoodCartDto;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.domain.KdhPointVo;
+import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
 import com.kh.team.domain.kdhFoodBuyListDto;
 import com.kh.team.service.KdhFoodCartService;
@@ -122,12 +123,6 @@ public class KdhController {
 			return "false";
 		}
 
-//			KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
-//			String user_id = (String) session.getAttribute("user_id");
-//			String findCartResult= cartService.overlapCart(user_id, food_num);
-//			model.addAttribute("findCartResult", findCartResult);
-//			model.addAttribute("foodVo", foodVo);
-//			model.addAttribute("user_id", user_id);
 		return "success";
 	}
 		
@@ -136,7 +131,8 @@ public class KdhController {
 	@RequestMapping(value = "/buy", method = RequestMethod.GET)
 	@Transactional
 	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id) throws Exception {
-		List<KdhPointVo> pointList = pointService.selectPointById(buy_user_id);
+		KdhPointVo pointList = pointService.selectPointById(buy_user_id);
+		KdhUserVo userInfo = foodService.selectUserInfo(buy_user_id);
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(buy_food_num);
 		String food_image = foodVo.getFood_image();
 		String food_name = foodVo.getFood_name();
@@ -150,6 +146,7 @@ public class KdhController {
 		model.addAttribute("buy_food_buy_price", buy_food_buy_price);
 		model.addAttribute("buy_food_buy_count", buy_food_buy_count);
 		model.addAttribute("pointList", pointList);
+		model.addAttribute("userInfo", userInfo);
 		
 		// foodBuyDto 설정
 		kdhFoodBuyDto foodBuyDto = new kdhFoodBuyDto();
@@ -171,15 +168,28 @@ public class KdhController {
 		return "user/kdh/kdh_food/kdh_buy";
 	}
 
+	// 결제완료
 	@RequestMapping(value = "/buyView", method = RequestMethod.GET)
-	public String buyView() throws Exception {
+	public String buyView(HttpSession session, int user_point, int food_buy_price) throws Exception {
+		String user_id = (String) session.getAttribute("user_id");
+		KdhPointVo pointVo = pointService.selectPointById(user_id);
+		
+//		int food_buy_price = foodService.selectBuyPrice(user_id);
+		int point_percent = pointVo.getPoint_percent();
+		
+		pointService.insertPointInData(user_id, food_buy_price, point_percent);
+		int totalPoint = pointService.selectTotalPoint(user_id);
+		pointService.updateTotalUserPoint(totalPoint, user_id);
+		
+		pointService.updateUserPoint(user_point, user_id);
+		
 		return "user/kdh/kdh_food/kdh_buy_view";
 	}
 	
 	@RequestMapping(value = "/buyFoodNone", method = RequestMethod.GET)
 	public String buyFoodNone(HttpSession session) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
-		pointService.insertPointInData(user_id);
+//		pointService.insertPointInData(user_id);
 		
 		return "user/kdh/kdh_food/kdh_buy_none";
 	}

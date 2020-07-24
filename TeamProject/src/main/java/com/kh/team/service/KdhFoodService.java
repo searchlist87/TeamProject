@@ -6,6 +6,7 @@ import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
+import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
 import com.kh.team.domain.kdhFoodBuyListDto;
 
@@ -52,5 +53,11 @@ public interface KdhFoodService {
 	
 	// 구매 내역 리스트 테이블 테이터 입력
 	public void insertFoodBuyList(kdhFoodBuyListDto foodBuyListDto) throws Exception;
+	
+	// 유저 정보 가져오기
+	public KdhUserVo selectUserInfo(String user_id) throws Exception;
+	
+//	// buy.jsp에 쓸 산 금액만 가져오기 
+//	public int selectBuyPrice(String user_id) throws Exception;
 
 }

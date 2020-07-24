@@ -106,8 +106,14 @@ where food_code = '300'
 </insert>
 
 <!-- 유저정보 가져오기 -->
-<select id="selectUserInfo">
+<select id="selectUserInfo" resultType="KdhUserVo">
 	select * from tbl_user
+	where user_id = #{user_id}
+</select>
+
+<!-- buy.jsp에 쓸 산 금액만 가져오기 -->
+<select id="selectBuyPrice" resultType="int">
+	select food_buy_total_price from tbl_food_buy
 	where user_id = #{user_id}
 </select>
 </mapper>
