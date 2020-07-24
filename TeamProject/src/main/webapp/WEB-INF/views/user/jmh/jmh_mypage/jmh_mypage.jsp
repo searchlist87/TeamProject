@@ -4,142 +4,139 @@
 <html lang="zxx">
 <head>
 
+<style>
+.subul {
+	padding-left : 30px;
+	margin-top : 10px;
+	font-size : 15px;
+	border : 1px dotted #ccc;
+}
+</style>
+<script src="../../../include/bootstrap.jsp"></script>
+<script>
+$(function () {
+	var mMsg = "${modifyMsg}";
+	console.log(mMsg);
+	
+});
+
+</script>
 <!-- tag_and_styleSheet 인크루드 -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-<body class="js">
 
-	<!-- Breadcrumbs -->
-	<div class="breadcrumbs">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="bread-inner">
-						<ul class="bread-list">
-							<li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-							<li class="active"><a href="resources/blog-single.html">Contact</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Breadcrumbs -->
-  
-	<!-- Start Contact -->
-	<section id="contact-us" class="contact-us section">
-		<div class="container">
-				<div class="contact-head">
-					<div class="row">
-						<div class="col-lg-8 col-12">
-							<div class="form-main">
-								<div class="title">
-									<h4>Get in touch</h4>
-									<h3>Write us a message</h3>
-								</div>
-								<form class="form" method="post" action="mail/mail.php">
-									<div class="row">
-										<div class="col-lg-6 col-12">
-											<div class="form-group">
-												<label>Your Name<span>*</span></label>
-												<input name="name" type="text" placeholder="">
-											</div>
-										</div>
-										<div class="col-lg-6 col-12">
-											<div class="form-group">
-												<label>Your Subjects<span>*</span></label>
-												<input name="subject" type="text" placeholder="">
-											</div>
-										</div>
-										<div class="col-lg-6 col-12">
-											<div class="form-group">
-												<label>Your Email<span>*</span></label>
-												<input name="email" type="email" placeholder="">
-											</div>	
-										</div>
-										<div class="col-lg-6 col-12">
-											<div class="form-group">
-												<label>Your Phone<span>*</span></label>
-												<input name="company_name" type="text" placeholder="">
-											</div>	
-										</div>
-										<div class="col-12">
-											<div class="form-group message">
-												<label>your message<span>*</span></label>
-												<textarea name="message" placeholder=""></textarea>
-											</div>
-										</div>
-										<div class="col-12">
-											<div class="form-group button">
-												<button type="submit" class="btn ">Send Message</button>
-											</div>
+<body class="js">  
+<div class="container" style="left:100px;margin-top:100px;">
+		<h2>My page_마이페이지</h2>
+</div>
+<!-- Start Contact -->
+<section id="contact-us" class="contact-us section" style="padding:50px;">
+	<div class="container">
+			<div class="contact-head">
+				<div class="row">
+					<%@ include file="../include/mypage_side_menu.jsp"%>
+					<div class="col-lg-8 col-12">
+						<div class="form-main">
+							<div class="title">
+								<h4>My 정보관리</h4>
+								<h3>회원 정보 관리</h3>
+							</div>
+							<form class="form" method="post" action="/mypage/modify">
+								<div class="row">
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_id">아이디<span>*</span></label>
+											<input name="user_id" id="user_id" type="text" value="${mypageVo.user_id}" readonly>
 										</div>
 									</div>
-								</form>
-							</div>
-						</div>
-						<div class="col-lg-4 col-12">
-							<div class="single-head">
-								<div class="single-info">
-									<i class="fa fa-phone"></i>
-									<h4 class="title">Call us Now:</h4>
-									<ul>
-										<li>+123 456-789-1120</li>
-										<li>+522 672-452-1120</li>
-									</ul>
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_pw">패스워드<span>*</span></label>
+											<input name="user_pw" id="user_pw" type="text" readonly>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_name">이름<span>*</span></label>
+											<input name="user_name" id="user_name" type="text" value="${mypageVo.user_name}" readonly>
+										</div>
+									</div>
+									<div class="col-12">
+										<div>
+											<label for="user_gender" style="padding-right:5px;">성별<span style="color:#ff2c18;">* </span></label>
+											
+											<input name="user_gender" type="radio" value="M"
+											<c:if test="${mypageVo.user_gender == 'M'}">checked</c:if>
+											>남
+											<input name="user_gender" type="radio" value="F"
+											<c:if test="${mypageVo.user_gender == 'F'}">checked</c:if>
+											>여
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_email">이메일<span>*</span></label>
+											<input name="user_email" id="user_email" type="email" value="${mypageVo.user_email}" readonly>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_birth">생년월일<span>*</span></label>
+											<input name="user_birth" id="user_birth" type="text" value="${mypageVo.user_birth}" readonly>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_phone">전화번호<span>*</span></label>
+											<input name="user_phone" id="user_phone" type="text" value="${mypageVo.user_phone}" readonly>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_address" style="margin-right:20px;">주소<span>*</span></label>
+											<input name="user_address" id="user_address" type="text" value="${mypageVo.user_address}" readonly>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_total_money">총 사용금액<span>*</span></label>
+											<input name="user_total_money" id="user_total_money" type="text" value="${mypageVo.user_total_money}" readonly>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="form-group">
+											<label for="user_point">포인트<span>*</span></label>
+											<input name="user_point" id="user_point" type="text" value="${mypageVo.user_point}" readonly>
+										</div>
+									</div>
+									
+									<div class="col-12">
+										<div>
+											<label for="user_sms_check" style="margin-bottom:5px;">SMS 수신여부<span style="color:#ff2c18;">*</span></label>
+											
+												<input type="checkbox" style="width:20px;height:20px;" 
+												<c:if test="${mypageVo.user_sms_check == 'Y'}">
+												checked
+												</c:if>
+												>
+										</div>
+									</div>
+															
+									<div class="col-12" style="margin-top:20px;">
+										<div class="form-group button">
+											<a href="/mypage/modify" class="btn" style="color:#fff;">회원 정보수정</a>
+										</div>
+									</div>
 								</div>
-								<div class="single-info">
-									<i class="fa fa-envelope-open"></i>
-									<h4 class="title">Email:</h4>
-									<ul>
-										<li><a href="mailto:info@yourwebsite.com">info@yourwebsite.com</a></li>
-										<li><a href="mailto:info@yourwebsite.com">support@yourwebsite.com</a></li>
-									</ul>
-								</div>
-								<div class="single-info">
-									<i class="fa fa-location-arrow"></i>
-									<h4 class="title">Our Address:</h4>
-									<ul>
-										<li>KA-62/1, Travel Agency, 45 Grand Central Terminal, New York.</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-	</section>
-	<!--/ End Contact -->
-	
-	<!-- Map Section -->
-	<div class="map-section">
-		<div id="myMap"></div>
-	</div>
-	<!--/ End Map Section -->
-	
-	<!-- Start Shop Newsletter  -->
-	<section class="shop-newsletter section">
-		<div class="container">
-			<div class="inner-top">
-				<div class="row">
-					<div class="col-lg-8 offset-lg-2 col-12">
-						<!-- Start Newsletter Inner -->
-						<div class="inner">
-							<h4>Newsletter</h4>
-							<p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
-							<form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-								<input name="EMAIL" placeholder="Your email address" required="" type="email">
-								<button class="btn">Subscribe</button>
 							</form>
 						</div>
-						<!-- End Newsletter Inner -->
 					</div>
+					
 				</div>
 			</div>
 		</div>
-	</section>
-	<!-- End Shop Newsletter -->
-	
+</section>
+<!--/ End Contact -->
 <%@ include file="../../../include/footer.jsp"%>
 </body>
 </html>
