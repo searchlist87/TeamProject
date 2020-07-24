@@ -22,6 +22,7 @@ import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodCartDto;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
+import com.kh.team.domain.KdhPointCodeVo;
 import com.kh.team.domain.KdhPointVo;
 import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
@@ -131,7 +132,8 @@ public class KdhController {
 	@RequestMapping(value = "/buy", method = RequestMethod.GET)
 	@Transactional
 	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id) throws Exception {
-		KdhPointVo pointList = pointService.selectPointById(buy_user_id);
+		List<KdhPointVo> pointList = pointService.selectPointById(buy_user_id);
+		int totalPoint = pointService.selectTotalPoint(buy_user_id);
 		KdhUserVo userInfo = foodService.selectUserInfo(buy_user_id);
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(buy_food_num);
 		String food_image = foodVo.getFood_image();
@@ -147,7 +149,7 @@ public class KdhController {
 		model.addAttribute("buy_food_buy_count", buy_food_buy_count);
 		model.addAttribute("pointList", pointList);
 		model.addAttribute("userInfo", userInfo);
-		
+		model.addAttribute("totalPoint", totalPoint);
 		// foodBuyDto 설정
 		kdhFoodBuyDto foodBuyDto = new kdhFoodBuyDto();
 		// food_num, user_id, food_buy_total_price, food_buy_count
@@ -172,16 +174,15 @@ public class KdhController {
 	@RequestMapping(value = "/buyView", method = RequestMethod.GET)
 	public String buyView(HttpSession session, int user_point, int food_buy_price) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
-		KdhPointVo pointVo = pointService.selectPointById(user_id);
-		
-//		int food_buy_price = foodService.selectBuyPrice(user_id);
-		int point_percent = pointVo.getPoint_percent();
+		List<KdhPointVo> pointVo = pointService.selectPointById(user_id);
+		KdhPointCodeVo codeVo = pointService.selectFoodPercent();
+		int point_percent = codeVo.getPoint_percent();
 		
 		pointService.insertPointInData(user_id, food_buy_price, point_percent);
 		int totalPoint = pointService.selectTotalPoint(user_id);
 		pointService.updateTotalUserPoint(totalPoint, user_id);
 		
-		pointService.updateUserPoint(user_point, user_id);
+		pointService.updateTotalUserPoint(user_point, user_id);
 		
 		return "user/kdh/kdh_food/kdh_buy_view";
 	}

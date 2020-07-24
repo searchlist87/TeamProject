@@ -2,12 +2,16 @@ package com.kh.team.persistence;
 
 import java.util.List;
 
+import com.kh.team.domain.KdhPointCodeVo;
 import com.kh.team.domain.KdhPointVo;
 
 public interface KdhPointDao {
 	
+	// 포인트코드 테이블에 퍼센트값 구하기
+	public KdhPointCodeVo selectFoodPercent() throws Exception;
+	
 	// 아이디로 포인트 조회
-	public KdhPointVo selectPointById(String user_id) throws Exception;
+	public List<KdhPointVo> selectPointById(String user_id) throws Exception;
 	
 	// 물건을 살때 포인트 테이블에 데이터 넣기
 	public void insertPointInData(String user_id, int food_buy_price, int point_percent) throws Exception;

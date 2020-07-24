@@ -12,7 +12,6 @@
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
 
-
 <script>
 $(function() {
 	// 적립포인트 사용 버튼
@@ -28,10 +27,11 @@ $(function() {
 		} else {
 			if (point < couponPrice) {
 				alert("포인트를 사용할 수 없습니다.")
-				$("#UsecouponPrice").val("");
+				$("#UsecouponPrice").val(0);
 			}
 			
 			if (point > couponPrice) {
+				
 				if (sumPrice > couponPrice) {
 					var lastPriceToString = String(lastPrice);
 					var PriceLastIndex3 = lastPriceToString.substring(lastPriceToString.length-3);
@@ -78,9 +78,6 @@ $(function() {
 					var sumPrice = (price * Iindex);
 					$("#lastPrice").attr("data-lastPrice", sumPrice);
 					
-		
-		
-				
 					// 적립포인트 금액 만들기
 					var PriceLastIndex3 = StringcouponPrice.substring(StringcouponPrice.length-3);
 					var priceFirstIndex = StringcouponPrice.substring(0,StringcouponPrice.length);
@@ -218,15 +215,12 @@ $(function() {
 		}
 	});
 	
-	
 	// 결제하기 버튼
 	$("#btnBuy").click(function() {
 		var Stringuser_point = $("#UsecouponPrice").val();
-		
+		var food_buy_price =  $("#lastPrice").attr("data-lastPrice");
 		user_point = parseInt(Stringuser_point);
-		var lastPrice =  $("#lastPrice").attr("data-lastPrice");
-		console.log("lastPrice:" + lastPrice);
-// 		location.href="/kdh/food/buyView?user_point="+user_point&;
+		location.href="/kdh/food/buyView?user_point="+user_point+"&food_buy_price="+food_buy_price;
 	});
 	
 	// 쓰레기통 모양 클릭(스토어 홈으로 보내기)
@@ -318,8 +312,8 @@ $(function() {
 								<div class="left">
 									<h3>포인트</h3>
 									<ul>
-										<li>적립포인트 사용　　　적립포인트 잔액　　　<input id="pointInfo" type="text" style="text-align:right;" value="${userInfo.user_point}" name="pointInfo" readonly>원</li>
-										<li>사용 포인트　　　<input data-point="${userInfo.user_point}" id="UsecouponPrice" type="text" value="" name="Coupon" placeholder="0" style="text-align:right;">원　
+										<li>적립포인트 사용　　　적립포인트 잔액　　　<input id="pointInfo" type="text" style="text-align:right;" value="${totalPoint}" name="pointInfo" readonly>원</li>
+										<li>사용 포인트　　　<input data-point="${userInfo.user_point}" id="UsecouponPrice" type="text" value="0" name="Coupon" placeholder="0" style="text-align:right;">원　
 										<a id="btnUse" class="btn" style="color: white;">사용하기</a>　
 										<a id="btnUseNo" class="btn" style="color: white;">삭제하기</a></li>
 									</ul>
@@ -329,8 +323,8 @@ $(function() {
 								<div class="right">
 									<ul>
 										<li>총 상품금액<span id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
-										<li>적립포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
-										<li>총 결제금액<span data-lastPrice="" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
+										<li>적립포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value="0"></fmt:formatNumber>원</span></li>
+										<li>총 결제금액<span data-lastPrice="${buy_food_buy_price}" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">
 										<a id="btnBuy" href="#" class="btn">결제하기</a>
