@@ -13,10 +13,16 @@
 <script>
 $(function() {
 	var result = "${result}";
-	console.log("result : " + result);
+// 	console.log("result : " + result);
 	if(result == "false") {
 		console.log("찍힘");
 		alert("잘못된 등급의 접근 입니다.");
+	}
+	
+	//회원 탈퇴 처리 후 결과
+	var secessionMsg = "${secessionMsg}";
+	if(secessionMsg == "success") {
+		alert("회원 탈퇴 되었습니다.");
 	}
 });
 

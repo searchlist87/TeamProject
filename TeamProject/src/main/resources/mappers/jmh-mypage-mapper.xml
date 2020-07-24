@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.jmh-mypage-mapper">
+
+<!--  내 정보 가져오기 -->
+<select id="getUserInfo" resultType="JmhMyPageVo">
+	select * from tbl_user
+	where user_id = #{user_id}
+</select>
+
+<!--  내 정보 수정하기 -->
+<update id="modifyUserInfo">
+	update tbl_user set
+		user_pw = #{user_pw},
+		user_name = #{user_name},
+		user_gender = #{user_gender},
+		user_email = #{user_email},
+		user_birth = #{user_birth},
+		user_phone = #{user_phone},
+		user_address = #{user_address},
+		user_sms_check = #{user_sms_check}
+	where user_id = #{user_id}
+</update>
+
+<!--  회원 탈퇴하기 -->
+<update id="secessionUser">
+	update tbl_user set
+		user_out_check = sysdate
+	where user_id = #{user_id}
+</update>
+	
+</mapper>
