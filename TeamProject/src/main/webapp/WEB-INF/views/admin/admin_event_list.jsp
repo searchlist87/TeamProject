@@ -34,11 +34,19 @@ $(function () {
 		location.href="/admin/admin_event_list?searchType=" + searchType + "&keyword=" + keyword;
 	});
 	
+	// 페이지 번호
+	$("a.page-link").click(function(e) {
+		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
+		var page = $(this).attr("href").trim();
+		$("#frmPage > input[name=page]").val(page);
+		$("#frmPage").submit();
+	});
+	
 });
 </script>
 
 <body class="js">
-
+<%@ include file="../user/jmh/include/formPage.jsp" %>
 <!-- 해더 부분 -->
 <%@include file="../include/admin_header.jsp" %>
 		<!-- admin_category -->

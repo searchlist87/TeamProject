@@ -26,8 +26,15 @@ public interface JmhEventDao {
 	// 지난 이벤트 조회
 	public List<JmhEventVo> pastEventList(Date event_end_date) throws Exception;
 	
+	// 지난 이벤트 갯수 가져오기
+	public int pastEventCount(JmhPagingDto jmhPagingDto) throws Exception;
+	
+	// 지난 이벤트 페이징
+	public List<JmhEventVo> pastEventPagingList(JmhPagingDto jmhPagingDto) throws Exception;
+	
+	
 	// 이벤트 총 갯수 가져오기
-	public int getCountEvent(Date event_date) throws Exception;
+	public int getCountEvent(JmhPagingDto jmhPagingDto) throws Exception;
 	
 	// 이벤트 페이징
 	public List<JmhEventVo> eventPagingList(JmhPagingDto jmhPagingDto) throws Exception;

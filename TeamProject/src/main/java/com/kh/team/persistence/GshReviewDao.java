@@ -16,8 +16,12 @@ public interface GshReviewDao {
 	public void write_review(GshReviewVo gshReviewVo) throws Exception;
 
 	// 영화 리뷰 수정
-	public List<GshReviewVo> reviewModify() throws Exception;
+	public void update_review(String review_content,int review_score,int review_num) throws Exception;
 	
 	// 영화 리뷰 삭제
-	public List<GshReviewVo> reviewDelete() throws Exception;	
+	public void delete_review(int review_num) throws Exception;
+
+	// 해당 영화 리뷰 조회
+	public List<GshReviewVo> selectReviewByCode(String movie_code) throws Exception;
+
 }

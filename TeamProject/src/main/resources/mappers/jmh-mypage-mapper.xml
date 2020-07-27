@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.jmh-mypage-mapper">
+
+<!--  내 정보 가져오기 -->
+<select id="getUserInfo" resultType="JmhMyPageVo">
+	select * from tbl_user
+	where user_id = #{user_id}
+</select>
+
+<!--  내 정보 수정하기 -->
+<update id="modifyUserInfo">
+	update tbl_user set
+		user_pw = #{user_pw},
+		user_name = #{user_name},
+		user_gender = #{user_gender},
+		user_email = #{user_email},
+		user_birth = #{user_birth},
+		user_phone = #{user_phone},
+		user_address = #{user_address},
+		user_sms_check = #{user_sms_check}
+	where user_id = #{user_id}
+</update>
+
+<!--  회원 탈퇴하기 -->
+<update id="secessionUser">
+	update tbl_user set
+		user_out_check = sysdate
+	where user_id = #{user_id}
+</update>
+	
+<!--  1:1 문의 등록하기 -->
+<insert id="registerQuestion">
+	insert into tbl_board(board_code, board_category_code, user_id, board_title, board_content)
+	values(seq_board_code.nextval,'BCC02', #{user_id}, #{board_title}, #{board_content})
+</insert>
+
+<!-- 1:1 문의 리스트 -->
+<select id="getQuestionList" resultType="JmhBoardVo">
+	select * from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02'
+	order by board_code desc
+</select>
+
+<!--  1:1 문의 상세내용 보기 -->
+<select id="selectQuestion" resultType="JmhBoardVo">
+	select * from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</select>
+
+<!--  1:1 문의 수정하기 -->
+<update id="modifyQuestion">
+	update tbl_board set
+		board_title = #{board_title},
+		board_content = #{board_content}
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</update>
+
+<!--  1:1 문의 삭제하기 -->
+<delete id="deleteQuestion">
+	delete from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</delete>
+
+<!--  1:1 문의 답변상태 체크 -->
+<select id="checkReply" resultType="int">
+	select count(*) cnt from tbl_reply
+	where board_code = #{board_code}
+</select>
+
+<!--  1:1 문의 답변 가져오기 -->
+<select id="selectReply" resultType="JmhReplyVo">
+	select * from tbl_reply
+	where board_code = #{board_code}
+</select>
+</mapper>

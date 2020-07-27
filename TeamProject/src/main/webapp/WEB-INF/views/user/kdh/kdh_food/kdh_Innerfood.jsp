@@ -176,9 +176,10 @@ $(function() {
 		$("#buy_food_buy_price").val(buy_food_buy_price);
 		buy_food_buy_count = $("#buy_food_buy_count").val();
 		buy_food_buy_price = $("#buy_food_buy_price").val();
+		console.log("buy_food_buy_count:" + buy_food_buy_count);
+		console.log("buy_food_buy_price:" + buy_food_buy_price);
 		var buy_user_id = "${user_id}";
 		$("#BuyFoodForm").submit();
-		location.href = "/kdh/food/buy";
 	});
  }); 
  	

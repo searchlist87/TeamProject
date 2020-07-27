@@ -13,11 +13,14 @@ public interface GshReviewService {
 	public void write_review(GshReviewVo gshReviewVo) throws Exception;
 	
 	// 리뷰 수정하기
-//	public void update_review() throws Exception;
+	public void update_review(String review_content,int review_score,int review_num) throws Exception;
 	
 	// 리뷰 삭제하기
-//	public void reviewDelete() throws Exception;
+	public void delete_review(int review_num) throws Exception;
 	
 	// 영화 정보 가져오기
 	public List<GshReviewVo> select_reviewAll() throws Exception;
+	
+	// 해당 영화 리뷰 조회
+	public List<GshReviewVo> selectReviewByCode(String movie_code) throws Exception;
 }

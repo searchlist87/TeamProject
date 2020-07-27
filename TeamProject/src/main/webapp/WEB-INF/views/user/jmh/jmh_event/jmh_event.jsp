@@ -64,16 +64,26 @@ $(function() {
 			return false;
 			
 		}
-		location.href="/event/eventList?searchType=" + searchType + "&keyword=" + keyword;
+		$("#frmPage > input[name=searchType]").val(searchType);
+		$("#frmPage > input[name=keyword]").val(keyword);
+		$("#frmPage").attr("action", "/event/eventList");
+		$("#frmPage").submit();
 	});
 	
-	
+	// 페이지 번호
+	$("a.page-link").click(function(e) {
+		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
+		var page = $(this).attr("href").trim();
+		$("#frmPage > input[name=page]").val(page);
+		$("#frmPage").attr("action", "/event/eventList");
+		$("#frmPage").submit();
+	});
 	
 });
 
 
 </script>
-
+<%@ include file="../include/formPage.jsp" %>
 <body class="js">
 	<section class="hero-slider">
 		<!-- Single Slider -->
@@ -95,7 +105,7 @@ $(function() {
 				<h2>진행 이벤트</h2>
 				<div style="float:right;">
 					<div style="padding:10px;float:left;height:50px;">
-						<select id="selectSearch"> 
+						<select id="selectSearch" name="searchType"> 
 							<option selected="selected" value="ename">이벤트명</option>
 						</select>
 					</div>
@@ -141,7 +151,7 @@ $(function() {
  						<ul class="pagination">
 						<!-- 이전 -->
  							<c:if test="${jmhPagingDto.startPage != 1}">
- 								<li class="page-item"><a class="page-link" href="/sgh/admin/movieTheaterList?start_page=${sghPagingDto.start_page - 1}&area_code=${sghPagingDto.area_code}">&laquo;</a></li>
+ 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
  							</c:if>
 						<!-- 페이지 넘버링 -->
  							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
@@ -151,12 +161,12 @@ $(function() {
  									</c:if>
  									"
  								>
- 									<a class="page-link" href="/event/eventList?page=${v}">${v}</a>
+ 									<a class="page-link" href="${v}">${v}</a>
  								</li>
  							</c:forEach>
 						<!-- 다음 -->
  							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
- 								<li class="page-item"><a class="page-link" href="/sgh/admin/movieTheaterList?end_page=${jmhPagingDto.endPage + 1}&area_code=${sghPagingDto.area_code}">&raquo;</a></li>
+ 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
  							</c:if>
  						</ul>
  					</nav>

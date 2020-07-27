@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kh.team.domain.JmhEventVo;
+import com.kh.team.domain.JmhMovieVo;
 import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.jmh.service.JmhEventService;
 
@@ -27,24 +28,19 @@ public class JmhEventController {
 	// 이벤트 정보 리스트
 	@RequestMapping(value="/eventList", method = RequestMethod.GET)
 	public String eventList(Model model, JmhPagingDto jmhPagingDto) throws Exception {
-		
+		jmhPagingDto.setPageInfo();
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		int month = cal.get(Calendar.MONTH) + 1;
 		int day = cal.get(Calendar.DAY_OF_MONTH);
 		String date = year + "-" + month + "-" + day;
 		Date event_date =  java.sql.Date.valueOf(date);
-		
-		int count = jmhEventService.getCountEvent(event_date);
-		jmhPagingDto.setTotalCount(count);
-		jmhPagingDto.setPageInfo();
 		jmhPagingDto.setEvent_date(event_date);
+		int count = jmhEventService.getCountEvent(jmhPagingDto);
+		jmhPagingDto.setTotalCount(count);
+		
 		List<JmhEventVo> list = jmhEventService.eventPagingList(jmhPagingDto);
 
-//		List<JmhEventVo> list = jmhEventService.eventList(keyword, searchType, event_date);
-//		Map<String, String> searchMap = new HashMap<String, String>();
-//		searchMap.put("keyword", keyword);
-//		searchMap.put("searchType", searchType);
 		model.addAttribute("list", list);
 		model.addAttribute("jmhPagingDto", jmhPagingDto);
 
@@ -61,9 +57,15 @@ public class JmhEventController {
 	
 	// 지난 이벤트 보기
 	@RequestMapping(value="/pastEventList", method = RequestMethod.GET)
-	public String pastEventList(Date event_end_date, Model model) throws Exception {
-		List<JmhEventVo> list = jmhEventService.pastEventList(event_end_date);
+	public String pastEventList(Model model, JmhPagingDto jmhPagingDto) throws Exception {
+		jmhPagingDto.setPageInfo();
+		int count = jmhEventService.pastEventCount(jmhPagingDto);
+		System.out.println("count :" + count);
+		jmhPagingDto.setTotalCount(count);
+		List<JmhEventVo> list = jmhEventService.pastEventPagingList(jmhPagingDto);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("jmhPagingDto", jmhPagingDto);
 		return "user/jmh/jmh_event/jmh_past_event";
 	}
 }
