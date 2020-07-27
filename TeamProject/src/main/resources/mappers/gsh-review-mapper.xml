@@ -32,10 +32,11 @@
 	</delete>
 	
 	<!-- 2020/07/23 추가 -->
-	<!-- 리뷰 수정하기(리뷰 내용, 리뷰 평점) -->
+	<!-- 리뷰 수정하기(리뷰 번호로 리뷰 내용, 리뷰 평점 수정) -->
 	<update id="update_review">
-		update tbl_review
-		set review_content = #{review_content}, #{review_score}
+		update tbl_review set
+   	 	review_content = #{review_content},
+   		review_score =  #{review_score}
 		where review_num = #{review_num}
 	</update>
 	
