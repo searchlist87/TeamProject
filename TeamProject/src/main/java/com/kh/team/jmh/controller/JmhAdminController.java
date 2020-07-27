@@ -132,11 +132,19 @@ public class JmhAdminController {
 	}
 	
 	// 이벤트 수정 처리
-	@RequestMapping(value="admin_event_modify", method = RequestMethod.POST)
+	@RequestMapping(value="/admin_event_modify", method = RequestMethod.POST)
 	public String admin_modifyPost(JmhEventVo jmhEventVo) throws Exception {
 		int event_code = jmhEventVo.getEvent_code();
 		jmhEventService.eventModify(jmhEventVo);
 		return "redirect:/admin/admin_event_selectEvent?event_code="+ event_code;
+	}
+	
+	// --------------- 이벤트 끝 ---------------------
+	
+	// 1:1 문의 리스트
+	@RequestMapping(value="/admin_questionList", method = RequestMethod.GET)
+	public String admin_question() throws Exception {
+		return "/admin/admin_question_list";
 	}
 	
 }

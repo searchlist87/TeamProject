@@ -59,7 +59,7 @@
 					
 				</div>
 				<div class="blog-meta" style="padding:20px;">
-					 <h6 style="padding-top:5px;">울산광역시 남구 삼산동</h6>
+					 <h6 style="padding-top:5px;">${mTheaterVo.theater_address}</h6>
 				</div>
 				<div class="blog-meta" style="padding:20px;border:3px solid #A6A6A6;border-radius:1em;">
 					<img src="/resources/images/jmh/info.png" style="float:left;"/>
