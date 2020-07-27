@@ -7,6 +7,18 @@
 		width : 100px;
  		text-align : center; 
 	}
+	.total-count {
+		position : absolute;
+		top : -7px;
+		right : -8px;
+		background-color : #f6931d;
+		width : 18px;
+		height : 18px;
+		line-height : 18px;
+		text-align : center;
+		border-radius : 100%;
+		color:#fff;
+	}
 </style>
 <!-- Header -->
 <header class="header shop">
@@ -32,8 +44,14 @@
 									<li><i class="ti-power-off"></i><a href="/team/user">로그인</a></li>
 								</c:otherwise>
 							</c:choose>
-							<li><i class="ti-user"></i> <a href="#">내 정보</a></li>
+							<li><i class="ti-user"></i> <a href="/mypage/pageForm">내 정보</a></li>
 							<li><i class="ti-user"></i> <a href="#">고객센터</a></li>
+							<li><div class="sinlge-bar shopping">
+							<i class="ti-bag"></i>
+							<a href="/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon" style="position:relative;">
+							<span class="total-count">2</span></a>
+							</div>
+							</li>
 						</ul>
 					</div>
 					<!-- End Top Right -->
@@ -93,52 +111,7 @@
 				<div class="col-lg-2 col-md-3 col-12">
 					<div class="right-bar">
 						<!-- Search Form -->
-						<div class="sinlge-bar">
-							<a href="#" class="single-icon"><i class="fa fa-heart-o"
-								aria-hidden="true"></i></a>
-						</div>
-						<div class="sinlge-bar">
-							<a href="#" class="single-icon"><i
-								class="fa fa-user-circle-o" aria-hidden="true"></i></a>
-						</div>
-						<div class="sinlge-bar shopping">
-
-							<a href="/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon"><i class="ti-bag"></i>
-							<span class="total-count">2</span></a>
-							<!-- Shopping Item -->
-							<div class="shopping-item">
-								<div class="dropdown-cart-header">
-									<span>2 Items</span> <a href="#">View Cart</a>
-								</div>
-								<ul class="shopping-list">
-									<li><a href="#" class="remove" title="Remove this item"><i
-											class="fa fa-remove"></i></a> <a class="cart-img" href="#"><img
-											src="https://via.placeholder.com/70x70" alt="#"></a>
-										<h4>
-											<a href="#">Woman Ring</a>
-										</h4>
-										<p class="quantity">
-											1x - <span class="amount">$99.00</span>
-										</p></li>
-									<li><a href="#" class="remove" title="Remove this item"><i
-											class="fa fa-remove"></i></a> <a class="cart-img" href="#"><img
-											src="https://via.placeholder.com/70x70" alt="#"></a>
-										<h4>
-											<a href="#">Woman Necklace</a>
-										</h4>
-										<p class="quantity">
-											1x - <span class="amount">$35.00</span>
-										</p></li>
-								</ul>
-								<div class="bottom">
-									<div class="total">
-										<span>Total</span> <span class="total-amount">$134.00</span>
-									</div>
-									<a href="checkout.html" class="btn animate">Checkout</a>
-								</div>
-							</div>
-							<!--/ End Shopping Item -->
-						</div>
+						
 					</div>
 				</div>
 			</div>

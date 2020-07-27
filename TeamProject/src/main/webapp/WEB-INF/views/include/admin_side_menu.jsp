@@ -49,8 +49,8 @@ $(function () {
 				</dl>
 				<dl class="categor-list" id="food_product_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃푸드 상품관리</a></dt>
-					<dd><a href="#" class="sub_menu">푸드 상품조회</a></dd>
-					<dd><a href="#" class="sub_menu">푸드 상품등록</a></dd>
+					<dd><a href="/kdh/admin/admin_food_list" class="sub_menu">푸드 상품조회</a></dd>
+					<dd><a href="/kdh/admin/admin_food_register" class="sub_menu">푸드 상품등록</a></dd>
 				</dl>
 				<dl class="categor-list" id="event_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃이벤트 관리</a></dt>

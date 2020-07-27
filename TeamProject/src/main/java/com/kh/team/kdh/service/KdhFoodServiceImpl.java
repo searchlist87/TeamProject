@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.kdh.service;
 
 import java.util.List;
 
@@ -6,10 +6,14 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
-import com.kh.team.persistence.KdhFoodDao;
+import com.kh.team.domain.KdhUserVo;
+import com.kh.team.domain.kdhFoodBuyDto;
+import com.kh.team.domain.kdhFoodBuyListDto;
+import com.kh.team.kdh.persistence.KdhFoodDao;
 
 @Service
 public class KdhFoodServiceImpl implements KdhFoodService {
@@ -76,5 +80,25 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	public KdhBuyFoodInfo selectBuyFoodbyNum(int food_num) throws Exception {
 		return foodDao.selectBuyFoodbyNum(food_num);
 	}
+
+	@Override
+	public void insertFoodBuy(kdhFoodBuyDto foodBuyDto) throws Exception {
+		foodDao.insertFoodBuy(foodBuyDto);
+	}
+
+	@Override
+	public void insertFoodBuyList(kdhFoodBuyListDto foodBuyListDto) throws Exception {
+		foodDao.insertFoodBuyList(foodBuyListDto);
+	}
+
+	@Override
+	public KdhUserVo selectUserInfo(String user_id) throws Exception {
+		return foodDao.selectUserInfo(user_id);
+	}
+
+//	@Override
+//	public int selectBuyPrice(String user_id) throws Exception {
+//		return foodDao.selectBuyPrice(user_id);
+//	}
 
 }

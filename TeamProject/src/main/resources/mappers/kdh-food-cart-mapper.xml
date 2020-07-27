@@ -48,14 +48,16 @@
 	and food_num = #{food_num}
 </select>
 
-<!-- food_cart_num으로 KdhFoodCartDao 구하기  --> 
-<select id="selectFoodnumByCartnum" resultType="int">
-	select food_num from tbl_food_cart
-	where food_cart_num = #{food_cart_num}
+<!-- userId로 장바구니 합계액 구하기 -->
+<select id="FoodTotalMoney" resultType="int">
+	select sum(buy_food_price) from tbl_food_cart
+	where user_id = #{user_id}
 </select>
 
-<!-- 장바구니 합계액 구하기 -->
-<select id="FoodTotalMoney" resultType="int">
-	select sum(buy_food_price) as buy_food_price from tbl_food_cart
+<!-- userId로 장바구니 내역 가져오기 -->
+<select id="selectCartListByUserId" resultType="KdhBasicCartDto">
+	select * from tbl_food_cart
+	where user_id = #{user_id}
 </select>
+
 </mapper>
