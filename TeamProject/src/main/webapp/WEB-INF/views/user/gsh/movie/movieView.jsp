@@ -84,7 +84,7 @@
 				<c:forEach items="${list}" var="vo">
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
 						<a href="/gsh/movie/movieInfo?movie_code=${vo.movie_code}">
-								<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:100px;height:auto;"></span>
+							<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:100px;height:auto;"></span><br>
 							<span><img src="/resources/images/jmh/movie_grade_${vo.movie_grade}.png" width="30">${vo.movie_name}</span>
 						
 						</a>
