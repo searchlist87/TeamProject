@@ -1,4 +1,4 @@
-package com.kh.team.controller;
+package com.kh.team.kdh.controller;
 
 
 import java.util.List;
@@ -19,11 +19,11 @@ import com.kh.team.domain.KdhFoodCartDto;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.kdhFoodBuyDto;
 import com.kh.team.domain.kdhFoodBuyListDto;
-import com.kh.team.service.KdhFoodCartService;
-import com.kh.team.service.KdhFoodService;
-import com.kh.team.service.KdhPointService;
+import com.kh.team.kdh.service.KdhFoodCartService;
+import com.kh.team.kdh.service.KdhFoodService;
+import com.kh.team.kdh.service.KdhPointService;
 
-@RequestMapping("/cart")
+@RequestMapping("/kdh/cart")
 @Controller
 public class KdhCartController {
 	

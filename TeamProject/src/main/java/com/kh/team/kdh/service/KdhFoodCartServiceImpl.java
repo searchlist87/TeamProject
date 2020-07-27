@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.kdh.service;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhFoodCartDto;
-import com.kh.team.persistence.KdhFoodCartDao;
+import com.kh.team.kdh.persistence.KdhFoodCartDao;
 
 @Service
 public class KdhFoodCartServiceImpl implements KdhFoodCartService {

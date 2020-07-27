@@ -1,4 +1,4 @@
-package com.kh.team.service;
+package com.kh.team.kdh.service;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
 import com.kh.team.domain.kdhFoodBuyListDto;
-import com.kh.team.persistence.KdhFoodDao;
+import com.kh.team.kdh.persistence.KdhFoodDao;
 
 @Service
 public class KdhFoodServiceImpl implements KdhFoodService {

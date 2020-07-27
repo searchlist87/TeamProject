@@ -1,4 +1,4 @@
-package com.kh.team.controller;
+package com.kh.team.kdh.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,9 +27,9 @@ import com.kh.team.domain.KdhPointVo;
 import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
 import com.kh.team.domain.kdhFoodBuyListDto;
-import com.kh.team.service.KdhFoodCartService;
-import com.kh.team.service.KdhFoodService;
-import com.kh.team.service.KdhPointService;
+import com.kh.team.kdh.service.KdhFoodCartService;
+import com.kh.team.kdh.service.KdhFoodService;
+import com.kh.team.kdh.service.KdhPointService;
 
 @Controller
 @RequestMapping("/kdh/food")
