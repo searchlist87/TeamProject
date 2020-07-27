@@ -46,11 +46,8 @@ public class SghMovieProductController {
 		int seat_col = sghMovieProductVo.getScreen_seat_col();
 		ArrayList<String> seat_col_Array = SghAsciiChangeUtil.row_make(seat_col);
 		
-		System.out.println(sghMovieProductVo);
-		System.out.println(seat_col_Array);
-		
-		model.addAttribute("seat_check_list", seat_check_list);
 		model.addAttribute("sghMovieProductVo", sghMovieProductVo);
+		model.addAttribute("seat_check_list", seat_check_list);
 		model.addAttribute("seat_col_Array", seat_col_Array);
 		return "user/sgh/sgh_admin/sgh_schedule_product/sgh_schedule_product_info";
 	}
@@ -60,7 +57,6 @@ public class SghMovieProductController {
 	@RequestMapping(value="/seatCheckAjax", method=RequestMethod.GET)
 	public List<SghSeatCheckVo> seatCheckAjax(String movie_time_code) throws Exception {
 		List<SghSeatCheckVo> seat_check_list = sghMovieProductService.getSeatCheck(movie_time_code);
-		
 		return seat_check_list;
 	}
 }

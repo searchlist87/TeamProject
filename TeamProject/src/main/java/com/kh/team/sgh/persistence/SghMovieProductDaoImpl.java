@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.SghMovieProductVo;
+import com.kh.team.domain.SghPaymentVo;
 import com.kh.team.domain.SghSeatCheckVo;
 
 @Repository
@@ -33,5 +34,4 @@ public class SghMovieProductDaoImpl implements SghMovieProductDao {
 	public List<SghSeatCheckVo> getSeatCheck(String movie_time_code) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "getSeatCheck", movie_time_code);
 	}
-
 }

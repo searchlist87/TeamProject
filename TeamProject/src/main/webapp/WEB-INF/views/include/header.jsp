@@ -21,6 +21,25 @@
 	}
 </style>
 <!-- Header -->
+<script>
+$(function() {
+	
+	$("#bookingView").click(function(e) {
+		e.preventDefault();
+		var sghPaymentVo = "${sghPaymentVo}";
+		var sghChoiceSeatDto = "${sghChoiceSeatDto}";
+		if(!(sghPaymentVo == null || sghPaymentVo == "") && !(sghChoiceSeatDto == null || sghChoiceSeatDto == "")) {
+			var session_result = confirm("남아있던 예매 과정이 있습니다. 이어서 하시겠습니까?");
+			console.log("session_result:",session_result);
+			if(session_result == true) {
+				location.href = "/sgh/choiceSeat/paymentForm";
+				return;
+			}
+		}
+		location.href = "/sgh/book/bookingView";
+	});
+});
+</script>
 <header class="header shop">
 	<!-- Topbar -->
 	<div class="topbar">
@@ -38,13 +57,13 @@
 								<c:when test="${not empty user_id}">
 									<li><i class="ti-user"><label style="color: black; margin-left: 5px;">${user_id}님</label></i></li>
 									<li><i class="ti-user"></i> <a href="/sgh/user/logout">로그아웃</a></li>
+									<li><i class="ti-user"></i> <a href="/mypage/pageForm">내 정보</a></li>
 								</c:when>
 								<c:otherwise>
 									<li><i class="ti-user"></i> <a href="/sgh/user/joinForm">회원가입</a></li>
 									<li><i class="ti-power-off"></i><a href="/team/user">로그인</a></li>
 								</c:otherwise>
 							</c:choose>
-							<li><i class="ti-user"></i> <a href="/mypage/pageForm">내 정보</a></li>
 							<li><i class="ti-user"></i> <a href="#">고객센터</a></li>
 							<li><div class="sinlge-bar shopping">
 							<i class="ti-bag"></i>
@@ -138,7 +157,7 @@
 <!-- 													<li><a href="/gsh/movie/onairList">상영작</a></li> -->
 <!-- 												</ul> -->
 											</li>
-											<li><a href="/team/bookingView" class="titlePadding">예매</a>
+											<li><a id="bookingView" href="/team/bookingView" class="titlePadding">예매</a>
 <!-- 												<ul class="dropdown"> -->
 <!-- 													<li><a href="blog-single-sidebar.html">예매하기</a></li> -->
 <!-- 													<li><a href="blog-single-sidebar.html">상영 시간표</a></li> -->

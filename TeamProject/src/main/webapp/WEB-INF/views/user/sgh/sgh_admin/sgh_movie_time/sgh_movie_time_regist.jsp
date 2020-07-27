@@ -143,7 +143,7 @@ $(function() {
 		}
 		
 		var screen_select = $("#screen_select option:selected").val();
-		if(screen_select == 'not') {
+		if(screen_select == 'not' || screen_select == null || screen_select == "") {
 			alert("스크린이 설정되지 않았습니다. 다시 확인해주세요.");
 			return false;
 		}

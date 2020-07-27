@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.sgh-mypage-mapper">
+	<!-- 영화 상영 일정 등록에 사용할 movie 목록 가져오기 -->
+	<select id="getMyMovieBuyList" resultType="SghMyMovieBuyVo">
+		select mbl.movie_buy_num, mc.movie_name, mbl.movie_price, mbl.movie_buy_date
+		from tbl_movie_buy_list mbl, tbl_movie mc
+		where user_id = #{user_id}
+		and mbl.movie_code = mc.movie_code
+	</select>
+	
+</mapper>

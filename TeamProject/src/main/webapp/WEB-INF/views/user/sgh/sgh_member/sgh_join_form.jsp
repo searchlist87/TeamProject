@@ -266,7 +266,7 @@ $(function() {
 				</div>
 				<div class="form-group">
 					<input type="email" class="form-control" id="user_email" name="user_email" maxlength="40" placeholder="이메일"/>
-					<input type="email" class="form-control" id="email_check" name="email_check" maxlength="40" placeholder="인증번호" readonly/>
+					<input type="text" class="form-control" id="email_check" name="email_check" maxlength="40" placeholder="인증번호" readonly/>
 					<button id="btn_email_check" type="button" class="btn-sm">인증코드 확인</button>
 					<button id="btnEmail" type="button" class="btn-sm">메일 인증 보내기</button>
 				</div>

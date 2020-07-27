@@ -17,6 +17,13 @@ $(function() {
 	if(result == "false") {
 		console.log("찍힘");
 		alert("잘못된 등급의 접근 입니다.");
+		return false;
+	}
+	
+	var movie_payment_result = "${movie_payment_result}";
+	if(movie_payment_result == "true") {
+		alert("구매해주셔서 감사합니다.");
+		return false;
 	}
 	
 	//회원 탈퇴 처리 후 결과

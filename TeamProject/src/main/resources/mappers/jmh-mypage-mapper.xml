@@ -32,4 +32,48 @@
 	where user_id = #{user_id}
 </update>
 	
+<!--  1:1 문의 등록하기 -->
+<insert id="registerQuestion">
+	insert into tbl_board(board_code, board_category_code, user_id, board_title, board_content)
+	values(seq_board_code.nextval,'BCC02', #{user_id}, #{board_title}, #{board_content})
+</insert>
+
+<!-- 1:1 문의 리스트 -->
+<select id="getQuestionList" resultType="JmhBoardVo">
+	select * from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02'
+	order by board_code desc
+</select>
+
+<!--  1:1 문의 상세내용 보기 -->
+<select id="selectQuestion" resultType="JmhBoardVo">
+	select * from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</select>
+
+<!--  1:1 문의 수정하기 -->
+<update id="modifyQuestion">
+	update tbl_board set
+		board_title = #{board_title},
+		board_content = #{board_content}
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</update>
+
+<!--  1:1 문의 삭제하기 -->
+<delete id="deleteQuestion">
+	delete from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</delete>
+
+<!--  1:1 문의 답변상태 체크 -->
+<select id="checkReply" resultType="int">
+	select count(*) cnt from tbl_reply
+	where board_code = #{board_code}
+</select>
+
+<!--  1:1 문의 답변 가져오기 -->
+<select id="selectReply" resultType="JmhReplyVo">
+	select * from tbl_reply
+	where board_code = #{board_code}
+</select>
 </mapper>

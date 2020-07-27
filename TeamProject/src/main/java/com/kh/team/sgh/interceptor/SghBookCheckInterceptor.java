@@ -7,17 +7,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class SghLoginInterceptor extends HandlerInterceptorAdapter {
+import com.kh.team.domain.SghChoiceSeatDto;
+import com.kh.team.domain.SghPaymentVo;
 
-	// 세션에 로그인이 담겨있지 않은 상태면 로그인 폼으로
+public class SghBookCheckInterceptor extends HandlerInterceptorAdapter {
+
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		String user_id = (String)session.getAttribute("user_id");
-		System.out.println("로그인 확인 : " + user_id);
-		if(user_id == null) {
-			response.sendRedirect("/sgh/user/loginForm");
+		SghPaymentVo sghPaymentVo = (SghPaymentVo)session.getAttribute("sghPaymentVo");
+		SghChoiceSeatDto sghChoiceSeatDto = (SghChoiceSeatDto)session.getAttribute("sghChoiceSeatDto");
+		if(sghPaymentVo != null && sghChoiceSeatDto != null) {
+			response.sendRedirect("/sgh/choiceSeat/paymentForm");
 			return false;
 		}
 		return true;
@@ -26,6 +28,7 @@ public class SghLoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
+		// TODO Auto-generated method stub
 		super.postHandle(request, response, handler, modelAndView);
 	}
 }

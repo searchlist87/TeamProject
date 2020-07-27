@@ -45,12 +45,12 @@
  	<!-- 인터셉터 빈 --> 
 	<beans:bean id="sghLoginInterceptor" class="com.kh.team.sgh.interceptor.SghLoginInterceptor"/>
 	<beans:bean id="sghAdminInterceptor" class="com.kh.team.sgh.interceptor.SghAdminInterceptor"/>
+	<beans:bean id="sghBookCheckInterceptor" class="com.kh.team.sgh.interceptor.SghBookCheckInterceptor"/>
 	
 	<interceptors>
 		<!-- 로그인 인터셉터 아직 설정 안함-->
 		<interceptor>
-			<mapping path="/board/**/*"/>
-			<exclude-mapping path="/board/listPage"/> <!-- 인터셉트에서 제외시키기 -->
+			<mapping path="/sgh/choiceSeat/**/*"/>
 			<beans:ref bean="sghLoginInterceptor"/>
 		</interceptor>
 		<!-- 어드민 인터셉터 -->
@@ -58,6 +58,12 @@
 			<mapping path="/sgh/admin/**/*"/>
 			<mapping path="/admin/**/*"/>
 			<beans:ref bean="sghAdminInterceptor"/>
+		</interceptor>
+		<!-- 예매 인터셉터 -->
+		<interceptor>
+			<mapping path="/sgh/book/**/*"/>
+			<exclude-mapping path="/sgh/book/bookingView"/>
+			<beans:ref bean="sghBookCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

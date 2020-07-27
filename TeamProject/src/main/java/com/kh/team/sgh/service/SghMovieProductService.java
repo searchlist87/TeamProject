@@ -3,6 +3,7 @@ package com.kh.team.sgh.service;
 import java.util.List;
 
 import com.kh.team.domain.SghMovieProductVo;
+import com.kh.team.domain.SghPaymentVo;
 import com.kh.team.domain.SghSeatCheckVo;
 
 public interface SghMovieProductService {

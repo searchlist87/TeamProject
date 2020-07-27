@@ -132,53 +132,57 @@ $(function() {
 		
 	}
 	// 월 나타내기 - 6번째껄로
-	var monthText = $("#appendDiv").find(".cloneDiv").eq(6).find("li:first").text();
+	var monthText = $("#appendDiv").find(".cloneDiv").eq(0).find("li:first").text();
 	$("#monthSpan").text("[ " + monthText + "월 ]");
 	
-	var checkState = 1;
+	var checkStateLeft = 0;
+	var checkStateRight = 0;
 	// 상영시간표 왼쪽으로 이동
 	$("#btnLeftShow").click(function() {
-		console.log(checkState);
-		switch(checkState) {
+		console.log(checkStateLeft);
+		switch(checkStateLeft) {
 		case 0 :
 			$("#appendDiv").css("transform", "translate(0px)");
 			$("#btnRightShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
-			var monthText = $("#appendDiv").find(".cloneDiv").eq(6).find("li:first").text();
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(0).find("li:first").text();
 			$("#monthSpan").text("[ " + monthText + "월 ]");
-			checkState = 1;
+			checkStateLeft = 1;
+			checkStateRight = 0;
 			break;
 		case 1 :
 			$("#appendDiv").css("transform", "translate(-770px)");
 			$("#btnRightShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
-			var monthText = $("#appendDiv").find(".cloneDiv").eq(20).find("li:first").text();
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(14).find("li:first").text();
 			$("#monthSpan").text("[ " + monthText + "월 ]");
-			console.log(monthText);
-			checkState = 0;
+			checkStateLeft = 0;
+			checkStateRight = 0;
 			break;
 		}
 	});
 	
 	// 상영시간표 오른쪽으로 이동
 	$("#btnRightShow").click(function() {
-		console.log(checkState);
-		switch(checkState) {
-		case 0 :
+		console.log(checkStateRight);
+		switch(checkStateRight) {
+		case 1 :
 			$("#appendDiv").css("transform", "translate(0px)");
 			$("#btnLeftShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
-			var monthText = $("#appendDiv").find(".cloneDiv").eq(6).find("li:first").text();
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(0).find("li:first").text();
 			$("#monthSpan").text("[ " + monthText + "월 ]");
-			checkState = 1;
+			checkStateLeft = 0;
+			checkStateRight = 0;
 			break;
-		case 1 :
+		case 0 : 
 			$("#appendDiv").css("transform", "translate(-770px)");
 			$("#btnLeftShow").css("pointer-events", "auto");
 			$(this).css("pointer-events", "none");
-			var monthText = $("#appendDiv").find(".cloneDiv").eq(20).find("li:first").text();
+			var monthText = $("#appendDiv").find(".cloneDiv").eq(14).find("li:first").text();
 			$("#monthSpan").text("[ " + monthText + "월 ]");
-			checkState = 0;
+			checkStateLeft = 0;
+			checkStateRight = 1;
 			break;
 		}
 	});
@@ -380,8 +384,8 @@ $(function () {
 </script>
 
 <body class="js">
-<div id="temp_div"></div>
-<div id="temp_sub_div"></div>
+<div id="temp_div" style="display:none;"></div>
+<div id="temp_sub_div" style="display:none;"></div>
 <!--  복사할 제목&등급 -->
 <c:forEach items="${mTheaterDto}" var="mTDto">
 	<div class="movie_name_info" data-movie-code='${mTDto.movie_code}' style="display:none;">
@@ -480,12 +484,12 @@ $(function () {
 				<div class="col-lg-4 col-12">
 					<div class="main-sidebar" style="height:550px;">
 					<!--  검색창 -->
-						<div class="single-widget search">
-							<div class="form">
-								<input type="text" placeholder="검색할 영화관 입력"> <a
-									class="button" href="#"><i class="fa fa-search"></i></a>
-							</div>
-						</div>
+<!-- 						<div class="single-widget search"> -->
+<!-- 							<div class="form"> -->
+<!-- 								<input type="text" placeholder="검색할 영화관 입력"> <a -->
+<!-- 									class="button" href="#"><i class="fa fa-search"></i></a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						<!-- 오른쪽 side bar 안내 -->
 						<div class="single-widget category" id="theaterAction">
 							<h3 class="title">영화관 안내</h3>
