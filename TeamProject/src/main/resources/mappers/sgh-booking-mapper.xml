@@ -4,16 +4,66 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mappers.sgh-booking-mapper">
+
 	<!-- 상영 회차에 등록된 영화 시간을 골라서 오늘 하는 영화 중 해당 영화 가져오기 -->
 	<select id="getChoiceMovieList" resultType="SghBookingVo">
-		select mt.*, m.movie_code, m.movie_name, m.movie_grade, s.screen_name, s.screen_total_seat, c.rmn_sts
-		from tbl_movie_schedule sd, tbl_movie m, tbl_movie_screen s, 
+		select mt.*, m.movie_code, m.movie_name, m.movie_grade, s.screen_name, s.screen_code, s.screen_total_seat, c.rmn_sts
+		from tbl_movie_schedule sd, tbl_movie m, tbl_movie_screen s,
 		(select movie_time_code, count(*) rmn_sts from tbl_schedule_seat s where seat_check = 'N' group by movie_time_code) c,
-		(select movie_time_code, movie_schedule_code, screen_code, to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, movie_end_time from tbl_movie_time) mt
+		(select movie_time_code, movie_schedule_code, screen_code, to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, to_char(movie_end_time, 'HH24:MI') end_time from tbl_movie_time) mt
 		where mt.start_date = #{start_date} and m.movie_code = #{movie_code}
 		and mt.movie_schedule_code = sd.movie_schedule_code
 		and sd.movie_code = m.movie_code
 		and mt.screen_code = s.screen_code
 		and mt.movie_time_code = c.movie_time_code
 	</select>
+	
+	<!-- 회차에 대한 등록된 시트 상품 정보 가져오기 -->
+	<select id="getTimeSeat" resultType="SghBookSeatVo">
+		select ss.schedule_seat_code, ss.movie_time_code, ss.movie_seat_num, s.seat_code, ms.screen_seat_row, ms.screen_seat_col, ss.seat_check
+		from tbl_schedule_seat ss, tbl_movie_seat s, tbl_movie_screen ms
+		where movie_time_code = #{movie_time_code}
+		and ss.movie_seat_num = s.movie_seat_num
+		and s.screen_code = ms.screen_code
+		order by movie_seat_num asc
+	</select>
+	
+	<!-- 영화 회차에 정해진 가격 찾기 -->
+	<select id="getMovieMoney" resultType="SghMovieMoneyVo">
+		select movie_time_code, movie_money from tbl_movie_time
+		where movie_time_code = #{movie_time_code}
+	</select>
+	
+		
+	<!-- 구매할 때 좌석 일정 테이블에 업데이트 -->
+	<update id="updateScheduleSeat">
+		update tbl_schedule_seat set
+    		seat_check = 'Y'
+		where schedule_seat_code = #{schedule_seat_code}
+	</update>
+	
+	<!-- 구매할 때 구매 내역 인설트 -->
+	<insert id="insertMovieBuy">
+		insert into tbl_movie_buy(movie_buy_num, movie_time_code, schedule_seat_code, screen_code, user_id)
+		values(seq_movie_buy_num.nextval, #{movie_time_code}, #{schedule_seat_code}, #{screen_code}, #{user_id})
+	</insert>
+	
+	<!-- 구매할 때 구매 내역 리스트 인설트 -->
+	<insert id="insertMovieBuyList">
+		insert into tbl_movie_buy_list(movie_buy_list_num, movie_buy_num, movie_time_code, schedule_seat_code, movie_code, screen_code, user_id, movie_price)
+		values(seq_movie_buy_list_num.nextval, 'MBL' || seq_movie_buy_list_num.nextval, #{movie_time_code}, #{schedule_seat_code}, #{movie_code}, #{screen_code}, #{user_id}, #{movie_price})
+	</insert>
+	
+	<!-- 구매할 때 유저 포인트 지급 내역 -->
+	<insert id="insertPointList">
+		insert into tbl_point(point_num, point_code, user_id, point)
+		values(seq_point_num.nextval, #{point_code}, #{user_id}, #{point})
+	</insert>
+	
+	<!-- 구매할 때 유저 포인트 업데이트 -->
+	<update id="updateUserPoint">
+		update tbl_user set
+    	user_point = user_point + #{point}
+		where user_id = #{user_id}
+	</update>
 </mapper>

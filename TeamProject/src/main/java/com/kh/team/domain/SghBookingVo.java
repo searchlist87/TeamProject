@@ -12,7 +12,7 @@ public class SghBookingVo {
 	private String movie_grade;
 	private String start_date;
 	private String start_time;
-	private Timestamp movie_end_time;
+	private String end_time;
 	private int screen_total_seat;
 	private int rmn_sts;
 	
@@ -22,7 +22,7 @@ public class SghBookingVo {
 
 	public SghBookingVo(String movie_time_code, String movie_schedule_code, String screen_code, String movie_code,
 			String movie_name, String screen_name, String movie_grade, String start_date, String start_time,
-			Timestamp movie_end_time, int screen_total_seat, int rmn_sts) {
+			String end_time, int screen_total_seat, int rmn_sts) {
 		super();
 		this.movie_time_code = movie_time_code;
 		this.movie_schedule_code = movie_schedule_code;
@@ -33,7 +33,7 @@ public class SghBookingVo {
 		this.movie_grade = movie_grade;
 		this.start_date = start_date;
 		this.start_time = start_time;
-		this.movie_end_time = movie_end_time;
+		this.end_time = end_time;
 		this.screen_total_seat = screen_total_seat;
 		this.rmn_sts = rmn_sts;
 	}
@@ -110,12 +110,12 @@ public class SghBookingVo {
 		this.start_time = start_time;
 	}
 
-	public Timestamp getMovie_end_time() {
-		return movie_end_time;
+	public String getEnd_time() {
+		return end_time;
 	}
 
-	public void setMovie_end_time(Timestamp movie_end_time) {
-		this.movie_end_time = movie_end_time;
+	public void setEnd_time(String end_time) {
+		this.end_time = end_time;
 	}
 
 	public int getScreen_total_seat() {
@@ -139,8 +139,8 @@ public class SghBookingVo {
 		return "SghBookingVo [movie_time_code=" + movie_time_code + ", movie_schedule_code=" + movie_schedule_code
 				+ ", screen_code=" + screen_code + ", movie_code=" + movie_code + ", movie_name=" + movie_name
 				+ ", screen_name=" + screen_name + ", movie_grade=" + movie_grade + ", start_date=" + start_date
-				+ ", start_time=" + start_time + ", movie_end_time=" + movie_end_time + ", screen_total_seat="
-				+ screen_total_seat + ", rmn_sts=" + rmn_sts + "]";
+				+ ", start_time=" + start_time + ", end_time=" + end_time + ", screen_total_seat=" + screen_total_seat
+				+ ", rmn_sts=" + rmn_sts + "]";
 	}
 	
 }

@@ -44,7 +44,7 @@ $(function () {
 				</dl>
 				<dl class="categor-list" id="movie_product_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃영화 상품관리</a></dt>
-					<dd><a href="#" class="sub_menu">영화 상품조회</a></dd>
+					<dd><a href="/sgh/admin/scheduleProduct/scheduleProductList" class="sub_menu">영화 상품조회</a></dd>
 					<dd><a href="#" class="sub_menu">영화 상품등록</a></dd>
 				</dl>
 				<dl class="categor-list" id="food_product_manage">

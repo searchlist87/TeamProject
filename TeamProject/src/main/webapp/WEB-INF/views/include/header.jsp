@@ -9,6 +9,25 @@
 	}
 </style>
 <!-- Header -->
+<script>
+$(function() {
+	
+	$("#bookingView").click(function(e) {
+		e.preventDefault();
+		var sghPaymentVo = "${sghPaymentVo}";
+		var sghChoiceSeatDto = "${sghChoiceSeatDto}";
+		if(!(sghPaymentVo == null || sghPaymentVo == "") && !(sghChoiceSeatDto == null || sghChoiceSeatDto == "")) {
+			var session_result = confirm("남아있던 예매 과정이 있습니다. 이어서 하시겠습니까?");
+			console.log("session_result:",session_result);
+			if(session_result == true) {
+				location.href = "/sgh/choiceSeat/paymentForm";
+				return;
+			}
+		}
+		location.href = "/sgh/book/bookingView";
+	});
+});
+</script>
 <header class="header shop">
 	<!-- Topbar -->
 	<div class="topbar">
@@ -164,7 +183,7 @@
 <!-- 													<li><a href="/gsh/movie/onairList">상영작</a></li> -->
 <!-- 												</ul> -->
 											</li>
-											<li><a href="/team/bookingView" class="titlePadding">예매</a>
+											<li><a id="bookingView" href="/team/bookingView" class="titlePadding">예매</a>
 <!-- 												<ul class="dropdown"> -->
 <!-- 													<li><a href="blog-single-sidebar.html">예매하기</a></li> -->
 <!-- 													<li><a href="blog-single-sidebar.html">상영 시간표</a></li> -->
