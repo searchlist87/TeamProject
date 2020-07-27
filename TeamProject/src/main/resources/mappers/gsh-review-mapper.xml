@@ -28,7 +28,7 @@
 	<!-- 리뷰 삭제하기 -->
 	<delete id="delete_review">
 		delete from tbl_review
-		where review_num = #{review_num};
+		where review_num = #{review_num}
 	</delete>
 	
 	<!-- 2020/07/23 추가 -->
