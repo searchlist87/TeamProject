@@ -68,9 +68,12 @@ public class GshController {
 		return "success";
 	}
 	
-	// 리뷰 삭제
-	@RequestMapping(value = "/delete_review", method = RequestMethod.DELETE)
-	public String reviewDelete() throws Exception {
+	// 리뷰 삭제 원본
+	// 삭제를 위해서 리뷰 번호를 ()에 넣어준다
+	@RequestMapping(value = "/delete_review", method = RequestMethod.GET)
+	public String reviewDelete(int review_num) throws Exception {
+		System.out.println("review_num:" + review_num);
+		gshReviewService.delete_review(review_num);
 		return "user/gsh/movie/movieInfo";
 	}
 	

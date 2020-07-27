@@ -95,7 +95,7 @@
 				if (rData == "success") {
 					alert("등록 되었습니다.");
 					$("#commentTable tr.clone_tr").remove();
-					// 내용 작성하고 작성 누르면 내용이 그대로 남아있는걸 지우는 기능
+					// 리뷰 내용 남아있는걸 지우기
 					$("#review_content").val('');
 					getReviewList();
 				}
@@ -109,12 +109,9 @@
 				".btnModify",
 				function() {
 
-					var review_num = $(this).parent().parent().find("td").eq(0)
-							.text();
-					var review_content = $(this).parent().parent().find("td")
-							.eq(2).text();
-					var review_score = $(this).parent().parent().find("td").eq(
-							3).text();
+					var review_num = $(this).parent().parent().find("td").eq(0).text();
+					var review_content = $(this).parent().parent().find("td").eq(2).text();
+					var review_score = $(this).parent().parent().find("td").eq(3).text();
 
 					$("#review_num").val(review_num);
 
@@ -139,9 +136,9 @@
 // 				저장 버튼 누를시 팝업창 띄워서 변경알려줌
 // 				console.log("수정 저장");
 				alert("내용이 변경 되었습니다.");
-// 				$("#").trigger("click");
-// 				opener.parent.location.reload();
-// 				window.close();
+// 				저장 버튼 클릭 시 새로고침
+				location.reload();
+				
 			});
 		});
 
@@ -152,23 +149,19 @@
 // 			삭제 버튼 기능 활성화 확인
 			console.log("삭제 버튼 클릭");
 			var that = $(this);
-			console.log(that);
-// 			var review_num = $(this);
-// 			console.log(this);
-// 					var url = "/gsh/movie/reviewList${reviewVo.review_num}/" + review_num;
-// 					$.ajax({
-// 						"type" : "delete",
-// 						"url" : url,
-// 						"dataType" : "text",
-// 						"headers" : {
-// 							"Content-Type" : "application/json",
-// 							"X-HTTP-Method-Override" : "delete"
-// 						},
-// 						"success" : function(rData) {
-// 							console.log(rData);
-// 							$("#btnDelete").trigger("click");
-// 						}
-// 					});
+// 			console.log(that);
+//			수정이랑 같은 경로를 불러옴
+			var review_num = $(this).parent().parent().find("td").eq(0).text();
+			console.log(review_num);
+			var url = "/gsh/movie/delete_review"
+				sendData = {
+						"review_num" :	review_num			
+				};
+				$.get(url, sendData, function(rData) {
+					console.log("rData:" + rData);
+					alert("삭제되었습니다.");
+					location.reload();
+				});
 		});
 
 		// 리뷰 목록 얻어오기
@@ -311,7 +304,7 @@
 
 				<div class="row">
 					<%-- 			<c:forEach items="${subImageList}" var="str" varStatus="status"> --%>
-					<c:forEach begin="0" end="3" var="i">
+					<c:forEach begin="1" end="4" var="i">
 
 						<div class="col-md-3" style="margin: 50px auto;">
 
@@ -335,7 +328,7 @@
 						<br>
 
 						<div>
-							<span>${movieDto.movie_content}</span>
+							<span style="font-size : 20px;">${movieDto.movie_content}</span>
 						</div>
 					</div>
 					<!-- 영화 내용 끝 -->
