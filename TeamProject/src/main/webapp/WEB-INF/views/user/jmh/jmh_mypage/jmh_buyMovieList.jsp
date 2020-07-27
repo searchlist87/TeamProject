@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -42,16 +43,18 @@
 												<th>구매번호</th>
 												<th>영화명</th>
 												<th>금액</th>
-												<th></th>
+												<th>구매일시</th>
 											</tr>
 										</thead>
 										<tbody>
+											<c:forEach items="${sghMyMovieBuyVo}" var="sghMyMovieBuyVo">
 											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>${sghMyMovieBuyVo.movie_buy_num}</td>
+												<td>${sghMyMovieBuyVo.movie_name}</td>
+												<td>${sghMyMovieBuyVo.movie_price}원</td>
+												<td>${sghMyMovieBuyVo.movie_buy_date}</td>
 											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>

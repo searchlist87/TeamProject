@@ -19,6 +19,7 @@ import com.kh.team.domain.SghBookSeatVo;
 import com.kh.team.domain.SghBookingVo;
 import com.kh.team.domain.SghMovieNameVo;
 import com.kh.team.domain.SghMovieProductVo;
+import com.kh.team.domain.SghMovieTimeAjaxVo;
 import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.sgh.service.SghAreaService;
 import com.kh.team.sgh.service.SghBookingService;
@@ -61,8 +62,9 @@ public class SghBookController {
 	// 영화 일정
 	@ResponseBody
 	@RequestMapping(value="/movieSchedule", method=RequestMethod.GET)
-	public List<SghBookingVo> getDayMovieList(String start_date, String movie_code) throws Exception {
-		List<SghBookingVo> booking_list = sghBookingService.getChoiceMovieList(start_date, movie_code);
+	public List<SghBookingVo> getDayMovieList(SghMovieTimeAjaxVo sghMovieTimeAjaxVo) throws Exception {
+		System.out.println("sghMovieTimeAjaxVo :" + sghMovieTimeAjaxVo);
+		List<SghBookingVo> booking_list = sghBookingService.getChoiceMovieList(sghMovieTimeAjaxVo);
 		return booking_list;
 	}
 	

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team.domain.SghBookSeatVo;
 import com.kh.team.domain.SghBookingVo;
 import com.kh.team.domain.SghMovieMoneyVo;
+import com.kh.team.domain.SghMovieTimeAjaxVo;
 import com.kh.team.domain.SghPaymentVo;
 import com.kh.team.domain.SghPointDto;
 import com.kh.team.sgh.constants.SghTeamConstants;
@@ -22,8 +23,8 @@ public class SghBookingServiceImpl implements SghBookingService {
 	private SghBookingDao sghBookingDao;
 	
 	@Override
-	public List<SghBookingVo> getChoiceMovieList(String start_date, String movie_code) throws Exception {
-		return sghBookingDao.getChoiceMovieList(start_date, movie_code);
+	public List<SghBookingVo> getChoiceMovieList(SghMovieTimeAjaxVo sghMovieTimeAjaxVo) throws Exception {
+		return sghBookingDao.getChoiceMovieList(sghMovieTimeAjaxVo);
 	}
 
 	@Override

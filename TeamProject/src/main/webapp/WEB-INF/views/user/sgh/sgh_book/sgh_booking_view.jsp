@@ -87,7 +87,7 @@ $(function() {
 		$("#screeningArea").after(screenClone);
 	});
 	
-	// 상영 영화관
+	// 상영 영화관에서 상영하는 작품
 	$("#section").on("click", ".theater_code", function(e) {
 		e.preventDefault();
 		var url = "/sgh/book/getMovieName";
@@ -107,7 +107,7 @@ $(function() {
 			console.log("rData" + rData);
 			$.each(rData, function() {
 				var movieName = this.movie_name;
-				var a = "<li><a href='#' class='movie_name' data-movie-code='" + this.movie_code + "'>" + movieName + "</a></li>";
+				var a = "<li><a href='#' class='movie_name' data-movie-code='" + this.movie_code + "' data-t-theater-code='"+theater_code+"'>" + movieName + "</a></li>";
 				screenClone.find("ul").append(a);
 			});
 		});
@@ -139,11 +139,14 @@ $(function() {
 		screenClone.attr("class", "col-lg-4 col-md-2 col-2 movie_list_clone");
 		screenClone.find(".title").addClass("movie_list_title").html(btn_left + strDate + btn_right);
 		screenClone.find("li").remove();
+		var theater_code = $(this).attr("data-t-theater-code");
 		
 		var url = "/sgh/book/movieSchedule";
+		console.log("theater_code : ", theater_code);
 		var sendData = {
 				"start_date" : start_date,
-				"movie_code" : movie_code
+				"movie_code" : movie_code,
+				"theater_code" : theater_code
 		};
 		
 		$.get(url, sendData, function(rData) {

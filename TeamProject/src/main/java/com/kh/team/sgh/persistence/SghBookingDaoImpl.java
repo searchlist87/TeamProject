@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.team.domain.SghBookSeatVo;
 import com.kh.team.domain.SghBookingVo;
 import com.kh.team.domain.SghMovieMoneyVo;
+import com.kh.team.domain.SghMovieTimeAjaxVo;
 import com.kh.team.domain.SghPaymentVo;
 import com.kh.team.domain.SghPointDto;
 
@@ -23,11 +24,8 @@ public class SghBookingDaoImpl implements SghBookingDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<SghBookingVo> getChoiceMovieList(String start_date, String movie_code) throws Exception {
-		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("start_date", start_date);
-		paramMap.put("movie_code", movie_code);
-		return sqlSession.selectList(NAMESPACE + "getChoiceMovieList", paramMap);
+	public List<SghBookingVo> getChoiceMovieList(SghMovieTimeAjaxVo sghMovieTimeAjaxVo) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getChoiceMovieList", sghMovieTimeAjaxVo);
 	}
 
 	@Override
