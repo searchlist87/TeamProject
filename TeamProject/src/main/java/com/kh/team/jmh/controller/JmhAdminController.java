@@ -10,12 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.domain.JmhBoardDto;
+import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhEventVo;
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
 import com.kh.team.domain.JmhPagingDto;
+import com.kh.team.domain.JmhReplyVo;
 import com.kh.team.jmh.service.JmhEventService;
 import com.kh.team.jmh.service.JmhMovieService;
+import com.kh.team.jmh.service.JmhMypageService;
 
 @Controller
 @RequestMapping("/admin")
@@ -27,6 +31,9 @@ public class JmhAdminController {
 	@Inject
 	private JmhEventService jmhEventService;
 	
+	@Inject
+	private JmhMypageService jmhMypageService;
+	
 	// admin page
 	@RequestMapping(value="/admin", method = RequestMethod.GET)
 	public String admin() throws Exception {
@@ -36,6 +43,7 @@ public class JmhAdminController {
 	// 영화 조회
 	@RequestMapping(value="/admin_movie_list", method = RequestMethod.GET)
 	public String movie_list(Model model, JmhPagingDto jmhPagingDto) throws Exception {
+		System.out.println("jmhPagingDto :" + jmhPagingDto);
 		jmhPagingDto.setPageInfo();
 		int count = jmhMovieService.getCountMovie(jmhPagingDto);
 		jmhPagingDto.setTotalCount(count);
@@ -73,6 +81,7 @@ public class JmhAdminController {
 	// 영화 수정
 	@RequestMapping(value="/admin_movie_modify", method = RequestMethod.GET)
 	public String movie_modify(String movie_code, Model model) throws Exception {
+		System.out.println("movie_code :" + movie_code);
 		JmhMovieVo jmhMovieVo = jmhMovieService.selectByMovie(movie_code);
 		List<JmhMovieImageVo> jmhMovieImageVo = jmhMovieService.selectByMovieSubImage(movie_code);
 		model.addAttribute("jmhMovieImageVo", jmhMovieImageVo);
@@ -141,10 +150,61 @@ public class JmhAdminController {
 	
 	// --------------- 이벤트 끝 ---------------------
 	
+	
+	// --------------- 1:1 문의 -----------------------
 	// 1:1 문의 리스트
 	@RequestMapping(value="/admin_questionList", method = RequestMethod.GET)
-	public String admin_question() throws Exception {
+	public String admin_question(Model model) throws Exception {
+		List<JmhBoardVo> jmhBoardVo = jmhMypageService.adminGetQuestionList();
+		int size = jmhBoardVo.size();
+		for(int i = 0; i < size; i ++) {
+			JmhBoardVo vo = jmhBoardVo.get(i);
+			int board_code = vo.getBoard_code();
+			int count = jmhMypageService.checkReply(board_code);
+			vo.setCount(count);
+		}
+		model.addAttribute("jmhBoardVo", jmhBoardVo);
 		return "/admin/admin_question_list";
+	}
+	
+	// 1:1 문의 상세보기
+	@RequestMapping(value="/admin_selectQuestion", method = RequestMethod.GET)
+	public String admin_selectQuestion(int board_code, String user_id, Model model) throws Exception {
+		
+		JmhBoardVo boardVo = jmhMypageService.selectQuestion(user_id, board_code);
+		JmhReplyVo replyVo = jmhMypageService.selectReply(board_code);
+		
+		model.addAttribute("jmhReplyVo", replyVo);
+		model.addAttribute("jmhBoardVo", boardVo);
+		return "/admin/admin_selectByQuestion";
+	}
+	
+	// 1:1 문의 답변 등록
+	@RequestMapping(value="/admin_registerReply", method = RequestMethod.POST)
+	public String admin_registerReply(JmhBoardDto jmhBoardDto) throws Exception {
+		jmhMypageService.adminRegisterReply(jmhBoardDto);
+		int board_code = jmhBoardDto.getBoard_code();
+		String user_id = jmhBoardDto.getUser_id();
+		return "redirect:/admin/admin_selectQuestion?board_code=" + board_code + "&user_id=" + user_id;
+	}
+	
+	// 1:1 문의 답변 수정
+	@RequestMapping(value="/admin_modifyReply", method = RequestMethod.POST)
+	public String admin_modifyReply(JmhBoardDto jmhBoardDto) throws Exception {
+		jmhMypageService.adminModifyReply(jmhBoardDto);
+		int board_code = jmhBoardDto.getBoard_code();
+		String user_id = jmhBoardDto.getUser_id();
+		return "redirect:/admin/admin_selectQuestion?board_code=" + board_code + "&user_id=" + user_id;
+	}
+	
+	// --------------- 1:1 문의 끝 -----------------------
+	
+	// --------------- 고객관리 - 회원정보 조회 ----------
+	
+	@RequestMapping(value = "/admin_customerList", method = RequestMethod.GET)
+	public String admin_customer() throws Exception {
+		
+		return "/admin/admin_customerList";
 	}
 	
 }

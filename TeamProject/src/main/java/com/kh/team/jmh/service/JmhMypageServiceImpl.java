@@ -5,7 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.team.domain.JmhBoardDto;
 import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhMyPageVo;
 import com.kh.team.domain.JmhReplyVo;
@@ -63,9 +65,11 @@ public class JmhMypageServiceImpl implements JmhMypageService {
 	}
 
 	// 1:1 문의 삭제하기
+	@Transactional
 	@Override
 	public void deleteQuestion(String user_id, int board_code) throws Exception {
 		jmhMypageDao.deleteQuestion(user_id, board_code);
+		jmhMypageDao.adminDeleteReply(board_code);
 	}
 	// 1:1 답변 체크
 	@Override
@@ -78,5 +82,29 @@ public class JmhMypageServiceImpl implements JmhMypageService {
 	public JmhReplyVo selectReply(int board_code) throws Exception {
 		return jmhMypageDao.selectReply(board_code);
 	}
+	
+	// ------------ 사용자 끝 --------------------------
+	
+	// ------ admin  -------------------- 
+	
+	// 1:1 문의 리스트
+	@Override
+	public List<JmhBoardVo> adminGetQuestionList() throws Exception {
+		return jmhMypageDao.adminGetQuestionList();
+	}
+
+	// 1:1 답변 달기
+	@Override
+	public void adminRegisterReply(JmhBoardDto jmhBoardDto) throws Exception {
+		jmhMypageDao.adminRegisterReply(jmhBoardDto);
+	}
+
+	// 1:1 답변 수정
+	@Override
+	public void adminModifyReply(JmhBoardDto jmhBoardDto) throws Exception {
+		jmhMypageDao.adminModifyReply(jmhBoardDto);
+	}
+
+	
 
 }

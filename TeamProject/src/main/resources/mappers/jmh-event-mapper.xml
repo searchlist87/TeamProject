@@ -126,6 +126,7 @@
 		where #{event_date} between event_start_date and event_end_date
 	</if>
 </sql>
+
 <sql id="pastSearchType">
 	<if test="searchType != null">
 		<choose>

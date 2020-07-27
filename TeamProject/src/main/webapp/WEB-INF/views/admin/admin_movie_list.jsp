@@ -91,7 +91,7 @@ $(function () {
 											</select>
 										</div>
 
-									<input type="text" id="keyword" value="${jmhPagingDto.keyword}"/>
+									<input type="text" id="keyword" value="${jmhPagingDto.keyword}" name="keyword"/>
 									<button type="button" class="btn" id="btnSearch">검색</button>
 								</div>	
 								<!--  검색 끝 -->

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.domain.JmhBoardDto;
 import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhMyPageVo;
 import com.kh.team.domain.JmhReplyVo;
@@ -90,5 +91,35 @@ public class JmhMyPageDaoImpl implements JmhMyPageDao {
 	public JmhReplyVo selectReply(int board_code) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "selectReply", board_code);
 	}
+
+	// ------------ 사용자 끝 --------------------------
+	
+	// ------ admin  -------------------- 
+	
+	// 1:1 문의 리스트
+	@Override
+	public List<JmhBoardVo> adminGetQuestionList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "adminGetQuestionList");
+	}
+
+	// 1:1 답변 달기
+	@Override
+	public void adminRegisterReply(JmhBoardDto jmhBoardDto) throws Exception {
+		sqlSession.insert(NAMESPACE + "adminRegisterReply", jmhBoardDto);
+	}
+
+	// 1:1 답변 수정
+	@Override
+	public void adminModifyReply(JmhBoardDto jmhBoardDto) throws Exception {
+		sqlSession.update(NAMESPACE + "adminModifyReply", jmhBoardDto);
+	}
+
+	// 1:1 답변 삭제
+	@Override
+	public void adminDeleteReply(int board_code) throws Exception {
+		sqlSession.delete(NAMESPACE + "adminDeleteReply" , board_code);
+	}
+	
+	
 
 }

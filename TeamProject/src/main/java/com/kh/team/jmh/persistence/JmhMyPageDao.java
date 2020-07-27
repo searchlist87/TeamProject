@@ -2,6 +2,7 @@ package com.kh.team.jmh.persistence;
 
 import java.util.List;
 
+import com.kh.team.domain.JmhBoardDto;
 import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhMyPageVo;
 import com.kh.team.domain.JmhReplyVo;
@@ -41,5 +42,20 @@ public interface JmhMyPageDao {
 	
 	// 1:1 답변 가져오기
 	public JmhReplyVo selectReply(int board_code) throws Exception;
+	
+	// ------------ 사용자 끝 --------------------------
+	
+	// ------ admin  -------------------- 
+	
+	// 1:1 문의 리스트
+	public List<JmhBoardVo> adminGetQuestionList() throws Exception;
+	
+	// 1:1 답변 달기
+	public void adminRegisterReply(JmhBoardDto jmhBoardDto) throws Exception;
 
+	// 1:1 답변 수정
+	public void adminModifyReply(JmhBoardDto jmhBoardDto) throws Exception;
+	
+	// 1:1 답변 삭제
+	public void adminDeleteReply(int board_code) throws Exception;
 }

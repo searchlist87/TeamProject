@@ -74,7 +74,7 @@ $(function () {
 				</dl>
 				<dl class="categor-list" id="costomer_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃고객 관리</a></dt>
-					<dd><a href="#" class="sub_menu">회원정보 조회</a></dd>
+					<dd><a href="/admin/admin_customerList" class="sub_menu">회원정보 조회</a></dd>
 				</dl>
 			</div>
 			<!--/ End Single Widget -->

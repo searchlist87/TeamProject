@@ -30,9 +30,9 @@
 </style>
 <script>
 $(function () {
-	$("#movie_manage > dd").css("display","block");
-	$("#movie_manage > dt").css("color","red");
-	$("#movie_manage > dd").eq(0).css("color","blue");
+	$("#costomer_manage > dd").css("display","block");
+	$("#costomer_manage > dt").css("color","red");
+	$("#costomer_manage > dd").eq(0).css("color","blue");
 	
 	// 페이지 번호
 	$("a.page-link").click(function(e) {
@@ -59,7 +59,7 @@ $(function () {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
-									<h4 class="title" >1:1 문의 관리</h4>
+									<h4 class="title" >회원정보 관리</h4>
 								</div>	
 								<div style="margin-top:50px;"></div>
 								<!--  페이지별 내용 -->

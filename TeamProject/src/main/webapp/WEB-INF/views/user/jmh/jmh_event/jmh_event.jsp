@@ -46,13 +46,12 @@ $(function() {
 	var month = date.getMonth() + 1; // 월
 	var day = date.getDate(); // 일
 	
-	
-	
+	var date1 = year + "-" + month + "-" + day;
 	// pastEventBtn 지난이벤트
 	$("#pastEventBtn").click(function (e) {
 		e.preventDefault();
-		var date = year + "-" + month + "-" + day;
-		location.href="/event/pastEventList?event_end_date="+date;
+		
+		location.href="/event/pastEventList?event_end_date="+date1;
 	});
 	
 	$("#searchBtn").click(function (e) {
@@ -66,10 +65,11 @@ $(function() {
 		}
 		$("#frmPage > input[name=searchType]").val(searchType);
 		$("#frmPage > input[name=keyword]").val(keyword);
+		
 		$("#frmPage").attr("action", "/event/eventList");
 		$("#frmPage").submit();
 	});
-	
+	return false;
 	// 페이지 번호
 	$("a.page-link").click(function(e) {
 		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
