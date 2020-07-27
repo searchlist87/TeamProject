@@ -4,9 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mappers.sgh-movie-buy-mapper">
-	<!-- 영화 내역 검색하기 -->
+	<!-- 내정보 영화 내역 검색하기 -->
 	<select id="getMovieBuyList" resultType="SghScheduleListDto">
 		select movie_code, movie_name, movie_open_date from tbl_movie
 	</select>
 	
+	<!-- 어드민 모든 영화 내역 검색하기 -->
+	<select id="getAdminMovieBuyList" resultType="SghAdminMovieBuyVo">
+		select * from (select rownum rnum, a.* from (select mbl.movie_buy_num, mc.movie_name, mbl.movie_price, mbl.movie_buy_date, mbl.user_id, mbl.movie_buy_check
+		      , tt.theater_name, a.area_name
+		from tbl_movie_buy_list mbl, tbl_movie mc, tbl_movie_screen ms, tbl_theater tt, tbl_area a
+		where mbl.movie_code = mc.movie_code
+		and mbl.screen_code = ms.screen_code
+		and ms.theater_code = tt.theater_code
+		and tt.area_code = a.area_code
+		order by movie_buy_date desc) a)
+		where rnum between #{start_row} and #{end_row}
+	</select>
+	
+	<!-- 총 숫자 가져오기 -->
+	<select id="getTotalCount" resultType="integer">
+		select count(*) from tbl_movie_buy_list
+	</select>
 </mapper>

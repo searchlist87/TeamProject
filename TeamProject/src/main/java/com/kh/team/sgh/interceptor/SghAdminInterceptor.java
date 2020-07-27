@@ -9,14 +9,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class SghAdminInterceptor extends HandlerInterceptorAdapter {
 
-	// 세션에 로그인이 담겨있지 않은 상태면 로그인 폼으로
+	// 등급이 어드민이 아니면
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
 		String user_class = (String)session.getAttribute("user_class");
 		System.out.println("class :" + user_class);
-		if(!user_class.equals("admin")) {
+		if (user_class == null || !user_class.equals("admin")) {
 			response.sendRedirect("/sgh/interceptor/admin");
 			return false;
 		}

@@ -49,9 +49,8 @@ $(function () {
 				</dl>
 				<dl class="categor-list" id="product_list">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃구매 내역 조회</a></dt>
-					<dd><a href="/sgh/admin/product_buy_list" class="sub_menu">#총 구매 내역 조회</a></dd>
-					<dd><a href="/sgh/admin/movie_buy_list" class="sub_menu">#영화 구매 내역 조회</a></dd>
-					<dd><a href="/kdh/admin/admin_food_buy_list" class="sub_menu">#푸드 구매 내역 조회</a></dd>
+					<dd><a href="/sgh/admin/buyListForm" class="sub_menu">영화 내역 조회</a></dd>
+					<dd><a href="/kdh/admin/admin_food_buy_list" class="sub_menu">푸드 내역 조회</a></dd>
 				</dl>
 				<dl class="categor-list" id="food_product_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃푸드 상품관리</a></dt>
