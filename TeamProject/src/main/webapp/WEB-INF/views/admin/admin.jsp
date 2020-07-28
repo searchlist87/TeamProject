@@ -27,13 +27,9 @@
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
-									<h4 class="title" >영화관리_영화조회</h4>
+									<img src="/resources/images/jmh/admin_main.jpg">
 								</div>	
 								<!--  페이지별 내용 -->
-								
-								
-								
-								
 								
 							</div>
 						</div>
