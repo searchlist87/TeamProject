@@ -22,8 +22,8 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	private KdhFoodDao foodDao;
 	
 	@Override
-	public List<KdhFoodVo> listFood() throws Exception {
-		return foodDao.listFood();
+	public List<KdhFoodVo> selectListFood() throws Exception {
+		return foodDao.selectListFood();
 	}
 
 	@Override
@@ -32,23 +32,23 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	}
 
 	@Override
-	public List<KdhFoodVo> listFoodCode100(KdhPagingDto pagingDto) throws Exception {
-		return foodDao.listFoodCode100(pagingDto);
+	public List<KdhFoodVo> selectListFoodCode100(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.selectListFoodCode100(pagingDto);
 	}
 
 	@Override
-	public List<KdhFoodVo> listFoodCode200(KdhPagingDto pagingDto) throws Exception {
-		return foodDao.listFoodCode200(pagingDto);
+	public List<KdhFoodVo> selectListFoodCode200(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.selectListFoodCode200(pagingDto);
 	}
 
 	@Override
-	public List<KdhFoodVo> listFoodCode300(KdhPagingDto pagingDto) throws Exception {
-		return foodDao.listFoodCode300(pagingDto);
+	public List<KdhFoodVo> selectListFoodCode300(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.selectListFoodCode300(pagingDto);
 	}
 
 	@Override
-	public List<KdhFoodVo> listLatestFood() throws Exception {
-		return foodDao.listLatestFood();
+	public List<KdhFoodVo> selectListLatestFood3() throws Exception {
+		return foodDao.selectListLatestFood3();
 	}
 
 	@Override
@@ -57,23 +57,23 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	}
 
 	@Override
-	public int foodCount() throws Exception {
-		return foodDao.foodCount();
+	public int selectFoodCount() throws Exception {
+		return foodDao.selectFoodCount();
 	}
 
 	@Override
-	public int CountFoodCode100() throws Exception {
-		return foodDao.CountFoodCode100();
+	public int selectCountFoodCode100() throws Exception {
+		return foodDao.selectCountFoodCode100();
 	}
 
 	@Override
-	public int CountFoodCode200() throws Exception {
-		return foodDao.CountFoodCode200();
+	public int selectCountFoodCode200() throws Exception {
+		return foodDao.selectCountFoodCode200();
 	}
 
 	@Override
-	public int CountFoodCode300() throws Exception {
-		return foodDao.CountFoodCode300();
+	public int selectCountFoodCode300() throws Exception {
+		return foodDao.selectCountFoodCode300();
 	}
 
 	@Override
@@ -96,9 +96,24 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 		return foodDao.selectUserInfo(user_id);
 	}
 
-//	@Override
-//	public int selectBuyPrice(String user_id) throws Exception {
-//		return foodDao.selectBuyPrice(user_id);
-//	}
+	@Override
+	public void updateFoodbyNum(KdhFoodVo foodVo) throws Exception {
+		foodDao.updateFoodbyNum(foodVo);		
+	}
+
+	@Override
+	public void deleteFoodByNum(int food_num) throws Exception {
+		foodDao.deleteFoodByNum(food_num);
+	}
+
+	@Override
+	public void deleteFoodBuy(int food_num) throws Exception {
+		foodDao.deleteFoodBuy(food_num);
+	}
+
+	@Override
+	public void insertFood(KdhFoodVo foodVo) throws Exception {
+		foodDao.insertFood(foodVo);
+	}
 
 }

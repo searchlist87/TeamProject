@@ -6,7 +6,7 @@
 <mapper namespace="mappers.kdh-food-mapper">
 
 <!-- 상품 전체 조회 -->
-<select id="listFood" resultType="KdhFoodVo">
+<select id="selectListFood" resultType="KdhFoodVo">
 	select * from tbl_food
 	order by food_num desc
 </select>
@@ -18,7 +18,7 @@
 </select>
 
 <!-- food number 100(스낵)만 9개 선택 -->
-<select id="listFoodCode100" resultType="KdhFoodVo">
+<select id="selectListFoodCode100" resultType="KdhFoodVo">
 select *
 from (select rownum rnum, a.*
         from (select * from tbl_food
@@ -28,7 +28,7 @@ where rnum between #{startRow} and #{endRow}
 </select>
 
 <!-- food number 200(음료)만 9개 선택 -->
-<select id="listFoodCode200" resultType="KdhFoodVo">
+<select id="selectListFoodCode200" resultType="KdhFoodVo">
 select *
 from (select rownum rnum, a.*
         from (select * from tbl_food
@@ -38,7 +38,7 @@ where rnum between #{startRow} and #{endRow}
 </select>
 
 <!-- food number 300(패키지)만 9개 선택 -->
-<select id="listFoodCode300" resultType="KdhFoodVo">
+<select id="selectListFoodCode300" resultType="KdhFoodVo">
 select *
 from (select rownum rnum, a.*
         from (select * from tbl_food
@@ -48,7 +48,7 @@ where rnum between #{startRow} and #{endRow}
 </select>
 
 <!-- 최근 상품 3개 구하기 -->
-<select id="listLatestFood" resultType="KdhFoodVo">
+<select id="selectListLatestFood3" resultType="KdhFoodVo">
 select *
 from(select * from tbl_food
 order by food_num desc)
@@ -65,24 +65,24 @@ where rnum between #{startRow} and #{endRow}
 </select>
 
 <!-- 상품 총 개수 구하기 -->
-<select id="foodCount" resultType="int">
+<select id="selectFoodCount" resultType="int">
 select count(*) from tbl_food
 </select>
 
 <!-- food number 100(스낵) 상품 개수 구하기  -->
-<select id="CountFoodCode100" resultType="int">
+<select id="selectCountFoodCode100" resultType="int">
 select count(*) from tbl_food
 where food_code = 100
 </select>
 
 <!-- food number 200(음료) 상품 개수 구하기 -->
-<select id="CountFoodCode200" resultType="int">
+<select id="selectCountFoodCode200" resultType="int">
 select count(*) from tbl_food
 where food_code = '200'
 </select> 
 
 <!-- food number 300(패키지) 상품 개수 구하기  -->
-<select id="CountFoodCode300" resultType="int">
+<select id="selectCountFoodCode300" resultType="int">
 select count(*) from tbl_food
 where food_code = '300'
 </select>
@@ -116,4 +116,33 @@ where food_code = '300'
 	select food_buy_total_price from tbl_food_buy
 	where user_id = #{user_id}
 </select>
+
+<!-- 상품 정보 업데이트 -->
+<update id="updateFoodbyNum">
+	update tbl_food set
+    food_image = #{food_image},
+    food_name = #{food_name},
+    food_code = #{food_code},
+    food_price = #{food_price},
+    food_count = #{food_count}
+	where food_num = #{food_num}
+</update>
+
+<!-- 상품 삭제하기 -->
+<delete id="deleteFoodByNum">
+	delete from tbl_food
+	where food_num = #{food_num}
+</delete>
+
+<!-- 구매 내역 삭제하기 -->
+<delete id="deleteFoodBuy">
+	delete tbl_food_buy
+	where food_num = #{food_num}
+</delete>
+
+<!-- 상품 등록하기 -->
+<insert id="insertFood">
+	insert into tbl_food(food_num,food_code,food_name,food_price,food_count,food_image)
+	values(seq_food_num.nextval, #{food_code}, #{food_name}, #{food_price}, #{food_count}, #{food_image})
+</insert>
 </mapper>

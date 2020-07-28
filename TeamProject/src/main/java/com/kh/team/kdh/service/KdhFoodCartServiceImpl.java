@@ -61,4 +61,9 @@ public class KdhFoodCartServiceImpl implements KdhFoodCartService {
 		return cartDao.selectCartListByUserId(user_id);
 	}
 
+	@Override
+	public void deleteFoodCart(int food_num) throws Exception {
+		cartDao.deleteFoodCart(food_num);
+	}
+
 }
