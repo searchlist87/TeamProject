@@ -30,14 +30,48 @@
 </style>
 <script>
 $(function () {
-	$("#movie_manage > dd").css("display","block");
-	$("#movie_manage > dt").css("color","red");
-	$("#movie_manage > dd").eq(0).css("color","blue");
+	$("#board_manage > dd").css("display","block");
+	$("#board_manage > dt").css("color","red");
+	$("#board_manage > dd").eq(2).css("color","blue");
+	
+	
+// 	$("#selectSearch").change(function () {
+		
+// 		var searchType = $("#selectSearch option:selected").val();
+// 		if (searchType == 'noReply') {
+// 			$("#keyword").css("visibility", "hidden");
+// 		} else {
+// 			$("#keyword").css("visibility", "visible");
+// 		}
+// 	});
+	
+	$("#searchBtn").click(function () {
+		var searchType = $("#selectSearch option:selected").val();
+		if (searchType == 'noReply') {
+		} else {
+			var keyword = $("#keyword").val();
+			if (keyword == null || keyword == "") {
+				alert("검색 키워드를 확인해주세요.");
+				$("#keyword").focus();
+				return false;
+				
+			}
+		}
+		$("#frmPage > input[name=searchType]").val(searchType);
+		$("#frmPage > input[name=keyword]").val(keyword);
+		$("#frmPage").attr("action","/admin/admin_questionList");
+		$("#frmPage").submit();
+	});
+	
+	$("#listBtn").click(function () {
+		location.href="/admin/admin_questionList";
+	});
 	
 	// 페이지 번호
 	$("a.page-link").click(function(e) {
 		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
 		var page = $(this).attr("href").trim();
+		$("#frmPage").attr("action","/admin/admin_questionList");
 		$("#frmPage > input[name=page]").val(page);
 		$("#frmPage").submit();
 	});
@@ -62,6 +96,23 @@ $(function () {
 									<h4 class="title" >1:1 문의 관리</h4>
 								</div>	
 								<div style="margin-top:50px;"></div>
+								<!--  검색 -->
+								<div style="padding:20px;text-align:right;">
+										
+									<div class="single-shorter" style="vertical-align:middle;">
+										<label>검색 :</label>
+										<select id="selectSearch">
+											<option selected="selected" value="user_id">아이디</option>
+											<option value="noReply">무답변</option>
+										</select>
+									</div>
+
+									<input type="text" name="keyword" id="keyword"/>
+									<button class="btn" id="searchBtn">검색</button>
+									<button class="btn" id="listBtn">목록</button>
+								</div>	
+								<!--  검색 끝 -->
+								
 								<!--  페이지별 내용 -->
 								<table class="table" style="text-align:center;height:auto;" id="movie_table">
 									<thead>
@@ -84,7 +135,7 @@ $(function () {
 											<td style="vertical-align:middle;">
 											<c:choose>
 												<c:when test="${boardVo.count == 0}"><span>없음</span></c:when>
-												<c:otherwise><span style="color:red;">있음</span></c:otherwise>
+												<c:otherwise><span style="color:red;" class="replyOk">있음</span></c:otherwise>
 											</c:choose></td>
 										</tr>
 									</c:forEach>
@@ -94,6 +145,37 @@ $(function () {
 						</div>
 						<div class="row" style="height:100px;">
 						</div>
+						<!--페이징-->
+						<div class="row">
+							<div class="col-md-5">
+							</div>
+							<div class="col-md-7">
+								<nav>
+			 						<ul class="pagination">
+									<!-- 이전 -->
+			 							<c:if test="${jmhPagingDto.startPage != 1}">
+			 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
+			 							</c:if>
+									<!-- 페이지 넘버링 -->
+			 							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
+											<li class="page-item
+			 									<c:if test="${jmhPagingDto.page == v }">
+			 										active
+			 									</c:if>
+			 									"
+			 								>
+			 									<a class="page-link" href="${v}">${v}</a>
+			 								</li>
+			 							</c:forEach>
+									<!-- 다음 -->
+			 							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
+			 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
+			 							</c:if>
+			 						</ul>
+			 					</nav>
+							</div>
+						</div>
+					<!--  페이징 끝 -->
 					</div>
 				</div>
 			</div>

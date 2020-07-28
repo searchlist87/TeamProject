@@ -13,9 +13,17 @@
 	<script src="/resources/js/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="/resources/css/admin.css">
 <style>
-	.eventTitle:hover {
-		color:red;
-	}
+.eventTitle:hover {
+	color:red;
+}
+	
+.page-item {
+	float:left;
+}
+.page-link {
+	width:30px;
+	float:left;
+}
 </style>
 <script>
 $(function () {
@@ -31,14 +39,22 @@ $(function () {
 			return false;
 			
 		}
-		location.href="/admin/admin_event_list?searchType=" + searchType + "&keyword=" + keyword;
+		
+		$("#frmPage > input[name=searchType]").val(searchType);
+		$("#frmPage > input[name=perPage]").val(10);
+		$("#frmPage > input[name=keyword]").val(keyword);
+		$("#frmPage").attr("action","/admin/admin_event_list");
+		$("#frmPage").submit();
+		
 	});
 	
 	// 페이지 번호
 	$("a.page-link").click(function(e) {
 		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
 		var page = $(this).attr("href").trim();
+		$("#frmPage > input[name=perPage]").val(10);
 		$("#frmPage > input[name=page]").val(page);
+		$("#frmPage").attr("action","/admin/admin_event_list");
 		$("#frmPage").submit();
 	});
 	
@@ -104,6 +120,37 @@ $(function () {
 						</div>
 						<div class="row" style="height:100px;">
 						</div>
+						<!--페이징-->
+						<div class="row">
+							<div class="col-md-5">
+							</div>
+							<div class="col-md-7">
+								<nav>
+			 						<ul class="pagination">
+									<!-- 이전 -->
+			 							<c:if test="${jmhPagingDto.startPage != 1}">
+			 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
+			 							</c:if>
+									<!-- 페이지 넘버링 -->
+			 							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
+											<li class="page-item
+			 									<c:if test="${jmhPagingDto.page == v }">
+			 										active
+			 									</c:if>
+			 									"
+			 								>
+			 									<a class="page-link" href="${v}">${v}</a>
+			 								</li>
+			 							</c:forEach>
+									<!-- 다음 -->
+			 							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
+			 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
+			 							</c:if>
+			 						</ul>
+			 					</nav>
+							</div>
+						</div>
+					<!--  페이징 끝 -->
 					</div>
 				</div>
 			</div>

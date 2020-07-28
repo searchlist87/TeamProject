@@ -128,36 +128,36 @@ $(function () {
 						</div>
 						
 						<!--페이징-->
-			<div class="row">
-				<div class="col-md-5">
-				</div>
-				<div class="col-md-7">
-					<nav>
- 						<ul class="pagination">
-						<!-- 이전 -->
- 							<c:if test="${jmhPagingDto.startPage != 1}">
- 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
- 							</c:if>
-						<!-- 페이지 넘버링 -->
- 							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
-								<li class="page-item
- 									<c:if test="${jmhPagingDto.page == v }">
- 										active
- 									</c:if>
- 									"
- 								>
- 									<a class="page-link" href="${v}">${v}</a>
- 								</li>
- 							</c:forEach>
-						<!-- 다음 -->
- 							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
- 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
- 							</c:if>
- 						</ul>
- 					</nav>
-				</div>
-			</div>
-		<!--  페이징 끝 -->
+						<div class="row">
+							<div class="col-md-5">
+							</div>
+							<div class="col-md-7">
+								<nav>
+			 						<ul class="pagination">
+									<!-- 이전 -->
+			 							<c:if test="${jmhPagingDto.startPage != 1}">
+			 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
+			 							</c:if>
+									<!-- 페이지 넘버링 -->
+			 							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
+											<li class="page-item
+			 									<c:if test="${jmhPagingDto.page == v }">
+			 										active
+			 									</c:if>
+			 									"
+			 								>
+			 									<a class="page-link" href="${v}">${v}</a>
+			 								</li>
+			 							</c:forEach>
+									<!-- 다음 -->
+			 							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
+			 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
+			 							</c:if>
+			 						</ul>
+			 					</nav>
+							</div>
+						</div>
+					<!--  페이징 끝 -->
 					</div>
 				</div>
 			</div>

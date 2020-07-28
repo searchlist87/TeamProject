@@ -108,8 +108,13 @@ public class JmhAdminController {
 	
 	// 이벤트 조회
 	@RequestMapping(value="/admin_event_list", method = RequestMethod.GET)
-	public String admin_eventList(Model model, String keyword, String searchType) throws Exception {
-		List<JmhEventVo> list = jmhEventService.adminEventList(keyword, searchType);
+	public String admin_eventList(Model model, JmhPagingDto jmhPagingDto) throws Exception {
+		jmhPagingDto.setPerPage(10);
+		jmhPagingDto.setPageInfo();
+		
+		int count = jmhEventService.adminEventCount(jmhPagingDto);
+		jmhPagingDto.setTotalCount(count);
+		List<JmhEventVo> list = jmhEventService.adminEventPagingList(jmhPagingDto);
 		model.addAttribute("list", list);
 		return "/admin/admin_event_list";
 	}
@@ -159,8 +164,27 @@ public class JmhAdminController {
 	// --------------- 1:1 문의 -----------------------
 	// 1:1 문의 리스트
 	@RequestMapping(value="/admin_questionList", method = RequestMethod.GET)
-	public String admin_question(Model model) throws Exception {
-		List<JmhBoardVo> jmhBoardVo = jmhMypageService.adminGetQuestionList();
+	public String admin_question(Model model, JmhPagingDto jmhPagingDto) throws Exception {
+		jmhPagingDto.setPerPage(10);
+		jmhPagingDto.setPageInfo();
+		
+		System.out.println("jmhPagingDto : " + jmhPagingDto);
+		
+		int count1 = jmhMypageService.adminGetQuestionCount();
+		jmhPagingDto.setTotalCount(count1);
+		String searchType = jmhPagingDto.getSearchType();
+		List<JmhBoardVo> jmhBoardVo;
+		
+		if(searchType == null || searchType.equals("")) {
+			jmhBoardVo = jmhMypageService.adminQuestionListPaging(jmhPagingDto);
+		} else if(searchType.equals("noReply")){
+			int count2 = jmhMypageService.adminQuestionNoReplyCount();
+			jmhPagingDto.setTotalCount(count2);
+			jmhBoardVo = jmhMypageService.adminQuestionNoReply(jmhPagingDto);
+		} else {
+			jmhBoardVo = jmhMypageService.adminQuestionListPaging(jmhPagingDto);
+		}
+		
 		int size = jmhBoardVo.size();
 		for(int i = 0; i < size; i ++) {
 			JmhBoardVo vo = jmhBoardVo.get(i);

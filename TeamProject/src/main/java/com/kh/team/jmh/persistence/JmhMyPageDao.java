@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.team.domain.JmhBoardDto;
 import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhMyPageVo;
+import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.domain.JmhReplyVo;
 
 public interface JmhMyPageDao {
@@ -58,4 +59,16 @@ public interface JmhMyPageDao {
 	
 	// 1:1 답변 삭제
 	public void adminDeleteReply(int board_code) throws Exception;
+	
+	// 1:1 문의 총 갯수 가져오기
+	public int adminGetQuestionCount() throws Exception;
+	
+	// 1:1 문의 페이징
+	public List<JmhBoardVo> adminQuestionListPaging(JmhPagingDto jmhPagingDto) throws Exception;
+	
+	// 1:1 문의 답변없는 총 갯수 가져오기
+	public int adminQuestionNoReplyCount() throws Exception;
+	
+	// 1:1 문의 답변없는 페이징
+	public List<JmhBoardVo> adminQuestionNoReply(JmhPagingDto jmhPagingDto) throws Exception;
 }
