@@ -27,6 +27,19 @@
 .link_hover:hover {
 	color:red;
 }
+
+.table td {
+	vertical-align:middle;
+}
+
+.table thead th {
+	vertical-align:middle;
+}
+
+
+/* .userTd { */
+/* 	vertical-align:middle; */
+/* } */
 </style>
 <script>
 $(function () {
@@ -66,26 +79,32 @@ $(function () {
 								<table class="table" style="text-align:center;height:auto;" id="movie_table">
 									<thead>
 										<tr>
-											<th style="width:70px;">순서</th>
+											<th style="width:10px;"></th>
 											<th style="width:70px;">아이디</th>
-											<th style="width:100px;">제목</th>
-											<th style="width:130px;">문의 작성일</th>
-											<th style="width:130px;">답변 상태</th>
+											<th style="width:150px;">이름</th>
+											<th style="width:70px;">성별</th>
+											<th style="width:150px;">이메일</th> 
+											<th style="width:70px;">생일</th>
+											<th style="width:100px;">휴대폰</th>
+											<th style="width:150px;">주소</th>
+											<th style="width:70px;">사용금액</th>
+											<th style="width:70px;">총 포인트</th>
 										</tr>
 									</thead>
 									<tbody style="vertical-align:middle;table-layout:fixed;">
 									<!--  1:1문의 조회 -->
-									<c:forEach items="${jmhBoardVo}" var="boardVo">
+									<c:forEach items="${jmhUserVo}" var="userVo">
 										<tr style="height:50px;">
-											<td style="vertical-align:middle;">${boardVo.board_code}</td>
-											<td>${boardVo.user_id}</td>
-											<td style="vertical-align:middle;"><a class="link_hover" href="/admin/admin_selectQuestion?board_code=${boardVo.board_code}&user_id=${boardVo.user_id}">${boardVo.board_title}</a></td>
-											<td style="vertical-align:middle;">${boardVo.board_date}</td>
-											<td style="vertical-align:middle;">
-											<c:choose>
-												<c:when test="${boardVo.count == 0}"><span>없음</span></c:when>
-												<c:otherwise><span style="color:red;">있음</span></c:otherwise>
-											</c:choose></td>
+											<td class="userTd">${userVo.user_num}</td>
+											<td class="userTd">${userVo.user_id}</td>
+											<td class="userTd">${userVo.user_name}</td>
+											<td class="userTd">${userVo.user_gender}</td>
+											<td class="userTd">${userVo.user_email}</td>
+											<td class="userTd">${userVo.user_birth}</td>
+											<td class="userTd">${userVo.user_phone}</td>
+											<td class="userTd">${userVo.user_address}</td>
+											<td class="userTd">${userVo.user_total_money}</td>
+											<td class="userTd">${userVo.user_point}</td>
 										</tr>
 									</c:forEach>
 									</tbody>

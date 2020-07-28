@@ -17,9 +17,11 @@ import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
 import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.domain.JmhReplyVo;
+import com.kh.team.domain.JmhUserVo;
 import com.kh.team.jmh.service.JmhEventService;
 import com.kh.team.jmh.service.JmhMovieService;
 import com.kh.team.jmh.service.JmhMypageService;
+import com.kh.team.jmh.service.JmhUserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,6 +35,9 @@ public class JmhAdminController {
 	
 	@Inject
 	private JmhMypageService jmhMypageService;
+	
+	@Inject
+	private JmhUserService jmhUserService;
 	
 	// admin page
 	@RequestMapping(value="/admin", method = RequestMethod.GET)
@@ -202,8 +207,9 @@ public class JmhAdminController {
 	// --------------- 고객관리 - 회원정보 조회 ----------
 	
 	@RequestMapping(value = "/admin_customerList", method = RequestMethod.GET)
-	public String admin_customer() throws Exception {
-		
+	public String admin_customer(Model model) throws Exception {
+		List<JmhUserVo> jmhUserVo = jmhUserService.getUserInfo();
+		model.addAttribute("jmhUserVo", jmhUserVo);
 		return "/admin/admin_customerList";
 	}
 	
