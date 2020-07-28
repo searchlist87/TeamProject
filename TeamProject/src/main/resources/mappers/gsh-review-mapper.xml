@@ -28,16 +28,16 @@
 	<!-- 리뷰 삭제하기 -->
 	<delete id="delete_review">
 		delete from tbl_review
-		where review_num = #{review_num}
+		where review_num = #{review_num} and user_id = #{user_id}
 	</delete>
 	
 	<!-- 2020/07/23 추가 -->
-	<!-- 리뷰 수정하기(리뷰 번호로 리뷰 내용, 리뷰 평점 수정) -->
+	<!-- 리뷰 수정하기(로그인한 유저만 리뷰 번호로 리뷰 내용, 리뷰 평점 수정) -->
 	<update id="update_review">
 		update tbl_review set
    	 	review_content = #{review_content},
    		review_score =  #{review_score}
-		where review_num = #{review_num}
+		where review_num = #{review_num} and user_id = #{user_id}
 	</update>
 	
 	<!-- 2020/07/22 추가 -->
@@ -53,6 +53,10 @@
 		select * from tbl_review
 		where movie_code = #{movie_code}
 		order by review_num desc
+	</select>
+	
+	<select id="">
+		select
 	</select>
 		
 </mapper>

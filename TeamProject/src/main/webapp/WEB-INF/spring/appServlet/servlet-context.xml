@@ -48,13 +48,13 @@
 	<beans:bean id="sghBookCheckInterceptor" class="com.kh.team.sgh.interceptor.SghBookCheckInterceptor"/>
 	
 	<interceptors>
-		<!-- 로그인 인터셉터 아직 설정 안함-->
+		<!-- 로그인 인터셉터 아직 설정 안함 -->
 		<interceptor>
 			<mapping path="/sgh/choiceSeat/**/*"/>
 			<beans:ref bean="sghLoginInterceptor"/>
 		</interceptor>
 		<!-- 어드민 인터셉터 -->
-		<interceptor>
+		<interceptor><!--  고수현씨 로그인 인터셉터 추가하기 -->
 			<mapping path="/sgh/admin/**/*"/>
 			<mapping path="/admin/**/*"/>
 			<beans:ref bean="sghAdminInterceptor"/>
@@ -66,8 +66,5 @@
 			<beans:ref bean="sghBookCheckInterceptor"/>
 		</interceptor>
 	</interceptors>
-	
-	
-	
 	
 </beans:beans>
