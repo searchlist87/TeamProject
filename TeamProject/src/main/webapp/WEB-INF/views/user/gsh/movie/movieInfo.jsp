@@ -60,6 +60,7 @@
 				// success값이 나온다면 다음 단계 진행
 				if (rData == "success") {
 					alert("등록 되었습니다.");
+					
 					$("#commentTable tr.clone_tr").remove();
 					// 리뷰 내용 남아있는걸 지우기
 					$("#review_content").val('');
@@ -298,6 +299,7 @@
 				<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
+						<c:if test="${not empty user_id}">
 						<div class="row" style="margin: 10px 0">
 							<div class="col-md-10">
 								<input type="text" class="form-control"
@@ -318,7 +320,7 @@
 									id="btnCommentWrite">작성</button>
 							</div>
 						</div>
-
+						</c:if>
 						<!-- 리뷰 목록 -->
 						<div class="row">
 							<div class="col-md-12">
