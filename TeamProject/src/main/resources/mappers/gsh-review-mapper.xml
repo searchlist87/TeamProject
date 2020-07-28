@@ -55,8 +55,12 @@
 		order by review_num desc
 	</select>
 	
-	<select id="">
-		select
+	<select id="averageReviewScore">
+		select 5/count(*)
+		from tbl_movie m, tbl_review r
+		where m.movie_code = r.movie_code
+		and m.movie_code = 'MC9'
+		order by review_num desc;
 	</select>
 		
 </mapper>
