@@ -27,43 +27,10 @@
 	// 페이지 시작 시 리뷰 목록 나타내기
 	$(function() {
 
-		function getReviewList() {
-			var url = "/gsh/movie/reviewList/${movieDto.movie_code}";
-			$.get(url, function(rData) {
-				// 			console.log(rData);
-				$.each(rData, function() {
-					var clone_tr = $("#commentTable > tbody > tr:eq(0)")
-							.clone();
-					// this - rData에 들어있는 각각의 객체
-					// 각 줄에 대한 값 -> this.
-					var review_num = this.review_num;
-					var user_id = this.user_id;
-					var review_content = this.review_content;
-					var review_score = this.review_score;
-					// 날짜 표시를 위한 dateString
-					// dateString을 쓰기 위해서 js/gsh_js/gsh_js.js를 추가함
-					var review_date = dateString(this.review_date);
-
-					clone_tr.find("td").eq(0).text(review_num).addClass(
-							"review_num");
-					clone_tr.find("td").eq(1).text(user_id);
-					clone_tr.find("td").eq(2).text(review_content);
-					clone_tr.find("td").eq(3).text(review_score);
-					clone_tr.find("td").eq(4).text(review_date);
-
-					// 숨어있는 줄을 복사해서
-					clone_tr.css("display", "");
-					// class를 부여하고 값을 변경해서 붙인다
-					clone_tr.addClass("clone_tr");
-					$("#commentTable > tbody").append(clone_tr);
-				});
-			});
-		}
-
 		$(".nice-select").remove();
 		$("#review_score").removeAttr("style");
 		$("#review_score_modify").removeAttr("style");
-
+		
 		// 댓글작성 버튼
 		$("#btnCommentWrite").click(function() {
 			var movie_code = "${movieDto.movie_code}";
@@ -81,7 +48,6 @@
 			var review_score = $("#review_score").val();
 
 			var sendData = {
-
 				"movie_code" : movie_code,
 				"review_content" : review_content,
 				"review_score" : review_score
@@ -104,21 +70,17 @@
 
 		// 댓글 수정 버튼
 		// 		$('.btnModify').click(function() {
-		$("#commentTable > tbody").on(
-				"click",
-				".btnModify",
-				function() {
-
-					var review_num = $(this).parent().parent().find("td").eq(0).text();
-					var review_content = $(this).parent().parent().find("td").eq(2).text();
-					var review_score = $(this).parent().parent().find("td").eq(3).text();
-
-					$("#review_num").val(review_num);
-
-					$("#modal_review_content").val(review_content);
-					$("#review_score_modify").val(review_score);
-					$("#modal-997340").trigger("click");
-				});
+		$("#commentTable > tbody").on("click", ".btnModify", function() {
+			var review_num = $(this).parent().parent().find("td").eq(0).text();
+			var review_content = $(this).parent().parent().find("td").eq(2).text();
+			var review_score = $(this).parent().parent().find("td").eq(3).text();
+	
+			$("#review_num").val(review_num);
+	
+			$("#modal_review_content").val(review_content);
+			$("#review_score_modify").val(review_score);
+			$("#modal-997340").trigger("click");
+		});
 
 		// 댓글 수정하고 저장하기
 		$("#btnModifyModal").click(function() {
@@ -126,7 +88,6 @@
 			var review_score = $("#review_score_modify option:selected").val();
 			var review_num = $("#review_num").val();
 			var sendData = {
-
 				"review_num" : review_num,
 				"review_content" : review_content,
 				"review_score" : review_score
@@ -134,11 +95,9 @@
 			var url = "/gsh/movie/reviewModify";
 			$.get(url, sendData, function(rData) {
 // 				저장 버튼 누를시 팝업창 띄워서 변경알려줌
-// 				console.log("수정 저장");
 				alert("내용이 변경 되었습니다.");
 // 				저장 버튼 클릭 시 새로고침
 				location.reload();
-				
 			});
 		});
 
@@ -149,24 +108,19 @@
 // 			삭제 버튼 기능 활성화 확인
 			console.log("삭제 버튼 클릭");
 			var that = $(this);
-// 			console.log(that);
 //			수정이랑 같은 경로를 불러옴
 			var review_num = $(this).parent().parent().find("td").eq(0).text();
 			console.log(review_num);
 			var url = "/gsh/movie/delete_review"
-				sendData = {
+		    var sendData = {
 						"review_num" :	review_num			
-				};
-				$.get(url, sendData, function(rData) {
-					console.log("rData:" + rData);
-					alert("삭제되었습니다.");
-					location.reload();
-				});
+			};
+			$.get(url, sendData, function(rData) {
+				console.log("rData:" + rData);
+				alert("삭제되었습니다.");
+				location.reload();
+			});
 		});
-
-		// 리뷰 목록 얻어오기
-		getReviewList();
-
 	});
 </script>
 <input type="hidden" id="review_num">
@@ -208,22 +162,19 @@
 											<div class="form-group">
 												<label>평점</label> <select id="review_score_modify"
 													name="review_score_modify">
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
+													<option value="1">1점</option>
+													<option value="2">2점</option>
+													<option value="3">3점</option>
+													<option value="4">4점</option>
+													<option value="5">5점</option>
 												</select>
 											</div>
-
 											<button type="button" class="btn btn-primary" id="btnModifyModal">저장</button>
 											<button type="button" class="btn btn-secondary"	data-dismiss="modal">닫기</button>
 										</form>
 									</div>
 								</div>
-
 								<!--  버튼(modal) 클릭 시 나타나는 수정 창 끝 -->
-
 							</div>
 						</div>
 					</div>
@@ -232,18 +183,13 @@
 		</div>
 		<!-- 모달 창 부분 끝 -->
 
-
-
-
-
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" style="margin-top: 50px; margin-bottom: 50px;"></div>
 			<div class="col-md-2"></div>
 		</div>
-
 		<!-- 영화 배너 이미지 끝 -->
-
+		
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
@@ -269,9 +215,10 @@
 								</tr>
 								<tr>
 									<th>평점</th>
-									<td><c:forEach begin="1" end="${movieDto.review_score}">
-									★
-								</c:forEach></td>
+									<td>dd${movieDto.review_score}</td>
+<%-- 									<td><c:forEach begin="1" end="${movieDto.review_score}"> --%>
+<!-- 									★ -->
+<%-- 								</c:forEach></td> --%>
 								</tr>
 								<tr>
 									<th>장르</th>
@@ -301,32 +248,26 @@
 			<div class="col-md-8">
 
 				<!-- 영화 스틸컷 시작 -->
-
 				<div class="row">
-					<%-- 			<c:forEach items="${subImageList}" var="str" varStatus="status"> --%>
-					<c:forEach begin="1" end="4" var="i">
-
+					<c:forEach begin="0" end="3" var="i">
+					
 						<div class="col-md-3" style="margin: 50px auto;">
-
-							<div class="span_strong">스틸컷 - ${i}</div>
+							<div class="span_strong">스틸컷 - ${i + 1}</div>
 							<img class="img-thumbnail"
 								src="/upload/displayFile?fileName=${subImageList[i]}"
 								alt="영화스틸컷">
 						</div>
 					</c:forEach>
 				</div>
-
 			</div>
 			<!-- 영화 스틸컷 끝 -->
+			
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
 					<!-- 영화 내용 시작 -->
-
 					<div class="movieContent " style="margin-bottom: 20px;">
-						<h2>시놉시스</h2>
-						<br>
-
+						<h2>시놉시스</h2><br/>
 						<div>
 							<span style="font-size : 20px;">${movieDto.movie_content}</span>
 						</div>
@@ -334,15 +275,12 @@
 					<!-- 영화 내용 끝 -->
 				</div>
 				<div class="col-md-2"></div>
-
-
-
-				<!-- 영화 예고편 시작 -->
 			</div>
+			
+			<!-- 영화 예고편 시작 -->
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-
 					<div
 						style="margin-top: 50px; margin-bottom: 50px; margin-left: 100px;">
 						<h2>예고편</h2>
@@ -355,20 +293,19 @@
 			</div>
 			<!-- 영화 예고편 끝 -->
 
-			<!-- 한줄 감상평 1 시작 -->
-
+			<!-- 리뷰 시작 -->
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-1"></div>
 					<div class="col-md-10">
-
 						<div class="row" style="margin: 10px 0">
 							<div class="col-md-10">
 								<input type="text" class="form-control"
-									placeholder="감상평을 남겨주세요." maxlength="60" id="review_content" />
+									placeholder="감상평을 남겨주세요. 최대 60자까지 가능합니다." maxlength="60" id="review_content" />
 							</div>
 							<div class="col-md-1">
-								<span>평점 : </span> <select id="review_score">
+								<span><strong>평점 : </strong></span>
+								<select id="review_score">
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -382,6 +319,7 @@
 							</div>
 						</div>
 
+						<!-- 리뷰 목록 -->
 						<div class="row">
 							<div class="col-md-12">
 								<table id="commentTable" class="table">
@@ -396,30 +334,30 @@
 											<th>삭제</th>
 										</tr>
 									</thead>
-
 									<tbody class="tbody">
-										<tr style="display: none;">
-											<td>1</td>
-											<td>2</td>
-											<td>3</td>
-											<td>4</td>
-											<td>5</td>
-											<td><button type="button" class="btn btn-sx btnModify">수정</button></td>
-											<td><button type="button" class="btn btn-sx btnDelete">삭제</button></td>
+										<c:forEach items="${reviewList}" var="GshReviewVo">
+										<tr>
+											<td>${GshReviewVo.review_num}</td>
+											<td>${GshReviewVo.user_id}</td>
+											<td>${GshReviewVo.review_content}</td>
+											<td>${GshReviewVo.review_score}</td>
+											<td>${GshReviewVo.review_date}</td>
+											<!-- 로그인한 아이디와 작성자 아이디가 다르면 버튼을 보여주지 않음 -->
+											<c:if test="${user_id == GshReviewVo.user_id}">
+												<td><button type="button" class="btn btn-sx btnModify">수정</button></td>
+												<td><button type="button" class="btn btn-sx btnDelete">삭제</button></td>
+											</c:if>
 										</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>
 						</div>
-
 					</div>
 					<div class="col-md-1"></div>
 				</div>
 			</div>
-
 			<!-- 한줄 감상평 1 끝 -->
-
-
 		</div>
 		<div class="col-md-2"></div>
 	</div>

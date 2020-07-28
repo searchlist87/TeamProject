@@ -41,19 +41,23 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	
 	// 리뷰 수정
 	@Override
-	public void update_review(String review_content,int review_score,int review_num) throws Exception {
+	public void update_review(String review_content,int review_score,int review_num,String user_id) throws Exception {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("review_content", review_content);
 		paraMap.put("review_score", review_score);
 		paraMap.put("review_num", review_num);
+		paraMap.put("user_id", user_id);
 		
 		sqlSession.update(NAMESPACE + "update_review", paraMap);
 	}
 	
 	// 리뷰 삭제
 	@Override
-	public void delete_review(int review_num) throws Exception {
-		sqlSession.delete(NAMESPACE + "delete_review", review_num);
+	public void delete_review(int review_num, String user_id) throws Exception {
+		Map<String, Object> paraMap = new HashMap<>();
+		paraMap.put("review_num", review_num);
+		paraMap.put("user_id", user_id);
+		sqlSession.delete(NAMESPACE + "delete_review", paraMap);
 	}
 
 	// 해당 영화 리뷰 조회
