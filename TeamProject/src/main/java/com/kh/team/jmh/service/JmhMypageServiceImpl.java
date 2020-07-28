@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.team.domain.JmhBoardDto;
 import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhMyPageVo;
+import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.domain.JmhReplyVo;
 import com.kh.team.jmh.persistence.JmhMyPageDao;
 
@@ -103,6 +104,30 @@ public class JmhMypageServiceImpl implements JmhMypageService {
 	@Override
 	public void adminModifyReply(JmhBoardDto jmhBoardDto) throws Exception {
 		jmhMypageDao.adminModifyReply(jmhBoardDto);
+	}
+
+	// 1:1 문의 총 갯수 가져오기
+	@Override
+	public int adminGetQuestionCount() throws Exception {
+		return jmhMypageDao.adminGetQuestionCount();
+	}
+
+	// 1:1 문의 페이징
+	@Override
+	public List<JmhBoardVo> adminQuestionListPaging(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhMypageDao.adminQuestionListPaging(jmhPagingDto);
+	}
+
+	// 1:1 문의 댓글없는 페이징
+	@Override
+	public List<JmhBoardVo> adminQuestionNoReply(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhMypageDao.adminQuestionNoReply(jmhPagingDto);
+	}
+
+	// 1:1 문의 답변없는 총 갯수 가져오기
+	@Override
+	public int adminQuestionNoReplyCount() throws Exception {
+		return jmhMypageDao.adminQuestionNoReplyCount();
 	}
 
 	

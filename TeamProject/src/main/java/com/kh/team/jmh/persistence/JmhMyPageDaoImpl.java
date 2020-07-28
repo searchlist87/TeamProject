@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.team.domain.JmhBoardDto;
 import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhMyPageVo;
+import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.domain.JmhReplyVo;
 
 @Repository
@@ -118,6 +119,30 @@ public class JmhMyPageDaoImpl implements JmhMyPageDao {
 	@Override
 	public void adminDeleteReply(int board_code) throws Exception {
 		sqlSession.delete(NAMESPACE + "adminDeleteReply" , board_code);
+	}
+
+	// 1:1 문의 총 갯수 가져오기
+	@Override
+	public int adminGetQuestionCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "adminGetQuestionCount");
+	}
+
+	// 1:1 문의 페이징
+	@Override
+	public List<JmhBoardVo> adminQuestionListPaging(JmhPagingDto jmhPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "adminQuestionListPaging", jmhPagingDto);
+	}
+
+	// 1:1 문의 댓글없는 페이징
+	@Override
+	public List<JmhBoardVo> adminQuestionNoReply(JmhPagingDto jmhPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "adminQuestionNoReply", jmhPagingDto);
+	}
+
+	// 1:1 문의 답변없는 총 갯수 가져오기
+	@Override
+	public int adminQuestionNoReplyCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "adminQuestionNoReplyCount");
 	}
 	
 	

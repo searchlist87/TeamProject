@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.team.domain.JmhBoardDto;
 import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhMyPageVo;
+import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.domain.JmhReplyVo;
 
 public interface JmhMypageService {
@@ -54,6 +55,18 @@ public interface JmhMypageService {
 	
 	// 1:1 답변 수정
 	public void adminModifyReply(JmhBoardDto jmhBoardDto) throws Exception;
+	
+	// 1:1 문의 총 갯수 가져오기
+	public int adminGetQuestionCount() throws Exception;
+	
+	// 1:1 문의 페이징
+	public List<JmhBoardVo> adminQuestionListPaging(JmhPagingDto jmhPagingDto) throws Exception;
+	
+	// 1:1 문의 답변없는 총 갯수 가져오기
+	public int adminQuestionNoReplyCount() throws Exception;
+	
+	// 1:1 문의 댓글없는 페이징
+	public List<JmhBoardVo> adminQuestionNoReply(JmhPagingDto jmhPagingDto) throws Exception;
 	
 
 
