@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.jmh-best3-mapper">
+
+<!-- 영화 베스트3 리스트 가져오기 -->
+<select id="getMovieBest3" resultType="JmhMovieBest3Vo">
+	select * from (select rownum rnum, b.* from (select t.movie_name, t.movie_main_image, t.movie_code  from (select movie_code, count(*) cnt from tbl_movie_buy_list group by movie_code having count(*) > 1 order by cnt desc) a, tbl_movie t
+					where a.movie_code = t.movie_code) b)
+	where rnum between 1 and 3
+</select>
+
+</mapper>

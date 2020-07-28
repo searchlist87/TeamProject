@@ -37,6 +37,9 @@
 <script>
 $(function() {
 	
+	$(".nice-select").remove();
+	$("#selectSearch").removeAttr("style");
+	
 	// 현재 시간 및 날짜
 	var date = new Date();
 	var year = date.getFullYear();
