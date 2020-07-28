@@ -1,6 +1,8 @@
 package com.kh.team.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,6 +22,7 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	// 리뷰 작성하기
 	@Override
 	public void write_review(GshReviewVo ghGshReviewVo) throws Exception {
+		System.out.println("write_review, ghGshReviewVo:"+ ghGshReviewVo);
 		sqlSession.insert(NAMESPACE + "write_review", ghGshReviewVo);
 	}
 	
@@ -38,15 +41,23 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	
 	// 리뷰 수정
 	@Override
-	public List<GshReviewVo> reviewModify() throws Exception {
-//		return sqlSession.update(NAMESPACE + "reviewModify");
-		return null;
+	public void update_review(String review_content,int review_score,int review_num,String user_id) throws Exception {
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("review_content", review_content);
+		paraMap.put("review_score", review_score);
+		paraMap.put("review_num", review_num);
+		paraMap.put("user_id", user_id);
+		
+		sqlSession.update(NAMESPACE + "update_review", paraMap);
 	}
 	
 	// 리뷰 삭제
 	@Override
-	public List<GshReviewVo> delete_review() throws Exception {
-		return null;
+	public void delete_review(int review_num, String user_id) throws Exception {
+		Map<String, Object> paraMap = new HashMap<>();
+		paraMap.put("review_num", review_num);
+		paraMap.put("user_id", user_id);
+		sqlSession.delete(NAMESPACE + "delete_review", paraMap);
 	}
 
 	// 해당 영화 리뷰 조회

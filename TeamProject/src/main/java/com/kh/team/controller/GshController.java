@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,99 +38,84 @@ public class GshController {
 	 // 영화 폼 Post
 	@RequestMapping(value = "/movieForm", method = RequestMethod.POST)
 	public String movieFormPOST(@RequestBody GshReviewVo gshReviewVo) throws Exception {
-		System.out.println("GshController, write_review, gshReviewVo:" + gshReviewVo);
+//		System.out.println("GshController, write_review, gshReviewVo:" + gshReviewVo);
 		gshReviewService.write_review(gshReviewVo);
 		return "success";
 	}
 	
 	// 리뷰 목록
 	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
-	public String review(Model model) throws Exception {
+	public String reviewList(Model model) throws Exception {
 		List<GshReviewVo> list = gshReviewService.select_reviewAll();
-		System.out.println("list:" + list);
+//		System.out.println("list:" + list);
 		model.addAttribute("list", list);
 		return "user/gsh/movie/movieInfo";
 	}
 	
-	
-	// 리뷰 작성 폼
-//	@RequestMapping(value = "/review_write_form", method = RequestMethod.GET)
-//	public String review_form() throws Exception {
-//		return "user/gsh/movie/review_write_form";
-//	}
-	
 	// 리뷰 내용 작성
 	@ResponseBody
 	@RequestMapping(value = "/write_review", method = RequestMethod.POST)
-	public String reviewContent(@RequestBody GshReviewVo gshReviewVo) throws Exception {
+	public String reviewContent(HttpSession session, GshReviewVo gshReviewVo) throws Exception {
 //		List<GshReviewVo> list = gshReviewService.write_review();
 //		System.out.println("list:" + list);
-		System.out.println("GshController, write_review, gshReviewVo:" + gshReviewVo);
+//		System.out.println("GshController, write_review, gshReviewVo:" + gshReviewVo);
+		String user_id = (String) session.getAttribute("user_id");
+		if (user_id == null || user_id.equals("")) {
+			return "fail";
+		}
+		gshReviewVo.setUser_id(user_id);
 		gshReviewService.write_review(gshReviewVo);
 		return "success";
 	}
 	
-	// 리뷰 내용 수정
-//	@RequestMapping(value = "/reviewContent", method = RequestMethod.GET)
-//	public String reviewModify() throws Exception {
-//		return "user/gsh/movie/reviewContent";
-//	}
+	// 리뷰 삭제 원본
+	// 삭제를 위해서 리뷰 번호를 ()에 넣어준다
+	@RequestMapping(value = "/delete_review", method = RequestMethod.GET)
+	public String reviewDelete(int review_num, HttpSession session) throws Exception {
+		String user_id = (String)session.getAttribute("user_id");
+		System.out.println("user_id :" + user_id);
+		System.out.println("review_num:" + review_num);
+		gshReviewService.delete_review(review_num, user_id);
+		return "user/gsh/movie/movieInfo";
+	}
 	
-	// 리뷰 삭제
-//	@RequestMapping(value = "/reviewContent", method = RequestMethod.POST)
-//	public String reviewDelete() throws Exception {
-//		return "user/gsh/movie/reviewList";
-//	}
-	
-	// 영화 리뷰 목차
+	// 영화 목록
 	@RequestMapping(value = "/movieView", method = RequestMethod.GET)
 	public String movieView(Model model) throws Exception {
 		List<GshMovieDto> list = gshMovieService.select_movieAll();
-		System.out.println(list);
+		
+//		System.out.println(list);
 		model.addAttribute("list", list);
 		return "user/gsh/movie/movieView";
 	}
 	
 //	 영화 상세 정보 보기
 	@RequestMapping(value = "/movieInfo", method = RequestMethod.GET)
-	public String movieInfo(String movie_code, ModelMap model) throws Exception {
-//		System.out.println("movie_code:" + movie_code);
-		List<GshMovieDto> list = gshMovieService.select_movieAll();
-		System.out.println("list:" + list);
+	public String movieInfo(HttpSession session, String movie_code, ModelMap model) throws Exception {
 		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
+		// 스틸컷 파일명 목록
 		List<String> subImageList = gshMovieService.selectMovieSubImage(movie_code);
 		List<GshReviewVo> reviewList = gshReviewService.selectReviewByCode(movie_code);
-//		System.out.println("subImageList:" + subImageList);
-//		System.out.println("movieDto :" + movieDto);
-		model.addAttribute("list", list);
 		model.addAttribute("movieDto", movieDto);
 		model.addAttribute("subImageList", subImageList);
 		model.addAttribute("reviewList", reviewList);
 		return "user/gsh/movie/movieInfo";
 	}
 	
-//	 영화 상세 정보 보기
-	@RequestMapping(value = "/movieAjax", method = RequestMethod.GET)
+	// 리뷰 목록
+	@RequestMapping(value = "/reviewList/{movie_code}", method = RequestMethod.GET)
 	@ResponseBody
-	public GshReviewVo movieAjax(HttpSession session, Model model, GshReviewVo gshReviewVo) throws Exception {
-		String movie_code = gshReviewVo.getMovie_code();
-		System.out.println("movie_code:" + movie_code);
-//		System.out.println("============== GshController, movieAjax ================");
+	public List<GshReviewVo> reviewList(@PathVariable("movie_code") String movie_code) throws Exception {
+	List<GshReviewVo> reviewList = gshReviewService.selectReviewByCode(movie_code);
+	return reviewList;
+	}
+	
+//	 댓글 수정
+	@ResponseBody
+	@RequestMapping(value = "/reviewModify", method = RequestMethod.GET)
+	public void reviewModify(HttpSession session, Model model, int review_num, String review_content, int review_score) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
-		gshReviewVo.setUser_id(user_id); // null -> user01
-		System.out.println("user_id: "+ user_id);
-//		System.out.println("review_content"+gshReviewVo.getReview_content());
-//		System.out.println("review_score"+gshReviewVo.getReview_score());
-		gshReviewService.write_review(gshReviewVo);
-//		System.out.println("gshReviewVo :" + gshReviewVo);
-//		System.out.println("movie_code:" + movie_code);
-		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
-		List<String> subImageList = gshMovieService.selectMovieSubImage(movie_code);
-//		System.out.println("subImageList:" + subImageList);
-//		System.out.println("movieDto :" + movieDto);
-		model.addAttribute("movieDto", movieDto);
-		model.addAttribute("subImageList", subImageList);
-		return gshReviewVo;
+		gshReviewService.update_review(review_content, review_score, review_num, user_id);
 	}
 	
 	
@@ -142,12 +128,12 @@ public class GshController {
 	}
 	
 	// 상영작 리스트
-	@ResponseBody
-	@RequestMapping(value = "/commentListAjax", method = RequestMethod.GET)
-	public String commentListAjax(GshReviewVo gshReviewVo) throws Exception {
-		System.out.println("GshReviewVo gshReviewVo :" + gshReviewVo);
-		return "success";	
-	}
+//	@ResponseBody
+//	@RequestMapping(value = "/commentListAjax", method = RequestMethod.GET)
+//	public String commentListAjax(GshReviewVo gshReviewVo) throws Exception {
+//		System.out.println("GshReviewVo gshReviewVo :" + gshReviewVo);
+//		return "success";	
+//	}
 		
 	
 }

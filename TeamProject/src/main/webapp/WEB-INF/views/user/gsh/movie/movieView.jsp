@@ -33,17 +33,15 @@
 <%@include file="/WEB-INF/views/include/header.jsp" %>
 
 	<!-- 영화 메인 사진 시작 -->
-	<div class="foodMain" style="background-color:black">
-		<div style="background-color:black" class="container">
-			<div class="row">
-				<div class="col-12" style="text-align: center;">
-					<div>
-						<img src="/resources/images/gsh/peninsula.jpg" style="height:300px; width:100%;"/>
-					</div>
-				</div>
+	<section class="hero-slider">
+		<!-- Single Slider -->
+		<div style="background-color:black;">
+			<div>
+			<img src="/resources/images/main2.jpg" style="height:100%; width:100%;"/>  
 			</div>
 		</div>
-	</div>
+		<!--/ End Single Slider -->
+	</section>
 	<!-- 영화 메인 사진 끝 -->
 	
 		<div></div>
@@ -84,7 +82,7 @@
 				<c:forEach items="${list}" var="vo">
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
 						<a href="/gsh/movie/movieInfo?movie_code=${vo.movie_code}">
-								<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:100px;height:auto;"></span>
+							<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:184px;height:262.84px;"></span><br>
 							<span><img src="/resources/images/jmh/movie_grade_${vo.movie_grade}.png" width="30">${vo.movie_name}</span>
 						
 						</a>

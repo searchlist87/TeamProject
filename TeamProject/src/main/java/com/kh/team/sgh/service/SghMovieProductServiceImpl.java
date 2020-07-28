@@ -5,8 +5,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.domain.SghMovieProductVo;
+import com.kh.team.domain.SghPaymentVo;
 import com.kh.team.domain.SghSeatCheckVo;
 import com.kh.team.sgh.persistence.SghMovieProductDao;
 
@@ -27,5 +29,4 @@ public class SghMovieProductServiceImpl implements SghMovieProductService {
 	public List<SghSeatCheckVo> getSeatCheck(String movie_time_code) throws Exception {
 		return sghMovieProductDao.getSeatCheck(movie_time_code);
 	}
-
 }

@@ -17,6 +17,13 @@ $(function() {
 	if(result == "false") {
 		console.log("찍힘");
 		alert("잘못된 등급의 접근 입니다.");
+		return false;
+	}
+	
+	var movie_payment_result = "${movie_payment_result}";
+	if(movie_payment_result == "true") {
+		alert("구매해주셔서 감사합니다.");
+		return false;
 	}
 	
 	//회원 탈퇴 처리 후 결과
@@ -34,9 +41,6 @@ $(function() {
 		<div style="background-color:black;">
 			<div>
 			<img src="/resources/images/main2.jpg" style="height:100%; width:100%;"/>  
-<!-- 				<div class="row no-gutters"> --> 
-<!-- 					<div class="col-lg-9 offset-lg-3 col-12"></div> -->
-<!-- 				</div> -->
 			</div>
 		</div>
 		<!--/ End Single Slider -->

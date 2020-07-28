@@ -32,4 +32,117 @@
 	where user_id = #{user_id}
 </update>
 	
+<!--  1:1 문의 등록하기 -->
+<insert id="registerQuestion">
+	insert into tbl_board(board_code, board_category_code, user_id, board_title, board_content)
+	values(seq_board_code.nextval,'BCC02', #{user_id}, #{board_title}, #{board_content})
+</insert>
+
+<!-- 1:1 문의 리스트 -->
+<select id="getQuestionList" resultType="JmhBoardVo">
+	select * from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02'
+	order by board_code desc
+</select>
+
+<!--  1:1 문의 상세내용 보기 -->
+<select id="selectQuestion" resultType="JmhBoardVo">
+	select * from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</select>
+
+<!--  1:1 문의 수정하기 -->
+<update id="modifyQuestion">
+	update tbl_board set
+		board_title = #{board_title},
+		board_content = #{board_content}
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</update>
+
+<!--  1:1 문의 삭제하기 -->
+<delete id="deleteQuestion">
+	delete from tbl_board
+	where user_id = #{user_id} and board_category_code = 'BCC02' and board_code = #{board_code}
+</delete>
+
+<!--  1:1 문의 답변상태 체크 -->
+<select id="checkReply" resultType="int">
+	select count(*) cnt from tbl_reply
+	where board_code = #{board_code}
+</select>
+
+<!--  1:1 문의 답변 가져오기 -->
+<select id="selectReply" resultType="JmhReplyVo">
+	select * from tbl_reply
+	where board_code = #{board_code}
+</select>
+
+
+<!--  admin  -->
+<!--  1:1 문의 리스트 가져오기 -->
+<select id="adminGetQuestionList" resultType="JmhBoardVo">
+	select * from tbl_board
+	where board_category_code = 'BCC02'
+	order by board_code desc
+</select>
+
+<!--  1:1 문의 답변 달아주기 -->
+<insert id="adminRegisterReply">
+	insert into tbl_reply(REPLY_CODE, BOARD_CODE, REPLY_CONTENT)
+	values (seq_reply_code.nextval, #{board_code}, #{reply_content}) 
+</insert>
+
+<!--  1:1 문의 답변 수정하기 -->
+<update id="adminModifyReply">
+	update tbl_reply set
+		reply_content = #{reply_content}
+	where board_code = #{board_code}
+</update>
+
+<!--  1:1 문의 답변 삭제하기 (트랜잭션) -->
+<delete id="adminDeleteReply">
+	delete from tbl_reply
+	where board_code = #{board_code}
+</delete>
+
+<!--  1:1 문의 총 갯수 가져오기 -->
+<select id="adminGetQuestionCount" resultType="int">
+	select count(*) from tbl_board
+</select>
+
+<!--  1:1 문의 리스트 페이징 -->
+<select id="adminQuestionListPaging" resultType="JmhBoardVo">
+	select * from (
+		select rownum rnum, a.* from (
+			select * from tbl_board 
+			<include refid="searchType"></include>
+			order by board_code desc)
+		 a)
+	where rnum between #{startRow} and #{endRow}	
+</select>
+<!--  1:1 문의 댓글 없는 페이징 -->
+<select id="adminQuestionNoReply" resultType="JmhBoardVo">
+	select * from (select rownum rnum, a.*
+					from tbl_board a left outer join tbl_reply b on (a.board_code = b.board_code)
+					where b.board_code is null
+					order by a.board_code desc)
+	where rnum between #{startRow} and #{endRow}
+</select>
+<!--  1:1 문의 댓글없는 갯수 -->
+<select id="adminQuestionNoReplyCount" resultType="int">
+	select count(*)
+	from tbl_board a left outer join tbl_reply b on (a.board_code = b.board_code)
+	where b.board_code is null
+	order by a.board_code desc
+</select>
+
+<sql id="searchType">
+	<if test="searchType != null">
+		<choose>
+			<when test="searchType == 'user_id'">
+			where user_id like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+	</if>
+</sql>
 </mapper>

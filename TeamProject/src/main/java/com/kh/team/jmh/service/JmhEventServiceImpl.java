@@ -29,12 +29,6 @@ public class JmhEventServiceImpl implements JmhEventService {
 		return jmhEventDao.eventList(keyword, searchType, event_date);
 	}
 	
-	// [admin]이벤트 조회
-	@Override
-	public List<JmhEventVo> adminEventList(String keyword, String searchType) throws Exception {
-		return jmhEventDao.adminEventList(keyword, searchType);
-	}
-	
 	// 이벤트 수정
 	@Override
 	public void eventModify(JmhEventVo jmhEventVo) throws Exception {
@@ -82,6 +76,28 @@ public class JmhEventServiceImpl implements JmhEventService {
 	@Override
 	public List<JmhEventVo> pastEventPagingList(JmhPagingDto jmhPagingDto) throws Exception {
 		return jmhEventDao.pastEventPagingList(jmhPagingDto);
+	}
+	
+	// ----------------------- 사용자 끝 -----------------------------
+	
+	// ----------------------- admin ---------------------------------
+		
+	// [admin]이벤트 조회
+	@Override
+	public List<JmhEventVo> adminEventList(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhEventDao.adminEventList(jmhPagingDto);
+	}
+
+	// [admin] 이벤트 총 갯수
+	@Override
+	public int adminEventCount(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhEventDao.adminEventCount(jmhPagingDto);
+	}
+
+	// [admin] 이벤트 페이징
+	@Override
+	public List<JmhEventVo> adminEventPagingList(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhEventDao.adminEventPagingList(jmhPagingDto);
 	}
 
 	

@@ -14,8 +14,7 @@ public interface JmhEventDao {
 	// 이벤트 조회
 	public List<JmhEventVo> eventList(String keyword, String searchType, Date event_date) throws Exception;
 	
-	// [admin] 이벤트 조회
-	public List<JmhEventVo> adminEventList(String keyword, String searchType) throws Exception;
+	
 		
 	// 이벤트 수정
 	public void eventModify(JmhEventVo jmhEventVo) throws Exception;
@@ -39,9 +38,23 @@ public interface JmhEventDao {
 	// 이벤트 페이징
 	public List<JmhEventVo> eventPagingList(JmhPagingDto jmhPagingDto) throws Exception;
 	
-	// [admin] 이벤트 총 갯수 가져오기
 	
 	// theater페이지 event 3개 가져오기
 	public List<JmhEventVo> selectEventThree(Date event_date) throws Exception;
+	
+	
+	// ---------------- 사용자 끝 -------------------------
+	
+	// ------------------- admin -------------------------------
+	
+	
+	// [admin] 이벤트 조회
+	public List<JmhEventVo> adminEventList(JmhPagingDto jmhPagingDto) throws Exception;
+		
+	// [admin] 이벤트 갯수 가져오기
+	public int adminEventCount(JmhPagingDto jmhPagingDto) throws Exception;
+	
+	// [admin] 이벤트 페이징
+	public List<JmhEventVo> adminEventPagingList(JmhPagingDto jmhPagingDto) throws Exception;
 
 }

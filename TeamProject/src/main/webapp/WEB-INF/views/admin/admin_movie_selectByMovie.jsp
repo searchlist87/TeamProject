@@ -140,8 +140,8 @@ $(function () {
 											<video src="/upload/displayFile?fileName=${jmhMovieVo.movie_preview}" width="300px;" controls></video>
 										</div>
 									</div>
-									<a href="/admin/admin_movie_modify?movie_code=${jmhMovieVo.movie_code}" role="button" class="btn">수정</a>
-									<a href="/admin/admin_movie_list" role="button" class="btn">목록</a>
+									<a href="/admin/admin_movie_modify?movie_code=${jmhMovieVo.movie_code}" role="button" class="btn" style="color:#fff;">수정</a>
+									<a href="/admin/admin_movie_list" role="button" class="btn" style="color:#fff;">목록</a>
 								</form>
 							</div>
 						</div>

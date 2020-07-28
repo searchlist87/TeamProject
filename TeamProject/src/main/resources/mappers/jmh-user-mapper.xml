@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.jmh-user-mapper">
+<!--  회원 정보 가져오기 -->
+<select id="getUserInfo" resultType="JmhUserVo">
+	select * from tbl_user
+	order by user_num desc
+</select>
+
+</mapper>
