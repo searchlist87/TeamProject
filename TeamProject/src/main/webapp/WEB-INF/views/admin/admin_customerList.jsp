@@ -36,10 +36,6 @@
 	vertical-align:middle;
 }
 
-
-/* .userTd { */
-/* 	vertical-align:middle; */
-/* } */
 </style>
 <script>
 $(function () {
