@@ -41,9 +41,6 @@ $(function() {
 		<div style="background-color:black;">
 			<div>
 			<img src="/resources/images/main2.jpg" style="height:100%; width:100%;"/>  
-<!-- 				<div class="row no-gutters"> --> 
-<!-- 					<div class="col-lg-9 offset-lg-3 col-12"></div> -->
-<!-- 				</div> -->
 			</div>
 		</div>
 		<!--/ End Single Slider -->

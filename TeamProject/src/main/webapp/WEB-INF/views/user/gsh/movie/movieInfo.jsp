@@ -249,9 +249,10 @@
 
 				<!-- 영화 스틸컷 시작 -->
 				<div class="row">
-					<c:forEach begin="1" end="4" var="i">
+					<c:forEach begin="0" end="3" var="i">
+					
 						<div class="col-md-3" style="margin: 50px auto;">
-							<div class="span_strong">스틸컷 - ${i}</div>
+							<div class="span_strong">스틸컷 - ${i + 1}</div>
 							<img class="img-thumbnail"
 								src="/upload/displayFile?fileName=${subImageList[i]}"
 								alt="영화스틸컷">
