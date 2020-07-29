@@ -3,6 +3,7 @@ package com.kh.team.kdh.persistence;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.team.domain.KdhAdminFoodBuyListDto;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
@@ -69,4 +70,7 @@ public interface KdhFoodDao {
 	
 	// 상품 등록하기
 	public void insertFood(KdhFoodVo foodVo) throws Exception;
+	
+	// 상품 구매 내역 가져오기
+	public List<KdhAdminFoodBuyListDto> selectBuyFoodList() throws Exception;
 }
