@@ -21,7 +21,9 @@
 	}
 </style>
 <!-- Header -->
-<%@include file="/WEB-INF/views/include/bootstrap.jsp" %>
+<script src="/resources/js/jquery.min.js"></script>
+<script src="/resources/js/jquery-migrate-3.0.0.js"></script>
+<script src="/resources/js/jquery-ui.min.js"></script>
 <script>
 $(function() {
 	
