@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.KdhPointCodeVo;
 import com.kh.team.domain.KdhPointVo;
+import com.kh.team.domain.KdhUserVo;
 
 @Repository
 public class KdhPointDaoImpl implements KdhPointDao {
@@ -59,11 +60,10 @@ public class KdhPointDaoImpl implements KdhPointDao {
 	}
 
 	@Override
-	public void updateUserPoint(int user_point, String user_id) throws Exception {
-		System.out.println("user_point:" + user_point);
-		System.out.println("user_id:" + user_id);
+	public void updateUserPoint(int user_point, int used_Point, String user_id) throws Exception {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
 		paraMap.put("user_point", user_point);
+		paraMap.put("used_Point", used_Point);
 		paraMap.put("user_id", user_id);
 		sqlSession.update(NAMESPACE + "updateUserPoint", paraMap);
 	}
@@ -71,6 +71,11 @@ public class KdhPointDaoImpl implements KdhPointDao {
 	@Override
 	public KdhPointCodeVo selectFoodPercent() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "selectFoodPercent");
+	}
+
+	@Override
+	public int selectPointByUserId(String user_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectPointByUserId", user_id);
 	}
 
 }

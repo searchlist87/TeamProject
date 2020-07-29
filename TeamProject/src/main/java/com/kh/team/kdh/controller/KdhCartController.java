@@ -50,7 +50,7 @@ public class KdhCartController {
 	public String deleteCart(int food_cart_num, HttpSession session) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
 		cartService.deleteCart(food_cart_num);
-		return "redirect:/cart/displayCart?user_id=" + user_id;
+		return "redirect:/kdh/cart/displayCart?user_id=" + user_id;
 	}
 	
 	// 장바구니 수정 (ajax -> url -> user_id,food_num)

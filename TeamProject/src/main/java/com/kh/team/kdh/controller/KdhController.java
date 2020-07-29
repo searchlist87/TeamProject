@@ -142,6 +142,7 @@ public class KdhController {
 		int food_count = foodVo.getFood_count();
 		
 		model.addAttribute("food_count", food_count);
+		model.addAttribute("buy_food_num", buy_food_num);
 		model.addAttribute("food_image", food_image);
 		model.addAttribute("food_name", food_name);
 		model.addAttribute("food_price", food_price);
@@ -172,19 +173,29 @@ public class KdhController {
 
 	// 결제완료
 	@RequestMapping(value = "/buyView", method = RequestMethod.GET)
-	public String buyView(HttpSession session, int user_point, int food_buy_price) throws Exception {
+	public String buyView() throws Exception {
+		return "user/kdh/kdh_food/kdh_buy_view";
+	}
+	
+	// 결제완료
+	@RequestMapping(value = "/buyView", method = RequestMethod.POST)
+	public String buyViewPOST(HttpSession session, int used_Point, int food_buy_price, int food_buy_count, int buy_food_num) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
-		List<KdhPointVo> pointVo = pointService.selectPointById(user_id);
+//		List<KdhPointVo> pointVo = pointService.selectPointById(user_id);
 		KdhPointCodeVo codeVo = pointService.selectFoodPercent();
 		int point_percent = codeVo.getPoint_percent();
+		KdhFoodVo foodVo = foodService.selectFoodbyNum(buy_food_num);
+		int food_count = foodVo.getFood_count();
+		foodService.updateFoodCount(food_count, food_buy_count, buy_food_num);
 		
 		pointService.insertPointInData(user_id, food_buy_price, point_percent);
 		int totalPoint = pointService.selectTotalPoint(user_id);
 		pointService.updateTotalUserPoint(totalPoint, user_id);
 		
-		pointService.updateTotalUserPoint(user_point, user_id);
-		
-		return "user/kdh/kdh_food/kdh_buy_view";
+		if (totalPoint != 0) {
+		pointService.updateUserPoint(totalPoint, used_Point, user_id);
+		}
+		return "redirect:/kdh/food/buyView";
 	}
 	
 	@RequestMapping(value = "/buyFoodNone", method = RequestMethod.GET)

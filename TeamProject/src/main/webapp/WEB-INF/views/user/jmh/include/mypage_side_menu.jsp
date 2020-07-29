@@ -13,7 +13,7 @@
 			<h5># 내 구매 내역</h5>
 			<ul class="subul">
 				<li><a href="/sgh/myPage/movieBuyForm">영화 구매 내역</a></li>
-				<li><a href="/mypage/buyFoodList">푸드 구매 내역</a></li>
+				<li><a href="/kdh/mypage/buyFoodList">푸드 구매 내역</a></li>
 			</ul>
 		</div>
 		<div class="single-info">

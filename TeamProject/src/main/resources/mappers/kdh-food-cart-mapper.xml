@@ -65,4 +65,6 @@
 	delete tbl_food_cart
 	where food_num =  #{food_num} 
 </delete>
+
+<!-- 구매 내역  -->
 </mapper>

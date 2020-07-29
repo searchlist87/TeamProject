@@ -48,8 +48,14 @@
 <!-- 포인트 쓴만큼 차감 -->
 <update id="updateUserPoint">
 	UPDATE tbl_user
-	SET user_point = user_point-#{user_point}
-	where point_num = #{point_num} and user_id = #{user_id}
+	SET user_point = #{user_point}-#{used_Point}
+	where user_id = #{user_id}
 </update>
+
+<!-- 유저 포인트 찾기 -->
+<select id="selectPointByUserId" resultType="int">
+	select point from tbl_point
+	where user_id = #{user_id}
+</select>
 
 </mapper>
