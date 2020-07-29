@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -41,17 +43,20 @@
 											<tr>
 												<th>구매번호</th>
 												<th>상품명</th>
-												<th>금액</th>
-												<th></th>
+												<th>상품금액</th>
+												<th>구매수량</th>
+												<th>구매일</th>
 											</tr>
 										</thead>
 										<tbody>
+											<c:forEach items="${buyFoodList}" var="buyFoodList">
 											<tr>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td>${buyFoodList.food_name}</td>
+												<td><fmt:formatNumber pattern="#,###,###" value="${buyFoodList.food_buy_total_price}"></fmt:formatNumber>원</td>
+												<td>${buyFoodList.food_buy_count}</td>
+												<td>${buyFoodList.food_buy_date}</td>
 											</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
