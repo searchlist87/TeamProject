@@ -153,4 +153,13 @@ where food_code = '300'
 	where fl.food_num = f.food_num
     order by food_buy_list_num desc
 </select>
+
+<!-- 푸드 구매하면 구매한 갯수만큼 푸드 테이블 업데이트 -->
+<update id="updateFoodCount">
+	update tbl_food set
+	food_count = #{food_count}-#{food_buy_count}
+	where food_num = #{buy_food_num}
+</update>
+
+
 </mapper>

@@ -122,4 +122,10 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 		return foodDao.selectBuyFoodList();
 	}
 
+	@Override
+	public void updateFoodCount(int food_count, int food_buy_count, int buy_food_num) throws Exception {
+		foodDao.updateFoodCount(food_count, food_buy_count, buy_food_num);
+	}
+
+
 }

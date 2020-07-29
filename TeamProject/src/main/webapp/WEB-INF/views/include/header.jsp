@@ -70,7 +70,7 @@ $(function() {
 							<li><i class="ti-user"></i> <a href="#">고객센터</a></li>
 							<li><div class="sinlge-bar shopping">
 							<i class="ti-bag"></i>
-							<a href="/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon" style="position:relative;">
+							<a href="/kdh/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon" style="position:relative;">
 							<span class="total-count">2</span></a>
 							</div>
 							</li>

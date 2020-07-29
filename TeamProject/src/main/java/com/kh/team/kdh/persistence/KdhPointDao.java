@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.team.domain.KdhPointCodeVo;
 import com.kh.team.domain.KdhPointVo;
+import com.kh.team.domain.KdhUserVo;
 
 public interface KdhPointDao {
 	
@@ -26,6 +27,9 @@ public interface KdhPointDao {
 	public void updateTotalUserPoint(int user_point, String user_id) throws Exception;
 	
 	// 포인트 쓴만큼 차감
-	public void updateUserPoint(int user_point, String user_id) throws Exception;
+	public void updateUserPoint(int user_point, int used_Point, String user_id) throws Exception;
+	
+	// 유저 포인트 찾기
+	public int selectPointByUserId(String user_id) throws Exception;
 	
 }

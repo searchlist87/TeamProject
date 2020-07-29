@@ -1,6 +1,8 @@
 package com.kh.team.kdh.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -123,6 +125,15 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	@Override
 	public List<KdhAdminFoodBuyListDto> selectBuyFoodList() throws Exception {
 		return sqlSession.selectList(NAMESPACE + "selectBuyFoodList");
+	}
+
+	@Override
+	public void updateFoodCount(int food_count,int food_buy_count, int buy_food_num) throws Exception {
+		Map<String, Object> paraMap = new HashMap<>();
+		paraMap.put("food_count", food_count);
+		paraMap.put("food_buy_count", food_buy_count);
+		paraMap.put("buy_food_num", buy_food_num);
+		sqlSession.update(NAMESPACE + "updateFoodCount", paraMap);
 	}
 
 
