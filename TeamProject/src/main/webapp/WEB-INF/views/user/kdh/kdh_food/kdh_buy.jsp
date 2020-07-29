@@ -286,7 +286,7 @@ $(function() {
 						</thead>
 						<tbody id="Ttbody">
 							<tr id="food_tr">
-								<td class="image"><img src="/resources/images/kdh/${food_image}" alt="${food_image}이미지"></td>
+								<td class="image"><img src="/kdh/upload/displayFile?fileName=${food_image}" alt="${food_image}이미지"></td>
 								<td class="product-des" data-title="Description">
 									<p class="product-name"><a href="#">${food_name}</a></p>
 								</td>

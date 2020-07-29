@@ -81,7 +81,7 @@ $(function() {
 									<c:forEach items="${listLatestFood}" var="LatestFood">
 									<div class="single-post first">
 										<div class="image">
-											<img src="/resources/images/kdh/${LatestFood.food_image}" alt="${LatestFood.food_image}">
+											<img src="/kdh/upload/displayFile?fileName=${LatestFood.food_image}" alt="${LatestFood.food_image}">
 										</div>
 										<div class="content">
 											<h5><a href="#">${LatestFood.food_name}</a></h5>
@@ -119,7 +119,7 @@ $(function() {
 								<div class="single-product">
 									<div class="product-img">
 										<a href="/kdh/food/innerfood?food_num=${foodVo.food_num}">
-											<img id="foodImg" class="default-img" data-food-num="${foodVo.food_num}" src="/resources/images/kdh/${foodVo.food_image}" style="height:300px" alt="${foodVo.food_image}">
+											<img id="foodImg" class="default-img" data-food-num="${foodVo.food_num}" src="/kdh/upload/displayFile?fileName=${foodVo.food_image}" style="height:300px" alt="${foodVo.food_image}">
 										<!-- <span class="out-of-stock">Hot</span> -->
 										</a>
 									</div>
