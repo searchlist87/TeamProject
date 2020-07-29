@@ -12,7 +12,7 @@
 	border : 1px dotted #ccc;
 }
 </style>
-<script src="../../../include/bootstrap.jsp"></script>
+<%@ include file="/WEB-INF/views/include/bootstrap.jsp"%>
 <script>
 $(function () {
 	var mMsg = "${modifyMsg}";
