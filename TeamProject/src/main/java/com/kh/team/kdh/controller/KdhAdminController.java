@@ -94,12 +94,14 @@ public class KdhAdminController {
 	// 푸드 상품관리_상품등록
 	@RequestMapping(value = "/admin_food_register", method = RequestMethod.POST)
 	public String admin_food_registerPOST(KdhFoodVo foodVo) throws Exception {
-//		System.out.println("foodVo:" + foodVo);
 		foodService.insertFood(foodVo);
 		return "redirect:/kdh/admin/admin_food_list";
 	}
 	
-	
-		
+	// 푸드 푸드내역 조회
+	@RequestMapping(value = "/admin_food_buy_list", method = RequestMethod.GET)
+	public String admin_food_buy_list() throws Exception {
+		return "user/kdh/kdh_admin/kdh_admin_food_buy_list";
+	}
 	
 }
