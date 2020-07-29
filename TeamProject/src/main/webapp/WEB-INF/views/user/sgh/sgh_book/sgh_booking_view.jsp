@@ -64,7 +64,7 @@ $(function() {
 		$(this).css("border", "2px solid");
 	});
 	
-	// 상영 지역
+	// 상영 영화관
 	$("#screeningArea").on("click", ".areaChoice", function(e) {
 		e.preventDefault();
 		var a_areaName = $(this).attr("data-a-areaName");
@@ -74,6 +74,9 @@ $(function() {
 		var screenClone = $("#screeningArea").clone().addClass("screeningAreaClone");
 		screenClone.find(".title").text("상영 영화관");
 		screenClone.find("li").remove();
+		screenClone.attr("class", "col-lg-3 col-md-2 col-2 screeningAreaClone");
+		screenClone.css("width", "300");
+		
 		
 		$.each(theaterArr, function() {
 			var t_areaName = $(this).attr("data-t-areaName");
@@ -374,7 +377,8 @@ $(function() {
 	</div>
 </div>
 		<!-- Product Style -->
-		<section id="section" class="product-area shop-sidebar shop section">
+		<section id="section" class="product-area shop-sidebar shop section" style="padding-top: 50px;">
+			<div><h1 style="margin-left: 190px; margin-bottom: 30px;">영화 예매</h1></div>
 			<div class="container">
 				<div class="row">
 					<div id="screeningArea" class="col-lg-2 col-md-2 col-2">

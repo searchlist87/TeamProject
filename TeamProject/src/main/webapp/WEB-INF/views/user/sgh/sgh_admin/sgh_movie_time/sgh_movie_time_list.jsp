@@ -16,6 +16,7 @@
 <script src="/resources/js/sgh_js/timestmap_change.js"></script>
 <script>
 $(function() {
+	
 	$(".start_time").each(function() {
 		var start_time = $(this).text();
 		var start_time_change = timestmap_change(start_time);

@@ -7,18 +7,29 @@
 
 	<!-- 상영관 목록 가져오기 -->
 	<select id="getScreenList" resultType="SghMovieScreenVo">
-		select * from tbl_movie_screen where theater_code = #{theater_code}
+		select * from tbl_movie_screen where theater_code = #{theater_code} and screen_state = 'Y'
 	</select>
+	
+	<!-- 상영관 삭제하기 -->
+	<update id="stateDeleteScreen">
+		update tbl_movie_screen set
+			screen_state = 'N',
+			screen_del_date = sysdate
+		where screen_code = #{screen_code}
+	</update>
+	
 	<!-- 상영관 등록하기 -->
 	<insert id="insertScreen">
 		insert into tbl_movie_screen(screen_code, theater_code, screen_name, screen_total_seat,
                              screen_seat_row, screen_seat_col, movie_screen_num)
 		values('MSC' || seq_movie_screen_num.nextval, #{theater_code}, #{screen_name}, #{screen_total_seat}, #{screen_seat_row}, #{screen_seat_col}, seq_movie_screen_num.nextval)
 	</insert>
+	
 	<!-- 상영관 하나 가져오기 -->
 	<select id="getScreenOne" resultType="SghMovieScreenVo">
 		select * from tbl_movie_screen where screen_code = #{screen_code}
 	</select>
+	
 	<!-- 상영관 수정하기 -->
 	<update id="screenModify">
 		update tbl_movie_screen set
@@ -28,21 +39,53 @@
 			screen_seat_row = #{screen_seat_row}
 		where screen_code = #{screen_code}
 	</update>
+	
 	<!-- 상영관 좌석 가져오기 -->
 	<select id="getScreenSeat" resultType="SghScreenSeatVo">
 		select screen_total_seat, screen_seat_row, screen_seat_col
 		from tbl_movie_screen
 		where screen_code = #{screen_code}
 	</select>
+	
 	<!-- 상영관 좌석 추가하기 -->
 	<select id="insertSeat" resultType="SghMovieSeatVo">
 		insert into tbl_movie_seat(movie_seat_num, seat_code, screen_code)
 		values(seq_movie_seat_num.nextval, #{seat_code}, #{screen_code})
 	</select>
+	
 	<!-- 등록한 상영관 최신 데이터 가져오기 -->
 	<select id="selectNewDate" resultType="string">
 		select screen_code from (select rownum rnum, screen_code from (select screen_code from tbl_movie_screen
         order by regexp_replace(screen_code, '[0-9]'), to_number(regexp_replace(screen_code, '[^0-9]')) desc))
 		where rnum = 1
 	</select>
+	
+	<!-- 좌석 삭제하기 -->
+	<delete id="deleteScreenSeat">
+		delete
+		from tbl_movie_seat
+		where screen_code = #{screen_code}
+	</delete>
+	
+	<!-- 현재 등록된 상품이 있는지 없는지 체크해서 수정 폼 넘어가게 하기 -->
+	<select id="productCheck" resultType="integer">
+		select count(*)
+		from tbl_movie_time
+		where screen_code = #{screen_code}
+	</select>
+	
+	<!-- 등록된 상영관의 총 숫자 가져오기 -->
+	<select id="getScreenTotal" resultType="integer">
+	select count(*) from tbl_movie_screen
+	where theater_code = #{theater_code}
+	and screen_state = 'Y'
+	</select>
+	
+	
+	<!-- 다른곳에 쓰일듯. 좌석 예약 일정 삭제시키기 -->
+<!-- 	<delete id="deleteScheduleSeat"> -->
+<!-- 	delete -->
+<!-- 	from tbl_schedule_seat -->
+<!-- 	where movie_time_code = (select movie_time_code from tbl_movie_time where movie_time_code = #{screen_code}) -->
+<!-- 	</delete> -->
 </mapper>

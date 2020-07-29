@@ -19,4 +19,6 @@ public interface SghTheaterService {
 	public void modifyTheater(SghTheaterVo sghTheaterVo) throws Exception;
 	// 영화관 하나 정보 가져오기
 	public SghTheaterVo selectOneTheater(String theater_code) throws Exception;
+	// 영화관 삭제하기
+	public void stateDeleteTheater(String theater_code) throws Exception;
 }

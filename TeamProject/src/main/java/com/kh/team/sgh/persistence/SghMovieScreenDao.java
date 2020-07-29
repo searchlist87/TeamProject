@@ -14,6 +14,8 @@ public interface SghMovieScreenDao {
 	public void insertScreen(SghMovieScreenVo sghMovieScreenVo) throws Exception;
 	// 상영관 하나 가져오기
 	public SghMovieScreenVo getScreenOne(String screen_code) throws Exception;
+	// 상영관 삭제하기
+	public void stateDeleteScreen(String screen_code) throws Exception;
 	// 상영관 수정하기
 	public void screenModify(SghMovieScreenVo sghMovieScreenVo) throws Exception;
 	// 상영관 좌석 가져오기
@@ -22,4 +24,14 @@ public interface SghMovieScreenDao {
 	public void insertSeat(SghMovieSeatVo sghMovieSeatVo) throws Exception;
 	// 등록된 최신 상영관 코드 가져오기
 	public String selectNewDate() throws Exception;
+	// 상영좌석 삭제하기
+	public void deleteScreenSeat(String screen_code) throws Exception;
+	// 등록된 일정이 있는지 없는지 체크하기
+	public int productCheck(String screen_code) throws Exception;
+	// 등록된 상영관의 총 갯수 들고오기
+	public int getScreenTotal(String theater_code) throws Exception;
+	
+	// 다른 곳에 쓰일듯
+//	// 좌석 일정 테이블에 삭제시키기
+//	public void deleteScheduleSeat(String screen_code) throws Exception;
 }

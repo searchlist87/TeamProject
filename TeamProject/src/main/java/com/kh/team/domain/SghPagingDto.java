@@ -10,6 +10,8 @@ public class SghPagingDto {
 	private int total_count;
 	private int total_page;
 	private String area_code = "all";
+	private String keyword;
+	private String category;
 	
 	public SghPagingDto() {
 		super();
@@ -93,11 +95,28 @@ public class SghPagingDto {
 		this.area_code = area_code;
 	}
 
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	@Override
 	public String toString() {
 		return "SghPagingDto [per_page=" + per_page + ", page=" + page + ", start_row=" + start_row + ", end_row="
 				+ end_row + ", start_page=" + start_page + ", end_page=" + end_page + ", total_count=" + total_count
-				+ ", total_page=" + total_page + ", area_code=" + area_code + "]";
+				+ ", total_page=" + total_page + ", area_code=" + area_code + ", keyword=" + keyword + ", category="
+				+ category + "]";
 	}
 
 }

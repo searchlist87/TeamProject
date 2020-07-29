@@ -14,7 +14,11 @@ public interface SghMovieScreenService {
 	// 상영관 하나 가져오기
 	public SghMovieScreenVo getScreenOne(String screen_code) throws Exception;
 	// 상영관 수정하기
-	public void screenModify(SghMovieScreenVo sghMovieScreenVo) throws Exception;
+	public void screenModify(SghMovieScreenVo sghMovieScreenVo, ArrayList<String> rws) throws Exception;
 	// 상영관 좌석 가져오기
 	public SghScreenSeatVo getScreenSeat(String screen_code) throws Exception;
+	// 등록된 일정이 있는지 없는지 체크하기
+	public int productCheck(String screen_code) throws Exception;
+	// 상영관 삭제하기
+	public void stateDeleteScreen(String screen_code) throws Exception;
 }

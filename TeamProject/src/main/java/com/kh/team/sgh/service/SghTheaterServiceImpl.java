@@ -46,4 +46,9 @@ public class SghTheaterServiceImpl implements SghTheaterService {
 		return sghTheaterDao.selectOneTheater(theater_code);
 	}
 
+	@Override
+	public void stateDeleteTheater(String theater_code) throws Exception {
+		sghTheaterDao.stateDeleteTheater(theater_code);
+	}
+
 }

@@ -48,4 +48,9 @@ public class SghTheaterDaoImpl implements SghTheaterDao {
 		return sqlSession.selectOne(NAMESPACE + "selectOneTheater", theater_code);
 	}
 
+	@Override
+	public void stateDeleteTheater(String theater_code) throws Exception {
+		sqlSession.update(NAMESPACE + "stateDeleteTheater", theater_code);
+	}
+
 }

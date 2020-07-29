@@ -18,12 +18,92 @@
 		and mbl.screen_code = ms.screen_code
 		and ms.theater_code = tt.theater_code
 		and tt.area_code = a.area_code
+		<if test="category != null">
+			<choose>
+				<when test='category == "area_name"'>
+					and a.area_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and tt.theater_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "movie_name"'>
+					and mc.movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "user_id"'>
+					and mbl.user_id like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "movie_buy_check"'>
+					and mbl.movie_buy_check = #{keyword}
+				</when>
+			</choose>
+		</if>
 		order by movie_buy_date desc) a)
 		where rnum between #{start_row} and #{end_row}
 	</select>
 	
 	<!-- 총 숫자 가져오기 -->
 	<select id="getTotalCount" resultType="integer">
-		select count(*) from tbl_movie_buy_list
+		select count(*) from (select rownum rnum, a.* from (select mbl.movie_buy_num, mc.movie_name, mbl.movie_price, mbl.movie_buy_date, mbl.user_id, mbl.movie_buy_check
+		      , tt.theater_name, a.area_name
+		from tbl_movie_buy_list mbl, tbl_movie mc, tbl_movie_screen ms, tbl_theater tt, tbl_area a
+		where mbl.movie_code = mc.movie_code
+		and mbl.screen_code = ms.screen_code
+		and ms.theater_code = tt.theater_code
+		and tt.area_code = a.area_code
+		<if test="category != null">
+			<choose>
+				<when test='category == "area_name"'>
+					and a.area_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and tt.theater_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "movie_name"'>
+					and mc.movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "user_id"'>
+					and mbl.user_id like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "movie_buy_check"'>
+					and mbl.movie_buy_check = #{keyword}
+				</when>
+			</choose>
+		</if>
+		order by movie_buy_date desc) a)
+	</select>
+	
+	<!-- 영화관 목록 가져오기 -->
+	<select id="getBuyTheaterList" resultType="SghBuyTheaterVo">
+		select theater_name, theater_code from tbl_theater
+		where area_code = #{area_code}
+	</select>
+	
+	<!-- 상영작으로 등록된 영화 목록 가져오기 -->
+	<select id="getBuyMovieList" resultType="SghBuyMovieVo">
+		select m.movie_code, m.movie_name from tbl_movie_schedule ms, tbl_movie m
+		where theater_code = #{theater_code}
+		and ms.movie_code = m.movie_code
+	</select>
+	
+	<!-- 매출 가져오기 -->
+	<select id="getBuyTotal" resultType="integer">
+		select nvl(sum(mbl.movie_price), 0)
+		from tbl_movie_buy_list mbl, tbl_movie_screen ms, tbl_theater tt, tbl_area a
+		where
+		<choose>
+			<when test='movie_code != "all" and theater_code != "all" and area_code != "all"'>
+				mbl.movie_code = #{movie_code} and tt.theater_code = #{theater_code} and a.area_code = #{area_code} and
+			</when>
+			<when test='movie_code == "all" and theater_code == "all" and area_code != "all"'>
+				a.area_code = #{area_code} and
+			</when>
+			<when test='movie_code == "all" and theater_code != "all" and area_code != "all"'>
+				a.area_code = #{area_code} and tt.theater_code = #{theater_code} and
+			</when>
+		</choose>
+		mbl.screen_code = ms.screen_code
+		and ms.theater_code = tt.theater_code
+		and a.area_code = tt.area_code
+		and movie_buy_date >= add_months(to_timestamp(sysdate, 'yyyy-mm-dd HH24:MI:SS'), #{mm_minus})
 	</select>
 </mapper>

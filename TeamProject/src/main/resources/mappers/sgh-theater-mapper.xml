@@ -8,7 +8,7 @@
 	<select id="getTheaterList" resultType="SghTheaterVo">
 		select *
 		from tbl_theater theater, tbl_area area	
-		where theater.area_code = area.area_code
+		where theater.area_code = area.area_code and theater.theater_state = 'Y'
 		order by regexp_replace(area.area_code, '[0-9]'), to_number(regexp_replace(area.area_code, '[^0-9]'))
 	</select>
 	
@@ -40,6 +40,7 @@
 		<if test="area_code != 'all'">
 		and area.area_code = #{area_code}
 		</if>
+		and theater.theater_state = 'Y'
 		order by area_code desc) a)
 		where rnum between #{start_row} and #{end_row}
 	</select>
@@ -57,6 +58,14 @@
 			theater_name = #{theater_name},
 			area_code = #{area_code},
 			theater_address = #{theater_address}
+		where theater_code = #{theater_code}
+	</update>
+	
+	<!-- 영화관 삭제 처리 -->
+	<update id="stateDeleteTheater">
+		update tbl_theater set
+		    theater_state = 'N',
+		    theater_del_date = sysdate
 		where theater_code = #{theater_code}
 	</update>
 </mapper>

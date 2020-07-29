@@ -41,14 +41,34 @@ public class SghMovieScreenServiceImpl implements SghMovieScreenService {
 		return sghMovieScreenDao.getScreenOne(screen_code);
 	}
 
+	// 스크린 수정할 때 좌석 지우고 다시 만들기
+	@Transactional
 	@Override
-	public void screenModify(SghMovieScreenVo sghMovieScreenVo) throws Exception {
+	public void screenModify(SghMovieScreenVo sghMovieScreenVo, ArrayList<String> rws) throws Exception {
 		sghMovieScreenDao.screenModify(sghMovieScreenVo);
+		String screen_code = sghMovieScreenDao.selectNewDate();
+		sghMovieScreenDao.deleteScreenSeat(screen_code);
+		SghMovieSeatVo sghMovieSeatVo = new SghMovieSeatVo();
+		for(String r : rws) {
+			sghMovieSeatVo.setScreen_code(screen_code);
+			sghMovieSeatVo.setSeat_code(r);
+			sghMovieScreenDao.insertSeat(sghMovieSeatVo);
+		}
 	}
 
 	@Override
 	public SghScreenSeatVo getScreenSeat(String screen_code) throws Exception {
 		return sghMovieScreenDao.getScreenSeat(screen_code);
+	}
+
+	@Override
+	public int productCheck(String screen_code) throws Exception {
+		return sghMovieScreenDao.productCheck(screen_code);
+	}
+
+	@Override
+	public void stateDeleteScreen(String screen_code) throws Exception {
+		sghMovieScreenDao.stateDeleteScreen(screen_code);
 	}
 
 }

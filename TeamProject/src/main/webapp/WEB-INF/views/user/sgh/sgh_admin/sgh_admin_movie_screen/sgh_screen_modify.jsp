@@ -15,17 +15,17 @@ $(function() {
 	
 	// 상영관 이름
 	$("#screen_name").blur(function() {
-		console.log("클릭");
 		$(".name_clone").remove();
 		var span_clone = $("#message_span").clone();
 		var screen_name = $(this).val();
 		var name_rgx = /^[가-힣a-zA-Z0-9]{1,5}$/;
 		if(!name_rgx.test(screen_name)) {
+			console.log("찍힘");
+			$("#screen_name_result").val("false");
 			span_clone.attr("class", "name_clone");
 			span_clone.text("필수 정보 입니다. 1~5자 한글, 영문자, 숫자만 사용 가능합니다.");
 			$(this).after(span_clone);
-			$("#screen_name_result").val("false");
-			return false;
+			return;
 		}
 		$("#screen_name_result").val("true");
 	});
@@ -33,15 +33,16 @@ $(function() {
 	// 행
 	$("#screen_seat_row").blur(function() {
 		$(".row_clone").remove();
+		$("#screen_seat_row_result").val("false");
 		var span_clone = $("#message_span").clone();
-		var screen_seat_row = $(this).val();
+		var screen_seat_	row = $(this).val();
 		var row_rgx = /^[0-9]{1,2}$/;
 		if(!row_rgx.test(screen_seat_row)) {
 			span_clone.attr("class", "row_clone");
 			span_clone.text("필수 정보 입니다. 1~2자 숫자만 사용 가능합니다.");
 			$(this).after(span_clone);
 			$("#screen_seat_row_result").val("false");
-			return false;
+			return;
 		}
 		
 		$("#screen_seat_row_result").val("true");
@@ -53,6 +54,7 @@ $(function() {
 	// 열
 	$("#screen_seat_col").blur(function() {
 		$(".col_clone").remove();
+		$("#screen_seat_col_result").val("false");
 		var span_clone = $("#message_span").clone();
 		var screen_seat_col = $(this).val();
 		var col_rgx = /^[0-9]{1,2}$/;

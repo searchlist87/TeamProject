@@ -3,12 +3,20 @@ package com.kh.team.sgh.service;
 import java.util.List;
 
 import com.kh.team.domain.SghAdminMovieBuyVo;
+import com.kh.team.domain.SghBuyCodeDto;
+import com.kh.team.domain.SghBuyMovieVo;
+import com.kh.team.domain.SghBuyTheaterVo;
+import com.kh.team.domain.SghPagingDto;
 
 public interface SghAdminMovieBuyService {
 	// 어드민 모든 영화 내역 가져오기
-	public List<SghAdminMovieBuyVo> getAdminMovieBuyList(int start_row, int end_row) throws Exception;
-	// 어드민 키워드에 따라 영화 내역 가져오기
-	public List<SghAdminMovieBuyVo> getKeywordMovieBuyList(String keyword, String category) throws Exception;
+	public List<SghAdminMovieBuyVo> getAdminMovieBuyList(SghPagingDto sghPagingDto) throws Exception;
 	// 영화 내역 총 숫자 가져오기
-	public int getTotalCount() throws Exception;
+	public int getTotalCount(SghPagingDto sghPagingDto) throws Exception;
+	// 영화관 목록 가져오기
+	public List<SghBuyTheaterVo> getBuyTheaterList(String area_code) throws Exception;
+	// 영화 목록 가져오기
+	public List<SghBuyMovieVo> getBuyMovieList(String theater_code) throws Exception;
+	// 영화 매출 가져오기
+	public int getBuyTotal(SghBuyCodeDto sghBuyCodeDto) throws Exception;
 }

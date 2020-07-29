@@ -19,6 +19,19 @@
 
 <script>
 $(function() {
+	
+	// 수정 결과
+	var result = "${result}";
+	console.log("result :" + result);
+	if(result == "false") {
+		alert("상영 회차에 등록된 상영관은 수정할 수 없습니다.");
+	}
+	// 삭제 결과
+	var delete_result = "${delete_result}";
+	if(delete_result == "false") {
+		alert("삭제할 수 없습니다");
+	}
+	
 	$("#screen_regist").click(function(e) {
 		e.preventDefault();
 		
@@ -72,7 +85,7 @@ $(function() {
 															<td>${SghScreenVo.screen_seat_row}</td>
 															<td>${SghScreenVo.screen_seat_col}</td>
 															<td><a href="/sgh/admin/movieScreen/screenModify?screen_code=${SghScreenVo.screen_code}" class="btn-primary" style="color: white;">수정</a></td>
-															<td><a href="/#" class="btn-danger" style="color: white;">삭제</a></td>
+															<td><a href="/sgh/admin/movieScreen/deleteScreen?screen_code=${SghScreenVo.screen_code}&theater_code=${SghScreenVo.theater_code}" class="btn-danger" style="color: white;">삭제</a></td>
 														</tr>
 													</c:forEach>
 													</tbody>

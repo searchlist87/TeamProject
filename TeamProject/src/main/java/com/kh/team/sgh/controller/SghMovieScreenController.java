@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.SghMovieScreenVo;
+import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghScreenRegistDto;
 import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.sgh.service.SghMovieScreenService;
@@ -29,7 +30,8 @@ public class SghMovieScreenController {
 	
 	// 상영관 리스트 폼으로
 	@RequestMapping(value="/screenList", method=RequestMethod.GET)
-	public String screenList(String theater_code, Model model) throws Exception {
+	public String screenList(SghPagingDto sghPagingDto, String theater_code, Model model) throws Exception {
+		sghPagingDto.setPageInfo();
 		List<SghMovieScreenVo> screen_list = sghMovieScreenService.getScreenList(theater_code);
 		SghTheaterVo sghTheaterVo = sghTheaterService.selectOneTheater(theater_code);
 		model.addAttribute("screen_list", screen_list);
@@ -37,20 +39,43 @@ public class SghMovieScreenController {
 		return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_screen_list";
 	}
 	
+	// 상영관 삭제 처리
+	@RequestMapping(value="/deleteScreen", method=RequestMethod.GET)
+	public String deleteScreen(String screen_code, String theater_code, RedirectAttributes rttr) {
+		try {
+			sghMovieScreenService.stateDeleteScreen(screen_code);
+			return "redirect:/sgh/admin/movieScreen/screenList?theater_code=" + theater_code; 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		rttr.addFlashAttribute("delete_result", "false");
+		return "redirect:/sgh/admin/movieScreen/screenList?theater_code=" + theater_code; 
+	}
+	
 	// 상영관 수정 폼으로
 	@RequestMapping(value="/screenModify", method=RequestMethod.GET)
-	public String screenModify(String screen_code, Model model) throws Exception {
+	public String screenModify(String screen_code, Model model, RedirectAttributes rttr) throws Exception {
+		int productCheck = sghMovieScreenService.productCheck(screen_code);
 		SghMovieScreenVo sghMovieScreenVo = sghMovieScreenService.getScreenOne(screen_code);
-		model.addAttribute("sghMovieScreenVo", sghMovieScreenVo);
-		return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_screen_modify";
+		String theater_code = sghMovieScreenVo.getTheater_code();
+		System.out.println("productCheck :" + productCheck);
+		if(productCheck < 1) {
+			model.addAttribute("sghMovieScreenVo", sghMovieScreenVo);
+			return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_screen_modify";
+		}
+		rttr.addFlashAttribute("result", "false");
+		return "redirect:/sgh/admin/movieScreen/screenList?theater_code=" + theater_code; 
 	}
 	
 	// 상영관 수정 처리
 	@RequestMapping(value="/screenModifyRun", method=RequestMethod.GET)
 	public String screenModifyRun(SghMovieScreenVo sghMovieScreenVo, RedirectAttributes rttr) {
 		String theater_code = sghMovieScreenVo.getTheater_code();
+		int row = sghMovieScreenVo.getScreen_seat_row();
+		int col = sghMovieScreenVo.getScreen_seat_col();
 		try {
-			sghMovieScreenService.screenModify(sghMovieScreenVo);
+			ArrayList<String> rws = SghAsciiChangeUtil.col_make(row, col);
+			sghMovieScreenService.screenModify(sghMovieScreenVo, rws);
 			return "redirect:/sgh/admin/movieScreen/screenList?theater_code=" + theater_code;
 		} catch (Exception e) {
 			e.printStackTrace();
