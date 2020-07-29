@@ -138,6 +138,7 @@ public class JmhMypageController {
 	public String deleteQuestion(HttpSession session, int board_code) throws Exception {
 		String user_id = (String)session.getAttribute("user_id");
 		jmhMypageService.deleteQuestion(user_id, board_code);
+		
 		return "redirect:/mypage/questionList";
 	}
 	

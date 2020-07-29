@@ -19,9 +19,7 @@
 					<!-- Top Right -->
 					<div class="right-content">
 						<ul class="list-main">
-							<li><i class="ti-power-off"></i><a href="login.html#">로그인</a></li>
-							<li><i class="ti-power-off"></i><a href="login.html#">로그아웃</a></li>
-							<li><i class="ti-user"></i> <a href="#">내 정보</a></li>
+							<li><i class="ti-power-off"></i><a href="/sgh/user/logout">로그아웃</a></li>
 							<li><i class="ti-user"></i> <a href="/">쇼핑몰메인으로 이동</a></li>
 						</ul>
 					</div>

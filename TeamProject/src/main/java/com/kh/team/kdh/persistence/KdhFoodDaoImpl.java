@@ -22,8 +22,8 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<KdhFoodVo> listFood() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "listFood");
+	public List<KdhFoodVo> selectListFood() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectListFood");
 	}
 
 	@Override
@@ -32,23 +32,23 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	}
 
 	@Override
-	public List<KdhFoodVo> listFoodCode100(KdhPagingDto pagingDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "listFoodCode100", pagingDto);
+	public List<KdhFoodVo> selectListFoodCode100(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectListFoodCode100", pagingDto);
 	}
 
 	@Override
-	public List<KdhFoodVo> listFoodCode200(KdhPagingDto pagingDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "listFoodCode200", pagingDto);
+	public List<KdhFoodVo> selectListFoodCode200(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectListFoodCode200", pagingDto);
 	}
 
 	@Override
-	public List<KdhFoodVo> listFoodCode300(KdhPagingDto pagingDto) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "listFoodCode300", pagingDto);
+	public List<KdhFoodVo> selectListFoodCode300(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectListFoodCode300", pagingDto);
 	}
 
 	@Override
-	public List<KdhFoodVo> listLatestFood() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "listLatestFood");
+	public List<KdhFoodVo> selectListLatestFood3() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectListLatestFood3");
 	}
 
 	@Override
@@ -57,23 +57,23 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	}
 
 	@Override
-	public int foodCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "foodCount");
+	public int selectFoodCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectFoodCount");
 	}
 
 	@Override
-	public int CountFoodCode100() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "CountFoodCode100");
+	public int selectCountFoodCode100() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectCountFoodCode100");
 	}
 
 	@Override
-	public int CountFoodCode200() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "CountFoodCode200");
+	public int selectCountFoodCode200() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectCountFoodCode200");
 	}
 
 	@Override
-	public int CountFoodCode300() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "CountFoodCode300");
+	public int selectCountFoodCode300() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectCountFoodCode300");
 	}
 
 	@Override
@@ -98,9 +98,26 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 		return sqlSession.selectOne(NAMESPACE + "selectUserInfo", user_id);
 	}
 
-//	@Override
-//	public int selectBuyPrice(String user_id) throws Exception {
-//		return sqlSession.selectOne(NAMESPACE + "selectBuyPrice", user_id);
-//	}
+	@Override
+	public void updateFoodbyNum(KdhFoodVo foodVo) throws Exception {
+		sqlSession.update(NAMESPACE + "updateFoodbyNum", foodVo);
+		
+	}
+
+	@Override
+	public void deleteFoodByNum(int food_num) throws Exception {
+		sqlSession.delete(NAMESPACE + "deleteFoodByNum", food_num);
+	}
+
+	@Override
+	public void deleteFoodBuy(int food_num) throws Exception {
+		sqlSession.delete(NAMESPACE + "deleteFoodBuy", food_num);
+	}
+
+	@Override
+	public void insertFood(KdhFoodVo foodVo) throws Exception {
+		sqlSession.insert(NAMESPACE + "insertFood", foodVo);
+	}
+
 
 }

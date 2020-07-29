@@ -23,17 +23,55 @@
 	width:30px;
 	float:left;
 }
+
+.link_hover:hover {
+	color:red;
+}
 </style>
 <script>
 $(function () {
-	$("#movie_manage > dd").css("display","block");
-	$("#movie_manage > dt").css("color","red");
-	$("#movie_manage > dd").eq(0).css("color","blue");
+	$("#board_manage > dd").css("display","block");
+	$("#board_manage > dt").css("color","red");
+	$("#board_manage > dd").eq(2).css("color","blue");
+	
+	
+// 	$("#selectSearch").change(function () {
+		
+// 		var searchType = $("#selectSearch option:selected").val();
+// 		if (searchType == 'noReply') {
+// 			$("#keyword").css("visibility", "hidden");
+// 		} else {
+// 			$("#keyword").css("visibility", "visible");
+// 		}
+// 	});
+	
+	$("#searchBtn").click(function () {
+		var searchType = $("#selectSearch option:selected").val();
+		if (searchType == 'noReply') {
+		} else {
+			var keyword = $("#keyword").val();
+			if (keyword == null || keyword == "") {
+				alert("검색 키워드를 확인해주세요.");
+				$("#keyword").focus();
+				return false;
+				
+			}
+		}
+		$("#frmPage > input[name=searchType]").val(searchType);
+		$("#frmPage > input[name=keyword]").val(keyword);
+		$("#frmPage").attr("action","/admin/admin_questionList");
+		$("#frmPage").submit();
+	});
+	
+	$("#listBtn").click(function () {
+		location.href="/admin/admin_questionList";
+	});
 	
 	// 페이지 번호
 	$("a.page-link").click(function(e) {
 		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
 		var page = $(this).attr("href").trim();
+		$("#frmPage").attr("action","/admin/admin_questionList");
 		$("#frmPage > input[name=page]").val(page);
 		$("#frmPage").submit();
 	});
@@ -55,53 +93,50 @@ $(function () {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
-									<h4 class="title" >1:1문의관리</h4>
+									<h4 class="title" >1:1 문의 관리</h4>
 								</div>	
+								<div style="margin-top:50px;"></div>
 								<!--  검색 -->
 								<div style="padding:20px;text-align:right;">
 										
 									<div class="single-shorter" style="vertical-align:middle;">
-											<label>검색 :</label>
-											<select id="searchSelect" name=searchType>
-												<option value="mname"
-												<c:if test="${jmhPagingDto.searchType == 'mname'}">selected</c:if>
-												>영화명</option>
-												<option value="mgenre"
-												<c:if test="${jmhPagingDto.searchType == 'mgenre'}">selected</c:if>
-												>영화장르</option>
-												<option value="mgrade"
-												<c:if test="${jmhPagingDto.searchType == 'mgrade'}">selected</c:if>
-												>영화등급</option>
-											</select>
-										</div>
+										<label>검색 :</label>
+										<select id="selectSearch">
+											<option selected="selected" value="user_id">아이디</option>
+											<option value="noReply">무답변</option>
+										</select>
+									</div>
 
-									<input type="text" id="keyword" value="${jmhPagingDto.keyword}"/>
-									<button type="button" class="btn" id="btnSearch">검색</button>
+									<input type="text" name="keyword" id="keyword"/>
+									<button class="btn" id="searchBtn">검색</button>
+									<button class="btn" id="listBtn">목록</button>
 								</div>	
 								<!--  검색 끝 -->
+								
 								<!--  페이지별 내용 -->
 								<table class="table" style="text-align:center;height:auto;" id="movie_table">
 									<thead>
 										<tr>
 											<th style="width:70px;">순서</th>
-											<th style="width:100px;">영화이미지</th>
-											<th>영화명</th>
-											<th style="width:100px;">영화장르</th>
-											<th style="width:100px;">영화등급</th>
-											<th style="width:130px;">개봉일</th>
+											<th style="width:70px;">아이디</th>
+											<th style="width:100px;">제목</th>
+											<th style="width:130px;">문의 작성일</th>
+											<th style="width:130px;">답변 상태</th>
 										</tr>
 									</thead>
 									<tbody style="vertical-align:middle;table-layout:fixed;">
-									<!--  영화정보 조회 -->
-									<c:forEach items="${jmhMovieVo}" var="jmhMovieVo">
+									<!--  1:1문의 조회 -->
+									<c:forEach items="${jmhBoardVo}" var="boardVo">
 										<tr style="height:50px;">
-											<td style="height:100px;vertical-align:middle;">${jmhMovieVo.movie_num}</td>
-											<td><img src="/upload/displayFile?fileName=${jmhMovieVo.movie_main_image}"/></td>
-											<td style="vertical-align:middle;"><a href="/admin/admin_movie_selectByMovie?movie_code=${jmhMovieVo.movie_code}" class="movie_title">${jmhMovieVo.movie_name}</a></td>
-											<td style="vertical-align:middle;">${jmhMovieVo.movie_genre}</td>
-											<!--  등급 image 처리 -->
-											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_${jmhMovieVo.movie_grade}.png"/></td>
-											<td style="vertical-align:middle;">${jmhMovieVo.movie_open_date}</td>
+											<td style="vertical-align:middle;">${boardVo.board_code}</td>
+											<td>${boardVo.user_id}</td>
+											<td style="vertical-align:middle;"><a class="link_hover" href="/admin/admin_selectQuestion?board_code=${boardVo.board_code}&user_id=${boardVo.user_id}">${boardVo.board_title}</a></td>
+											<td style="vertical-align:middle;">${boardVo.board_date}</td>
+											<td style="vertical-align:middle;">
+											<c:choose>
+												<c:when test="${boardVo.count == 0}"><span>없음</span></c:when>
+												<c:otherwise><span style="color:red;" class="replyOk">있음</span></c:otherwise>
+											</c:choose></td>
 										</tr>
 									</c:forEach>
 									</tbody>
@@ -110,38 +145,37 @@ $(function () {
 						</div>
 						<div class="row" style="height:100px;">
 						</div>
-						
 						<!--페이징-->
-			<div class="row">
-				<div class="col-md-5">
-				</div>
-				<div class="col-md-7">
-					<nav>
- 						<ul class="pagination">
-						<!-- 이전 -->
- 							<c:if test="${jmhPagingDto.startPage != 1}">
- 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
- 							</c:if>
-						<!-- 페이지 넘버링 -->
- 							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
-								<li class="page-item
- 									<c:if test="${jmhPagingDto.page == v }">
- 										active
- 									</c:if>
- 									"
- 								>
- 									<a class="page-link" href="${v}">${v}</a>
- 								</li>
- 							</c:forEach>
-						<!-- 다음 -->
- 							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
- 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
- 							</c:if>
- 						</ul>
- 					</nav>
-				</div>
-			</div>
-		<!--  페이징 끝 -->
+						<div class="row">
+							<div class="col-md-5">
+							</div>
+							<div class="col-md-7">
+								<nav>
+			 						<ul class="pagination">
+									<!-- 이전 -->
+			 							<c:if test="${jmhPagingDto.startPage != 1}">
+			 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.start_page - 1}">&laquo;</a></li>
+			 							</c:if>
+									<!-- 페이지 넘버링 -->
+			 							<c:forEach begin="${jmhPagingDto.startPage}" end="${jmhPagingDto.endPage}" var="v">
+											<li class="page-item
+			 									<c:if test="${jmhPagingDto.page == v }">
+			 										active
+			 									</c:if>
+			 									"
+			 								>
+			 									<a class="page-link" href="${v}">${v}</a>
+			 								</li>
+			 							</c:forEach>
+									<!-- 다음 -->
+			 							<c:if test="${jmhPagingDto.endPage < jmhPagingDto.totalPage}">
+			 								<li class="page-item"><a class="page-link" href="${jmhPagingDto.endPage + 1}">&raquo;</a></li>
+			 							</c:if>
+			 						</ul>
+			 					</nav>
+							</div>
+						</div>
+					<!--  페이징 끝 -->
 					</div>
 				</div>
 			</div>

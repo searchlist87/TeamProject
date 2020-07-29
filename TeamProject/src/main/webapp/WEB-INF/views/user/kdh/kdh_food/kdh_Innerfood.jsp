@@ -235,10 +235,10 @@ $(function() {
 								<div class="col-md-2"></div>
 							</div>
 							
-							<button id="btnOk" type="button" class="btn btn" data-dismiss="modal" style="text-align: center; height:50px;">
+							<button id="btnOk" type="button" class="btn btn" data-dismiss="modal" style="margin-left : 550px; height:50px;">
 								예
 							</button>
-							<button id="btnNo" type="button" class="btn btn" data-dismiss="modal" style="text-align: center; height:50px;">
+							<button id="btnNo" type="button" class="btn btn" data-dismiss="modal" style= "height:50px;">
 								아니요
 							</button>
 						

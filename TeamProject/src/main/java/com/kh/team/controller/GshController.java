@@ -71,9 +71,11 @@ public class GshController {
 	// 리뷰 삭제 원본
 	// 삭제를 위해서 리뷰 번호를 ()에 넣어준다
 	@RequestMapping(value = "/delete_review", method = RequestMethod.GET)
-	public String reviewDelete(int review_num) throws Exception {
+	public String reviewDelete(int review_num, HttpSession session) throws Exception {
+		String user_id = (String)session.getAttribute("user_id");
+		System.out.println("user_id :" + user_id);
 		System.out.println("review_num:" + review_num);
-		gshReviewService.delete_review(review_num);
+		gshReviewService.delete_review(review_num, user_id);
 		return "user/gsh/movie/movieInfo";
 	}
 	
@@ -81,6 +83,7 @@ public class GshController {
 	@RequestMapping(value = "/movieView", method = RequestMethod.GET)
 	public String movieView(Model model) throws Exception {
 		List<GshMovieDto> list = gshMovieService.select_movieAll();
+		
 //		System.out.println(list);
 		model.addAttribute("list", list);
 		return "user/gsh/movie/movieView";
@@ -88,20 +91,14 @@ public class GshController {
 	
 //	 영화 상세 정보 보기
 	@RequestMapping(value = "/movieInfo", method = RequestMethod.GET)
-	public String movieInfo(String movie_code, ModelMap model) throws Exception {
-//		System.out.println("movie_code:" + movie_code);
-//		List<GshMovieDto> list = gshMovieService.select_movieAll();
-//		System.out.println("list:" + list);
+	public String movieInfo(HttpSession session, String movie_code, ModelMap model) throws Exception {
 		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
 		// 스틸컷 파일명 목록
 		List<String> subImageList = gshMovieService.selectMovieSubImage(movie_code);
-		
-//		System.out.println("subImageList:" + subImageList);
-//		System.out.println("movieDto :" + movieDto);
-//		model.addAttribute("list", list);
+		List<GshReviewVo> reviewList = gshReviewService.selectReviewByCode(movie_code);
 		model.addAttribute("movieDto", movieDto);
 		model.addAttribute("subImageList", subImageList);
-//		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("reviewList", reviewList);
 		return "user/gsh/movie/movieInfo";
 	}
 	
@@ -118,9 +115,7 @@ public class GshController {
 	@RequestMapping(value = "/reviewModify", method = RequestMethod.GET)
 	public void reviewModify(HttpSession session, Model model, int review_num, String review_content, int review_score) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
-		
-		gshReviewService.update_review(review_content, review_score, review_num);
-		
+		gshReviewService.update_review(review_content, review_score, review_num, user_id);
 	}
 	
 	

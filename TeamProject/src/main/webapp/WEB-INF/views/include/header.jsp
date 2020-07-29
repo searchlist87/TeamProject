@@ -21,6 +21,7 @@
 	}
 </style>
 <!-- Header -->
+<%@include file="/WEB-INF/views/include/bootstrap.jsp" %>
 <script>
 $(function() {
 	

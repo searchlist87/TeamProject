@@ -38,14 +38,7 @@ public class JmhEventDaoImpl implements JmhEventDao {
 		return sqlSession.selectList(NAMESPACE + "eventList", paramMap);
 	}
 	
-	// [admin] 이벤트 조회
-	@Override
-	public List<JmhEventVo> adminEventList(String keyword, String searchType) throws Exception {
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("keyword", keyword);
-		paramMap.put("searchType", searchType);
-		return sqlSession.selectList(NAMESPACE + "adminEventList", paramMap);
-	}
+	
 
 	// 이벤트 수정
 	@Override
@@ -96,6 +89,28 @@ public class JmhEventDaoImpl implements JmhEventDao {
 	@Override
 	public List<JmhEventVo> pastEventPagingList(JmhPagingDto jmhPagingDto) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "pastEventListPaging", jmhPagingDto);
+	}
+	
+	// ---------------- 사용자 끝 -------------------------
+	
+	// ------------------- admin -------------------------------
+	
+	// [admin] 이벤트 조회
+	@Override
+	public List<JmhEventVo> adminEventList(JmhPagingDto jmhPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "adminEventList", jmhPagingDto);
+	}
+	
+	// [admin] 이벤트 총 갯수
+	@Override
+	public int adminEventCount(JmhPagingDto jmhPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "adminGetCountEvent", jmhPagingDto);
+	}
+
+	// [admin] 이벤트 페이징
+	@Override
+	public List<JmhEventVo> adminEventPagingList(JmhPagingDto jmhPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "adminEventListPaging", jmhPagingDto);
 	}
 	
 }

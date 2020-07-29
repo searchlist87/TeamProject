@@ -37,12 +37,16 @@
 <script>
 $(function() {
 	
+	$(".nice-select").remove();
+	$("#selectSearch").removeAttr("style");
+	
 	// 현재 시간 및 날짜
 	var date = new Date();
 	var year = date.getFullYear();
 	var month = date.getMonth() + 1; // 월
 	var day = date.getDate(); // 일
 	
+	var date1 = year + "-" + month + "-" + day;
 	$("#searchBtn").click(function (e) {
 		e.preventDefault();
 		var searchType = $("#selectSearch option:selected").val();
@@ -54,6 +58,8 @@ $(function() {
 		}
 		$("#frmPage > input[name=searchType]").val(searchType);
 		$("#frmPage > input[name=keyword]").val(keyword);
+		var html = "<input type='hidden' value='"+ date1 + "' name='event_end_date' />";
+		$("#frmPage").append(html);
 		$("#frmPage").attr("action", "/event/pastEventList");
 		$("#frmPage").submit();
 	});

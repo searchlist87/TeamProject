@@ -8,7 +8,8 @@
 	<select id="getTheaterInfo" resultType="JmhMovieTheaterVo">
 		select theater.theater_code, theater.theater_name
 		from tbl_theater theater, tbl_area area	
-		where theater.area_code = area.area_code 
+		where theater.area_code = area.area_code
+		and theater.theater_state = 'Y' 
 		and area.area_code = #{area_code}
 		order by theater_code
 	</select>

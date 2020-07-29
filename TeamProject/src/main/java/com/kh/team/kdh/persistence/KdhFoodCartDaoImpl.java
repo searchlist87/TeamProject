@@ -76,4 +76,9 @@ public class KdhFoodCartDaoImpl implements KdhFoodCartDao {
 		return sqlSession.selectList(NAMESPACE + "selectCartListByUserId", user_id);
 	}
 
+	@Override
+	public void deleteFoodCart(int food_num) throws Exception {
+		sqlSession.delete(NAMESPACE + "deleteFoodCart", food_num);
+	}
+
 }
