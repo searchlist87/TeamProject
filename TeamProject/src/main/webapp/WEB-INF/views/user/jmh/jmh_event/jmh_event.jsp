@@ -12,11 +12,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <!-- Jquery -->
-    <script src="/resources/js/jquery.min.js"></script>
-    <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
-	<script src="/resources/js/jquery-ui.min.js"></script>
-	<script src="/resources/js/jmh_js/jmh_js.js"></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x6srghvj2m"></script>
+<script src="/resources/js/jmh_js/jmh_js.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x6srghvj2m"></script>
 <style>
 
   .divEvent {  
