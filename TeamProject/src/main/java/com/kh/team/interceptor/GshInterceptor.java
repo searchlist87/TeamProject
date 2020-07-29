@@ -15,7 +15,7 @@ public class GshInterceptor extends HandlerInterceptorAdapter {
 		String user_id = (String) session.getAttribute("user_id");
 		System.out.println("Login_id:" + user_id);
 		if (user_id == null || user_id.equals("")) {
-			response.sendRedirect("/sgh/user/loginForm");
+			response.sendRedirect("");
 			return false;
 		}
 		return true;
