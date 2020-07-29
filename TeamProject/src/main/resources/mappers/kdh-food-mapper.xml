@@ -145,4 +145,12 @@ where food_code = '300'
 	insert into tbl_food(food_num,food_code,food_name,food_price,food_count,food_image)
 	values(seq_food_num.nextval, #{food_code}, #{food_name}, #{food_price}, #{food_count}, #{food_image})
 </insert>
+
+<!-- 구매 내역 불러오기 -->
+<select id="selectBuyFoodList" resultType="KdhAdminFoodBuyListDto">
+	select fl.food_num, fl.user_id, fl.food_buy_total_price, fl.food_buy_date, fl.food_buy_count, fl.food_buy_check, f.food_name
+	from tbl_food_buy_list fl, tbl_food f
+	where fl.food_num = f.food_num
+    order by food_buy_list_num desc
+</select>
 </mapper>

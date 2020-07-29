@@ -42,6 +42,7 @@ $(function () {
 		
 		$("#frmPage > input[name=searchType]").val(searchType);
 		$("#frmPage > input[name=keyword]").val(keyword);
+		$("#frmPage > input[name=parPage]").val("5");
 		$("#frmPage").submit();
 	});
 	
@@ -51,7 +52,23 @@ $(function () {
 		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
 		var page = $(this).attr("href").trim();
 		$("#frmPage > input[name=page]").val(page);
+		$("#frmPage > input[name=perPage]").val("5");
 		$("#frmPage").submit();
+	});
+	
+	// 목록으로 이동
+	$("#btnList").click(function () {
+		location.href="/admin/admin_movie_list";
+	});
+	
+	// searchType이 mgrade 일 때 placeholeder 넣어주기
+	$("#searchSelect").change(function () {
+		$("#keyword").val("");
+		$("#keyword").attr("placeholder", "");
+		var searchType = $("#searchSelect option:selected").val();
+		if(searchType =="mgrade") {
+			$("#keyword").attr("placeholder", "all/12/15/19");
+		}
 	});
 	
 });
@@ -93,6 +110,7 @@ $(function () {
 
 									<input type="text" id="keyword" value="${jmhPagingDto.keyword}" name="keyword"/>
 									<button type="button" class="btn" id="btnSearch">검색</button>
+									<button type="button" class="btn" id="btnList">목록</button>
 								</div>	
 								<!--  검색 끝 -->
 								<!--  페이지별 내용 -->
@@ -116,7 +134,7 @@ $(function () {
 											<td style="vertical-align:middle;"><a href="/admin/admin_movie_selectByMovie?movie_code=${jmhMovieVo.movie_code}" class="movie_title">${jmhMovieVo.movie_name}</a></td>
 											<td style="vertical-align:middle;">${jmhMovieVo.movie_genre}</td>
 											<!--  등급 image 처리 -->
-											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_${jmhMovieVo.movie_grade}.png"/></td>
+											<td style="vertical-align:middle;"><img src="/resources/images/jmh/movie_grade_${jmhMovieVo.movie_grade}.png" style="width:40px;height:40px;"/></td>
 											<td style="vertical-align:middle;">${jmhMovieVo.movie_open_date}</td>
 										</tr>
 									</c:forEach>

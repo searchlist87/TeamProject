@@ -48,7 +48,7 @@ public class JmhAdminController {
 	// 영화 조회
 	@RequestMapping(value="/admin_movie_list", method = RequestMethod.GET)
 	public String movie_list(Model model, JmhPagingDto jmhPagingDto) throws Exception {
-		System.out.println("jmhPagingDto :" + jmhPagingDto);
+		jmhPagingDto.setPerPage(5);
 		jmhPagingDto.setPageInfo();
 		int count = jmhMovieService.getCountMovie(jmhPagingDto);
 		jmhPagingDto.setTotalCount(count);
@@ -86,7 +86,6 @@ public class JmhAdminController {
 	// 영화 수정
 	@RequestMapping(value="/admin_movie_modify", method = RequestMethod.GET)
 	public String movie_modify(String movie_code, Model model) throws Exception {
-		System.out.println("movie_code :" + movie_code);
 		JmhMovieVo jmhMovieVo = jmhMovieService.selectByMovie(movie_code);
 		List<JmhMovieImageVo> jmhMovieImageVo = jmhMovieService.selectByMovieSubImage(movie_code);
 		model.addAttribute("jmhMovieImageVo", jmhMovieImageVo);
@@ -128,7 +127,6 @@ public class JmhAdminController {
 	// 이벤트 등록 처리
 	@RequestMapping(value="/admin_event_register", method = RequestMethod.POST)
 	public String admin_eventRegisterPost(JmhEventVo jmhEventVo) throws Exception {
-		System.out.println("JmhEventVo :" + jmhEventVo);
 		jmhEventService.eventRegister(jmhEventVo);
 		return "redirect:/admin/admin_event_list";
 	}
@@ -167,8 +165,6 @@ public class JmhAdminController {
 	public String admin_question(Model model, JmhPagingDto jmhPagingDto) throws Exception {
 		jmhPagingDto.setPerPage(10);
 		jmhPagingDto.setPageInfo();
-		
-		System.out.println("jmhPagingDto : " + jmhPagingDto);
 		
 		int count1 = jmhMypageService.adminGetQuestionCount();
 		jmhPagingDto.setTotalCount(count1);
