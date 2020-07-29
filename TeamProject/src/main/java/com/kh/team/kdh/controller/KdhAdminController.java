@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.team.domain.KdhAdminFoodBuyListDto;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.kdh.service.KdhFoodCartService;
@@ -94,12 +95,17 @@ public class KdhAdminController {
 	// 푸드 상품관리_상품등록
 	@RequestMapping(value = "/admin_food_register", method = RequestMethod.POST)
 	public String admin_food_registerPOST(KdhFoodVo foodVo) throws Exception {
-//		System.out.println("foodVo:" + foodVo);
 		foodService.insertFood(foodVo);
 		return "redirect:/kdh/admin/admin_food_list";
 	}
 	
-	
-		
+	// 푸드 푸드내역 조회
+	@RequestMapping(value = "/admin_food_buy_list", method = RequestMethod.GET)
+	public String admin_food_buy_list(Model model) throws Exception {
+		List<KdhAdminFoodBuyListDto> buyFoodList = foodService.selectBuyFoodList();
+		System.out.println("buyFoodList :" + buyFoodList);
+		model.addAttribute("buyFoodList", buyFoodList);
+		return "user/kdh/kdh_admin/kdh_admin_food_buy_list";
+	}
 	
 }

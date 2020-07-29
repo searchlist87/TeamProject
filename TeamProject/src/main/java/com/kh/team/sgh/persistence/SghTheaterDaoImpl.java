@@ -53,4 +53,19 @@ public class SghTheaterDaoImpl implements SghTheaterDao {
 		sqlSession.update(NAMESPACE + "stateDeleteTheater", theater_code);
 	}
 
+	@Override
+	public List<SghTheaterVo> deleteTheaterListPaging(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "deleteTheaterListPaging", sghPagingDto);
+	}
+
+	@Override
+	public int deleteTheaterListCount(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "deleteTheaterListCount", sghPagingDto);
+	}
+
+	@Override
+	public void restoreTheater(String theater_code) throws Exception {
+		sqlSession.update(NAMESPACE + "restoreTheater", theater_code);
+	}
+
 }

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.domain.KdhAdminFoodBuyListDto;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
 import com.kh.team.domain.KdhPagingDto;
@@ -118,6 +119,12 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	public void insertFood(KdhFoodVo foodVo) throws Exception {
 		sqlSession.insert(NAMESPACE + "insertFood", foodVo);
 	}
+
+	@Override
+	public List<KdhAdminFoodBuyListDto> selectBuyFoodList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectBuyFoodList");
+	}
+
 
 
 }

@@ -12,11 +12,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <!-- Jquery -->
-    <script src="/resources/js/jquery.min.js"></script>
-    <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
-	<script src="/resources/js/jquery-ui.min.js"></script>
-	<script src="/resources/js/jmh_js/jmh_js.js"></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x6srghvj2m"></script>
+<script src="/resources/js/jmh_js/jmh_js.js"></script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x6srghvj2m"></script>
 <style>
 
   .divEvent {  
@@ -37,7 +34,7 @@
 <script>
 $(function() {
 	
-	$(".nice-select").remove();
+	$("#searchNiceSelect").find(".nice-select").remove();
 	$("#selectSearch").removeAttr("style");
 	
 	// 현재 시간 및 날짜
@@ -103,7 +100,7 @@ $(function() {
 			<div class="col-md-2"></div>
 			<div class="col-md-8 blog-meta" style="margin-bottom:20px;">
 				<h2>진행 이벤트</h2>
-				<div style="float:right;">
+				<div style="float:right;" id="searchNiceSelect">
 					<div style="padding:10px;float:left;height:50px;">
 						<select id="selectSearch" name="searchType"> 
 							<option selected="selected" value="ename">이벤트명</option>

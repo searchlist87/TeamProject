@@ -75,6 +75,21 @@ public class SghMovieScreenDaoImpl implements SghMovieScreenDao {
 		return sqlSession.selectOne(NAMESPACE + "getScreenTotal", theater_code);
 	}
 
+	@Override
+	public List<SghMovieScreenVo> getDeleteScreenList(SghScreenPagingVo sghScreenPagingVo) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getDeleteScreenList", sghScreenPagingVo);
+	}
+
+	@Override
+	public int getDeleteScreenTotal(String theater_code) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getDeleteScreenTotal", theater_code);
+	}
+
+	@Override
+	public void stateRestoreScreen(String screen_code) throws Exception {
+		sqlSession.update(NAMESPACE + "stateRestoreScreen", screen_code);
+	}
+
 //	@Override
 //	public void deleteScheduleSeat(String screen_code) throws Exception {
 //		sqlSession.delete(NAMESPACE + "screen_code", screen_code);

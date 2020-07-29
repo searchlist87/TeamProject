@@ -41,6 +41,14 @@ public class SghBookingServiceImpl implements SghBookingService {
 	@Transactional
 	@Override
 	public void updateScheduleSeat(SghPaymentVo sghPaymentVo, String[] schedule_seat_arr) throws Exception {
+		SghPointDto sghPointDto = new SghPointDto();
+		String user_id = sghPaymentVo.getUser_id();
+		int movie_price = sghPaymentVo.getMovie_price();
+		sghPointDto.setUser_id(user_id);
+		int point = movie_price / SghTeamConstants.POINT_PERCENT;
+		sghPointDto.setPoint(point);
+		String point_code = SghTeamConstants.MOVIE_POINT;
+		sghPointDto.setPoint_code(point_code);
 		for(String schedule_seat_code : schedule_seat_arr) {
 			// 예약 시키기
 			sghBookingDao.updateScheduleSeat(schedule_seat_code);
@@ -49,23 +57,15 @@ public class SghBookingServiceImpl implements SghBookingService {
 			sghBookingDao.insertMovieBuy(sghPaymentVo);
 			// 변하지 않는 내역 추가
 			sghBookingDao.insertMovieBuyList(sghPaymentVo);
+			// 포인트 지급하기
+			sghBookingDao.insertPointList(sghPointDto);
+			sghBookingDao.updateUserPoint(sghPointDto);
 		}
 		
-		String user_id = sghPaymentVo.getUser_id();
-		int movie_price = sghPaymentVo.getMovie_price();
 		
-		int point = movie_price / SghTeamConstants.POINT_PERCENT;
-		String point_code = SghTeamConstants.MOVIE_POINT;
 		
-		SghPointDto sghPointDto = new SghPointDto();
 		
-		sghPointDto.setUser_id(user_id);
-		sghPointDto.setPoint(point);
-		sghPointDto.setPoint_code(point_code);
 		
-		// 포인트 지급하기
-		sghBookingDao.insertPointList(sghPointDto);
-		sghBookingDao.updateUserPoint(sghPointDto);
 	}
 
 }
