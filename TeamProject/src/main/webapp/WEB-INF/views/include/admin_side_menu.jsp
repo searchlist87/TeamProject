@@ -65,6 +65,8 @@ $(function () {
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃게시판 관리</a></dt>
 					<dd><a href="#" class="sub_menu">공지사항 조회</a></dd>
 					<dd><a href="#" class="sub_menu">공지사항 등록</a></dd>
+					<dd><a href="/admin/admin_faq_list" class="sub_menu">FAQ 조회</a></dd>
+					<dd><a href="/admin/admin_faq_register" class="sub_menu">FAQ 등록</a></dd>
 					<dd><a href="/admin/admin_questionList" class="sub_menu">1:1 문의 관리</a></dd>
 				</dl>
 				<dl class="categor-list" id="review_manage">

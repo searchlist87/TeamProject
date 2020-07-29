@@ -13,11 +13,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.team.domain.JmhBoardDto;
 import com.kh.team.domain.JmhBoardVo;
 import com.kh.team.domain.JmhEventVo;
+import com.kh.team.domain.JmhFAQVo;
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
 import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.domain.JmhReplyVo;
 import com.kh.team.domain.JmhUserVo;
+import com.kh.team.jmh.service.JmhCustomerService;
 import com.kh.team.jmh.service.JmhEventService;
 import com.kh.team.jmh.service.JmhMovieService;
 import com.kh.team.jmh.service.JmhMypageService;
@@ -38,6 +40,9 @@ public class JmhAdminController {
 	
 	@Inject
 	private JmhUserService jmhUserService;
+	
+	@Inject
+	private JmhCustomerService jmhCustomerService;
 	
 	// admin page
 	@RequestMapping(value="/admin", method = RequestMethod.GET)
@@ -231,6 +236,57 @@ public class JmhAdminController {
 		List<JmhUserVo> jmhUserVo = jmhUserService.getUserInfo();
 		model.addAttribute("jmhUserVo", jmhUserVo);
 		return "/admin/admin_customerList";
+	}
+	
+	// --------------- 고객관리 - 회원정보 조회 끝 ----------
+	
+	// --------------- FAQ ----------
+	
+	// faq 등록 폼
+	@RequestMapping(value="/admin_faq_register", method = RequestMethod.GET)
+	public String admin_faq_register() throws Exception {
+		return "/admin/admin_faq_register";
+	}
+	
+	// faq 등록 처리
+	@RequestMapping(value="/admin_faq_register", method = RequestMethod.POST)
+	public String admin_faq_registerPost(JmhFAQVo jmhFAQVo, RedirectAttributes rttr) throws Exception {
+		jmhCustomerService.faqResiter(jmhFAQVo);
+		rttr.addFlashAttribute("rMsg", "success");
+		return "redirect:/admin/admin_faq_list";
+	}
+	
+	// faq 리스트
+	@RequestMapping(value="/admin_faq_list", method = RequestMethod.GET)
+	public String admin_faq_list(Model model) throws Exception {
+		List<JmhFAQVo> jmhFAQVo = jmhCustomerService.getFaqList();
+		model.addAttribute("jmhFAQVo", jmhFAQVo);
+		return "/admin/admin_faq_list";
+	}
+	
+	// faq 상세보기
+	@RequestMapping(value="/admin_select_faq", method = RequestMethod.GET)
+	public String admin_select_faq(int faq_code, Model model) throws Exception {
+		JmhFAQVo jmhFAQVo = jmhCustomerService.selectFaq(faq_code);
+		model.addAttribute("jmhFAQVo", jmhFAQVo);
+		return "/admin/admin_select_faq";
+	}
+	
+	// faq 수정하기
+	@RequestMapping(value="/admin_modify_faq", method = RequestMethod.POST)
+	public String admin_modify_faq(JmhFAQVo jmhFAQVo) throws Exception {
+		System.out.println("jmhFAQVo :" + jmhFAQVo);
+		jmhCustomerService.modifyFaq(jmhFAQVo);
+		int faq_code = jmhFAQVo.getFaq_code();
+		return "redirect:/admin/admin_select_faq?faq_code="+ faq_code;
+	}
+	
+	// faq 삭제하기
+	@RequestMapping(value="/admin_delete_faq", method = RequestMethod.GET)
+	public String admin_delete_faq(int faq_code, RedirectAttributes rttr) throws Exception {
+		jmhCustomerService.deleteFaq(faq_code);
+		rttr.addFlashAttribute("dMsg", "success");
+		return "redirect:/admin/admin_faq_list";
 	}
 	
 }
