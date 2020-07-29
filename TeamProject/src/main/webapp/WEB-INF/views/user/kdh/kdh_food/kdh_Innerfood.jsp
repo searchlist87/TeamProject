@@ -22,16 +22,6 @@
 <script>
 $(function() {
 	
-	// 구매 후 취소 버튼
-	$("#btnCancle").click(function() {
-		$("#cancleContent").toggle();
-	});
-
-	// 상품이용안내 버튼 
-	$("#btnUseGuide").click(function() {
-		$("#useContent").toggle();
-	});
-	
 	// 수량/금액 증가 버튼
 	$("#btnPlus").click(function() {
 		var count = "${foodVo.food_count}";
@@ -296,7 +286,7 @@ $(function() {
 			<div class="col-md-8">
 				 <hr/>
 				<a id="btnCancle" style="color: white;" class="btn">구매 후 취소</a>
-				<br/><br/><div id="cancleContent" style="display:none">■ 연장/취소/환불 안내<br/>
+				<br/><br/><div id="cancleContent">■ 연장/취소/환불 안내<br/>
 				본 상품은 구매일로부터 10일 이내에 취소 가능합니다.<br/>
 				- 유효기간은 본 상품의 유효기간 내에서 연장 신청이 가능하며, 1회 연장 시 3개월(92일) 단위로 연장됩니다.<br/>
 				- 구매일로부터 5년까지 유효기간 연장이 가능합니다.<br/>
@@ -305,7 +295,7 @@ $(function() {
 				- 본 상품은 현금으로 환불이 불가합니다.<br/>
 				 ※ 2020년 2월 4일 이후 구매 상품에 한하여 유효기간 연장 신청이 가능합니다.</div><br/>
 				<a id="btnUseGuide" style="color: white;" class="btn">상품이용안내</a>
-				<br/><br/><div id="useContent" style="display:none">■ 이용 안내<br/>
+				<br/><br/><div id="useContent">■ 이용 안내<br/>
 				본 상품의 사용 기한은 구매일로부터 92일까지입니다.<br/>
 				- 영화관 매점에서 스토어 쿠폰번호 제시 후 상품으로 교환하실 수 있습니다.<br/>
 				- 본 상품은 온라인 전용 판매 상품으로 현장 구매는 불가합니다.<br/>

@@ -62,7 +62,7 @@ $(function() {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
-									<h4 class="title" >푸드 상품관리_상품조회(스토어)</h4>
+									<h4 class="title" >구매 내역조회(푸드)</h4>
 								</div>	
 								<!--  검색 -->
 								<div style="padding:20px;text-align:right;">
@@ -103,15 +103,15 @@ $(function() {
 									<tbody style="vertical-align:middle;table-layout:fixed;">
 								
 									<!-- 상품(스토어) 조회 -->
-<%-- 									<c:forEach items="${foodlist}" var="foodVo"> --%>
-<!-- 										<tr style="height:50px;"> -->
-<%-- 											<td style="height:100px;vertical-align:middle;">${foodVo.food_num}</td> --%>
-<%-- 											<td><img src="/kdh/upload/displayFile?fileName=${foodVo.food_image}"/></td> --%>
-<%-- 											<td style="vertical-align:middle;"><a href="/kdh/admin/admin_food_selectByFood?food_num=${foodVo.food_num}" class="food_title">${foodVo.food_name}</a></td> --%>
-<%-- 											<td style="vertical-align:middle;"><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber>원</td> --%>
-<%-- 											<td style="vertical-align:middle;">${foodVo.food_count}</td> --%>
-<!-- 										</tr> -->
-<%-- 									</c:forEach> --%>
+									<c:forEach items="${buyFoodList}" var="buyFoodList">
+										<tr style="height:50px;">
+											<td style="height:100px;vertical-align:middle;">${buyFoodList.food_name}</td>
+											<td style="vertical-align:middle;">${buyFoodList.user_id}</td>
+											<td style="vertical-align:middle;"><fmt:formatNumber pattern="#,###,###" value="${buyFoodList.food_buy_total_price}"></fmt:formatNumber>원</td>
+											<td style="vertical-align:middle;">${buyFoodList.food_buy_count}</td>
+											<td style="vertical-align:middle;">${buyFoodList.food_buy_date}</td>
+										</tr>
+									</c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -120,38 +120,38 @@ $(function() {
 						</div>
 						
 						<!-- 페이징 -->
-<!-- 						<div class="row"  style="text-align:center;"> -->
-<!-- 							<div class="col-md-9"></div> -->
-<!-- 								<div class="col-md-5 text-center" style="text-align:center;"> -->
-<!-- 									<nav style="text-align:center;"> -->
-<!-- 										<ul class="pagination text-center" style="text-align:center;"> -->
+						<div class="row"  style="text-align:center;">
+							<div class="col-md-9"></div>
+								<div class="col-md-5 text-center" style="text-align:center;">
+									<nav style="text-align:center;">
+										<ul class="pagination text-center" style="text-align:center;">
 										
-<!-- 										이전 버튼 -->
-<%-- 										<c:if test ="${pagingDto.startPage != 1}"> --%>
-<!-- 											<li class="page-item" style="width:60px;"  style="float:left;"> -->
-<%-- 										    	<a class="page-link" href="${pagingDto.startPage - 1}">이전</a> --%>
-<!-- 											</li> -->
-<%-- 										</c:if> --%>
+										<!-- 이전 버튼 -->
+										<c:if test ="${pagingDto.startPage != 1}">
+											<li class="page-item" style="width:60px;"  style="float:left;">
+										    	<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
+											</li>
+										</c:if>
 						
-<!-- 									 	페이징 넘버링 -->
-<%-- 									 	<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v"> --%>
-<!-- 										    <li id="pageNumber" class="page-item"  style="width:30px; float:left;"> -->
-<%-- 										    	<a class="page-link" href="${v}">${v}</a> --%>
-<!-- 										    </li> -->
-<%-- 										</c:forEach>    	 --%>
+									 	<!-- 페이징 넘버링 -->
+									 	<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+										    <li id="pageNumber" class="page-item"  style="width:30px; float:left;">
+										    	<a class="page-link" href="${v}">${v}</a>
+										    </li>
+										</c:forEach>    	
 										
-<!-- 										다음 버튼 -->
-<%-- 										  <c:if test="${pagingDto.endPage < pagingDto.totalPage}"> --%>
-<!-- 										    <li class="page-item" style="width:60px; float:left;"> -->
-<%-- 										    	<a class="page-link" href="${pagingDto.endPage + 1}">다음</a> --%>
-<!-- 										    </li> -->
-<%-- 										   </c:if> --%>
-<!-- 										</ul> -->
-<!-- 									</nav> -->
-<!-- 								</div> -->
-<!-- 							<div class="col-md-4"></div> -->
-<!-- 							<div class="col-md-12" style="margin-bottom: 100px;"></div>	 -->
-<!-- 						</div> -->
+										<!-- 다음 버튼 -->
+										  <c:if test="${pagingDto.endPage < pagingDto.totalPage}">
+										    <li class="page-item" style="width:60px; float:left;">
+										    	<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
+										    </li>
+										   </c:if>
+										</ul>
+									</nav>
+								</div>
+							<div class="col-md-4"></div>
+							<div class="col-md-12" style="margin-bottom: 100px;"></div>	
+						</div>
 						<!-- /페이징 -->
 					</div>
 				</div>
