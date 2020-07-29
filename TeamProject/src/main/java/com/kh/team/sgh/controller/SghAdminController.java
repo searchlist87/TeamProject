@@ -58,6 +58,24 @@ public class SghAdminController {
 		return "user/sgh/sgh_admin/sgh_movie_theater_list";
 	}
 	
+	// 삭제된 영화관 조회 폼 이동
+	@RequestMapping(value="/deleteTheaterList", method=RequestMethod.GET)
+	public String deleteTheaterForm(SghPagingDto sghPagingDto, Model model) throws Exception {
+		int list_count = sghTheaterService.deleteTheaterListCount(sghPagingDto);
+		
+		sghPagingDto.setTotal_count(list_count);
+		sghPagingDto.setPageInfo();
+		
+		List<SghTheaterVo> theater_list = sghTheaterService.deleteTheaterListPaging(sghPagingDto);
+		List<SghAreaVo> area_list = sghAreaService.getAreaList();
+		
+		System.out.println("theater_list :" + theater_list);
+		model.addAttribute("theater_list", theater_list);
+		model.addAttribute("sghPagingDto", sghPagingDto);
+		model.addAttribute("area_list", area_list);
+		return "user/sgh/sgh_admin/sgh_delete_theater_list";
+	}
+	
 	// 영화관 등록 폼 이동
 	@RequestMapping(value="/movieTheaterAdd", method=RequestMethod.GET)
 	public String movieTheaterAddForm(Model model) throws Exception {
@@ -115,6 +133,19 @@ public class SghAdminController {
 	public String stateDeleteTheater(String theater_code, RedirectAttributes rttr){
 		try {
 			sghTheaterService.stateDeleteTheater(theater_code);
+			return "redirect:/sgh/admin/deleteTheaterList";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		rttr.addFlashAttribute("del_result", "false");
+		return "redirect:/sgh/admin/deleteTheaterList";
+	}
+	
+	// 영화관 복구 처리
+	@RequestMapping(value="/restoreTheater", method=RequestMethod.GET)
+	public String restoreTheater(String theater_code, RedirectAttributes rttr){
+		try {
+			sghTheaterService.restoreTheater(theater_code);
 			return "redirect:/sgh/admin/movieTheaterList?theater_code=" + theater_code;
 		} catch (Exception e) {
 			e.printStackTrace();

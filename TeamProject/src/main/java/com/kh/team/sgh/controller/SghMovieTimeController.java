@@ -17,19 +17,19 @@ import com.kh.team.domain.SghMovieTimeAjaxDto;
 import com.kh.team.domain.SghMovieTimeListVo;
 import com.kh.team.domain.SghMovieTimeModifyVo;
 import com.kh.team.domain.SghMovieTimeVo;
+import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghScheduleVo;
 import com.kh.team.domain.SghScreenSeatVo;
+import com.kh.team.sgh.service.SghMovieScheduleService;
 import com.kh.team.sgh.service.SghMovieScreenService;
 import com.kh.team.sgh.service.SghMovieTimeService;
-import com.kh.team.sgh.service.SghScheduleService;
-import com.kh.team.sgh.util.SghAsciiChangeUtil;
 
 @Controller
 @RequestMapping(value="/sgh/admin/movieTime")
 public class SghMovieTimeController {
 	
 	@Inject
-	private SghScheduleService sghScheduleService;
+	private SghMovieScheduleService sghMovieScheduleService;
 	@Inject
 	private SghMovieTimeService sghMovieTimeService;
 	@Inject
@@ -45,8 +45,8 @@ public class SghMovieTimeController {
 
 	// 상영 회차 등록 폼으로
 	@RequestMapping(value="/movieTimeRegist", method=RequestMethod.GET)
-	public String movieTimeRegist(Model model) throws Exception {
-		List<SghScheduleVo> schedule_list = sghScheduleService.getScheduleList();
+	public String movieTimeRegist(SghPagingDto sghPagingDto, Model model) throws Exception {
+		List<SghScheduleVo> schedule_list = sghMovieScheduleService.getScheduleList(sghPagingDto);
 		model.addAttribute("schedule_list", schedule_list);		
 		return "user/sgh/sgh_admin/sgh_movie_time/sgh_movie_time_regist";
 	}

@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghScheduleListDto;
 import com.kh.team.domain.SghScheduleVo;
 import com.kh.team.domain.SghTheaterVo;
+import com.kh.team.sgh.service.SghMovieScheduleService;
 import com.kh.team.sgh.service.SghMovieService;
-import com.kh.team.sgh.service.SghScheduleService;
 import com.kh.team.sgh.service.SghTheaterService;
 
 @Controller
@@ -22,7 +23,7 @@ import com.kh.team.sgh.service.SghTheaterService;
 public class SghMovieScheduleController {
 
 	@Inject
-	private SghScheduleService sghScheduleService;
+	private SghMovieScheduleService sghMovieScheduleService;
 	@Inject
 	private SghMovieService sghMovieService;
 	@Inject
@@ -30,8 +31,8 @@ public class SghMovieScheduleController {
 	
 	// 영화 스케쥴 리스트 폼으로
 	@RequestMapping(value="/scheduleList", method=RequestMethod.GET)
-	public String scheduleList(Model model) throws Exception {
-		List<SghScheduleVo> schedule_list = sghScheduleService.getScheduleList();
+	public String scheduleList(SghPagingDto sghPagingDto, Model model) throws Exception {
+		List<SghScheduleVo> schedule_list = sghMovieScheduleService.getScheduleList(sghPagingDto);
 		model.addAttribute("schedule_list", schedule_list);
 		return "user/sgh/sgh_admin/sgh_movie_schedule/sgh_movie_schedule_list";
 	}
@@ -51,7 +52,7 @@ public class SghMovieScheduleController {
 	@RequestMapping(value="/scheduleRegistRun", method=RequestMethod.GET)
 	public String scheduleRegistRun(SghScheduleVo sghScheduleVo, RedirectAttributes rttr) {
 		try {
-			sghScheduleService.insertMovieSchedule(sghScheduleVo);
+			sghMovieScheduleService.insertMovieSchedule(sghScheduleVo);
 			return "redirect:/sgh/admin/schedule/scheduleList";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,7 +66,7 @@ public class SghMovieScheduleController {
 	public String scheduleModify(String movie_schedule_code, Model model) throws Exception {
 		List<SghScheduleListDto> schedule_list = sghMovieService.getScheduleMovieList();
 		List<SghTheaterVo> theater_list = sghTheaterService.getTheaterList();
-		SghScheduleVo schedule_vo = sghScheduleService.getMovieScheduleOne(movie_schedule_code);
+		SghScheduleVo schedule_vo = sghMovieScheduleService.getMovieScheduleOne(movie_schedule_code);
 		model.addAttribute("schedule_list", schedule_list);
 		model.addAttribute("theater_list", theater_list);
 		model.addAttribute("schedule_vo", schedule_vo);
@@ -78,7 +79,7 @@ public class SghMovieScheduleController {
 	public String scheduleModifyRun(SghScheduleVo sghScheduleVo, RedirectAttributes rttr) throws Exception {
 		System.out.println("sghScheduleVo :" + sghScheduleVo);
 		try {
-			sghScheduleService.updateSchedule(sghScheduleVo);
+			sghMovieScheduleService.updateSchedule(sghScheduleVo);
 			return "redirect:/sgh/admin/schedule/scheduleList";
 		} catch (Exception e) {
 			e.printStackTrace();

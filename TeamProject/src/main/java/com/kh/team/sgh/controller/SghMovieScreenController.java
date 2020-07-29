@@ -28,12 +28,14 @@ public class SghMovieScreenController {
 	private SghMovieScreenService sghMovieScreenService;
 	@Inject
 	private SghTheaterService sghTheaterService;
-	
+
 	// 상영관 리스트 폼으로
 	@RequestMapping(value="/screenList", method=RequestMethod.GET)
 	public String screenList(SghPagingDto sghPagingDto, String theater_code, Model model) throws Exception {
 		// 상영관 페이징 작업
+		final int SCREEN_PER_PAGE = 5;
 		int total_count = sghMovieScreenService.getScreenTotal(theater_code);
+		sghPagingDto.setPer_page(SCREEN_PER_PAGE);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		int start_row = sghPagingDto.getStart_row();
@@ -42,10 +44,14 @@ public class SghMovieScreenController {
 		sghScreenPagingVo.setStart_row(start_row);
 		sghScreenPagingVo.setEnd_row(end_row);
 		sghScreenPagingVo.setTheater_code(theater_code);
+		// ------------------------------------------------------------------
+		
 		List<SghMovieScreenVo> screen_list = sghMovieScreenService.getScreenList(sghScreenPagingVo);
 		SghTheaterVo sghTheaterVo = sghTheaterService.selectOneTheater(theater_code);
 		model.addAttribute("screen_list", screen_list);
 		model.addAttribute("sghTheaterVo", sghTheaterVo);
+		model.addAttribute("sghPagingDto", sghPagingDto);
+		model.addAttribute("theater_code", theater_code);
 		return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_screen_list";
 	}
 	
@@ -60,6 +66,19 @@ public class SghMovieScreenController {
 		}
 		rttr.addFlashAttribute("delete_result", "false");
 		return "redirect:/sgh/admin/movieScreen/screenList?theater_code=" + theater_code; 
+	}
+	
+	// 상영관 복구 처리
+	@RequestMapping(value="/screenRestore", method=RequestMethod.GET)
+	public String restoreScreen(String screen_code, String theater_code, RedirectAttributes rttr) {
+		try {
+			sghMovieScreenService.stateRestoreScreen(screen_code);
+			return "redirect:/sgh/admin/movieScreen/deleteScreenList?theater_code=" + theater_code; 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		rttr.addFlashAttribute("restore_result", "false");
+		return "redirect:/sgh/admin/movieScreen/deleteScreenList?theater_code=" + theater_code; 
 	}
 	
 	// 상영관 수정 폼으로
@@ -120,5 +139,31 @@ public class SghMovieScreenController {
 		boolean result = false;
 		rttr.addFlashAttribute("result", result);
 		return "redirect:/sgh/admin/movieScreen/screenRegist?theater_code=" + theater_code + "&theater_name=" + theater_name;
+	}
+	
+	// 삭제된 상영관 리스트
+	@RequestMapping(value="/deleteScreenList", method=RequestMethod.GET)
+	public String deleteScreenList(SghPagingDto sghPagingDto, String theater_code, Model model) throws Exception {
+		// 상영관 페이징 작업
+		final int SCREEN_PER_PAGE = 5;
+		int total_count = sghMovieScreenService.getDeleteScreenTotal(theater_code);
+		sghPagingDto.setPer_page(SCREEN_PER_PAGE);
+		sghPagingDto.setTotal_count(total_count);
+		sghPagingDto.setPageInfo();
+		int start_row = sghPagingDto.getStart_row();
+		int end_row = sghPagingDto.getEnd_row();
+		SghScreenPagingVo sghScreenPagingVo = new SghScreenPagingVo();
+		sghScreenPagingVo.setStart_row(start_row);
+		sghScreenPagingVo.setEnd_row(end_row);
+		sghScreenPagingVo.setTheater_code(theater_code);
+		// ------------------------------------------------------------------
+		
+		List<SghMovieScreenVo> screen_list = sghMovieScreenService.getDeleteScreenList(sghScreenPagingVo);
+		SghTheaterVo sghTheaterVo = sghTheaterService.selectOneTheater(theater_code);
+		model.addAttribute("screen_list", screen_list);
+		model.addAttribute("sghTheaterVo", sghTheaterVo);
+		model.addAttribute("sghPagingDto", sghPagingDto);
+		model.addAttribute("theater_code", theater_code);
+		return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_delete_screen_list";
 	}
 }

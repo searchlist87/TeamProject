@@ -1,5 +1,7 @@
 package com.kh.team.domain;
 
+import java.sql.Timestamp;
+
 public class SghMovieScreenVo {
 	private String screen_code;
 	private String theater_code;
@@ -8,19 +10,10 @@ public class SghMovieScreenVo {
 	private int screen_seat_row;
 	private int screen_seat_col;
 	private String movie_screen_num;
+	private String screen_state;
+	private Timestamp screen_del_date;
 	public SghMovieScreenVo() {
 		super();
-	}
-	public SghMovieScreenVo(String screen_code, String theater_code, String screen_name, int screen_total_seat,
-			int screen_seat_row, int screen_seat_col, String movie_screen_num) {
-		super();
-		this.screen_code = screen_code;
-		this.theater_code = theater_code;
-		this.screen_name = screen_name;
-		this.screen_total_seat = screen_total_seat;
-		this.screen_seat_row = screen_seat_row;
-		this.screen_seat_col = screen_seat_col;
-		this.movie_screen_num = movie_screen_num;
 	}
 	public String getScreen_code() {
 		return screen_code;
@@ -64,10 +57,23 @@ public class SghMovieScreenVo {
 	public void setMovie_screen_num(String movie_screen_num) {
 		this.movie_screen_num = movie_screen_num;
 	}
+	public String getScreen_state() {
+		return screen_state;
+	}
+	public void setScreen_state(String screen_state) {
+		this.screen_state = screen_state;
+	}
+	public Timestamp getScreen_del_date() {
+		return screen_del_date;
+	}
+	public void setScreen_del_date(Timestamp screen_del_date) {
+		this.screen_del_date = screen_del_date;
+	}
 	@Override
 	public String toString() {
 		return "SghMovieScreenVo [screen_code=" + screen_code + ", theater_code=" + theater_code + ", screen_name="
 				+ screen_name + ", screen_total_seat=" + screen_total_seat + ", screen_seat_row=" + screen_seat_row
-				+ ", screen_seat_col=" + screen_seat_col + ", movie_screen_num=" + movie_screen_num + "]";
+				+ ", screen_seat_col=" + screen_seat_col + ", movie_screen_num=" + movie_screen_num + ", screen_state="
+				+ screen_state + ", screen_del_date=" + screen_del_date + "]";
 	}
 }
