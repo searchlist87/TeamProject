@@ -17,33 +17,26 @@
 	}
 </style>
 
+<script src="/resources/js/sgh_js/timestmap_change.js"></script>
 <script>
 $(function() {
 	
-	// 수정 결과
-	var result = "${result}";
-	console.log("result :" + result);
-	if(result == "false") {
-		alert("상영 회차에 등록된 상영관은 수정할 수 없습니다.");
-	}
-	// 삭제 결과
-	var delete_result = "${delete_result}";
-	if(delete_result == "false") {
-		alert("삭제할 수 없습니다");
-	}
-	
-	$("#screen_regist").click(function(e) {
-		e.preventDefault();
-		
-		$("#frm_theater").submit();
+	$(".del_date").each(function() {
+		var del_date = $(this).text();
+		var change_date = timestmap_change(del_date);
+		$(this).text(change_date);
+		console.log("change_date :" + change_date);
 	});
+	
+	// 수정 결과
+	var restore_result = "${restore_result}";
+	console.log("restore_result :" + restore_result);
+	if(restore_result == "false") {
+		alert("복구에 실패하셨습니다.");
+	}
 });
 </script>
 
-<form id="frm_theater" action="/sgh/admin/movieScreen/screenRegist" method="get">
-	<input type="hidden" name="theater_name" value="${sghTheaterVo.theater_name}">
-	<input type="hidden" name="theater_code" value="${sghTheaterVo.theater_code}">
-</form>
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">
@@ -57,11 +50,10 @@ $(function() {
 						<div><strong>지역 : ${sghTheaterVo.area_name}</strong></div>
 						<div><strong>주소 : ${sghTheaterVo.theater_address}</strong></div>
 						
-						<a id="screen_regist" class="btn btn-sm" href="/#" style="color:white; margin-bottom: 30px;">상영관 등록</a>
-						<a id="screen_delete_list" class="btn btn-sm" href="/sgh/admin/movieScreen/deleteScreenList?theater_code=${theater_code}" style="color:white; margin-bottom: 30px;">삭제된 상영관 목록</a>
+						<a id="screen_delete_list" class="btn btn-sm" href="/sgh/admin/movieScreen/screenList?theater_code=${theater_code}" style="color:white; margin-bottom: 30px;">등록된 영화관 목록</a>
 						<a class="btn btn-sm" href="/sgh/admin/movieTheaterList" style="color:white; margin-bottom: 30px;">목록으로</a>
 						
-						<div style="margin-bottom: 10px; text-align: center;"><strong>등록된 상영관 목록</strong></div>
+						<div style="margin-bottom: 10px; text-align: center;"><strong>삭제된 상영관 목록</strong></div>
 						
 						<table class="table">
 							<thead>
@@ -70,8 +62,8 @@ $(function() {
 									<th>총 좌석 수</th>
 									<th>좌석 행</th>
 									<th>좌석 열</th>
-									<th>수정</th>
-									<th>삭제</th>
+									<th>삭제일</th>
+									<th>복구</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -81,8 +73,8 @@ $(function() {
 									<td>${SghScreenVo.screen_total_seat}</td>
 									<td>${SghScreenVo.screen_seat_row}</td>
 									<td>${SghScreenVo.screen_seat_col}</td>
-									<td><a href="/sgh/admin/movieScreen/screenModify?screen_code=${SghScreenVo.screen_code}" class="btn-primary" style="color: white;">수정</a></td>
-									<td><a href="/sgh/admin/movieScreen/deleteScreen?screen_code=${SghScreenVo.screen_code}&theater_code=${SghScreenVo.theater_code}" class="btn-danger" style="color: white;">삭제</a></td>
+									<td class="del_date">${SghScreenVo.screen_del_date}</td>
+									<td><a href="/sgh/admin/movieScreen/screenRestore?screen_code=${SghScreenVo.screen_code}&theater_code=${theater_code}" class="btn-warning" style="color: white;">복구</a></td>
 								</tr>
 							</c:forEach>
 							</tbody>
@@ -103,7 +95,7 @@ $(function() {
 				<ul class="pagination">
 <!--  							이전 -->
 					<c:if test="${sghPagingDto.start_page != 1}">
-						<li class="page-item"><a class="page-link" href="/sgh/admin/movieScreen/screenList?start_page=${sghPagingDto.start_page - 1}&theater_code=${theater_code}">&laquo;</a></li>
+						<li class="page-item"><a class="page-link" href="/sgh/admin/movieScreen/deleteScreenList?start_page=${sghPagingDto.start_page - 1}&theater_code=${theater_code}">&laquo;</a></li>
 					</c:if>
 <!--  								페이지 넘버링 -->
 					<c:forEach begin="${sghPagingDto.start_page}" end="${sghPagingDto.end_page}" var="v">
@@ -113,12 +105,12 @@ $(function() {
 							</c:if>
 							"
 						>
-							<a class="page-link" href="/sgh/admin/movieScreen/screenList?page=${v}&theater_code=${theater_code}" style="float: left;">${v}</a>
+							<a class="page-link" href="/sgh/admin/movieScreen/deleteScreenList?page=${v}&theater_code=${theater_code}" style="float: left;">${v}</a>
 						</li>
 					</c:forEach>
 <!--  								다음 -->
 					<c:if test="${sghPagingDto.end_page < sghPagingDto.total_page}">
-						<li class="page-item"><a class="page-link" href="/sgh/admin/movieScreen/screenList?end_page=${sghPagingDto.end_page + 1}&theater_code=${theater_code}">&raquo;</a></li>
+						<li class="page-item"><a class="page-link" href="/sgh/admin/movieScreen/deleteScreenList?end_page=${sghPagingDto.end_page + 1}&theater_code=${theater_code}">&raquo;</a></li>
 					</c:if>
 				</ul>
 			</nav>

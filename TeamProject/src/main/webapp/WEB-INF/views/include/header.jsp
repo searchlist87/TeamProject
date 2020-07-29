@@ -67,7 +67,7 @@ $(function() {
 									<li><i class="ti-power-off"></i><a href="/team/user">로그인</a></li>
 								</c:otherwise>
 							</c:choose>
-							<li><i class="ti-user"></i> <a href="#">고객센터</a></li>
+							<li><i class="ti-user"></i> <a href="/customer/customerPage">고객센터</a></li>
 							<li><div class="sinlge-bar shopping">
 							<i class="ti-bag"></i>
 							<a href="/kdh/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon" style="position:relative;">

@@ -35,15 +35,15 @@ $(function () {
 	$("#board_manage > dd").eq(2).css("color","blue");
 	
 	
-// 	$("#selectSearch").change(function () {
+	$("#selectSearch").change(function () {
 		
-// 		var searchType = $("#selectSearch option:selected").val();
-// 		if (searchType == 'noReply') {
-// 			$("#keyword").css("visibility", "hidden");
-// 		} else {
-// 			$("#keyword").css("visibility", "visible");
-// 		}
-// 	});
+		var searchType = $("#selectSearch option:selected").val();
+		if (searchType == 'noReply') {
+			$("#keyword").css("visibility", "hidden");
+		} else {
+			$("#keyword").css("visibility", "visible");
+		}
+	});
 	
 	$("#searchBtn").click(function () {
 		var searchType = $("#selectSearch option:selected").val();

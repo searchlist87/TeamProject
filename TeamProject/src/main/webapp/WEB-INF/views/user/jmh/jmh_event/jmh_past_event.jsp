@@ -37,7 +37,7 @@
 <script>
 $(function() {
 	
-	$(".nice-select").remove();
+	$("#searchNiceSelect").find(".nice-select").remove();
 	$("#selectSearch").removeAttr("style");
 	
 	// 현재 시간 및 날짜
@@ -96,7 +96,7 @@ $(function() {
 			<div class="col-md-2"></div>
 			<div class="col-md-8 blog-meta" style="margin-bottom:20px;">
 				<h2>지난 이벤트</h2>
-				<div style="float:right;">
+				<div style="float:right;" id="searchNiceSelect">
 					<div style="padding:10px;float:left;height:50px;">
 						<select id="selectSearch" name="searchType"> 
 							<option selected="selected" value="ename">이벤트명</option>

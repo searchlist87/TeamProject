@@ -93,9 +93,12 @@ public class GshController {
 	@RequestMapping(value = "/movieInfo", method = RequestMethod.GET)
 	public String movieInfo(HttpSession session, String movie_code, ModelMap model) throws Exception {
 		GshMovieDto movieDto = gshMovieService.selectMovieCode(movie_code);
+		System.out.println("movieInfo, movieDto:" + movieDto);
 		// 스틸컷 파일명 목록
 		List<String> subImageList = gshMovieService.selectMovieSubImage(movie_code);
 		List<GshReviewVo> reviewList = gshReviewService.selectReviewByCode(movie_code);
+//		int review_score = gshReviewService.averageReviewScore(movie_code);
+//		movieDto.setReview_score(review_score);
 		model.addAttribute("movieDto", movieDto);
 		model.addAttribute("subImageList", subImageList);
 		model.addAttribute("reviewList", reviewList);
@@ -119,21 +122,13 @@ public class GshController {
 	}
 	
 	
-	// 상영작 리스트
-	@RequestMapping(value = "/onairList", method = RequestMethod.GET)
-	public String onairList(Model model) throws Exception {
-		List<GshMovieDto> list = gshMovieService.select_movieAll();
-		model.addAttribute("list", list);
-		return "user/gsh/movie/onairList";
-	}
 	
 	// 상영작 리스트
-//	@ResponseBody
-//	@RequestMapping(value = "/commentListAjax", method = RequestMethod.GET)
-//	public String commentListAjax(GshReviewVo gshReviewVo) throws Exception {
-//		System.out.println("GshReviewVo gshReviewVo :" + gshReviewVo);
-//		return "success";	
+//	@RequestMapping(value = "/onairList", method = RequestMethod.GET)
+//	public String onairList(Model model) throws Exception {
+//		List<GshMovieDto> list = gshMovieService.select_movieAll();
+//		model.addAttribute("list", list);
+//		return "user/gsh/movie/onairList";
 //	}
-		
 	
 }

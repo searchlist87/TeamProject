@@ -35,7 +35,7 @@ public class GshMovieDto {
 	// 작성자 아이디
 	private String user_id;
 	// 리뷰 점수
-	private String review_score;
+	private int review_score;
 	// 리뷰 내용
 	private String review_content;
 	// 리뷰 작성일
@@ -133,10 +133,10 @@ public class GshMovieDto {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public String getReview_score() {
+	public int getReview_score() {
 		return review_score;
 	}
-	public void setReview_score(String review_score) {
+	public void setReview_score(int review_score) {
 		this.review_score = review_score;
 	}
 	public String getReview_content() {

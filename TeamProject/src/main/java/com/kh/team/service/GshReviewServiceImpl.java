@@ -50,6 +50,11 @@ public class GshReviewServiceImpl implements GshReviewService {
 		return gshReviewDao.selectReviewByCode(movie_code);
 	}
 
+	@Override
+	public int averageReviewScore(String movie_code) throws Exception {
+		return gshReviewDao.averageReviewScore(movie_code);
+	}
+
 
 	
 }

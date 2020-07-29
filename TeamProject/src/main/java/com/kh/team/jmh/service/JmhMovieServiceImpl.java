@@ -31,6 +31,7 @@ public class JmhMovieServiceImpl implements JmhMovieService {
 	public void movieRegister(JmhMovieVo jmhMovieVo) throws Exception {
 		jmhMovieDao.movieRegister(jmhMovieVo);
 		String movie_code = jmhMovieDao.selectMovieCode();
+		System.out.println("movie_code :" + movie_code);
 		String[] files = jmhMovieVo.getMovie_sub_image();
 		for (String movie_sub_image : files) {
 			jmhMovieDao.movieSubImageRegister(movie_code, movie_sub_image);

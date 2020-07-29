@@ -77,4 +77,19 @@ public class SghMovieScreenServiceImpl implements SghMovieScreenService {
 		return sghMovieScreenDao.getScreenTotal(theater_code);
 	}
 
+	@Override
+	public List<SghMovieScreenVo> getDeleteScreenList(SghScreenPagingVo sghScreenPagingVo) throws Exception {
+		return sghMovieScreenDao.getDeleteScreenList(sghScreenPagingVo);
+	}
+
+	@Override
+	public int getDeleteScreenTotal(String theater_code) throws Exception {
+		return sghMovieScreenDao.getDeleteScreenTotal(theater_code);
+	}
+
+	@Override
+	public void stateRestoreScreen(String screen_code) throws Exception {
+		sghMovieScreenDao.stateRestoreScreen(screen_code);
+	}
+
 }

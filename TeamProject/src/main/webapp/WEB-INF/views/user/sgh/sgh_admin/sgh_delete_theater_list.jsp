@@ -5,6 +5,7 @@
 <%@ include file="../../../include/tag_and_styleSheet.jsp" %>
 <%@ include file="../../../include/admin_header.jsp" %>
 
+<script src="/resources/js/sgh_js/timestmap_change.js"></script>
 <script>
 $(function() {
 	$(".page-link").css("float", "left");
@@ -13,12 +14,24 @@ $(function() {
 	$("select").css("display", "block");
 	$(".nice-select").remove()
 	
+	var del_result = "${del_result}";
+	if(del_result == "false") {
+		alert("삭제에 실패하셨습니다.");
+	}
+	
+	$(".del_date").each(function() {
+		var date = $(this).text();
+		var del_date = timestmap_change(date);
+		$(this).text(del_date);
+		console.log("del_date :" + del_date);
+	});
+	
 	$("#btnAreaSearch").click(function() {
 		var start_row ="${sghPagingDto.start_row}";
 		var end_row ="${sghPagingDto.end_row}";
 		var area_code = $("#select_area option:selected").attr("data-area-code");
 		
-		location.href = "/sgh/admin/movieTheaterList?start_row=" + start_row + "&end_row=" + end_row + "&area_code=" + area_code;
+		location.href = "/sgh/admin/deleteTheaterList?start_row=" + start_row + "&end_row=" + end_row + "&area_code=" + area_code;
 	});
 });
 </script>
@@ -43,7 +56,7 @@ $(function() {
 								</c:forEach>
 							</select>
 							<button id="btnAreaSearch" type="button" class="btn-success" style="margin-left: 10px;">검색</button>
-							<a href="/sgh/admin/deleteTheaterList" class="btn-sm" style="margin-left: 10px; background-color: black; color: white;">삭제된 목록</a>
+							<a href="/sgh/admin//movieTheaterList" class="btn-sm" style="margin-left: 10px; background-color: black; color: white;">등록된 목록</a>
 						</div>
 						<!--  페이지별 내용 -->
 						<div class="container-fluid">
@@ -55,8 +68,8 @@ $(function() {
 												<th>지역</th>
 												<th>영화관명</th>
 												<th>주소</th>
-												<th>수정</th>
-												<th>삭제</th>
+												<th>삭제일</th>
+												<th>복구</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -65,8 +78,8 @@ $(function() {
 												<td>${SghTheaterVo.area_name}</td>
 												<td><a href="/sgh/admin/movieScreen/screenList?theater_code=${SghTheaterVo.theater_code}" style="color:blue;">${SghTheaterVo.theater_name}</a></td>
 												<td>${SghTheaterVo.theater_address}</td>
-												<td><a href="/sgh/admin/movieTheaterModify?theater_code=${SghTheaterVo.theater_code}" class="btn-primary" style="color: white;">수정</a></td>
-												<td><a href="/sgh/admin/deleteTheater?theater_code=${SghTheaterVo.theater_code}" class="btn-danger" style="color: white;">삭제</a></td>
+												<td class="del_date">${SghTheaterVo.theater_del_date}</td>
+												<td><a href="/sgh/admin/restoreTheater?theater_code=${SghTheaterVo.theater_code}" class="btn-warning" style="color: white;">복구</a></td>
 											</tr>
 											</c:forEach>
 										</tbody>
@@ -82,7 +95,7 @@ $(function() {
 						 						<ul class="pagination">
 						<!--  							이전 -->
 						 							<c:if test="${sghPagingDto.start_page != 1}">
-						 								<li class="page-item"><a class="page-link" href="/sgh/admin/movieTheaterList?start_page=${sghPagingDto.start_page - 1}&area_code=${sghPagingDto.area_code}">&laquo;</a></li>
+						 								<li class="page-item"><a class="page-link" href="/sgh/admin/deleteTheaterList?start_page=${sghPagingDto.start_page - 1}&area_code=${sghPagingDto.area_code}">&laquo;</a></li>
 						 							</c:if>
 						<!--  								페이지 넘버링 -->
 						 							<c:forEach begin="${sghPagingDto.start_page}" end="${sghPagingDto.end_page}" var="v">
@@ -92,12 +105,12 @@ $(function() {
 						 									</c:if>
 						 									"
 						 								>
-						 									<a class="page-link" href="/sgh/admin/movieTheaterList?page=${v}&area_code=${sghPagingDto.area_code}">${v}</a>
+						 									<a class="page-link" href="/sgh/admin/deleteTheaterList?page=${v}&area_code=${sghPagingDto.area_code}">${v}</a>
 						 								</li>
 						 							</c:forEach>
 						<!--  								다음 -->
 						 							<c:if test="${sghPagingDto.end_page < sghPagingDto.total_page}">
-						 								<li class="page-item"><a class="page-link" href="/sgh/admin/movieTheaterList?end_page=${sghPagingDto.end_page + 1}&area_code=${sghPagingDto.area_code}">&raquo;</a></li>
+						 								<li class="page-item"><a class="page-link" href="/sgh/admin/deleteTheaterList?end_page=${sghPagingDto.end_page + 1}&area_code=${sghPagingDto.area_code}">&raquo;</a></li>
 						 							</c:if>
 						 						</ul>
 						 					</nav>

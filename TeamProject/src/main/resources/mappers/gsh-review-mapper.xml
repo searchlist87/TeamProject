@@ -55,12 +55,13 @@
 		order by review_num desc
 	</select>
 	
-	<select id="averageReviewScore">
-		select 5/count(*)
+	<!-- 해당 영화에 대한 평점 구하기 -->
+	<select id="averageReviewScore" resultType="int">
+		select round(avg(review_score))
 		from tbl_movie m, tbl_review r
 		where m.movie_code = r.movie_code
-		and m.movie_code = 'MC9'
-		order by review_num desc;
+		and m.movie_code = #{movie_code}
+		order by review_num desc
 	</select>
-		
+	
 </mapper>

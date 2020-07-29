@@ -51,4 +51,18 @@ public class SghTheaterServiceImpl implements SghTheaterService {
 		sghTheaterDao.stateDeleteTheater(theater_code);
 	}
 
+	@Override
+	public List<SghTheaterVo> deleteTheaterListPaging(SghPagingDto sghPagingDto) throws Exception {
+		return sghTheaterDao.deleteTheaterListPaging(sghPagingDto);
+	}
+
+	@Override
+	public int deleteTheaterListCount(SghPagingDto sghPagingDto) throws Exception {
+		return sghTheaterDao.deleteTheaterListCount(sghPagingDto);
+	}
+
+	@Override
+	public void restoreTheater(String theater_code) throws Exception {
+		sghTheaterDao.restoreTheater(theater_code);
+	}
 }

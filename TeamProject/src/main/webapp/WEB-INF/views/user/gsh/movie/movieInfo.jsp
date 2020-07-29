@@ -64,6 +64,7 @@
 					$("#commentTable tr.clone_tr").remove();
 					// 리뷰 내용 남아있는걸 지우기
 					$("#review_content").val('');
+					location.reload();
 					getReviewList();
 				}
 			});
@@ -122,6 +123,7 @@
 				location.reload();
 			});
 		});
+
 	});
 </script>
 <input type="hidden" id="review_num">
@@ -216,10 +218,7 @@
 								</tr>
 								<tr>
 									<th>평점</th>
-									<td>dd${movieDto.review_score}</td>
-<%-- 									<td><c:forEach begin="1" end="${movieDto.review_score}"> --%>
-<!-- 									★ -->
-<%-- 								</c:forEach></td> --%>
+									<td>${movieDto.review_score}</td>
 								</tr>
 								<tr>
 									<th>장르</th>
@@ -232,10 +231,6 @@
 								<tr>
 									<th>출연</th>
 									<td>${movieDto.movie_actor}</td>
-								</tr>
-								<tr>
-									<th colspan="2"><button type="button"
-											class="btn btn-primary">예매하기</button></th>
 								</tr>
 							</tbody>
 						</table>

@@ -14,11 +14,26 @@
 		where rnum between #{start_row} and #{end_row}
 	</select>
 	
+	<!-- 삭제된 상영관 목록 가져오기 -->
+	<select id="getDeleteScreenList" resultType="SghMovieScreenVo">
+		select * from
+		(select rownum rnum, a.* from
+		(select * from tbl_movie_screen
+		 where theater_code = #{theater_code} and screen_state = 'N') a)
+		where rnum between #{start_row} and #{end_row}
+	</select>
+	
 	<!-- 상영관 삭제하기 -->
 	<update id="stateDeleteScreen">
 		update tbl_movie_screen set
 			screen_state = 'N',
 			screen_del_date = sysdate
+		where screen_code = #{screen_code}
+	</update>
+	<!-- 상영관 복구하기 -->
+	<update id="stateRestoreScreen">
+		update tbl_movie_screen set
+			screen_state = 'Y'
 		where screen_code = #{screen_code}
 	</update>
 	
@@ -80,9 +95,16 @@
 	
 	<!-- 등록된 상영관의 총 숫자 가져오기 -->
 	<select id="getScreenTotal" resultType="integer">
-	select count(*) from tbl_movie_screen
-	where theater_code = #{theater_code}
-	and screen_state = 'Y'
+		select count(*) from tbl_movie_screen
+		where theater_code = #{theater_code}
+		and screen_state = 'Y'
+	</select>
+	
+	<!-- 삭제된 상영관의 총 숫자 가져오기 -->
+	<select id="getDeleteScreenTotal" resultType="integer">
+		select count(*) from tbl_movie_screen
+		where theater_code = #{theater_code}
+		and screen_state = 'N'
 	</select>
 	
 	
