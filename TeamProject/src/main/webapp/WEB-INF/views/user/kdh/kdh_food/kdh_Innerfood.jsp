@@ -267,7 +267,7 @@ $(function() {
 			<div class="row">
 				<!-- 바디 왼쪽 이미지-->
 				<div class="col-md-6" style="text-align: center">
-					<img alt="${foodVo.food_name} 이미지" src="/resources/images/kdh/${foodVo.food_image}" style="width: 500px; height:auto;"/>
+					<img alt="${foodVo.food_name} 이미지" src="/kdh/upload/displayFile?fileName=${foodVo.food_image}" style="width: 500px; height:auto;"/>
 				</div>
 				
 				<!-- 바디 오른쪽 이미지-->

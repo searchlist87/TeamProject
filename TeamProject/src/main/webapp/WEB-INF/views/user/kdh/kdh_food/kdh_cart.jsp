@@ -437,7 +437,7 @@ $(function() {
 						<tbody class="Ttbody" id="Ttbody">
 						<c:forEach items="${list}" var="foodVo">
 							<tr id="food_tr">
-								<td class="image"><img src="/resources/images/kdh/${foodVo.food_image}" alt="${foodVo.food_image}"></td>
+								<td class="image"><img src="/kdh/upload/displayFile?fileName=${foodVo.food_image}" alt="${foodVo.food_image}"></td>
 								<td class="product-des" data-food-num="${foodVo.food_num}">
 									<p class="product-name"><a href="#">${foodVo.food_name}</a></p>
 								</td>
