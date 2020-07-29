@@ -7,7 +7,11 @@
 
 	<!-- 상영관 목록 가져오기 -->
 	<select id="getScreenList" resultType="SghMovieScreenVo">
-		select * from tbl_movie_screen where theater_code = #{theater_code} and screen_state = 'Y'
+		select * from
+		(select rownum rnum, a.* from
+		(select * from tbl_movie_screen
+		 where theater_code = #{theater_code} and screen_state = 'Y') a)
+		where rnum between #{start_row} and #{end_row}
 	</select>
 	
 	<!-- 상영관 삭제하기 -->

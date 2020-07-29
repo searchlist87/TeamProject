@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.team.domain.SghMovieScreenVo;
 import com.kh.team.domain.SghMovieSeatVo;
+import com.kh.team.domain.SghScreenPagingVo;
 import com.kh.team.domain.SghScreenSeatVo;
 import com.kh.team.sgh.persistence.SghMovieScreenDao;
 
@@ -19,8 +20,8 @@ public class SghMovieScreenServiceImpl implements SghMovieScreenService {
 	@Inject
 	private SghMovieScreenDao sghMovieScreenDao;
 	@Override
-	public List<SghMovieScreenVo> getScreenList(String theater_code) throws Exception {
-		return sghMovieScreenDao.getScreenList(theater_code);
+	public List<SghMovieScreenVo> getScreenList(SghScreenPagingVo sghScreenPagingVo) throws Exception {
+		return sghMovieScreenDao.getScreenList(sghScreenPagingVo);
 	}
 	
 	@Transactional
@@ -69,6 +70,11 @@ public class SghMovieScreenServiceImpl implements SghMovieScreenService {
 	@Override
 	public void stateDeleteScreen(String screen_code) throws Exception {
 		sghMovieScreenDao.stateDeleteScreen(screen_code);
+	}
+
+	@Override
+	public int getScreenTotal(String theater_code) throws Exception {
+		return sghMovieScreenDao.getScreenTotal(theater_code);
 	}
 
 }

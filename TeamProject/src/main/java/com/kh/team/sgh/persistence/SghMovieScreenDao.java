@@ -4,12 +4,13 @@ import java.util.List;
 
 import com.kh.team.domain.SghMovieScreenVo;
 import com.kh.team.domain.SghMovieSeatVo;
+import com.kh.team.domain.SghScreenPagingVo;
 import com.kh.team.domain.SghScreenSeatVo;
 
 public interface SghMovieScreenDao {
 
 	// 상영관 목록 가져오기
-	public List<SghMovieScreenVo> getScreenList(String theater_code) throws Exception;
+	public List<SghMovieScreenVo> getScreenList(SghScreenPagingVo sghScreenPagingVo) throws Exception;
 	// 상영관 추가
 	public void insertScreen(SghMovieScreenVo sghMovieScreenVo) throws Exception;
 	// 상영관 하나 가져오기

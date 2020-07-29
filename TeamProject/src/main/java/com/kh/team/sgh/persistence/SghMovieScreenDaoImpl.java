@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.SghMovieScreenVo;
 import com.kh.team.domain.SghMovieSeatVo;
+import com.kh.team.domain.SghScreenPagingVo;
 import com.kh.team.domain.SghScreenSeatVo;
 
 @Repository
@@ -19,8 +20,8 @@ public class SghMovieScreenDaoImpl implements SghMovieScreenDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<SghMovieScreenVo> getScreenList(String theater_code) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getScreenList", theater_code);
+	public List<SghMovieScreenVo> getScreenList(SghScreenPagingVo sghScreenPagingVo) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getScreenList", sghScreenPagingVo);
 	}
 
 	@Override

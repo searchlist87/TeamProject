@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.SghMovieScreenVo;
 import com.kh.team.domain.SghPagingDto;
+import com.kh.team.domain.SghScreenPagingVo;
 import com.kh.team.domain.SghScreenRegistDto;
 import com.kh.team.domain.SghTheaterVo;
 import com.kh.team.sgh.service.SghMovieScreenService;
@@ -31,8 +32,17 @@ public class SghMovieScreenController {
 	// 상영관 리스트 폼으로
 	@RequestMapping(value="/screenList", method=RequestMethod.GET)
 	public String screenList(SghPagingDto sghPagingDto, String theater_code, Model model) throws Exception {
+		// 상영관 페이징 작업
+		int total_count = sghMovieScreenService.getScreenTotal(theater_code);
+		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
-		List<SghMovieScreenVo> screen_list = sghMovieScreenService.getScreenList(theater_code);
+		int start_row = sghPagingDto.getStart_row();
+		int end_row = sghPagingDto.getEnd_row();
+		SghScreenPagingVo sghScreenPagingVo = new SghScreenPagingVo();
+		sghScreenPagingVo.setStart_row(start_row);
+		sghScreenPagingVo.setEnd_row(end_row);
+		sghScreenPagingVo.setTheater_code(theater_code);
+		List<SghMovieScreenVo> screen_list = sghMovieScreenService.getScreenList(sghScreenPagingVo);
 		SghTheaterVo sghTheaterVo = sghTheaterService.selectOneTheater(theater_code);
 		model.addAttribute("screen_list", screen_list);
 		model.addAttribute("sghTheaterVo", sghTheaterVo);
