@@ -60,4 +60,9 @@
 	where user_id = #{user_id}
 </select>
 
+<!-- 해당 상품 장바구니 내역 삭제 -->
+<delete id="deleteFoodCart">
+	delete tbl_food_cart
+	where food_num =  #{food_num} 
+</delete>
 </mapper>
