@@ -12,4 +12,12 @@
 	where rnum between 1 and 3
 </select>
 
+<!--  영화 4개 가져오기 -->
+<select id="selectMovie8" resultType="JmhMovieVo">
+	select * from (select rownum rnum, t.* from(select * from tbl_movie 
+												order by movie_regist_date desc) 
+				   t)
+	where rnum between 1 and 8
+</select>
+
 </mapper>
