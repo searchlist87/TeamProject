@@ -49,30 +49,14 @@
 		<section class="product-area shop-sidebar shop section">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-3 col-md-4 col-12">
-						<div class="shop-sidebar">
-						
-							<!-- 영화 카테고리 부분 시작 -->
-<!-- 							<div class="single-widget category"> -->
-<!-- 								<h3 class="title">카테고리</h3> -->
-<!-- 								<ul class="categor-list"> -->
-<!-- 									<li><a href="#">베스트</a></li> -->
-<!-- 									<li><a href="#">신작</a></li> -->
-<!-- 									<li><a href="#">상영작</a></li> -->
-<!-- 								</ul> -->
-<!-- 							</div> -->
-							<!-- 영화 카테고리 부분 끝 -->
-							
-						</div>
-					</div>
-					<div class="col-lg-9 col-md-8 col-12">
+					<div class="col-md-12 col-12">
 						<div class="row">
 							<div class="col-12">
 								<!-- Shop Top -->
 								<div class="shop-top" style="border-bottom: 1px solid #ddd;margin-bottom:20px;">
 									<div class="shop-shorter">
 										<div class="single-shorter">
-											<h3>전체</h3>
+											<h3 style="margin-left:450px;">TOTAL MOVIE</h3>
 										</div>
 									</div>
 								</div>
