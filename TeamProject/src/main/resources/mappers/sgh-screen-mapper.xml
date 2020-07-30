@@ -10,7 +10,8 @@
 		select * from
 		(select rownum rnum, a.* from
 		(select * from tbl_movie_screen
-		 where theater_code = #{theater_code} and screen_state = 'Y') a)
+		 where theater_code = #{theater_code} and screen_state = 'Y'
+		 order by screen_code desc) a)
 		where rnum between #{start_row} and #{end_row}
 	</select>
 	

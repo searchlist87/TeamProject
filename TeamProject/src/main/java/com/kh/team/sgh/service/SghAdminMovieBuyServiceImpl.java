@@ -21,7 +21,6 @@ public class SghAdminMovieBuyServiceImpl implements SghAdminMovieBuyService {
 	
 	@Override
 	public List<SghAdminMovieBuyVo> getAdminMovieBuyList(SghPagingDto sghPagingDto) throws Exception {
-		System.out.println("daoImpl sghPagingDto :" + sghPagingDto);
 		return sghAdminMovieBuyDao.getAdminMovieBuyList(sghPagingDto);
 	}
 

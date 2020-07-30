@@ -1,6 +1,5 @@
 package com.kh.team.sgh.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,12 +34,66 @@ public class SghMovieTimeController {
 	@Inject
 	private SghMovieScreenService sghMovieScreenService;
 	
-	// 상영 회차 조회 폼으로
+	// 기간이 지나지 않고 삭제되지 않은 상영 회차 조회 폼으로
 	@RequestMapping(value="/movieTimeList", method=RequestMethod.GET)
-	public String movieTimeList(Model model) throws Exception {
-		List<SghMovieTimeListVo> time_list = sghMovieTimeService.getMovieTimeList();
+	public String movieTimeList(SghPagingDto sghPagingDto, Model model) throws Exception {
+		int total_count = sghMovieTimeService.getMovieTimeCount();
+		sghPagingDto.setTotal_count(total_count);
+		sghPagingDto.setPageInfo();
+		List<SghMovieTimeListVo> time_list = sghMovieTimeService.getMovieTimeList(sghPagingDto);
 		model.addAttribute("time_list", time_list);
+		model.addAttribute("sghPagingDto", sghPagingDto);
 		return "user/sgh/sgh_admin/sgh_movie_time/sgh_movie_time_list";
+	}
+	
+	// 삭제된 상영 회차 조회 폼으로
+	@RequestMapping(value="/deleteMovieTimeList", method=RequestMethod.GET)
+	public String deleteMovieTimeList(SghPagingDto sghPagingDto, Model model) throws Exception {
+		int total_count = sghMovieTimeService.deleteMovieTimeCount();
+		sghPagingDto.setTotal_count(total_count);
+		sghPagingDto.setPageInfo();
+		List<SghMovieTimeListVo> time_list = sghMovieTimeService.deleteMovieTimeList(sghPagingDto);
+		model.addAttribute("time_list", time_list);
+		model.addAttribute("sghPagingDto", sghPagingDto);
+		return "user/sgh/sgh_admin/sgh_movie_time/sgh_delete_movie_time_list";
+	}
+	
+	// 기간이 지나고 삭제되지않은 상영 회차 조회 폼으로
+	@RequestMapping(value="/endOupMovieTimeList", method=RequestMethod.GET)
+	public String endOupMovieTimeList(SghPagingDto sghPagingDto, Model model) throws Exception {
+		int total_count = sghMovieTimeService.endOutMovieTimeCount();
+		sghPagingDto.setTotal_count(total_count);
+		sghPagingDto.setPageInfo();
+		List<SghMovieTimeListVo> time_list = sghMovieTimeService.endOutMovieTimeList(sghPagingDto);
+		model.addAttribute("time_list", time_list);
+		model.addAttribute("sghPagingDto", sghPagingDto);
+		return "user/sgh/sgh_admin/sgh_movie_time/sgh_end_out_movie_time_list";
+	}
+	
+	// 삭제하기
+	@RequestMapping(value="/deleteMovieTime", method=RequestMethod.GET)
+	public String deleteMovieTime(String movie_time_code, RedirectAttributes rttr) {
+		try {
+			sghMovieTimeService.deleteMovieTime(movie_time_code);
+			return "redirect:/sgh/admin/movieTime/movieTimeList";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		rttr.addFlashAttribute("delete_result", false);
+		return "redirect:/sgh/admin/movieTime/movieTimeList";
+	}
+	
+	// 복구하기
+	@RequestMapping(value="/restoreMovieTime", method=RequestMethod.GET)
+	public String restoreMovieTime(String movie_time_code, RedirectAttributes rttr) {
+		try {
+			sghMovieTimeService.restoreMovieTime(movie_time_code);
+			return "redirect:/sgh/admin/movieTime/movieTimeList";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		rttr.addFlashAttribute("delete_result", false);
+		return "redirect:/sgh/admin/movieTime/movieTimeList";
 	}
 
 	// 상영 회차 등록 폼으로

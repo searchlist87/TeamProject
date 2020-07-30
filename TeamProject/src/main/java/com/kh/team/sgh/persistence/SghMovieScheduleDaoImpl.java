@@ -51,26 +51,32 @@ public class SghMovieScheduleDaoImpl implements SghMovieScheduleDao {
 
 	@Override
 	public List<SghScheduleVo> deleteScheduleList(SghPagingDto sghPagingDto) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(NAMESPACE + "deleteScheduleList", sghPagingDto);
 	}
 
 	@Override
 	public int getDeleteScheduleCount() throws Exception {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne(NAMESPACE + "getDeleteScheduleCount");
 	}
 
 	@Override
 	public void stateDeleteSchedule(String movie_schedule_code) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update(NAMESPACE + "stateDeleteSchedule", movie_schedule_code);
 	}
 
 	@Override
 	public void stateRestoreSchedule(String movie_schedule_code) throws Exception {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update(NAMESPACE + "stateRestoreSchedule", movie_schedule_code);
+	}
+
+	@Override
+	public List<SghScheduleVo> endDateOutScheduleList(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "endDateOutScheduleList", sghPagingDto);
+	}
+
+	@Override
+	public int getEndDateOutScheduleCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getEndDateOutScheduleCount");
 	}
 
 }

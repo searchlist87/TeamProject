@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.SghMovieProductVo;
+import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghSeatCheckVo;
 import com.kh.team.sgh.service.SghMovieProductService;
 import com.kh.team.sgh.util.SghAsciiChangeUtil;
@@ -23,12 +24,28 @@ public class SghMovieProductController {
 	@Inject
 	private SghMovieProductService sghMovieProductService;
 	
-	// 스케쥴 리스트 폼으로
+	// 기간이 지나지 않은 스케쥴 리스트 폼으로
 	@RequestMapping(value="/scheduleProductList", method=RequestMethod.GET)
-	public String scheduleSeatList(Model model) throws Exception {
-		List<SghMovieProductVo> movie_product_vo = sghMovieProductService.getMovieProductList();
+	public String movieProductList(SghPagingDto sghPagingDto, Model model) throws Exception {
+		int total_count = sghMovieProductService.getMovieProductTotal();
+		sghPagingDto.setTotal_count(total_count);
+		sghPagingDto.setPageInfo();
+		List<SghMovieProductVo> movie_product_vo = sghMovieProductService.getMovieProductList(sghPagingDto);
 		model.addAttribute("movie_product_vo", movie_product_vo);
+		model.addAttribute("sghPagingDto", sghPagingDto);
 		return "user/sgh/sgh_admin/sgh_schedule_product/sgh_schedule_product_list";
+	}
+	
+	// 기간이 지난 스케쥴 리스트 폼으로
+	@RequestMapping(value="/outProductList", method=RequestMethod.GET)
+	public String outProductList(SghPagingDto sghPagingDto, Model model) throws Exception {
+		int total_count = sghMovieProductService.getOutProductTotal();
+		sghPagingDto.setTotal_count(total_count);
+		sghPagingDto.setPageInfo();
+		List<SghMovieProductVo> movie_product_vo = sghMovieProductService.getOutProductList(sghPagingDto);
+		model.addAttribute("movie_product_vo", movie_product_vo);
+		model.addAttribute("sghPagingDto", sghPagingDto);
+		return "user/sgh/sgh_admin/sgh_schedule_product/sgh_out_schedule_product_list";
 	}
 	
 	// 스케쥴 등록 폼으로

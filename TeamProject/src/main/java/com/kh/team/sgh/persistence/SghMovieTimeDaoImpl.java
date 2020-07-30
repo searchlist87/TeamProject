@@ -14,6 +14,7 @@ import com.kh.team.domain.SghMovieTimeAjaxDto;
 import com.kh.team.domain.SghMovieTimeListVo;
 import com.kh.team.domain.SghMovieTimeModifyVo;
 import com.kh.team.domain.SghMovieTimeVo;
+import com.kh.team.domain.SghPagingDto;
 
 @Repository
 public class SghMovieTimeDaoImpl implements SghMovieTimeDao {
@@ -23,8 +24,8 @@ public class SghMovieTimeDaoImpl implements SghMovieTimeDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<SghMovieTimeListVo> getMovieTimeList() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getMovieTimeList");
+	public List<SghMovieTimeListVo> getMovieTimeList(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getMovieTimeList", sghPagingDto);
 	}
 
 	@Override
@@ -68,6 +69,41 @@ public class SghMovieTimeDaoImpl implements SghMovieTimeDao {
 	@Override
 	public String getMovieTimeNewDate() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getMovieTimeNewDate");
+	}
+
+	@Override
+	public int getMovieTimeCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getMovieTimeCount");
+	}
+
+	@Override
+	public List<SghMovieTimeListVo> deleteMovieTimeList(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "deleteMovieTimeList", sghPagingDto);
+	}
+
+	@Override
+	public int deleteMovieTimeCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "deleteMovieTimeCount");
+	}
+
+	@Override
+	public List<SghMovieTimeListVo> endOutMovieTimeList(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "endOutMovieTimeList", sghPagingDto);
+	}
+
+	@Override
+	public int endOutMovieTimeCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "endOutMovieTimeCount");
+	}
+
+	@Override
+	public void deleteMovieTime(String movie_time_code) throws Exception {
+		sqlSession.update(NAMESPACE + "deleteMovieTime", movie_time_code);
+	}
+
+	@Override
+	public void restoreMovieTime(String movie_time_code) throws Exception {
+		sqlSession.update(NAMESPACE + "restoreMovieTime", movie_time_code);
 	}
 
 }

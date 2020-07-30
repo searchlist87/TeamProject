@@ -4,27 +4,117 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mappers.sgh-movie-time-mapper">
-	<!-- movie_time 리스트 가져오기 -->
+
+	<!-- 종료시간이 지나지 않고 삭제되지 않은 movie_time 리스트 가져오기 -->
 	<select id="getMovieTimeList" resultType="SghMovieTimeListVo">
-		select t.movie_time_code, t.movie_start_time, t.movie_end_time, d.movie_code,
-       		   m.movie_name, s.screen_name, tt.theater_name, t.movie_money
+		select * from (select rownum rnum, a.* from (select t.movie_time_code, t.movie_start_time, t.movie_end_time, d.movie_code,
+		m.movie_name, s.screen_name, tt.theater_name, t.movie_money, t.movie_time_state, t.movie_time_del_date
 		from tbl_movie_time t, tbl_movie_schedule d, tbl_movie m, tbl_movie_screen s, tbl_theater tt
 		where t.movie_schedule_code = d.movie_schedule_code and d.movie_code = m.movie_code and t.screen_code = s.screen_code
-              and s.theater_code = tt.theater_code
+		and s.theater_code = tt.theater_code and t.movie_time_state = 'Y' and movie_end_time >= sysdate
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
+		order by movie_end_time desc) a)
+		where rnum between #{start_row} and #{end_row}
+		order by movie_end_time desc
 	</select>
+	
+	<!-- 시간이 지나지 않은 것 중 삭제되지 않은 총합 수 가져오기 -->
+	<select id="getMovieTimeCount" resultType="integer">
+		select count(*) from tbl_movie_time
+		where movie_time_state = 'Y' and movie_end_time >= sysdate
+	</select>
+	
+	<!-- 삭제된 movie_time 리스트 가져오기 -->
+	<select id="deleteMovieTimeList" resultType="SghMovieTimeListVo">
+		select * from (select rownum rnum, a.* from (select t.movie_time_code, t.movie_start_time, t.movie_end_time, d.movie_code,
+		m.movie_name, s.screen_name, tt.theater_name, t.movie_money, t.movie_time_state, t.movie_time_del_date
+		from tbl_movie_time t, tbl_movie_schedule d, tbl_movie m, tbl_movie_screen s, tbl_theater tt
+		where t.movie_schedule_code = d.movie_schedule_code and d.movie_code = m.movie_code and t.screen_code = s.screen_code
+		and s.theater_code = tt.theater_code and t.movie_time_state = 'N'
+		order by movie_end_time desc) a)
+		where rnum between #{start_row} and #{end_row}
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
+		order by movie_end_time desc
+	</select>
+	
+	<!-- 시간이 지나지 않은 것 중 삭제되지 않은 총합 수 가져오기 -->
+	<select id="deleteMovieTimeCount" resultType="integer">
+		select count(*) from tbl_movie_time
+		where movie_time_state = 'N'
+	</select>
+	
+	<!-- 종료시간이 지나지 않고 삭제되지 않은 movie_time 리스트 가져오기 -->
+	<select id="endOutMovieTimeList" resultType="SghMovieTimeListVo">
+		select * from (select rownum rnum, a.* from (select t.movie_time_code, t.movie_start_time, t.movie_end_time, d.movie_code,
+		m.movie_name, s.screen_name, tt.theater_name, t.movie_money, t.movie_time_state, t.movie_time_del_date
+		from tbl_movie_time t, tbl_movie_schedule d, tbl_movie m, tbl_movie_screen s, tbl_theater tt
+		where t.movie_schedule_code = d.movie_schedule_code and d.movie_code = m.movie_code and t.screen_code = s.screen_code
+		and s.theater_code = tt.theater_code and t.movie_time_state = 'Y' and movie_end_time <![CDATA[ <= ]]> sysdate
+		order by movie_end_time desc) a)
+		where rnum between #{start_row} and #{end_row}
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
+	</select>
+	
+	<!-- 시간이 지난 것 중 삭제되지 않은 총합 수 가져오기 -->
+	<select id="endOutMovieTimeCount" resultType="integer">
+		select count(*) from tbl_movie_time
+		where movie_time_state = 'Y' and movie_end_time <![CDATA[ <= ]]> sysdate
+	</select>
+	
+	<!-- 삭제하기 -->
+	<update id="deleteMovieTime">
+		update tbl_movie_time set
+			movie_time_state = 'N',
+			movie_time_del_date = sysdate
+		where movie_time_code = #{movie_time_code}
+	</update>
+	
+	<!-- 복구하기 -->
+	<update id="restoreMovieTime">
+		update tbl_movie_time set
+			movie_time_state = 'Y'
+		where movie_time_code = #{movie_time_code}
+	</update>
 	
 	<!-- 에이잭스 요청, 상영 일정에 등록된 영화 정보 -->
 	<select id="getAjaxScheduleOne" resultType="SghMovieTimeAjaxDto">
 		select m.movie_name, m.movie_code, tt.theater_name, d.theater_code, d.movie_start_date, d.movie_end_date, d.movie_schedule_code
 		from tbl_movie_schedule d, tbl_theater tt, tbl_movie m
 		where d.theater_code = tt.theater_code and m.movie_code = d.movie_code
-			  and d.movie_schedule_code = #{movie_schedule_code}
+			  and d.movie_schedule_code = #{movie_schedule_code} and d.movie_schedule_state = 'Y'
 	</select>
 	
 	<!-- 에이잭스 요청, 상영 일정에서 고른 상영관에 대한 스크린 정보 -->
 	<select id="getAjaxScreenList" resultType="SghMovieScreenAjaxDto">
 		select * from tbl_movie_screen
-		where theater_code = #{theater_code}
+		where theater_code = #{theater_code} and screen_state = 'Y'
 	</select>
 	
 	<!-- 상영 회차 등록하기 -->
