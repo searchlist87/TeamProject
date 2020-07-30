@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.domain.SghMovieBuyIdDateVo;
 import com.kh.team.domain.SghMovieProductVo;
 import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghPaymentVo;
@@ -47,5 +48,10 @@ public class SghMovieProductDaoImpl implements SghMovieProductDao {
 	@Override
 	public int getOutProductTotal() throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getOutProductTotal");
+	}
+
+	@Override
+	public SghMovieBuyIdDateVo getUserIdDate(String schedule_seat_code) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getUserIdDate", schedule_seat_code);
 	}
 }

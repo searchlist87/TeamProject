@@ -33,6 +33,12 @@
 	th {
 		text-align: center;
 	}
+	.set_prog {
+		font-size: 30px;
+	}
+	strong {
+		color: white;
+	}
 	
 </style>
 <script src="/resources/js/sgh_js/booking_date.js"></script>
@@ -64,7 +70,7 @@ $(function() {
 		$(this).css("border", "2px solid");
 	});
 	
-	// 상영 영화관
+	// 상영 지역 클릭 이벤트
 	$("#screeningArea").on("click", ".areaChoice", function(e) {
 		e.preventDefault();
 		var a_areaName = $(this).attr("data-a-areaName");
@@ -77,7 +83,6 @@ $(function() {
 		screenClone.attr("class", "col-lg-3 col-md-2 col-2 screeningAreaClone");
 		screenClone.css("width", "300");
 		
-		
 		$.each(theaterArr, function() {
 			var t_areaName = $(this).attr("data-t-areaName");
 			if(a_areaName == t_areaName) {
@@ -87,10 +92,15 @@ $(function() {
 		});
 		screenClone.find("a").wrap("<li></li>");
 		
+		$("#prog1").css("color", "red");
+		$("#prog2").css("color", "black");
+		$("#prog3").css("color", "black");
+		$("#prog4").css("color", "black");
+		
 		$("#screeningArea").after(screenClone);
 	});
 	
-	// 상영 영화관에서 상영하는 작품
+	// 상영 영화관 클릭 이벤트
 	$("#section").on("click", ".theater_code", function(e) {
 		e.preventDefault();
 		var url = "/sgh/book/getMovieName";
@@ -107,7 +117,6 @@ $(function() {
 		screenClone.find("li").remove();
 		
 		$.get(url, sendData, function(rData) {
-			console.log("rData" + rData);
 			$.each(rData, function() {
 				var movieName = this.movie_name;
 				var a = "<li><a href='#' class='movie_name' data-movie-code='" + this.movie_code + "' data-t-theater-code='"+theater_code+"'>" + movieName + "</a></li>";
@@ -115,18 +124,22 @@ $(function() {
 			});
 		});
 		
+		$("#prog1").css("color", "white");
+		$("#prog2").css("color", "red");
+		$("#prog3").css("color", "white");
+		$("#prog4").css("color", "white");
+		
 		$(".screeningAreaClone").after(screenClone);
 	});
 	
 	var start_date = year + "-" + zeroPlus(month) + "-" + zeroPlus(date);
 	var movie_index = 0;
-	// 각각의 영화
+	// 상영작 클릭 이벤트
 	$("#section").on("click", ".movie_name", function(e) {
 		e.preventDefault();
 		movie_index++;
 		var movie_id = "movie" + movie_index;
 		$(this).attr("id", movie_id);
-		console.log("movie_id :" + movie_id);
 		$(".movie_list_clone").remove();
 		
 		var strDate = year + "-" + zeroPlus(month) + "-" + zeroPlus(date) + "("+strDay(day)+")";
@@ -145,7 +158,6 @@ $(function() {
 		var theater_code = $(this).attr("data-t-theater-code");
 		
 		var url = "/sgh/book/movieSchedule";
-		console.log("theater_code : ", theater_code);
 		var sendData = {
 				"start_date" : start_date,
 				"movie_code" : movie_code,
@@ -176,6 +188,11 @@ $(function() {
 				$(".movie_list_title").after(list_span_clone);
 			});
 		});
+		
+		$("#prog1").css("color", "white");
+		$("#prog2").css("color", "white");
+		$("#prog3").css("color", "red");
+		$("#prog4").css("color", "white");
 		
 		screenClone.find("a").wrap("<li></li>");
 		$(".movieChoice").after(screenClone);
@@ -297,6 +314,11 @@ $(function() {
 			});
 			$("#modal_table").append(tr);
 		}); // get
+		
+		$("#prog1").css("color", "white");
+		$("#prog2").css("color", "white");
+		$("#prog3").css("color", "white");
+		$("#prog4").css("color", "red");
 	});
 	
 	// 인원/좌석 선택 버튼
@@ -377,8 +399,22 @@ $(function() {
 	</div>
 </div>
 		<!-- Product Style -->
-		<section id="section" class="product-area shop-sidebar shop section" style="padding-top: 50px;">
-			<div><h1 style="margin-left: 190px; margin-bottom: 30px;">영화 예매</h1></div>
+		<section id="section" class="product-area shop-sidebar shop section" style="padding-top: 50px; background-color:#333; mar">
+			<div style="margin-bottom: 30px;" >
+				<strong style="margin-left: 190px; margin-bottom: 30px; font-size: 50px; color:white;">
+					<img alt="카메라 이미지" src="/resources/images/camera2.png" width="100px;" height="50px;">
+					영화 예매
+				</strong>
+				<div style="text-align: center;">
+					<strong class="set_prog" id="prog1">&#9312;</strong>
+					<strong class="set_prog">&#8594;</strong>
+					<strong class="set_prog" id="prog2">&#9313;</strong>
+					<strong class="set_prog">&#8594;</strong>
+					<strong class="set_prog" id="prog3">&#9314;</strong>
+					<strong class="set_prog">&#8594;</strong>
+					<strong class="set_prog" id="prog4">&#9315;</strong>
+				</div>
+			</div>
 			<div class="container">
 				<div class="row">
 					<div id="screeningArea" class="col-lg-2 col-md-2 col-2">

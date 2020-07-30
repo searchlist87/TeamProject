@@ -28,7 +28,7 @@
 	<div class="container">
 			<div class="contact-head">
 				<div class="row">
-					<%@ include file="../include/mypage_side_menu.jsp"%>
+					<%@ include file="/WEB-INF/views/user/jmh/include/mypage_side_menu.jsp"%>
 					<div class="col-lg-8 col-12">
 						<div class="form-main">
 							<div class="title">

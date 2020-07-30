@@ -13,6 +13,7 @@ public class SghMovieProductVo {
 	private Timestamp movie_start_time;
 	private Timestamp movie_end_time;
 	private int screen_total_seat;
+	private int seat_check_cnt;
 	private int screen_seat_row;
 	private int screen_seat_col;
 	private int movie_seat_num;
@@ -79,6 +80,12 @@ public class SghMovieProductVo {
 	public void setScreen_total_seat(int screen_total_seat) {
 		this.screen_total_seat = screen_total_seat;
 	}
+	public int getSeat_check_cnt() {
+		return seat_check_cnt;
+	}
+	public void setSeat_check_cnt(int seat_check_cnt) {
+		this.seat_check_cnt = seat_check_cnt;
+	}
 	public int getScreen_seat_row() {
 		return screen_seat_row;
 	}
@@ -103,7 +110,9 @@ public class SghMovieProductVo {
 				+ movie_code + ", theater_code=" + theater_code + ", theater_name=" + theater_name + ", screen_code="
 				+ screen_code + ", screen_name=" + screen_name + ", movie_start_time=" + movie_start_time
 				+ ", movie_end_time=" + movie_end_time + ", screen_total_seat=" + screen_total_seat
-				+ ", screen_seat_row=" + screen_seat_row + ", screen_seat_col=" + screen_seat_col + ", movie_seat_num="
-				+ movie_seat_num + "]";
+				+ ", seat_check_cnt=" + seat_check_cnt + ", screen_seat_row=" + screen_seat_row + ", screen_seat_col="
+				+ screen_seat_col + ", movie_seat_num=" + movie_seat_num + "]";
 	}
+	
+	
 }

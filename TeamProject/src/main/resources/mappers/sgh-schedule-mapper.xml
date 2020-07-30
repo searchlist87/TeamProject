@@ -106,8 +106,8 @@
 	
 	<!-- 상영작으로 등록하기 -->
 	<insert id="insertMovieSchedule">
-	insert into tbl_movie_schedule(movie_schedule_code, movie_code, theater_code, movie_start_date, movie_end_date, movie_schedule_num)
-	values('SC' || seq_movie_schedule_num.nextval, #{movie_code}, #{theater_code}, #{movie_start_date}, #{movie_end_date}, seq_movie_schedule_num.nextval)
+		insert into tbl_movie_schedule(movie_schedule_code, movie_code, theater_code, movie_start_date, movie_end_date, movie_schedule_num)
+		values('SC' || seq_movie_schedule_num.nextval, #{movie_code}, #{theater_code}, #{movie_start_date}, #{movie_end_date}, seq_movie_schedule_num.nextval)
 	</insert>
 	
 	<!-- 등록된 영화 하나 가져오기 -->

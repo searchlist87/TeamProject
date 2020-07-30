@@ -62,6 +62,12 @@
 		select ss.schedule_seat_code, s.movie_seat_num, s.seat_code, ss.seat_check, t.screen_code, ss.movie_time_code
 		from tbl_schedule_seat ss, tbl_movie_time t, tbl_movie_seat s
 		where ss.movie_time_code = t.movie_time_code and ss.movie_seat_num = s.movie_seat_num
-		and ss.movie_time_code = #{movie_time_code} and ss.seat_check = 'Y'
+		and ss.movie_time_code = #{movie_time_code}
+	</select>
+	
+	<!-- 해당 좌석의 구매자와 구매 시간 가져오기 -->
+	<select id="getUserIdDate" resultType="SghMovieBuyIdDateVo">
+		select user_id, movie_buy_date from tbl_movie_buy_list
+		where schedule_seat_code = #{schedule_seat_code} and movie_buy_check = 'Y'
 	</select>
 </mapper>
