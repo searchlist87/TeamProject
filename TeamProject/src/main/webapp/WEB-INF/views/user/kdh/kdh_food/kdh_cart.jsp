@@ -186,7 +186,7 @@ $(function() {
 	
 	// 결제하기 버튼
 	$("#btnBuy").click(function() {
-		location.href="/cart/buyCart";
+		location.href="/kdh/cart/buyCart";
 // 		var test = $(this).parent().parent().parent().parent().parent().parent().parent().parent().find($(".data-food-num")).attr("data-food-num");
 // 		console.log("test:" + test);
 		
@@ -197,7 +197,7 @@ $(function() {
 		var r = confirm("선택하신 상품을 삭제하시겠습니까?");
 		if(r == true) {
 			var food_cart_num = $(this).attr("data-food-cart-num");
-			location.href="/cart/delete?food_cart_num="+food_cart_num;
+			location.href="/kdh/cart/delete?food_cart_num="+food_cart_num;
 		} else {
 			
 		}

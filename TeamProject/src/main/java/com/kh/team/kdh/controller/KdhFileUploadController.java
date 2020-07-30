@@ -37,10 +37,8 @@ public class KdhFileUploadController {
 	@ResponseBody
 	public byte[] displayFile(@RequestParam("fileName") String fileName) throws Exception {
 		String KdhUploadPath = uploadPath + "/kong_upload";
-		System.out.println("fileName:" + fileName);
 		String filePath = KdhUploadPath + File.separator + fileName;
 		String rFilePath = filePath.replace("/", "\\");
-		System.out.println("rFilePath:" + rFilePath);
 		FileInputStream fis = new FileInputStream(rFilePath);
 		byte[] bytes = IOUtils.toByteArray(fis);
 		fis.close();

@@ -221,10 +221,24 @@ $(function() {
 	
 	// 결제하기 버튼
 	$("#btnBuy").click(function() {
+		var buy_food_num = "${buy_food_num}";
+		$("#buy_food_num").val(buy_food_num);
 		var Stringuser_point = $("#UsecouponPrice").val();
+		var food_buy_countString = $("#btnCount").text();
+		var food_buy_count = parseInt(food_buy_countString);
+		$("#food_buy_count").val(food_buy_count);
 		var food_buy_price =  $("#lastPrice").attr("data-lastPrice");
-		user_point = parseInt(Stringuser_point);
-		location.href="/kdh/food/buyView?user_point="+user_point+"&food_buy_price="+food_buy_price;
+		$("#food_buy_price").val(food_buy_price);
+		var used_Point = parseInt(Stringuser_point);
+		$("#used_Point").val(used_Point);
+		
+		/* <input type="hidden" id="user_point" value="" name="user_point"/>
+	<input type="hidden" id="food_buy_price" value="" name="food_buy_price"/>
+	<input type="hidden" id="food_buy_count" value="" name="food_buy_count"/>
+	<input type="hidden" id="buy_food_num" value="" name="buy_food_num"/> */
+	
+		$("#BuyFoodForm").submit();
+// 		location.href="/kdh/food/buyView";
 	});
 	
 	// 쓰레기통 모양 클릭(스토어 홈으로 보내기)
@@ -245,7 +259,12 @@ $(function() {
 
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-
+<form id="BuyFoodForm" action="/kdh/food/buyView" method="post">
+	<input type="hidden" id="used_Point" value="" name="used_Point"/>
+	<input type="hidden" id="food_buy_price" value="" name="food_buy_price"/>
+	<input type="hidden" id="food_buy_count" value="" name="food_buy_count"/>
+	<input type="hidden" id="buy_food_num" value="" name="buy_food_num"/>
+</form>
 </head>
 
 	<!-- Breadcrumbs -->
@@ -293,9 +312,7 @@ $(function() {
 								<td class="price" id="food_price" data-price="${food_price}"><span><fmt:formatNumber pattern="#,###,###" value="${food_price}"></fmt:formatNumber></span>원</td>
 								<td class="qty" data-title="Qty">
 									<div id="btnSetCount" data-food-count="${food_count}" class="input-group" style="text-align: center;">
-										<button class="button1" id="btnMius" type="button">-</button> 
 										<span id="btnCount">${buy_food_buy_count}</span>
-										<button class="button1" id="btnPlus" type="button">+</button>
 									</div>
 								</td>
 								<td class="total-amount" data-total-price="${buy_food_buy_price}"><span id="sumPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></td>
@@ -327,7 +344,6 @@ $(function() {
 								<div class="right">
 									<ul>
 										<li>총 상품금액<span id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
-										<li>적립포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value="0"></fmt:formatNumber>원</span></li>
 										<li>총 결제금액<span data-lastPrice="${buy_food_buy_price}" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">

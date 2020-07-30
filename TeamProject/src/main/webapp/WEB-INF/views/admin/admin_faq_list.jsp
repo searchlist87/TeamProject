@@ -12,20 +12,18 @@
     <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 	<script src="/resources/js/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="/resources/css/admin.css">
+
 <style>
-	.movie_title:hover {
-		color:red;
-	}
+.eventTitle:hover {
+	color:red;
+}
+	
 .page-item {
 	float:left;
 }
 .page-link {
 	width:30px;
 	float:left;
-}
-
-.link_hover:hover {
-	color:red;
 }
 </style>
 <script>
@@ -34,47 +32,15 @@ $(function () {
 	$("#board_manage > dt").css("color","red");
 	$("#board_manage > dd").eq(2).css("color","blue");
 	
+	var rMsg = "${rMsg}";
+	if(rMsg == "success") {
+		alert("등록되었습니다.");
+	}
 	
-	$("#selectSearch").change(function () {
-		
-		var searchType = $("#selectSearch option:selected").val();
-		if (searchType == 'noReply') {
-			$("#keyword").css("visibility", "hidden");
-		} else {
-			$("#keyword").css("visibility", "visible");
-		}
-	});
-	
-	$("#searchBtn").click(function () {
-		var searchType = $("#selectSearch option:selected").val();
-		if (searchType == 'noReply') {
-		} else {
-			var keyword = $("#keyword").val();
-			if (keyword == null || keyword == "") {
-				alert("검색 키워드를 확인해주세요.");
-				$("#keyword").focus();
-				return false;
-				
-			}
-		}
-		$("#frmPage > input[name=searchType]").val(searchType);
-		$("#frmPage > input[name=keyword]").val(keyword);
-		$("#frmPage").attr("action","/admin/admin_questionList");
-		$("#frmPage").submit();
-	});
-	
-	$("#listBtn").click(function () {
-		location.href="/admin/admin_questionList";
-	});
-	
-	// 페이지 번호
-	$("a.page-link").click(function(e) {
-		e.preventDefault(); // 브라우저의 기본기능(a:링크) 막기
-		var page = $(this).attr("href").trim();
-		$("#frmPage").attr("action","/admin/admin_questionList");
-		$("#frmPage > input[name=page]").val(page);
-		$("#frmPage").submit();
-	});
+	var dMsg = "${dMsg}";
+	if (dMsg == "success") {
+		alert("삭제되었습니다.");
+	}
 	
 });
 </script>
@@ -85,6 +51,7 @@ $(function () {
 <%@include file="../include/admin_header.jsp" %>
 		<!-- admin_category -->
 		<section class="product-area shop-sidebar shop section" style="padding-top:10px;">
+		
 			<div class="container" style="padding:0px;">
 				<div class="row">
 				<%@ include file="/WEB-INF/views/include/admin_side_menu.jsp"%>
@@ -93,50 +60,41 @@ $(function () {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
-									<h4 class="title" >1:1 문의 관리</h4>
+									<h4 class="title" >게시판관리_FAQ조회</h4>
 								</div>	
-								<div style="margin-top:50px;"></div>
 								<!--  검색 -->
 								<div style="padding:20px;text-align:right;">
 										
 									<div class="single-shorter" style="vertical-align:middle;">
 										<label>검색 :</label>
 										<select id="selectSearch">
-											<option selected="selected" value="user_id">아이디</option>
-											<option value="noReply">무답변</option>
+											<option selected="selected" value="ename">이벤트명</option>
 										</select>
 									</div>
 
 									<input type="text" name="keyword" id="keyword"/>
 									<button class="btn" id="searchBtn">검색</button>
-									<button class="btn" id="listBtn">목록</button>
 								</div>	
 								<!--  검색 끝 -->
-								
 								<!--  페이지별 내용 -->
+								<div style="padding-bottom:20px;">
+									<h6 style="color:green;">* 이벤트 주제를 클릭하면 상세페이지로 이동합니다.</h6>
+								</div>
 								<table class="table" style="text-align:center;height:auto;" id="movie_table">
 									<thead>
 										<tr>
 											<th style="width:70px;">순서</th>
-											<th style="width:70px;">아이디</th>
-											<th style="width:100px;">제목</th>
-											<th style="width:130px;">문의 작성일</th>
-											<th style="width:130px;">답변 상태</th>
+											<th>FAQ 주제</th>
+											<th style="width:400px;">FAQ 등록일</th> 
 										</tr>
 									</thead>
 									<tbody style="vertical-align:middle;table-layout:fixed;">
-									<!--  1:1문의 조회 -->
-									<c:forEach items="${jmhBoardVo}" var="boardVo">
+									<!--  이벤트 조회 -->
+									<c:forEach items="${jmhFAQVo}" var="vo">
 										<tr style="height:50px;">
-											<td style="vertical-align:middle;">${boardVo.board_code}</td>
-											<td>${boardVo.user_id}</td>
-											<td style="vertical-align:middle;"><a class="link_hover" href="/admin/admin_selectQuestion?board_code=${boardVo.board_code}&user_id=${boardVo.user_id}">${boardVo.board_title}</a></td>
-											<td style="vertical-align:middle;">${boardVo.board_date}</td>
-											<td style="vertical-align:middle;">
-											<c:choose>
-												<c:when test="${boardVo.count == 0}"><span>없음</span></c:when>
-												<c:otherwise><span style="color:red;" class="replyOk">있음</span></c:otherwise>
-											</c:choose></td>
+											<td>${vo.faq_code}</td>
+											<td><a href="/admin/admin_select_faq?faq_code=${vo.faq_code}" class="faq_Title">${vo.faq_title}</a></td>
+											<td>${vo.faq_date}</td>
 										</tr>
 									</c:forEach>
 									</tbody>

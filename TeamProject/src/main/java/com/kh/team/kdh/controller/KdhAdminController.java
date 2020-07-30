@@ -103,7 +103,6 @@ public class KdhAdminController {
 	@RequestMapping(value = "/admin_food_buy_list", method = RequestMethod.GET)
 	public String admin_food_buy_list(Model model) throws Exception {
 		List<KdhAdminFoodBuyListDto> buyFoodList = foodService.selectBuyFoodList();
-		System.out.println("buyFoodList :" + buyFoodList);
 		model.addAttribute("buyFoodList", buyFoodList);
 		return "user/kdh/kdh_admin/kdh_admin_food_buy_list";
 	}

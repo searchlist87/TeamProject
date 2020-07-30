@@ -53,7 +53,7 @@ $(function () {
 									<table class="table">
 										<thead>
 											<tr>
-												<th>번호</th>
+												<th>문의번호</th>
 												<th>제목</th>
 												<th>문의날짜</th>
 												<th>답변상태</th>
@@ -70,12 +70,6 @@ $(function () {
 													<c:when test="${boardVo.count == 0}"><span>없음</span></c:when>
 													<c:otherwise><span style="color:red;">있음</span></c:otherwise>
 												</c:choose>
-<%-- 													<c:if test="${boardVo.count} == 0"> --%>
-<!-- 														<span>답변없음</span> -->
-<%-- 													</c:if> --%>
-<%-- 													<c:if test="${boardVo.count} == 0"> --%>
-<!-- 														<span>답변없음</span> -->
-<%-- 													</c:if> --%>
 												</td>
 											</tr>
 										</c:forEach>

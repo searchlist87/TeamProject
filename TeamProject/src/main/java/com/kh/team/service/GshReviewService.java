@@ -23,4 +23,7 @@ public interface GshReviewService {
 	
 	// 해당 영화 리뷰 조회
 	public List<GshReviewVo> selectReviewByCode(String movie_code) throws Exception;
+	
+	// 해당 영화 평균점수 구하기
+	public int averageReviewScore(String movie_code) throws Exception;
 }

@@ -66,4 +66,10 @@ public class GshReviewDaoImpl implements GshReviewDao {
 		return sqlSession.selectList(NAMESPACE + "selectReviewByCode", movie_code);
 	}
 
+
+	@Override
+	public int averageReviewScore(String movie_code) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "averageReviewScore", movie_code);
+	}
+
 }

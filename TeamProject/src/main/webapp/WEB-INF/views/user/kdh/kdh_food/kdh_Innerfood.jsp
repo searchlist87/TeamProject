@@ -144,7 +144,7 @@ $(function() {
 			if (rData == "success") {
 				$("#modal-420329").trigger("click");
 				$("#btnOk").click(function() {
-					location.href = "/cart/displayCart?user_id=" + user_id;
+					location.href = "/kdh/cart/displayCart?user_id=" + user_id;
 				});
 			} else if (rData == "false") {
 				alert("중복된 상품이 있습니다.");
