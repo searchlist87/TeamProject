@@ -4,28 +4,66 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mappers.sgh-schedule-mapper">
-	<!-- 상영작으로 등록된 영화 가져오기 -->
+	<!-- end date가 지나지 않은 상영작으로 등록된 영화 가져오기 -->
 	<select id="getScheduleList" resultType="SghScheduleVo">
-		select * from (select rownum rnum, a.* from (select s.movie_schedule_code, s.movie_code, s.theater_code, m.movie_name, s.movie_start_date, s.movie_end_date, t.theater_name
+		select * from (select rownum rnum, a.* from (select s.movie_schedule_code, s.movie_code, s.theater_code, m.movie_name, s.movie_start_date, s.movie_end_date, t.theater_name, s.movie_schedule_state, s.movie_del_date
 		from tbl_movie_schedule s, tbl_movie m, tbl_theater t
 		where s.movie_code = m.movie_code and s.theater_code = t.theater_code and s.movie_schedule_state = 'Y'
-       	<if test="keyword != null">
-        and movie_name like '%고%'
-        </if>
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
         ) a)
         where rownum between #{start_row} and #{end_row}
+        and movie_end_date >= sysdate
+        order by rnum desc
 	</select>
 	
 	<!-- 삭제된 상영작 가져오기 -->
 	<select id="deleteScheduleList" resultType="SghScheduleVo">
-		select * from (select rownum rnum, a.* from (select s.movie_schedule_code, s.movie_code, s.theater_code, m.movie_name, s.movie_start_date, s.movie_end_date, t.theater_name
+		select * from (select rownum rnum, a.* from (select s.movie_schedule_code, s.movie_code, s.theater_code, m.movie_name, s.movie_start_date, s.movie_end_date, t.theater_name, s.movie_schedule_state, s.movie_del_date
 		from tbl_movie_schedule s, tbl_movie m, tbl_theater t
 		where s.movie_code = m.movie_code and s.theater_code = t.theater_code and s.movie_schedule_state = 'N'
-       	<if test="keyword != null">
-        and movie_name like '%고%'
-        </if>
+       	<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
         ) a)
         where rownum between #{start_row} and #{end_row}
+        order by rnum desc
+	</select>
+	
+	<!-- end date가 지난 상영작으로 등록된 영화 가져오기 -->
+	<select id="endDateOutScheduleList" resultType="SghScheduleVo">
+		select * from (select rownum rnum, a.* from (select s.movie_schedule_code, s.movie_code, s.theater_code, m.movie_name, s.movie_start_date, s.movie_end_date, t.theater_name, s.movie_schedule_state, s.movie_del_date
+		from tbl_movie_schedule s, tbl_movie m, tbl_theater t
+		where s.movie_code = m.movie_code and s.theater_code = t.theater_code and s.movie_schedule_state = 'Y'
+       	<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
+        ) a)
+        where rownum between #{start_row} and #{end_row}
+        and movie_end_date <![CDATA[ <= ]]> sysdate
+        order by rnum desc
 	</select>
 	
 	<!-- 상영작 총 숫자 가져오기 -->
@@ -38,6 +76,12 @@
 		select count(*) from tbl_movie_schedule where movie_schedule_state = 'N'
 	</select>
 	
+	<!-- 삭제되지 않은 종료 기간이 지난 상영작 총 숫자 가져오기 -->
+	<select id="getEndOutScheduleCount" resultType="integer">
+		select count(*) from tbl_movie_schedule where movie_schedule_state = 'Y'
+        and movie_end_date <![CDATA[ <= ]]> sysdate
+	</select>
+	
 	<!-- 삭제하기 -->
 	<update id="stateDeleteSchedule">
 		update tbl_movie_schedule set
@@ -45,6 +89,7 @@
 			movie_del_date = sysdate
 		where movie_schedule_code = #{movie_schedule_code}
 	</update>
+	
 	<!-- 복구하기 -->
 	<update id="stateRestoreSchedule">
 		update tbl_movie_schedule set

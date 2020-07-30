@@ -65,7 +65,6 @@ public class SghUserController {
 	public String logout(HttpSession session) throws Exception {
 		// 저장된 로그인 세션 지우기
 		session.invalidate();
-		System.out.println("로그아웃");
 		return "redirect:/sgh/user/loginForm";
 	}
 	

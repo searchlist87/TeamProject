@@ -1,8 +1,6 @@
 package com.kh.team.sgh.persistence;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.SghMovieProductVo;
+import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghPaymentVo;
 import com.kh.team.domain.SghSeatCheckVo;
 
@@ -21,8 +20,8 @@ public class SghMovieProductDaoImpl implements SghMovieProductDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<SghMovieProductVo> getMovieProductList() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getMovieProductList");
+	public List<SghMovieProductVo> getMovieProductList(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getMovieProductList", sghPagingDto);
 	}
 
 	@Override
@@ -33,5 +32,20 @@ public class SghMovieProductDaoImpl implements SghMovieProductDao {
 	@Override
 	public List<SghSeatCheckVo> getSeatCheck(String movie_time_code) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "getSeatCheck", movie_time_code);
+	}
+
+	@Override
+	public List<SghMovieProductVo> getOutProductList(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getOutProductList", sghPagingDto);
+	}
+
+	@Override
+	public int getMovieProductTotal() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getMovieProductTotal");
+	}
+
+	@Override
+	public int getOutProductTotal() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getOutProductTotal");
 	}
 }

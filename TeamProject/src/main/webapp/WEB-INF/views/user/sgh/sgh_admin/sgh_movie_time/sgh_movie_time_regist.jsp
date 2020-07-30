@@ -133,8 +133,14 @@ $(function() {
 	$("#frm_movie_time").submit(function() {
 		var screen_code = $("#screen_code").val();
 		var movie_schedule_code = $("#movie_schedule_code").val();
-		var movie_start_time = $("#movie_start_time").val();
-		var movie_end_time = $("#movie_end_time").val();
+		var t_start_time = $("#t_start_time").val();
+		var t_end_time = $("#t_end_time").val();
+		var movie_start_time = t_start_time.replace("T", " ");
+		var movie_end_time = t_end_time.replace("T", " ");
+		movie_end_time += ":00";
+		movie_start_time += ":00";
+		$("#movie_start_time").val(movie_start_time);
+		$("#movie_end_time").val(movie_end_time);
 		
 		var movie_schedule_code = $("#movie_name option:selected").val();
 		if(movie_schedule_code == 'not') {
@@ -148,14 +154,13 @@ $(function() {
 			return false;
 		}
 		
-		var time_rgx = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])\s([1-9]|[01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/;
-		if(!time_rgx.test(movie_start_time)) {
-			alert("시작 시간 정보가 잘못되었습니다. 다시 확인해주세요.");
+		if(t_start_time == "" || t_start_time == null) {
+			alert("시작 시간은 필수 입력 정보 입니다.");
 			return false;
 		}
 		
-		if(!time_rgx.test(movie_end_time)) {
-			alert("종료 시간 정보가 잘못되었습니다. 다시 확인해주세요.");
+		if(t_end_time == "" || t_end_time == null) {
+			alert("종료 시간은 필수 입력 정보 입니다.");
 			return false;
 		}
 		
@@ -195,6 +200,8 @@ $(function() {
 							<input type="hidden" id="screen_seat_row" name="screen_seat_row">
 							<input type="hidden" id="screen_seat_col" name="screen_seat_col">
 							<input type="hidden" id="screen_total_seat" name="screen_total_seat">
+							<input type="hidden" id="movie_start_time" name="movie_start_time">
+							<input type="hidden" id="movie_end_time" name="movie_end_time">
 							<div class="form-group" id="select_div">
 								<label for="movie_genre"><strong>등록된 영화</strong></label>
 								<select id="movie_name">
@@ -206,11 +213,11 @@ $(function() {
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>시작 시간</strong></label>
-								<input type="text" class="form-control" id="movie_start_time" name="movie_start_time" placeholder="2020-01-01 12:00:00 형식으로 작성해주세요."/>
+								<input type="datetime-local" class="form-control" id="t_start_time"/>
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>종료 시간</strong></label>
-								<input type="text" class="form-control" id="movie_end_time" name="movie_end_time" placeholder="2020-01-01 12:00:00 형식으로 작성해주세요."/>
+								<input type="datetime-local" class="form-control" id="t_end_time"/>
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>금액</strong></label>

@@ -12,6 +12,7 @@ import com.kh.team.domain.SghMovieTimeAjaxDto;
 import com.kh.team.domain.SghMovieTimeListVo;
 import com.kh.team.domain.SghMovieTimeModifyVo;
 import com.kh.team.domain.SghMovieTimeVo;
+import com.kh.team.domain.SghPagingDto;
 import com.kh.team.sgh.persistence.SghMovieDao;
 import com.kh.team.sgh.persistence.SghMovieTimeDao;
 
@@ -22,8 +23,8 @@ public class SghMovieTimeServiceImpl implements SghMovieTimeService {
 	private SghMovieTimeDao sghMovieTimeDao;
 	
 	@Override
-	public List<SghMovieTimeListVo> getMovieTimeList() throws Exception {
-		return sghMovieTimeDao.getMovieTimeList();
+	public List<SghMovieTimeListVo> getMovieTimeList(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieTimeDao.getMovieTimeList(sghPagingDto);
 	}
 
 	@Override
@@ -58,4 +59,38 @@ public class SghMovieTimeServiceImpl implements SghMovieTimeService {
 		sghMovieTimeDao.modifyMovieTime(sghMovieTimeVo);
 	}
 
+	@Override
+	public int getMovieTimeCount() throws Exception {
+		return sghMovieTimeDao.getMovieTimeCount();
+	}
+
+	@Override
+	public List<SghMovieTimeListVo> deleteMovieTimeList(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieTimeDao.deleteMovieTimeList(sghPagingDto);
+	}
+
+	@Override
+	public int deleteMovieTimeCount() throws Exception {
+		return sghMovieTimeDao.deleteMovieTimeCount();
+	}
+
+	@Override
+	public List<SghMovieTimeListVo> endOutMovieTimeList(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieTimeDao.endOutMovieTimeList(sghPagingDto);
+	}
+
+	@Override
+	public int endOutMovieTimeCount() throws Exception {
+		return sghMovieTimeDao.endOutMovieTimeCount();
+	}
+
+	@Override
+	public void deleteMovieTime(String movie_time_code) throws Exception {
+		sghMovieTimeDao.deleteMovieTime(movie_time_code);
+	}
+
+	@Override
+	public void restoreMovieTime(String movie_time_code) throws Exception {
+		sghMovieTimeDao.restoreMovieTime(movie_time_code);
+	}
 }

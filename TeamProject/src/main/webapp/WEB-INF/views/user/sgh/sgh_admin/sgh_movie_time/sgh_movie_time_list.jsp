@@ -28,9 +28,26 @@ $(function() {
 		var end_time_change = timestmap_change(end_time);
 		$(this).text(end_time_change);
 	});
+	
+	var delete_result = "${delete_result}";
+	if(delete_result == "false") {
+		alert("삭제에 실패하셨습니다.");
+	}
+	
+	$("#btnSearch").click(function() {
+		var category = $("#select_category option:selected").val();
+		var keyword = $("#input_keyword").val();
+		$("#category").val(category);
+		$("#keyword").val(keyword);
+		
+		$("#frmSearch").submit();
+	});
 });
 </script>
-
+<form id="frmSearch" action="/sgh/admin/movieTime/movieTimeList" method="get"> 
+	<input type="hidden" id="category" name="category">
+	<input type="hidden" id="keyword" name="keyword">
+</form>
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">
@@ -39,12 +56,28 @@ $(function() {
 			<div class="col-lg-9 col-md-8 col-12">
 				<div class="row">
 					<div class="col-12">
+						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
+						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
+							<h4 class="title">상영일정관리_상영회차조회</h4>
+						</div>
 						<!--  페이지별 내용 -->
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12">
+									<select id="select_category" style="float: left; height: 35px;">
+										<option value="movie_name" selected>상영작</option>
+										<option value="theater_name">영화관</option>
+									</select>
+										<input type="text" class="form-inline" id="input_keyword" placeholder="전체검색은 그냥 검색 버튼" style="float: left;">
+										<button type="button" id="btnSearch" class="btn-sm" style="background-color: green; color: white;">검색</button>
+									</div>
+									<div style="margin-top: 10px;">
+										<a href="/sgh/admin/movieTime/movieTimeList" class="btn-sm" style="background-color: orange; color: white;">등록된 상영작 목록</a>
+										<a href="/sgh/admin/movieTime/deleteMovieTimeList" class="btn-sm" style="background-color: black; color: white;">삭제된 상영작 목록</a>
+										<a href="/sgh/admin/movieTime/endOupMovieTimeList" class="btn-sm" style="background-color: black; color: white;">기간이 지난 상영작 목록</a>
+									</div>
 									<div class="container-fluid">
-										<div class="row" style="margin-top: 20px;">
+										<div class="row">
 											<div class="col-md-12"></div>
 												<table class="table">
 													<thead>
@@ -52,8 +85,8 @@ $(function() {
 															<th>상영작</th>
 															<th>영화관</th>
 															<th>상영관</th>
-															<th>시작시간</th>
-															<th>종료시간</th>
+															<th>시작</th>
+															<th>종료</th>
 															<th>금액</th>
 															<th>수정</th>
 															<th>삭제</th>
@@ -69,7 +102,7 @@ $(function() {
 															<td class="end_time">${SghMovieTimeListVo.movie_end_time}</td>
 															<td>${SghMovieTimeListVo.movie_money}원</td>
 															<td><a href="/sgh/admin/movieTime/movieTimeModify?movie_time_code=${SghMovieTimeListVo.movie_time_code}" class="btn-primary" style="color: white;">수정</a></td>
-															<td><a href="/#" class="btn-danger" style="color: white;">삭제</a></td>
+															<td><a href="/sgh/admin/movieTime/deleteMovieTime?movie_time_code=${SghMovieTimeListVo.movie_time_code}" class="btn-danger" style="color: white;">삭제</a></td>
 														</tr>
 													</c:forEach>
 													</tbody>
@@ -81,6 +114,38 @@ $(function() {
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+	<!--페이징-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-5">
+			</div>
+			<div class="col-md-7">
+				<nav>
+					<ul class="pagination">
+<!--  							이전 -->
+						<c:if test="${sghPagingDto.start_page != 1}">
+							<li class="page-item"><a class="page-link" href="/sgh/admin/movieTime/movieTimeList?start_page=${sghPagingDto.start_page - 1}">&laquo;</a></li>
+						</c:if>
+<!--  								페이지 넘버링 -->
+						<c:forEach begin="${sghPagingDto.start_page}" end="${sghPagingDto.end_page}" var="v">
+						<li class="page-item
+								<c:if test="${sghPagingDto.page == v }">
+									active
+								</c:if>
+								"
+							>
+								<a class="page-link" href="/sgh/admin/movieTime/movieTimeList?page=${v}" style="float: left;">${v}</a>
+							</li>
+						</c:forEach>
+<!--  								다음 -->
+						<c:if test="${sghPagingDto.end_page < sghPagingDto.total_page}">
+							<li class="page-item"><a class="page-link" href="/sgh/admin/movieTime/movieTimeList?end_page=${sghPagingDto.end_page + 1}">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>

@@ -54,11 +54,11 @@
 			<beans:ref bean="sghLoginInterceptor"/>
 		</interceptor>
 		<!-- 어드민 인터셉터 -->
-		<interceptor><!--  고수현씨 로그인 인터셉터 추가하기 -->
-			<mapping path="/sgh/admin/**/*"/>
-			<mapping path="/admin/**/*"/>
-			<beans:ref bean="sghAdminInterceptor"/>
-		</interceptor>
+<!-- 		<interceptor> 고수현씨 로그인 인터셉터 추가하기 -->
+<!-- 			<mapping path="/sgh/admin/**/*"/> -->
+<!-- 			<mapping path="/admin/**/*"/> -->
+<!-- 			<beans:ref bean="sghAdminInterceptor"/> -->
+<!-- 		</interceptor> -->
 		<!-- 예매 인터셉터 -->
 		<interceptor>
 			<mapping path="/sgh/book/**/*"/>
