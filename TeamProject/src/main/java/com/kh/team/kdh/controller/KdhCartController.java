@@ -61,6 +61,10 @@ public class KdhCartController {
 	public String deleteCart(int food_cart_num, HttpSession session) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
 		cartService.deleteCart(food_cart_num);
+		int cartCount = cartService.selectCartCount(user_id);
+		if (cartCount == 0) {
+			return "user/kdh/kdh_food/kdh_buy_none";
+		}
 		return "redirect:/kdh/cart/displayCart?user_id=" + user_id;
 	}
 	
