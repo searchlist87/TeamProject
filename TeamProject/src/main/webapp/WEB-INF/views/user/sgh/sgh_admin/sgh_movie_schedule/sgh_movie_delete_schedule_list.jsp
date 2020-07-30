@@ -26,6 +26,18 @@ $(function() {
 		alert("삭제에 실패하셨습니다.");
 	}
 	
+	var restore_result = "${restore_result}";
+	if(restore_result == "false") {
+		alert("복구에 실패하셨습니다.");
+	}
+	
+	$(".del_date").each(function() {
+		var del_date = $(this).text();
+		var change_date = timestmap_change(del_date);
+		$(this).text(change_date);
+		console.log("change_date :" + change_date);
+	});
+	
 	$("#btnSearch").click(function() {
 		var category = $("#select_category option:selected").val();
 		var keyword = $("#input_keyword").val();
@@ -36,7 +48,7 @@ $(function() {
 	});
 });
 </script>
-<form id="frmSearch" action="/sgh/admin/schedule/scheduleList" method="get"> 
+<form id="frmSearch" action="/sgh/admin/schedule/deleteScheduleList" method="get"> 
 	<input type="hidden" id="category" name="category">
 	<input type="hidden" id="keyword" name="keyword">
 </form>
@@ -66,8 +78,8 @@ $(function() {
 												<button type="button" id="btnSearch" class="btn-sm" style="background-color: green; color: white;">검색</button>
 											</div>
 											<div style="margin-top: 10px;">
-												<a href="/sgh/admin/schedule/scheduleList" class="btn-sm" style="background-color: orange; color: white;">등록된 상영작 목록</a>
-												<a href="/sgh/admin/schedule/deleteScheduleList" class="btn-sm" style="background-color: black; color: white;">삭제된 상영작 목록</a>
+												<a href="/sgh/admin/schedule/scheduleList" class="btn-sm" style="background-color: black; color: white;">등록된 상영작 목록</a>
+												<a href="/sgh/admin/schedule/deleteScheduleList" class="btn-sm" style="background-color: orange; color: white;">삭제된 상영작 목록</a>
 												<a href="/sgh/admin/schedule/endOutScheduleList" class="btn-sm" style="background-color: black; color: white;">기간이 지난 상영작 목록</a>
 											</div>
 												<table class="table">
@@ -77,8 +89,8 @@ $(function() {
 															<th>영화관</th>
 															<th>시작일</th>
 															<th>종료일</th>
-															<th>수정</th>
-															<th>삭제</th>
+															<th>삭제일</th>
+															<th>복구</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -88,8 +100,8 @@ $(function() {
 															<td>${SghScheduleVo.theater_name}</td>
 															<td>${SghScheduleVo.movie_start_date}</td>
 															<td>${SghScheduleVo.movie_end_date}</td>
-															<td><a href="/sgh/admin/schedule/scheduleModify?movie_schedule_code=${SghScheduleVo.movie_schedule_code}" class="btn-primary" style="color: white;">수정</a></td>
-															<td><a href="/sgh/admin/schedule/deleteMovieSchedule?movie_schedule_code=${SghScheduleVo.movie_schedule_code}" class="btn-danger" style="color: white;">삭제</a></td>
+															<td class="del_date">${SghScheduleVo.movie_del_date}</td>
+															<td><a href="/sgh/admin/schedule/restoreMovieSchedule?movie_schedule_code=${SghScheduleVo.movie_schedule_code}" class="btn-warning" style="color: white;">복구</a></td>
 														</tr>
 													</c:forEach>
 													</tbody>
@@ -114,7 +126,7 @@ $(function() {
 					<ul class="pagination">
 <!--  							이전 -->
 						<c:if test="${sghPagingDto.start_page != 1}">
-							<li class="page-item"><a class="page-link" href="/sgh/admin/schedule/scheduleList?start_page=${sghPagingDto.start_page - 1}">&laquo;</a></li>
+							<li class="page-item"><a class="page-link" href="/sgh/admin/schedule/deleteScheduleList?start_page=${sghPagingDto.start_page - 1}">&laquo;</a></li>
 						</c:if>
 <!--  								페이지 넘버링 -->
 						<c:forEach begin="${sghPagingDto.start_page}" end="${sghPagingDto.end_page}" var="v">
@@ -124,12 +136,12 @@ $(function() {
 								</c:if>
 								"
 							>
-								<a class="page-link" href="/sgh/admin/schedule/scheduleList?page=${v}" style="float: left;">${v}</a>
+								<a class="page-link" href="/sgh/admin/schedule/deleteScheduleList?page=${v}" style="float: left;">${v}</a>
 							</li>
 						</c:forEach>
 <!--  								다음 -->
 						<c:if test="${sghPagingDto.end_page < sghPagingDto.total_page}">
-							<li class="page-item"><a class="page-link" href="/sgh/admin/schedule/scheduleList?end_page=${sghPagingDto.end_page + 1}">&raquo;</a></li>
+							<li class="page-item"><a class="page-link" href="/sgh/admin/schedule/deleteScheduleList?end_page=${sghPagingDto.end_page + 1}">&raquo;</a></li>
 						</c:if>
 					</ul>
 				</nav>

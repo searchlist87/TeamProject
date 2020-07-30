@@ -61,11 +61,5 @@ public class SghBookingServiceImpl implements SghBookingService {
 			sghBookingDao.insertPointList(sghPointDto);
 			sghBookingDao.updateUserPoint(sghPointDto);
 		}
-		
-		
-		
-		
-		
 	}
-
 }

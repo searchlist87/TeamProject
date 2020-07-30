@@ -66,5 +66,15 @@
 	where food_num =  #{food_num} 
 </delete>
 
-<!-- 구매 내역  -->
+<!-- 장바구니 내역 전체 삭제하기 -->
+<delete id="deleteFoodCartAll">
+	delete from tbl_food_cart
+	where user_id = #{user_id}
+</delete>
+
+<!-- 장바구니 갯수 구하기 -->
+<select id="selectCartCount" resultType="int">
+	select count(*) from tbl_food_cart
+	where user_id = #{user_id}
+</select>
 </mapper>

@@ -129,12 +129,19 @@ public class KdhController {
 		
 		
 	// 구매하기
-	@RequestMapping(value = "/buy", method = RequestMethod.GET)
+	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	@Transactional
 	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id) throws Exception {
 		List<KdhPointVo> pointList = pointService.selectPointById(buy_user_id);
-		int totalPoint = pointService.selectTotalPoint(buy_user_id);
 		KdhUserVo userInfo = foodService.selectUserInfo(buy_user_id);
+		int user_point = userInfo.getUser_point();
+		int totalPoint = 0;
+		if (user_point != 0) {
+			totalPoint = pointService.selectPointByUserId(buy_user_id);
+			model.addAttribute("totalPoint", totalPoint);
+		} else {
+			model.addAttribute("totalPoint", totalPoint);
+		}
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(buy_food_num);
 		String food_image = foodVo.getFood_image();
 		String food_name = foodVo.getFood_name();
@@ -150,7 +157,8 @@ public class KdhController {
 		model.addAttribute("buy_food_buy_count", buy_food_buy_count);
 		model.addAttribute("pointList", pointList);
 		model.addAttribute("userInfo", userInfo);
-		model.addAttribute("totalPoint", totalPoint);
+		
+		
 		// foodBuyDto 설정
 		kdhFoodBuyDto foodBuyDto = new kdhFoodBuyDto();
 		// food_num, user_id, food_buy_total_price, food_buy_count

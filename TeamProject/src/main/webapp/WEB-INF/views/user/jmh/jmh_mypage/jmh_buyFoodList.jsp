@@ -51,6 +51,7 @@
 										<tbody>
 											<c:forEach items="${buyFoodList}" var="buyFoodList">
 											<tr>
+												<td>${buyFoodList.food_buy_code}</td>
 												<td>${buyFoodList.food_name}</td>
 												<td><fmt:formatNumber pattern="#,###,###" value="${buyFoodList.food_buy_total_price}"></fmt:formatNumber>원</td>
 												<td>${buyFoodList.food_buy_count}</td>

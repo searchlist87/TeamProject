@@ -350,7 +350,7 @@ $(function() {
 		var zero = 0;
 		var couponPriceVal = $("#couponPrice").val();
 		$("#couponPrice").text(zero + "원");
-		var couponPriceText = $("#couponPrice").text();
+		var couponPriceText = $("#couponPrice").text("");
 		
 		var lastPrice = sumPrice;	
 		var lastPriceToString = String(lastPrice);
@@ -467,18 +467,19 @@ $(function() {
 						<div class="row">
 							<div class="col-lg-8 col-md-5 col-12">
 								<div class="left">
-									<div class="coupon">
-										<input id="UsecouponPrice" name="Coupon" placeholder="포인트 사용">
-										<button id="btnUse" class="btn btn-sm">사용하기</button>
-										<button id="btnUseNo" class="btn btn-sm">삭제하기</button>
-									</div>
+									<ul>
+										<li>적립포인트 사용　　　적립포인트 잔액　　　<input id="pointInfo" type="text" style="text-align:right;" value="${totalPoint}" name="pointInfo" readonly>원</li>
+										<li>사용 포인트　　　<input data-point="${userInfo.user_point}" id="UsecouponPrice" type="text" value="0" name="Coupon" placeholder="0" style="text-align:right;">원　
+										<a id="btnUse" class="btn" style="color: white;">사용하기</a>　
+										<a id="btnUseNo" class="btn" style="color: white;">삭제하기</a></li>
+									</ul>
 								</div>
 							</div>
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
 										<li>총 상품금액<span class="totalPrice" id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
-										<li>포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>원</span></li>
+										<li>포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>0원</span></li>
 										<li>총 결제금액<span class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">

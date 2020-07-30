@@ -22,11 +22,10 @@ $(function() {
 	$("#movie_start_date").blur(function() {
 		$(".start_clone").remove();
 		var start_date = $(this).val();
-		var start_rgx = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
-		if(!start_rgx.test(start_date)) {
+		if(start_date == "" || start_date == null) {
 			var span_clone = $("#message_span").clone();
 			span_clone.attr("class", "start_clone");
-			span_clone.text("YYYY-MM-DD 형식으로 작성해주셔야 합니다.");
+			span_clone.text("시작일은 필수 입력 사항입니다.");
 			$(this).after(span_clone);
 			$("#start_date_result").val("false");
 			return false;
@@ -38,11 +37,10 @@ $(function() {
 	$("#movie_end_date").blur(function() {
 		$(".end_clone").remove();
 		var end_date = $(this).val();
-		var end_rgx = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;
-		if(!end_rgx.test(end_date)) {
+		if(end_date == "" || end_date == null) {
 			var span_clone = $("#message_span").clone();
 			span_clone.attr("class", "end_clone");
-			span_clone.text("YYYY-MM-DD 형식으로 작성해주셔야 합니다.");
+			span_clone.text("종료일은 필수 입력 사항입니다.");
 			$(this).after(span_clone);
 			$("#start_date_result").val("false");
 			return false;
@@ -97,7 +95,6 @@ $(function() {
 										>${SghScheduleListDto.movie_name}</option>
 									</c:forEach>
 								</select>
-<!-- 								<input type="text" class="form-control" id="movie_name" name="movie_name"/> -->
 							</div>
 							<div class="form-group">
 								<label for="movie_genre"><strong>등록된 영화관</strong></label>
@@ -113,11 +110,11 @@ $(function() {
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>시작일</strong></label>
-								<input type="text" class="form-control" id="movie_start_date" name="movie_start_date" value="${schedule_vo.movie_start_date}"/>
+								<input type="date" class="form-control" id="movie_start_date" name="movie_start_date" value="${schedule_vo.movie_start_date}"/>
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>종료일</strong></label>
-								<input type="text" class="form-control" id="movie_end_date" name="movie_end_date" value="${schedule_vo.movie_end_date}"/>
+								<input type="date" class="form-control" id="movie_end_date" name="movie_end_date" value="${schedule_vo.movie_end_date}"/>
 							</div>
 							<button type="submit" class="btn" id="btnSubmit">등록</button>
 							<a href="/sgh/admin/schedule/scheduleList" class="btn" style="color: white;">취소</a>

@@ -93,7 +93,6 @@ $(function() {
 								<table class="table" style="text-align:center;height:auto;" id="movie_table">
 									<thead>
 										<tr>
-											<th style="width:70px;">순서</th>
 											<th style="width:100px;">상품이미지</th>
 											<th>상품명</th>
 											<th style="width:100px;">상품금액</th>
@@ -105,7 +104,6 @@ $(function() {
 									<!-- 상품(스토어) 조회 -->
 									<c:forEach items="${foodlist}" var="foodVo">
 										<tr style="height:50px;">
-											<td style="height:100px;vertical-align:middle;">${foodVo.food_num}</td>
 											<td><img src="/kdh/upload/displayFile?fileName=${foodVo.food_image}"/></td>
 											<td style="vertical-align:middle;"><a href="/kdh/admin/admin_food_selectByFood?food_num=${foodVo.food_num}" class="food_title">${foodVo.food_name}</a></td>
 											<td style="vertical-align:middle;"><fmt:formatNumber pattern="#,###,###" value="${foodVo.food_price}"></fmt:formatNumber>원</td>

@@ -4,11 +4,49 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mappers.sgh-movie-product-mapper">
-	<!-- 영화 상품 목록 가져오기 -->
+	<!-- 기간이 지나지 않은 영화 상품 목록 가져오기 -->
 	<select id="getMovieProductList" resultType="SghMovieProductVo">
-		select t.movie_time_code, m.movie_name, m.movie_code, tt.theater_code, tt.theater_name, sc.screen_code, sc.screen_name, t.movie_start_time, t.movie_end_time, sc.screen_total_seat, a.*, sc.screen_seat_row, sc.screen_seat_col
-		from tbl_movie_time t, tbl_movie m, tbl_movie_schedule d, tbl_theater tt, tbl_movie_screen sc, (select count(*) seat_check_cnt from tbl_schedule_seat where seat_check = 'Y') a
+		select * from (select rownum rnum, a.* from (select t.movie_time_code, m.movie_name, m.movie_code, tt.theater_code, tt.theater_name, sc.screen_code,
+		       sc.screen_name, t.movie_start_time, t.movie_end_time, sc.screen_total_seat,
+		       sc.screen_seat_row, sc.screen_seat_col
+		from tbl_movie_time t, tbl_movie m, tbl_movie_schedule d, tbl_theater tt, tbl_movie_screen sc
 		where m.movie_code = d.movie_code and d.movie_schedule_code = t.movie_schedule_code and tt.theater_code = d.theater_code and t.screen_code = sc.screen_code
+		and t.movie_end_time >= sysdate
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
+		order by t.movie_end_time desc) a)
+		where rnum between #{start_row} and #{end_row}
+	</select>
+	
+	<!-- 기간이 지나지 않은 영화 상품 목록 토탈 -->
+	<select id="getMovieProductTotal" resultType="integer">
+		select count(*) from tbl_movie_time
+		where movie_end_time >= sysdate
+	</select>
+	
+	<!-- 기간이 지난 영화 상품 목록 가져오기 -->
+	<select id="getOutProductList" resultType="SghMovieProductVo">
+		select * from (select rownum rnum, a.* from (select t.movie_time_code, m.movie_name, m.movie_code, tt.theater_code, tt.theater_name, sc.screen_code,
+		       sc.screen_name, t.movie_start_time, t.movie_end_time, sc.screen_total_seat,
+		       sc.screen_seat_row, sc.screen_seat_col
+		from tbl_movie_time t, tbl_movie m, tbl_movie_schedule d, tbl_theater tt, tbl_movie_screen sc
+		where m.movie_code = d.movie_code and d.movie_schedule_code = t.movie_schedule_code and tt.theater_code = d.theater_code and t.screen_code = sc.screen_code
+		and t.movie_end_time <![CDATA[ <= ]]> sysdate) a)
+		where rnum between #{start_row} and #{end_row}
+	</select>
+	
+	<!-- 기간이 지난영화 상품 목록 토탈 -->
+	<select id="getOutProductTotal" resultType="integer">
+		select count(*) from tbl_movie_time
+		where movie_end_time <![CDATA[ <= ]]> sysdate
 	</select>
 	
 	<!-- 영화 상품 목록 한개 가져오기 -->

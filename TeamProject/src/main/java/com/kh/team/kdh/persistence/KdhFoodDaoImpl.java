@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.team.domain.KdhAdminFoodBuyListDto;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhMypageBuyFoodListDto;
 import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
@@ -134,6 +135,11 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 		paraMap.put("food_buy_count", food_buy_count);
 		paraMap.put("buy_food_num", buy_food_num);
 		sqlSession.update(NAMESPACE + "updateFoodCount", paraMap);
+	}
+
+	@Override
+	public List<KdhMypageBuyFoodListDto> selectMyPageBuyFoodList(String user_id) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectMyPageBuyFoodList", user_id);
 	}
 
 

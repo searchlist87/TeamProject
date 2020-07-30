@@ -10,6 +10,7 @@ import com.kh.team.domain.KdhAdminFoodBuyListDto;
 import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhMypageBuyFoodListDto;
 import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
@@ -125,6 +126,11 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	@Override
 	public void updateFoodCount(int food_count, int food_buy_count, int buy_food_num) throws Exception {
 		foodDao.updateFoodCount(food_count, food_buy_count, buy_food_num);
+	}
+
+	@Override
+	public List<KdhMypageBuyFoodListDto> selectMyPageBuyFoodList(String user_id) throws Exception {
+		return foodDao.selectMyPageBuyFoodList(user_id);
 	}
 
 
