@@ -17,6 +17,7 @@ import com.kh.team.domain.SghEmailDto;
 import com.kh.team.domain.SghFindDto;
 import com.kh.team.domain.SghLoginDto;
 import com.kh.team.domain.SghUserVo;
+import com.kh.team.kdh.service.KdhFoodCartService;
 import com.kh.team.sgh.service.SghUserService;
 import com.kh.team.sgh.util.SghEmailUtil;
 
@@ -28,7 +29,9 @@ public class SghUserController {
 	private SghUserService sghUserService;
 	@Inject
 	private JavaMailSender mailSender;
-
+	@Inject
+	private KdhFoodCartService kdhFoodCartService;
+	
 	@RequestMapping(value="/loginForm", method=RequestMethod.GET)
 	public String loginForm() throws Exception {
 		return "user/sgh/sgh_member/sgh_login_form";
@@ -43,6 +46,10 @@ public class SghUserController {
 			// 맵퍼의 반환값이 1이면 성공
 			session.setAttribute("user_id", sghLoginDto.getUser_id());
 			session.setAttribute("user_class", sghLoginDto.getUser_class());
+			
+			// ------------- 카트 갯수 담기(공다혜) -------------
+			int cartCount = kdhFoodCartService.selectCartCount(sghLoginDto.getUser_id());
+			session.setAttribute("cartCount", cartCount);
 			return "redirect:/";
 		} catch(Exception e) {
 			e.printStackTrace();

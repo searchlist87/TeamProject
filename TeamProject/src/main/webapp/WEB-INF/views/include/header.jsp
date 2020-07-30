@@ -69,9 +69,11 @@ $(function() {
 							</c:choose>
 							<li><i class="ti-user"></i> <a href="/customer/customerPage">고객센터</a></li>
 							<li><div class="sinlge-bar shopping">
-							<i class="ti-bag"></i>
-							<a href="/kdh/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon" style="position:relative;">
-							<span class="total-count">2</span></a>
+							<c:if test="${not empty user_id}">
+								<i class="ti-bag"></i>
+								<a href="/kdh/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon" style="position:relative;">
+								<span class="total-count">${cartCount}</span></a>
+							</c:if>
 							</div>
 							</li>
 						</ul>

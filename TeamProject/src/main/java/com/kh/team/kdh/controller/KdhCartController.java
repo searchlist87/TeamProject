@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhFoodCartDto;
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
 import com.kh.team.domain.kdhFoodBuyListDto;
 import com.kh.team.kdh.service.KdhFoodCartService;
@@ -39,7 +40,17 @@ public class KdhCartController {
 	public String displayCart(String user_id, ModelMap model) throws Exception {
 		List<KdhFoodCartDto> list = cartService.AllCart(user_id);
 		int food_total_money = cartService.FoodTotalMoney(user_id);
+		KdhUserVo userInfo = foodService.selectUserInfo(user_id);
+		int user_point = userInfo.getUser_point();
+		int totalPoint = 0;
+		if (user_point != 0) {
+			totalPoint = pointService.selectPointByUserId(user_id);
+			model.addAttribute("totalPoint", totalPoint);
+		} else {
+			model.addAttribute("totalPoint", totalPoint);
+		}
 		model.addAttribute("list", list);
+		model.addAttribute("totalPoint", totalPoint);
 		model.addAttribute("food_total_money", food_total_money);
 		return "user/kdh/kdh_food/kdh_cart";
 	}
@@ -95,6 +106,8 @@ public class KdhCartController {
 			foodBuyListDto.setFood_buy_count(food_buy_count);
 			foodService.insertFoodBuyList(foodBuyListDto);
 		}
+		
+			cartService.deleteFoodCartAll(user_id);
 			return "user/kdh/kdh_food/kdh_buy_view";
 		}
 }

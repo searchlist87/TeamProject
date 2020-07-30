@@ -6,6 +6,7 @@ import java.util.Map;
 import com.kh.team.domain.KdhAdminFoodBuyListDto;
 import com.kh.team.domain.KdhBuyFoodInfo;
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhMypageBuyFoodListDto;
 import com.kh.team.domain.KdhPagingDto;
 import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.SghUserVo;
@@ -71,9 +72,12 @@ public interface KdhFoodDao {
 	// 상품 등록하기
 	public void insertFood(KdhFoodVo foodVo) throws Exception;
 	
-	// 상품 구매 내역 가져오기
+	// 상품 구매 내역 가져오기(관리자 상품 구매내역)
 	public List<KdhAdminFoodBuyListDto> selectBuyFoodList() throws Exception;
 	
 	// 상품 갯수 업데이트
 	public void updateFoodCount( int food_count,int food_buy_count,int buy_food_num) throws Exception;
+	
+	// 상품 구매 내역 가져오기(마이페이지)
+	public List<KdhMypageBuyFoodListDto> selectMyPageBuyFoodList(String user_id) throws Exception;
 }

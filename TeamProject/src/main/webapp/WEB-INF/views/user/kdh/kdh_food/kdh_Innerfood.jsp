@@ -182,7 +182,7 @@ $(function() {
 <div class="container-fluid">
 
 <!-- 구매용 폼 -->
-<form id="BuyFoodForm" action="/kdh/food/buy" method="get">
+<form id="BuyFoodForm" action="/kdh/food/buy" method="post">
 	<input type="hidden" id="food_num" value="${foodVo.food_num}" name="buy_food_num"/>
 	<input type="hidden" id="buy_food_buy_price" value="" name="buy_food_buy_price"/>
 	<input type="hidden" id="buy_food_buy_count" value="" name="buy_food_buy_count"/>

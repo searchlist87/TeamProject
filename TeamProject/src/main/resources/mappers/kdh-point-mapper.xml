@@ -25,13 +25,6 @@
 	values(seq_point_num.nextval, 'PC2', #{user_id}, sysdate, #{food_buy_price}/#{point_percent})
 </insert>	
 
-<!-- 물건 살때 금액만큼 10% 적립 업데이트 -->
-<update id="insertPointInDataUpdate">
-	UPDATE tbl_point
-	SET point = #{food_buy_price}/#{point_percent}
-	where point_num = #{point_num} and user_id = #{user_id}
-</update>
-
 <!-- 총 포인트 합계 구하기 -->
 <select id="selectTotalPoint" resultType="int">
 	select sum(point) from tbl_point
@@ -54,7 +47,7 @@
 
 <!-- 유저 포인트 찾기 -->
 <select id="selectPointByUserId" resultType="int">
-	select point from tbl_point
+	select user_point from tbl_user
 	where user_id = #{user_id}
 </select>
 

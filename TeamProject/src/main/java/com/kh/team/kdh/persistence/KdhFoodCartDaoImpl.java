@@ -81,4 +81,14 @@ public class KdhFoodCartDaoImpl implements KdhFoodCartDao {
 		sqlSession.delete(NAMESPACE + "deleteFoodCart", food_num);
 	}
 
+	@Override
+	public void deleteFoodCartAll(String user_id) throws Exception {
+		sqlSession.delete(NAMESPACE + "deleteFoodCartAll", user_id);
+	}
+
+	@Override
+	public int selectCartCount(String user_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectCartCount", user_id);
+	}
+
 }
