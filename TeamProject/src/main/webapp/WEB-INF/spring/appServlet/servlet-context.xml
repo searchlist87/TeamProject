@@ -52,6 +52,9 @@
 		<interceptor>
 			<mapping path="/sgh/choiceSeat/**/*"/>
 			<mapping path="/sgh/1/**/*"/>
+			<!--  jmh -->
+			<mapping path="/mypage/**/*"/>
+			<!--  jmh end -->
 			<beans:ref bean="sghLoginInterceptor"/>
 		</interceptor>
 		<!-- 어드민 인터셉터 -->
