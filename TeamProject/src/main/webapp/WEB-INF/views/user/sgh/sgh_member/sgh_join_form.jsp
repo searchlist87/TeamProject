@@ -5,7 +5,12 @@
 <%@ include file="../../../include/tag_and_styleSheet.jsp" %>
 <%@ include file="../../../include/header.jsp" %>
 
-
+<style>
+	button {
+		background: orange;
+		color: white;
+	}
+</style>
 
 <script>
 <!-- 주소 창에서 주소 받을때 지정하기 -->
@@ -27,7 +32,7 @@ $(function() {
 	$(".nice-select").remove();
 	
 	// 아이디 중복 에이잭스 요청
-	$("#btnIdDupCheck").click(function() {
+	$("#user_id").blur(function() {
 		var user_id = $("#user_id").val();
 		var idLength = user_id.length;
 		var url = "/sgh/user/userIdDupCheck";
@@ -245,7 +250,7 @@ $(function() {
 			<form id="joinForm" role="form" action="/sgh/user/joinRun" method="post">
 				<div class="form-group">
 					<input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디"/>
-					<button type="button" id="btnIdDupCheck" class="btn-sm">중복 확인</button>
+<!-- 					<button type="button" id="btnIdDupCheck" class="btn-sm" style="background-color: orange; color:white;">중복 확인</button> -->
 					<span id="idDupResult"></span>
 				</div>
 				<div class="form-group">
@@ -288,7 +293,7 @@ $(function() {
 					<input type="radio" name="user_sms_check" value="N"/>수신안함
 				</div>
 				<div style="margin-bottom: 30px;">
-					<button id="btnSubmit" type="submit" class="btn btn-sm">
+					<button id="btnSubmit" type="submit" class="btn-lg" style="background-color: #333; color: white;">
 						회원가입
 					</button>
 					<a href="/sgh/user/loginForm" class="btn btn-sm" style="color: white;">취소</a>

@@ -63,10 +63,10 @@ public class SghBookingServiceImpl implements SghBookingService {
 			// 포인트 지급하기
 			sghBookingDao.insertPointList(sghPointDto);
 			sghBookingDao.updateUserPoint(sghPointDto);
-			// 포인트 사용하기
-			sghPointDao.updatePoint(user_id, use_point);
-			// 포인트 내역 추가하기
-			sghPointDao.insertUsedPoint(user_id, use_point);
 		}
+		// 포인트 사용하기
+		sghPointDao.updatePoint(user_id, use_point);
+		// 포인트 내역 추가하기
+		sghPointDao.insertUsedPoint(user_id, use_point);
 	}
 }

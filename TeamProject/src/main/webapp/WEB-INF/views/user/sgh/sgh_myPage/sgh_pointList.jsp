@@ -6,18 +6,33 @@
 <head>
 
 <style>
-.subul {
-	padding-left : 30px;
-	margin-top : 10px;
-	font-size : 15px;
-	border : 1px dotted #ccc;
-}
+	.subul {
+		padding-left : 30px;
+		margin-top : 10px;
+		font-size : 15px;
+		border : 1px dotted #ccc;
+	}
+	thead tr th {
+		text-align: center;
+	}
+	td {
+		text-align: center;
+	}
 </style>
-<script src="../../../include/bootstrap.jsp"></script>
-
+<script src="/resources/js/sgh_js/myScript.js"></script>
 <!-- tag_and_styleSheet 인크루드 -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
+<%@ include file="/WEB-INF/views/include/bootstrap.jsp"%>
+<script>
+$(function() {
+	$(".point_date").each(function() {
+		var point_date = $(this).text();
+		var str_date = dateString(point_date);
+		$(this).text(str_date);
+	});
+});
+</script>
 
 <body class="js">  
 <div class="container" style="left:100px;margin-top:100px;">
@@ -32,27 +47,25 @@
 					<div class="col-lg-8 col-12">
 						<div class="form-main">
 							<div class="title">
-								<h4>My 구매내역</h4>
-								<h3>영화 구매 내역</h3>
+								<h4>포인트 사용 내역</h4>
+								<h3>포인트 사용 내역</h3>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<table class="table">
 										<thead>
 											<tr>
-												<th>구매번호</th>
-												<th>영화명</th>
-												<th>금액</th>
-												<th>구매일시</th>
+												<th>포인트</th>
+												<th>사용날짜</th>
+												<th>사용용도</th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${sghMyMovieBuyVo}" var="sghMyMovieBuyVo">
+											<c:forEach items="${point_list}" var="SghPointListVo">
 											<tr>
-												<td>${sghMyMovieBuyVo.movie_buy_num}</td>
-												<td>${sghMyMovieBuyVo.movie_name}</td>
-												<td>${sghMyMovieBuyVo.movie_price}원</td>
-												<td>${sghMyMovieBuyVo.movie_buy_date}</td>
+												<td data-used-code="${SghPointListVo.point_used_num}">${SghPointListVo.used_point}P</td>
+												<td class="point_date">${SghPointListVo.used_point_date}</td>
+												<td>${SghPointListVo.point_used_name}</td>
 											</tr>
 											</c:forEach>
 										</tbody>

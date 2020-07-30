@@ -1,6 +1,13 @@
 package com.kh.team.sgh.persistence;
 
+import java.util.List;
+
+import com.kh.team.domain.SghPointListVo;
+
 public interface SghPointDao {
+	// 포인트 내역 조회
+	public List<SghPointListVo> getPointList(String user_id) throws Exception;
+	
 	// 포인트 조회
 	public int getUserPoint(String user_id) throws Exception;
 	

@@ -1,12 +1,15 @@
 package com.kh.team.sgh.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
+import com.kh.team.domain.SghPointListVo;
 
 @Repository
 public class SghPointDaoImpl implements SghPointDao {
@@ -34,6 +37,11 @@ public class SghPointDaoImpl implements SghPointDao {
 		paramMap.put("user_id", user_id);
 		paramMap.put("use_point", use_point);
 		sqlSession.insert(NAMESPACE + "insertUsedPoint", paramMap);
+	}
+
+	@Override
+	public List<SghPointListVo> getPointList(String user_id) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getPointList", user_id);
 	}
 
 }
