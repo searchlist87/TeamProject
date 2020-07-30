@@ -64,6 +64,44 @@ from (select rownum rnum, a.*
 where rnum between #{startRow} and #{endRow}
 </select>
 
+<!-- 상품 구매내역 페이징 -->
+<select id="foodBuyListPage" resultType="KdhAdminFoodBuyListDto">
+	select * from (select rownum rnum, a.*
+					from (select f.food_name, fl.food_buy_code, fl.food_num, fl.user_id, fl.food_buy_total_price,
+					fl.food_buy_date,fl.food_buy_count,fl.food_buy_check
+					from tbl_food_buy_list fl, tbl_food f
+					where fl.food_num = f.food_num
+					<include refid="search"></include>
+					order by fl.food_buy_date desc) a)
+	where rnum between #{startRow} and #{endRow}
+</select>
+
+<!-- 페이징 검색 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<choose>
+				<when test='searchType == "all"'>
+				</when>
+				<when test='searchType == "food_name"'>
+					and f.food_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "user_id"'>
+					and f.user_id like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>		
+	</sql>
+
+<!-- 상품 마이페이지 구매내역 페이징 -->
+<select id="foodBuyListMyPage" resultType="KdhAdminFoodBuyListDto">
+	select * from (select rownum rnum, a.* from (select f.food_name, fl.food_buy_code, fl.food_num, fl.user_id, fl.food_buy_total_price, fl.food_buy_date,
+	fl.food_buy_count,fl.food_buy_check
+	from tbl_food_buy_list fl, tbl_food f
+	where fl.food_num = f.food_num and fl.user_id = 'user01'
+	order by fl.food_buy_date desc) a)
+	where rnum between #{startRow} and #{endRow}
+</select>
+
 <!-- 상품 총 개수 구하기 -->
 <select id="selectFoodCount" resultType="int">
 select count(*) from tbl_food
@@ -168,6 +206,17 @@ where food_code = '300'
 	from tbl_food_buy_list fl, tbl_food f
 	where fl.food_num = f.food_num and fl.user_id = #{user_id}
 	order by fl.food_buy_date desc
+</select>
+
+<!-- 상품 구매 리스트 갯수 구하기 -->
+<select id="selectFoodBuyListCount" resultType="int">
+	select count(*) from tbl_food_buy_list
+</select>
+
+<!-- 마이페이지 구매 리스트 유저별로 갯수 구하기 -->
+<select id="selectMyPageFoodBuyListCount" resultType="int">
+	select count(*) from tbl_food_buy_list
+	where user_id = #{user_id}
 </select>
 
 </mapper>

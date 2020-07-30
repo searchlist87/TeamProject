@@ -40,9 +40,11 @@ public class KdhAdminController {
 	@RequestMapping(value = "/admin_food_list", method = RequestMethod.GET)
 	public String admin_food_list(ModelMap model, KdhPagingDto pagingDto) throws Exception {
 		List<KdhFoodVo> foodlist = foodService.selectListFood();
-		List<KdhFoodVo> listPageFoodlist = foodService.listPage(pagingDto);
+		int perPage = 6;
+		pagingDto.setPerPage(perPage);
 		int foodCount = foodService.selectFoodCount();
 		pagingDto.setPageInfo(foodCount);
+		List<KdhFoodVo> listPageFoodlist = foodService.listPage(pagingDto);
 		model.addAttribute("foodlist", foodlist);
 		model.addAttribute("listPageFoodlist", listPageFoodlist);
 		model.addAttribute("pagingDto", pagingDto);
@@ -101,9 +103,16 @@ public class KdhAdminController {
 	
 	// 푸드 푸드내역 조회
 	@RequestMapping(value = "/admin_food_buy_list", method = RequestMethod.GET)
-	public String admin_food_buy_list(Model model) throws Exception {
-		List<KdhAdminFoodBuyListDto> buyFoodList = foodService.selectBuyFoodList();
+	public String admin_food_buy_list(Model model, KdhPagingDto pagingDto) throws Exception {
+		int perPage = 10;
+		pagingDto.setPerPage(perPage);
+		int foodBuyListCount = foodService.selectFoodBuyListCount();
+		pagingDto.setPageInfo(foodBuyListCount);
+		List<KdhAdminFoodBuyListDto> buyFoodList = foodService.foodBuyListPage(pagingDto);
+		System.out.println("buyFoodList:" + buyFoodList);
+		System.out.println("pagingDto:" + pagingDto);
 		model.addAttribute("buyFoodList", buyFoodList);
+		model.addAttribute("pagingDto", pagingDto);
 		return "user/kdh/kdh_admin/kdh_admin_food_buy_list";
 	}
 	
