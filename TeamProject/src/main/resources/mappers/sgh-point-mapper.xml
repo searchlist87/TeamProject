@@ -6,9 +6,9 @@
 <mapper namespace="mappers.sgh-point-mapper">
 
 	<!-- 포인트 사용 내역 조회 -->
-	<select id="getPointList" resultType="">
+<!-- 	<select id="getPointList" resultType=""> -->
 	
-	</select>
+<!-- 	</select> -->
 	<!-- 포인트 조회하기 -->
 	<select id="getUserPoint" resultType="integer">
 		select user_point from tbl_user
