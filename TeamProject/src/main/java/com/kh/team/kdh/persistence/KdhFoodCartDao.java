@@ -37,4 +37,9 @@ public interface KdhFoodCartDao {
 	// 해당 상품 카트 내역 삭제
 	public void deleteFoodCart(int food_num) throws Exception;
 	
+	// 카트 내역 전체 삭제
+	public void deleteFoodCartAll(String user_id) throws Exception;
+	
+	// 카트 갯수 구하기
+	public int selectCartCount(String user_id) throws Exception;
 }

@@ -16,6 +16,7 @@ import com.kh.team.domain.JmhEventVo;
 import com.kh.team.domain.JmhFAQVo;
 import com.kh.team.domain.JmhMovieImageVo;
 import com.kh.team.domain.JmhMovieVo;
+import com.kh.team.domain.JmhNoticeVo;
 import com.kh.team.domain.JmhPagingDto;
 import com.kh.team.domain.JmhReplyVo;
 import com.kh.team.domain.JmhUserVo;
@@ -49,6 +50,8 @@ public class JmhAdminController {
 	public String admin() throws Exception {
 		return "/admin/admin";
 	}
+	
+	//---------------------- 영화 -------------------------------------
 	
 	// 영화 조회
 	@RequestMapping(value="/admin_movie_list", method = RequestMethod.GET)
@@ -107,7 +110,9 @@ public class JmhAdminController {
 		return "redirect:/admin/admin_movie_selectByMovie?movie_code=" + movie_code;
 	}
 	
-	// 이벤트 -------------------------------------
+	//---------------------- 영화 END -------------------------------------
+	
+	//---------------------- 이벤트 -------------------------------------
 	
 	
 	// 이벤트 조회
@@ -161,7 +166,7 @@ public class JmhAdminController {
 		return "redirect:/admin/admin_event_selectEvent?event_code="+ event_code;
 	}
 	
-	// --------------- 이벤트 끝 ---------------------
+	// --------------- 이벤트 END ---------------------
 	
 	
 	// --------------- 1:1 문의 -----------------------
@@ -227,7 +232,7 @@ public class JmhAdminController {
 		return "redirect:/admin/admin_selectQuestion?board_code=" + board_code + "&user_id=" + user_id;
 	}
 	
-	// --------------- 1:1 문의 끝 -----------------------
+	// --------------- 1:1 문의 END -----------------------
 	
 	// --------------- 고객관리 - 회원정보 조회 ----------
 	
@@ -238,9 +243,9 @@ public class JmhAdminController {
 		return "/admin/admin_customerList";
 	}
 	
-	// --------------- 고객관리 - 회원정보 조회 끝 ----------
+	// --------------- 고객관리 - 회원정보 조회 END ----------
 	
-	// --------------- FAQ ----------
+	// --------------- FAQ ----------------------------------
 	
 	// faq 등록 폼
 	@RequestMapping(value="/admin_faq_register", method = RequestMethod.GET)
@@ -289,4 +294,54 @@ public class JmhAdminController {
 		return "redirect:/admin/admin_faq_list";
 	}
 	
+	// --------------- FAQ END ----------------------------------
+	
+	// --------------- 공지사항 ----------------------------------
+	
+	// 공지사항 페이지
+	@RequestMapping(value="/admin_notice_list", method = RequestMethod.GET)
+	public String admin_notice_list(Model model) throws Exception {
+		List<JmhNoticeVo> jmhNoticeVo = jmhCustomerService.getNoticeList();
+		model.addAttribute("jmhNoticeVo", jmhNoticeVo);
+		return "/admin/admin_notice_list";
+	}
+	
+	// 공지사항 등록 페이지
+	@RequestMapping(value="/admin_notice_register", method = RequestMethod.GET)
+	public String admin_notice_register() throws Exception {
+		return "/admin/admin_notice_register";
+	}
+	
+	// 공지사항 등록 처리
+	@RequestMapping(value="/admin_notice_register", method = RequestMethod.POST)
+	public String admin_notice_registerPost(JmhNoticeVo jmhNoticeVo, RedirectAttributes rttr) throws Exception {
+		jmhCustomerService.registerNotice(jmhNoticeVo);
+		rttr.addFlashAttribute("rMsg", "success");
+		return "redirect:/admin/admin_notice_list";
+	}
+	
+	// 공지사항 상세페이지
+	@RequestMapping(value="/admin_select_notice", method = RequestMethod.GET)
+	public String admin_notice_select(int board_code, Model model) throws Exception {
+		JmhNoticeVo jmhNoticeVo = jmhCustomerService.selectByNotice(board_code);
+		model.addAttribute("jmhNoticeVo", jmhNoticeVo);
+		return "/admin/admin_notice_selectByNotice";
+	}
+	
+	// 공지사항 수정처리
+	@RequestMapping(value="/admin_notice_modify", method = RequestMethod.POST)
+	public String admin_notice_modify(JmhNoticeVo jmhNoticeVo, RedirectAttributes rttr) throws Exception {
+		int board_code = jmhNoticeVo.getBoard_code();
+		jmhCustomerService.modifyNotice(jmhNoticeVo);
+		rttr.addFlashAttribute("mMsg", "success");
+		return "redirect:/admin/admin_select_notice?board_code="+ board_code;
+	}
+	
+	// 공지사항 삭제처리
+	@RequestMapping(value="/admin_notice_delete", method = RequestMethod.GET)
+	public String admin_notice_delete(int board_code, RedirectAttributes rttr) throws Exception {
+		jmhCustomerService.deleteNotice(board_code);
+		rttr.addFlashAttribute("dMsg", "success");
+		return "redirect:/admin/admin_notice_list";
+	}
 }
