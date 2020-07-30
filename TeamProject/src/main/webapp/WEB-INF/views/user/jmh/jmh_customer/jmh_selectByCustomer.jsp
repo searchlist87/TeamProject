@@ -8,46 +8,9 @@
 <!-- tag_and_styleSheet 인크루드 -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
-<style>
-.subul {
-	padding-left : 30px;
-	margin-top : 10px;
-	font-size : 15px;
-	border : 1px dotted #ccc;
-}
-.nav-link {
-	font-size : 20px;
-}
 
-.card-header {
-	background-color:#FFF;
-}
-
- .card-body { 
- 	background-color:#eee; 
- } 
-</style>
 <script>
 $(function () {
-	$(".card-body").attr("display", "none");
-	
-	//content 나오게
-	var index = 0;
-	$(".link").click(function (e) {
-		e.preventDefault();
-		var that = $(this).parent().parent().parent().find("div:last");
-		if (index == 0) {
-			that.css("display", "block");
-			$(this).find("img").attr("src","/resources/images/jmh/pointer_top.png");
-			index = 1;
-		} else if(index == 1) {
-			that.css("display", "none");
-			$(this).find("img").attr("src","/resources/images/jmh/pointer.png");
-			index = 0;
-		}
-		
-	});
-	
 	$(".nav-link").click(function () {
 		$(".nav-link").css("background-color", "#fff")
 		              .css("color", "black");
@@ -63,6 +26,7 @@ $(function () {
 <!-- Start Contact -->
 <section id="contact-us" class="contact-us section" style="padding:50px;">
 	<div class="container">
+	
 			<div class="contact-head">
 				<!--  TAB -->
 				<div class="row form-main">
@@ -70,14 +34,14 @@ $(function () {
 						<div class="tabbable" id="tabs-965434">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
-									<a class="nav-link" href="#tab1" data-toggle="tab" style="background-color:#f6931d;color:#fff;">FAQ</a>
+									<a class="nav-link" href="#tab1" data-toggle="tab" >FAQ</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#tab2" data-toggle="tab">공지사항</a>
+									<a class="nav-link active show" href="#tab2" data-toggle="tab" style="background-color:#f6931d;color:#fff;">공지사항</a>
 								</li>
 							</ul>
 							<div class="tab-content">
-								<div class="tab-pane active" id="tab1">
+								<div class="tab-pane" id="tab1">
 									<!--  FAQ 메뉴 -->
 									<c:forEach items="${jmhFAQVo}" var="faqVo">
 									<div class="row">
@@ -88,7 +52,6 @@ $(function () {
 												<span style="float:right;position:absolute;top:10px;left:970px;"><a href="" class="link"><img src="/resources/images/jmh/pointer.png"/></a></span>
 												</div>
 												<div class="card-body faq_content" style="display:none;">
-<%-- 													<textarea rows="5" readonly>${faqVo.faq_content}</textarea> --%>
 													<pre>${faqVo.faq_content}</pre>
 												</div>
 											</div>
@@ -98,31 +61,19 @@ $(function () {
 									<!--  메뉴 end-->
 								</div>
 								<!--  공지사항 -->
-								<div class="tab-pane" id="tab2">
+								<div class="tab-pane active" id="tab2">
 									<div class="row">
 										<div class="col-md-12">
-											<table class="table">
-												<thead>
-													<tr>
-														<th></th>
-														<th style="padding-left:100px;">제목</th>
-														<th style="padding-left:70px;">등록일</th>
-													</tr>
-												</thead>
-												<tbody>
-												<c:forEach items="${jmhNoticeVo}" var="noticeVo" varStatus="status">
-													<tr>
-														<td>${status.count}</td>
-														<td 
-														<c:if test="${noticeVo.notice_check == 'Y'}">
-														style="color:red;"
-														</c:if>
-														><a href="/customer/customer_selectByCustomer?board_code=${noticeVo.board_code}">${noticeVo.board_title}</a></td>
-														<td>${noticeVo.board_date}</td>
-													</tr>
-												</c:forEach>
-												</tbody>
-											</table>
+											<form role="form">
+												<div class="form-group">
+													<label for="board_title"></label>
+													<input type="text" class="form-control" id="board_title" value="${jmhNoticeVo.board_title}"readonly/>
+												</div>
+												<div class="form-group">
+													<pre>${jmhNoticeVo.board_content}</pre>
+												</div>
+											</form>
+											<a href="/customer/customerPage" role="button" class="btn" style="color:#fff;">목록</a>
 										</div>
 									</div>
 								</div>
