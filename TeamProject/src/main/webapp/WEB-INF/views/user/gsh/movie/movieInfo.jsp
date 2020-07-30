@@ -217,8 +217,12 @@
 									<td>${movieDto.movie_name}</td>
 								</tr>
 								<tr>
+									<th>개봉날짜</th>
+									<td>${movieDto.movie_open_date}</td>
+								</tr>
+								<tr>
 									<th>평점</th>
-									<td>${movieDto.review_score}</td>
+									<td>${movieDto.review_score}점</td>
 								</tr>
 								<tr>
 									<th>장르</th>

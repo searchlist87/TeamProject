@@ -42,7 +42,17 @@ public class GshMovieDaoImpl implements GshMovieDao {
 		return sqlSession.selectList(NAMESPACE + "select_movie_sub_iamage", movie_code);
 	}
 	
+	// 영화 이름으로 영화 찾기
+	@Override
+	public void findMovieNmae() throws Exception {
+		
+	}
 	
-	
+	// 영화 장르로 영화 찾기
+	@Override
+	public void findMovieGenre() throws Exception {
+		
+	}
 
+	
 }

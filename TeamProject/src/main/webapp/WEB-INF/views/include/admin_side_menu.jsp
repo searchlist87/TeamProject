@@ -71,7 +71,7 @@ $(function () {
 				</dl>
 				<dl class="categor-list" id="review_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃리뷰 관리</a></dt>
-					<dd><a href="#" class="sub_menu">리뷰 조회</a></dd>
+					<dd><a href="/gsh/admin/admin_movie_list" class="sub_menu">리뷰 조회</a></dd>
 				</dl>
 				<dl class="categor-list" id="costomer_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃고객 관리</a></dt>
