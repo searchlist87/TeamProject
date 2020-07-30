@@ -25,10 +25,24 @@ public class GshMovieServiceImpl implements GshMovieService {
 	public GshMovieDto selectMovieCode(String movie_code) throws Exception {
 		return gshMovieDao.selectMovieCode(movie_code);
 	}
-
+	
+	// 영화 서브 이미지(스틸컷) 가져오기
 	@Override
 	public List<String> selectMovieSubImage(String movie_code) throws Exception {
 		return gshMovieDao.selectMovieSubImage(movie_code);
 	}
+	
+	// 영화 이름으로 영화 찾기
+	@Override
+	public void findMovieName() throws Exception {
+		
+	}
+	
+	// 영화 장르로 영화 찾기
+	@Override
+	public void findMovieGenre() throws Exception {
+		
+	}
+	
 
 }

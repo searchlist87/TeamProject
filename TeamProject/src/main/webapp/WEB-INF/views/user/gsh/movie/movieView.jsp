@@ -51,16 +51,18 @@
 				<div class="row">
 					<div class="col-lg-3 col-md-4 col-12">
 						<div class="shop-sidebar">
-							<!-- Single Widget -->
-							<div class="single-widget category">
-								<h3 class="title">카테고리</h3>
-								<ul class="categor-list">
-									<li><a href="#">베스트</a></li>
-									<li><a href="#">신작</a></li>
-									<li><a href="#">상영작</a></li>
-								</ul>
-							</div>
-							<!--/ End Single Widget -->
+						
+							<!-- 영화 카테고리 부분 시작 -->
+<!-- 							<div class="single-widget category"> -->
+<!-- 								<h3 class="title">카테고리</h3> -->
+<!-- 								<ul class="categor-list"> -->
+<!-- 									<li><a href="#">베스트</a></li> -->
+<!-- 									<li><a href="#">신작</a></li> -->
+<!-- 									<li><a href="#">상영작</a></li> -->
+<!-- 								</ul> -->
+<!-- 							</div> -->
+							<!-- 영화 카테고리 부분 끝 -->
+							
 						</div>
 					</div>
 					<div class="col-lg-9 col-md-8 col-12">
@@ -80,11 +82,38 @@
 						<div class="row" style="padding-left:20px;">
 							
 				<c:forEach items="${list}" var="vo">
+				
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
 						<a href="/gsh/movie/movieInfo?movie_code=${vo.movie_code}">
 							<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:184px;height:262.84px;"></span><br>
 							<span><img src="/resources/images/jmh/movie_grade_${vo.movie_grade}.png" width="30">${vo.movie_name}</span>
-						
+							<br>
+							<c:choose>
+								<c:when test="${vo.review_score < 1}">
+								<span style="color: blue;">평점 없음</span>
+								</c:when>
+								<c:otherwise>
+								
+								<c:choose>
+									<c:when test="${vo.review_score < 3}">
+									<span style="color: red;">
+									</c:when>
+									<c:otherwise>
+									<span style="color: green;">
+									</c:otherwise>
+								
+								</c:choose>
+								평점 :
+								<c:forEach begin="1" end="${vo.review_score}">
+							 	★
+							 	
+							 	</c:forEach> (${vo.review_score})점</span>
+								</c:otherwise>
+							</c:choose>
+							 
+							
+							 
+							</span>
 						</a>
 					</div>
 				</c:forEach>

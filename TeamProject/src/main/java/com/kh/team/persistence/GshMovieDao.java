@@ -18,5 +18,11 @@ public interface GshMovieDao {
 	
 	// 영화 서브 이미지(스틸컷) 가져오기
 	public List<String> selectMovieSubImage(String movie_code) throws Exception;
-
+	
+	// 영화 이름으로 영화 찾기
+	public void findMovieNmae() throws Exception;
+	
+	// 영화 장르로 영화 찾기
+	public void findMovieGenre() throws Exception;
+	
 }

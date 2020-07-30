@@ -37,6 +37,67 @@
 	where faq_code = #{faq_code}
 </select>
 
+<!-- 공지사항 리스트 -->
+<select id="getNoticeList" resultType="JmhNoticeVo">
+	select a.*, n.notice_check from (select * from tbl_board
+	where board_category_code = 'BCC01')a, tbl_notice_check n
+	where a.board_code = n.board_code
+	order by n.notice_check desc
+</select>
 
-<!-- 공지사항 -->
+
+<!-- 공지사항 등록 -->
+<insert id="registerNotice">
+	insert into tbl_board(BOARD_CODE, BOARD_CATEGORY_CODE, USER_ID, BOARD_TITLE, BOARD_CONTENT)
+	values(seq_board_code.nextval, 'BCC01', 'admin', #{board_title}, #{board_content})
+</insert>
+
+<!-- board_code 가져오기 -->
+<select id="getBoardCode" resultType="int">
+	select b.board_code from(select rownum rnum, a.* from (select board_code from tbl_board
+															order by board_date desc) a
+							)b
+	where rnum = 1
+</select>
+
+<!--  공지사항 필수체크 등록 -->
+<insert id="registerNoticeCheck">
+	insert into tbl_notice_check(BOARD_CODE, NOTICE_CHECK)
+	values(#{board_code}, #{notice_check})
+</insert>
+
+<!--  공지사항 상세페이지용 -->
+<select id="selectByNotice" resultType="JmhNoticeVo">
+	select a.*, n.notice_check from (select * from tbl_board
+	where board_category_code = 'BCC01')a, tbl_notice_check n
+	where a.board_code = n.board_code
+	and a.board_code = #{board_code}
+</select>
+
+<!-- 공지사항 수정 -->
+<update id="modifyNotice">
+	update tbl_board set
+		board_title = #{board_title},
+		board_content = #{board_content}
+	where board_category_code = 'BCC01' and board_code = #{board_code}
+</update>
+
+<!--  공지사항 필수체크 수정 -->
+<update id="modifyNoticeCheck">
+	update tbl_notice_check set
+		notice_check = #{notice_check}
+	where board_code = #{board_code}
+</update>
+
+<!--  공지사항 삭제 -->
+<delete id="deleteNotice">
+	delete from tbl_board
+	where board_code = #{board_code}
+</delete>
+
+<!--  공지사항 필수체크 삭제 -->
+<delete id="deleteNoticeCheck">
+	delete from tbl_notice_check
+	where board_code = #{board_code}
+</delete>
 </mapper>
