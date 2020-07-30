@@ -30,13 +30,15 @@
 $(function () {
 	$("#board_manage > dd").css("display","block");
 	$("#board_manage > dt").css("color","red");
-	$("#board_manage > dd").eq(2).css("color","blue");
+	$("#board_manage > dd").eq(0).css("color","blue");
 	
+	// 등록 처리문구
 	var rMsg = "${rMsg}";
-	if(rMsg == "success") {
+	if (rMsg == "success") {
 		alert("등록되었습니다.");
 	}
 	
+	// 삭제 처리문구
 	var dMsg = "${dMsg}";
 	if (dMsg == "success") {
 		alert("삭제되었습니다.");
@@ -60,7 +62,7 @@ $(function () {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
-									<h4 class="title" >게시판관리_FAQ조회</h4>
+									<h4 class="title" >게시판관리_공지사항조회</h4>
 								</div>	
 								<!--  검색 -->
 								<div style="padding:20px;text-align:right;">
@@ -68,7 +70,7 @@ $(function () {
 									<div class="single-shorter" style="vertical-align:middle;">
 										<label>검색 :</label>
 										<select id="selectSearch">
-											<option selected="selected" value="faq_title">제목</option>
+											<option selected="selected" value="board_title">제목</option>
 										</select>
 									</div>
 
@@ -78,23 +80,27 @@ $(function () {
 								<!--  검색 끝 -->
 								<!--  페이지별 내용 -->
 								<div style="padding-bottom:20px;">
-									<h6 style="color:green;">* FAQ 주제를 클릭하면 상세페이지로 이동합니다.</h6>
+									<h6 style="color:green;">* 공지사항 제목을 클릭하면 상세페이지로 이동합니다.</h6>
 								</div>
 								<table class="table" style="text-align:center;height:auto;" id="movie_table">
 									<thead>
 										<tr>
 											<th style="width:70px;">순서</th>
-											<th>FAQ 주제</th>
-											<th style="width:400px;">FAQ 등록일</th> 
+											<th>제목</th>
+											<th style="width:400px;">등록일</th> 
 										</tr>
 									</thead>
 									<tbody style="vertical-align:middle;table-layout:fixed;">
 									<!--  이벤트 조회 -->
-									<c:forEach items="${jmhFAQVo}" var="vo">
+									<c:forEach items="${jmhNoticeVo}" var="vo" varStatus="status">
 										<tr style="height:50px;">
-											<td>${vo.faq_code}</td>
-											<td><a href="/admin/admin_select_faq?faq_code=${vo.faq_code}" class="faq_Title">${vo.faq_title}</a></td>
-											<td>${vo.faq_date}</td>
+											<td>${status.count}</td>
+											<td 
+											<c:if test="${vo.notice_check == 'Y'}">
+											style="color:red;"
+											</c:if>
+											><a href="/admin/admin_select_notice?board_code=${vo.board_code}" class="notice_Title">${vo.board_title}</a></td>
+											<td>${vo.board_date}</td>
 										</tr>
 									</c:forEach>
 									</tbody>

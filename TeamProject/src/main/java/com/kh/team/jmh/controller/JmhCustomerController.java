@@ -20,6 +20,7 @@ public class JmhCustomerController {
 	@Inject
 	private JmhCustomerService jmhCustomerService;
 	
+	// 고객센터 페이지
 	@RequestMapping(value="/customerPage", method = RequestMethod.GET)
 	public String customerService(Model model) throws Exception {
 		List<JmhFAQVo> jmhFAQVo = jmhCustomerService.getFaqList();
