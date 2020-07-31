@@ -50,8 +50,8 @@
 		select mt.*, m.movie_code, m.movie_name, m.movie_grade, s.screen_name, s.screen_total_seat, c.rmn_sts
 		from tbl_movie_schedule sd, tbl_movie m, tbl_movie_screen s, tbl_theater tt, 
 		(select movie_time_code, count(*) rmn_sts from tbl_schedule_seat s where seat_check = 'N' group by movie_time_code) c,
-		(select movie_time_code, movie_schedule_code, screen_code, to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, movie_end_time from tbl_movie_time) mt
-		where mt.start_date = #{movie_date} and tt.theater_code = #{theater_code}
+		(select movie_time_code, movie_schedule_code, screen_code, to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, movie_start_time, movie_end_time from tbl_movie_time) mt
+		where mt.start_date = #{movie_date} and tt.theater_code = #{theater_code} and mt.movie_start_time >= systimestamp
 		and mt.movie_schedule_code = sd.movie_schedule_code
 		and sd.movie_code = m.movie_code
 		and mt.screen_code = s.screen_code
@@ -63,8 +63,8 @@
 	<select id="getTheaterMovieName" resultType="JmhMovieTheaterDto">
 		select distinct m.movie_name, m.movie_code, m.movie_grade
 		from tbl_movie_schedule sd, tbl_movie m, tbl_movie_screen s, tbl_theater tt,
-		(select movie_time_code, movie_schedule_code, screen_code , to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, movie_end_time from tbl_movie_time) mt
-		where mt.start_date = #{movie_date} and tt.theater_code = #{theater_code}
+		(select movie_time_code, movie_schedule_code, screen_code , to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, movie_start_time, movie_end_time from tbl_movie_time) mt
+		where mt.start_date = #{movie_date} and tt.theater_code = #{theater_code} and mt.movie_start_time >= systimestamp
 		and mt.movie_schedule_code = sd.movie_schedule_code
 		and tt.theater_code = sd.theater_code
 		and sd.movie_code = m.movie_code

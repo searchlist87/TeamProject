@@ -119,8 +119,6 @@ public class KdhPagingDto {
 		this.keyword = keyword;
 	}
 
-	
-
 	public String getSearchType() {
 		return searchType;
 	}

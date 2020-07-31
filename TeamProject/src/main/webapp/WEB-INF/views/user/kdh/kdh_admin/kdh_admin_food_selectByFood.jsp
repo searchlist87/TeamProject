@@ -41,6 +41,10 @@
 </style>
 <script>
 $(function () {
+	$("#food_product_manage > dd").css("display","block");
+	$("#food_product_manage > dt").css("color","red");
+	$("#food_product_manage > dd").eq(0).css("color","blue");
+		
 	$("#btnDelete").click(function() {
 		var r = confirm("선택하신 상품을 삭제하시겠습니까?");
 		if(r == true) {

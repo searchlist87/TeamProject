@@ -55,6 +55,10 @@
 			<!--  jmh -->
 			<mapping path="/mypage/**/*"/>
 			<!--  jmh end -->
+			<!-- kdh -->
+			<mapping path="/kdh/food/buy"/>
+			<mapping path="/kdh/cart/**/*"/>
+			<!-- kdh end -->
 			<beans:ref bean="sghLoginInterceptor"/>
 		</interceptor>
 		<!-- 어드민 인터셉터 -->

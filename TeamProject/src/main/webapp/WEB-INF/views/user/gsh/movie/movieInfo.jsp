@@ -18,6 +18,11 @@
 	font-weight: bold;
 	font-size: 20px;
 }
+
+.tableCss {
+	
+}
+
 </style>
 
 <script>
@@ -26,10 +31,17 @@
 
 	// 페이지 시작 시 리뷰 목록 나타내기
 	$(function() {
-
-		$(".nice-select").remove();
+		
+		$("#reviewDiv").find(".nice-select").remove();
+		$("#modal-container-997340").find(".nice-select").remove();
 		$("#review_score").removeAttr("style");
 		$("#review_score_modify").removeAttr("style");
+		
+		var movie_open_date = "${movieDto.movie_open_date}";
+		var s_movie_open_date = movie_open_date.substring(0, 10);
+		$("#movie_open_date").text(s_movie_open_date);
+		
+		
 		
 		// 댓글작성 버튼
 		$("#btnCommentWrite").click(function() {
@@ -186,11 +198,11 @@
 		</div>
 		<!-- 모달 창 부분 끝 -->
 
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8" style="margin-top: 50px; margin-bottom: 50px;"></div>
-			<div class="col-md-2"></div>
-		</div>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-md-2"></div> -->
+<!-- 			<div class="col-md-8" style="margin-top: 50px; margin-bottom: 50px;"></div> -->
+<!-- 			<div class="col-md-2"></div> -->
+<!-- 		</div> -->
 		<!-- 영화 배너 이미지 끝 -->
 		
 		<div class="row">
@@ -198,43 +210,44 @@
 			<div class="col-md-8">
 				<div class="row">
 					<div class="col-md-4">
-						<div style="padding: 15px; float: left; margin-bottom: 50px;">
+						<div style="float: left;">
 							<img
 								src="/upload/displayFile?fileName=${movieDto.movie_main_image}"
-								style="height: auto;" alt="영화이름">
+								style="height: auto;border-radius: 2%;" alt="영화이름">
 						</div>
 					</div>
 					<div class="colo-md-8">
 						<table class="table">
 							<tbody>
+								
 								<tr>
-									<th>관람등급</th>
-									<td><img
+									<th style="vertical-align:middle;">관람등급</th>
+									<td style="vertical-align:middle;"><img
 										src="/resources/images/jmh/movie_grade_${movieDto.movie_grade}.png" /></td>
 								</tr>
 								<tr>
-									<th>영화이름</th>
-									<td>${movieDto.movie_name}</td>
+									<th style="vertical-align:middle;">영화이름</th>
+									<td style="vertical-align:middle;color:blue;"><strong>${movieDto.movie_name}</strong></td>
 								</tr>
 								<tr>
-									<th>개봉날짜</th>
-									<td>${movieDto.movie_open_date}</td>
+									<th style="vertical-align:middle;">개봉날짜</th>
+									<td style="vertical-align:middle;" id="movie_open_date"></td>
 								</tr>
 								<tr>
-									<th>평점</th>
-									<td>${movieDto.review_score}점</td>
+									<th style="vertical-align:middle;">평점</th>
+									<td style="vertical-align:middle;">${movieDto.review_score}점</td>
 								</tr>
 								<tr>
-									<th>장르</th>
-									<td>${movieDto.movie_genre}</td>
+									<th style="vertical-align:middle;">장르</th>
+									<td style="vertical-align:middle;">${movieDto.movie_genre}</td>
 								</tr>
 								<tr>
-									<th>감독</th>
-									<td>${movieDto.movie_director}</td>
+									<th style="vertical-align:middle;">감독</th>
+									<td style="vertical-align:middle;">${movieDto.movie_director}</td>
 								</tr>
-								<tr>
-									<th>출연</th>
-									<td>${movieDto.movie_actor}</td>
+								<tr style="border-bottom: 1px solid #e9ecef;">
+									<th style="vertical-align:middle;">출연</th>
+									<td style="vertical-align:middle;">${movieDto.movie_actor}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -261,45 +274,46 @@
 				</div>
 			</div>
 			<!-- 영화 스틸컷 끝 -->
+		</div>
 			
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<!-- 영화 내용 시작 -->
-					<div class="movieContent " style="margin-bottom: 20px;">
-						<h2>시놉시스</h2><br/>
-						<div>
-							<span style="font-size : 20px;">${movieDto.movie_content}</span>
-						</div>
-					</div>
-					<!-- 영화 내용 끝 -->
-				</div>
-				<div class="col-md-2"></div>
-			</div>
-			
-			<!-- 영화 예고편 시작 -->
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<div
-						style="margin-top: 50px; margin-bottom: 50px; margin-left: 100px;">
-						<h2>예고편</h2>
-						<br>
-						<video
-							src="/upload/displayFile?fileName=${movieDto.movie_preview}"
-							controls style="width: 1260px; height: auto;"></video>
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<!-- 영화 내용 시작 -->
+				<div class="movieContent " style="margin-bottom: 20px;">
+					<h2>시놉시스</h2><br/>
+					<div>
+						<span style="font-size : 20px;">${movieDto.movie_content}</span>
 					</div>
 				</div>
+				<!-- 영화 내용 끝 -->
 			</div>
-			<!-- 영화 예고편 끝 -->
+			<div class="col-md-2"></div>
+		</div>
+			
+		<!-- 영화 예고편 시작 -->
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div style="margin-top: 50px; margin-bottom: 50px;">
+					<h2>예고편</h2>
+					<br>
+					<video
+						src="/upload/displayFile?fileName=${movieDto.movie_preview}"
+						controls style="width: 1260px; height: auto;"></video>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+		<!-- 영화 예고편 끝 -->
 
 			<!-- 리뷰 시작 -->
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-10">
+<!-- 			<div class="container-fluid"> -->
+				<div class="row" id="reviewDiv">
+					<div class="col-md-2"></div>
+					<div class="col-md-8">
 						<c:if test="${not empty user_id}">
-						<div class="row" style="margin: 10px 0">
+						<div class="row">
 							<div class="col-md-10">
 								<input type="text" class="form-control"
 									placeholder="감상평을 남겨주세요. 최대 60자까지 가능합니다." maxlength="60" id="review_content" />
@@ -355,13 +369,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-1"></div>
+					<div class="col-md-2"></div>
 				</div>
-			</div>
+<!-- 			</div> -->
 			<!-- 한줄 감상평 1 끝 -->
 		</div>
 		<div class="col-md-2"></div>
-	</div>
 
 	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>

@@ -58,12 +58,11 @@ public class KdhController {
 	// 상품 이너 페이지(GET)
 	@RequestMapping(value = "/innerfood", method = RequestMethod.GET)
 	public String InnerfoodGet(int food_num, ModelMap model, HttpSession session) throws Exception {
-		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
 		String user_id = (String) session.getAttribute("user_id");
-		int findCartResult= cartService.overlapCart(user_id, food_num);
-		model.addAttribute("findCartResult", findCartResult);
+		int cartCount = cartService.selectCartCount(user_id);
+		session.setAttribute("cartCount", cartCount);
+		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
 		model.addAttribute("foodVo", foodVo);
-		model.addAttribute("user_id", user_id);
 		return "user/kdh/kdh_food/kdh_Innerfood";
 	}
 
@@ -109,8 +108,12 @@ public class KdhController {
 	// 카트 ajax요청
 	@ResponseBody
 	@RequestMapping(value = "/cartAjax", method = RequestMethod.GET)
-	public String cartAjax(ModelMap model,String user_id,int food_num,int food_buy_price,int food_buy_count) throws Exception {
+	public String cartAjax(HttpSession session, ModelMap model,String user_id,int food_num,int food_buy_price,int food_buy_count) throws Exception {
 		int findCartResult = cartService.overlapCart(user_id, food_num);
+		
+		int cartCount = cartService.selectCartCount(user_id);
+		session.setAttribute("cartCount", cartCount);
+		
 		// 중복 상품이 없으면
 		if (findCartResult==0) {
 			KdhFoodCartDto cartDto = new KdhFoodCartDto();
@@ -131,7 +134,11 @@ public class KdhController {
 	// 구매하기
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	@Transactional
-	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id) throws Exception {
+	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id, HttpSession session) throws Exception {
+		String user_id = (String) session.getAttribute("user_id");
+		int cartCount = cartService.selectCartCount(user_id);
+		session.setAttribute("cartCount", cartCount);
+		
 		List<KdhPointVo> pointList = pointService.selectPointById(buy_user_id);
 		KdhUserVo userInfo = foodService.selectUserInfo(buy_user_id);
 		int user_point = userInfo.getUser_point();
