@@ -208,6 +208,7 @@ $(function() {
 		var couponPrice = $("#pointInfo").val();
 		var StringcouponPrice = String(couponPrice);
 		var usedPoint = $("#UsecouponPrice").val();
+		console.log("usedPoint:" + usedPoint);
 		
 		// 포인트사용금액이 유저 누적포인트보다 클때 
 		if (couponPrice < usedPoint) {
@@ -268,9 +269,11 @@ $(function() {
 				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
 		
-			var StringcouponPrice = String(couponPrice);
-			var PriceLastIndex3 = StringcouponPrice.substring(StringcouponPrice.length-3);
-			var priceFirstIndex = StringcouponPrice.substring(0,StringcouponPrice.length);
+			
+			var StringusedPoint = String(usedPoint);
+			console.log("StringusedPoint:" + StringusedPoint);
+			var PriceLastIndex3 = StringcouponPrice.substring(StringusedPoint.length-3);
+			var priceFirstIndex = StringcouponPrice.substring(0,StringusedPoint.length);
 			priceIndex = StringcouponPrice.substring(priceFirstIndex,PriceLastIndex3);
 				
 			var firstPriceIndex3;
@@ -278,22 +281,22 @@ $(function() {
 			var lastPriceIndex3;
 			
 			if(StringcouponPrice.length == 4) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,1);
-				lastPriceIndex3 = StringcouponPrice.substr(1,4);
+				firstPriceIndex3 = StringusedPoint.substr(0,1);
+				lastPriceIndex3 = StringusedPoint.substr(1,4);
 			} else if(StringcouponPrice.length == 5) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,2);
-				lastPriceIndex3 = StringcouponPrice.substr(2,5);
+				firstPriceIndex3 = StringusedPoint.substr(0,2);
+				lastPriceIndex3 = StringusedPoint.substr(2,5);
 			} else if(StringcouponPrice.length == 6) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,3);
-				lastPriceIndex3 = StringcouponPrice.substr(3,6);
+				firstPriceIndex3 = StringusedPoint.substr(0,3);
+				lastPriceIndex3 = StringusedPoint.substr(3,6);
 			} else if(StringcouponPrice.length == 7) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,1);
-				centerPriceIndex3 = StringcouponPrice.substr(1,4);
-				lastPriceIndex3 = StringcouponPrice.substr(4,7);
+				firstPriceIndex3 = StringusedPoint.substr(0,1);
+				centerPriceIndex3 = StringusedPoint.substr(1,4);
+				lastPriceIndex3 = StringusedPoint.substr(4,7);
 			} else if(StringcouponPrice.length == 8) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,2);
-				centerPriceIndex3 = StringcouponPrice.substr(2,5);
-				lastPriceIndex3 = StringcouponPrice.substr(5,8);
+				firstPriceIndex3 = StringusedPoint.substr(0,2);
+				centerPriceIndex3 = StringusedPoint.substr(2,5);
+				lastPriceIndex3 = StringusedPoint.substr(5,8);
 			}
 			
 			if (centerPriceIndex3 != null) {
