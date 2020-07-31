@@ -130,6 +130,4 @@ public class JmhMypageServiceImpl implements JmhMypageService {
 		return jmhMypageDao.adminQuestionNoReplyCount();
 	}
 
-	
-
 }
