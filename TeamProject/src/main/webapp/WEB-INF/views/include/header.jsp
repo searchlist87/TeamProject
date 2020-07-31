@@ -53,6 +53,7 @@ $(function() {
 		
 		$("#frmSearch").submit();
 	});
+	
 });
 </script>
 <form id="frmSearch" action="/gsh/movie/movieView" method="get">
@@ -138,6 +139,8 @@ $(function() {
 					<!--/ End Search Form -->
 					<div class="mobile-nav"></div>
 				</div>
+				
+				<!-- 헤더 검색창 부분 시작 -->
 				<div class="col-lg-8 col-md-7 col-12">
 					<div class="search-bar-top">
 						<div class="search-bar">
@@ -155,6 +158,8 @@ $(function() {
 						</div>
 					</div>
 				</div>
+				<!-- 헤더 검색창 부분 끝 -->
+				
 				<div class="col-lg-2 col-md-3 col-12">
 					<div class="right-bar">
 						<!-- Search Form -->
