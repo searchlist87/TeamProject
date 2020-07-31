@@ -101,13 +101,9 @@ $(function() {
 								<div class="shop-top">
 									<div class="shop-shorter">
 										<div class="single-shorter">
-											<h3>스낵</h3>
+											<h3>　스낵</h3>
 										</div>
 									</div>
-									<ul class="view-mode">
-										<li class="active"><a href="shop-grid.html"><i class="fa fa-th-large"></i></a></li>
-										<li><a href="shop-list.html"><i class="fa fa-th-list"></i></a></li>
-									</ul>
 								</div>
 								<!--/ End Shop Top -->
 							</div>
@@ -257,25 +253,29 @@ $(function() {
 
 <!-- 페이징 -->
 <div class="row"  style="text-align:center;">
-	<div class="col-md-4"></div>
-		<div class="col-md-4 text-center" style="text-align:center;">
+	<div class="col-md-12" style="padding-left: 1200px;">
+		<div class="col-md-5 text-center" style="text-align:center;">
 			<nav style="text-align:center;">
 				<ul class="pagination text-center" style="text-align:center;">
 				
 				<!-- 이전 버튼 -->
-				<c:if test ="${pagingDto.startPage > 1}">
-					<li class="page-item" style="width:60px;"  style="text-align:center; float:left;">
+				<c:if test ="${pagingDto.startPage != 1}">
+					<li class="page-item" style="width:60px;"  style="float:left;">
 				    	<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
 					</li>
 				</c:if>
 
 			 	<!-- 페이징 넘버링 -->
 			 	<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
-				    <li id="pageNumber" class="page-item"  style="width:30px; float:left;">
-				    	<a class="page-link" href="${v}">${v}</a>
+				    <li id="pageNumber"  style="width:30px; float:left;" class="page-item 
+						<c:if test="${pagingDto.page == v }">
+				   			 active 
+						</c:if>
+						">
+						<a id="pageNumber" class="page-link" href="${v}">${v}</a>
 				    </li>
-				</c:forEach>    	
-				
+				</c:forEach>   
+				 	
 				<!-- 다음 버튼 -->
 				  <c:if test="${pagingDto.endPage < pagingDto.totalPage}">
 				    <li class="page-item" style="width:60px; float:left;">
@@ -285,6 +285,7 @@ $(function() {
 				</ul>
 			</nav>
 		</div>
+	</div>
 	<div class="col-md-4"></div>
 	<div class="col-md-12" style="margin-bottom: 100px;"></div>	
 </div>

@@ -28,16 +28,12 @@
 <script>
 $(function() {
 	// 페이지 버튼 클릭시 해당 페이지 넘어가게
+	// 링크 수정 필요
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
-		
-		var searchType = $("#searchSelect").val();
-		console.log("searchType :" + searchType);
-		
 		var page = $(this).attr("href");
-		console.log("page:" + page);
 		
-// 		location.href = "/kdh/admin/admin_food_buy_list?page=" + page;
+		location.href = "/kdh/admin/admin_food_list?page=" + page;
 	});
 	
 	// 현재 페이지 액티브 설정
@@ -49,6 +45,26 @@ $(function() {
 		}
 	});
 	
+	// 리뷰 삭제 기능
+	$("#commentTable > tbody").on("click", ".btnDelete", function() {
+		console.log("삭제클릭");
+		var that = $(this);
+		var review_num = $(this).parent().parent().find("td").eq(0).text();
+		console.log("review_num:" + review_num);
+		var url = "/gsh/admin/admin_review_delete";
+	    var sendData = {
+					"review_num" :	review_num	
+		};
+		$.get(url, sendData, function(rData) {
+			location.reload();
+		});
+	});
+	
+	// 검색 기능
+	$("#btnSearch").click(function() {
+		
+	});
+	
 });
 </script>
 
@@ -56,13 +72,6 @@ $(function() {
 <%@ include file="../../../user/jmh/include/formPage.jsp" %>
 <!-- 해더 부분 -->
 <%@include file="../../../include/admin_header.jsp" %>
-<!-- 폼 전송 -->
-<form id="adminForm" action="/kdh/admin/admin_food_buy_list" method="get">
-	<input type="hidden" name="page" value="${pagingDto.page}"/>
-	<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
-	<input type="hidden" name="searchType" value="${pagingDto.searchType}"/>
-	<input type="hidden" name="keyword" value="${pagingDto.keyword}"/>
-</form>
 		<!-- admin_category -->
 		<section class="product-area shop-sidebar shop section" style="padding-top:10px;">
 			<div class="container" style="padding:0px;">
@@ -73,7 +82,7 @@ $(function() {
 							<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
-									<h4 class="title" >구매 내역조회(푸드)</h4>
+									<h4 class="title" >리뷰 관리 페이지</h4>
 								</div>	
 								<!--  검색 -->
 								<div style="padding:20px;text-align:right;">
@@ -81,47 +90,49 @@ $(function() {
 									<div class="single-shorter" style="vertical-align:middle;">
 											<label>검색 :</label>
 											<select id="searchSelect" name=searchType>
-												<option value="all"
-												<c:if test="${pagingDto.searchType == 'all'}">selected</c:if>
-												>전체</option>
-												<option value="food_name"
-												<c:if test="${pagingDto.searchType == 'food_name'}">selected</c:if>
-												>상품명</option>
+												<option value="review_content"
+												<c:if test="${GshMovieDto.searchType == 'review_content'}">selected</c:if>
+												>리뷰내용</option>
 												<option value="user_id"
-												<c:if test="${pagingDto.searchType == 'user_id'}">selected</c:if>
-												>사용자</option>
+												<c:if test="${GshMovieDto.searchType == 'user_id'}">selected</c:if>
+												>작성자</option>
+												<option value="review_score"
+												<c:if test="${GshMovieDto.searchType == 'review_score'}">selected</c:if>
+												>평점</option>
 											</select>
 										</div>
 
-									<input type="text" id="keyword" value="${pagingDto.keyword}"/>
+									<input type="text" id="keyword" value="${GshMovieDto.keyword}"/>
 									<button type="button" class="btn" id="btnSearch">검색</button>
 								</div>	
 								<!--  검색 끝 -->
 								<!--  페이지별 내용 -->
-								<table class="table" style="text-align:center;height:auto;" id="movie_table">
+								
+								<table id="commentTable" class="table">
 									<thead>
-										<tr>
-											<th style="width:100px;">상품명</th>
-											<th style="width:100px;">구매자</th>
-											<th style="width:100px;">상품금액</th>
-											<th style="width:130px;">구매수량</th>
-											<th style="width:100px;">구매일</th>
+										<tr style="background-color: #ccc;">
+											<th>영화 코드</th>
+											<th>작성자 아이디</th>
+											<th>리뷰 내용</th>
+											<th>평점</th>
+											<th>작성일</th>
+											<th>삭제</th>
 										</tr>
 									</thead>
-									<tbody style="vertical-align:middle;table-layout:fixed;">
-								
-									<!-- 상품(스토어) 조회 -->
-									<c:forEach items="${buyFoodList}" var="buyFoodList">
+									<tbody class="tbody">
+										<c:forEach items="${reviewList}" var="GshReviewVo">
 										<tr>
-											<td style="vertical-align:middle;">${buyFoodList.food_name}</td>
-											<td style="vertical-align:middle;">${buyFoodList.user_id}</td>
-											<td style="vertical-align:middle;"><fmt:formatNumber pattern="#,###,###" value="${buyFoodList.food_buy_total_price}"></fmt:formatNumber>원</td>
-											<td style="vertical-align:middle;">${buyFoodList.food_buy_count}</td>
-											<td style="vertical-align:middle;">${buyFoodList.food_buy_date}</td>
+											<td>${GshReviewVo.movie_code}</td>
+											<td>${GshReviewVo.user_id}</td>
+											<td>${GshReviewVo.review_content}</td>
+											<td>${GshReviewVo.review_score}</td>
+											<td>${GshReviewVo.review_date}</td>
+											<td><button type="button" class="btn btn-sx btnDelete">삭제</button></td>
 										</tr>
-									</c:forEach>
+										</c:forEach>
 									</tbody>
 								</table>
+								
 							</div>
 						</div>
 						<div class="row" style="height:100px;">
@@ -129,7 +140,6 @@ $(function() {
 						
 						<!-- 페이징 -->
 						<div class="row"  style="text-align:center;">
-							<div class="col-md-12" style="padding-left: 400px;">
 							<div class="col-md-9"></div>
 								<div class="col-md-5 text-center" style="text-align:center;">
 									<nav style="text-align:center;">
@@ -158,7 +168,6 @@ $(function() {
 										</ul>
 									</nav>
 								</div>
-							</div>
 							<div class="col-md-4"></div>
 							<div class="col-md-12" style="margin-bottom: 100px;"></div>	
 						</div>

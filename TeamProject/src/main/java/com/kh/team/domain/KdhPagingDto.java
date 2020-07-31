@@ -10,7 +10,9 @@ public class KdhPagingDto {
 	private int endPage; // 끝 페이지 수
 	private int totalPage; // 총 페이지 수 
 	private int DisplayPageNum = 10; // 보여질 페이지 수
-
+	private String keyword;
+	private String searchType;
+	
 	public int getTotalPage() {
 		return totalPage;
 	}
@@ -109,11 +111,31 @@ public class KdhPagingDto {
 		this.endRow = endRow;
 	}
 
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
 	@Override
 	public String toString() {
 		return "KdhPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow=" + endRow
 				+ ", totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", totalPage="
-				+ totalPage + ", DisplayPageNum=" + DisplayPageNum + "]";
+				+ totalPage + ", DisplayPageNum=" + DisplayPageNum + ", keyword=" + keyword + ", searchType="
+				+ searchType + "]";
 	}
 
+	
 }

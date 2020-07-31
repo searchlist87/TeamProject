@@ -156,7 +156,7 @@ $(function() {
 		
 <!-- 페이징 -->
 <div class="row"  style="text-align:center;">
-	<div class="col-md-9"></div>
+	<div class="col-md-12" style="padding-left: 1200px;">
 		<div class="col-md-5 text-center" style="text-align:center;">
 			<nav style="text-align:center;">
 				<ul class="pagination text-center" style="text-align:center;">
@@ -184,6 +184,7 @@ $(function() {
 				</ul>
 			</nav>
 		</div>
+	</div>
 	<div class="col-md-4"></div>
 	<div class="col-md-12" style="margin-bottom: 100px;"></div>	
 </div>

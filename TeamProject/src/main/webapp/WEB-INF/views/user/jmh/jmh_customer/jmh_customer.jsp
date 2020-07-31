@@ -88,7 +88,6 @@ $(function () {
 												<span style="float:right;position:absolute;top:10px;left:970px;"><a href="" class="link"><img src="/resources/images/jmh/pointer.png"/></a></span>
 												</div>
 												<div class="card-body faq_content" style="display:none;">
-<%-- 													<textarea rows="5" readonly>${faqVo.faq_content}</textarea> --%>
 													<pre>${faqVo.faq_content}</pre>
 												</div>
 											</div>
@@ -127,11 +126,27 @@ $(function () {
 									</div>
 								</div>
 								<!--  공지사항 END-->
+								<div style="margin-top:20px;">더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면? <span style="color:red;"><a href="/mypage/question">[ 1:1문의 바로가기 ]</a></span></div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!--  TAB END -->
+				
+			</div>
+			<div class="row form-main" style="margin-top:20px;">
+					<div class="col-md-12">
+						<span style="float:left;"><img src="/resources/images/jmh/customer.png" width="50px;" height="auto;"/></span>
+						<h5 style="padding-top:20px;margin-left:70px;">허니박스 고객센터</h5>
+					</div>
+					<div class="col-md-12" style="margin-top:20px;">
+						<h2 style="float:left;">1588 - </h2><h2 style="color:#179cea;"> 2345</h2>
+					</div>
+					<div class="col-md-12" style="margin-top:20px;">
+						<span>평일 > 09:00 ~ 18:00</span><br/>
+						<span>점심시간 > 12:00 ~ 13:00</span><br/>
+						<span>업무 외 시간에는</span> <span style="color:red;">1:1 문의하기</span><span>를 이용해 주세요.</span>
+					</div>
 			</div>
 		</div>
 </section>

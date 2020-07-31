@@ -83,7 +83,6 @@ $(function () {
 											<th style="width:70px;">생일</th>
 											<th style="width:100px;">휴대폰</th>
 											<th style="width:150px;">주소</th>
-											<th style="width:70px;">사용금액</th>
 											<th style="width:70px;">총 포인트</th>
 										</tr>
 									</thead>
@@ -99,7 +98,6 @@ $(function () {
 											<td class="userTd">${userVo.user_birth}</td>
 											<td class="userTd">${userVo.user_phone}</td>
 											<td class="userTd">${userVo.user_address}</td>
-											<td class="userTd">${userVo.user_total_money}</td>
 											<td class="userTd">${userVo.user_point}</td>
 										</tr>
 									</c:forEach>

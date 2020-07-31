@@ -32,7 +32,6 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	public List<GshReviewVo> reviewList() throws Exception {
 		return null;
 	}
-	
 	// 리뷰 코드로 선택해서 보기
 	@Override
 	public List<GshReviewVo> select_reviewAll() throws Exception {
@@ -66,10 +65,16 @@ public class GshReviewDaoImpl implements GshReviewDao {
 		return sqlSession.selectList(NAMESPACE + "selectReviewByCode", movie_code);
 	}
 
-
+	// 해당 영화 평균점수 구하기
 	@Override
 	public int averageReviewScore(String movie_code) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "averageReviewScore", movie_code);
+	}
+
+	// 관리자 리뷰 삭제
+	@Override
+	public void admin_review_delete(int review_num) throws Exception {
+		sqlSession.delete(NAMESPACE + "admin_review_delete", review_num);
 	}
 
 }
