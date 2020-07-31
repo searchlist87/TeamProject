@@ -26,25 +26,25 @@
 						<div class="col-lg-2 col-md-6 col-12">	
 							<div class="single-footer links textcss">
 								<h4>고수현</h4> 
-								<img src="/resources/images/logo.jpg" style="height:150px;width:160px;"/>
+								<img src="/resources/images/1.png" style="height:150px;width:160px;"/>
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-6 col-12">	
 							<div class="single-footer links textcss">
 								<h4>전미혜</h4>  
-								<img src="/resources/images/jmh.png" style="height:150px;width:160px;"/>
+								<img src="/resources/images/2.png" style="height:150px;width:160px;"/>
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-6 col-12">
 							<div class="single-footer links textcss">
 								<h4>송근해</h4> 
-								<img src="/resources/images/logo.jpg" style="height:150px;width:160px;"/>
+								<img src="/resources/images/me.png" style="height:150px;width:160px;"/>
 							</div>
 						</div>
 						<div class="col-lg-2 col-md-6 col-12">
 							<div class="single-footer links textcss">
 								<h4>공다혜</h4> 
-								<img src="/resources/images/kdh.png" style="height:150px;width:160px;"/>
+								<img src="/resources/images/3.png" style="height:150px;width:160px;"/>
 							</div>
 						</div>
 							

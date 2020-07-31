@@ -15,7 +15,7 @@ public interface SghMovieProductDao {
 	// 기간이 지난영화 상품 목록 가져오기
 	public List<SghMovieProductVo> getOutProductList(SghPagingDto sghPagingDto) throws Exception;
 	// 기간이 지나지 않은 영화 총 숫자
-	public int getMovieProductTotal() throws Exception;
+	public int getMovieProductTotal(SghPagingDto sghPagingDto) throws Exception;
 	// 기간이 지난 영화 총 숫자
 	public int getOutProductTotal() throws Exception;
 	// 영화 상품 한개의 정보 가져오기

@@ -37,7 +37,7 @@ public class SghMovieTimeController {
 	// 기간이 지나지 않고 삭제되지 않은 상영 회차 조회 폼으로
 	@RequestMapping(value="/movieTimeList", method=RequestMethod.GET)
 	public String movieTimeList(SghPagingDto sghPagingDto, Model model) throws Exception {
-		int total_count = sghMovieTimeService.getMovieTimeCount();
+		int total_count = sghMovieTimeService.getMovieTimeCount(sghPagingDto);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		List<SghMovieTimeListVo> time_list = sghMovieTimeService.getMovieTimeList(sghPagingDto);
@@ -49,7 +49,7 @@ public class SghMovieTimeController {
 	// 삭제된 상영 회차 조회 폼으로
 	@RequestMapping(value="/deleteMovieTimeList", method=RequestMethod.GET)
 	public String deleteMovieTimeList(SghPagingDto sghPagingDto, Model model) throws Exception {
-		int total_count = sghMovieTimeService.deleteMovieTimeCount();
+		int total_count = sghMovieTimeService.deleteMovieTimeCount(sghPagingDto);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		List<SghMovieTimeListVo> time_list = sghMovieTimeService.deleteMovieTimeList(sghPagingDto);
@@ -61,7 +61,7 @@ public class SghMovieTimeController {
 	// 기간이 지나고 삭제되지않은 상영 회차 조회 폼으로
 	@RequestMapping(value="/endOupMovieTimeList", method=RequestMethod.GET)
 	public String endOupMovieTimeList(SghPagingDto sghPagingDto, Model model) throws Exception {
-		int total_count = sghMovieTimeService.endOutMovieTimeCount();
+		int total_count = sghMovieTimeService.endOutMovieTimeCount(sghPagingDto);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		List<SghMovieTimeListVo> time_list = sghMovieTimeService.endOutMovieTimeList(sghPagingDto);

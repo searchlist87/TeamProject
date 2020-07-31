@@ -48,14 +48,14 @@ public class SghMyPageDaoImpl implements SghMyPageDao {
 
 
 	@Override
-	public int getBuyTotal() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getBuyTotal");
+	public int getBuyTotal(String user_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getBuyTotal", user_id);
 	}
 
 
 	@Override
-	public int getOutBuyTotal() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getOutBuyTotal");
+	public int getOutBuyTotal(String user_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getOutBuyTotal", user_id);
 	}
 
 }

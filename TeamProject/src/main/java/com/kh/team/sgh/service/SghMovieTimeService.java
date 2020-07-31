@@ -13,15 +13,15 @@ public interface SghMovieTimeService {
 	// 상영 회차 목록 가져오기
 	public List<SghMovieTimeListVo> getMovieTimeList(SghPagingDto sghPagingDto) throws Exception;
 	// 시간이 지나지 않고 삭제되지 않은 상영회차 총 카운트 들고오기
-	public int getMovieTimeCount() throws Exception;
+	public int getMovieTimeCount(SghPagingDto sghPagingDto) throws Exception;
 	// 삭제된 상영 회차 목록 가져오기
 	public List<SghMovieTimeListVo> deleteMovieTimeList(SghPagingDto sghPagingDto) throws Exception;
 	// 삭제된 상영회차 총 카운트 들고오기
-	public int deleteMovieTimeCount() throws Exception;
+	public int deleteMovieTimeCount(SghPagingDto sghPagingDto) throws Exception;
 	// 상영 회차 목록 가져오기
 	public List<SghMovieTimeListVo> endOutMovieTimeList(SghPagingDto sghPagingDto) throws Exception;
 	// 시간이 지나고 삭제되지 않은 상영회차 총 카운트 들고오기
-	public int endOutMovieTimeCount() throws Exception;
+	public int endOutMovieTimeCount(SghPagingDto sghPagingDto) throws Exception;
 	// ajax 요청, 상영 일정에 등록된 상영작 하나 가져오기
 	public SghMovieTimeAjaxDto getAjaxScheduleOne(String movie_schedule_code) throws Exception;
 	// ajax 요청, 골라진 상영작에 대한 상영관의 스크린 정보 가져오기

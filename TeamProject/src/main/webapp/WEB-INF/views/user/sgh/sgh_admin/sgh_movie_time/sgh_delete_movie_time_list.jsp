@@ -42,7 +42,7 @@ $(function() {
 	});
 });
 </script>
-<form id="frmSearch" action="/sgh/admin/movieTime/restoreTimeList" method="get"> 
+<form id="frmSearch" action="/sgh/admin/movieTime/deleteMovieTimeList" method="get"> 
 	<input type="hidden" id="category" name="category">
 	<input type="hidden" id="keyword" name="keyword">
 </form>

@@ -36,8 +36,8 @@ public class SghMovieProductServiceImpl implements SghMovieProductService {
 		return sghMovieProductDao.getOutProductList(sghPagingDto);
 	}
 	@Override
-	public int getMovieProductTotal() throws Exception {
-		return sghMovieProductDao.getMovieProductTotal();
+	public int getMovieProductTotal(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieProductDao.getMovieProductTotal(sghPagingDto);
 	}
 	@Override
 	public int getOutProductTotal() throws Exception {

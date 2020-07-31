@@ -32,13 +32,13 @@ public class SghMyPageServiceImpl implements SghMyPageService {
 	}
 
 	@Override
-	public int getBuyTotal() throws Exception {
-		return sghMyPageDao.getBuyTotal();
+	public int getBuyTotal(String user_id) throws Exception {
+		return sghMyPageDao.getBuyTotal(user_id);
 	}
 
 	@Override
-	public int getOutBuyTotal() throws Exception {
-		return sghMyPageDao.getOutBuyTotal();
+	public int getOutBuyTotal(String user_id) throws Exception {
+		return sghMyPageDao.getOutBuyTotal(user_id);
 	}
 
 }

@@ -30,7 +30,7 @@ public class SghMovieProductController {
 	// 기간이 지나지 않은 스케쥴 리스트 폼으로
 	@RequestMapping(value="/scheduleProductList", method=RequestMethod.GET)
 	public String movieProductList(SghPagingDto sghPagingDto, Model model) throws Exception {
-		int total_count = sghMovieProductService.getMovieProductTotal();
+		int total_count = sghMovieProductService.getMovieProductTotal(sghPagingDto);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		List<SghMovieProductVo> movie_product_vo = sghMovieProductService.getMovieProductList(sghPagingDto);

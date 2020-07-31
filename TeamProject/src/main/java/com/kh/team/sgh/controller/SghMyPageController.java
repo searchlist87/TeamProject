@@ -47,10 +47,10 @@ public class SghMyPageController {
 	// 영화 예매 폼
 	@RequestMapping(value="/bookingForm", method=RequestMethod.GET)
 	public String bookingForm(SghPagingDto sghPagingDto, HttpSession session, Model model) throws Exception {
-		int total_count = sghMyPageService.getBuyTotal();
+		String user_id = (String)session.getAttribute("user_id");
+		int total_count = sghMyPageService.getBuyTotal(user_id);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
-		String user_id = (String)session.getAttribute("user_id");
 		int start_row = sghPagingDto.getStart_row();
 		int end_row = sghPagingDto.getEnd_row();
 		List<SghBuyListVo> movieBuyList = sghMyPageService.getBuyList(start_row, end_row, user_id);
@@ -59,13 +59,13 @@ public class SghMyPageController {
 		return "user/sgh/sgh_myPage/sgh_booking_form";
 	}
 	
-	// 시간이 지나지 않은 영화 예매 폼
+	// 시간이 지난 영화 예매 폼
 	@RequestMapping(value="/outBookingForm", method=RequestMethod.GET)
 	public String outBookingForm(SghPagingDto sghPagingDto, HttpSession session, Model model) throws Exception {
-		int total_count = sghMyPageService.getOutBuyTotal();
+		String user_id = (String)session.getAttribute("user_id");
+		int total_count = sghMyPageService.getOutBuyTotal(user_id);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
-		String user_id = (String)session.getAttribute("user_id");
 		int start_row = sghPagingDto.getStart_row();
 		int end_row = sghPagingDto.getEnd_row();
 		List<SghBuyListVo> movieBuyList = sghMyPageService.getOutBuyList(start_row, end_row, user_id);

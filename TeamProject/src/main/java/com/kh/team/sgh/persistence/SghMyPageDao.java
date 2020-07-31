@@ -15,7 +15,7 @@ public interface SghMyPageDao {
 	// 영화 시작 시간이 지난 예매 정보
 	public List<SghBuyListVo> getOutBuyList(int start_row, int end_row, String user_id) throws Exception;
 	// 영화 시작 시간이 지나지 않은 예매 총 숫자
-	public int getBuyTotal() throws Exception;
+	public int getBuyTotal(String user_id) throws Exception;
 	// 영화 시작 시간이 지난 예매 총 숫자
-	public int getOutBuyTotal() throws Exception;
+	public int getOutBuyTotal(String user_id) throws Exception;
 }

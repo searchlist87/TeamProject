@@ -43,8 +43,8 @@ public class SghMovieScheduleServiceImpl implements SghMovieScheduleService {
 	}
 
 	@Override
-	public int getMovieScheduleCount() throws Exception {
-		return sghMovieScheduleDao.getMovieScheduleCount();
+	public int getMovieScheduleCount(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieScheduleDao.getMovieScheduleCount(sghPagingDto);
 	}
 
 	@Override
@@ -53,8 +53,8 @@ public class SghMovieScheduleServiceImpl implements SghMovieScheduleService {
 	}
 
 	@Override
-	public int getDeleteScheduleCount() throws Exception {
-		return sghMovieScheduleDao.getDeleteScheduleCount();
+	public int getDeleteScheduleCount(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieScheduleDao.getDeleteScheduleCount(sghPagingDto);
 	}
 
 	@Override
@@ -73,8 +73,8 @@ public class SghMovieScheduleServiceImpl implements SghMovieScheduleService {
 	}
 
 	@Override
-	public int getEndDateOutScheduleCount() throws Exception {
-		return sghMovieScheduleDao.getEndDateOutScheduleCount();
+	public int getEndDateOutScheduleCount(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieScheduleDao.getEndDateOutScheduleCount(sghPagingDto);
 	}
 
 }

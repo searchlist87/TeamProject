@@ -15,10 +15,10 @@
 		<if test='keyword != ""'>
 			<choose>
 				<when test='category == "movie_name"'>
-					and movie_name like '%' || #{keyword} || '%'
+					and m.movie_name like '%' || #{keyword} || '%'
 				</when>
 				<when test='category == "theater_name"'>
-					and theater_name like '%' || #{keyword} || '%'
+					and tt.theater_name like '%' || #{keyword} || '%'
 				</when>
 			</choose>
 		</if>
@@ -28,8 +28,21 @@
 	
 	<!-- 기간이 지나지 않은 영화 상품 목록 토탈 -->
 	<select id="getMovieProductTotal" resultType="integer">
-		select count(*) from tbl_movie_time
-		where movie_end_time >= sysdate
+        select count(*) from tbl_movie_time mt, tbl_theater tt, tbl_movie_schedule tms, tbl_movie m
+		where mt.movie_end_time >= sysdate
+        and mt.movie_schedule_code = tms.movie_schedule_code
+        and tms.movie_code = m.movie_code
+        and tms.theater_code = tt.theater_code
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and m.movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and tt.theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	<!-- 기간이 지난 영화 상품 목록 가져오기 -->
@@ -39,14 +52,39 @@
 		       sc.screen_seat_row, sc.screen_seat_col
 		from tbl_movie_time t, tbl_movie m, tbl_movie_schedule d, tbl_theater tt, tbl_movie_screen sc
 		where m.movie_code = d.movie_code and d.movie_schedule_code = t.movie_schedule_code and tt.theater_code = d.theater_code and t.screen_code = sc.screen_code
+		
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and m.movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and tt.theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
+		
 		and t.movie_end_time <![CDATA[ <= ]]> sysdate) a)
 		where rnum between #{start_row} and #{end_row}
 	</select>
 	
 	<!-- 기간이 지난영화 상품 목록 토탈 -->
 	<select id="getOutProductTotal" resultType="integer">
-		select count(*) from tbl_movie_time
+		select count(*) from tbl_movie_time mt, tbl_theater tt, tbl_movie_schedule tms, tbl_movie m
 		where movie_end_time <![CDATA[ <= ]]> sysdate
+        and mt.movie_schedule_code = tms.movie_schedule_code
+        and tms.movie_code = m.movie_code
+        and tms.theater_code = tt.theater_code
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and m.movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and tt.theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	<!-- 영화 상품 목록 한개 가져오기 -->

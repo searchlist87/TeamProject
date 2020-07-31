@@ -51,6 +51,7 @@
   		select count(*) from tbl_movie_buy_list mbl, tbl_movie_time mt
         where mbl.movie_time_code = mt.movie_time_code
         and mt.movie_start_time >= systimestamp
+        and mbl.user_id = #{user_id}
 	</select>
 	
 	<!-- 기간이 지나지 않은 예매 총 숫자 -->
@@ -58,5 +59,6 @@
   		select count(*) from tbl_movie_buy_list mbl, tbl_movie_time mt
         where mbl.movie_time_code = mt.movie_time_code
         and mt.movie_start_time <![CDATA[ <= ]]> systimestamp
+        and mbl.user_id = #{user_id}
 	</select>
 </mapper>

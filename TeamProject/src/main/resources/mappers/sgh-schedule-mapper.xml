@@ -68,18 +68,60 @@
 	
 	<!-- 상영작 총 숫자 가져오기 -->
 	<select id="getMovieScheduleCount" resultType="integer">
-		select count(*) from tbl_movie_schedule where movie_schedule_state = 'Y'
+        select count(*)
+        from tbl_movie_schedule tms, tbl_movie m, tbl_theater tt
+        where tms.movie_schedule_state = 'Y'
+        and tms.movie_code = m.movie_code
+        and tms.theater_code = tt.theater_code
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and m.movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and tt.theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	<!-- 삭제된 상영작 총 숫자 가져오기 -->
 	<select id="getDeleteScheduleCount" resultType="integer">
-		select count(*) from tbl_movie_schedule where movie_schedule_state = 'N'
+        select count(*)
+        from tbl_movie_schedule tms, tbl_movie m, tbl_theater tt
+        where tms.movie_schedule_state = 'N'
+        and tms.movie_code = m.movie_code
+        and tms.theater_code = tt.theater_code
+		<if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and m.movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and tt.theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	<!-- 삭제되지 않은 종료 기간이 지난 상영작 총 숫자 가져오기 -->
 	<select id="getEndOutScheduleCount" resultType="integer">
-		select count(*) from tbl_movie_schedule where movie_schedule_state = 'Y'
-        and movie_end_date <![CDATA[ <= ]]> sysdate
+        select count(*)
+        from tbl_movie_schedule tms, tbl_movie m, tbl_theater tt
+        where tms.movie_schedule_state = 'Y'
+        and tms.movie_code = m.movie_code
+        and tms.theater_code = tt.theater_code
+        and tms.movie_end_date <![CDATA[ <= ]]> sysdate
+        <if test='keyword != ""'>
+			<choose>
+				<when test='category == "movie_name"'>
+					and m.movie_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='category == "theater_name"'>
+					and tt.theater_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>
 	</select>
 	
 	<!-- 삭제하기 -->
