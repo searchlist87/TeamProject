@@ -24,7 +24,7 @@ function jusoCallBack(roadFullAddr){
 
 
 $(function() {
-	
+	alert("수정작업을 완료한 후 수정완료 버튼을 눌러주세요.");
 	
 	// 수정 버튼
 	$("#modifyBtn").click(function () {
