@@ -7,16 +7,17 @@
 
 	<!-- 상영 회차에 등록된 영화 시간을 골라서 오늘 하는 영화 중 해당 영화 가져오기 -->
 	<select id="getChoiceMovieList" resultType="SghBookingVo">
-		select mt.*, m.movie_code, m.movie_name, m.movie_grade, s.screen_name, s.screen_code, s.screen_total_seat, c.rmn_sts
+     	select mt.*, m.movie_code, m.movie_name, m.movie_grade, s.screen_name, s.screen_code, s.screen_total_seat, c.rmn_sts
 		from tbl_movie_schedule sd, tbl_movie m, tbl_movie_screen s, tbl_theater tt,
 		(select movie_time_code, count(*) rmn_sts from tbl_schedule_seat s where seat_check = 'N' group by movie_time_code) c,
-		(select movie_time_code, movie_schedule_code, screen_code, to_char(movie_start_time, 'YYYY-MM-DD') start_date, to_char(movie_start_time, 'HH24:MI') start_time, to_char(movie_end_time, 'HH24:MI') end_time from tbl_movie_time) mt
+		(select movie_time_code, movie_schedule_code, screen_code, to_char(movie_start_time, 'YYYY-MM-DD') start_date, movie_start_time start_time, movie_end_time end_time from tbl_movie_time) mt
 		where mt.start_date = #{start_date} and m.movie_code = #{movie_code} and tt.theater_code = #{theater_code}
 		and mt.movie_schedule_code = sd.movie_schedule_code
 		and sd.movie_code = m.movie_code
 		and mt.screen_code = s.screen_code
 		and mt.movie_time_code = c.movie_time_code
         and s.theater_code = tt.theater_code
+        and mt.start_time >= systimestamp
 	</select>
 	
 	<!-- 회차에 대한 등록된 시트 상품 정보 가져오기 -->
@@ -42,12 +43,7 @@
     		seat_check = 'Y'
 		where schedule_seat_code = #{schedule_seat_code}
 	</update>
-	
-	<!-- 구매할 때 구매 내역 인설트 -->
-	<insert id="insertMovieBuy">
-		insert into tbl_movie_buy(movie_buy_num, movie_time_code, schedule_seat_code, screen_code, user_id)
-		values(seq_movie_buy_num.nextval, #{movie_time_code}, #{schedule_seat_code}, #{screen_code}, #{user_id})
-	</insert>
+
 	
 	<!-- 구매할 때 구매 내역 리스트 인설트 -->
 	<insert id="insertMovieBuyList">

@@ -27,7 +27,7 @@
 	
 	<!-- 영화 구매시 포인트 사용내역 추가하기 -->
 	<insert id="insertUsedPoint">
-		insert into tbl_used_point(POINT_USED_NUM, POINT_USED_CODE, USER_ID, USERD_POINT)
+		insert into tbl_used_point(POINT_USED_NUM, POINT_USED_CODE, USER_ID, USED_POINT)
 		values(seq_used_point_num.nextval, 'PS1', #{user_id}, #{use_point})
 	</insert>
 </mapper>

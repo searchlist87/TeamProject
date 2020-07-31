@@ -1,8 +1,6 @@
 package com.kh.team.sgh.persistence;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -41,11 +39,6 @@ public class SghBookingDaoImpl implements SghBookingDao {
 	@Override
 	public void updateScheduleSeat(String schedule_seat_code) throws Exception {
 		sqlSession.update(NAMESPACE + "updateScheduleSeat", schedule_seat_code);
-	}
-
-	@Override
-	public void insertMovieBuy(SghPaymentVo sghPaymentVo) throws Exception {
-		sqlSession.insert(NAMESPACE + "insertMovieBuy", sghPaymentVo);
 	}
 
 	@Override

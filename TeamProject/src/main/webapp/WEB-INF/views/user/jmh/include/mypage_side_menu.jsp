@@ -10,6 +10,13 @@
 			</ul>
 		</div>
 		<div class="single-info">
+			<h5># MY 영화 예매</h5>
+			<ul class="subul">
+				<li><a href="/sgh/myPage/bookingForm">기간이 남은 영화 예매 조회</a></li>
+				<li><a href="/sgh/myPage/outBookingForm">기간이 지난 영화 예매 조회</a></li>
+			</ul>
+		</div>
+		<div class="single-info">
 			<h5># 내 구매 내역</h5>
 			<ul class="subul">
 				<li><a href="/sgh/myPage/movieBuyForm">영화 구매 내역</a></li>

@@ -29,6 +29,7 @@ $(function() {
 		});
 	});
 	
+	var total = 0;
 	// 포인트 사용하기
 	$("#btnPointUse").click(function() {
 		$("#pointResult").remove();
@@ -53,13 +54,21 @@ $(function() {
 		}
 		
 		$("#point_use").text(pointUse + "P");
-		var total = "${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}";
+		total = "${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}";
 		$("#total").text((total - pointUse) + "원");
 		$("#use_point").val(pointUse);
 	});
 	
 	// 결제 진행
 	$("#btnPayment").click(function() {
+		var price = "${sghPaymentVo.movie_price}";
+		var point_use = $("#point_use").text(); 
+		
+		if(price < point_use) {
+			alert("포인트는 계산 금액을 넘어설수 없습니다.");
+			return false;
+		}
+		
 		$("#frmPayment").submit();
 	});
 });
@@ -69,81 +78,64 @@ $(function() {
 	<c:forEach items="${sghChoiceSeatDto.schedule_code_arr}" var="schedule_code">
 	<input type="hidden" name="schedule_code_arr" value="${schedule_code}">
 	</c:forEach>
-	<input type="hidden" id="use_point" name="use_point">
+	<input type="hidden" id="use_point" name="use_point" value="0">
 </form>
 <body class="js">
-		<!-- Breadcrumbs -->
-		<div class="breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="bread-inner">
-							<ul class="bread-list">
-								<li><a href="index1.html">좌석선택<i class="ti-arrow-right"></i></a></li>
-								<li class="active"><a href="blog-single.html">결제하기</a></li>
+<!-- Start Checkout -->
+<section class="shop checkout section">
+	<div class="container">
+		<div class="row"> 
+			<div class="col-lg-5 col-5">
+				<div class="checkout-form">
+					<h2>영화 제목 : ${sghPaymentVo.movie_name}</h2>
+					<p>일시 : ${sghPaymentVo.start_date} ${sghPaymentVo.start_time} ~ ${sghPaymentVo.end_time}</p>
+					<p>영화관 : ${sghPaymentVo.theater_name}</p>
+					<p>인원 : ${sghChoiceSeatDto.personnel}명</p>
+					<p>금액 : ${sghPaymentVo.movie_price}원</p>
+					<p>좌석번호 :
+						<strong style="color: red;">
+						<c:forEach items="${sghChoiceSeatDto.schedule_text_arr}" var="schedule_text">
+							${schedule_text} 
+						</c:forEach>
+						</strong>
+					</p>
+					<p>
+						<input type="text" id="user_point" class="form-inline" style="float:left;" placeholder="잔액 조회" readonly>
+						<button type="button" id="btnPointSearch" class="btn-sm" style="background-color: black; color: white;">조회</button>
+					<p>
+					<p>
+						<input type="text" id="pointUse" class="form-inline" style="float:left;" placeholder="사용할 포인트">
+						<button type="button" id="btnPointUse" class="btn-sm" style="background-color: black; color: white;">사용하기</button>
+					<p>
+				</div>
+			</div>
+			<div class="col-lg-4 col-12">
+				<div class="order-details">
+					<!-- Order Widget -->
+					<div class="single-widget">
+						<h2>결제 내용</h2>
+						<div class="content">
+							<ul>
+								<li>결제 금액<span>${sghPaymentVo.movie_price}원</span></li>
+								<li>(+) 인원<span>${sghChoiceSeatDto.personnel}명</span></li>
+								<li>(-) 포인트<span id="point_use" style="color:blue;">0</span>p</li>
+								<li class="last">Total<span id="total">${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}원</span></li>
 							</ul>
+						</div>
+					</div>
+					<div class="single-widget get-button">
+						<div class="content">
+							<div class="button">
+								<button id="btnPayment" class="btn">결제하기</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- End Breadcrumbs -->
-				
-		<!-- Start Checkout -->
-		<section class="shop checkout section">
-			<div class="container">
-				<div class="row"> 
-					<div class="col-lg-5 col-5">
-						<div class="checkout-form">
-							<h2>영화 제목 : ${sghPaymentVo.movie_name}</h2>
-							<p>일시 : ${sghPaymentVo.start_date} ${sghPaymentVo.start_time} ~ ${sghPaymentVo.end_time}</p>
-							<p>영화관 : ${sghPaymentVo.theater_name}</p>
-							<p>인원 : ${sghChoiceSeatDto.personnel}명</p>
-							<p>금액 : ${sghPaymentVo.movie_price}원</p>
-							<p>좌석번호 :
-								<strong style="color: red;">
-								<c:forEach items="${sghChoiceSeatDto.schedule_text_arr}" var="schedule_text">
-									${schedule_text} 
-								</c:forEach>
-								</strong>
-							</p>
-							<p>
-								<input type="text" id="user_point" class="form-inline" style="float:left;" placeholder="잔액 조회" readonly>
-								<button type="button" id="btnPointSearch" class="btn-sm" style="background-color: black; color: white;">조회</button>
-							<p>
-							<p>
-								<input type="text" id="pointUse" class="form-inline" style="float:left;" placeholder="사용할 포인트">
-								<button type="button" id="btnPointUse" class="btn-sm" style="background-color: black; color: white;">사용하기</button>
-							<p>
-						</div>
-					</div>
-					<div class="col-lg-4 col-12">
-						<div class="order-details">
-							<!-- Order Widget -->
-							<div class="single-widget">
-								<h2>결제 내용</h2>
-								<div class="content">
-									<ul>
-										<li>결제 금액<span>${sghPaymentVo.movie_price}원</span></li>
-										<li>(+) 인원<span>${sghChoiceSeatDto.personnel}명</span></li>
-										<li>(-) 포인트<span id="point_use" style="color:blue;"></span></li>
-										<li class="last">Total<span id="total" style="text-align: right;">${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}원</span></li>
-									</ul>
-								</div>
-							</div>
-							<div class="single-widget get-button">
-								<div class="content">
-									<div class="button">
-										<button id="btnPayment" class="btn">결제하기</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/ End Checkout -->
+	</div>
+</section>
+<!--/ End Checkout -->
 <%@ include file="../../../include/footer.jsp" %>		
 	
 </body>

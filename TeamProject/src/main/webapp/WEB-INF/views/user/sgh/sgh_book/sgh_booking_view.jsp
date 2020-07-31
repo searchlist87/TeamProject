@@ -36,12 +36,15 @@
 	.set_prog {
 		font-size: 30px;
 	}
-	strong {
+	.white_color {
 		color: white;
+	}
+	.modal-body strong {
+		color: black;
 	}
 	
 </style>
-<script src="/resources/js/sgh_js/booking_date.js"></script>
+<script src="/resources/js/sgh_js/myScript.js"></script>
 <script>
 $(function() {
 	
@@ -56,6 +59,7 @@ $(function() {
 	var rmn_sts;
 	var total_seat;
 	var choice_movie_time;
+	
 	
 	// 상영 지역 이벤트 설정
 	// 상영 지역에 있는 영화관 정보를 받아서 해당 지역으로 클릭하면 그 지역에 관한 영화관 뿌리기
@@ -93,9 +97,9 @@ $(function() {
 		screenClone.find("a").wrap("<li></li>");
 		
 		$("#prog1").css("color", "red");
-		$("#prog2").css("color", "black");
-		$("#prog3").css("color", "black");
-		$("#prog4").css("color", "black");
+		$("#prog2").css("color", "white");
+		$("#prog3").css("color", "white");
+		$("#prog4").css("color", "white");
 		
 		$("#screeningArea").after(screenClone);
 	});
@@ -132,16 +136,16 @@ $(function() {
 		$(".screeningAreaClone").after(screenClone);
 	});
 	
-	var start_date = year + "-" + zeroPlus(month) + "-" + zeroPlus(date);
 	var movie_index = 0;
 	// 상영작 클릭 이벤트
 	$("#section").on("click", ".movie_name", function(e) {
 		e.preventDefault();
 		movie_index++;
+		var start_date = year + "-" + zeroPlus(month) + "-" + zeroPlus(date);
 		var movie_id = "movie" + movie_index;
 		$(this).attr("id", movie_id);
 		$(".movie_list_clone").remove();
-		
+
 		var strDate = year + "-" + zeroPlus(month) + "-" + zeroPlus(date) + "("+strDay(day)+")";
 		
 		var movie_code = $(this).attr("data-movie-code");
@@ -169,6 +173,8 @@ $(function() {
 				var movie_grade = (this).movie_grade;
 				var start_date = (this).start_date;
 				var start_time = (this).start_time;
+				start_time = hh24_mi_change(start_time);
+				
 				var end_time = (this).end_time;
 				var screen_name = (this).screen_name;
 				var screen_code = (this).screen_code;
@@ -406,13 +412,13 @@ $(function() {
 					영화 예매
 				</strong>
 				<div style="text-align: center;">
-					<strong class="set_prog" id="prog1">&#9312;</strong>
-					<strong class="set_prog">&#8594;</strong>
-					<strong class="set_prog" id="prog2">&#9313;</strong>
-					<strong class="set_prog">&#8594;</strong>
-					<strong class="set_prog" id="prog3">&#9314;</strong>
-					<strong class="set_prog">&#8594;</strong>
-					<strong class="set_prog" id="prog4">&#9315;</strong>
+					<strong class="set_prog white_color" id="prog1">&#9312;</strong>
+					<strong class="set_prog white_color">&#8594;</strong>
+					<strong class="set_prog white_color" id="prog2">&#9313;</strong>
+					<strong class="set_prog white_color">&#8594;</strong>
+					<strong class="set_prog white_color" id="prog3">&#9314;</strong>
+					<strong class="set_prog white_color">&#8594;</strong>
+					<strong class="set_prog white_color" id="prog4">&#9315;</strong>
 				</div>
 			</div>
 			<div class="container">
