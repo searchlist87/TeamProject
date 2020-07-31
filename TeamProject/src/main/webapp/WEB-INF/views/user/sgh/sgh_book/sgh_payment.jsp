@@ -56,19 +56,18 @@ $(function() {
 		$("#point_use").text(pointUse + "P");
 		total = "${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}";
 		$("#total").text((total - pointUse) + "원");
-		$("#use_point").val(pointUse);
-	});
-	
-	// 결제 진행
-	$("#btnPayment").click(function() {
-		var price = "${sghPaymentVo.movie_price}";
-		var point_use = $("#point_use").text(); 
 		
-		if(price < point_use) {
+		if(total < point_use) {
 			alert("포인트는 계산 금액을 넘어설수 없습니다.");
 			return false;
 		}
 		
+		$("#use_point").val(pointUse);
+		
+	});
+	
+	// 결제 진행
+	$("#btnPayment").click(function() {
 		$("#frmPayment").submit();
 	});
 });
