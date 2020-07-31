@@ -41,9 +41,9 @@
 </style>
 <script>
 $(function () {
-	$("#food_manage > dd").css("display","block");
-	$("#food_manage > dt").css("color","red");
-	$("#food_manage > dd").eq(1).css("color","blue");
+	$("#food_product_manage > dd").css("display","block");
+	$("#food_product_manage > dt").css("color","red");
+	$("#food_product_manage > dd").eq(1).css("color","blue");
 	
 	$("#registForm").submit(function (e) {
 		// 메인 파일 담기

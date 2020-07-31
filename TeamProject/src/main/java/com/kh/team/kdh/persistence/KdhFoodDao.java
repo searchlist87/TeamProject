@@ -82,7 +82,7 @@ public interface KdhFoodDao {
 	public List<KdhMypageBuyFoodListDto> selectMyPageBuyFoodList(String user_id) throws Exception;
 	
 	// 상품 구매 리스트 갯수 구하기
-	public int selectFoodBuyListCount() throws Exception;
+	public int selectFoodBuyListCount(KdhPagingDto pagingDto) throws Exception;
 	
 	// 상품 구매 리스트 페이징
 	public List<KdhAdminFoodBuyListDto> foodBuyListPage(KdhPagingDto pagingDto) throws Exception;

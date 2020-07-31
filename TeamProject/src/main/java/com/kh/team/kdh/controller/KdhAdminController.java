@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Controller;
@@ -105,8 +106,10 @@ public class KdhAdminController {
 	@RequestMapping(value = "/admin_food_buy_list", method = RequestMethod.GET)
 	public String admin_food_buy_list(Model model, KdhPagingDto pagingDto) throws Exception {
 		int perPage = 10;
+//		System.out.println("pagingDto:" + pagingDto);
 		pagingDto.setPerPage(perPage);
-		int foodBuyListCount = foodService.selectFoodBuyListCount();
+		int foodBuyListCount = foodService.selectFoodBuyListCount(pagingDto);
+		System.out.println("foodBuyListCount:" + foodBuyListCount);
 		pagingDto.setPageInfo(foodBuyListCount);
 		List<KdhAdminFoodBuyListDto> buyFoodList = foodService.foodBuyListPage(pagingDto);
 		System.out.println("buyFoodList:" + buyFoodList);

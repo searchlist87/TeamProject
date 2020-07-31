@@ -27,6 +27,11 @@
 </style>
 <script>
 $(function() {
+	
+	$("#food_product_manage > dd").css("display","block");
+	$("#food_product_manage > dt").css("color","red");
+	$("#food_product_manage > dd").eq(0).css("color","blue");
+	
 	// 페이지 버튼 클릭시 해당 페이지 넘어가게
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
