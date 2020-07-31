@@ -10,7 +10,7 @@ public interface GshReviewDao {
 	public List<GshReviewVo> reviewList() throws Exception;
 	
 	// 영화 정보 가져오기
-	public List<GshReviewVo> select_reviewAll() throws Exception;
+	public List<GshReviewVo> select_reviewAll(int start_row, int end_row) throws Exception;
 	
 	// 리뷰 작성하기
 	public void write_review(GshReviewVo gshReviewVo) throws Exception;
@@ -29,5 +29,8 @@ public interface GshReviewDao {
 	
 	// 관리자 리뷰 삭제
 	public void admin_review_delete(int review_num) throws Exception;
+	
+	// 관리자 리뷰 목록 총 숫자 구하기
+	public int getReviewCount() throws Exception;
 
 }

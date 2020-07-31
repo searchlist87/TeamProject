@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.GshMovieDto;
+import com.kh.team.domain.GshPagingDto;
 import com.kh.team.persistence.GshMovieDao;
 
 @Service
@@ -16,8 +17,8 @@ public class GshMovieServiceImpl implements GshMovieService {
 	private GshMovieDao gshMovieDao;
 
 	// 영화 정보 가져오기
-	public List<GshMovieDto> select_movieAll() throws Exception {
-		return gshMovieDao.select_movieAll();
+	public List<GshMovieDto> select_movieAll(GshPagingDto gshPagingDto) throws Exception {
+		return gshMovieDao.select_movieAll(gshPagingDto);
 	}
 
 	// 영화 코드로 리뷰 보기
@@ -41,6 +42,13 @@ public class GshMovieServiceImpl implements GshMovieService {
 	// 영화 장르로 영화 찾기
 	@Override
 	public void findMovieGenre() throws Exception {
+		
+	}
+	
+	// 영화 목록 페이징
+	@Override
+	public int getMovieCount(GshPagingDto gshPagingDto) throws Exception {
+		return gshMovieDao.getMovieCount(gshPagingDto);
 		
 	}
 	

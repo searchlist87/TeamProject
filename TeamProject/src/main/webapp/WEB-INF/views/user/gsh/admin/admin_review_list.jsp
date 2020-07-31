@@ -29,12 +29,6 @@
 $(function() {
 	// 페이지 버튼 클릭시 해당 페이지 넘어가게
 	// 링크 수정 필요
-	$("a.page-link").click(function(e) {
-		e.preventDefault();
-		var page = $(this).attr("href");
-		
-		location.href = "/kdh/admin/admin_food_list?page=" + page;
-	});
 	
 	// 현재 페이지 액티브 설정
 	$("a.page-link").each(function() {
@@ -53,16 +47,16 @@ $(function() {
 		console.log("review_num:" + review_num);
 		var url = "/gsh/admin/admin_review_delete";
 	    var sendData = {
-					"review_num" :	review_num	
+					"review_num" :	review_num
 		};
 		$.get(url, sendData, function(rData) {
-			location.reload();
 		});
+		location.reload();
 	});
 	
 	// 검색 기능
 	$("#btnSearch").click(function() {
-		
+		// 클릭 기능 활성화 확인
 	});
 	
 });
@@ -84,34 +78,36 @@ $(function() {
 								<div style="background-color:#f6f7fb; padding:20px; border-bottom:1px solid #ddd;">
 									<h4 class="title" >리뷰 관리 페이지</h4>
 								</div>	
+								
 								<!--  검색 -->
-								<div style="padding:20px;text-align:right;">
+<!-- 								<div style="padding:20px;text-align:right;"> -->
 										
-									<div class="single-shorter" style="vertical-align:middle;">
-											<label>검색 :</label>
-											<select id="searchSelect" name=searchType>
-												<option value="review_content"
-												<c:if test="${GshMovieDto.searchType == 'review_content'}">selected</c:if>
-												>리뷰내용</option>
-												<option value="user_id"
-												<c:if test="${GshMovieDto.searchType == 'user_id'}">selected</c:if>
-												>작성자</option>
-												<option value="review_score"
-												<c:if test="${GshMovieDto.searchType == 'review_score'}">selected</c:if>
-												>평점</option>
-											</select>
-										</div>
+<!-- 									<div class="single-shorter" style="vertical-align:middle;"> -->
+<!-- 											<label>검색 :</label> -->
+<!-- 											<select id="searchSelect" name=searchType> -->
+<!-- 												<option value="review_content" -->
+<%-- 												<c:if test="${GshMovieDto.searchType == 'review_content'}">selected</c:if> --%>
+<!-- 												>리뷰내용</option> -->
+<!-- 												<option value="user_id" -->
+<%-- 												<c:if test="${GshMovieDto.searchType == 'user_id'}">selected</c:if> --%>
+<!-- 												>작성자</option> -->
+<!-- 												<option value="review_score" -->
+<%-- 												<c:if test="${GshMovieDto.searchType == 'review_score'}">selected</c:if> --%>
+<!-- 												>평점</option> -->
+<!-- 											</select> -->
+<!-- 										</div> -->
 
-									<input type="text" id="keyword" value="${GshMovieDto.keyword}"/>
-									<button type="button" class="btn" id="btnSearch">검색</button>
-								</div>	
+<%-- 									<input type="text" id="keyword" value="${GshMovieDto.keyword}"/> --%>
+<!-- 									<button type="button" class="btn" id="btnSearch">검색</button> -->
+<!-- 								</div>	 -->
 								<!--  검색 끝 -->
+								
 								<!--  페이지별 내용 -->
 								
 								<table id="commentTable" class="table">
 									<thead>
 										<tr style="background-color: #ccc;">
-											<th>영화 코드</th>
+											<th>리뷰 번호</th>
 											<th>작성자 아이디</th>
 											<th>리뷰 내용</th>
 											<th>평점</th>
@@ -122,7 +118,7 @@ $(function() {
 									<tbody class="tbody">
 										<c:forEach items="${reviewList}" var="GshReviewVo">
 										<tr>
-											<td>${GshReviewVo.movie_code}</td>
+											<td>${GshReviewVo.review_num}</td>
 											<td>${GshReviewVo.user_id}</td>
 											<td>${GshReviewVo.review_content}</td>
 											<td>${GshReviewVo.review_score}</td>
@@ -146,23 +142,23 @@ $(function() {
 										<ul class="pagination text-center" style="text-align:center;">
 										
 										<!-- 이전 버튼 -->
-										<c:if test ="${pagingDto.startPage != 1}">
+										<c:if test ="${gshPagingDto.startPage != 1}">
 											<li class="page-item" style="width:60px;"  style="float:left;">
-										    	<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
+										    	<a class="page-link" href="/gsh/admin/admin_review_list?startPage=${gshPagingDto.startPage - 1}">이전</a>
 											</li>
 										</c:if>
 						
 									 	<!-- 페이징 넘버링 -->
-									 	<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
+									 	<c:forEach begin="${gshPagingDto.startPage}" end="${gshPagingDto.endPage}" var="v">
 										    <li id="pageNumber" class="page-item"  style="width:30px; float:left;">
-										    	<a class="page-link" href="${v}">${v}</a>
+										    	<a class="page-link" href="/gsh/admin/admin_review_list?page=${v}">${v}</a>
 										    </li>
 										</c:forEach>    	
 										
 										<!-- 다음 버튼 -->
-										  <c:if test="${pagingDto.endPage < pagingDto.totalPage}">
+										  <c:if test="${gshPagingDto.endPage < gshPagingDto.totalPage}">
 										    <li class="page-item" style="width:60px; float:left;">
-										    	<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
+										    	<a class="page-link" href="/gsh/admin/admin_review_list?endPage=${gshPagingDto.endPage + 1}">다음</a>
 										    </li>
 										   </c:if>
 										</ul>

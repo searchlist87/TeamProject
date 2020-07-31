@@ -107,40 +107,40 @@
 			</div>
 		</section>
 		
-<!-- 페이징 -->
-<!-- <div class="row"  style="text-align:center;"> -->
-<!-- 	<div class="col-md-4"></div> -->
-<!-- 		<div class="col-md-8 text-center" style="text-align:center;"> -->
-<!-- 			<nav style="text-align:center;"> -->
-<!-- 				<ul class="pagination text-center" style="text-align:center;"> -->
+<!-- 페이징 시작 -->
+<div class="row"  style="text-align:center;">
+	<div class="col-md-4"></div>
+		<div class="col-md-8 text-center" style="text-align:center;">
+			<nav style="text-align:center;">
+				<ul class="pagination text-center" style="text-align:center;">
 				
 <!-- 				이전 버튼 -->
-<%-- 				<c:if test ="${pagingDto.startPage != 1}"> --%>
-<!-- 					<li class="page-item" style="width:60px;"  style="float:left;"> -->
-<%-- 				    	<a class="page-link" href="${pagingDto.startPage - 1}">이전</a> --%>
-<!-- 					</li> -->
-<%-- 				</c:if> --%>
+				<c:if test ="${gshPagingDto.startPage != 1}">
+					<li class="page-item" style="width:60px;"  style="float:left;">
+				    	<a class="page-link" href="/gsh/movie/movieView?startPage=${gshPagingDto.startPage - 1}">이전</a>
+					</li>
+				</c:if>
 
 <!-- 			 	페이징 넘버링 -->
-<%-- 			 	<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v"> --%>
-<!-- 				    <li id="pageNumber" class="page-item"  style="width:30px; float:left;"> -->
-<%-- 				    	<a class="page-link" href="${v}">${v}</a> --%>
-<!-- 				    </li> -->
-<%-- 				</c:forEach>    	 --%>
+			 	<c:forEach begin="${gshPagingDto.startPage}" end="${gshPagingDto.endPage}" var="v">
+				    <li id="pageNumber" class="page-item"  style="width:30px; float:left;">
+				    	<a class="page-link" href="/gsh/movie/movieView?page=${v}">${v}</a>
+				    </li>
+				</c:forEach>    	
 				
 <!-- 				다음 버튼 -->
-<%-- 				  <c:if test="${pagingDto.endPage < pagingDto.totalPage}"> --%>
-<!-- 				    <li class="page-item" style="width:60px; float:left;"> -->
-<%-- 				    	<a class="page-link" href="${pagingDto.endPage + 1}">다음</a> --%>
-<!-- 				    </li> -->
-<%-- 				   </c:if> --%>
-<!-- 				</ul> -->
-<!-- 			</nav> -->
-<!-- 		</div> -->
-<!-- 	<div class="col-md-4"></div> -->
-<!-- 	<div class="col-md-12" style="margin-bottom: 100px;"></div>	 -->
-<!-- </div> -->
-<!-- /페이징 -->
+				  <c:if test="${gshPagingDto.endPage < gshPagingDto.totalPage}">
+				    <li class="page-item" style="width:60px; float:left;">
+				    	<a class="page-link" href="/gsh/movie/movieView?endPage=${gshPagingDto.endPage + 1}">다음</a>
+				    </li>
+				   </c:if>
+				</ul>
+			</nav>
+		</div>
+	<div class="col-md-4"></div>
+	<div class="col-md-12" style="margin-bottom: 100px;"></div>	
+</div>
+<!-- 페이징 끝 -->
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
