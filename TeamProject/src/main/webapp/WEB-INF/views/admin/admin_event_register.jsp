@@ -28,14 +28,15 @@
 	.fileLabel {
 		width:80px;
 		height:30px;
-		border:1px solid #767676;
+/* 		border:1px solid #767676; */
 		border-top-right-radius:3px;
 		border-top-left-radius:3px;
 		border-bottom-left-radius:3px;
 		border-bottom-right-radius:3px;
 		text-align:center;
-		background-color:#efefef;
+		background-color:orange;
 		padding-top:2px;
+		color: white;
 	}
 
 </style>

@@ -15,12 +15,15 @@ import com.kh.team.domain.SghPaymentVo;
 import com.kh.team.domain.SghPointDto;
 import com.kh.team.sgh.constants.SghTeamConstants;
 import com.kh.team.sgh.persistence.SghBookingDao;
+import com.kh.team.sgh.persistence.SghPointDao;
 
 @Service
 public class SghBookingServiceImpl implements SghBookingService {
 
 	@Inject
 	private SghBookingDao sghBookingDao;
+	@Inject
+	private SghPointDao sghPointDao;
 	
 	@Override
 	public List<SghBookingVo> getChoiceMovieList(SghMovieTimeAjaxVo sghMovieTimeAjaxVo) throws Exception {
@@ -40,7 +43,7 @@ public class SghBookingServiceImpl implements SghBookingService {
 	// 영화 예약 시키기(구매내역, 구매내역리스트에도 추가)
 	@Transactional
 	@Override
-	public void updateScheduleSeat(SghPaymentVo sghPaymentVo, String[] schedule_seat_arr) throws Exception {
+	public void updateScheduleSeat(SghPaymentVo sghPaymentVo, String[] schedule_seat_arr, int use_point) throws Exception {
 		SghPointDto sghPointDto = new SghPointDto();
 		String user_id = sghPaymentVo.getUser_id();
 		int movie_price = sghPaymentVo.getMovie_price();
@@ -61,5 +64,9 @@ public class SghBookingServiceImpl implements SghBookingService {
 			sghBookingDao.insertPointList(sghPointDto);
 			sghBookingDao.updateUserPoint(sghPointDto);
 		}
+		// 포인트 사용하기
+		sghPointDao.updatePoint(user_id, use_point);
+		// 포인트 내역 추가하기
+		sghPointDao.insertUsedPoint(user_id, use_point);
 	}
 }

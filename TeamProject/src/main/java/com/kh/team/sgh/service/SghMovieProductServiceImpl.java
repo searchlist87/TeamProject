@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.team.domain.SghMovieBuyIdDateVo;
 import com.kh.team.domain.SghMovieProductVo;
 import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghPaymentVo;
@@ -41,5 +42,9 @@ public class SghMovieProductServiceImpl implements SghMovieProductService {
 	@Override
 	public int getOutProductTotal() throws Exception {
 		return sghMovieProductDao.getOutProductTotal();
+	}
+	@Override
+	public SghMovieBuyIdDateVo getUserIdDate(String schedule_seat_code) throws Exception {
+		return sghMovieProductDao.getUserIdDate(schedule_seat_code);
 	}
 }

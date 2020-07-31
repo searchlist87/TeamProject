@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+/* 오렌지 button 클래스 */
+.btn_orange {
+	background-color: orange;
+	color: white;
+}
+
+.btn_black {
+	background-color: #333;
+	color: white;
+}
+
+.btn_basic {
+	color: white;
+}

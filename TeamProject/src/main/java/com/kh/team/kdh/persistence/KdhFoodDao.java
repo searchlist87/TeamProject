@@ -80,4 +80,16 @@ public interface KdhFoodDao {
 	
 	// 상품 구매 내역 가져오기(마이페이지)
 	public List<KdhMypageBuyFoodListDto> selectMyPageBuyFoodList(String user_id) throws Exception;
+	
+	// 상품 구매 리스트 갯수 구하기
+	public int selectFoodBuyListCount() throws Exception;
+	
+	// 상품 구매 리스트 페이징
+	public List<KdhAdminFoodBuyListDto> foodBuyListPage(KdhPagingDto pagingDto) throws Exception;
+	
+	// 상품 마이페이지 구매 리스트 페이징
+	public List<KdhAdminFoodBuyListDto> foodBuyListMyPage(KdhPagingDto pagingDto) throws Exception;
+	
+	// 마이페이지 구매 리스트 유저별로 갯수 구하기
+	public int selectMyPageFoodBuyListCount(String user_id) throws Exception;
 }

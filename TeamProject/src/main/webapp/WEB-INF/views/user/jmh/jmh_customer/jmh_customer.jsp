@@ -70,7 +70,7 @@ $(function () {
 						<div class="tabbable" id="tabs-965434">
 							<ul class="nav nav-tabs">
 								<li class="nav-item">
-									<a class="nav-link show" href="#tab1" data-toggle="tab" style="background-color:#f6931d;color:#fff;">FAQ</a>
+									<a class="nav-link" href="#tab1" data-toggle="tab" style="background-color:#f6931d;color:#fff;">FAQ</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#tab2" data-toggle="tab">공지사항</a>
@@ -88,7 +88,6 @@ $(function () {
 												<span style="float:right;position:absolute;top:10px;left:970px;"><a href="" class="link"><img src="/resources/images/jmh/pointer.png"/></a></span>
 												</div>
 												<div class="card-body faq_content" style="display:none;">
-<%-- 													<textarea rows="5" readonly>${faqVo.faq_content}</textarea> --%>
 													<pre>${faqVo.faq_content}</pre>
 												</div>
 											</div>
@@ -97,35 +96,57 @@ $(function () {
 									</c:forEach>
 									<!--  메뉴 end-->
 								</div>
+								<!--  공지사항 -->
 								<div class="tab-pane" id="tab2">
 									<div class="row">
 										<div class="col-md-12">
 											<table class="table">
 												<thead>
 													<tr>
-														<th>1</th>
-														<th>1</th>
-														<th>1</th>
-														<th>1</th>
+														<th></th>
+														<th style="padding-left:100px;">제목</th>
+														<th style="padding-left:70px;">등록일</th>
 													</tr>
 												</thead>
 												<tbody>
+												<c:forEach items="${jmhNoticeVo}" var="noticeVo" varStatus="status">
 													<tr>
-														<td>1</td>
-														<td>1</td>
-														<td>1</td>
-														<td>1</td>
+														<td>${status.count}</td>
+														<td 
+														<c:if test="${noticeVo.notice_check == 'Y'}">
+														style="color:red;"
+														</c:if>
+														><a href="/customer/customer_selectByCustomer?board_code=${noticeVo.board_code}">${noticeVo.board_title}</a></td>
+														<td>${noticeVo.board_date}</td>
 													</tr>
+												</c:forEach>
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
+								<!--  공지사항 END-->
+								<div style="margin-top:20px;">더 궁금한 점이 있거나, 이미 문의한 내용과 답변을 확인하려면? <span style="color:red;"><a href="/mypage/question">[ 1:1문의 바로가기 ]</a></span></div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!--  TAB END -->
+				
+			</div>
+			<div class="row form-main" style="margin-top:20px;">
+					<div class="col-md-12">
+						<span style="float:left;"><img src="/resources/images/jmh/customer.png" width="50px;" height="auto;"/></span>
+						<h5 style="padding-top:20px;margin-left:70px;">허니박스 고객센터</h5>
+					</div>
+					<div class="col-md-12" style="margin-top:20px;">
+						<h2 style="float:left;">1588 - </h2><h2 style="color:#179cea;"> 2345</h2>
+					</div>
+					<div class="col-md-12" style="margin-top:20px;">
+						<span>평일 > 09:00 ~ 18:00</span><br/>
+						<span>점심시간 > 12:00 ~ 13:00</span><br/>
+						<span>업무 외 시간에는</span> <span style="color:red;">1:1 문의하기</span><span>를 이용해 주세요.</span>
+					</div>
 			</div>
 		</div>
 </section>

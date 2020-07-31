@@ -51,6 +51,10 @@
 		<!-- 로그인 인터셉터 아직 설정 안함 -->
 		<interceptor>
 			<mapping path="/sgh/choiceSeat/**/*"/>
+			<mapping path="/sgh/1/**/*"/>
+			<!--  jmh -->
+			<mapping path="/mypage/**/*"/>
+			<!--  jmh end -->
 			<beans:ref bean="sghLoginInterceptor"/>
 		</interceptor>
 		<!-- 어드민 인터셉터 -->
@@ -63,6 +67,7 @@
 		<interceptor>
 			<mapping path="/sgh/book/**/*"/>
 			<exclude-mapping path="/sgh/book/bookingView"/>
+			<exclude-mapping path="/sgh/book/userPoint"/>
 			<beans:ref bean="sghBookCheckInterceptor"/>
 		</interceptor>
 	</interceptors>

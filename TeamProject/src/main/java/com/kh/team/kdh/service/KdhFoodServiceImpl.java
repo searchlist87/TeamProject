@@ -133,5 +133,23 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 		return foodDao.selectMyPageBuyFoodList(user_id);
 	}
 
+	@Override
+	public int selectFoodBuyListCount() throws Exception {
+		return foodDao.selectFoodBuyListCount();
+	}
 
+	@Override
+	public List<KdhAdminFoodBuyListDto> foodBuyListPage(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.foodBuyListPage(pagingDto);
+	}
+
+	@Override
+	public List<KdhAdminFoodBuyListDto> foodBuyListMyPage(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.foodBuyListMyPage(pagingDto);
+	}
+
+	@Override
+	public int selectMyPageFoodBuyListCount(String user_id) throws Exception {
+		return foodDao.selectMyPageFoodBuyListCount(user_id);
+	}
 }

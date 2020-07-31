@@ -65,6 +65,7 @@ $(function() {
 			index = 1;
 		}
 	});
+	
 	$("#seat_tbody").append(tr);
 	
 	// 마이너스 버튼

@@ -30,10 +30,14 @@ $(function() {
 	// 페이지 버튼 클릭시 해당 페이지 넘어가게
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
+		
+		var searchType = $("#searchSelect").val();
+		console.log("searchType :" + searchType);
+		
 		var page = $(this).attr("href");
 		console.log("page:" + page);
 		
-		location.href = "/kdh/admin/admin_food_list?page=" + page;
+// 		location.href = "/kdh/admin/admin_food_buy_list?page=" + page;
 	});
 	
 	// 현재 페이지 액티브 설정
@@ -52,6 +56,13 @@ $(function() {
 <%@ include file="../../../user/jmh/include/formPage.jsp" %>
 <!-- 해더 부분 -->
 <%@include file="../../../include/admin_header.jsp" %>
+<!-- 폼 전송 -->
+<form id="adminForm" action="/kdh/admin/admin_food_buy_list" method="get">
+	<input type="hidden" name="page" value="${pagingDto.page}"/>
+	<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
+	<input type="hidden" name="searchType" value="${pagingDto.searchType}"/>
+	<input type="hidden" name="keyword" value="${pagingDto.keyword}"/>
+</form>
 		<!-- admin_category -->
 		<section class="product-area shop-sidebar shop section" style="padding-top:10px;">
 			<div class="container" style="padding:0px;">
@@ -70,22 +81,19 @@ $(function() {
 									<div class="single-shorter" style="vertical-align:middle;">
 											<label>검색 :</label>
 											<select id="searchSelect" name=searchType>
-												<option value="fname"
-												<c:if test="${jmhPagingDto.searchType == 'mname'}">selected</c:if>
+												<option value="all"
+												<c:if test="${pagingDto.searchType == 'all'}">selected</c:if>
+												>전체</option>
+												<option value="food_name"
+												<c:if test="${pagingDto.searchType == 'food_name'}">selected</c:if>
 												>상품명</option>
-												<option value="snack"
-												<c:if test="${jmhPagingDto.searchType == 'mgenre'}">selected</c:if>
-												>스낵</option>
-												<option value="drink"
-												<c:if test="${jmhPagingDto.searchType == 'mgrade'}">selected</c:if>
-												>음료</option>
-												<option value="package"
-												<c:if test="${jmhPagingDto.searchType == 'mgrade'}">selected</c:if>
-												>패키지</option>
+												<option value="user_id"
+												<c:if test="${pagingDto.searchType == 'user_id'}">selected</c:if>
+												>사용자</option>
 											</select>
 										</div>
 
-									<input type="text" id="keyword" value="${jmhPagingDto.keyword}"/>
+									<input type="text" id="keyword" value="${pagingDto.keyword}"/>
 									<button type="button" class="btn" id="btnSearch">검색</button>
 								</div>	
 								<!--  검색 끝 -->
@@ -104,8 +112,8 @@ $(function() {
 								
 									<!-- 상품(스토어) 조회 -->
 									<c:forEach items="${buyFoodList}" var="buyFoodList">
-										<tr style="height:50px;">
-											<td style="height:100px;vertical-align:middle;">${buyFoodList.food_name}</td>
+										<tr>
+											<td style="vertical-align:middle;">${buyFoodList.food_name}</td>
 											<td style="vertical-align:middle;">${buyFoodList.user_id}</td>
 											<td style="vertical-align:middle;"><fmt:formatNumber pattern="#,###,###" value="${buyFoodList.food_buy_total_price}"></fmt:formatNumber>원</td>
 											<td style="vertical-align:middle;">${buyFoodList.food_buy_count}</td>
@@ -121,6 +129,7 @@ $(function() {
 						
 						<!-- 페이징 -->
 						<div class="row"  style="text-align:center;">
+							<div class="col-md-12" style="padding-left: 400px;">
 							<div class="col-md-9"></div>
 								<div class="col-md-5 text-center" style="text-align:center;">
 									<nav style="text-align:center;">
@@ -149,6 +158,7 @@ $(function() {
 										</ul>
 									</nav>
 								</div>
+							</div>
 							<div class="col-md-4"></div>
 							<div class="col-md-12" style="margin-bottom: 100px;"></div>	
 						</div>

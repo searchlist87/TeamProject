@@ -17,6 +17,6 @@ public interface SghBookingService {
 	// 영화 회차의 가격 가져오기
 	public SghMovieMoneyVo getMovieMoney(String movie_time_code) throws Exception;
 	// 구매할 때 좌석 일정 예약시키기
-	public void updateScheduleSeat(SghPaymentVo sghPaymentVo,  String[] schedule_seat_arr) throws Exception;
+	public void updateScheduleSeat(SghPaymentVo sghPaymentVo,  String[] schedule_seat_arr, int use_point) throws Exception;
 	
 }

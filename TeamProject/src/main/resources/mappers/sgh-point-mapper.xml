@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mappers.sgh-point-mapper">
+
+	<!-- 포인트 사용 내역 조회 -->
+	<select id="getPointList" resultType="SghPointListVo">
+		select up.point_used_num, up.used_point, up.used_point_date, uc.point_used_name from tbl_used_point up, tbl_used_point_code uc
+		where up.user_id = #{user_id}
+		and up.point_used_code = uc.point_used_code
+		order by up.point_used_num desc
+	</select>
+	<!-- 포인트 조회하기 -->
+	<select id="getUserPoint" resultType="integer">
+		select user_point from tbl_user
+		where user_id = #{user_id}
+	</select>
+	
+	<!-- 포인트 사용하기 -->
+	<update id="updatePoint">
+		update tbl_user set
+			user_point = user_point - #{use_point}
+		where user_id = #{user_id}
+	</update>
+	
+	<!-- 영화 구매시 포인트 사용내역 추가하기 -->
+	<insert id="insertUsedPoint">
+		insert into tbl_used_point(POINT_USED_NUM, POINT_USED_CODE, USER_ID, USERD_POINT)
+		values(seq_used_point_num.nextval, 'PS1', #{user_id}, #{use_point})
+	</insert>
+</mapper>

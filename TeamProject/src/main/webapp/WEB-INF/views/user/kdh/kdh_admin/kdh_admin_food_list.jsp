@@ -31,8 +31,6 @@ $(function() {
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href");
-		console.log("page:" + page);
-		
 		location.href = "/kdh/admin/admin_food_list?page=" + page;
 	});
 	
@@ -102,7 +100,7 @@ $(function() {
 									<tbody style="vertical-align:middle;table-layout:fixed;">
 								
 									<!-- 상품(스토어) 조회 -->
-									<c:forEach items="${foodlist}" var="foodVo">
+									<c:forEach items="${listPageFoodlist}" var="foodVo">
 										<tr style="height:50px;">
 											<td><img src="/kdh/upload/displayFile?fileName=${foodVo.food_image}"/></td>
 											<td style="vertical-align:middle;"><a href="/kdh/admin/admin_food_selectByFood?food_num=${foodVo.food_num}" class="food_title">${foodVo.food_name}</a></td>
@@ -119,6 +117,7 @@ $(function() {
 						
 						<!-- 페이징 -->
 						<div class="row"  style="text-align:center;">
+							<div class="col-md-12" style="padding-left: 400px;">
 							<div class="col-md-9"></div>
 								<div class="col-md-5 text-center" style="text-align:center;">
 									<nav style="text-align:center;">
@@ -147,6 +146,7 @@ $(function() {
 										</ul>
 									</nav>
 								</div>
+							</div>
 							<div class="col-md-4"></div>
 							<div class="col-md-12" style="margin-bottom: 100px;"></div>	
 						</div>

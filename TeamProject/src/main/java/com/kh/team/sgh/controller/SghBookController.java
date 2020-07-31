@@ -25,6 +25,7 @@ import com.kh.team.sgh.service.SghAreaService;
 import com.kh.team.sgh.service.SghBookingService;
 import com.kh.team.sgh.service.SghMovieProductService;
 import com.kh.team.sgh.service.SghMovieScheduleService;
+import com.kh.team.sgh.service.SghPointService;
 import com.kh.team.sgh.service.SghTheaterService;
 
 @Controller
@@ -39,6 +40,8 @@ public class SghBookController {
 	private SghAreaService sghAreaService;
 	@Inject
 	private SghBookingService sghBookingService;
+	@Inject
+	private SghPointService sghPointService;
 	
 	// 예매 첫 페이지
 	@RequestMapping(value="/bookingView", method=RequestMethod.GET)
@@ -74,5 +77,14 @@ public class SghBookController {
 	public List<SghBookSeatVo> getMovieSeat(String movie_time_code) throws Exception {
 		List<SghBookSeatVo> book_seat_list = sghBookingService.getTimeSeat(movie_time_code);
 		return book_seat_list;
+	}
+	
+	// 유저 포인트 요청
+	@ResponseBody
+	@RequestMapping(value="/userPoint", method=RequestMethod.GET)
+	public int userPoint(HttpSession session) throws Exception {
+		String user_id = (String)session.getAttribute("user_id");
+		int point = sghPointService.getUserPoint(user_id);
+		return point;
 	}
 }

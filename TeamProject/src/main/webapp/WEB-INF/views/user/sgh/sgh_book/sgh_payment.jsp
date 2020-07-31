@@ -15,6 +15,50 @@ $(function() {
 		return;
 	}
 	
+	var user_point = 0;
+	var use_point = 0;
+	var pointSearchIndex = 0;
+	// 포인트 조회
+	$("#btnPointSearch").click(function() {
+		var url = "/sgh/book/userPoint";
+
+		$.get(url, function(rData) {
+			user_point = rData;
+			$("#user_point").val(user_point);
+			pointSearchIndex++;
+		});
+	});
+	
+	// 포인트 사용하기
+	$("#btnPointUse").click(function() {
+		$("#pointResult").remove();
+		var pointUse = $("#pointUse").val();
+		
+		// 포인트 조회를 누르지 않고 포인트 사용하기를 눌렀을 경우
+		if(pointSearchIndex == 0) {
+			$("#btnPointUse").parent().after("<div id='pointResult'><span style='color:red;'>포인트 조회를 해주세요.</span></div>");
+			return;
+		}
+		
+		// 포인트 사용하기를 눌렀으나 입력을 하지 않았을 경우
+		if(pointUse == "" || pointUse == null) {
+			$("#btnPointUse").parent().after("<div id='pointResult'><span style='color:red;'>포인트를 입력해주세요.</span></div>");
+			return;
+		}
+		
+		// 보유하고 있는 포인트보다 큰 수를 입력했을 경우
+		if(pointUse > user_point) {
+			$("#btnPointUse").parent().after("<div id='pointResult'><span style='color:red;'>보유하신 포인트를 넘으셨습니다.</span></div>");
+			return;
+		}
+		
+		$("#point_use").text(pointUse + "P");
+		var total = "${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}";
+		$("#total").text((total - pointUse) + "원");
+		$("#use_point").val(pointUse);
+	});
+	
+	// 결제 진행
 	$("#btnPayment").click(function() {
 		$("#frmPayment").submit();
 	});
@@ -25,6 +69,7 @@ $(function() {
 	<c:forEach items="${sghChoiceSeatDto.schedule_code_arr}" var="schedule_code">
 	<input type="hidden" name="schedule_code_arr" value="${schedule_code}">
 	</c:forEach>
+	<input type="hidden" id="use_point" name="use_point">
 </form>
 <body class="js">
 		<!-- Breadcrumbs -->
@@ -62,6 +107,14 @@ $(function() {
 								</c:forEach>
 								</strong>
 							</p>
+							<p>
+								<input type="text" id="user_point" class="form-inline" style="float:left;" placeholder="잔액 조회" readonly>
+								<button type="button" id="btnPointSearch" class="btn-sm" style="background-color: black; color: white;">조회</button>
+							<p>
+							<p>
+								<input type="text" id="pointUse" class="form-inline" style="float:left;" placeholder="사용할 포인트">
+								<button type="button" id="btnPointUse" class="btn-sm" style="background-color: black; color: white;">사용하기</button>
+							<p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-12">
@@ -73,7 +126,8 @@ $(function() {
 									<ul>
 										<li>결제 금액<span>${sghPaymentVo.movie_price}원</span></li>
 										<li>(+) 인원<span>${sghChoiceSeatDto.personnel}명</span></li>
-										<li class="last">Total<span>${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}원</span></li>
+										<li>(-) 포인트<span id="point_use" style="color:blue;"></span></li>
+										<li class="last">Total<span id="total" style="text-align: right;">${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}원</span></li>
 									</ul>
 								</div>
 							</div>

@@ -17,6 +17,12 @@
 			</ul>
 		</div>
 		<div class="single-info">
+			<h5># 포인트 사용 내역</h5>
+			<ul class="subul">
+				<li><a href="/sgh/myPage/pointList">포인트 사용 내역</a></li>
+			</ul>
+		</div>
+		<div class="single-info">
 			<h5 class="title1"># 1:1 문의</h5>
 			<ul class="subul">
 				<li><a href="/mypage/questionList">1:1 문의 내역</a></li>

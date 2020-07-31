@@ -2,6 +2,7 @@ package com.kh.team.sgh.service;
 
 import java.util.List;
 
+import com.kh.team.domain.SghMovieBuyIdDateVo;
 import com.kh.team.domain.SghMovieProductVo;
 import com.kh.team.domain.SghPagingDto;
 import com.kh.team.domain.SghPaymentVo;
@@ -20,4 +21,6 @@ public interface SghMovieProductService {
 	public SghMovieProductVo getMovieProductInfo(String movie_time_code) throws Exception;
 	// 영화 좌석 예약되지 않은것 가져오기
 	public List<SghSeatCheckVo> getSeatCheck(String movie_time_code) throws Exception;
+	// 구매 정보 가져오기
+	public SghMovieBuyIdDateVo getUserIdDate(String schedule_seat_code) throws Exception;
 }

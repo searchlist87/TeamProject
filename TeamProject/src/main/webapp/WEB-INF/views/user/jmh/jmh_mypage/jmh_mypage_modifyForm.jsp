@@ -246,12 +246,6 @@ $(function() {
 									</div>
 									<div class="col-12">
 										<div class="form-group">
-											<label for="user_total_money">총 사용금액<span>*</span></label>
-											<input name="user_total_money" id="user_total_money" type="text" value="${mypageVo.user_total_money}" readonly>
-										</div>
-									</div>
-									<div class="col-12">
-										<div class="form-group">
 											<label for="user_point">포인트<span>*</span></label>
 											<input name="user_point" id="user_point" type="text" value="${mypageVo.user_point}" readonly>
 										</div>

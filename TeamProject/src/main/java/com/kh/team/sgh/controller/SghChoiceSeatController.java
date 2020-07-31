@@ -1,6 +1,5 @@
 package com.kh.team.sgh.controller;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -31,7 +30,6 @@ public class SghChoiceSeatController {
 	// 인원 좌석 선택하는 폼
 	@RequestMapping(value="/movie_time_seat", method=RequestMethod.GET)
 	public String choiceSeatForm(SghPaymentVo sghPaymentVo, Model model, HttpSession session) throws Exception {
-		System.out.println("찍힘?");
 		String movie_time_code = sghPaymentVo.getMovie_time_code();
 		List<SghBookSeatVo> book_seat_list = sghBookingService.getTimeSeat(movie_time_code);
 		SghMovieMoneyVo movie_money_vo = sghBookingService.getMovieMoney(movie_time_code);
@@ -79,7 +77,7 @@ public class SghChoiceSeatController {
 		return "user/sgh/sgh_book/sgh_payment";
 	}
 	
-	// 결제 폼으로
+	// 결제 폼 요청
 	@RequestMapping(value="/requestPayment", method=RequestMethod.POST)
 	public String requestPayment(SghChoiceSeatDto sghChoiceSeatDto, HttpSession session, Model model) throws Exception {
 		session.setAttribute("sghChoiceSeatDto", sghChoiceSeatDto);
@@ -88,12 +86,12 @@ public class SghChoiceSeatController {
 	
 	// 결제 처리
 	@RequestMapping(value="/paymentRun", method=RequestMethod.POST)
-	public String paymentRun(String[] schedule_code_arr, HttpSession session, RedirectAttributes rttr) {
+	public String paymentRun(String[] schedule_code_arr, int use_point, HttpSession session, RedirectAttributes rttr) {
 		SghPaymentVo sghPaymentVo = (SghPaymentVo)session.getAttribute("sghPaymentVo");
 		try {
 			String user_id = (String)session.getAttribute("user_id");
 			sghPaymentVo.setUser_id(user_id);
-			sghBookingService.updateScheduleSeat(sghPaymentVo, schedule_code_arr);
+			sghBookingService.updateScheduleSeat(sghPaymentVo, schedule_code_arr, use_point);
 			session.removeAttribute("sghPaymentVo");
 			session.removeAttribute("sghChoiceSeatDto");
 			return "redirect:/sgh/choiceSeat/paymentResult";

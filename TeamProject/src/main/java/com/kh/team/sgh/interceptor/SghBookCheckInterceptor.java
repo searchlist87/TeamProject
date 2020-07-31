@@ -12,6 +12,7 @@ import com.kh.team.domain.SghPaymentVo;
 
 public class SghBookCheckInterceptor extends HandlerInterceptorAdapter {
 
+	// 세션에 결제에 대한 정보가 담겨있다면 바로 결제 페이지로 가게하기
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
