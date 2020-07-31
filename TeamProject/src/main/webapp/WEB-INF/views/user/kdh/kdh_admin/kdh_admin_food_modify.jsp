@@ -39,6 +39,13 @@
 	}
 
 </style>
+<script>
+$(function() {
+	$("#food_product_manage > dd").css("display","block");
+	$("#food_product_manage > dt").css("color","red");
+	$("#food_product_manage > dd").eq(0).css("color","blue");
+});
+</script>
 <body class="js">
 <!-- 해더 부분 -->
 <%@include file="../../../include/admin_header.jsp" %>

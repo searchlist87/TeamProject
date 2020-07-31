@@ -134,8 +134,8 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	}
 
 	@Override
-	public int selectFoodBuyListCount() throws Exception {
-		return foodDao.selectFoodBuyListCount();
+	public int selectFoodBuyListCount(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.selectFoodBuyListCount(pagingDto);
 	}
 
 	@Override

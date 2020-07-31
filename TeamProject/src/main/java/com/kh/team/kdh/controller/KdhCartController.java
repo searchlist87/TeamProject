@@ -37,7 +37,10 @@ public class KdhCartController {
 	
 	// 카트 메인 페이지
 	@RequestMapping(value = "/displayCart", method = RequestMethod.GET)
-	public String displayCart(String user_id, ModelMap model) throws Exception {
+	public String displayCart(String user_id, ModelMap model, HttpSession session) throws Exception {
+		int cartCount = cartService.selectCartCount(user_id);
+		session.setAttribute("cartCount", cartCount);
+		
 		List<KdhFoodCartDto> list = cartService.AllCart(user_id);
 		int food_total_money = cartService.FoodTotalMoney(user_id);
 		KdhUserVo userInfo = foodService.selectUserInfo(user_id);
@@ -60,8 +63,11 @@ public class KdhCartController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String deleteCart(int food_cart_num, HttpSession session) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
+//		int cartCounttest= (int) session.getAttribute("cartCount");
+//		System.out.println("cartCounttest:" + cartCounttest);
 		cartService.deleteCart(food_cart_num);
 		int cartCount = cartService.selectCartCount(user_id);
+		session.setAttribute("cartCount", cartCount);
 		if (cartCount == 0) {
 			return "user/kdh/kdh_food/kdh_buy_none";
 		}

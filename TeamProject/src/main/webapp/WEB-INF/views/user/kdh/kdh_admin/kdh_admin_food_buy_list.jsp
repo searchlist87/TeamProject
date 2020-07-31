@@ -27,16 +27,20 @@
 </style>
 <script>
 $(function() {
+	$("#product_list > dd").css("display","block");
+	$("#product_list > dt").css("color","red");
+	$("#product_list > dd").eq(1).css("color","blue");
+	
+	
 	// 페이지 버튼 클릭시 해당 페이지 넘어가게
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		
-		var searchType = $("#searchSelect").val();
-		console.log("searchType :" + searchType);
-		
 		var page = $(this).attr("href");
 		console.log("page:" + page);
 		
+		$("#adminForm > input[name=page]").val(page);
+		$("#adminForm").submit();
 // 		location.href = "/kdh/admin/admin_food_buy_list?page=" + page;
 	});
 	
@@ -49,6 +53,20 @@ $(function() {
 		}
 	});
 	
+	// 검색 버튼
+	$("#btnSearch").click(function() {
+		var searchType = $("#searchSelect").val();
+		var keyword = $("#keyword").val();
+		console.log("searchType:" + searchType);
+		console.log("keyword:" + keyword);
+		$("#adminForm > input[name=searchType]").val(searchType);
+		$("#adminForm > input[name=perPage]").val(10);
+		$("#adminForm > input[name=keyword]").val(keyword);
+		$("#adminForm").submit();
+		
+// 		location.href = "/kdh/admin/admin_food_buy_list?page=" + page;
+		
+	});
 });
 </script>
 
@@ -84,12 +102,12 @@ $(function() {
 												<option value="all"
 												<c:if test="${pagingDto.searchType == 'all'}">selected</c:if>
 												>전체</option>
-												<option value="food_name"
-												<c:if test="${pagingDto.searchType == 'food_name'}">selected</c:if>
-												>상품명</option>
 												<option value="user_id"
 												<c:if test="${pagingDto.searchType == 'user_id'}">selected</c:if>
 												>사용자</option>
+												<option value="food_name"
+												<c:if test="${pagingDto.searchType == 'food_name'}">selected</c:if>
+												>상품명</option>
 											</select>
 										</div>
 

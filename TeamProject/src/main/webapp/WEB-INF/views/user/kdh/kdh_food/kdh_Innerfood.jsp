@@ -125,32 +125,37 @@ $(function() {
  	// 장바구니 버튼
  	$("#btnCart").click(function() {
  		// 중복된 상품 체크
- 		var url = "/kdh/food/cartAjax";
  		var user_id = "${user_id}";
- 		var food_num = "${foodVo.food_num}";
- 		console.log("food_num" + food_num);
- 		var index = $("#btnCount").text();
- 		var food_buy_count = parseInt(index);
- 		var price = $("#price").attr("data-price");
-		var food_buy_price = (price * food_buy_count);
-		var sendData = {
- 				"user_id" : user_id,
- 				"food_num" : food_num,
- 				"food_buy_price" : food_buy_price,
- 				"food_buy_count" : food_buy_count				
- 		};
- 		$.get(url, sendData, function(rData) {
- 			console.log("rData:" + rData);
-			if (rData == "success") {
-				$("#modal-420329").trigger("click");
-				$("#btnOk").click(function() {
-					location.href = "/kdh/cart/displayCart?user_id=" + user_id;
-				});
-			} else if (rData == "false") {
-				alert("중복된 상품이 있습니다.");
-			}
-
-		});
+ 		console.log("user_id :" + user_id);
+ 		if (user_id == null || user_id == "") {
+ 			location.href = "/sgh/user/loginForm";
+ 		} else {
+	 		var url = "/kdh/food/cartAjax";
+	 		var food_num = "${foodVo.food_num}";
+	 		console.log("food_num" + food_num);
+	 		var index = $("#btnCount").text();
+	 		var food_buy_count = parseInt(index);
+	 		var price = $("#price").attr("data-price");
+			var food_buy_price = (price * food_buy_count);
+			var sendData = {
+	 				"user_id" : user_id,
+	 				"food_num" : food_num,
+	 				"food_buy_price" : food_buy_price,
+	 				"food_buy_count" : food_buy_count				
+	 		};
+	 		$.get(url, sendData, function(rData) {
+	 			console.log("rData:" + rData);
+				if (rData == "success") {
+					$("#modal-420329").trigger("click");
+					$("#btnOk").click(function() {
+						location.href = "/kdh/cart/displayCart?user_id=" + user_id;
+					});
+				} else if (rData == "false") {
+					alert("중복된 상품이 있습니다.");
+				}
+	
+			});
+ 		}
  	});
  
  	// 바로구매 버튼
