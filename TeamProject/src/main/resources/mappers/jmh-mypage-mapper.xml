@@ -108,6 +108,7 @@
 <!--  1:1 문의 총 갯수 가져오기 -->
 <select id="adminGetQuestionCount" resultType="int">
 	select count(*) from tbl_board
+	where board_category_code = 'BCC02'
 </select>
 
 <!--  1:1 문의 리스트 페이징 -->
@@ -125,6 +126,7 @@
 	select * from (select rownum rnum, a.*
 					from tbl_board a left outer join tbl_reply b on (a.board_code = b.board_code)
 					where b.board_code is null
+					and a.board_category_code = 'BCC02'
 					order by a.board_code desc)
 	where rnum between #{startRow} and #{endRow}
 </select>
@@ -133,6 +135,7 @@
 	select count(*)
 	from tbl_board a left outer join tbl_reply b on (a.board_code = b.board_code)
 	where b.board_code is null
+	and a.board_category_code = 'BCC02'
 	order by a.board_code desc
 </select>
 
@@ -141,8 +144,12 @@
 		<choose>
 			<when test="searchType == 'user_id'">
 			where user_id like '%' || #{keyword} || '%'
+			and board_category_code = 'BCC02'
 			</when>
 		</choose>
+	</if>
+	<if test="searchType == null || searchType == ''">
+		where board_category_code = 'BCC02'
 	</if>
 </sql>
 </mapper>

@@ -16,6 +16,7 @@
 	<!--  admin.js -->
 	<script src="/resources/js/admin.js"></script>
 <link rel="stylesheet" href="/resources/css/admin.css">
+<link rel="stylesheet" href="/resources/css/button_css.css">
 <style>
 	.movie_grade {
 		margin-left:20px;
@@ -28,14 +29,15 @@
 	.fileLabel {
 		width:80px;
 		height:30px;
-		border:1px solid #767676;
+/* 		border:1px solid #767676; */
 		border-top-right-radius:3px;
 		border-top-left-radius:3px;
 		border-bottom-left-radius:3px;
 		border-bottom-right-radius:3px;
 		text-align:center;
-		background-color:#efefef;
+		background-color:orange;
 		padding-top:2px;
+		color: white;
 	}
 
 </style>
@@ -335,7 +337,7 @@ function previewUpload(value) {
 									<div class="form-group">
 										<label for="movie_main_image" style="margin-right:10px;"><strong>영화 메인이미지 : </strong></label>
 										<input type="file" class="movie_main_image" id="movie_main_image" onchange="loadImage(this);" accept="image/*" required style="display:none;"/>
-										<label for="movie_main_image" class="fileLabel" >파일 선택</label>
+										<label for="movie_main_image" class="fileLabel btn_orange" >파일 선택</label>
 										<span id="movie_main_image_text">선택된 파일 없음</span>
 										<div id="main_image_div" style="width:300px;height:auto;"></div>
 									</div>
@@ -354,7 +356,7 @@ function previewUpload(value) {
 										<span id="movie_preview_span">선택된 파일 없음</span>
 										<div id="movie_preview_text" style="width:250px;height:auto;"></div>
 									</div>
-									<button type="submit" class="btn btn-primary" id="btnSubmit">등록</button>
+									<button type="submit" class="btn " id="btnSubmit">등록</button>
 								</form>
 							</div>
 						</div>
