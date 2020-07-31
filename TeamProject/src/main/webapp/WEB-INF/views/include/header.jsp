@@ -24,6 +24,7 @@
 <script src="/resources/js/jquery.min.js"></script>
 <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 <script src="/resources/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/resources/css/button_css.css">
 <script>
 $(function() {
 	

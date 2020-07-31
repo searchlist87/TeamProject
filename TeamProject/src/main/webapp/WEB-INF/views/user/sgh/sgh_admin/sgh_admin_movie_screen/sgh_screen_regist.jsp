@@ -8,6 +8,10 @@
 <script>
 
 $(function() {
+	$("#theater_manage > dd").css("display","block");
+	$("#theater_manage > dt").css("color","red");
+	$("#theater_manage > dd").eq(0).css("color","blue");
+	
 	var result = "${result}";
 	if(result == "false") {
 		alert("등록에 실패하셨습니다 다시 확인해주세요.");
@@ -97,7 +101,10 @@ $(function() {
 					<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
-							<h4 class="title">${sghScreenRegistDto.theater_name}의 상영관 등록</h4>
+							<h4 class="title" style="text-align: center;">영화관 관리_영화관 조회</h4>
+						</div>
+						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
+							<h4 class="title" style="text-align: center;">${sghScreenRegistDto.theater_name}의 상영관 등록</h4>
 						</div>
 						<!--  페이지별 내용 -->
 						<form id="frm_screen" role="form" action="/sgh/admin/movieScreen/screenRegistRun" method="get">

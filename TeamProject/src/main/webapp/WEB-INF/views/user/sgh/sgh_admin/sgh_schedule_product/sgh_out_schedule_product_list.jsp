@@ -15,6 +15,10 @@
 </style>
 <script>
 $(function() {
+	$("#movie_product_manage > dd").css("display","block");
+	$("#movie_product_manage > dt").css("color","red");
+	$("#movie_product_manage > dd").eq(0).css("color","blue");
+	
 	// 템플릿에서 나오는 select 막기
 	$("select").css("display", "block");
 	$(".nice-select").remove()

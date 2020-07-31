@@ -272,8 +272,8 @@ $(function() {
 				<div class="form-group">
 					<input type="email" class="form-control" id="user_email" name="user_email" maxlength="40" placeholder="이메일"/>
 					<input type="text" class="form-control" id="email_check" name="email_check" maxlength="40" placeholder="인증번호" readonly/>
-					<button id="btn_email_check" type="button" class="btn-sm">인증코드 확인</button>
-					<button id="btnEmail" type="button" class="btn-sm">메일 인증 보내기</button>
+					<button id="btn_email_check" type="button" class="btn-sm btn_orange">인증코드 확인</button>
+					<button id="btnEmail" type="button" class="btn-sm btn_orange">메일 인증 보내기</button>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="user_birth" name="user_birth"  placeholder="태어난 년도 ex : 19900101">
@@ -283,7 +283,7 @@ $(function() {
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="user_address" name="user_address" placeholder="주소" readonly/>
-					<button id="addressSearch" type="button" class="btn-sm">주소 검색</button>
+					<a id="addressSearch" type="button" class="btn-sm btn_orange">주소 검색</a>
 				</div>
 				<div class="form-group">
 					<label for="user_sms_check">
@@ -293,10 +293,10 @@ $(function() {
 					<input type="radio" name="user_sms_check" value="N"/>수신안함
 				</div>
 				<div style="margin-bottom: 30px;">
-					<button id="btnSubmit" type="submit" class="btn-lg" style="background-color: #333; color: white;">
+					<button id="btnSubmit" type="submit" class="btn-lg btn_black">
 						회원가입
 					</button>
-					<a href="/sgh/user/loginForm" class="btn btn-sm" style="color: white;">취소</a>
+					<a href="/sgh/user/loginForm" class="btn-lg btn_black">취소</a>
 				</div>
 			</form>
 		</div>

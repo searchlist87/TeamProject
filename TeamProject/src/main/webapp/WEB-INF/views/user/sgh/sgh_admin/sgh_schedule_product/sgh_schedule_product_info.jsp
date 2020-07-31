@@ -24,6 +24,9 @@
 <script src="/resources/js/sgh_js/myScript.js"></script>
 <script>
 $(function() {
+	$("#movie_product_manage > dd").css("display","block");
+	$("#movie_product_manage > dt").css("color","red");
+	$("#movie_product_manage > dd").eq(0).css("color","blue");
 	
 	var movie_start_time = "${sghMovieProductVo.movie_start_time}";
 	var movie_end_time = "${sghMovieProductVo.movie_end_time}";
@@ -161,6 +164,9 @@ $(function() {
 				<div class="row">
 					<div class="col-12">
 						<!--  페이지별 내용 -->
+						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
+							<h4 class="title">영화상품관리_영화상품조회</h4>
+						</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12">
