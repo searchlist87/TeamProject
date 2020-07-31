@@ -12,6 +12,10 @@
 </style>
 <script>
 $(function() {
+	$("#product_list > dd").css("display","block");
+	$("#product_list > dt").css("color","red");
+	$("#product_list > dd").eq(0).css("color","blue");
+	
 	$(".page-link").css("float", "left");
 	$(".page-item").css("float", "left");
 	// 템플릿에서 나오는 select 막기
@@ -115,7 +119,7 @@ $(function() {
 					<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
-							<h4 class="title" style="text-align: center;">구매내역 조회</h4>
+							<h4 class="title" style="text-align: center;">구매내역 조회_영화 구매 내역 조회</h4>
 						</div>
 						<div class="container-fluid">
 							<div class="row">

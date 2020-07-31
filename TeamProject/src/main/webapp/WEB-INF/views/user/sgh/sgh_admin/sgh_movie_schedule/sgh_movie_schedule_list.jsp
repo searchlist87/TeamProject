@@ -17,6 +17,10 @@
 <script src="/resources/js/sgh_js/timestmap_change.js"></script>
 <script>
 $(function() {
+	$("#movie_time_manage > dd").css("display","block");
+	$("#movie_time_manage > dt").css("color","red");
+	$("#movie_time_manage > dd").eq(0).css("color","blue");
+	
 	// 템플릿에서 나오는 select 막기
 	$("select").css("display", "block");
 	$(".nice-select").remove()
