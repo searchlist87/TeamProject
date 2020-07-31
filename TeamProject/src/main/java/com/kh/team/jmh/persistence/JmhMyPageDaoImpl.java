@@ -123,8 +123,8 @@ public class JmhMyPageDaoImpl implements JmhMyPageDao {
 
 	// 1:1 문의 총 갯수 가져오기
 	@Override
-	public int adminGetQuestionCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "adminGetQuestionCount");
+	public int adminGetQuestionCount(JmhPagingDto jmhPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "adminGetQuestionCount", jmhPagingDto);
 	}
 
 	// 1:1 문의 페이징

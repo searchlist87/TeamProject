@@ -61,7 +61,7 @@ public interface JmhMyPageDao {
 	public void adminDeleteReply(int board_code) throws Exception;
 	
 	// 1:1 문의 총 갯수 가져오기
-	public int adminGetQuestionCount() throws Exception;
+	public int adminGetQuestionCount(JmhPagingDto jmhPagingDto) throws Exception;
 	
 	// 1:1 문의 페이징
 	public List<JmhBoardVo> adminQuestionListPaging(JmhPagingDto jmhPagingDto) throws Exception;

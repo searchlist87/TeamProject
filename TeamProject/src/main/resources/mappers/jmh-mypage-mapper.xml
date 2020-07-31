@@ -108,7 +108,7 @@
 <!--  1:1 문의 총 갯수 가져오기 -->
 <select id="adminGetQuestionCount" resultType="int">
 	select count(*) from tbl_board
-	where board_category_code = 'BCC02'
+	<include refid="searchType"></include>
 </select>
 
 <!--  1:1 문의 리스트 페이징 -->
