@@ -26,4 +26,7 @@ public interface GshReviewService {
 	
 	// 해당 영화 평균점수 구하기
 	public int averageReviewScore(String movie_code) throws Exception;
+	
+	// 관리자 리뷰 삭제
+	public void admin_review_delete(int review_num) throws Exception;
 }
