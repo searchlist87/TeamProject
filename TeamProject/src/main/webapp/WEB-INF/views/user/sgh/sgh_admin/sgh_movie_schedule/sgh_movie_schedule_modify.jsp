@@ -8,6 +8,10 @@
 <script>
 
 $(function() {
+	$("#movie_time_manage > dd").css("display","block");
+	$("#movie_time_manage > dt").css("color","red");
+	$("#movie_time_manage > dd").eq(0).css("color","blue");
+	
 	var result = "${result}";
 	console.log("result :" + result);
 	if(result == "false") {

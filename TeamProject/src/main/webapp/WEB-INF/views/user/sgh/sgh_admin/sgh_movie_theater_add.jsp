@@ -12,6 +12,10 @@ function jusoCallBack(roadFullAddr){
 }
 
 $(function() {
+	$("#theater_manage > dd").css("display","block");
+	$("#theater_manage > dt").css("color","red");
+	$("#theater_manage > dd").eq(1).css("color","blue");
+	
 	// 템플릿에서 나오는 select 막기
 	$("select").css("display", "block");
 	$(".nice-select").remove();
@@ -70,7 +74,7 @@ $(function() {
 					<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
-							<h4 class="title">영화관 등록</h4>
+							<h4 class="title">영화관 관리_영화 등록</h4>
 						</div>
 						<!--  페이지별 내용 -->
 						<form id="frm_theater" role="form" action="/sgh/admin/movieTheaterAddRun" method="get">

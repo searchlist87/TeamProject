@@ -55,6 +55,12 @@ public class GshReviewServiceImpl implements GshReviewService {
 		return gshReviewDao.averageReviewScore(movie_code);
 	}
 
+	@Override
+	public void admin_review_delete(int review_num) throws Exception {
+		gshReviewDao.admin_review_delete(review_num);
+		
+	}
+
 
 	
 }

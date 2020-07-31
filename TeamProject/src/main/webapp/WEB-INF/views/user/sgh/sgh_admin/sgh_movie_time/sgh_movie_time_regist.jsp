@@ -8,6 +8,10 @@
 <script>
 
 $(function() {
+	$("#movie_time_manage > dd").css("display","block");
+	$("#movie_time_manage > dt").css("color","red");
+	$("#movie_time_manage > dd").eq(3).css("color","blue");
+	
 	var result = "${result}";
 	console.log("result :" + result);
 	if(result == "false") {
@@ -191,7 +195,7 @@ $(function() {
 					<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
-							<h4 class="title">상영회차 등록하기</h4>
+							<h4 class="title">상영일정 관리_상영 회차 등록</h4>
 						</div>
 						<!--  페이지별 내용 -->
 						<form id="frm_movie_time" role="form" action="/sgh/admin/movieTime/registMovieTime" method="get">
