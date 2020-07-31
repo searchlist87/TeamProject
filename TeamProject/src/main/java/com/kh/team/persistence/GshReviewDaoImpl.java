@@ -34,8 +34,11 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	}
 	// 리뷰 코드로 선택해서 보기
 	@Override
-	public List<GshReviewVo> select_reviewAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "select_reviewAll");
+	public List<GshReviewVo> select_reviewAll(int start_row, int end_row) throws Exception {
+		Map<String, Integer> paramMap = new HashMap<>();
+		paramMap.put("start_row", start_row);
+		paramMap.put("end_row", end_row);
+		return sqlSession.selectList(NAMESPACE + "select_reviewAll", paramMap);
 	}
 	
 	// 리뷰 수정
@@ -75,6 +78,12 @@ public class GshReviewDaoImpl implements GshReviewDao {
 	@Override
 	public void admin_review_delete(int review_num) throws Exception {
 		sqlSession.delete(NAMESPACE + "admin_review_delete", review_num);
+	}
+
+
+	@Override
+	public int getReviewCount() throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getReviewCount");
 	}
 
 }

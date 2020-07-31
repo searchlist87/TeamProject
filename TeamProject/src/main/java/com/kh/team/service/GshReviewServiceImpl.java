@@ -23,8 +23,8 @@ public class GshReviewServiceImpl implements GshReviewService {
 	
 	// 리뷰 목록 선택
 	@Override
-	public List<GshReviewVo> select_reviewAll() throws Exception {
-		return gshReviewDao.select_reviewAll();
+	public List<GshReviewVo> select_reviewAll(int start_row, int end_row) throws Exception {
+		return gshReviewDao.select_reviewAll(start_row, end_row);
 	}
 	
 	// 리뷰 작성하기
@@ -59,6 +59,11 @@ public class GshReviewServiceImpl implements GshReviewService {
 	public void admin_review_delete(int review_num) throws Exception {
 		gshReviewDao.admin_review_delete(review_num);
 		
+	}
+
+	@Override
+	public int getReviewCount() throws Exception {
+		return gshReviewDao.getReviewCount();
 	}
 
 

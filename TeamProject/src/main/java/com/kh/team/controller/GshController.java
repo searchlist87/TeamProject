@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.GshMovieDto;
+import com.kh.team.domain.GshPagingDto;
 import com.kh.team.domain.GshReviewVo;
 import com.kh.team.service.GshMovieService;
 import com.kh.team.service.GshReviewService;
@@ -44,13 +45,13 @@ public class GshController {
 	}
 	
 	// 리뷰 목록
-	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
-	public String reviewList(Model model) throws Exception {
-		List<GshReviewVo> list = gshReviewService.select_reviewAll();
-//		System.out.println("list:" + list);
-		model.addAttribute("list", list);
-		return "user/gsh/movie/movieInfo";
-	}
+//	@RequestMapping(value = "/reviewList", method = RequestMethod.GET)
+//	public String reviewList(Model model) throws Exception {
+//		List<GshReviewVo> list = gshReviewService.select_reviewAll();
+////		System.out.println("list:" + list);
+//		model.addAttribute("list", list);
+//		return "user/gsh/movie/movieInfo";
+//	}
 	
 	// 리뷰 내용 작성
 	@ResponseBody
@@ -79,12 +80,17 @@ public class GshController {
 		return "user/gsh/movie/movieInfo";
 	}
 	
-	// 영화 목록
+	// 영화 목록 페이지
 	@RequestMapping(value = "/movieView", method = RequestMethod.GET)
-	public String movieView(Model model) throws Exception {
-		List<GshMovieDto> list = gshMovieService.select_movieAll();
+	public String movieView(GshPagingDto gshPagingDto, Model model) throws Exception {
+		System.out.println("gshPagingDto :" + gshPagingDto);
+		int total_count = gshMovieService.getMovieCount(gshPagingDto);
+		gshPagingDto.setTotalCount(total_count);
+		gshPagingDto.setPageInfo();
+		List<GshMovieDto> list = gshMovieService.select_movieAll(gshPagingDto);
 //		System.out.println(list);
 		model.addAttribute("list", list);
+		model.addAttribute("gshPagingDto", gshPagingDto);
 		return "user/gsh/movie/movieView";
 	}
 	

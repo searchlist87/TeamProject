@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.GshMovieDto;
 import com.kh.team.domain.GshMovieListVo;
+import com.kh.team.domain.GshPagingDto;
 
 @Repository
 public class GshMovieDaoImpl implements GshMovieDao {
@@ -20,8 +21,8 @@ public class GshMovieDaoImpl implements GshMovieDao {
 	
 	// 영화 목록 보기
 	@Override
-	public List<GshMovieDto> select_movieAll() throws Exception {
-		return sqlSession.selectList(NAMESPACE + "select_movieAll");
+	public List<GshMovieDto> select_movieAll(GshPagingDto gshPagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "select_movieAll", gshPagingDto);
 	}
 	
 	// 영화 코드로 영화 리뷰 보기
@@ -52,6 +53,12 @@ public class GshMovieDaoImpl implements GshMovieDao {
 	@Override
 	public void findMovieGenre() throws Exception {
 		
+	}
+	
+	// 영화 목록 페이징
+	@Override
+	public int getMovieCount(GshPagingDto gshPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getMovieCount", gshPagingDto);
 	}
 
 	

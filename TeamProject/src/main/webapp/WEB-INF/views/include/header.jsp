@@ -42,8 +42,24 @@ $(function() {
 		}
 		location.href = "/sgh/book/bookingView";
 	});
+	
+	// 검색 기능
+	$("#btnSearch").click(function() {
+		var text_keyword = $("#text_keyword").val();
+		var select_searchType = $("#select_searchType option:selected").val();
+		
+		$("#keyword").val(text_keyword);
+		$("#searchType").val(select_searchType);
+		
+		$("#frmSearch").submit();
+	});
+	
 });
 </script>
+<form id="frmSearch" action="/gsh/movie/movieView" method="get">
+	<input type="hidden" id="keyword" name="keyword">
+	<input type="hidden" id="searchType" name="searchType">
+</form>
 <header class="header shop">
 	<!-- Topbar -->
 	<div class="topbar">
@@ -123,25 +139,27 @@ $(function() {
 					<!--/ End Search Form -->
 					<div class="mobile-nav"></div>
 				</div>
+				
+				<!-- 헤더 검색창 부분 시작 -->
 				<div class="col-lg-8 col-md-7 col-12">
 					<div class="search-bar-top">
 						<div class="search-bar">
-							<select>
-								<option selected="selected">장르선택</option>
-								<option>로맨스</option>
-								<option>액션</option>
-								<option>공포</option>
+							<select id="select_searchType">
+								<option value="movie_name" selected>영화제목</option>
+								<option value="movie_genre">영화장르</option>
 							</select>
 							<form>
-								<input name="search" placeholder="영화제목을 입력해주세요."
-									type="search">
-								<button class="btnn">
+								<input id="text_keyword" placeholder="영화제목을 입력해주세요."
+									type="text">
+								<button id="btnSearch" type="button" class="btnn">
 									<i class="ti-search"></i>
 								</button>
 							</form>
 						</div>
 					</div>
 				</div>
+				<!-- 헤더 검색창 부분 끝 -->
+				
 				<div class="col-lg-2 col-md-3 col-12">
 					<div class="right-bar">
 						<!-- Search Form -->

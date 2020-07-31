@@ -8,12 +8,41 @@
 
 	<!-- 최신등록된 영화 목록 가져오기 -->
 	<select id="select_movieAll" resultType="GshMovieDto">
-		select m.movie_code movie_code, movie_name, movie_main_image, movie_grade, review_score
+		select * from (select rownum rnum, a.* from (select m.movie_code movie_code, movie_name, movie_main_image, movie_grade, review_score
 	    from tbl_movie m, (select movie_code, round(avg(review_score)) review_score
 	    from tbl_review
 	    group by movie_code) r
 	    where m.movie_code = r.movie_code(+)
-		order by m.movie_regist_date desc
+	    <if test='keyword != null'>
+	    	<choose>
+	    	<when test='searchType == "movie_name"'>
+	    		and movie_name like '%' || #{keyword} || '%'
+	    	</when>
+	    	<when test='searchType == "movie_genre"'>
+	    		and movie_genre like '%' || #{keyword} || '%'
+	    	</when>
+	    	</choose>
+	    </if>
+		order by m.movie_regist_date desc) a)
+        where rnum between #{startRow} and #{endRow}
+        
+        
+	</select>
+	
+		
+	<!-- 영화 페이지 영화 총 수 구하기 -->
+	<select id="getMovieCount" resultType="integer">
+		select count(*) from tbl_movie
+		 <if test='keyword != null'>
+	    	<choose>
+	    	<when test='searchType == "movie_name"'>
+	    		where movie_name like '%' || #{keyword} || '%'
+	    	</when>
+	    	<when test='searchType == "movie_genre"'>
+	    		where movie_genre like '%' || #{keyword} || '%'
+	    	</when>
+	    	</choose>
+	    </if>
 	</select>
 	
 	<!-- 영화감독 이름으로 영화 찾기 -->
@@ -60,5 +89,4 @@
 		select movie_sub_image from tbl_movie_image
 		where movie_code = #{movie_code}
 	</select>
-	
 </mapper>

@@ -74,7 +74,7 @@ function zoomOut(event) {
 				<div class="col-6" style="margin-left:45px;">
 				<c:forEach items="${jmhMovieBest3Vo}" var="jmhMovieBest3Vo">
 					<ul class="single-banner" style="float:left;">
-						<li style="margin-right:50px;"><a href="/gsh/movie/movieInfo?movie_code=${jmhMovieBest3Vo.movie_code}"><img src="/upload/displayFile?fileName=${jmhMovieBest3Vo.movie_main_image}" alt="${jmhMovieBest3Vo.movie_main_image}" style="width:250px; height:350px;"></a></li>
+						<li style="margin-right:50px;"><a href="/gsh/movie/movieInfo?movie_code=${jmhMovieBest3Vo.movie_code}"><img src="/upload/displayFile?fileName=${jmhMovieBest3Vo.movie_main_image}" alt="${jmhMovieBest3Vo.movie_main_image}" style="width:250px; height:350px;border-radius: 2%;""></a></li>
 					</ul>
 				</c:forEach>
 				</div> 
@@ -103,9 +103,8 @@ function zoomOut(event) {
 						<div class="single-product">
 							<div class="product-img">  
 								<a href="/gsh/movie/movieInfo?movie_code=${movieVo.movie_code}">
-									<img class="default-img" src="/upload/displayFile?fileName=${movieVo.movie_main_image}" alt="${movieVo.movie_main_image}" 
+									<img class="default-img" src="/upload/displayFile?fileName=${movieVo.movie_main_image}" alt="${movieVo.movie_main_image}" style="border-radius: 2%;"
 									onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)">
-<!-- 									<img class="hover-img" src="" alt=""> -->
 									<span class="out-of-stock" style="background-color:#f6931d;">New</span>
 								</a>
 							</div>
