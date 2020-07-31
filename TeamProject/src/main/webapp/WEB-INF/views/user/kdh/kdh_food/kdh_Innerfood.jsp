@@ -150,6 +150,10 @@ $(function() {
 					$("#btnOk").click(function() {
 						location.href = "/kdh/cart/displayCart?user_id=" + user_id;
 					});
+					$("#btnNo").click(function() {
+						var cartCount = $("#cartCount").text();
+			 			$("#cartCount").text(parseInt(cartCount) + 1);
+					});
 				} else if (rData == "false") {
 					alert("중복된 상품이 있습니다.");
 				}
@@ -158,6 +162,7 @@ $(function() {
  		}
  	});
  
+ 	
  	// 바로구매 버튼
 	$("#btnBuy").click(function() {
 		var food_num = "${foodVo.food_num}";

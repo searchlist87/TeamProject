@@ -57,7 +57,10 @@ public class KdhController {
 	
 	// 상품 이너 페이지(GET)
 	@RequestMapping(value = "/innerfood", method = RequestMethod.GET)
-	public String InnerfoodGet(int food_num, ModelMap model) throws Exception {
+	public String InnerfoodGet(int food_num, ModelMap model, HttpSession session) throws Exception {
+		String user_id = (String) session.getAttribute("user_id");
+		int cartCount = cartService.selectCartCount(user_id);
+		session.setAttribute("cartCount", cartCount);
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
 		model.addAttribute("foodVo", foodVo);
 		return "user/kdh/kdh_food/kdh_Innerfood";
@@ -131,7 +134,11 @@ public class KdhController {
 	// 구매하기
 	@RequestMapping(value = "/buy", method = RequestMethod.POST)
 	@Transactional
-	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id) throws Exception {
+	public String buy(ModelMap model,int buy_food_num, int buy_food_buy_price, int buy_food_buy_count, String buy_user_id, HttpSession session) throws Exception {
+		String user_id = (String) session.getAttribute("user_id");
+		int cartCount = cartService.selectCartCount(user_id);
+		session.setAttribute("cartCount", cartCount);
+		
 		List<KdhPointVo> pointList = pointService.selectPointById(buy_user_id);
 		KdhUserVo userInfo = foodService.selectUserInfo(buy_user_id);
 		int user_point = userInfo.getUser_point();

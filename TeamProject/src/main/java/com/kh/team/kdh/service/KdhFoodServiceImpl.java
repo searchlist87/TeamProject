@@ -152,4 +152,14 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	public int selectMyPageFoodBuyListCount(String user_id) throws Exception {
 		return foodDao.selectMyPageFoodBuyListCount(user_id);
 	}
+
+	@Override
+	public List<KdhFoodVo> foodPage(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.foodPage(pagingDto);
+	}
+
+	@Override
+	public int selectFoodPageCount(KdhPagingDto pagingDto) throws Exception {
+		return foodDao.selectFoodPageCount(pagingDto);
+	}
 }

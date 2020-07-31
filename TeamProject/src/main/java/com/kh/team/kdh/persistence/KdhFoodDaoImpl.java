@@ -162,6 +162,16 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 		return sqlSession.selectOne(NAMESPACE + "selectMyPageFoodBuyListCount", user_id);
 	}
 
+	@Override
+	public List<KdhFoodVo> foodPage(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "foodPage", pagingDto);
+	}
+
+	@Override
+	public int selectFoodPageCount(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectFoodPageCount", pagingDto);
+	}
+
 
 
 }

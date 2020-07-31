@@ -82,7 +82,7 @@ $(function() {
 										</c:otherwise>
 									</c:choose>
 									class="single-icon" style="position:relative;">
-									<span class="total-count"><%=session.getAttribute("cartCount")%></span></a>
+									<span id="cartCount" class="total-count"><%=session.getAttribute("cartCount")%></span></a>
 								</c:if>
 							</div>
 							</li>
