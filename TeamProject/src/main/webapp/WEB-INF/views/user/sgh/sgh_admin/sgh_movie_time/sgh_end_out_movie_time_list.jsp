@@ -13,9 +13,12 @@
 		text-align: center;
 	}
 </style>
-<script src="/resources/js/sgh_js/timestmap_change.js"></script>
+<script src="/resources/js/sgh_js/myScript.js"></script>
 <script>
 $(function() {
+	$("#movie_time_manage > dd").css("display","block");
+	$("#movie_time_manage > dt").css("color","red");
+	$("#movie_time_manage > dd").eq(2).css("color","blue");
 	
 	$(".start_time").each(function() {
 		var start_time = $(this).text();

@@ -108,8 +108,8 @@ public class JmhMypageServiceImpl implements JmhMypageService {
 
 	// 1:1 문의 총 갯수 가져오기
 	@Override
-	public int adminGetQuestionCount() throws Exception {
-		return jmhMypageDao.adminGetQuestionCount();
+	public int adminGetQuestionCount(JmhPagingDto jmhPagingDto) throws Exception {
+		return jmhMypageDao.adminGetQuestionCount(jmhPagingDto);
 	}
 
 	// 1:1 문의 페이징
@@ -129,7 +129,5 @@ public class JmhMypageServiceImpl implements JmhMypageService {
 	public int adminQuestionNoReplyCount() throws Exception {
 		return jmhMypageDao.adminQuestionNoReplyCount();
 	}
-
-	
 
 }

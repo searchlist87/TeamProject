@@ -12,4 +12,51 @@
 		and mbl.movie_code = mc.movie_code
 	</select>
 	
+		<!-- 시작 시간이 지나지 않은 구매한 표 리스트 -->
+	<select id="getBuyList" resultType="SghBuyListVo">
+        select * from (select rownum rnum, a.* from (select mbl.movie_buy_num, mc.movie_name, mbl.movie_buy_date, tt.theater_name, ms.screen_name, mt.movie_start_time, mt.movie_end_time, se.seat_code
+        from tbl_movie_buy_list mbl, tbl_movie_time mt, tbl_movie_screen ms, tbl_theater tt, tbl_movie mc, tbl_movie_seat se, tbl_schedule_seat scs
+        where mbl.user_id = #{user_id}
+        and mbl.movie_time_code = mt.movie_time_code
+        and mbl.screen_code = ms.screen_code
+        and ms.theater_code = tt.theater_code
+        and mc.movie_code = mbl.movie_code
+        and mbl.schedule_seat_code = scs.schedule_seat_code
+        and scs.movie_seat_num = se.movie_seat_num
+        and mt.movie_start_time >= systimestamp
+        order by mbl.movie_buy_date desc
+        ) a)
+        where rnum between #{start_row} and #{end_row}
+	</select>
+	
+		<!-- 시작 시간이 지난 구매한 표 리스트 -->
+	<select id="getOutBuyList" resultType="SghBuyListVo">
+        select * from (select rownum rnum, a.* from (select mbl.movie_buy_num, mc.movie_name, mbl.movie_buy_date, tt.theater_name, ms.screen_name, mt.movie_start_time, mt.movie_end_time, se.seat_code
+        from tbl_movie_buy_list mbl, tbl_movie_time mt, tbl_movie_screen ms, tbl_theater tt, tbl_movie mc, tbl_movie_seat se, tbl_schedule_seat scs
+        where mbl.user_id = #{user_id}
+        and mbl.movie_time_code = mt.movie_time_code
+        and mbl.screen_code = ms.screen_code
+        and ms.theater_code = tt.theater_code
+        and mc.movie_code = mbl.movie_code
+        and mbl.schedule_seat_code = scs.schedule_seat_code
+        and scs.movie_seat_num = se.movie_seat_num
+        and mt.movie_start_time <![CDATA[ <= ]]> systimestamp
+        order by mbl.movie_buy_date desc
+        ) a)
+        where rnum between #{start_row} and #{end_row}
+	</select>
+	
+		<!-- 기간이 지난 예매 총 숫자 -->
+	<select id="getBuyTotal" resultType="integer">
+  		select count(*) from tbl_movie_buy_list mbl, tbl_movie_time mt
+        where mbl.movie_time_code = mt.movie_time_code
+        and mt.movie_start_time >= systimestamp
+	</select>
+	
+	<!-- 기간이 지나지 않은 예매 총 숫자 -->
+	<select id="getOutBuyTotal" resultType="integer">
+  		select count(*) from tbl_movie_buy_list mbl, tbl_movie_time mt
+        where mbl.movie_time_code = mt.movie_time_code
+        and mt.movie_start_time <![CDATA[ <= ]]> systimestamp
+	</select>
 </mapper>

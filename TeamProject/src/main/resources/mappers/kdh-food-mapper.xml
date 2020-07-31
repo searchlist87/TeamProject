@@ -86,11 +86,60 @@ where rnum between #{startRow} and #{endRow}
 					and f.food_name like '%' || #{keyword} || '%'
 				</when>
 				<when test='searchType == "user_id"'>
-					and f.user_id like '%' || #{keyword} || '%'
+					and fl.user_id like '%' || #{keyword} || '%'
 				</when>
 			</choose>
 		</if>		
 	</sql>
+
+<!-- 관리자 - 푸드 상품관리 페이지 페이징 -->
+<select id="foodPage" resultType="KdhFoodVo">
+	select * from (select rownum rnum, a.*
+					from (select food_num, food_code, food_name, food_price, food_count, food_image
+							from tbl_food
+							<include refid="searchFood"></include>
+							order by food_num desc) a)
+	where rnum between #{startRow} and #{endRow}
+</select>
+
+<!-- 관리자 - 푸드 상품관리 페이지 페이징 검색 -->
+	<sql id="searchFood">
+		<if test="searchType != null">
+			<choose>
+				<when test='searchType == "all"'>
+				</when>
+				<when test='searchType == "snack"'>
+				food_code='100' and food_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "drink"'>
+				food_code='200' and food_name like '%' || #{keyword} || '%'
+				</when>
+				<when test='searchType == "package"'>
+				food_code='300' and food_name like '%' || #{keyword} || '%'
+				</when>
+			</choose>
+		</if>		
+	</sql>
+
+<!-- 관리자 - 푸드 상품관리 페이지 상품 갯수 구하기 -->
+<select id="selectFoodPageCount" resultType="int">
+	select count(*) from tbl_food
+	<if test="searchType != null || searchType == ''">
+		<choose>
+			<when test='searchType == "all"'>
+			</when>
+			<when test='searchType == "snack"'>
+				where food_code='100' || f.food_name like '%' || #{keyword} || '%'
+			</when>
+			<when test='searchType == "drink"'>
+				where food_code='200' || f.food_name like '%' || #{keyword} || '%'
+			</when>
+			<when test='searchType == "package"'>
+				where food_code='300' || f.food_name like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+	</if>	
+</select>
 
 <!-- 상품 마이페이지 구매내역 페이징 -->
 <select id="foodBuyListMyPage" resultType="KdhAdminFoodBuyListDto">
@@ -211,6 +260,19 @@ where food_code = '300'
 <!-- 상품 구매 리스트 갯수 구하기 -->
 <select id="selectFoodBuyListCount" resultType="int">
 	select count(*) from tbl_food_buy_list
+	<if test="searchType != null || searchType == ''">
+		<choose>
+			<when test='searchType == "all"'>
+			</when>
+			<when test='searchType == "user_id"'>
+				where user_id like '%' || #{keyword} || '%'
+			</when>
+			<when test='searchType == "food_name"'>
+				fl, tbl_food f
+				where fl.food_num = f.food_num and f.food_name like '%' || #{keyword} || '%'
+			</when>
+		</choose>
+	</if>	
 </select>
 
 <!-- 마이페이지 구매 리스트 유저별로 갯수 구하기 -->

@@ -10,6 +10,9 @@
 		background: orange;
 		color: white;
 	}
+	strong {
+		color: red;
+	}
 </style>
 
 <script>
@@ -31,45 +34,110 @@ $(function() {
 	$("select").css("display", "block");
 	$(".nice-select").remove();
 	
-	// 아이디 중복 에이잭스 요청
+	// 아이디 포커스 벗어날때 이벤트 확인
 	$("#user_id").blur(function() {
-		var user_id = $("#user_id").val();
-		var idLength = user_id.length;
+		$(".id_clone").remove();
+		var user_id = $(this).val();
+		var resultMessage = $("#resultMessage").clone().addClass("id_clone");
+		
+		// 아이디 조건 체크
+		var id_rgx = /^[a-z0-9]{5,14}/;
+		if(!id_rgx.test(user_id)) {
+			var message = "아이디는 5~14자, 영어 소문자와 숫자로만 구성해주세요.";
+			resultMessage.find("strong").text(message);
+			$(this).after(resultMessage);
+			$("#id_result").val("false");
+			return false;
+		}
+		
 		var url = "/sgh/user/userIdDupCheck";
 		var sendData = {
-			"user_id" : user_id	
+				"user_id" : user_id
 		};
-		
+		// 에이잭스로 아이디 중복 체크 요청
 		$.get(url, sendData, function(rData) {
-			// 아이디 글자수 체크
-			for(var v = 0; v < idLength; v++) {
-				var idCode = user_id.charCodeAt(v);
-				if(v < 2) {
-					if(!(97 <= idCode && idCode <= 122)) {
-						$("#idDupResult").text("첫글자와 두번째 글자는 영어 소문자만 입력 가능합니다.").css("color", "red");
-						$("#idDupCheckResult").text("false");
-						return;
-					}
-				}
-				
-				if(!(97 <= idCode && idCode <= 122 || 48 <= idCode && idCode <= 57)) {
-					$("#idDupResult").text("잘못된 문자를 입력 가능합니다. 영어 소문자, 숫자 외에 입력한 문자가 있는지 확인해주세요.").css("color", "red");
-					$("#idDupCheckResult").text("false");
-					return;
-				}
+			console.log(rData);
+			if(rData == "true") {
+				var message = "사용 가능한 계정 입니다.";
+				resultMessage.find("strong").text(message).css("color", "blue");
+				$("#user_id").after(resultMessage);
+				$("#id_result").val("true");
+				return false;
 			}
-			
-			if(rData == 'true' && 4 <= idLength && idLength <= 12) {
-				// 사용 가능
-				$("#idDupResult").text("사용 가능한 아이디 입니다.").css("color", "blue");
-				$("#idDupCheckResult").text("true");
-			} else {
-				// 사용 불가능
-				$("#idDupResult").text("사용 불가능한 아이디 입니다.").css("color", "red");
-				$("#idDupCheckResult").text("false");
-			}
+			var message = "이미 존재하거나 탈퇴한 계정 입니다.";
+			resultMessage.find("strong").text(message);
+			$("#user_id").after(resultMessage);
+			$("#id_result").val("false");
+			return false;
 		});
 	});
+	
+	// 첫번째 비밀번호 체크
+	$("#user_pw").blur(function() {
+		$(".pw_clone").remove();
+		var user_pw = $(this).val();
+		var resultMessage = $("#resultMessage").clone().addClass("pw_clone");
+		
+		// 비밀번호 조건 체크
+		var pw_rgx = /^[a-z0-9]{6,20}$/;
+		if(!pw_rgx.test(user_pw)) {
+			var message = "비밀번호는 6~20자 영어 소문자와 숫자로만 이루어져야합니다.";
+			resultMessage.find("strong").text(message);
+			$("#user_pw2").after(resultMessage);
+			$("#pw_result").val("false");
+			return false;
+		}
+	});
+	
+	// 비밀번호 재확인
+	$("#user_pw2").blur(function() {
+		$(".pw_clone").remove();
+		var user_pw = $("#user_pw").val();
+		var user_pw2 = $(this).val();
+		var resultMessage = $("#resultMessage").clone().addClass("pw_clone");
+		
+		if(user_pw == "" || user_pw == null || user_pw2 == "" || user_pw2 == null) {
+			var message = "비밀번호를 입력해주세요.";
+			resultMessage.find("strong").text(message);
+			$(this).after(resultMessage);
+			$("#pw_result").val("false");
+			return;
+		}
+		
+		if(user_pw != user_pw2) {
+			var message = "비밀번호가 일치하지 않습니다. 다시 확인해주세요.";
+			resultMessage.find("strong").text(message);
+			$(this).after(resultMessage);
+			$("#pw_result").val("false");
+			return;
+		}
+		
+		var message = "사용 가능한 비밀번호 입니다.";
+		resultMessage.find("strong").text(message).css("color", "blue");
+		$(this).after(resultMessage);
+		$("#pw_result").val("true");
+	});
+	
+	// 이름 확인
+	$("#user_name").blur(function() {
+		$(".name_clone").remove();
+		var user_name = $(this).val();
+		var resultMessage = $("#resultMessage").clone().addClass("name_clone");
+		
+		var name_rgx = /^[가-힣a-zA-Z]{1,20}$/;
+		if(!name_rgx.test(user_name)) {
+			var message = "이름은 1~20자 한글과 영문자만 가능합니다.";
+			resultMessage.find("strong").text(message);
+			$(this).after(resultMessage);
+			$("#name_result").val("false");
+			return false;
+		}
+		var message = "사용 가능한 이름 입니다.";
+		resultMessage.find("strong").text(message).css("color", "blue");
+		$(this).after(resultMessage);
+		$("#name_result").val("true");
+	});
+	
 	
 	// 주소 검색 창 띄우기 popup는 webapp 아래에 위치함
 	$("#addressSearch").click(function() {
@@ -78,6 +146,7 @@ $(function() {
 	
 	// 메일 ajax 인증 요청하기
 	$("#btnEmail").click(function() {
+		$(".send_email_clone").remove();
 		var user_email = $("#user_email").val();
 		var url = "/sgh/user/emailCheck";
 		var sendData = {
@@ -86,158 +155,198 @@ $(function() {
 		$.get(url, sendData, function(rData) {
 			emailCheckNum = rData;
 			$("#email_check").removeAttr("readonly");
+			var resultMessage = $("#resultMessage").clone().addClass("send_email_clone");
+			var message = "이메일이 성공적으로 보내졌습니다. 확인해주세요.";
+			resultMessage.find("strong").text(message).css("color", "green");
+			$("#email_check").after(resultMessage);
 		});
 	});
 	
 	// 메일 인증 확인
 	$("#btn_email_check").click(function() {
-		var userCheckNum = $("#email_check").val();
+		$(".send_email_clone").remove();
 		$(".emailCheck").remove();
+		var userCheckNum = $("#email_check").val();
 		if(emailCheckNum == userCheckNum) {
-			var span = "<div><span style='color:blue' class='emailCheck'>인증되었습니다.</span></div>";
-			$("#email_check").after(span);
-			$("#emailCheckResult").val("true");
+			var resultMessage = $("#resultMessage").clone().addClass("send_email_clone");
+			var message = "인증되었습니다.";
+			resultMessage.find("strong").text(message).css("color", "blue");
+			$("#email_check").after(resultMessage);
+			$("#email_result").val("true");
 		} else {
-			var span = "<div><span style='color:red' class='emailCheck'>인증에 실패하였습니다.</span></div>";
-			$("#email_check").after(span);
-			$("#emailCheckResult").val("false");
+			var resultMessage = $("#resultMessage").clone().addClass("send_email_clone");
+			var message = "이메일이 인증에 실패하였습니다. 다시 확인해주세요.";
+			resultMessage.find("strong").text(message).css("color", "red");
+			$("#email_check").after(resultMessage);
+			$("#email_result").val("false");
 		}
-		var emailCheckResult = $("#emailCheckResult").val();
 	});
 	
-	// 전송할 때 조건 체크하기
-	$("#btnSubmit").click(function() {
-		var address = $("#user_address").val();
-		console.log("address :" + address);
-		$(".idSpan").remove();
-		$(".nameSpan").remove();
-		$(".pwSpan").remove();
-		$(".emailSpan").remove();
-		$(".birthSpan").remove();
-		$(".phoneSpan").remove();
-		$(".addressSpan").remove();
+	// 생년 월일 체크
+	$("#yy").blur(function() {
+		$(".birth_clone").remove();
+		var yy = $(this).val();
+		var yy_rgx = /^[0-9]{1,4}$/;
+		var resultMessage = $("#resultMessage").clone().addClass("birth_clone");
 		
-		// 사용할 span 만들기
-		var span = $("#checkDiv").clone().removeAttr("style");
-		span.css("color", "red");
+		if(!yy_rgx.test(yy)) {
+			var message = "태어난 년도는 4자 숫자만 가능합니다.";
+			resultMessage.find("strong").text(message);
+			$("#dd").after(resultMessage);
+			$("#yy_result").val("false");
+			return false;
+		}
+		var message = "생년월일을 빈칸 없이 입력해주세요.";
+		resultMessage.find("strong").text(message);
+		$("#dd").after(resultMessage);
+		$("#yy_result").val("true");
 		
-		// 아이디 확인
-		var result = $("#idDupCheckResult").text();
-		var user_id = $("#user_id").val();
+		var yy_result = $("#yy_result").val();
+		var mm_result = $("#mm_result").val();
+		var dd_result = $("#dd_result").val();
 		
-		if(user_id == null || user_id == "") {
-			span.addClass("idSpan").text("아이디는 필수사항 입니다.");
-			$("#user_id").focus();
-			$("#user_id").after(span);
+		if(yy_result == "true" && mm_result == "true" && dd_result == "true") {
+			$(".birth_clone").remove();
+			var message = "확인되었습니다.";
+			resultMessage.find("strong").text(message).css("color", "blue");
+			$("#birth").after(resultMessage);
+			$("#birth_result").val("true");
 			return false;
 		}
-// 		아이디 사용이 불가능한데 회원가입을 눌렀을 경우
-		if(result == 'false') {
-			span.addClass("idSpan").text("불가능한 아이디 입니다. 다시 한번 확인해주세요.");
-			$("#user_id").focus();
-			$("#user_id").after(span);
+		$("#birth_result").val("false");
+	});
+	
+	// 월 체크
+	$("#mm").change(function() {
+		$(".birth_clone").remove();
+		var mm = $("#mm option:selected").val();
+		var resultMessage = $("#resultMessage").clone().addClass("birth_clone");
+		if(mm == 'not') {
+			var message = "태어난 일을 선택해주세요.";
+			resultMessage.find("strong").text(message);
+			$("#dd").after(resultMessage);
+			$("#mm_result").val("false");
 			return false;
+		}
+		var message = "생년월일을 빈칸 없이 입력해주세요.";
+		resultMessage.find("strong").text(message);
+		$("#dd").after(resultMessage);
+		$("#mm_result").val("true");
+		
+		var yy_result = $("#yy_result").val();
+		var mm_result = $("#mm_result").val();
+		var dd_result = $("#dd_result").val();
+		
+		if(yy_result == "true" && mm_result == "true" && dd_result == "true") {
+			$(".birth_clone").remove();
+			var message = "확인되었습니다.";
+			resultMessage.find("strong").text(message).css("color", "blue");
+			$("#birth").after(resultMessage);
+			$("#birth_result").val("true");
+			return false;
+		}
+		$("#birth_result").val("false");
+	});
+	
+	// 일 체크
+	$("#dd").blur(function() {
+		$(".birth_clone").remove();
+		var dd = $(this).val();
+		var dd_rgx = /^[0-9]{2,2}$/;
+		var resultMessage = $("#resultMessage").clone().addClass("birth_clone");
+		if(!dd_rgx.test(dd)) {
+			var message = "태어난 일은 2자 숫자로만 입력 가능합니다.";
+			resultMessage.find("strong").text(message);
+			$(this).after(resultMessage);
+			$("#dd_result").val("false");
+			return false;
+		}
+		var message = "생년월일을 빈칸 없이 입력해주세요.";
+		resultMessage.find("strong").text(message);
+		$(this).after(resultMessage);
+		$("#dd_result").val("true");
+		
+		var yy_result = $("#yy_result").val();
+		var mm_result = $("#mm_result").val();
+		var dd_result = $("#dd_result").val();
+		
+		if(yy_result == "true" && mm_result == "true" && dd_result == "true") {
+			$(".birth_clone").remove();
+			var message = "확인되었습니다.";
+			resultMessage.find("strong").text(message).css("color", "blue");
+			$("#birth").after(resultMessage);
+			$("#birth_result").val("true");
+			return false;
+		}
+		$("#birth_result").val("false");
+	});
+	
+	// 휴대전화
+	$("#user_phone").blur(function() {
+		$(".phone_clone").remove();
+		var phone_number = $(this).val();
+		var phone_rgx  = /^\d{3}\d{3,4}\d{4}$/;
+		var resultMessage = $("#resultMessage").clone().addClass("phone_clone");
+		if(!phone_rgx.test(phone_number)) {
+			var message = "양식에 맞춰 전화번호를 입력해주세요.";
+			resultMessage.find("strong").text(message);
+			$(this).after(resultMessage);
+			$("#phone_result").val("false");
+			return false;
+		}
+		var message = "확인되었습니다.";
+		resultMessage.find("strong").text(message).css("color", "blue");
+		$(this).after(resultMessage);
+		$("#phone_result").val("true");
+	});
+	
+	// 회원가입 전송이 될 때
+	$("#joinForm").submit(function() {
+		var user_address = $("#user_address").val();
+		var address_length = user_address.length;
+		if(address_length != 0) {
+			$("#address_result").val("true");
+		} else {
+			$("#address_result").val("false");
 		}
 		
-		//비밀번호
-		var pw = $("#user_pw").val();
-		var pw2 = $("#user_pw2").val();
-		var pwLength = pw.length;
-		console.log("pwLength :" + pwLength);
-		if(!(8 <= pwLength && pwLength <= 15)) {
-			span.addClass("pwSpan").text("비밀번호의 길이는 8에서 15글자 사이 입니다.");
-			$("#user_pw").focus();
-			$("#user_pw2").after(span);
-			return false;
-		}
-		// 비밀번호를 입력 안했을 경우
-		if(pw == null || pw == "" || pw2 == null || pw2 == "") {
-			span.addClass("pwSpan").text("비밀번호는 필수사항 입니다.");
-			$("#user_pw").focus();
-			$("#user_pw2").after(span);
-			return false;
-		}
-// 		비밀번호와 비밀번호 확인이 같은지 체크
-		if(pw != pw2) {
-			span.addClass("pwSpan").text("비밀번호가 서로 다릅니다. 다시 확인해주세요.");
-			$("#user_pw").focus();
-			$("#user_pw2").after(span);
-			return false;
-		}
+		var yy = $("#yy").val();
+		var mm = $("#mm option:selected").val();
+		var dd = $("#dd").val();
+		var yymmdd = yy + mm + dd;
+		$("#user_birth").val(yymmdd);
 		
-		// 이름 확인
-		var name = $("#user_name").val();
-		var nameLength = name.length;
-		if(!(nameLength <= 10)) {
-			span.addClass("nameSpan").text("이름은 10글자 안까지만 가능합니다.");
-			$("#user_name").focus();
-			$("#user_name").after(span);
-			return false;
-		}
-		if(name == null || name == "") {
-			span.addClass("nameSpan").text("이름은 필수사항 입니다.");
-			$("#user_name").focus();
-			$("#user_name").after(span);
-			return false;
-		}
+		var id_result = $("#id_result").val();
+		var pw_result = $("#pw_result").val();
+		var name_result = $("#name_result").val();
+		var email_result = $("#email_result").val();
+		var birth_result = $("#birth_result").val();
+		var address_result = $("#address_result").val();
+		var phone_result = $("#phone_result").val();
 		
-		// 이메일 확인
-		var email = $("#user_email").val();
-		if(email == null || email == "") {
-			span.addClass("emailSpan").text("이메일은 필수사항 입니다.");
-			$("#user_email").focus();
-			$("#email_check").after(span);
+		if(id_result != 'true' || pw_result != 'true' || name_result != 'true' || email_result != 'true' ||
+		   birth_result != 'true' || address_result != 'true'|| phone_result != 'true') {
+			window.alert("잘못된 항목이 있습니다. 다시 확인해주세요.");
 			return false;
 		}
-		// 이메일 인증
-		var emailCheckResult = $("#emailCheckResult").val();
-		if(emailCheckResult != "true") {
-			span.addClass("emailSpan").text("이메일은 인증이 안되었습니다. 인증을 하시고 시도해주세요.");
-			$("#user_email").focus();
-			$("#email_check").after(span);
-			return false;
-		}
-		
-		var user_birth = $("#user_birth").val();
-		var birthLimit = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-		if(!birthLimit.test(user_birth)) {
-			span.addClass("birthSpan").text("생년월일은 - 제외하고 숫자로만 8글자 입력 가능합니다.");
-			$("#user_birth").focus();
-			$("#user_birth").after(span);
-			return false;
-		}
-		
-		// 전화번호 확인
-		var user_phone = $("#user_phone").val();
-		var phone_limit = /^\d{3}\d{3,4}\d{4}$/;
-		if(!phone_limit.test(user_phone)) {
-			span.addClass("phoneSpan").text("휴대전화는 01012345678 형식 입니다.");
-			$("#user_phone").focus();
-			$("#user_phone").after(span);
-			return false;
-		}
-		if(user_phone == null || user_phone == "") {
-			span.addClass("phoneSpan").text("휴대전화는 필수사항 입니다.");
-			$("#user_phone").focus();
-			$("#user_phone").after(span);
-			return false;
-		}
-		// 주소 확인
-		var address = $("#user_address").val();
-		if(address == null || address == "") {
-			span.addClass("addressSpan").text("주소는 필수사항 입니다.");
-			$("#user_address").focus();
-			$("#user_address").after(span);
-			return false;
-		}
+	});
+	
+	$("#btnCancle").click(function() {
+		location.href="/sgh/user/loginForm";
 	});
 });
 </script>
-
-<div id="checkDiv" style="visibility: hidden;"></div>
-<div id="idDupCheckResult" style="visibility: hidden;"></div>
-<div id="emailCheckResult" style="visibility: hidden;"></div>
-
+<input type="hidden" id="id_result">
+<input type="hidden" id="pw_result">
+<input type="hidden" id="name_result">
+<input type="hidden" id="email_result">
+<input type="hidden" id="yy_result">
+<input type="hidden" id="mm_result">
+<input type="hidden" id="dd_result">
+<input type="hidden" id="birth_result">
+<input type="hidden" id="address_result">
+<input type="hidden" id="phone_result">
+<div id="resultMessage"><span><strong></strong></span></div>
 <body class="loginBody">
 <div class="container-fluid">
 	<div style="margin-top: 50px; margin-bottom: 50px;">
@@ -248,9 +357,9 @@ $(function() {
 		</div>
 		<div class="col-md-8">
 			<form id="joinForm" role="form" action="/sgh/user/joinRun" method="post">
+				<input type="hidden" id="user_birth" name="user_birth">
 				<div class="form-group">
 					<input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디"/>
-<!-- 					<button type="button" id="btnIdDupCheck" class="btn-sm" style="background-color: orange; color:white;">중복 확인</button> -->
 					<span id="idDupResult"></span>
 				</div>
 				<div class="form-group">
@@ -272,18 +381,28 @@ $(function() {
 				<div class="form-group">
 					<input type="email" class="form-control" id="user_email" name="user_email" maxlength="40" placeholder="이메일"/>
 					<input type="text" class="form-control" id="email_check" name="email_check" maxlength="40" placeholder="인증번호" readonly/>
-					<button id="btn_email_check" type="button" class="btn-sm">인증코드 확인</button>
-					<button id="btnEmail" type="button" class="btn-sm">메일 인증 보내기</button>
+					<button id="btn_email_check" type="button" class="btn-sm btn_orange">인증코드 확인</button>
+					<button id="btnEmail" type="button" class="btn-sm btn_orange">메일 인증 보내기</button>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="user_birth" name="user_birth"  placeholder="태어난 년도 ex : 19900101">
+					<label for="yy_birthday">생년월일<br/></label>
+					<div id="birth">
+						<input type="text" id="yy" placeholder="년(4자)" style="float: left;">
+						<select id="mm" style="float: left; height: 32px;">
+							<option value="not" selected>월</option>
+							<c:forEach begin="1" end="12" var="mm">
+								<option value="<c:if test="${mm < 10}">0</c:if>${mm}">${mm}월</option>
+							</c:forEach>
+						</select>
+						<input type="text" id="dd" placeholder="일 ex:02, 11">
+					</div>
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="전화번호"/>
+					<input type="text" class="form-control" id="user_phone" name="user_phone" placeholder="01012345678 식으로 작성해주세요."/>
 				</div>
 				<div class="form-group">
 					<input type="text" class="form-control" id="user_address" name="user_address" placeholder="주소" readonly/>
-					<button id="addressSearch" type="button" class="btn-sm">주소 검색</button>
+					<button id="addressSearch" type="button" class="btn-sm btn_orange">주소 검색</button>
 				</div>
 				<div class="form-group">
 					<label for="user_sms_check">
@@ -293,10 +412,12 @@ $(function() {
 					<input type="radio" name="user_sms_check" value="N"/>수신안함
 				</div>
 				<div style="margin-bottom: 30px;">
-					<button id="btnSubmit" type="submit" class="btn-lg" style="background-color: #333; color: white;">
+					<button id="btnSubmit" type="submit" class="btn-lg btn_black">
 						회원가입
 					</button>
-					<a href="/sgh/user/loginForm" class="btn btn-sm" style="color: white;">취소</a>
+					<button id="btnCancle" type="button" class="btn-lg btn_black">
+						취소
+					</button>
 				</div>
 			</form>
 		</div>

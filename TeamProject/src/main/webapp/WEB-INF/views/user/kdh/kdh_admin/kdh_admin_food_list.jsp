@@ -27,11 +27,17 @@
 </style>
 <script>
 $(function() {
+	
+	$("#food_product_manage > dd").css("display","block");
+	$("#food_product_manage > dt").css("color","red");
+	$("#food_product_manage > dd").eq(0).css("color","blue");
+	
 	// 페이지 버튼 클릭시 해당 페이지 넘어가게
 	$("a.page-link").click(function(e) {
 		e.preventDefault();
 		var page = $(this).attr("href");
-		location.href = "/kdh/admin/admin_food_list?page=" + page;
+		$("#adminForm > input[name=page]").val(page);
+		$("#adminForm").submit();
 	});
 	
 	// 현재 페이지 액티브 설정
@@ -43,6 +49,18 @@ $(function() {
 		}
 	});
 	
+	// 검색 버튼
+	$("#btnSearch").click(function() {
+		var searchType = $("#searchSelect").val();
+		var keyword = $("#keyword").val();
+		console.log("searchType:" + searchType);
+		console.log("keyword:" + keyword);
+		$("#adminForm > input[name=searchType]").val(searchType);
+		$("#adminForm > input[name=perPage]").val(10);
+		$("#adminForm > input[name=keyword]").val(keyword);
+		$("#adminForm").submit();
+	});
+	
 });
 </script>
 
@@ -50,6 +68,15 @@ $(function() {
 <%@ include file="../../../user/jmh/include/formPage.jsp" %>
 <!-- 해더 부분 -->
 <%@include file="../../../include/admin_header.jsp" %>
+
+<!-- 폼 전송 -->
+<form id="adminForm" action="/kdh/admin/admin_food_list" method="get">
+	<input type="hidden" name="page" value="${pagingDto.page}"/>
+	<input type="hidden" name="perPage" value="${pagingDto.perPage}"/>
+	<input type="hidden" name="searchType" value="${pagingDto.searchType}"/>
+	<input type="hidden" name="keyword" value="${pagingDto.keyword}"/>
+</form>
+
 		<!-- admin_category -->
 		<section class="product-area shop-sidebar shop section" style="padding-top:10px;">
 			<div class="container" style="padding:0px;">
@@ -68,22 +95,22 @@ $(function() {
 									<div class="single-shorter" style="vertical-align:middle;">
 											<label>검색 :</label>
 											<select id="searchSelect" name=searchType>
-												<option value="fname"
-												<c:if test="${jmhPagingDto.searchType == 'mname'}">selected</c:if>
-												>상품명</option>
+												<option value="all"
+												<c:if test="${pagingDto.searchType == 'all'}">selected</c:if>
+												>전체</option>
 												<option value="snack"
-												<c:if test="${jmhPagingDto.searchType == 'mgenre'}">selected</c:if>
+												<c:if test="${pagingDto.searchType == 'snack'}">selected</c:if>
 												>스낵</option>
 												<option value="drink"
-												<c:if test="${jmhPagingDto.searchType == 'mgrade'}">selected</c:if>
+												<c:if test="${pagingDto.searchType == 'drink'}">selected</c:if>
 												>음료</option>
 												<option value="package"
-												<c:if test="${jmhPagingDto.searchType == 'mgrade'}">selected</c:if>
+												<c:if test="${pagingDto.searchType == 'package'}">selected</c:if>
 												>패키지</option>
 											</select>
 										</div>
 
-									<input type="text" id="keyword" value="${jmhPagingDto.keyword}"/>
+									<input type="text" id="keyword" value="${pagingDto.keyword}"/>
 									<button type="button" class="btn" id="btnSearch">검색</button>
 								</div>	
 								<!--  검색 끝 -->

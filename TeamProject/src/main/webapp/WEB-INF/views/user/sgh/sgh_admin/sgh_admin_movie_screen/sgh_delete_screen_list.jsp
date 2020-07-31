@@ -17,9 +17,12 @@
 	}
 </style>
 
-<script src="/resources/js/sgh_js/timestmap_change.js"></script>
+<script src="/resources/js/sgh_js/myScript.js"></script>
 <script>
 $(function() {
+	$("#theater_manage > dd").css("display","block");
+	$("#theater_manage > dt").css("color","red");
+	$("#theater_manage > dd").eq(0).css("color","blue");
 	
 	$(".del_date").each(function() {
 		var del_date = $(this).text();
@@ -44,6 +47,9 @@ $(function() {
 			<%@ include file="/WEB-INF/views/include/admin_side_menu.jsp"%>
 			<div class="col-lg-9 col-md-8 col-12">
 						<!--  페이지별 내용 -->
+				<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
+					<h4 class="title" style="text-align: center;">영화관 관리_영화관 조회</h4>
+				</div>
 				<div class="row" style="margin-top: 20px;">
 					<div class="col-md-12">
 						<h2>${sghTheaterVo.theater_name}</h2>

@@ -69,7 +69,7 @@
 				
 					<div class="col-md-3" style="margin-bottom:30px;text-align:center;">
 						<a href="/gsh/movie/movieInfo?movie_code=${vo.movie_code}">
-							<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:184px;height:262.84px;"></span><br>
+							<span><img src="/upload/displayFile?fileName=${vo.movie_main_image}" style="width:184px;height:262.84px;border-radius: 2%;"></span><br>
 							<span><img src="/resources/images/jmh/movie_grade_${vo.movie_grade}.png" width="30">${vo.movie_name}</span>
 							<br>
 							<c:choose>

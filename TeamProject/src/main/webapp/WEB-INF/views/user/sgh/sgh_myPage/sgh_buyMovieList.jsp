@@ -13,8 +13,17 @@
 	border : 1px dotted #ccc;
 }
 </style>
-<script src="../../../include/bootstrap.jsp"></script>
-
+<%@include file="/WEB-INF/views/include/bootstrap.jsp" %>
+<script src="/resources/js/sgh_js/myScript.js"></script>
+<script>
+$(function() {
+	$(".buy_date").each(function() {
+		var date = $(this).text();
+		var str_date = timestmap_change(date);
+		$(this).text(str_date);
+	});
+});
+</script>
 <!-- tag_and_styleSheet 인크루드 -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>
 <%@ include file="/WEB-INF/views/include/header.jsp"%>
@@ -23,6 +32,8 @@
 <div class="container" style="left:100px;margin-top:100px;">
 		<h2>My page_마이페이지</h2>
 </div>
+
+
 <!-- Start Contact -->
 <section id="contact-us" class="contact-us section" style="padding:50px;">
 	<div class="container">
@@ -52,7 +63,7 @@
 												<td>${sghMyMovieBuyVo.movie_buy_num}</td>
 												<td>${sghMyMovieBuyVo.movie_name}</td>
 												<td>${sghMyMovieBuyVo.movie_price}원</td>
-												<td>${sghMyMovieBuyVo.movie_buy_date}</td>
+												<td class="buy_date">${sghMyMovieBuyVo.movie_buy_date}</td>
 											</tr>
 											</c:forEach>
 										</tbody>

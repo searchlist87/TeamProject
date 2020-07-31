@@ -5,9 +5,13 @@
 <%@ include file="../../../include/tag_and_styleSheet.jsp" %>
 <%@ include file="../../../include/admin_header.jsp" %>
 
-<script src="/resources/js/sgh_js/timestmap_change.js"></script>
+<script src="/resources/js/sgh_js/myScript.js"></script>
 <script>
 $(function() {
+	$("#theater_manage > dd").css("display","block");
+	$("#theater_manage > dt").css("color","red");
+	$("#theater_manage > dd").eq(0).css("color","blue");
+	
 	$(".page-link").css("float", "left");
 	$(".page-item").css("float", "left");
 	// 템플릿에서 나오는 select 막기

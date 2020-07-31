@@ -20,7 +20,7 @@
 			</choose>
 		</if>
         ) a)
-        where rownum between #{start_row} and #{end_row}
+        where rnum between #{start_row} and #{end_row}
         and movie_end_date >= sysdate
         order by rnum desc
 	</select>

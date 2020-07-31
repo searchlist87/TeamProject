@@ -24,6 +24,7 @@
 <script src="/resources/js/jquery.min.js"></script>
 <script src="/resources/js/jquery-migrate-3.0.0.js"></script>
 <script src="/resources/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="/resources/css/button_css.css">
 <script>
 $(function() {
 	
@@ -84,11 +85,20 @@ $(function() {
 							</c:choose>
 							<li><i class="ti-user"></i> <a href="/customer/customerPage">고객센터</a></li>
 							<li><div class="sinlge-bar shopping">
-							<c:if test="${not empty user_id}">
-								<i class="ti-bag"></i>
-								<a href="/kdh/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>" class="single-icon" style="position:relative;">
-								<span class="total-count">${cartCount}</span></a>
-							</c:if>
+								<c:if test="${not empty user_id}">
+									<i class="ti-bag"></i>
+									<a href=
+									<c:choose>
+										<c:when test="${cartCount == 0}">
+											"/kdh/food/buyFoodNone"
+										</c:when>
+										<c:otherwise>
+											"/kdh/cart/displayCart?user_id=<%=session.getAttribute("user_id")%>"
+										</c:otherwise>
+									</c:choose>
+									class="single-icon" style="position:relative;">
+									<span id="cartCount" class="total-count"><%=session.getAttribute("cartCount")%></span></a>
+								</c:if>
 							</div>
 							</li>
 						</ul>

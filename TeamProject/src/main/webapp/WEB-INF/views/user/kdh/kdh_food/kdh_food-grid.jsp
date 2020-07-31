@@ -117,10 +117,6 @@ $(function() {
 											<h3>전체</h3>
 										</div>
 									</div>
-									<ul class="view-mode">
-										<li class="active"><a href="shop-grid.html"><i class="fa fa-th-large"></i></a></li>
-										<li><a href="shop-list.html"><i class="fa fa-th-list"></i></a></li>
-									</ul>
 								</div>
 								<!--/ End Shop Top -->
 							</div>

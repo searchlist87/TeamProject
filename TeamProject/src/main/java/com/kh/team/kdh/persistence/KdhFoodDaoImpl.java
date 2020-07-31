@@ -143,8 +143,8 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	}
 
 	@Override
-	public int selectFoodBuyListCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "selectFoodBuyListCount");
+	public int selectFoodBuyListCount(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectFoodBuyListCount", pagingDto);
 	}
 
 	@Override
@@ -160,6 +160,16 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 	@Override
 	public int selectMyPageFoodBuyListCount(String user_id) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "selectMyPageFoodBuyListCount", user_id);
+	}
+
+	@Override
+	public List<KdhFoodVo> foodPage(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "foodPage", pagingDto);
+	}
+
+	@Override
+	public int selectFoodPageCount(KdhPagingDto pagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "selectFoodPageCount", pagingDto);
 	}
 
 
