@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.team.domain.KdhBasicCartDto;
 import com.kh.team.domain.KdhFoodCartDto;
 import com.kh.team.domain.KdhFoodVo;
+import com.kh.team.domain.KdhPointCodeVo;
 import com.kh.team.domain.KdhUserVo;
 import com.kh.team.domain.kdhFoodBuyDto;
 import com.kh.team.domain.kdhFoodBuyListDto;
@@ -84,13 +85,25 @@ public class KdhCartController {
 	}
 	
 	// 장바구니 결제하기
-	@RequestMapping(value = "/buyCart", method = RequestMethod.GET)
-	@Transactional
-	public String buy(HttpSession session,ModelMap model) throws Exception {
+	@RequestMapping(value = "/buyCart", method = RequestMethod.POST)
+	public String buy(HttpSession session, String used_Point1, String food_buy_price1) throws Exception {
+		int used_Point = Integer.parseInt(used_Point1);
+		int food_buy_price = Integer.parseInt(food_buy_price1);
+		System.out.println("used_Point:" + used_Point);
+		System.out.println("food_buy_price:" + food_buy_price);
+		
 		String user_id = (String) session.getAttribute("user_id");
 		List<KdhBasicCartDto> cartDto = cartService.selectCartListByUserId(user_id);
-		int total_price = cartService.FoodTotalMoney(user_id);
-		model.addAttribute("total_price", total_price);
+		
+		KdhPointCodeVo codeVo = pointService.selectFoodPercent();
+		int point_percent = codeVo.getPoint_percent();
+		
+		pointService.insertPointInData(user_id, food_buy_price, point_percent);
+		int totalPoint = pointService.selectTotalPoint(user_id);
+		
+		if (totalPoint != 0) {
+		pointService.updateUserPoint(totalPoint, used_Point, user_id);
+		}
 		
 		// foodBuyDto 설정
 		for (KdhBasicCartDto data : cartDto ) {
@@ -98,12 +111,13 @@ public class KdhCartController {
 			kdhFoodBuyDto foodBuyDto = new kdhFoodBuyDto();
 			// food_num, user_id, food_buy_total_price, food_buy_count
 			int food_buy_total_price = data.getBuy_food_price();
-			int food_buy_count = data.getFood_cart_count();
+			int food_cart_count = data.getFood_cart_count();
+			System.out.println("food_cart_count : " + food_cart_count);
 			int food_num = data.getFood_num();
 			
 			foodBuyDto.setFood_num(food_num);
 			foodBuyDto.setUser_id(user_id);
-			foodBuyDto.setFood_buy_count(food_buy_count);
+			foodBuyDto.setFood_buy_count(food_cart_count);
 			foodBuyDto.setFood_buy_total_price(food_buy_total_price);
 			foodService.insertFoodBuy(foodBuyDto);
 			
@@ -112,12 +126,13 @@ public class KdhCartController {
 			kdhFoodBuyListDto foodBuyListDto = new kdhFoodBuyListDto();
 			foodBuyListDto.setFood_num(food_num);
 			foodBuyListDto.setUser_id(user_id);
+			foodBuyListDto.setFood_buy_count(food_cart_count);
 			foodBuyListDto.setFood_buy_total_price(food_buy_total_price);
-			foodBuyListDto.setFood_buy_count(food_buy_count);
 			foodService.insertFoodBuyList(foodBuyListDto);
 		}
 		
 			cartService.deleteFoodCartAll(user_id);
-			return "user/kdh/kdh_food/kdh_buy_view";
+			session.setAttribute("cartCount", 0);
+			return "redirect:/kdh/food/buyView";
 		}
 }
