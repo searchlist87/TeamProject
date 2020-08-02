@@ -176,8 +176,9 @@ public class JmhAdminController {
 		jmhPagingDto.setPerPage(10);
 		jmhPagingDto.setPageInfo();
 		
-		int count1 = jmhMypageService.adminGetQuestionCount();
+		int count1 = jmhMypageService.adminGetQuestionCount(jmhPagingDto);
 		jmhPagingDto.setTotalCount(count1);
+		System.out.println("count :" + count1);
 		String searchType = jmhPagingDto.getSearchType();
 		List<JmhBoardVo> jmhBoardVo;
 		

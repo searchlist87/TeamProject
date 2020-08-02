@@ -19,8 +19,6 @@ public interface SghBookingDao {
 	public SghMovieMoneyVo getMovieMoney(String movie_time_code) throws Exception;
 	// 구매할 때 좌석 일정 예약시키기
 	public void updateScheduleSeat(String schedule_seat_code) throws Exception;
-	// 구매할 때 구매 내역에 추가
-	public void insertMovieBuy(SghPaymentVo sghPaymentVo) throws Exception;
 	// 구매할 때 변하지 않는 구매 내역 리스트에 데이터 추가
 	public void insertMovieBuyList(SghPaymentVo sghPaymentVo) throws Exception;
 	// 포인트 내역 추가하기

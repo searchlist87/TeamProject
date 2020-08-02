@@ -13,7 +13,7 @@
 		text-align: center;
 	}
 </style>
-<script src="/resources/js/sgh_js/timestmap_change.js"></script>
+<script src="/resources/js/sgh_js/myScript.js"></script>
 <script>
 $(function() {
 	$("#movie_time_manage > dd").css("display","block");
@@ -42,7 +42,7 @@ $(function() {
 	});
 });
 </script>
-<form id="frmSearch" action="/sgh/admin/movieTime/deleteMovieTimeList" method="get"> 
+<form id="frmSearch" action="/sgh/admin/movieTime/endOupMovieTimeList" method="get"> 
 	<input type="hidden" id="category" name="category">
 	<input type="hidden" id="keyword" name="keyword">
 </form>

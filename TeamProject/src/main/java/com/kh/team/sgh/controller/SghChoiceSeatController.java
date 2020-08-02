@@ -73,7 +73,6 @@ public class SghChoiceSeatController {
 	public String paymentForm(HttpSession session, Model model) throws Exception {
 		SghChoiceSeatDto sghChoiceSeatDto = (SghChoiceSeatDto)session.getAttribute("sghChoiceSeatDto");
 		model.addAttribute("sghChoiceSeatDto", sghChoiceSeatDto);
-		System.out.println("payment-sghChoiceSeatDto : " + sghChoiceSeatDto);
 		return "user/sgh/sgh_book/sgh_payment";
 	}
 	
@@ -87,6 +86,8 @@ public class SghChoiceSeatController {
 	// 결제 처리
 	@RequestMapping(value="/paymentRun", method=RequestMethod.POST)
 	public String paymentRun(String[] schedule_code_arr, int use_point, HttpSession session, RedirectAttributes rttr) {
+		System.out.println("ㅇㅇ");
+		System.out.println("use_point :" + use_point);
 		SghPaymentVo sghPaymentVo = (SghPaymentVo)session.getAttribute("sghPaymentVo");
 		try {
 			String user_id = (String)session.getAttribute("user_id");

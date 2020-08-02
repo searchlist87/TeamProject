@@ -60,8 +60,8 @@ public class SghMovieTimeServiceImpl implements SghMovieTimeService {
 	}
 
 	@Override
-	public int getMovieTimeCount() throws Exception {
-		return sghMovieTimeDao.getMovieTimeCount();
+	public int getMovieTimeCount(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieTimeDao.getMovieTimeCount(sghPagingDto);
 	}
 
 	@Override
@@ -70,8 +70,8 @@ public class SghMovieTimeServiceImpl implements SghMovieTimeService {
 	}
 
 	@Override
-	public int deleteMovieTimeCount() throws Exception {
-		return sghMovieTimeDao.deleteMovieTimeCount();
+	public int deleteMovieTimeCount(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieTimeDao.deleteMovieTimeCount(sghPagingDto);
 	}
 
 	@Override
@@ -80,8 +80,8 @@ public class SghMovieTimeServiceImpl implements SghMovieTimeService {
 	}
 
 	@Override
-	public int endOutMovieTimeCount() throws Exception {
-		return sghMovieTimeDao.endOutMovieTimeCount();
+	public int endOutMovieTimeCount(SghPagingDto sghPagingDto) throws Exception {
+		return sghMovieTimeDao.endOutMovieTimeCount(sghPagingDto);
 	}
 
 	@Override

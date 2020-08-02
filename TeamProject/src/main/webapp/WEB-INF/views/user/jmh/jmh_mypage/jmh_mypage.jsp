@@ -16,10 +16,10 @@
 <script>
 $(function () {
 	var mMsg = "${modifyMsg}";
-	console.log(mMsg);
-	
+	if(mMsg == "success") {
+		alert("수정이 완료 되었습니다.");
+	}
 });
-
 </script>
 <!-- tag_and_styleSheet 인크루드 -->
 <%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp"%>

@@ -66,7 +66,6 @@ public class SghBookController {
 	@ResponseBody
 	@RequestMapping(value="/movieSchedule", method=RequestMethod.GET)
 	public List<SghBookingVo> getDayMovieList(SghMovieTimeAjaxVo sghMovieTimeAjaxVo) throws Exception {
-		System.out.println("sghMovieTimeAjaxVo :" + sghMovieTimeAjaxVo);
 		List<SghBookingVo> booking_list = sghBookingService.getChoiceMovieList(sghMovieTimeAjaxVo);
 		return booking_list;
 	}

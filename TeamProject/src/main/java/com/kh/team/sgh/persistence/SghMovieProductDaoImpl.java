@@ -41,8 +41,8 @@ public class SghMovieProductDaoImpl implements SghMovieProductDao {
 	}
 
 	@Override
-	public int getMovieProductTotal() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getMovieProductTotal");
+	public int getMovieProductTotal(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getMovieProductTotal", sghPagingDto);
 	}
 
 	@Override

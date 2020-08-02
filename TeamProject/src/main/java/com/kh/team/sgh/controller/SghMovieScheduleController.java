@@ -32,7 +32,7 @@ public class SghMovieScheduleController {
 	// 영화 스케쥴 리스트 폼으로
 	@RequestMapping(value="/scheduleList", method=RequestMethod.GET)
 	public String scheduleList(SghPagingDto sghPagingDto, Model model) throws Exception {
-		int total_count = sghMovieScheduleService.getMovieScheduleCount();
+		int total_count = sghMovieScheduleService.getMovieScheduleCount(sghPagingDto);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		List<SghScheduleVo> schedule_list = sghMovieScheduleService.getScheduleList(sghPagingDto);
@@ -44,7 +44,7 @@ public class SghMovieScheduleController {
 	// 삭제된 영화 스케쥴 리스트 폼으로
 	@RequestMapping(value="/deleteScheduleList", method=RequestMethod.GET)
 	public String deleteScheduleList(SghPagingDto sghPagingDto, Model model) throws Exception {
-		int total_count = sghMovieScheduleService.getDeleteScheduleCount();
+		int total_count = sghMovieScheduleService.getDeleteScheduleCount(sghPagingDto);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		List<SghScheduleVo> schedule_list = sghMovieScheduleService.deleteScheduleList(sghPagingDto);
@@ -56,7 +56,7 @@ public class SghMovieScheduleController {
 	// end 시간이 지난 영화작 목록
 	@RequestMapping(value="/endOutScheduleList", method=RequestMethod.GET)
 	public String endOutScheduleList(SghPagingDto sghPagingDto, Model model) throws Exception {
-		int total_count = sghMovieScheduleService.getDeleteScheduleCount();
+		int total_count = sghMovieScheduleService.getDeleteScheduleCount(sghPagingDto);
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		List<SghScheduleVo> schedule_list = sghMovieScheduleService.endDateOutScheduleList(sghPagingDto);

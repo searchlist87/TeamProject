@@ -17,7 +17,7 @@
 	}
 </style>
 
-<script src="/resources/js/sgh_js/timestmap_change.js"></script>
+<script src="/resources/js/sgh_js/myScript.js"></script>
 <script>
 $(function() {
 	$("#theater_manage > dd").css("display","block");

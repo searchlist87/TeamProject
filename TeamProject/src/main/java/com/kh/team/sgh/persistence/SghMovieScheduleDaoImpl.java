@@ -45,8 +45,8 @@ public class SghMovieScheduleDaoImpl implements SghMovieScheduleDao {
 	}
 
 	@Override
-	public int getMovieScheduleCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getMovieScheduleCount");
+	public int getMovieScheduleCount(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getMovieScheduleCount", sghPagingDto);
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class SghMovieScheduleDaoImpl implements SghMovieScheduleDao {
 	}
 
 	@Override
-	public int getDeleteScheduleCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getDeleteScheduleCount");
+	public int getDeleteScheduleCount(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getDeleteScheduleCount", sghPagingDto);
 	}
 
 	@Override
@@ -75,8 +75,8 @@ public class SghMovieScheduleDaoImpl implements SghMovieScheduleDao {
 	}
 
 	@Override
-	public int getEndDateOutScheduleCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getEndDateOutScheduleCount");
+	public int getEndDateOutScheduleCount(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getEndDateOutScheduleCount", sghPagingDto);
 	}
 
 }

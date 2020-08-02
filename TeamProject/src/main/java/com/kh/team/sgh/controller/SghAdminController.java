@@ -69,7 +69,6 @@ public class SghAdminController {
 		List<SghTheaterVo> theater_list = sghTheaterService.deleteTheaterListPaging(sghPagingDto);
 		List<SghAreaVo> area_list = sghAreaService.getAreaList();
 		
-		System.out.println("theater_list :" + theater_list);
 		model.addAttribute("theater_list", theater_list);
 		model.addAttribute("sghPagingDto", sghPagingDto);
 		model.addAttribute("area_list", area_list);
@@ -96,7 +95,7 @@ public class SghAdminController {
 		}
 		result = "false";
 		rttr.addFlashAttribute("message", result);
-		return "redirect:/sgh/admin/adminMainForm";
+		return "redirect:/sgh/admin/movieTheaterList";
 	}
 	
 	// 영화관 수정 폼 이동
@@ -161,9 +160,6 @@ public class SghAdminController {
 		sghPagingDto.setTotal_count(total_count);
 		sghPagingDto.setPageInfo();
 		List<SghAdminMovieBuyVo> sghAdminMovieBuyVoList = sghAdminMovieBuyService.getAdminMovieBuyList(sghPagingDto);
-		
-		// 지역 목록
-		List<SghTheaterVo> theater_list = sghTheaterService.getTheaterList();
 		
 		// 영화관 목록
 		List<SghAreaVo> area_list = sghAreaService.getAreaList();

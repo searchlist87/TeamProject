@@ -72,8 +72,8 @@ public class SghMovieTimeDaoImpl implements SghMovieTimeDao {
 	}
 
 	@Override
-	public int getMovieTimeCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getMovieTimeCount");
+	public int getMovieTimeCount(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getMovieTimeCount", sghPagingDto);
 	}
 
 	@Override
@@ -82,8 +82,8 @@ public class SghMovieTimeDaoImpl implements SghMovieTimeDao {
 	}
 
 	@Override
-	public int deleteMovieTimeCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "deleteMovieTimeCount");
+	public int deleteMovieTimeCount(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "deleteMovieTimeCount", sghPagingDto);
 	}
 
 	@Override
@@ -92,8 +92,8 @@ public class SghMovieTimeDaoImpl implements SghMovieTimeDao {
 	}
 
 	@Override
-	public int endOutMovieTimeCount() throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "endOutMovieTimeCount");
+	public int endOutMovieTimeCount(SghPagingDto sghPagingDto) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "endOutMovieTimeCount", sghPagingDto);
 	}
 
 	@Override
