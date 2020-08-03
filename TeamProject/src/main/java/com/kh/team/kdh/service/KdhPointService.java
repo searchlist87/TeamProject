@@ -2,6 +2,7 @@ package com.kh.team.kdh.service;
 
 import java.util.List;
 
+import com.kh.team.domain.KdhMypagePointDto;
 import com.kh.team.domain.KdhPointCodeVo;
 import com.kh.team.domain.KdhPointVo;
 import com.kh.team.domain.KdhUserVo;
@@ -31,4 +32,10 @@ public interface KdhPointService {
 	
 	// 유저 포인트 찾기
 	public int selectPointByUserId(String user_id) throws Exception;
+	
+	// 마이페이지 포인트 내역 데이터 넣기
+	public void insertUsedPointInfo(String user_id, int used_point) throws Exception;
+		
+	// 마이페이지 포인트 내역 보기
+	public List<KdhMypagePointDto> selectUsedPointInfo(String user_id) throws Exception;
 }

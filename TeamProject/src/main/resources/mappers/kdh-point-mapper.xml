@@ -51,4 +51,16 @@
 	where user_id = #{user_id}
 </select>
 
+<!-- 마이페이지 포인트 내역 데이터 넣기 -->
+<insert id="insertUsedPointInfo">
+	insert into tbl_used_point(point_used_num, point_used_code, user_id, used_point, used_point_date)
+	values(seq_used_point_num.nextval, 'PS2', #{user_id}, #{used_point}, sysdate)
+</insert>
+
+<!-- 마이페이지 포인트 내역 보기 -->
+<select id="selectUsedPointInfo" resultType="KdhMypagePointDto">
+	select up.used_point, up.used_point_date, upc.point_used_name
+	from tbl_used_point up, tbl_used_point_code upc
+	where up.point_used_code = up.point_used_code and upc.point_used_code = 'PS1' and up.user_id = #{user_id}
+</select>
 </mapper>
