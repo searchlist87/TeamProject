@@ -55,6 +55,7 @@ $(function() {
 		e.preventDefault();
 		var searchType = $("#selectSearch option:selected").val();
 		var keyword = $("#keyword").val();
+		console.log("keyword : "+ keyword);
 		if (keyword == null || keyword == "") {
 			alert("검색 키워드를 확인해주세요.");
 			return false;
