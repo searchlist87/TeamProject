@@ -2,7 +2,7 @@ package com.kh.team.domain;
 
 public class GshPagingDto {
 		private int page = 1;
-		private int perPage = 10;
+		private int perPage = 12;
 		private int startRow = 1;
 		private int endRow = 10;
 		private String searchType;
