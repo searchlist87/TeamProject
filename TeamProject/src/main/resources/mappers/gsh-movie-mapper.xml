@@ -13,13 +13,13 @@
 	    from tbl_review
 	    group by movie_code) r
 	    where m.movie_code = r.movie_code(+)
-	    <if test='keyword != null'>
+	    <if test='gsh_keyword != null'>
 	    	<choose>
-	    	<when test='searchType == "movie_name"'>
-	    		and movie_name like '%' || #{keyword} || '%'
+	    	<when test='gsh_searchType == "movie_name"'>
+	    		and movie_name like '%' || #{gsh_keyword} || '%'
 	    	</when>
-	    	<when test='searchType == "movie_genre"'>
-	    		and movie_genre like '%' || #{keyword} || '%'
+	    	<when test='gsh_searchType == "movie_genre"'>
+	    		and movie_genre like '%' || #{gsh_keyword} || '%'
 	    	</when>
 	    	</choose>
 	    </if>
@@ -33,13 +33,13 @@
 	<!-- 영화 페이지 영화 총 수 구하기 -->
 	<select id="getMovieCount" resultType="integer">
 		select count(*) from tbl_movie
-		 <if test='keyword != null'>
+		 <if test='gsh_keyword != null'>
 	    	<choose>
-	    	<when test='searchType == "movie_name"'>
-	    		where movie_name like '%' || #{keyword} || '%'
+	    	<when test='gsh_searchType == "movie_name"'>
+	    		where movie_name like '%' || #{gsh_keyword} || '%'
 	    	</when>
-	    	<when test='searchType == "movie_genre"'>
-	    		where movie_genre like '%' || #{keyword} || '%'
+	    	<when test='gsh_searchType == "movie_genre"'>
+	    		where movie_genre like '%' || #{gsh_keyword} || '%'
 	    	</when>
 	    	</choose>
 	    </if>
@@ -83,7 +83,7 @@
 		where m.movie_code = #{movie_code}
 		and m.movie_code = r.movie_code
 	</select>
-	
+		
 	<!-- 영화 서브 이미지(스틸컷) 가져오기 -->
 	<select id="select_movie_sub_iamage" resultType="string">
 		select movie_sub_image from tbl_movie_image

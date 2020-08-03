@@ -5,8 +5,8 @@ public class GshPagingDto {
 		private int perPage = 12;
 		private int startRow = 1;
 		private int endRow = 10;
-		private String searchType;
-		private String keyword;
+		private String gsh_searchType;
+		private String gsh_keyword;
 		private int totalCount;
 		private int totalPage;
 		private int startPage;
@@ -63,20 +63,25 @@ public class GshPagingDto {
 			this.endRow = endRow;
 		}
 
-		public String getSearchType() {
-			return searchType;
+
+		public String getGsh_searchType() {
+			return gsh_searchType;
 		}
 
-		public void setSearchType(String searchType) {
-			this.searchType = searchType;
+		public void setGsh_searchType(String gsh_searchType) {
+			this.gsh_searchType = gsh_searchType;
 		}
 
-		public String getKeyword() {
-			return keyword;
+		public String getGsh_keyword() {
+			return gsh_keyword;
 		}
 
-		public void setKeyword(String keyword) {
-			this.keyword = keyword;
+		public void setGsh_keyword(String gsh_keyword) {
+			this.gsh_keyword = gsh_keyword;
+		}
+
+		public int getPAGE_BLOCK() {
+			return PAGE_BLOCK;
 		}
 
 		public int getTotalCount() {
@@ -124,11 +129,11 @@ public class GshPagingDto {
 
 		@Override
 		public String toString() {
-			return "PagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow=" + endRow
-					+ ", searchType=" + searchType + ", keyword=" + keyword + ", totalCount=" + totalCount + ", totalPage="
-					+ totalPage + ", startPage=" + startPage + ", endPage=" + endPage + "]";
+			return "GshPagingDto [page=" + page + ", perPage=" + perPage + ", startRow=" + startRow + ", endRow="
+					+ endRow + ", gsh_searchType=" + gsh_searchType + ", gsh_keyword=" + gsh_keyword + ", totalCount="
+					+ totalCount + ", totalPage=" + totalPage + ", startPage=" + startPage + ", endPage=" + endPage
+					+ ", PAGE_BLOCK=" + PAGE_BLOCK + "]";
 		}
 
-	
 
 }

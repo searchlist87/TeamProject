@@ -48,8 +48,8 @@ $(function() {
 		var text_keyword = $("#text_keyword").val();
 		var select_searchType = $("#select_searchType option:selected").val();
 		
-		$("#keyword").val(text_keyword);
-		$("#searchType").val(select_searchType);
+		$("#gsh_keyword").val(text_keyword);
+		$("#gsh_searchType").val(select_searchType);
 		
 		$("#frmSearch").submit();
 	});
@@ -57,8 +57,8 @@ $(function() {
 });
 </script>
 <form id="frmSearch" action="/gsh/movie/movieView" method="get">
-	<input type="hidden" id="keyword" name="keyword">
-	<input type="hidden" id="searchType" name="searchType">
+	<input type="hidden" id="gsh_keyword" name="gsh_keyword">
+	<input type="hidden" id="gsh_searchType" name="gsh_searchType">
 </form>
 <header class="header shop">
 	<!-- Topbar -->
