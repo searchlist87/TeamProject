@@ -20,4 +20,34 @@ public class SghAreaServiceImpl implements SghAreaService {
 		return sghAreaDao.getAreaList();
 	}
 
+	@Override
+	public void insertArea(String area_name) throws Exception {
+		sghAreaDao.insertArea(area_name);
+	}
+
+	@Override
+	public SghAreaVo getAreaInfo(String area_code) throws Exception {
+		return sghAreaDao.getAreaInfo(area_code);
+	}
+
+	@Override
+	public void modifyArea(String area_code, String area_name) throws Exception {
+		sghAreaDao.modifyArea(area_code, area_name);
+	}
+
+	@Override
+	public void delArea(String area_code) throws Exception {
+		sghAreaDao.delArea(area_code);
+	}
+
+	@Override
+	public void restoreArea(String area_code) throws Exception {
+		sghAreaDao.restoreArea(area_code);
+	}
+
+	@Override
+	public List<SghAreaVo> getDeleteAreaList() throws Exception {
+		return sghAreaDao.getDeleteAreaList();
+	}
+
 }

@@ -12,6 +12,9 @@ function jusoCallBack(roadFullAddr){
 }
 
 $(function() {
+	$("#theater_manage > dd").css("display","block");
+	$("#theater_manage > dt").css("color","red");
+	$("#theater_manage > dd").eq(2).css("color","blue");
 	
 	// 템플릿에서 나오는 select 막기
 	$("select").css("display", "block");

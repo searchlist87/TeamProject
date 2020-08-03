@@ -9,6 +9,9 @@
 		margin-left: 10px;
 		margin-right: 10px;
 	}
+	tr {
+		text-align: center;
+	}
 </style>
 <script>
 $(function() {

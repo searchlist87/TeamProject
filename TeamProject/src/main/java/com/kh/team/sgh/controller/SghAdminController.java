@@ -34,11 +34,91 @@ public class SghAdminController {
 	@Inject
 	private SghAdminMovieBuyService sghAdminMovieBuyService;
 	
+	// 영화관 지역 폼 이동
+	@RequestMapping(value="/areaListForm", method=RequestMethod.GET)
+	public String areaListForm(SghPagingDto sghPagingDto, Model model) throws Exception {
+		List<SghAreaVo> area_list = sghAreaService.getAreaList();
+		model.addAttribute("area_list", area_list);
+		return "user/sgh/sgh_admin/sgh_area/sgh_area_list";
+	}
 	
-//	 영화관 임시 메인 폼 이동
-	@RequestMapping(value="/adminMainForm", method=RequestMethod.GET)
-	public String adminMainForm() throws Exception {
-		return "user/sgh/sgh_admin/sgh_admin_main_form";
+	// 삭제된 영화관 지역 폼 이동
+	@RequestMapping(value="/deleteAreaListForm", method=RequestMethod.GET)
+	public String deleteAreaListForm(SghPagingDto sghPagingDto, Model model) throws Exception {
+		List<SghAreaVo> area_list = sghAreaService.getDeleteAreaList();
+		model.addAttribute("area_list", area_list);
+		return "user/sgh/sgh_admin/sgh_area/sgh_area_del_list";
+	}
+	
+	// 영화관 지역 등록 폼 이동
+	@RequestMapping(value="/areaAddForm", method=RequestMethod.GET)
+	public String areaAddForm() throws Exception {
+		return "user/sgh/sgh_admin/sgh_area/sgh_area_add";
+	}
+	
+	// 영화관 삭제 처리
+	@RequestMapping(value="/areaDeleteRun", method=RequestMethod.GET)
+	public String areaDeleteRun(String area_code, RedirectAttributes rttr) {
+		try {
+			sghAreaService.delArea(area_code);
+			return "redirect:/sgh/admin/areaListForm";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String result = "false";
+		rttr.addFlashAttribute("result", result);
+		return "redirect:/sgh/admin/areaListForm";
+	}
+	
+	// 영화관 복구 처리
+	@RequestMapping(value="/areaRestore", method=RequestMethod.GET)
+	public String areaRestore(String area_code, RedirectAttributes rttr) throws Exception {
+		try {
+			sghAreaService.restoreArea(area_code);
+			return "redirect:/sgh/admin/deleteAreaListForm";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String result = "false";
+		rttr.addFlashAttribute("result", result);
+		return "redirect:/sgh/admin/deleteAreaListForm";
+	}
+	
+	// 영화관 등록 처리
+	@RequestMapping(value="/areaAddRun", method=RequestMethod.GET)
+	public String areaAddRun(String area_name, RedirectAttributes rttr){
+		String result;
+		try {
+			sghAreaService.insertArea(area_name);
+			return "redirect:/sgh/admin/areaListForm";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		result = "false";
+		rttr.addFlashAttribute("message", result);
+		return "redirect:/sgh/admin/areaListForm";
+	}
+	
+	// 영화관 지역 등록 폼 이동
+	@RequestMapping(value="/areaModfiyForm", method=RequestMethod.GET)
+	public String areaModifyForm(String area_code, Model model) throws Exception {
+		SghAreaVo areaVo = sghAreaService.getAreaInfo(area_code);
+		model.addAttribute("areaVo", areaVo);
+		return "user/sgh/sgh_admin/sgh_area/sgh_area_modify";
+	}
+	
+	// 영화관 등록 처리
+	@RequestMapping(value="/areaModifyRun", method=RequestMethod.GET)
+	public String areaModfiyRun(String area_name, String area_code, RedirectAttributes rttr){
+		try {
+			sghAreaService.modifyArea(area_code, area_name);
+			return "redirect:/sgh/admin/areaListForm";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String result = "false";
+		rttr.addFlashAttribute("message", result);
+		return "redirect:/sgh/admin/areaListForm";
 	}
 	
 	// 영화관 조회 폼 이동

@@ -29,7 +29,7 @@ $(function() {
 	if(result == 'false') {
 		alret("회원가입에 실패하셨습니다. 다시 확인해주세요.");
 	}
-	
+	-
 	// 템플릿에서 나오는 select 막기
 	$("select").css("display", "block");
 	$(".nice-select").remove();
@@ -138,6 +138,25 @@ $(function() {
 		$("#name_result").val("true");
 	});
 	
+	// 이메일 입력칸
+	$("#user_address").blur(function() {
+		$(".address_clone").remove();
+		$(".send_email_clone").remove();
+		$(".emailCheck").remove();
+		var user_address = $(this).val();
+		var resultMessage = $("#resultMessage").clone().addClass("address_clone");
+		
+		var address_rgx = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if(!address_rgx.test(user_address)) {
+			var message = "이메일 형식으로 작성해주세요.";
+			resultMessage.find("strong").text(message);
+			$("#email_check").after(resultMessage);
+			return false;
+		}
+		var message = "인증해주세요.";
+		resultMessage.find("strong").text(message).css("color", "blue");
+		$("#email_check").after(resultMessage);
+	});
 	
 	// 주소 검색 창 띄우기 popup는 webapp 아래에 위치함
 	$("#addressSearch").click(function() {
@@ -146,7 +165,9 @@ $(function() {
 	
 	// 메일 ajax 인증 요청하기
 	$("#btnEmail").click(function() {
+		$(".address_clone").remove();
 		$(".send_email_clone").remove();
+		$(".emailCheck").remove();
 		var user_email = $("#user_email").val();
 		var url = "/sgh/user/emailCheck";
 		var sendData = {
@@ -326,7 +347,12 @@ $(function() {
 		
 		if(id_result != 'true' || pw_result != 'true' || name_result != 'true' || email_result != 'true' ||
 		   birth_result != 'true' || address_result != 'true'|| phone_result != 'true') {
-			window.alert("잘못된 항목이 있습니다. 다시 확인해주세요.");
+			$("#user_id").trigger("blur");
+			$("#user_pw2").trigger("blur");
+			$("#user_name").trigger("blur");
+			$("#user_address").trigger("blur");
+			$("#yy").trigger("blur");
+			$("#user_phone").trigger("blur");
 			return false;
 		}
 	});

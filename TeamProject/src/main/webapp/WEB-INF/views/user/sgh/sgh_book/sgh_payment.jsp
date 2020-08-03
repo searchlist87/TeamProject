@@ -29,7 +29,6 @@ $(function() {
 		});
 	});
 	
-	var total = 0;
 	// 포인트 사용하기
 	$("#btnPointUse").click(function() {
 		$("#pointResult").remove();
@@ -54,10 +53,12 @@ $(function() {
 		}
 		
 		$("#point_use").text(pointUse + "P");
-		total = "${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}";
+		var total = "${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}";
 		$("#total").text((total - pointUse) + "원");
+		console.log("total :" + total);
+		console.log("pointUse :" + pointUse);
 		
-		if(total < point_use) {
+		if(total < pointUse) {
 			alert("포인트는 계산 금액을 넘어설수 없습니다.");
 			return false;
 		}

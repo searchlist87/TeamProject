@@ -4,7 +4,52 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mappers.sgh-area-mapper">
-	<select id="getAreaList" resultType="SghAreaVo">
+
+	<!-- 전체 지역 조회 -->
+	<select id="getAllAreaList" resultType="SghAreaVo">
 		select * from tbl_area
 	</select>
+	
+	<!-- 삭제되지 않은 지역 조회 -->
+	<select id="getAreaList" resultType="SghAreaVo">
+		select * from tbl_area where area_state = 'Y'
+	</select>
+	
+	<!-- 삭제된 지역 조회 -->
+	<select id="getDeleteAreaList" resultType="SghAreaVo">
+		select * from tbl_area where area_state = 'N'
+	</select>
+	
+	<!-- 지역 등록 -->
+	<insert id="insertArea">
+		insert into tbl_area(area_code, area_name, area_num)
+		values('PC' || seq_area_num.nextval, #{area_name}, seq_area_num.nextval)
+	</insert>
+	
+	<!-- 지역 정보 한개 가져오기 -->
+	<select id="getAreaInfo" resultType="SghAreaVo">
+		select * from tbl_area where area_code = #{area_code}
+	</select>
+	
+	<!-- 지역 정보 수정하기 -->
+	<update id="modifyArea">
+		update tbl_area set
+			area_name = #{area_name}
+		where area_code = #{area_code}
+	</update>
+	
+	<!-- 지역 삭제하기 -->
+	<update id="delArea">
+		update tbl_area set
+			area_state = 'N',
+			area_del_date = sysdate
+		where area_code = #{area_code}
+	</update>
+	
+	<!-- 지역 복구시키기 -->
+	<update id="restoreArea">
+		update tbl_area set
+			area_state = 'Y'
+		where area_code = #{area_code}
+	</update>
 </mapper>

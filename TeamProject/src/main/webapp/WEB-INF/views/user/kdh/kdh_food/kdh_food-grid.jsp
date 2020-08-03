@@ -57,15 +57,7 @@ $(function() {
 
 	<!-- 음식 메인 사진 -->
 	<div class="foodMain" style="background-color:black">
-		<div style="background-color:black" class="container">
-			<div class="row">
-				<div class="col-12" style="text-align: center;">
-					<div>
-						<img src="/resources/images/kdh/팝콘.png" style="height:400px; width:70%;"/>
-					</div>
-				</div>
-			</div>
-		</div>
+		<img src="/resources/images/kdh/팝콘.png" style="height:400px; width:100%;"/>
 	</div>
 	<!--/ 음식 메인 사진 -->
 		<div></div>

@@ -32,6 +32,8 @@ $(function () {
 				</dl>
 				<dl class="categor-list" id="theater_manage">
 					<dt><a href="#" data-link="sub_open" class="title_menu">＃영화관 관리</a></dt>
+					<dd><a href="/sgh/admin/areaListForm" class="sub_menu">지역 조회</a></dd>
+					<dd><a href="/sgh/admin/areaAddForm" class="sub_menu">지역 등록</a></dd>
 					<dd><a href="/sgh/admin/movieTheaterList" class="sub_menu">영화관 조회</a></dd>
 					<dd><a href="/sgh/admin/movieTheaterAdd" class="sub_menu">영화관 등록</a></dd>
 				</dl>	

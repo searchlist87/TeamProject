@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="../../../include/bootstrap.jsp" %>
-<%@ include file="../../../include/tag_and_styleSheet.jsp" %>
-<%@ include file="../../../include/admin_header.jsp" %>
+<%@ include file="/WEB-INF/views/include/bootstrap.jsp" %>
+<%@ include file="/WEB-INF/views/include/tag_and_styleSheet.jsp" %>
+<%@ include file="/WEB-INF/views/include/admin_header.jsp" %>
 
 <script>
 <!-- 주소 창에서 주소 받을때 지정하기 -->
@@ -14,11 +14,7 @@ function jusoCallBack(roadFullAddr){
 $(function() {
 	$("#theater_manage > dd").css("display","block");
 	$("#theater_manage > dt").css("color","red");
-	$("#theater_manage > dd").eq(3).css("color","blue");
-	
-	// 템플릿에서 나오는 select 막기
-	$("select").css("display", "block");
-	$(".nice-select").remove();
+	$("#theater_manage > dd").eq(0).css("color","blue");
 	
 	// 실패했을 경우
 	var result = "${result}";
@@ -26,13 +22,8 @@ $(function() {
 		alert("등록에 실패하셨습니다 다시 확인해주세요.");
 	}
 	
-	// 주소 검색 클릭 했을때
-	$("#addressSearch").click(function() {
-		var pop = window.open("/popup/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
-	});
-	
 	// 영화관 이름
-	$("#theater_name").blur(function() {
+	$("#area_name").blur(function() {
 		$(".name_clone").remove();
 		var theater_name = $(this).val();
 		var name_rgx = /^[가-힣a-zA-Z0-9]{1,50}$/;
@@ -43,14 +34,13 @@ $(function() {
 			$(this).after(span_clone);
 			return false;
 		}
-		$("#theater_name_result").val("true");
+		$("#area_name_result").val("true");
 	});
 	
 	// 전송 할 때
-	$("#frm_theater").submit(function() {
-		var name_result = $("#theater_name_result").val();
-		var address = $("#theater_address").val(); 
-		if(name_result != "true" || address == null || address == "") {
+	$("#frm_area").submit(function() {
+		var area_name = $("#area_name_result").val();
+		if(area_name != "true" || area_name == null) {
 			alert("비어있는 정보가 있습니다. 다시 확인해주세요.");
 			return false;
 		}
@@ -64,7 +54,7 @@ $(function() {
 	<span id="message_span" style="color: red;"></span>
 </div>
 <!-- 등록을 할 때 결과를 체크할 hidden type들 -->
-<input type="hidden" id="theater_name_result">
+<input type="hidden" id="area_name_result">
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">
@@ -74,28 +64,16 @@ $(function() {
 					<div class="col-12">
 						<!-- -------- 페이지별 바뀌는 부분  코딩 필요-->
 						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
-							<h4 class="title">영화관 관리_영화 등록</h4>
+							<h4 class="title">영화관 관리_지역 수정</h4>
 						</div>
 						<!--  페이지별 내용 -->
-						<form id="frm_theater" role="form" action="/sgh/admin/movieTheaterAddRun" method="get">
+						<form id="frm_area" role="form" action="/sgh/admin/areaModifyRun" method="get">
+							<input type="hidden" name="area_code" value="${areaVo.area_code}">
 							<div class="form-group">
-								<label for="movie_name"><strong>영화관 지역</strong></label>
-								<select class="form-control" name="area_code">
-									<c:forEach items="${areaList}" var="sghAreaVo">
-										<option value="${sghAreaVo.area_code}">${sghAreaVo.area_name}</option>
-									</c:forEach>
-								</select>
+								<label for="movie_genre"><strong>지역 이름</strong></label>
+								<input type="text" class="form-control" id="area_name" name="area_name" value="${areaVo.area_name}" placeholder="지역 이름"/>
 							</div>
-							<div class="form-group">
-								<label for="movie_genre"><strong>영화관 이름</strong></label>
-								<input type="text" class="form-control" id="theater_name" name="theater_name" placeholder="영화관 이름"/>
-							</div>
-							<div class="form-group">
-								<label for="movie_director"><strong>영화관 주소</strong></label>
-								<input type="text" class="form-control" id="theater_address" name="theater_address" readonly />
-								<button type="button" class="btn" id="addressSearch">주소 검색</button>
-							</div>
-							<button type="submit" class="btn" id="btnSubmit">등록</button>
+							<button type="submit" class="btn">등록</button>
 							<a href="/sgh/admin/movieTheaterList" class="btn" style="color: white;">취소</a>
 						</form>
 					</div>
@@ -104,4 +82,4 @@ $(function() {
 		</div>
 	</div>
 </section>
-<%@ include file="../../../include/footer.jsp" %>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>

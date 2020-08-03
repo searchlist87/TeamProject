@@ -86,8 +86,6 @@ public class SghChoiceSeatController {
 	// 결제 처리
 	@RequestMapping(value="/paymentRun", method=RequestMethod.POST)
 	public String paymentRun(String[] schedule_code_arr, int use_point, HttpSession session, RedirectAttributes rttr) {
-		System.out.println("ㅇㅇ");
-		System.out.println("use_point :" + use_point);
 		SghPaymentVo sghPaymentVo = (SghPaymentVo)session.getAttribute("sghPaymentVo");
 		try {
 			String user_id = (String)session.getAttribute("user_id");
@@ -95,19 +93,13 @@ public class SghChoiceSeatController {
 			sghBookingService.updateScheduleSeat(sghPaymentVo, schedule_code_arr, use_point);
 			session.removeAttribute("sghPaymentVo");
 			session.removeAttribute("sghChoiceSeatDto");
-			return "redirect:/sgh/choiceSeat/paymentResult";
+			rttr.addFlashAttribute("movie_payment_result", "true");
+			return "redirect:/ ";
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		session.removeAttribute("sghPaymentVo");
 		rttr.addFlashAttribute("result", "false");
 		return "redirect:/sgh/choiceSeat/movie_time_seat?SghPaymentVo=" + sghPaymentVo;
-	}
-	
-	// 결제 완료
-	@RequestMapping(value="/paymentResult", method=RequestMethod.GET)
-	public String paymentResult(RedirectAttributes rttr) throws Exception {
-		rttr.addFlashAttribute("movie_payment_result", "true");
-		return "redirect:/team/main";
 	}
 }
