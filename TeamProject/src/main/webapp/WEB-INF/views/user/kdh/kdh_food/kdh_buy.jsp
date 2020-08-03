@@ -25,6 +25,7 @@ $(function() {
 
 		var couponPriceVal = $("#couponPrice").val();
 		var couponPriceText = $("#couponPrice").text();
+		$("#couponPrice").text(couponPrice+"P");
 		
 		var lastPrice = sumPrice;
 		$("#lastPrice").attr("data-lastPrice", sumPrice);
@@ -120,42 +121,6 @@ $(function() {
 			} else {
 				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
-
-			// 적립포인트 금액 만들기
-			var StringcouponPrice = String(couponPrice);
-			var PriceLastIndex3 = StringcouponPrice.substring(StringcouponPrice.length-3);
-			var priceFirstIndex = StringcouponPrice.substring(0,StringcouponPrice.length);
-			priceIndex = StringcouponPrice.substring(priceFirstIndex,PriceLastIndex3);
-				
-			var firstPriceIndex3;
-			var centerPriceIndex3;
-			var lastPriceIndex3;
-			
-			if(StringcouponPrice.length == 4) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,1);
-				lastPriceIndex3 = StringcouponPrice.substr(1,4);
-			} else if(StringcouponPrice.length == 5) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,2);
-				lastPriceIndex3 = StringcouponPrice.substr(2,5);
-			} else if(StringcouponPrice.length == 6) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,3);
-				lastPriceIndex3 = StringcouponPrice.substr(3,6);
-			} else if(StringcouponPrice.length == 7) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,1);
-				centerPriceIndex3 = StringcouponPrice.substr(1,4);
-				lastPriceIndex3 = StringcouponPrice.substr(4,7);
-			} else if(StringcouponPrice.length == 8) {
-				firstPriceIndex3 = StringcouponPrice.substr(0,2);
-				centerPriceIndex3 = StringcouponPrice.substr(2,5);
-				lastPriceIndex3 = StringcouponPrice.substr(5,8);
-			}
-			
-			if (centerPriceIndex3 != null) {
-				$("#couponPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
-		
-			} else {
-				$("#couponPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
-			}
 			
 }); 
 	// 적립포인트 삭제하기 버튼
@@ -170,7 +135,7 @@ $(function() {
 		
 		var zero = 0;
 		var couponPriceVal = $("#couponPrice").val();
-		$("#couponPrice").text(zero + "원");
+		$("#couponPrice").text(zero + "P");
 		var couponPriceText = $("#couponPrice").text();
 		
 		var lastPrice = sumPrice;
@@ -325,7 +290,7 @@ $(function() {
 									<h3>포인트</h3>
 									<ul>
 										<li>적립포인트 사용　　　적립포인트 잔액　　　<input id="pointInfo" type="text" style="text-align:right;" value="${totalPoint}" name="pointInfo" readonly>원</li>
-										<li>사용 포인트　　　<input data-point="${userInfo.user_point}" id="UsecouponPrice" type="text" value="0" name="Coupon" placeholder="0" style="text-align:right;">원　
+										<li>사용 포인트　　　<input data-point="${userInfo.user_point}" id="UsecouponPrice" type="text" value="0" name="Coupon" placeholder="0" style="text-align:right;">P　
 										<a id="btnUse" class="btn" style="color: white;">사용하기</a>　
 										<a id="btnUseNo" class="btn" style="color: white;">삭제하기</a></li>
 									</ul>
@@ -335,7 +300,7 @@ $(function() {
 								<div class="right">
 									<ul>
 										<li>총 상품금액<span class="totalPrice" id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
-										<li>포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>0원</span></li>
+										<li>포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>0P</span></li>
 										<li>총 결제금액<span data-lastPrice="${buy_food_buy_price}" class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${buy_food_buy_price}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">

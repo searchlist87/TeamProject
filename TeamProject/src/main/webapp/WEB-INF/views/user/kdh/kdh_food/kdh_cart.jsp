@@ -186,7 +186,21 @@ $(function() {
 	
 	// 결제하기 버튼
 	$("#btnBuy").click(function() {
-		location.href="/kdh/cart/buyCart";
+		var food_buy_price = $("#lastPrice").text();
+		var couponPrice = $("#couponPrice").text();
+		
+		var food_buy_priceIndex = food_buy_price.substring(0,food_buy_price.length-1);
+		var couponPriceIndex = couponPrice.substring(0,couponPrice.length-1);
+		var a = food_buy_priceIndex.replace("," ,"");
+		var b = $.trim(a);
+// 		used_Point = Number(couponPriceIndex);
+		$("#food_buy_price1").val(b);
+		$("#used_Point1").val(couponPriceIndex);
+		
+		console.log("couponPriceIndex:" + couponPriceIndex);
+		console.log("b:" + b);
+		$("#cartForm").submit();
+// 		location.href="/kdh/cart/buyCart";
 // 		var test = $(this).parent().parent().parent().parent().parent().parent().parent().parent().find($(".data-food-num")).attr("data-food-num");
 // 		console.log("test:" + test);
 		
@@ -206,9 +220,11 @@ $(function() {
 	// 포인트 사용 버튼
 	$("#btnUse").click(function() {
 		var couponPrice = $("#pointInfo").val();
+		console.log("couponPrice:" + couponPrice);
 		var StringcouponPrice = String(couponPrice);
 		var usedPoint = $("#UsecouponPrice").val();
 		console.log("usedPoint:" + usedPoint);
+		$("#couponPrice").text(usedPoint+"P");
 		
 		// 포인트사용금액이 유저 누적포인트보다 클때 
 		if (couponPrice < usedPoint) {
@@ -232,9 +248,9 @@ $(function() {
 			alert("사용할 포인트를 입력해주세요.");
 			return false;
 		} 
-		
+		// used_point submit
 			var lastPrice = sumPrice-couponPrice;
-			
+			$("#lastPrice").attr("data-totalprice",lastPrice);
 			var lastPriceToString = String(lastPrice);
 			var PriceLastIndex3 = lastPriceToString.substring(lastPriceToString.length-3);
 			var priceFirstIndex = lastPriceToString.substring(0,lastPriceToString.length);
@@ -268,43 +284,7 @@ $(function() {
 			} else {
 				$("#lastPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
 			}
-		
 			
-			var StringusedPoint = String(usedPoint);
-			console.log("StringusedPoint:" + StringusedPoint);
-			var PriceLastIndex3 = StringcouponPrice.substring(StringusedPoint.length-3);
-			var priceFirstIndex = StringcouponPrice.substring(0,StringusedPoint.length);
-			priceIndex = StringcouponPrice.substring(priceFirstIndex,PriceLastIndex3);
-				
-			var firstPriceIndex3;
-			var centerPriceIndex3;
-			var lastPriceIndex3;
-			
-			if(StringcouponPrice.length == 4) {
-				firstPriceIndex3 = StringusedPoint.substr(0,1);
-				lastPriceIndex3 = StringusedPoint.substr(1,4);
-			} else if(StringcouponPrice.length == 5) {
-				firstPriceIndex3 = StringusedPoint.substr(0,2);
-				lastPriceIndex3 = StringusedPoint.substr(2,5);
-			} else if(StringcouponPrice.length == 6) {
-				firstPriceIndex3 = StringusedPoint.substr(0,3);
-				lastPriceIndex3 = StringusedPoint.substr(3,6);
-			} else if(StringcouponPrice.length == 7) {
-				firstPriceIndex3 = StringusedPoint.substr(0,1);
-				centerPriceIndex3 = StringusedPoint.substr(1,4);
-				lastPriceIndex3 = StringusedPoint.substr(4,7);
-			} else if(StringcouponPrice.length == 8) {
-				firstPriceIndex3 = StringusedPoint.substr(0,2);
-				centerPriceIndex3 = StringusedPoint.substr(2,5);
-				lastPriceIndex3 = StringusedPoint.substr(5,8);
-			}
-			
-			if (centerPriceIndex3 != null) {
-				$("#couponPrice").text(firstPriceIndex3+","+centerPriceIndex3+","+lastPriceIndex3+"원");
-		
-			} else {
-				$("#couponPrice").text(firstPriceIndex3+","+lastPriceIndex3+"원");
-			}
 	}); // 포인트 사용 버튼
 	
 	// 포인트 삭제하기 버튼
@@ -372,9 +352,13 @@ $(function() {
 
 <!-- 해더 부분 -->
 <%@include file="/WEB-INF/views/include/header.jsp" %>
-
 </head>
 
+<!-- 폼 전송 -->
+<form id="cartForm" action="/kdh/cart/buyCart" method="post">
+	<input type="hidden" id="food_buy_price1" name="food_buy_price1" value=""/>
+	<input type="hidden" id="used_Point1" name="used_Point1" value=""/>
+</form>
 	<!-- Breadcrumbs -->
 	<div class="breadcrumbs">
 		<div class="container">
@@ -455,8 +439,8 @@ $(function() {
 								<div class="right">
 									<ul>
 										<li>총 상품금액<span class="totalPrice" id="totalPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
-										<li>포인트 사용<span class="couponPrice" id="couponPrice" ><fmt:formatNumber pattern="#,###,###" value=""></fmt:formatNumber>0원</span></li>
-										<li>총 결제금액<span class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
+										<li>포인트 사용<span data_point="" class="couponPrice" id="couponPrice" >0P</span></li>
+										<li>총 결제금액<span data-totalPrice="" class="lastPrice" id="lastPrice" ><fmt:formatNumber pattern="#,###,###" value="${food_total_money}"></fmt:formatNumber>원</span></li>
 									</ul>
 									<div class="button5">
 										<button id="btnBuy" class="btn btn-sm">결제하기</button>

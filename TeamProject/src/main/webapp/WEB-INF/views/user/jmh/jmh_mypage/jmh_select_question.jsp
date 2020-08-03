@@ -64,7 +64,7 @@ $(function () {
 						<div class="form-main">
 							<div class="title">
 								<h4>1:1 문의</h4>
-								<h3>1:1 문의하기</h3>
+								<h3>1:1 문의내역</h3>
 							</div>
 							<form class="form" method="post" action="/mypage/modifyQuestion" id="modifyForm">
 								<input type="hidden" name="board_code" value="${jmhBoardVo.board_code}"/>
