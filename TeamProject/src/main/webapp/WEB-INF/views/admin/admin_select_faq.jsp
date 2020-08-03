@@ -43,7 +43,7 @@
 $(function () {
 	$("#board_manage > dd").css("display","block");
 	$("#board_manage > dt").css("color","red");
-	$("#board_manage > dd").eq(3).css("color","blue");
+	$("#board_manage > dd").eq(2).css("color","blue");
 	
 	// 목록으로 가기
 	$("#btnList").click(function () {
