@@ -9,7 +9,7 @@ public class KdhPagingDto {
 	private int startPage = 1; // 시작 페이지 수
 	private int endPage; // 끝 페이지 수
 	private int totalPage; // 총 페이지 수 
-	private int DisplayPageNum = 10; // 보여질 페이지 수
+	private int DisplayPageNum = 5; // 보여질 페이지 수
 	private String keyword;
 	private String searchType;
 	
