@@ -57,24 +57,24 @@ public class JmhController {
 		
 		// 영화관 정보 가져오기
 		JmhMovieTheaterVo mTheaterVo = jmhMovieTheaterService.getTheaterInformation(theater_code);
-		// 영화관 총 좌석수 가져오기
-		int totalSeat = jmhMovieTheaterService.getTotalSeat(theater_code);
-		// 영화관 상영관 수 가져오기
-		int screenCount = jmhMovieTheaterService.getScreenCount(theater_code);
-		// 상영 영화제목 가져오기
-		List<JmhMovieTheaterDto> mTheaterDto = jmhMovieTheaterService.getTheaterScheduleMovieName(theater_code, movie_date);
-		
-		
-		// 오늘 날짜로 해당 영화관 일정 가져오기
-		List<JmhTheaterScheduleVo> tScheduleVo = jmhMovieTheaterService.getTheaterSchedule(theater_code, movie_date);
-		
-		model.addAttribute("totalSeat", totalSeat);
-		model.addAttribute("screenCount", screenCount);
+//		// 영화관 총 좌석수 가져오기
+//		int totalSeat = jmhMovieTheaterService.getTotalSeat(theater_code);
+//		// 영화관 상영관 수 가져오기
+//		int screenCount = jmhMovieTheaterService.getScreenCount(theater_code);
+//		// 상영 영화제목 가져오기
+//		List<JmhMovieTheaterDto> mTheaterDto = jmhMovieTheaterService.getTheaterScheduleMovieName(theater_code, movie_date);
+//		
+//		
+//		// 오늘 날짜로 해당 영화관 일정 가져오기
+//		List<JmhTheaterScheduleVo> tScheduleVo = jmhMovieTheaterService.getTheaterSchedule(theater_code, movie_date);
+//		
+//		model.addAttribute("totalSeat", totalSeat);
+//		model.addAttribute("screenCount", screenCount);
 		model.addAttribute("mTheaterVo", mTheaterVo);
 		model.addAttribute("eventVo", eventVo);
 		model.addAttribute("areaVo", areaVo);
-		model.addAttribute("tScheduleVo", tScheduleVo);
-		model.addAttribute("mTheaterDto", mTheaterDto);
+//		model.addAttribute("tScheduleVo", tScheduleVo);
+//		model.addAttribute("mTheaterDto", mTheaterDto);
 		return "user/jmh/jmh_theater/jmh_theater";
 	}
 	
