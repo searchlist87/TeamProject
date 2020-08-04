@@ -270,9 +270,8 @@ public class SghAdminController {
 	@ResponseBody
 	@RequestMapping(value="/priceAjax", method=RequestMethod.GET)
 	public int priceAjax(SghBuyCodeDto sghBuyCodeDto) throws Exception {
-		System.out.println("sghBuyTotalVo : " + sghBuyCodeDto);
+		System.out.println("sghBuyCodeDto :" + sghBuyCodeDto);
 		int total_price = sghAdminMovieBuyService.getBuyTotal(sghBuyCodeDto);
-		System.out.println("total_price : " + total_price);
 		return total_price;
 	}
 }

@@ -22,8 +22,12 @@ public class SghMyPageDaoImpl implements SghMyPageDao {
 	
 	
 	@Override
-	public List<SghMyMovieBuyVo> getMyMovieBuyList(String user_id) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "getMyMovieBuyList", user_id);
+	public List<SghMyMovieBuyVo> getMyMovieBuyList(int start_row, int end_row, String user_id) throws Exception {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("start_row", start_row);
+		paramMap.put("end_row", end_row);
+		paramMap.put("user_id", user_id);
+		return sqlSession.selectList(NAMESPACE + "getMyMovieBuyList", paramMap);
 	}
 
 
@@ -56,6 +60,12 @@ public class SghMyPageDaoImpl implements SghMyPageDao {
 	@Override
 	public int getOutBuyTotal(String user_id) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "getOutBuyTotal", user_id);
+	}
+
+
+	@Override
+	public int getBuyMovieTotal(String user_id) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getBuyMovieTotal", user_id);
 	}
 
 }

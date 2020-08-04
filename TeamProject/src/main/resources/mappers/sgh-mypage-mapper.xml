@@ -4,12 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="mappers.sgh-mypage-mapper">
-	<!-- 영화 상영 일정 등록에 사용할 movie 목록 가져오기 -->
+	<!-- 구매 내역 -->
 	<select id="getMyMovieBuyList" resultType="SghMyMovieBuyVo">
-		select mbl.movie_buy_num, mc.movie_name, mbl.movie_price, mbl.movie_buy_date
+		select * from (select rownum rnum, a.* from (select mbl.movie_buy_num, mc.movie_name, mbl.movie_price, mbl.movie_buy_date
 		from tbl_movie_buy_list mbl, tbl_movie mc
 		where user_id = #{user_id}
 		and mbl.movie_code = mc.movie_code
+		order by mbl.movie_buy_date desc) a)
+		where rnum between #{start_row} and #{end_row}
+	</select>
+	
+	<!-- 구매내역 총 숫자 -->
+	<select id="getBuyMovieTotal" resultType="integer">
+		select count(*)
+		from tbl_movie_buy_list mbl, tbl_movie mc
+		where user_id = #{user_id}
+		and mbl.movie_code = mc.movie_code
+		order by mbl.movie_buy_date desc
 	</select>
 	
 		<!-- 시작 시간이 지나지 않은 구매한 표 리스트 -->

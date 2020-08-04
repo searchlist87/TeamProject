@@ -28,10 +28,16 @@ public class SghMyPageController {
 	
 	// 영화 구매 내역 폼
 	@RequestMapping(value="/movieBuyForm", method=RequestMethod.GET)
-	public String movieBuyForm(HttpSession session, Model model) throws Exception {
+	public String movieBuyForm(SghPagingDto sghPagingDto, HttpSession session, Model model) throws Exception {
 		String user_id = (String)session.getAttribute("user_id");
-		List<SghMyMovieBuyVo> sghMyMovieBuyVo = sghMyPageService.getMyMovieBuyList(user_id);
+		int total_count = sghMyPageService.getBuyMovieTotal(user_id);
+		sghPagingDto.setTotal_count(total_count);
+		sghPagingDto.setPageInfo();
+		int start_row = sghPagingDto.getStart_row();
+		int end_row = sghPagingDto.getEnd_row();
+		List<SghMyMovieBuyVo> sghMyMovieBuyVo = sghMyPageService.getMyMovieBuyList(start_row, end_row, user_id);
 		model.addAttribute("sghMyMovieBuyVo", sghMyMovieBuyVo);
+		model.addAttribute("sghPagingDto", sghPagingDto);
 		return "user/sgh/sgh_myPage/sgh_buyMovieList";
 	}
 	

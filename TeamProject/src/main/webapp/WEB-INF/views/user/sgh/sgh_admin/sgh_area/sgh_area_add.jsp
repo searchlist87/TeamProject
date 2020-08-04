@@ -73,7 +73,7 @@ $(function() {
 								<input type="text" class="form-control" id="area_name" name="area_name" placeholder="지역 이름"/>
 							</div>
 							<button type="submit" class="btn">등록</button>
-							<a href="/sgh/admin/movieTheaterList" class="btn" style="color: white;">취소</a>
+							<a href="/sgh/admin/areaListForm" class="btn" style="color: white;">취소</a>
 						</form>
 					</div>
 				</div>

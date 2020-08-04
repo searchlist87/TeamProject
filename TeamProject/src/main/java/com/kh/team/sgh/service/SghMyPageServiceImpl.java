@@ -17,8 +17,8 @@ public class SghMyPageServiceImpl implements SghMyPageService {
 	private SghMyPageDao sghMyPageDao;
 	
 	@Override
-	public List<SghMyMovieBuyVo> getMyMovieBuyList(String user_id) throws Exception {
-		return sghMyPageDao.getMyMovieBuyList(user_id);
+	public List<SghMyMovieBuyVo> getMyMovieBuyList(int start_row, int end_row, String user_id) throws Exception {
+		return sghMyPageDao.getMyMovieBuyList(start_row, end_row, user_id);
 	}
 
 	@Override
@@ -39,6 +39,11 @@ public class SghMyPageServiceImpl implements SghMyPageService {
 	@Override
 	public int getOutBuyTotal(String user_id) throws Exception {
 		return sghMyPageDao.getOutBuyTotal(user_id);
+	}
+
+	@Override
+	public int getBuyMovieTotal(String user_id) throws Exception {
+		return sghMyPageDao.getBuyMovieTotal(user_id);
 	}
 
 }

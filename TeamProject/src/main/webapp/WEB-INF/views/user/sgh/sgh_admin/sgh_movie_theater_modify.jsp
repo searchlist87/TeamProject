@@ -99,7 +99,7 @@ $(function() {
 								<button type="button" class="btn" id="addressSearch">주소 검색</button>
 							</div>
 							<button type="submit" class="btn" id="btnSubmit">등록</button>
-							<a href="/sgh/admin/adminMainForm" class="btn" style="color: white;">취소</a>
+							<a href="/sgh/admin/movieTheaterList" class="btn" style="color: white;">취소</a>
 						</form>
 					</div>
 				</div>

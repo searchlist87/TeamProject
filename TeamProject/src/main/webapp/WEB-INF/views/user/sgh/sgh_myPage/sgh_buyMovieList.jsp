@@ -6,12 +6,16 @@
 <head>
 
 <style>
-.subul {
-	padding-left : 30px;
-	margin-top : 10px;
-	font-size : 15px;
-	border : 1px dotted #ccc;
-}
+	td {
+		text-align: center;
+	}
+	
+	.subul {
+		padding-left : 30px;
+		margin-top : 10px;
+		font-size : 15px;
+		border : 1px dotted #ccc;
+	}
 </style>
 <%@include file="/WEB-INF/views/include/bootstrap.jsp" %>
 <script src="/resources/js/sgh_js/myScript.js"></script>
@@ -68,6 +72,38 @@ $(function() {
 											</c:forEach>
 										</tbody>
 									</table>
+									<!--페이징-->
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-md-4">
+											</div>
+											<div class="col-md-8">
+												<nav>
+													<ul class="pagination">
+								<!--  							이전 -->
+														<c:if test="${sghPagingDto.start_page != 1}">
+															<li class="page-item"><a class="page-link" href="/sgh/myPage/movieBuyForm?start_page=${sghPagingDto.start_page - 1}">&laquo;</a></li>
+														</c:if>
+								<!--  								페이지 넘버링 -->
+														<c:forEach begin="${sghPagingDto.start_page}" end="${sghPagingDto.end_page}" var="v">
+														<li class="page-item
+																<c:if test="${sghPagingDto.page == v }">
+																	active
+																</c:if>
+																"
+															>
+																<a class="page-link" href="/sgh/myPage/movieBuyForm?page=${v}" style="float: left;">${v}</a>
+															</li>
+														</c:forEach>
+								<!--  								다음 -->
+														<c:if test="${sghPagingDto.end_page < sghPagingDto.total_page}">
+															<li class="page-item"><a class="page-link" href="/sgh/myPage/movieBuyForm?end_page=${sghPagingDto.end_page + 1}">&raquo;</a></li>
+														</c:if>
+													</ul>
+												</nav>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

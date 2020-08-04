@@ -19,12 +19,6 @@ $(function() {
 		return false;
 	}
 	
-	var movie_payment_result = "${movie_payment_result}";
-	if(movie_payment_result == "true") {
-		alert("구매해주셔서 감사합니다.");
-		return false;
-	}
-	
 	//회원 탈퇴 처리 후 결과
 	var secessionMsg = "${secessionMsg}";
 	if(secessionMsg == "success") {
