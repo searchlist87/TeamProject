@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.kh.team.domain.KdhMypagePointDto;
 import com.kh.team.domain.KdhPointCodeVo;
 import com.kh.team.domain.KdhPointVo;
 import com.kh.team.domain.KdhUserVo;
@@ -59,6 +60,16 @@ public class KdhPointServiceImpl implements KdhPointService {
 	@Override
 	public int selectPointByUserId(String user_id) throws Exception {
 		return pointDao.selectPointByUserId(user_id);
+	}
+
+	@Override
+	public void insertUsedPointInfo(String user_id, int used_point) throws Exception {
+		pointDao.insertUsedPointInfo(user_id, used_point);
+	}
+
+	@Override
+	public List<KdhMypagePointDto> selectUsedPointInfo(String user_id) throws Exception {
+		return pointDao.selectUsedPointInfo(user_id);
 	}
 	
 	

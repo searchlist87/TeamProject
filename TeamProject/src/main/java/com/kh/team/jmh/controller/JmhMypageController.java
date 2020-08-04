@@ -62,7 +62,7 @@ public class JmhMypageController {
 		String user_id = (String)session.getAttribute("user_id");
 		jmhMypageService.secessionUser(user_id);
 		rttr.addFlashAttribute("secessionMsg", "success");
-		return "redirect:/team/main";
+		return "redirect:/sgh/user/logout";
 	}
 	
 	// ---------------------  마이페이지 회원정보 끝--------------------

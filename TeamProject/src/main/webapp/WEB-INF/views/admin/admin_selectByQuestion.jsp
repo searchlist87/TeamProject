@@ -32,9 +32,9 @@
 </style>
 <script>
 $(function () {
-	$("#event_manage > dd").css("display","block");
-	$("#event_manage > dt").css("color","red");
-	$("#event_manage > dd").eq(0).css("color","blue");
+	$("#board_manage > dd").css("display","block");
+	$("#board_manage > dt").css("color","red");
+	$("#board_manage > dd").eq(4).css("color","blue");
 	
 	// 답변 등록
 	$("#replyRegisterBtn").click(function (e) {

@@ -105,6 +105,10 @@ public class KdhCartController {
 		pointService.updateUserPoint(totalPoint, used_Point, user_id);
 		}
 		
+		if (used_Point != 0) {
+			pointService.insertUsedPointInfo(user_id, used_Point);
+		}
+		
 		// foodBuyDto 설정
 		for (KdhBasicCartDto data : cartDto ) {
 			System.out.println("data:" + data);
