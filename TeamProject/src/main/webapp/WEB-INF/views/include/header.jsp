@@ -36,7 +36,7 @@ $(function() {
 			var session_result = confirm("남아있던 예매 과정이 있습니다. 이어서 하시겠습니까?");
 			console.log("session_result:",session_result);
 			if(session_result == true) {
-				location.href = "/sgh/choiceSeat/paymentForm";
+				location.href = "/sgh/payment/paymentForm";
 				return;
 			}
 		}

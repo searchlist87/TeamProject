@@ -32,7 +32,8 @@ $(function() {
 	// 포인트 사용하기
 	$("#btnPointUse").click(function() {
 		$("#pointResult").remove();
-		var pointUse = $("#pointUse").val();
+		var pointUse = 0;
+		pointUse = $("#pointUse").val();
 		
 		// 포인트 조회를 누르지 않고 포인트 사용하기를 눌렀을 경우
 		if(pointSearchIndex == 0) {
@@ -53,12 +54,11 @@ $(function() {
 		}
 		
 		$("#point_use").text(pointUse + "P");
-		var total = "${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}";
+		var total = 0;
+		total = "${sghPaymentVo.movie_price * sghChoiceSeatDto.personnel}";
 		$("#total").text((total - pointUse) + "원");
-		console.log("total :" + total);
-		console.log("pointUse :" + pointUse);
-		
-		if(total < pointUse) {
+		var index_result = total - pointUse;
+		if(index_result < 0) {
 			alert("포인트는 계산 금액을 넘어설수 없습니다.");
 			return false;
 		}
@@ -74,7 +74,7 @@ $(function() {
 });
 </script>
 </head>
-<form id="frmPayment" action="/sgh/choiceSeat/paymentRun" method="post">
+<form id="frmPayment" action="/sgh/payment/paymentRun" method="post">
 	<c:forEach items="${sghChoiceSeatDto.schedule_code_arr}" var="schedule_code">
 	<input type="hidden" name="schedule_code_arr" value="${schedule_code}">
 	</c:forEach>

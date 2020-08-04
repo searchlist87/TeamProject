@@ -97,4 +97,7 @@ public interface KdhFoodService {
 	
 	// 관리자 - 푸드 상품관리 페이지 상품 갯수 구하기
 	public int selectFoodPageCount(KdhPagingDto pagingDto) throws Exception;
+	
+	// 관리자 페이지 구매 내역 매출액 구하기
+	public int selectAdminSales(String food_code, int mm_minus) throws Exception;
 }

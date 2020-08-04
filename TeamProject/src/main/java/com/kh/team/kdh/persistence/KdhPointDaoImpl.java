@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.kh.team.domain.KdhMypagePointDto;
 import com.kh.team.domain.KdhPointCodeVo;
 import com.kh.team.domain.KdhPointVo;
 import com.kh.team.domain.KdhUserVo;
@@ -76,6 +77,19 @@ public class KdhPointDaoImpl implements KdhPointDao {
 	@Override
 	public int selectPointByUserId(String user_id) throws Exception {
 		return sqlSession.selectOne(NAMESPACE + "selectPointByUserId", user_id);
+	}
+
+	@Override
+	public void insertUsedPointInfo(String user_id, int used_point) throws Exception {
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("user_id", user_id);
+		paraMap.put("used_point", used_point);
+		sqlSession.insert(NAMESPACE + "insertUsedPointInfo", paraMap);
+	}
+
+	@Override
+	public List<KdhMypagePointDto> selectUsedPointInfo(String user_id) throws Exception {
+		return sqlSession.selectList(NAMESPACE + "selectUsedPointInfo", user_id);
 	}
 
 }

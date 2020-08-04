@@ -42,6 +42,9 @@ public class SghAdminMovieBuyDaoImpl implements SghAdminMovieBuyDao {
 
 	@Override
 	public int getBuyTotal(SghBuyCodeDto sghBuyCodeDto) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "getBuyTotal", sghBuyCodeDto);
+		int total = sqlSession.selectOne(NAMESPACE + "getBuyTotal", sghBuyCodeDto);
+		System.out.println("total :" + total);
+		System.out.println("daosghBuyCodeDto :" + sghBuyCodeDto);
+		return total;
 	}
 }

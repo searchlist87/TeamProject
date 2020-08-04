@@ -15,7 +15,6 @@ public class SghAdminInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		String user_class = (String)session.getAttribute("user_class");
-		System.out.println("class :" + user_class);
 		if (user_class == null || !user_class.equals("admin")) {
 			response.sendRedirect("/sgh/interceptor/admin");
 			return false;

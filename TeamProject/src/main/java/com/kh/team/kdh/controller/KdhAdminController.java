@@ -12,9 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.KdhAdminFoodBuyListDto;
 import com.kh.team.domain.KdhFoodVo;
@@ -119,4 +121,12 @@ public class KdhAdminController {
 		return "user/kdh/kdh_admin/kdh_admin_food_buy_list";
 	}
 	
+	// 푸드 푸드내역 매출액 조회 Ajax
+	@ResponseBody
+	@RequestMapping(value = "/salesAjax", method = RequestMethod.GET)
+	public int salesAjax(int mm_minus, String food_code, Model model) throws Exception {
+		int sales_price = foodService.selectAdminSales(food_code, mm_minus);
+		model.addAttribute("sales_price", sales_price);
+		return sales_price;
+	}
 }

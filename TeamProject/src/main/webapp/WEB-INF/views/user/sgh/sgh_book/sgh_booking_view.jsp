@@ -334,7 +334,7 @@ $(function() {
 });
 
 </script>
-<form id="frm_time_seat" action="/sgh/choiceSeat/movie_time_seat" method="GET">
+<form id="frm_time_seat" action="/sgh/payment/movie_time_seat" method="GET">
 	<input type="hidden" id="theater_name" name="theater_name">
 	<input type="hidden" id="movie_name" name="movie_name">
 	<input type="hidden" id="movie_code" name="movie_code">

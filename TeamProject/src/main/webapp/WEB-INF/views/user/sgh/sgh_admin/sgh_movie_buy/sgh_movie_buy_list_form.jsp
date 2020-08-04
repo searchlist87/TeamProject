@@ -51,6 +51,7 @@ $(function() {
 	$("#area_code").change(function() {
 		$(".theater_select").remove();
 		$(".movie_select").remove();
+		$(".theater_select").remove();
 		var area_code = $(this).val();
 		var url = "/sgh/admin/areaAjax";
 		var sendData = {
@@ -93,10 +94,18 @@ $(function() {
 	});
 	
 	$("#btnPrice").click(function() {
-		var movie_code = $("#movie_code option:selected").val();
-		var theater_code =$("#theater_code option:selected").val();
-		var area_code = $("#area_code option:selected").val();
+		$("#price_text1").text("");
+		$("#price_text2").text("");
+		$("#price_text3").text("");
+		$("#price_text4").text("");
 		var mm_minus = $("#mm_minus option:selected").val();
+		var mm_txt = $("#mm_minus option:selected").text();
+		var area_code = $("#area_code option:selected").val();
+		var area_txt = $("#area_code option:selected").text();
+		var theater_code =$("#theater_code option:selected").val();
+		var theater_txt =$("#theater_code option:selected").text();
+		var movie_code = $("#movie_code option:selected").val();
+		var movie_txt = $("#movie_code option:selected").text();
 		var url = "/sgh/admin/priceAjax";
 		var sendData = {
 				"movie_code" : movie_code,
@@ -105,6 +114,19 @@ $(function() {
 				"mm_minus" : mm_minus
 		};
 		$.get(url, sendData, function(rData) {
+			if(mm_txt != "") {
+				$("#price_text1").text("기간 :" + mm_txt);
+			}
+			if(area_txt != "") {
+				$("#price_text2").text("지역 :" + area_txt);
+			}
+			if(theater_txt != "") {
+				$("#price_text3").text("영화관 :" + theater_txt);
+			}
+			if(movie_txt != "") {
+				$("#price_text4").text("영화 :" + movie_txt);
+			}
+			
 			$("#price_result").text("총 매출은 " + rData + "원 입니다.");
 		});
 	});
@@ -146,9 +168,6 @@ $(function() {
 															<option value='movie_name'>영화제목</option>
 															<option value='user_id'>유저</option>
 															<option value='movie_buy_check'>상태</option>
-														<c:forEach items="${area_list}" var="sghAreaVo">
-															<option data-area-code="${sghAreaVo.area_code}">${sghAreaVo.area_name}</option>
-														</c:forEach>
 														</select>
 														<input type="text" id="keyword" name="keyword" placeholder="검색어를 입력해주세요.">
 														<button id="btnSearch" type="button" class="btn-success">검색</button>
@@ -234,11 +253,11 @@ $(function() {
 														<div class="form-inline form-group" id="price_select" style="margin-top: 20px;">
 															<label for="mm_minus">기간 :</label>
 															<select id="mm_minus">
-																<option value=0 selected>전체 매출</option>
-																<option value=-1>1달 매출</option>
-																<option value=-3>3달 매출</option>
-																<option value=-5>5달 매출</option>
-																<option value=-12>1년 매출</option>
+																<option value="0" selected>전체 매출</option>
+																<option value="-1">1달 매출</option>
+																<option value="-3">3달 매출</option>
+																<option value="-5">5달 매출</option>
+																<option value="-12">1년 매출</option>
 															</select>
 															<label for="area_code">지역 :</label>
 															<select id="area_code" name="area_code">
@@ -254,9 +273,21 @@ $(function() {
 														</button>
 														</div>
 													</div>
-													<div style="text-align: center;">
-														<span><h4 id="price_result"></h4></span>
-													</div>
+												</div>
+												<div>
+													<span><h4 id="price_text1"></h4></span>
+												</div>
+												<div>
+													<span><h4 id="price_text2"></h4></span>
+												</div>
+												<div>
+													<span><h4 id="price_text3"></h4></span>
+												</div>
+												<div>
+													<span><h4 id="price_text4"></h4></span>
+												</div>
+												<div style="margin-top: 10px;">
+													<span><h4 id="price_result"></h4></span>
 												</div>
 											</div>
 										</div>

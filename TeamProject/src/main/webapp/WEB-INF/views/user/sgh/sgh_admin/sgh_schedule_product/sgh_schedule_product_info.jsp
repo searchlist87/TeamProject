@@ -90,6 +90,8 @@ $(function() {
 			var str_buy_date = dateString(movie_buy_date);
 			
 			if(movie_buy_date == "" || movie_buy_date == null) {
+				$("#user_id").val("");
+				$("#movie_buy_date").val("");
 				return;
 			}
 			
@@ -103,8 +105,8 @@ $(function() {
 
 <a id="modal-112384" style="visibility: hidden;" href="#modal-container-112384" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
 			<div class="modal fade" id="modal-container-112384" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
+				<div class="modal-dialog" style="max-height: 1000px;" role="document">
+					<div class="modal-content" style="max-height: 1000px;">
 						<div class="modal-header">
 							<h5 class="modal-title" id="myModalLabel" style="text-align: center;">
 							</h5> 
@@ -112,7 +114,7 @@ $(function() {
 								<span aria-hidden="true">×</span>
 							</button>
 						</div>
-						<div class="modal-body">
+						<div class="modal-body" style="max-height: 1000px;">
 							<div class="col-md-2"></div>
 							<div class="col-md-8">
 								<div class="form-group" style="margin-top: 30px;">

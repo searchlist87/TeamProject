@@ -22,7 +22,7 @@ public class SghPagingDto {
 		this.start_row = end_row - (per_page - 1);
 		this.end_page = ((page - 1) / 10) * 10 + 10;
 		this.start_page = end_page - 9;
-		
+		this.total_page = (int)Math.ceil((double)total_count / per_page);
 		if(end_page > total_page) {
 			this.end_page = total_page;
 		}
@@ -59,7 +59,6 @@ public class SghPagingDto {
 
 	public void setTotal_count(int total_count) {
 		this.total_count = total_count;
-		this.total_page = (int)Math.ceil((double)total_count / per_page);
 	}
 
 	public int getTotal_page() {

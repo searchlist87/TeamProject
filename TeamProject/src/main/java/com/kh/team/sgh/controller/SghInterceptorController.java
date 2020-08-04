@@ -13,6 +13,6 @@ public class SghInterceptorController {
 	@RequestMapping(value="/admin", method=RequestMethod.GET)
 	public String adminInterceptor(RedirectAttributes rttr) throws Exception {
 		rttr.addFlashAttribute("result", "false");
-		return "redirect:/team/main";
+		return "redirect:/";
 	}
 }

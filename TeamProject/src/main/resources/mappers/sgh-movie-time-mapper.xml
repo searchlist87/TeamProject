@@ -29,7 +29,7 @@
 	<!-- 시간이 지나지 않은 것 중 삭제되지 않은 총합 수 가져오기 -->
 	<select id="getMovieTimeCount" resultType="integer">
 		select count(*) from tbl_movie_time mt, tbl_theater tt, tbl_movie_schedule tms, tbl_movie m
-		where mt.movie_time_state = 'Y' and movie_end_time <![CDATA[ <= ]]> sysdate
+		where mt.movie_time_state = 'Y' and movie_end_time >= sysdate
         and mt.movie_schedule_code = tms.movie_schedule_code
         and tms.movie_code = m.movie_code
         and tms.theater_code = tt.theater_code
@@ -87,7 +87,7 @@
 		</if>
 	</select>
 	
-	<!-- 종료시간이 지나지 않고 삭제되지 않은 movie_time 리스트 가져오기 -->
+	<!-- 종료시간이 지나고 삭제되지 않은 movie_time 리스트 가져오기 -->
 	<select id="endOutMovieTimeList" resultType="SghMovieTimeListVo">
 		select * from (select rownum rnum, a.* from (select t.movie_time_code, t.movie_start_time, t.movie_end_time, d.movie_code,
 		m.movie_name, s.screen_name, tt.theater_name, t.movie_money, t.movie_time_state, t.movie_time_del_date

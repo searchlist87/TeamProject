@@ -162,4 +162,11 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 	public int selectFoodPageCount(KdhPagingDto pagingDto) throws Exception {
 		return foodDao.selectFoodPageCount(pagingDto);
 	}
+
+	@Override
+	public int selectAdminSales(String food_code, int mm_minus) throws Exception {
+		return foodDao.selectAdminSales(food_code, mm_minus);
+	}
+
+	
 }
