@@ -11,7 +11,7 @@
 		       sc.screen_seat_row, sc.screen_seat_col
 		from tbl_movie_time t, tbl_movie m, tbl_movie_schedule d, tbl_theater tt, tbl_movie_screen sc
 		where m.movie_code = d.movie_code and d.movie_schedule_code = t.movie_schedule_code and tt.theater_code = d.theater_code and t.screen_code = sc.screen_code
-		and t.movie_end_time >= sysdate
+		and t.movie_end_time >= sysdate and t.movie_time_state = 'Y'
 		<if test='keyword != ""'>
 			<choose>
 				<when test='category == "movie_name"'>
@@ -32,7 +32,7 @@
 		where mt.movie_end_time >= sysdate
         and mt.movie_schedule_code = tms.movie_schedule_code
         and tms.movie_code = m.movie_code
-        and tms.theater_code = tt.theater_code
+        and tms.theater_code = tt.theater_code and mt.movie_time_state = 'Y'
 		<if test='keyword != ""'>
 			<choose>
 				<when test='category == "movie_name"'>
@@ -52,7 +52,7 @@
 		       sc.screen_seat_row, sc.screen_seat_col
 		from tbl_movie_time t, tbl_movie m, tbl_movie_schedule d, tbl_theater tt, tbl_movie_screen sc
 		where m.movie_code = d.movie_code and d.movie_schedule_code = t.movie_schedule_code and tt.theater_code = d.theater_code and t.screen_code = sc.screen_code
-		
+		and t.movie_time_state = 'Y'
 		<if test='keyword != ""'>
 			<choose>
 				<when test='category == "movie_name"'>
@@ -74,7 +74,7 @@
 		where movie_end_time <![CDATA[ <= ]]> sysdate
         and mt.movie_schedule_code = tms.movie_schedule_code
         and tms.movie_code = m.movie_code
-        and tms.theater_code = tt.theater_code
+        and tms.theater_code = tt.theater_code and mt.movie_time_state = 'Y'
 		<if test='keyword != ""'>
 			<choose>
 				<when test='category == "movie_name"'>

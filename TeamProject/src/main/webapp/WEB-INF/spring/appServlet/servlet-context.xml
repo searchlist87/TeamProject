@@ -45,13 +45,13 @@
  	<!-- 인터셉터 빈 --> 
 	<beans:bean id="sghLoginInterceptor" class="com.kh.team.sgh.interceptor.SghLoginInterceptor"/>
 	<beans:bean id="sghAdminInterceptor" class="com.kh.team.sgh.interceptor.SghAdminInterceptor"/>
-	<beans:bean id="sghBookCheckInterceptor" class="com.kh.team.sgh.interceptor.SghBookCheckInterceptor"/>
 	
 	<interceptors>
 		<!-- 로그인 인터셉터 아직 설정 안함 -->
 		<interceptor>
-			<mapping path="/sgh/choiceSeat/**/*"/>
-			<mapping path="/sgh/1/**/*"/>
+			<!-- sgh -->
+			<mapping path="/sgh/payment/**/*"/>
+			<mapping path="/sgh/myPage/**/*"/>
 			<!--  jmh -->
 			<mapping path="/mypage/**/*"/>
 			<!--  jmh end -->
@@ -61,18 +61,10 @@
 			<!-- kdh end -->
 			<beans:ref bean="sghLoginInterceptor"/>
 		</interceptor>
-		<!-- 어드민 인터셉터 -->
-<!-- 		<interceptor> 고수현씨 로그인 인터셉터 추가하기 -->
-<!-- 			<mapping path="/sgh/admin/**/*"/> -->
-<!-- 			<mapping path="/admin/**/*"/> -->
-<!-- 			<beans:ref bean="sghAdminInterceptor"/> -->
-<!-- 		</interceptor> -->
-		<!-- 예매 인터셉터 -->
+		<!-- 관리자 페이지 접근 -->
 		<interceptor>
-			<mapping path="/sgh/book/**/*"/>
-			<exclude-mapping path="/sgh/book/bookingView"/>
-			<exclude-mapping path="/sgh/book/userPoint"/>
-			<beans:ref bean="sghBookCheckInterceptor"/>
+			<mapping path="/sgh/admin/**/*"/>
+			<beans:ref bean="sghAdminInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

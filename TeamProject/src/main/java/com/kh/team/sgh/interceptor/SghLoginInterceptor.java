@@ -16,7 +16,6 @@ public class SghLoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		if(user_id == null) {
-			System.out.println("로그인 확인 : " + user_id);
 			response.sendRedirect("/sgh/user/loginForm");
 			return false;
 		}

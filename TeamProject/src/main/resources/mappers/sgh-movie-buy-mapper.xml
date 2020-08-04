@@ -80,13 +80,13 @@
 	
 	<!-- 상영작으로 등록된 영화 목록 가져오기 -->
 	<select id="getBuyMovieList" resultType="SghBuyMovieVo">
-		select m.movie_code, m.movie_name from tbl_movie_schedule ms, tbl_movie m
+		select distinct m.movie_code, m.movie_name from tbl_movie_schedule ms, tbl_movie m
 		where theater_code = #{theater_code}
 		and ms.movie_code = m.movie_code
 	</select>
 	
 	<!-- 매출 가져오기 -->
-	<select id="getBuyTotal" resultType="integer">
+	<select id="getBuyTotal" resultType="int">
 		select nvl(sum(mbl.movie_price), 0)
 		from tbl_movie_buy_list mbl, tbl_movie_screen ms, tbl_theater tt, tbl_area a
 		where
@@ -104,6 +104,8 @@
 		mbl.screen_code = ms.screen_code
 		and ms.theater_code = tt.theater_code
 		and a.area_code = tt.area_code
-		and movie_buy_date >= add_months(to_timestamp(sysdate, 'yyyy-mm-dd HH24:MI:SS'), #{mm_minus})
+		<if test="mm_minus != 0">
+			and mbl.movie_buy_date between add_months(sysdate, #{mm_minus}) and sysdate
+		</if>
 	</select>
 </mapper>

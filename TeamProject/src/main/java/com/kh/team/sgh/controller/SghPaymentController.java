@@ -20,8 +20,8 @@ import com.kh.team.domain.SghPaymentVo;
 import com.kh.team.sgh.service.SghBookingService;
 
 @Controller
-@RequestMapping("/sgh/choiceSeat")
-public class SghChoiceSeatController {
+@RequestMapping("/sgh/payment")
+public class SghPaymentController {
 	// 예매에서 인원과 좌석을 선택할때 넘어가는 창
 	
 	@Inject
@@ -80,7 +80,7 @@ public class SghChoiceSeatController {
 	@RequestMapping(value="/requestPayment", method=RequestMethod.POST)
 	public String requestPayment(SghChoiceSeatDto sghChoiceSeatDto, HttpSession session, Model model) throws Exception {
 		session.setAttribute("sghChoiceSeatDto", sghChoiceSeatDto);
-		return "redirect:/sgh/choiceSeat/paymentForm";
+		return "redirect:/sgh/payment/paymentForm";
 	}
 	
 	// 결제 처리
@@ -93,13 +93,18 @@ public class SghChoiceSeatController {
 			sghBookingService.updateScheduleSeat(sghPaymentVo, schedule_code_arr, use_point);
 			session.removeAttribute("sghPaymentVo");
 			session.removeAttribute("sghChoiceSeatDto");
-			rttr.addFlashAttribute("movie_payment_result", "true");
-			return "redirect:/ ";
+			return "redirect:/sgh/payment/paymentResultForm";
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		session.removeAttribute("sghPaymentVo");
 		rttr.addFlashAttribute("result", "false");
-		return "redirect:/sgh/choiceSeat/movie_time_seat?SghPaymentVo=" + sghPaymentVo;
+		return "redirect:/sgh/payment/movie_time_seat?SghPaymentVo=" + sghPaymentVo;
+	}
+	
+	// 결제 결과 창
+	@RequestMapping(value="/paymentResultForm", method=RequestMethod.GET)
+	public String paymentResultForm() {
+		return "user/sgh/sgh_book/sgh_payment_result";
 	}
 }

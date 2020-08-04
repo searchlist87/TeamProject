@@ -43,6 +43,7 @@ public class SghMovieTimeController {
 		List<SghMovieTimeListVo> time_list = sghMovieTimeService.getMovieTimeList(sghPagingDto);
 		model.addAttribute("time_list", time_list);
 		model.addAttribute("sghPagingDto", sghPagingDto);
+		System.out.println("sghPagingDto :" + sghPagingDto);
 		return "user/sgh/sgh_admin/sgh_movie_time/sgh_movie_time_list";
 	}
 	

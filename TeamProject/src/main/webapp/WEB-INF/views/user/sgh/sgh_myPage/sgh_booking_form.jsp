@@ -53,7 +53,7 @@ $(function() {
 						<div class="form-main">
 							<div class="title">
 								<h4>예매 표 확인</h4>
-								<h3>기간이 지나지 않은 예매 표 내역</h3>
+								<h3>기간이 남은 예매 표 내역</h3>
 							</div>
 							<div class="row">
 								<div class="col-md-12">

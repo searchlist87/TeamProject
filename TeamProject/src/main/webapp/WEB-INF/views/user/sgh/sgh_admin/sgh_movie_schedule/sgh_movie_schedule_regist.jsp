@@ -72,8 +72,8 @@ $(function() {
 	<span id="message_span" style="color: red;"></span>
 </div>
 <!-- 등록을 할 때 결과를 체크할 hidden type들 -->
-<input type="hidden" id="start_date_result">
-<input type="hidden" id="end_date_result">
+<input type="hidden" id="start_date_result" value="false">
+<input type="hidden" id="end_date_result" value="false">
 <section class="product-area shop-sidebar shop section" style="padding-top: 10px;">
 	<div class="container" style="padding: 0px;">
 		<div class="row">
@@ -108,7 +108,7 @@ $(function() {
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>시작일</strong></label>
-								<input type="date" class="form-control" id="input_start_date" name="movie_start_date"/>
+								<input type="date" class="form-control" id="movie_start_date" name="movie_start_date"/>
 							</div>
 							<div class="form-group">
 								<label for="movie_director"><strong>종료일</strong></label>

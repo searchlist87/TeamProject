@@ -8,6 +8,9 @@
 <html lang="zxx">
 <head>
 <style>
+	body {
+		text-align: center;
+	}
 	table {
 		border-collapse: separate;
 		border-spacing: 20px 20px ;
@@ -140,25 +143,26 @@ $(function() {
 });
 </script>
 </head>
-<form id="frmPayment" action="/sgh/choiceSeat/requestPayment" method="post">
+<form id="frmPayment" action="/sgh/payment/requestPayment" method="post">
 	<input type="hidden" id="personnel" name="personnel">
 </form>
 <body class="js">
 	<!-- Breadcrumbs -->
-	<div class="breadcrumbs">
+	<div class="breadcrumbs" style="background-color: #F2F2F2;">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
 					<div>
-						<label>인원</label>
-						<span>
+						<h1>좌석 선택</h1>
+						<label style="float: left; font-size: 20px;">인원</label>
+						<span style="float: left; font-size: 20px;">
 							<button type="button" id="btn_minus">-</button>
 							<strong id="prs">0</strong>
 							<button type="button" id="btn_plus">+</button>
 						</span>
 					</div>
 					<div>
-						<span><strong id="movie_money">0원</strong></span>
+						<br/><span style="clear: both; font-size: 20px; float: left;"><strong id="movie_money">0원</strong></span>
 					</div>
 				</div>
 			</div>
