@@ -67,7 +67,7 @@ public class JmhController {
 		
 		// 오늘 날짜로 해당 영화관 일정 가져오기
 		List<JmhTheaterScheduleVo> tScheduleVo = jmhMovieTheaterService.getTheaterSchedule(theater_code, movie_date);
-		
+//		
 		model.addAttribute("totalSeat", totalSeat);
 		model.addAttribute("screenCount", screenCount);
 		model.addAttribute("mTheaterVo", mTheaterVo);

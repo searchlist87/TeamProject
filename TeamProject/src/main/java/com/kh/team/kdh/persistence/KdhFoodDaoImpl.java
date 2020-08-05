@@ -172,6 +172,14 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 		return sqlSession.selectOne(NAMESPACE + "selectFoodPageCount", pagingDto);
 	}
 
+	@Override
+	public int selectAdminSales(String food_code, int mm_minus) throws Exception {
+		Map<String, Object> paraMap = new HashMap<>();
+		paraMap.put("food_code", food_code);
+		paraMap.put("mm_minus", mm_minus);
+		return sqlSession.selectOne(NAMESPACE + "selectAdminSales", paraMap);
+	}
+
 
 
 }

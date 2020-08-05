@@ -23,6 +23,7 @@
 	<select id="selectTheaterInfo" resultType="JmhMovieTheaterVo">
 		select * from tbl_theater
 		where theater_code = #{theater_code} 
+		and theater_state = 'Y'
 	</select>
 	
 	<!--  영화관 총 좌석수 가져오기 -->
@@ -41,6 +42,7 @@
 	<!--  영화관 코드 하나 가져오기 -->
 	<select id="getTheaterCode" resultType="string">
 		select theater_code from (select rownum rnum, t.* from (select * from tbl_theater
+		where theater_state = 'Y'
 		order by theater_num desc) t)
 		where rnum = 1	
 	</select>

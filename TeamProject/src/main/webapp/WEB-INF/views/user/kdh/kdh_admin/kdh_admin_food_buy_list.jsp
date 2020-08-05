@@ -65,8 +65,38 @@ $(function() {
 		$("#adminForm").submit();
 		
 // 		location.href = "/kdh/admin/admin_food_buy_list?page=" + page;
-		
 	});
+	
+	// 매출보기 버튼 
+	$("#btnShow").click(function() {
+		$("#modal-138960").trigger("click");
+		// 모달에 검색 버튼
+		$("#btnSales").click(function() {
+			var mm_minus = $("#mm_minus option:selected").val();
+			var food_code = $("#food_code option:selected").val();
+			var url = "/kdh/admin/salesAjax";
+			var sendData = {
+				"food_code" : food_code,
+				"mm_minus" : mm_minus
+			};
+			$.ajax({
+				"type" : "get",
+				"url" : url,
+				"data" : sendData,
+				"headers" : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "get"
+				},
+				"success" : function(rData) {
+					console.log(rData);
+					$("#sales_result").text("총 매출은 " + rData + "원 입니다.");
+					$("#btnClose").css("display", "");
+				}
+			});
+		});
+	});
+	
+	
 });
 </script>
 
@@ -95,21 +125,74 @@ $(function() {
 								</div>	
 								<!--  검색 -->
 								<div style="padding:20px;text-align:right;">
-										
+									<button style="float: left;" type="button" class="btn" id="btnShow">매출액 보기</button>
+										<!-- 매출보기 모달창 -->
+											<div class="row">
+												<div class="col-md-12">
+													 <a id="modal-138960" style="display: none;" href="#modal-container-138960" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+													<div class="modal fade" id="modal-container-138960" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="myModalLabel">
+																	</h5> 
+																	<button type="button" class="close" data-dismiss="modal">
+																		<span aria-hidden="true">X</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<div class="row">
+																		<div class="col-md-12">
+																			<div class="form-inline form-group" id="price_select" style="margin-top: 30px; margin-left: 100px; text-align:center;">
+																				<label for="mm_minus" >기간 : </label>
+																				<select id="mm_minus">
+																					<option value=0 selected>전체 매출</option>
+																					<option value=-1>1달 매출</option>
+																					<option value=-3>3달 매출</option>
+																					<option value=-5>5달 매출</option>
+																					<option value=-12>1년 매출</option>
+																				</select>
+																				<label for="food_code">선택 : </label>
+																				<select id="food_code" name="food_code">　　
+																					<option value="all">전체</option>
+																					<option value="100">스낵</option>
+																					<option value="200">음료</option>
+																					<option value="300">패키지</option>
+																				</select>
+																			　　<button id="btnSales" type="button" class="btn">검색</button><br/>　
+																			</div>
+																			<div class="row">
+																			<div class="col-md-2">
+																				<h1>　　　</h1></div>
+																			<div class="col-md-8"></div>
+																			<div class="col-md-2"></div>
+																			</div>
+																			<div style="text-align:center;">
+																				<h4 id="sales_result"></h4><br/>
+																				<button type="button" id="btnClose" class="btn" data-dismiss="modal" style="display : none;">닫기</button>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 									<div class="single-shorter" style="vertical-align:middle;">
-											<label>검색 :</label>
-											<select id="searchSelect" name=searchType>
-												<option value="all"
-												<c:if test="${pagingDto.searchType == 'all'}">selected</c:if>
-												>전체</option>
-												<option value="user_id"
-												<c:if test="${pagingDto.searchType == 'user_id'}">selected</c:if>
-												>사용자</option>
-												<option value="food_name"
-												<c:if test="${pagingDto.searchType == 'food_name'}">selected</c:if>
-												>상품명</option>
-											</select>
-										</div>
+										<label>검색 :</label>
+										<select id="searchSelect" name=searchType>
+											<option value="all"
+											<c:if test="${pagingDto.searchType == 'all'}">selected</c:if>
+											>전체</option>
+											<option value="user_id"
+											<c:if test="${pagingDto.searchType == 'user_id'}">selected</c:if>
+											>사용자</option>
+											<option value="food_name"
+											<c:if test="${pagingDto.searchType == 'food_name'}">selected</c:if>
+											>상품명</option>
+										</select>
+									</div>
 
 									<input type="text" id="keyword" value="${pagingDto.keyword}"/>
 									<button type="button" class="btn" id="btnSearch">검색</button>

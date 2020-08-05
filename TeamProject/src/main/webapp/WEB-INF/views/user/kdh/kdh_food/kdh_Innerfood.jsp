@@ -274,9 +274,8 @@ $(function() {
 				<div id="priceDiv" class="col-md-6">
 					<h2>${foodVo.food_name}</h2>
 					<hr/>
-					<p>유효기간　　　구매일로부터 92일 이내 사용 가능</p>
-					<p>판매수량　　　1회 8개 구매가능</p>
-					<p>구매 후 취소　　　구매일로부터 10일 이내 취소 가능하며, 부분취소는 불가능합니다.
+					<p>판매수량　　　재고 수 만큼 구매가능</p>
+					<p>구매 후 취소　　　구매 후 취소는 가능하며, 부분취소는 불가능합니다.
 					<hr/>
 					<div>수량/금액　　<button class="button1" id="btnMius" type="button">-</button> 
 					<span id="btnCount">1</span>

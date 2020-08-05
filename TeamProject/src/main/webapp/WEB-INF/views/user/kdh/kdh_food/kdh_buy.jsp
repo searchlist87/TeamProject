@@ -25,7 +25,6 @@ $(function() {
 
 		var couponPriceVal = $("#couponPrice").val();
 		var couponPriceText = $("#couponPrice").text();
-		$("#couponPrice").text(couponPrice+"P");
 		
 		var lastPrice = sumPrice;
 		$("#lastPrice").attr("data-lastPrice", sumPrice);
@@ -81,11 +80,14 @@ $(function() {
 			
 // 		// 포인트사용금액이 유저 누적포인트보다 클때 
 		var point = $("#pointInfo").val();
-		if (point < couponPrice) {
+		
+		var total_sum = point - couponPrice;
+		if (total_sum < 0) {
 			alert("포인트를 사용할 수 없습니다.")
-			$("#UsecouponPrice").val(0);
-			return false;
+			$("#UsecouponPrice").val("0");
+			return;
 		}
+		$("#couponPrice").text(couponPrice+"P");
 			
 			var lastPriceToString = String(lastPrice);
 			console.log("lastPriceToString:" + lastPriceToString);
@@ -289,7 +291,7 @@ $(function() {
 								<div class="left">
 									<h3>포인트</h3>
 									<ul>
-										<li>적립포인트 사용　　　적립포인트 잔액　　　<input id="pointInfo" type="text" style="text-align:right;" value="${totalPoint}" name="pointInfo" readonly>원</li>
+										<li>적립포인트 사용　　　적립포인트 잔액　　　<input id="pointInfo" type="text" style="text-align:right;" value="${totalPoint}" name="pointInfo" readonly>P</li>
 										<li>사용 포인트　　　<input data-point="${userInfo.user_point}" id="UsecouponPrice" type="text" value="0" name="Coupon" placeholder="0" style="text-align:right;">P　
 										<a id="btnUse" class="btn" style="color: white;">사용하기</a>　
 										<a id="btnUseNo" class="btn" style="color: white;">삭제하기</a></li>

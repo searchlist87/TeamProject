@@ -109,7 +109,7 @@ where rnum between #{startRow} and #{endRow}
 				<when test='searchType == "all"'>
 				</when>
 				<when test='searchType == "snack"'>
-				food_code='100' and food_name like '%' || #{keyword} || '%'
+				food_code='100' and food_name like '%' || #{keyword} || '%' 
 				</when>
 				<when test='searchType == "drink"'>
 				food_code='200' and food_name like '%' || #{keyword} || '%'
@@ -124,7 +124,7 @@ where rnum between #{startRow} and #{endRow}
 <!-- 관리자 - 푸드 상품관리 페이지 상품 갯수 구하기 -->
 <select id="selectFoodPageCount" resultType="int">
 	select count(*) from tbl_food
-	<if test="searchType != null || searchType == ''">
+	<if test="searchType != null || searchType != ''">
 		<choose>
 			<when test='searchType == "all"'>
 			</when>
@@ -260,7 +260,7 @@ where food_code = '300'
 <!-- 상품 구매 리스트 갯수 구하기 -->
 <select id="selectFoodBuyListCount" resultType="int">
 	select count(*) from tbl_food_buy_list
-	<if test="searchType != null || searchType == ''">
+	<if test="searchType != null || searchType != ''">
 		<choose>
 			<when test='searchType == "all"'>
 			</when>
@@ -275,10 +275,33 @@ where food_code = '300'
 	</if>	
 </select>
 
-<!-- 마이페이지 구매 리스트 유저별로 갯수 구하기 -->
+<!-- 마이페이지 구매 리스트 유저별로 개수 구하기 -->
 <select id="selectMyPageFoodBuyListCount" resultType="int">
 	select count(*) from tbl_food_buy_list
 	where user_id = #{user_id}
 </select>
 
+<!-- 관리자 페이지 구매 내역 매출액 구하기 -->
+<select id="selectAdminSales" resultType="int">
+	select sum(food_buy_total_price)
+	from tbl_food_buy_list fl, tbl_food f
+	where
+	<if test="food_code != null || food_code != ''">
+		<choose>
+			<when test='food_code == "all"'>
+			</when>
+			<when test='food_code == "100"'>
+				f.food_code = '100' and
+			</when>
+			<when test='food_code == "200"'>
+				f.food_code = '200' and
+			</when>
+			<when test='food_code == "300"'>
+				f.food_code = '300' and
+			</when>
+		</choose>
+	</if>	
+	fl.food_num = f.food_num
+	and food_buy_date >= add_months(to_timestamp(sysdate, 'yyyy-mm-dd HH24:MI:SS'), #{mm_minus})
+</select>
 </mapper>
