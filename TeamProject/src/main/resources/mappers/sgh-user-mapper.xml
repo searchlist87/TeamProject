@@ -13,6 +13,7 @@
 	<select id="userLoginSelect" resultType="SghLoginDto">
 		select * from tbl_user
 		where user_id = #{user_id} and user_pw = #{user_pw}
+		and user_out_check is null
 	</select>
 	<!-- 아이디 중복 체크 -->
 	<select id="userIdDupCheckSelect" resultType="Integer">
