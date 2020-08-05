@@ -6,7 +6,6 @@
 <script>
 $(function() {
 	var result = "${result}";
-	console.log("result :" + result);
 	if(result == 'false') {
 		alert("이름이나 이메일이 잘못 입력 되었습니다. 다시 확인해주세요.");
 	}
@@ -19,9 +18,14 @@ $(function() {
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8">
-			<form role="form" action="/sgh/user/findPwRun" method="post">
+			<form id="frm_pw" role="form" action="/sgh/user/findPwRun" method="post">
 				<div class="form-group">
-					<input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디"/>
+					<input type="text" class="form-control" id="user_name" name="user_name" placeholder="이름" required/>
+					<input type="text" class="form-control" id="user_id" name="user_id" placeholder="아이디" required/>
+					<input type="email" class="form-control" id="user_email" name="user_email" placeholder="이메일" required/>
+				</div>
+				<div>
+					<span><strong style="color:red;" id="pw_result"></strong></span>
 				</div>
 				<div>
 					<button type="submit" class="btn btn-sm">

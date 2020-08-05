@@ -3,6 +3,7 @@ package com.kh.team.sgh.service;
 import java.util.List;
 
 import com.kh.team.domain.SghFindDto;
+import com.kh.team.domain.SghFindPwVo;
 import com.kh.team.domain.SghLoginDto;
 import com.kh.team.domain.SghUserVo;
 
@@ -18,5 +19,5 @@ public interface SghUserService {
 	// 비밀번호 변경
 	public void userChengePw(String user_id, String user_pw) throws Exception;
 	// 비밀번호 찾기
-	public SghFindDto userPwSelect(String user_id) throws Exception;
+	public SghFindDto userPwSelect(SghFindPwVo sghFindPwVo) throws Exception;
 }

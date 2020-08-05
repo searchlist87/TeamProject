@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.team.domain.SghFindDto;
+import com.kh.team.domain.SghFindPwVo;
 import com.kh.team.domain.SghLoginDto;
 import com.kh.team.domain.SghUserVo;
 
@@ -49,8 +50,8 @@ public class SghUserDaoImpl implements SghUserDao {
 	}
 
 	@Override
-	public SghFindDto userPwSelect(String user_id) throws Exception {
-		return sqlSession.selectOne(NAMESPACE + "userPwSelect", user_id);
+	public SghFindDto userPwSelect(SghFindPwVo sghFindPwVo) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "userPwSelect", sghFindPwVo);
 	}
 
 }

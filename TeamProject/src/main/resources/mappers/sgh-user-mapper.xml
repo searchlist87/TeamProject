@@ -34,6 +34,6 @@
 	<!-- 비밀번호 찾기 -->
 	<select id="userPwSelect" resultType="SghFindDto">
 		select * from tbl_user
-		where user_id = #{user_id}
+		where user_id = #{user_id} and user_name = #{user_name} and user_email = #{user_email}
 	</select>
 </mapper>
