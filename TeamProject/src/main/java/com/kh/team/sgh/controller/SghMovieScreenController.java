@@ -59,6 +59,11 @@ public class SghMovieScreenController {
 	@RequestMapping(value="/deleteScreen", method=RequestMethod.GET)
 	public String deleteScreen(String screen_code, String theater_code, RedirectAttributes rttr) {
 		try {
+			int productCheck = sghMovieScreenService.productCheck(screen_code);
+			if(!(productCheck < 1)) {
+				rttr.addFlashAttribute("delete_result", "false");
+				return "redirect:/sgh/admin/movieScreen/screenList?theater_code=" + theater_code;
+			}
 			sghMovieScreenService.stateDeleteScreen(screen_code);
 			return "redirect:/sgh/admin/movieScreen/screenList?theater_code=" + theater_code; 
 		} catch (Exception e) {
@@ -87,7 +92,6 @@ public class SghMovieScreenController {
 		int productCheck = sghMovieScreenService.productCheck(screen_code);
 		SghMovieScreenVo sghMovieScreenVo = sghMovieScreenService.getScreenOne(screen_code);
 		String theater_code = sghMovieScreenVo.getTheater_code();
-		System.out.println("productCheck :" + productCheck);
 		if(productCheck < 1) {
 			model.addAttribute("sghMovieScreenVo", sghMovieScreenVo);
 			return "user/sgh/sgh_admin/sgh_admin_movie_screen/sgh_screen_modify";

@@ -25,7 +25,6 @@ $(function() {
 	
 	// 수정 결과
 	var result = "${result}";
-	console.log("result :" + result);
 	if(result == "false") {
 		alert("상영 회차에 등록된 상영관은 수정할 수 없습니다.");
 	}

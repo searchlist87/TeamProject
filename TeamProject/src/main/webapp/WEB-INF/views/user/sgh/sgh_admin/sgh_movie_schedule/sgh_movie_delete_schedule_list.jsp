@@ -65,7 +65,7 @@ $(function() {
 				<div class="row">
 					<div class="col-12">
 						<div style="background-color: #f6f7fb; padding: 20px; border-bottom: 1px solid #ddd; margin-bottom: 20px;">
-							<h4 class="title">영화관 관리_영화관 조회</h4>
+							<h4 class="title">상영일정관리_상영일정 조회</h4>
 						</div>
 						<!--  페이지별 내용 -->
 						<div class="container-fluid">

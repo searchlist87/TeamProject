@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.kh.team.domain.SghFindDto;
+import com.kh.team.domain.SghFindPwVo;
 import com.kh.team.domain.SghLoginDto;
 import com.kh.team.domain.SghUserVo;
 import com.kh.team.sgh.persistence.SghUserDao;
@@ -43,8 +44,8 @@ public class SghUserServiceImpl implements SghUserService {
 	}
 
 	@Override
-	public SghFindDto userPwSelect(String user_id) throws Exception {
-		return sghUserDao.userPwSelect(user_id);
+	public SghFindDto userPwSelect(SghFindPwVo sghFindPwVo) throws Exception {
+		return sghUserDao.userPwSelect(sghFindPwVo);
 	}
 
 }

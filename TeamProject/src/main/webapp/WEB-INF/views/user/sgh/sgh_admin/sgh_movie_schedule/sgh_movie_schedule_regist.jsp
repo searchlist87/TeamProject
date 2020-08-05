@@ -44,10 +44,10 @@ $(function() {
 			span_clone.attr("class", "end_clone");
 			span_clone.text("종료일은 필수 입력 사항입니다.");
 			$(this).after(span_clone);
-			$("#start_date_result").val("false");
+			$("#end_date_result").val("false");
 			return false;
 		}
-		$("#start_date_result").val("true");
+		$("#end_date_result").val("true");
 	});
 	
 	// 전송할 때

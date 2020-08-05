@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.team.domain.SghEmailDto;
 import com.kh.team.domain.SghFindDto;
+import com.kh.team.domain.SghFindPwVo;
 import com.kh.team.domain.SghLoginDto;
 import com.kh.team.domain.SghUserVo;
 import com.kh.team.kdh.service.KdhFoodCartService;
@@ -130,10 +131,14 @@ public class SghUserController {
 	
 	// 아이디 찾기 처리
 	@RequestMapping(value="/findIdRun", method=RequestMethod.POST)
-	public String findIdRun(SghFindDto sghFindDto, Model model, RedirectAttributes rttr) {
+	public String findIdRun(SghFindDto sghFindDto, Model model, RedirectAttributes rttr) throws Exception {
 		try {
 			List<SghFindDto> list = sghUserService.userFindId(sghFindDto);
 			String user_email = sghFindDto.getUser_email();
+			int list_size = list.size();
+			if(list_size == 0) {
+				return "redirect:/sgh/user/failFindPw";
+			}
 			model.addAttribute("list", list);
 			model.addAttribute("user_email", user_email);
 			return "user/sgh/sgh_member/sgh_find_mail";
@@ -168,17 +173,19 @@ public class SghUserController {
 	
 	// 비밀번호 찾기 처리
 	@RequestMapping(value="/findPwRun", method=RequestMethod.POST)
-	public String findPwRun(String user_id, Model model) throws Exception {
-		System.out.println("user_id :" + user_id);
-		SghFindDto sghFindDto = sghUserService.userPwSelect(user_id);
+	public String findPwRun(SghFindPwVo sghFindPwVo, Model model) throws Exception {
+		SghFindDto sghFindDto = sghUserService.userPwSelect(sghFindPwVo);
 		model.addAttribute("sghFindDto", sghFindDto);
+		
+		if(sghFindDto == null) {
+			return "redirect:/sgh/user/failFindPw";
+		}
 		return "user/sgh/sgh_member/sgh_find_pw_mail_form";
 	}
 	
-	// 관리자 페이지 회원가입 조회 폼
-	@RequestMapping(value="/userList", method=RequestMethod.GET)
-	public String userList(Model model) throws Exception {
-		
-		return "user/sgh/sgh_admin/sgh_user/sgh_user_list";
+	// 비밀번호 찾았을때 없는거면
+	@RequestMapping(value="/failFindPw", method=RequestMethod.GET)
+	public String failFindPw() throws Exception {
+		return "user/sgh/sgh_member/sgh_find_fail_pw";
 	}
 }

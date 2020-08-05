@@ -9,6 +9,7 @@
 		select * from (select rownum rnum, a.* from (select s.movie_schedule_code, s.movie_code, s.theater_code, m.movie_name, s.movie_start_date, s.movie_end_date, t.theater_name, s.movie_schedule_state, s.movie_del_date
 		from tbl_movie_schedule s, tbl_movie m, tbl_theater t
 		where s.movie_code = m.movie_code and s.theater_code = t.theater_code and s.movie_schedule_state = 'Y'
+		and s.movie_end_date >= sysdate
 		<if test='keyword != ""'>
 			<choose>
 				<when test='category == "movie_name"'>
@@ -21,7 +22,6 @@
 		</if>
         ) a)
         where rnum between #{start_row} and #{end_row}
-        and movie_end_date >= sysdate
         order by rnum desc
 	</select>
 	
