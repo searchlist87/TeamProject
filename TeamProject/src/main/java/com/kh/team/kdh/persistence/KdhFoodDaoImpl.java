@@ -180,6 +180,4 @@ public class KdhFoodDaoImpl implements KdhFoodDao {
 		return sqlSession.selectOne(NAMESPACE + "selectAdminSales", paraMap);
 	}
 
-
-
 }

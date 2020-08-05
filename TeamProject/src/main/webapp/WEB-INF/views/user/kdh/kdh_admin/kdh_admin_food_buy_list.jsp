@@ -193,7 +193,6 @@ $(function() {
 											>상품명</option>
 										</select>
 									</div>
-
 									<input type="text" id="keyword" value="${pagingDto.keyword}"/>
 									<button type="button" class="btn" id="btnSearch">검색</button>
 								</div>	

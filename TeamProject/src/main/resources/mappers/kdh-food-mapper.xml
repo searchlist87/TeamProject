@@ -95,11 +95,23 @@ where rnum between #{startRow} and #{endRow}
 <!-- 관리자 - 푸드 상품관리 페이지 페이징 -->
 <select id="foodPage" resultType="KdhFoodVo">
 	select * from (select rownum rnum, a.*
-					from (select food_num, food_code, food_name, food_price, food_count, food_image
-							from tbl_food
-							<include refid="searchFood"></include>
-							order by food_num desc) a)
-	where rnum between #{startRow} and #{endRow}
+		from (select food_num, food_code, food_name, food_price, food_count, food_image
+				from tbl_food
+				<if test='searchType != "all"'>
+					<choose>
+						<when test='searchType == "100"'>
+						where food_code='100' and food_name like '%' || #{keyword} || '%'
+						</when>
+						<when test='searchType == "200"'>
+						where food_code='200' and food_name like '%' || #{keyword} || '%'
+						</when>
+						<when test='searchType == "300"'>
+						where food_code='300' and food_name like '%' || #{keyword} || '%'
+						</when>
+					</choose>
+				</if>
+				order by food_num desc) a)
+				where rnum between #{startRow} and #{endRow}
 </select>
 
 <!-- 관리자 - 푸드 상품관리 페이지 페이징 검색 -->
@@ -108,13 +120,13 @@ where rnum between #{startRow} and #{endRow}
 			<choose>
 				<when test='searchType == "all"'>
 				</when>
-				<when test='searchType == "snack"'>
+				<when test='searchType == "100"'>
 				food_code='100' and food_name like '%' || #{keyword} || '%' 
 				</when>
-				<when test='searchType == "drink"'>
+				<when test='searchType == "200"'>
 				food_code='200' and food_name like '%' || #{keyword} || '%'
 				</when>
-				<when test='searchType == "package"'>
+				<when test='searchType == "300"'>
 				food_code='300' and food_name like '%' || #{keyword} || '%'
 				</when>
 			</choose>
@@ -124,18 +136,16 @@ where rnum between #{startRow} and #{endRow}
 <!-- 관리자 - 푸드 상품관리 페이지 상품 갯수 구하기 -->
 <select id="selectFoodPageCount" resultType="int">
 	select count(*) from tbl_food
-	<if test="searchType != null || searchType != ''">
+	<if test="searchType != null">
 		<choose>
-			<when test='searchType == "all"'>
+			<when test='searchType == "100"'>
+				where food_code='100' and food_name like '%' || #{keyword} || '%'
 			</when>
-			<when test='searchType == "snack"'>
-				where food_code='100' || f.food_name like '%' || #{keyword} || '%'
+			<when test='searchType == "200"'>
+				where food_code='200' and food_name like '%' || #{keyword} || '%'
 			</when>
-			<when test='searchType == "drink"'>
-				where food_code='200' || f.food_name like '%' || #{keyword} || '%'
-			</when>
-			<when test='searchType == "package"'>
-				where food_code='300' || f.food_name like '%' || #{keyword} || '%'
+			<when test='searchType == "300"'>
+				where food_code='300' and food_name like '%' || #{keyword} || '%'
 			</when>
 		</choose>
 	</if>	
