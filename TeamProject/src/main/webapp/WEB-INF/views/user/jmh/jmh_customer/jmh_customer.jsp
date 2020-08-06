@@ -29,21 +29,21 @@
 </style>
 <script>
 $(function () {
-	$(".card-body").attr("display", "none");
+	$(".card-body").css("display", "none");
 	
 	//content 나오게
 	var index = 0;
 	$(".link").click(function (e) {
 		e.preventDefault();
 		var that = $(this).parent().parent().parent().find("div:last");
-		if (index == 0) {
+		
+		
+		if(that.css("display") == "none") {
 			that.css("display", "block");
 			$(this).find("img").attr("src","/resources/images/jmh/pointer_top.png");
-			index = 1;
-		} else if(index == 1) {
+		} else if(that.css("display") == "block"){
 			that.css("display", "none");
 			$(this).find("img").attr("src","/resources/images/jmh/pointer.png");
-			index = 0;
 		}
 		
 	});
