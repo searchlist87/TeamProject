@@ -67,6 +67,7 @@ public class SghMovieProductController {
 		ArrayList<String> seat_col_Array = SghAsciiChangeUtil.row_make(seat_col);
 		// JSON으로 보낼 데이터
 		JSONArray jArray = new JSONArray();
+		
 		for (SghSeatCheckVo vo : seat_check_list) {
 			String schedule_seat_code = vo.getSchedule_seat_code();
 			String movie_seat_num = vo.getMovie_seat_num();

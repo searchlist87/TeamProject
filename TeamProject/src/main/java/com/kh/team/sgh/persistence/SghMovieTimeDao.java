@@ -8,6 +8,7 @@ import com.kh.team.domain.SghMovieTimeListVo;
 import com.kh.team.domain.SghMovieTimeModifyVo;
 import com.kh.team.domain.SghMovieTimeVo;
 import com.kh.team.domain.SghPagingDto;
+import com.kh.team.domain.SghScheduleVo;
 
 public interface SghMovieTimeDao {
 	
@@ -43,4 +44,6 @@ public interface SghMovieTimeDao {
 	public void deleteMovieTime(String movie_time_code) throws Exception;
 	// 복구하기
 	public void restoreMovieTime(String movie_time_code) throws Exception;
+	// 등록할때 필요한 영화 명단
+	public List<SghScheduleVo> getMovieList() throws Exception;
 }

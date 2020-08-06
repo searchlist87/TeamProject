@@ -210,8 +210,8 @@ $(function() {
 								<label for="movie_genre"><strong>등록된 영화</strong></label>
 								<select id="movie_name">
 										<option value="not">등록할 영화를 선택해주세요.</option>
-									<c:forEach items="${schedule_list}" var="SghScheduleListDto">
-										<option value="${SghScheduleListDto.movie_schedule_code}">${SghScheduleListDto.movie_name}(${SghScheduleListDto.theater_name})</option>
+									<c:forEach items="${movie_list}" var="SghScheduleVo">
+										<option value="${SghScheduleVo.movie_schedule_code}">${SghScheduleVo.movie_name}(${SghScheduleVo.theater_name})</option>
 									</c:forEach>
 								</select>
 							</div>

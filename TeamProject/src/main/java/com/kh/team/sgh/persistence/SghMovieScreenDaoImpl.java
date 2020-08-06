@@ -46,7 +46,6 @@ public class SghMovieScreenDaoImpl implements SghMovieScreenDao {
 
 	@Override
 	public void insertSeat(SghMovieSeatVo sghMovieSeatVo) throws Exception {
-		System.out.println("sghMovieSeatVo :" + sghMovieSeatVo);
 		sqlSession.insert(NAMESPACE + "insertSeat", sghMovieSeatVo);
 	}
 

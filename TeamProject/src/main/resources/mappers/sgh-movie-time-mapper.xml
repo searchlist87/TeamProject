@@ -144,6 +144,14 @@
 		where movie_time_code = #{movie_time_code}
 	</update>
 	
+	<!-- 등록할때 필요한 영화 명단 -->
+	<select id="getMovieList" resultType="SghScheduleVo">
+		select s.movie_schedule_code, s.movie_code, s.theater_code, m.movie_name, s.movie_start_date, s.movie_end_date, t.theater_name, s.movie_schedule_state, s.movie_del_date
+		from tbl_movie_schedule s, tbl_movie m, tbl_theater t
+		where s.movie_code = m.movie_code and s.theater_code = t.theater_code and s.movie_schedule_state = 'Y'
+		and s.movie_end_date >= sysdate
+	</select>
+	
 	<!-- 에이잭스 요청, 상영 일정에 등록된 영화 정보 -->
 	<select id="getAjaxScheduleOne" resultType="SghMovieTimeAjaxDto">
 		select m.movie_name, m.movie_code, tt.theater_name, d.theater_code, d.movie_start_date, d.movie_end_date, d.movie_schedule_code
