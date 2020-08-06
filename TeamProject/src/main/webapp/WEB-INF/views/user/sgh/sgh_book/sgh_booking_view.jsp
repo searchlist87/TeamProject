@@ -56,10 +56,7 @@ $(function() {
 	var day = today.getDay(); // 날짜
 	var dateCount = new Date(year, month, 0).getDate();
 	
-	var rmn_sts;
-	var total_seat;
 	var choice_movie_time;
-	
 	
 	// 상영 지역 이벤트 설정
 	// 상영 지역에 있는 영화관 정보를 받아서 해당 지역으로 클릭하면 그 지역에 관한 영화관 뿌리기
@@ -178,8 +175,8 @@ $(function() {
 				var end_time = (this).end_time;
 				var screen_name = (this).screen_name;
 				var screen_code = (this).screen_code;
-				total_seat = (this).screen_total_seat;
-				rmn_sts = (this).rmn_sts;
+				var total_seat = (this).screen_total_seat;
+				var rmn_sts = (this).rmn_sts;
 				var movie_time_code = (this).movie_time_code;
 				
 				var list_span_clone = $("#movie_list_span").clone();
@@ -279,9 +276,7 @@ $(function() {
 		$("#movie_time_code").val(movie_time_code);
 		var movie_code = $(this).attr("date-movie-code");
 		var strDate = year + "-" + zeroPlus(month) + "-" + zeroPlus(date) + "("+strDay(day)+")";
-		var seat_state = "잔여좌석 : " + rmn_sts + "/" + total_seat;
 		$("#modal_time").text(strDate);
-		$("#modal_seat").text(seat_state);
 		
 		// 다음 페이지 갈때 넘길 time_code 저장
 		choice_movie_time = movie_time_code;
@@ -290,11 +285,12 @@ $(function() {
 		var sendData = {
 				"movie_time_code" : movie_time_code
 		};
-		
+
 		$.get(url, sendData, function(rData) {
 			var index = 1;
 			var tr = "";
 			$.each(rData, function() {
+				console.log("rrr", $(this));
 				var seat_code = (this).seat_code;
 				var screen_seat_row = (this).screen_seat_row;
 				var screen_seat_col = (this).screen_seat_col;
@@ -378,13 +374,10 @@ $(function() {
 							<div>
 								<span class="modal_content"><strong id="modal_time">시간대</strong></span>
 							</div>
-							<div>
-								<span class="modal_content"><strong id="modal_seat">좌석 상황</strong></span>
-							</div>
-							<div>
+							<div style="text-align: center;">
 								<span class="modal_content"><strong>screen</strong></span>
 							</div>
-							<table>
+							<table style="margin: auto;">
 								<tbody id="modal_table">
 									
 								</tbody>

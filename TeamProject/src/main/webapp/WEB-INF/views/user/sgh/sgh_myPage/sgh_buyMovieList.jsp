@@ -6,7 +6,7 @@
 <head>
 
 <style>
-	td {
+	tr {
 		text-align: center;
 	}
 	

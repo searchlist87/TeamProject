@@ -13,6 +13,7 @@ import com.kh.team.domain.SghMovieTimeListVo;
 import com.kh.team.domain.SghMovieTimeModifyVo;
 import com.kh.team.domain.SghMovieTimeVo;
 import com.kh.team.domain.SghPagingDto;
+import com.kh.team.domain.SghScheduleVo;
 import com.kh.team.sgh.persistence.SghMovieDao;
 import com.kh.team.sgh.persistence.SghMovieTimeDao;
 
@@ -41,9 +42,13 @@ public class SghMovieTimeServiceImpl implements SghMovieTimeService {
 	@Override
 	public void insertMovieTime(SghMovieTimeVo sghMovieTimeVo) throws Exception{
 		String screen_code = sghMovieTimeVo.getScreen_code();
+		System.out.println("screen_code :" + screen_code);
 		List<String> code = sghMovieTimeDao.getSeatCode(screen_code);
+		System.out.println("code : " + code);
 		sghMovieTimeDao.insertMovieTime(sghMovieTimeVo);
+		System.out.println("sghMovieTimeVo :" + sghMovieTimeVo);
 		String movie_time_code = sghMovieTimeDao.getMovieTimeNewDate();
+		System.out.println("movie_time_code :" + movie_time_code);
 		for(String movie_seat_num : code) {
 			sghMovieTimeDao.insertScheduleSeat(movie_seat_num, movie_time_code);
 		}
@@ -92,5 +97,10 @@ public class SghMovieTimeServiceImpl implements SghMovieTimeService {
 	@Override
 	public void restoreMovieTime(String movie_time_code) throws Exception {
 		sghMovieTimeDao.restoreMovieTime(movie_time_code);
+	}
+
+	@Override
+	public List<SghScheduleVo> getMovieList() throws Exception {
+		return sghMovieTimeDao.getMovieList();
 	}
 }

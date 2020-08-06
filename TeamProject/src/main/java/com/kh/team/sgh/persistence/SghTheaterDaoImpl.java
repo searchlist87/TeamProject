@@ -34,7 +34,6 @@ public class SghTheaterDaoImpl implements SghTheaterDao {
 
 	@Override
 	public List<SghTheaterVo> getTheaterPagingList(SghPagingDto sghPagingDto) throws Exception {
-		System.out.println("Dao, sghPagingDto:" + sghPagingDto);
 		return sqlSession.selectList(NAMESPACE + "theaterListPaging", sghPagingDto);
 	}
 

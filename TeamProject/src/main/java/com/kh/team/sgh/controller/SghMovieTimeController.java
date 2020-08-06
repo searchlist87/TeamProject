@@ -98,9 +98,9 @@ public class SghMovieTimeController {
 
 	// 상영 회차 등록 폼으로
 	@RequestMapping(value="/movieTimeRegist", method=RequestMethod.GET)
-	public String movieTimeRegist(SghPagingDto sghPagingDto, Model model) throws Exception {
-		List<SghScheduleVo> schedule_list = sghMovieScheduleService.getScheduleList(sghPagingDto);
-		model.addAttribute("schedule_list", schedule_list);		
+	public String movieTimeRegist(Model model) throws Exception {
+		List<SghScheduleVo> movie_list = sghMovieTimeService.getMovieList();
+		model.addAttribute("movie_list", movie_list);		
 		return "user/sgh/sgh_admin/sgh_movie_time/sgh_movie_time_regist";
 	}
 	
@@ -109,7 +109,6 @@ public class SghMovieTimeController {
 	@RequestMapping(value="/choiceSchedule", method=RequestMethod.GET)
 	public SghMovieTimeAjaxDto choiceAjaxSchedule(String movie_schedule_code) throws Exception {
 		SghMovieTimeAjaxDto time_ajax_dto = sghMovieTimeService.getAjaxScheduleOne(movie_schedule_code);
-		System.out.println("time_ajax_dto :" + time_ajax_dto);
 		return time_ajax_dto;
 	}
 
@@ -118,14 +117,12 @@ public class SghMovieTimeController {
 	@RequestMapping(value="/getScreenList", method=RequestMethod.GET)
 	public List<SghMovieScreenAjaxDto> getAjaxScreenList(String theater_code) throws Exception {
 		List<SghMovieScreenAjaxDto> screen_ajax = sghMovieTimeService.getAjaxScreenList(theater_code);
-		System.out.println("screen_ajax :" + screen_ajax);
 		return screen_ajax;
 	}
 	
 	// 등록 작업
 	@RequestMapping(value="/registMovieTime", method=RequestMethod.GET)
 	public String registMovieTime(SghMovieTimeVo sghMovieTimeVo, SghScreenSeatVo sghScreenSeatVo, RedirectAttributes rttr) {
-		System.out.println("sghMovieTimeVo :" + sghMovieTimeVo);
 		try {
 			sghMovieTimeService.insertMovieTime(sghMovieTimeVo);
 			return "redirect:/sgh/admin/movieTime/movieTimeList";

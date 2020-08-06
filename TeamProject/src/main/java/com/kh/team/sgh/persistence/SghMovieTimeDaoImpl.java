@@ -15,6 +15,7 @@ import com.kh.team.domain.SghMovieTimeListVo;
 import com.kh.team.domain.SghMovieTimeModifyVo;
 import com.kh.team.domain.SghMovieTimeVo;
 import com.kh.team.domain.SghPagingDto;
+import com.kh.team.domain.SghScheduleVo;
 
 @Repository
 public class SghMovieTimeDaoImpl implements SghMovieTimeDao {
@@ -104,6 +105,11 @@ public class SghMovieTimeDaoImpl implements SghMovieTimeDao {
 	@Override
 	public void restoreMovieTime(String movie_time_code) throws Exception {
 		sqlSession.update(NAMESPACE + "restoreMovieTime", movie_time_code);
+	}
+
+	@Override
+	public List<SghScheduleVo> getMovieList() throws Exception {
+		return sqlSession.selectList(NAMESPACE + "getMovieList");
 	}
 
 }

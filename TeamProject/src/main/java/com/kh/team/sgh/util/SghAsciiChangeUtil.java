@@ -10,10 +10,8 @@ public class SghAsciiChangeUtil {
 		int seat_col_ascii = num + start_ascii;
 		for(int i = start_ascii; i < seat_col_ascii; i++) {
 			String str_seat_col = String.valueOf((char)i);
-			System.out.println("str_seat_col :" + str_seat_col);
 			arrNum.add(str_seat_col);
 		}
-		System.out.println("arrNum :" + arrNum);
 		return arrNum;
 	}
 	
@@ -28,7 +26,6 @@ public class SghAsciiChangeUtil {
 				rws.add(rw);
 			}
 		}
-		System.out.println("rws :" + rws);
 		return rws;
 	}
 }

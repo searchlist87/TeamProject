@@ -21,7 +21,7 @@
 $(function() {
 	$("#theater_manage > dd").css("display","block");
 	$("#theater_manage > dt").css("color","red");
-	$("#theater_manage > dd").eq(0).css("color","blue");
+	$("#theater_manage > dd").eq(2).css("color","blue");
 	
 	// 수정 결과
 	var result = "${result}";

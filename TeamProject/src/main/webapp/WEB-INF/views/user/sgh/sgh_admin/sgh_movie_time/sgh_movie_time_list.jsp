@@ -16,6 +16,7 @@
 <script src="/resources/js/sgh_js/myScript.js"></script>
 <script>
 $(function() {
+	
 	$("#movie_time_manage > dd").css("display","block");
 	$("#movie_time_manage > dt").css("color","red");
 	$("#movie_time_manage > dd").eq(2).css("color","blue");
@@ -130,7 +131,7 @@ $(function() {
 					<ul class="pagination">
 <!--  							이전 -->
 						<c:if test="${sghPagingDto.start_page != 1}">
-							<li class="page-item"><a class="page-link" href="/sgh/admin/movieTime/movieTimeList?start_page=${sghPagingDto.start_page - 1}">&laquo;</a></li>
+							<li class="page-item"><a class="page-link" href="/sgh/admin/movieTime/movieTimeList?start_page=${sghPagingDto.start_page - 1}"  style="float: left;">&laquo;</a></li>
 						</c:if>
 <!--  								페이지 넘버링 -->
 						<c:forEach begin="${sghPagingDto.start_page}" end="${sghPagingDto.end_page}" var="v">
@@ -145,7 +146,7 @@ $(function() {
 						</c:forEach>
 <!--  								다음 -->
 						<c:if test="${sghPagingDto.end_page < sghPagingDto.total_page}">
-							<li class="page-item"><a class="page-link" href="/sgh/admin/movieTime/movieTimeList?end_page=${sghPagingDto.end_page + 1}">&raquo;</a></li>
+							<li class="page-item"><a class="page-link" href="/sgh/admin/movieTime/movieTimeList?end_page=${sghPagingDto.end_page + 1}"  style="float: left;">&raquo;</a></li>
 						</c:if>
 					</ul>
 				</nav>
