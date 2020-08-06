@@ -37,6 +37,7 @@ $(function() {
 		e.preventDefault();
 		var page = $(this).attr("href");
 		$("#adminForm > input[name=page]").val(page);
+		console.log("page:" + page);
 		$("#adminForm").submit();
 	});
 	
@@ -59,6 +60,13 @@ $(function() {
 		$("#adminForm > input[name=perPage]").val(10);
 		$("#adminForm > input[name=keyword]").val(keyword);
 		$("#adminForm").submit();
+	});
+	
+	$("#searchSelect").change(function() {
+		var selected = $("#searchSelect option:selected").val();
+		if (selected == "all") {
+			$("#keyword").css("display", "none");
+		}
 	});
 	
 });
@@ -98,19 +106,19 @@ $(function() {
 												<option value="all"
 												<c:if test="${pagingDto.searchType == 'all'}">selected</c:if>
 												>전체</option>
-												<option value="snack"
-												<c:if test="${pagingDto.searchType == 'snack'}">selected</c:if>
+												<option value="100"
+												<c:if test="${pagingDto.searchType == '100'}">selected</c:if>
 												>스낵</option>
-												<option value="drink"
-												<c:if test="${pagingDto.searchType == 'drink'}">selected</c:if>
+												<option value="200"
+												<c:if test="${pagingDto.searchType == '200'}">selected</c:if>
 												>음료</option>
-												<option value="package"
-												<c:if test="${pagingDto.searchType == 'package'}">selected</c:if>
+												<option value="300"
+												<c:if test="${pagingDto.searchType == '300'}">selected</c:if>
 												>패키지</option>
 											</select>
 										</div>
 
-									<input type="text" id="keyword" value="${pagingDto.keyword}"/>
+									<input type="text" id="keyword" value=""/>
 									<button type="button" class="btn" id="btnSearch">검색</button>
 								</div>	
 								<!--  검색 끝 -->

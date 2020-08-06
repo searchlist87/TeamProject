@@ -76,7 +76,7 @@ public interface KdhFoodDao {
 	public List<KdhAdminFoodBuyListDto> selectBuyFoodList() throws Exception;
 	
 	// 상품 갯수 업데이트
-	public void updateFoodCount( int food_count,int food_buy_count,int buy_food_num) throws Exception;
+	public void updateFoodCount(int food_count,int food_buy_count,int buy_food_num) throws Exception;
 	
 	// 상품 구매 내역 가져오기(마이페이지)
 	public List<KdhMypageBuyFoodListDto> selectMyPageBuyFoodList(String user_id) throws Exception;

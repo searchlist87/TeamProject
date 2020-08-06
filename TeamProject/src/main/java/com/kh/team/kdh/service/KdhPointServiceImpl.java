@@ -41,14 +41,14 @@ public class KdhPointServiceImpl implements KdhPointService {
 	}
 	
 	@Override
-	public void updateTotalUserPoint(int user_point, String user_id) throws Exception {
-		pointDao.updateTotalUserPoint(user_point, user_id);
+	public void updateTotalUserPoint(int food_buy_price, int point_percent, String user_id) throws Exception {
+		pointDao.updateTotalUserPoint(food_buy_price, point_percent, user_id);
 		
 	}
 
 	@Override
-	public void updateUserPoint(int user_point, int used_Point, String user_id) throws Exception {
-		pointDao.updateUserPoint(user_point, used_Point, user_id);
+	public void updateUserPoint(int used_Point, String user_id) throws Exception {
+		pointDao.updateUserPoint(used_Point, user_id);
 		
 	}
 

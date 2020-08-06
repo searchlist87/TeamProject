@@ -168,5 +168,4 @@ public class KdhFoodServiceImpl implements KdhFoodService {
 		return foodDao.selectAdminSales(food_code, mm_minus);
 	}
 
-	
 }

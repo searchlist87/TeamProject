@@ -42,13 +42,11 @@ public class KdhAdminController {
 	// 푸드 상품관리_상품조회
 	@RequestMapping(value = "/admin_food_list", method = RequestMethod.GET)
 	public String admin_food_list(ModelMap model, KdhPagingDto pagingDto) throws Exception {
-		List<KdhFoodVo> foodlist = foodService.selectListFood();
 		int perPage = 6;
 		pagingDto.setPerPage(perPage);
 		int foodCount = foodService.selectFoodPageCount(pagingDto);
 		pagingDto.setPageInfo(foodCount);
 		List<KdhFoodVo> listPageFoodlist = foodService.foodPage(pagingDto);
-		model.addAttribute("foodlist", foodlist);
 		model.addAttribute("listPageFoodlist", listPageFoodlist);
 		model.addAttribute("pagingDto", pagingDto);
 		return "user/kdh/kdh_admin/kdh_admin_food_list";

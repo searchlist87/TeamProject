@@ -74,45 +74,6 @@ $(function() {
 									</table>
 								</div>
 							</div>
-								<!-- 페이징 -->
-								<div class="row"  style="text-align:center;">
-									<div class="col-md-12" style="padding-left: 300px;">
-										<div class="col-md-5 text-center" style="text-align:center;">
-											<nav style="text-align:center;">
-												<ul class="pagination text-center" style="text-align:center;">
-												
-												<!-- 이전 버튼 -->
-												<c:if test ="${pagingDto.startPage != 1}">
-													<li class="page-item" style="width:60px;"  style="float:left;">
-												    	<a class="page-link" href="${pagingDto.startPage - 1}">이전</a>
-													</li>
-												</c:if>
-								
-											 	<!-- 페이징 넘버링 -->
-											 	<c:forEach begin="${pagingDto.startPage}" end="${pagingDto.endPage}" var="v">
-												    <li id="pageNumber"  style="width:30px; float:left;" class="page-item 
-														<c:if test="${pagingDto.page == v }">
-												   			 active 
-														</c:if>
-														">
-														<a id="pageNumber" class="page-link" href="${v}">${v}</a>
-												    </li>
-												</c:forEach>   
-												 	
-												<!-- 다음 버튼 -->
-												  <c:if test="${pagingDto.endPage < pagingDto.totalPage}">
-												    <li class="page-item" style="width:60px; float:left;">
-												    	<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
-												    </li>
-												   </c:if>
-												</ul>
-											</nav>
-										</div>
-									</div>
-									<div class="col-md-4"></div>
-									<div class="col-md-12" style="margin-bottom: 100px;"></div>	
-								</div>
-							<!-- /페이징 -->		
 						</div>
 					</div>
 				</div>

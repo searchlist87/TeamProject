@@ -186,24 +186,19 @@ $(function() {
 	
 	// 결제하기 버튼
 	$("#btnBuy").click(function() {
-		var food_buy_price = $("#lastPrice").text();
+		var food_buy_price = $("#totalPrice").text();
 		var couponPrice = $("#couponPrice").text();
 		
 		var food_buy_priceIndex = food_buy_price.substring(0,food_buy_price.length-1);
 		var couponPriceIndex = couponPrice.substring(0,couponPrice.length-1);
 		var a = food_buy_priceIndex.replace("," ,"");
 		var b = $.trim(a);
+		
 // 		used_Point = Number(couponPriceIndex);
 		$("#food_buy_price1").val(b);
 		$("#used_Point1").val(couponPriceIndex);
 		
-		console.log("couponPriceIndex:" + couponPriceIndex);
-		console.log("b:" + b);
 		$("#cartForm").submit();
-// 		location.href="/kdh/cart/buyCart";
-// 		var test = $(this).parent().parent().parent().parent().parent().parent().parent().parent().find($(".data-food-num")).attr("data-food-num");
-// 		console.log("test:" + test);
-		
 	});
 	
 	// 쓰레기통 모양 클릭(스토어 홈으로 보내기)
@@ -223,16 +218,28 @@ $(function() {
 		console.log("couponPrice:" + couponPrice);
 		var StringcouponPrice = String(couponPrice);
 		var usedPoint = $("#UsecouponPrice").val();
-		console.log("usedPoint:" + usedPoint);
-		$("#couponPrice").text(usedPoint+"P");
 		
 		// 포인트사용금액이 유저 누적포인트보다 클때 
-		if (couponPrice < usedPoint) {
-			alert("포인트를 사용할 수 없습니다.")
-			$("#UsecouponPrice").val(0);
-			return false;
-			}
+// 		if (couponPrice < usedPoint) {
+// 			alert("포인트를 사용할 수 없습니다.")
+// 			var zero = 0;
+// 			$("#couponPrice").text(zero + "P");
+// 			var couponPriceText = $("#couponPrice").text("0P");
+// 			$("#UsecouponPrice").val("0");
+// 			return false;
+// 			}
 		
+		var total_sum = couponPrice - usedPoint;
+		if (total_sum < 0) {
+			alert("포인트를 사용할 수 없습니다.")
+			$("#UsecouponPrice").val("0");
+			return;
+		}
+		$("#couponPrice").text(couponPrice+"P");
+		
+		console.log("usedPoint:" + usedPoint);
+		$("#couponPrice").text(usedPoint+"P");
+
 		var sumPrice = 0;
 		$.each($(".small_total"), function() {
 			sumPrice += Number($(this).attr("data-total-price"));
@@ -304,8 +311,8 @@ $(function() {
 		
 		var zero = 0;
 		var couponPriceVal = $("#couponPrice").val();
-		$("#couponPrice").text(zero + "원");
-		var couponPriceText = $("#couponPrice").text("0원");
+		$("#couponPrice").text(zero + "P");
+		var couponPriceText = $("#couponPrice").text("0P");
 		$("#UsecouponPrice").val("0");
 		
 		var lastPrice = sumPrice;	
