@@ -292,7 +292,7 @@ $(function() {
 									<h3>포인트</h3>
 									<ul>
 										<li>적립포인트 사용　　　적립포인트 잔액　　　<input id="pointInfo" type="text" style="text-align:right;" value="${totalPoint}" name="pointInfo" readonly>P</li>
-										<li>사용 포인트　　　<input data-point="${userInfo.user_point}" id="UsecouponPrice" type="text" value="0" name="Coupon" placeholder="0" style="text-align:right;">P　
+										<li>사용 포인트　　　<input data-point="${userInfo.user_point}" id="UsecouponPrice" type="number" value="0" name="Coupon" placeholder="0" style="text-align:right;">P　
 										<a id="btnUse" class="btn" style="color: white;">사용하기</a>　
 										<a id="btnUseNo" class="btn" style="color: white;">삭제하기</a></li>
 									</ul>
