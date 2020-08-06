@@ -204,17 +204,14 @@ public class KdhController {
 		foodService.updateFoodCount(food_count, food_buy_count, buy_food_num);
 		
 		pointService.insertPointInData(user_id, food_buy_price, point_percent);
+		pointService.updateTotalUserPoint(food_buy_price, point_percent, user_id);
 		int totalPoint = pointService.selectTotalPoint(user_id);
-		pointService.updateTotalUserPoint(totalPoint, user_id);
 		
 		if (totalPoint != 0 && used_Point != 0) {
-			pointService.updateUserPoint(totalPoint, used_Point, user_id);
+			pointService.updateUserPoint(used_Point, user_id);
 			pointService.insertUsedPointInfo(user_id, used_Point);
 		}
-//		
-//		if (used_Point != 0) {
-//			pointService.insertUsedPointInfo(user_id, used_Point);
-//		}
+
 		return "redirect:/kdh/food/buyView";
 	}
 	

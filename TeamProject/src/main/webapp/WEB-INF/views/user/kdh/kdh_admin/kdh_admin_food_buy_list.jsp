@@ -250,11 +250,11 @@ $(function() {
 										</c:forEach>    	
 										
 										<!-- 다음 버튼 -->
-										  <c:if test="${pagingDto.endPage < pagingDto.totalPage}">
-										    <li class="page-item" style="width:60px; float:left;">
-										    	<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
-										    </li>
-										   </c:if>
+										 <c:if test="${pagingDto.endPage < pagingDto.totalPage}">
+										   <li class="page-item" style="width:60px; float:left;">
+										   	<a class="page-link" href="${pagingDto.endPage + 1}">다음</a>
+										   </li>
+										  </c:if>
 										</ul>
 									</nav>
 								</div>

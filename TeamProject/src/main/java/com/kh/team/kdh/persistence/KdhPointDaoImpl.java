@@ -52,18 +52,18 @@ public class KdhPointDaoImpl implements KdhPointDao {
 	}
 
 	@Override
-	public void updateTotalUserPoint(int user_point, String user_id) throws Exception {
+	public void updateTotalUserPoint(int food_buy_price, int point_percent, String user_id) throws Exception {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("user_point", user_point);
+		paraMap.put("food_buy_price", food_buy_price);
+		paraMap.put("point_percent", point_percent);
 		paraMap.put("user_id", user_id);
 		sqlSession.update(NAMESPACE + "updateTotalUserPoint", paraMap);
 		
 	}
 
 	@Override
-	public void updateUserPoint(int user_point, int used_Point, String user_id) throws Exception {
+	public void updateUserPoint(int used_Point, String user_id) throws Exception {
 		Map<String, Object> paraMap = new HashMap<String, Object>();
-		paraMap.put("user_point", user_point);
 		paraMap.put("used_Point", used_Point);
 		paraMap.put("user_id", user_id);
 		sqlSession.update(NAMESPACE + "updateUserPoint", paraMap);

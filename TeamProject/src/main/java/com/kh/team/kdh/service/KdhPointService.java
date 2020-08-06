@@ -25,10 +25,10 @@ public interface KdhPointService {
 	public int selectTotalPoint(String user_id) throws Exception;
 	
 	// 유저 데이트 포인트 업데이트
-	public void updateTotalUserPoint(int user_point, String user_id) throws Exception;
+	public void updateTotalUserPoint(int food_buy_price, int point_percent, String user_id) throws Exception;
 	
 	// 포인트 쓴만큼 차감
-	public void updateUserPoint(int user_point, int used_Point, String user_id) throws Exception;
+	public void updateUserPoint(int used_Point, String user_id) throws Exception;
 	
 	// 유저 포인트 찾기
 	public int selectPointByUserId(String user_id) throws Exception;

@@ -45,11 +45,8 @@ public class KdhAdminController {
 		int perPage = 6;
 		pagingDto.setPerPage(perPage);
 		int foodCount = foodService.selectFoodPageCount(pagingDto);
-		System.out.println("foodCount:" + foodCount);
 		pagingDto.setPageInfo(foodCount);
-		System.out.println("pagingDto:" + pagingDto);
 		List<KdhFoodVo> listPageFoodlist = foodService.foodPage(pagingDto);
-		System.out.println("listPageFoodlist:" + listPageFoodlist);
 		model.addAttribute("listPageFoodlist", listPageFoodlist);
 		model.addAttribute("pagingDto", pagingDto);
 		return "user/kdh/kdh_admin/kdh_admin_food_list";

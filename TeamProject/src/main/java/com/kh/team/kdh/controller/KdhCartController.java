@@ -98,14 +98,17 @@ public class KdhCartController {
 		KdhPointCodeVo codeVo = pointService.selectFoodPercent();
 		int point_percent = codeVo.getPoint_percent();
 		
+		System.out.println("food_buy_price:" + food_buy_price);
+		System.out.println("point_percent:" + point_percent);
+		System.out.println("user_id:" + user_id);
+		System.out.println("used_Point:" + used_Point);
+		
 		pointService.insertPointInData(user_id, food_buy_price, point_percent);
+		pointService.updateTotalUserPoint(food_buy_price, point_percent, user_id);
 		int totalPoint = pointService.selectTotalPoint(user_id);
 		
-		if (totalPoint != 0) {
-		pointService.updateUserPoint(totalPoint, used_Point, user_id);
-		}
-		
-		if (used_Point != 0) {
+		if (totalPoint != 0 && used_Point != 0) {
+			pointService.updateUserPoint(used_Point, user_id);
 			pointService.insertUsedPointInfo(user_id, used_Point);
 		}
 		

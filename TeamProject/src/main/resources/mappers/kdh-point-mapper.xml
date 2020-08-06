@@ -34,14 +34,14 @@
 <!-- 유저 데이트 포인트 업데이트 -->
 <select id="updateTotalUserPoint">
 	update tbl_user
-	set user_point = #{user_point}
+	set user_point = user_point + (#{food_buy_price}/#{point_percent})
 	where user_id = #{user_id}
 </select>
 
 <!-- 포인트 쓴만큼 차감 -->
 <update id="updateUserPoint">
-	UPDATE tbl_user
-	SET user_point = #{user_point}-#{used_Point}
+	update tbl_user
+	set user_point = user_point - #{used_Point}
 	where user_id = #{user_id}
 </update>
 
