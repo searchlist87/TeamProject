@@ -57,10 +57,7 @@ public class KdhController {
 	
 	// 상품 이너 페이지(GET)
 	@RequestMapping(value = "/innerfood", method = RequestMethod.GET)
-	public String InnerfoodGet(int food_num, ModelMap model, HttpSession session) throws Exception {
-		String user_id = (String) session.getAttribute("user_id");
-		int cartCount = cartService.selectCartCount(user_id);
-		session.setAttribute("cartCount", cartCount);
+	public String InnerfoodGet(int food_num, ModelMap model) throws Exception {
 		KdhFoodVo foodVo = foodService.selectFoodbyNum(food_num);
 		model.addAttribute("foodVo", foodVo);
 		return "user/kdh/kdh_food/kdh_Innerfood";
