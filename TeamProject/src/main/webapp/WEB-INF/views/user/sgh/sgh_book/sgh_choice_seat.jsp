@@ -130,11 +130,15 @@ $(function() {
 		$(this).removeAttr("class").addClass("seat");
 	});
 	
+	$("#btnCancle").click(function() {
+		location.href = "/sgh/book/bookingView";
+	});
+	
 	$("#btnPayMent").click(function() {
 		var prs_num = $("#prs").text();
 		
 		if(prs_num < 1) {
-			alert("인원을 정해주세요.");
+			alert("좌석을 선택해주세요.");
 			return false;
 		}
 		
@@ -188,7 +192,7 @@ $(function() {
 		<div class="col-md-2">
 			<div>
 				<button id="btnPayMent"type="button" class="btn">결제하기</button>
-				<button type="button" class="btn">취소</button>
+				<button id="btnCancle" type="button" class="btn">취소</button>
 			</div>
 		</div>
 	</div>
