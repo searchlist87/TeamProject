@@ -137,6 +137,7 @@ $(function() {
 		
 		var zero = 0;
 		var couponPriceVal = $("#couponPrice").val();
+		$("#couponPrice").text(zero + "P");
 		$("#UsecouponPrice").val(zero);
 		var couponPriceText = $("#couponPrice").text();
 		
