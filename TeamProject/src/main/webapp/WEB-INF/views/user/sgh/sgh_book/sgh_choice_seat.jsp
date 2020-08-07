@@ -132,6 +132,12 @@ $(function() {
 	
 	$("#btnPayMent").click(function() {
 		var prs_num = $("#prs").text();
+		
+		if(prs_num < 1) {
+			alert("인원을 정해주세요.");
+			return false;
+		}
+		
 		if(personnel != now_personnel) {
 			alert("현재 정하신 인원과 좌석의 수가 맞지 않습니다. 다시 확인해주세요.");
 			return false;

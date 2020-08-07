@@ -104,7 +104,7 @@ $(function() {
 						<button type="button" id="btnPointSearch" class="btn-sm" style="background-color: black; color: white;">조회</button>
 					<p>
 					<p>
-						<input type="text" id="pointUse" class="form-inline" style="float:left;" placeholder="사용할 포인트">
+						<input type="number" id="pointUse" class="form-inline" style="float:left;" placeholder="사용할 포인트" step="100">
 						<button type="button" id="btnPointUse" class="btn-sm" style="background-color: black; color: white;">사용하기</button>
 					<p>
 				</div>
