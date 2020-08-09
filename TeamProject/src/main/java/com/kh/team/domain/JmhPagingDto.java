@@ -46,9 +46,6 @@ public class JmhPagingDto {
 		// 현재 페이지가 15 : 11 ~ 20
 		this.endPage = (int) (Math.ceil((double)page / PAGE_BLOCK) * PAGE_BLOCK);
 		this.startPage = this.endPage - PAGE_BLOCK + 1;
-		
-		
-		
 	}
 
 	public int getPage() {
@@ -116,7 +113,6 @@ public class JmhPagingDto {
 		if(endPage > totalPage) {
 			endPage = totalPage;
 		}
-		
 	}
 
 	public int getTotalPage() {
