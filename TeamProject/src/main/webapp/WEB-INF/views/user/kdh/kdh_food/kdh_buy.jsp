@@ -204,7 +204,7 @@ $(function() {
 	$("#trash").click(function() {
 		var r = confirm("선택하신 상품을 삭제하시겠습니까?");
 		if(r == true) {
-			location.href = "/kdh/food/buyFoodNone";
+			location.href = "/kdh/food/foodView";
 		} else {
 			
 		}

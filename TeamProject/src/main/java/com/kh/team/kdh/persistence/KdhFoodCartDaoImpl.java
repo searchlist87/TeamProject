@@ -72,8 +72,11 @@ public class KdhFoodCartDaoImpl implements KdhFoodCartDao {
 	}
 
 	@Override
-	public List<KdhBasicCartDto> selectCartListByUserId(String user_id) throws Exception {
-		return sqlSession.selectList(NAMESPACE + "selectCartListByUserId", user_id);
+	public List<KdhBasicCartDto> selectCartListByUserId(String user_id, int food_num) throws Exception {
+		Map<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("user_id", user_id);
+		paraMap.put("food_num", food_num);
+		return sqlSession.selectList(NAMESPACE + "selectCartListByUserId", paraMap);
 	}
 
 	@Override

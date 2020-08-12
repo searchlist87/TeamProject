@@ -57,7 +57,7 @@
 <!-- userId로 장바구니 내역 가져오기 -->
 <select id="selectCartListByUserId" resultType="KdhBasicCartDto">
 	select * from tbl_food_cart
-	where user_id = #{user_id}
+	where user_id = #{user_id} and food_num = #{food_num}
 </select>
 
 <!-- 해당 상품 장바구니 내역 삭제 -->
