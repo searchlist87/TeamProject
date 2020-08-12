@@ -6,12 +6,15 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.team.domain.KdhBasicCartDto;
@@ -56,16 +59,15 @@ public class KdhCartController {
 		model.addAttribute("list", list);
 		model.addAttribute("totalPoint", totalPoint);
 		model.addAttribute("food_total_money", food_total_money);
+		model.addAttribute("user_id", user_id);
 		return "user/kdh/kdh_food/kdh_cart";
 	}
 	
 	
-	// 장바구니 삭제 
+	// 장바구니 삭제(GET)
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String deleteCart(int food_cart_num, HttpSession session) throws Exception {
+	public String deleteGET(int food_cart_num, HttpSession session) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
-//		int cartCounttest= (int) session.getAttribute("cartCount");
-//		System.out.println("cartCounttest:" + cartCounttest);
 		cartService.deleteCart(food_cart_num);
 		int cartCount = cartService.selectCartCount(user_id);
 		session.setAttribute("cartCount", cartCount);
@@ -75,34 +77,53 @@ public class KdhCartController {
 		return "redirect:/kdh/cart/displayCart?user_id=" + user_id;
 	}
 	
+	
+	// 장바구니 삭제(POST)
+	@ResponseBody
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public int deletePOST(HttpSession session, @RequestParam(value = "selectCheck[]") List<String> checkArr, Model model) throws Exception {
+		System.out.println("checkArr:" + checkArr);
+		String user_id = (String) session.getAttribute("user_id");
+		model.addAttribute("user_id", user_id);
+		int food_cart_num = 0;
+		int result = 0;
+		if(user_id != null || user_id != "") {
+			for(String i : checkArr) {
+				food_cart_num = Integer.parseInt(i);
+				System.out.println("food_cart_num:" + food_cart_num);
+				cartService.deleteCart(food_cart_num);
+				int cartCount = cartService.selectCartCount(user_id);
+				session.setAttribute("cartCount", cartCount);
+			}
+			result = 1;
+		int cartCount = cartService.selectCartCount(user_id);
+		session.setAttribute("cartCount", cartCount);
+			if(cartCount == 0) {
+				result = 3;
+			}
+		}
+		return result;
+	}
+	
 	// 장바구니 수정 (ajax -> url -> user_id,food_num)
 	@ResponseBody
 	@RequestMapping(value= "/update", method = RequestMethod.GET)
-	public String updateCart(int food_cart_num, int food_cart_count,int buy_food_price,HttpSession session) throws Exception {
-		String user_id = (String) session.getAttribute("user_id");
+	public String updateCart(int food_cart_num, int food_cart_count, int buy_food_price) throws Exception {
 		cartService.updateCart(food_cart_num, food_cart_count, buy_food_price);
 		return "success";
 	}
 	
 	// 장바구니 결제하기
 	@RequestMapping(value = "/buyCart", method = RequestMethod.POST)
-	public String buy(HttpSession session, String used_Point1, String food_buy_price1) throws Exception {
+	public String buy(HttpSession session, String used_Point1, String food_buy_price1, int[] food_frm_num) throws Exception {
+		String user_id = (String) session.getAttribute("user_id");
+		
 		int used_Point = Integer.parseInt(used_Point1);
 		int food_buy_price = Integer.parseInt(food_buy_price1);
-		System.out.println("used_Point:" + used_Point);
-		System.out.println("food_buy_price:" + food_buy_price);
-		
-		String user_id = (String) session.getAttribute("user_id");
-		List<KdhBasicCartDto> cartDto = cartService.selectCartListByUserId(user_id);
-		
+
 		KdhPointCodeVo codeVo = pointService.selectFoodPercent();
 		int point_percent = codeVo.getPoint_percent();
-		
-		System.out.println("food_buy_price:" + food_buy_price);
-		System.out.println("point_percent:" + point_percent);
-		System.out.println("user_id:" + user_id);
-		System.out.println("used_Point:" + used_Point);
-		
+
 		pointService.insertPointInData(user_id, food_buy_price, point_percent);
 		pointService.updateTotalUserPoint(food_buy_price, point_percent, user_id);
 		int totalPoint = pointService.selectTotalPoint(user_id);
@@ -112,14 +133,15 @@ public class KdhCartController {
 			pointService.insertUsedPointInfo(user_id, used_Point);
 		}
 		
-		// foodBuyDto 설정
-		for (KdhBasicCartDto data : cartDto ) {
-			System.out.println("data:" + data);
+		List<KdhBasicCartDto> cartDto = null;
+		for (int i = 0 ; i < food_frm_num.length; i++) {
+			cartDto = cartService.selectCartListByUserId(user_id, food_frm_num[i]);
+			
+			for (KdhBasicCartDto data : cartDto) {
 			kdhFoodBuyDto foodBuyDto = new kdhFoodBuyDto();
 			// food_num, user_id, food_buy_total_price, food_buy_count
 			int food_buy_total_price = data.getBuy_food_price();
 			int food_cart_count = data.getFood_cart_count();
-			System.out.println("food_cart_count : " + food_cart_count);
 			int food_num = data.getFood_num();
 			
 			foodBuyDto.setFood_num(food_num);
@@ -136,8 +158,9 @@ public class KdhCartController {
 			foodBuyListDto.setFood_buy_count(food_cart_count);
 			foodBuyListDto.setFood_buy_total_price(food_buy_total_price);
 			foodService.insertFoodBuyList(foodBuyListDto);
-		}
 		
+			}
+		}
 			cartService.deleteFoodCartAll(user_id);
 			session.setAttribute("cartCount", 0);
 			return "redirect:/kdh/food/buyView";

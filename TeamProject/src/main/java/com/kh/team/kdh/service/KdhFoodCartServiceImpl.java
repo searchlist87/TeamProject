@@ -57,8 +57,8 @@ public class KdhFoodCartServiceImpl implements KdhFoodCartService {
 	}
 
 	@Override
-	public List<KdhBasicCartDto> selectCartListByUserId(String user_id) throws Exception {
-		return cartDao.selectCartListByUserId(user_id);
+	public List<KdhBasicCartDto> selectCartListByUserId(String user_id, int food_num) throws Exception {
+		return cartDao.selectCartListByUserId(user_id, food_num);
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public interface KdhFoodCartService {
 	public int FoodTotalMoney(String user_id) throws Exception;
 	
 	// 아이디로 장바구니내역 가져오기
-	public List<KdhBasicCartDto> selectCartListByUserId(String user_id) throws Exception;
+	public List<KdhBasicCartDto> selectCartListByUserId(String user_id, int food_num) throws Exception;
 	
 	// 해당 상품 카트 내역 삭제
 	public void deleteFoodCart(int food_num) throws Exception;

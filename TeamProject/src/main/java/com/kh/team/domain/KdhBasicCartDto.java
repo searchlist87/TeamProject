@@ -9,9 +9,11 @@ public class KdhBasicCartDto {
 	private int food_cart_num;
 	private int food_num;
 	private String user_id;
+	
 	public KdhBasicCartDto() {
 		super();
 	}
+	
 	public KdhBasicCartDto(int buy_food_price, int food_cart_count, Timestamp food_cart_date, int food_cart_num,
 			int food_num, String user_id) {
 		super();
