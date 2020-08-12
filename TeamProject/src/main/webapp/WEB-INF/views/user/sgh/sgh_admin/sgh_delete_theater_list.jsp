@@ -72,20 +72,16 @@ $(function() {
 												<th>지역</th>
 												<th>영화관명</th>
 												<th>주소</th>
-												<th>시작일</th>
-												<th>종료일</th>
 												<th>삭제일</th>
 												<th>복구</th>
 											</tr>
 										</thead>
-										<tbody>
+									<tbody>
 											<c:forEach items="${theater_list}" var="SghTheaterVo">
 											<tr>
 												<td>${SghTheaterVo.area_name}</td>
 												<td><a href="/sgh/admin/movieScreen/screenList?theater_code=${SghTheaterVo.theater_code}" style="color:blue;">${SghTheaterVo.theater_name}</a></td>
 												<td>${SghTheaterVo.theater_address}</td>
-												<td>${SghScheduleVo.movie_start_date}</td>
-												<td>${SghScheduleVo.movie_end_date}</td>
 												<td class="del_date">${SghTheaterVo.theater_del_date}</td>
 												<td><a href="/sgh/admin/restoreTheater?theater_code=${SghTheaterVo.theater_code}" class="btn-warning" style="color: white;">복구</a></td>
 											</tr>
